@@ -1,0 +1,12 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+de:
+  activerecord:
+    models:
+      group/top_layer: Hauptebene
+      group/top_layer/administrator: Administrator
+
+      role/leader: Leitung
+      role/member: Mitglied
+      role/external: Externer

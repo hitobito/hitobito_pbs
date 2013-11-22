@@ -1,0 +1,14 @@
+.bundle/
+log/*.log
+tmp/
+pkg/
+doc/rdoc
+db/*.sqlite3
+zeus.json
+
+# ignore Gemfile.lock for wagons
+Gemfile.lock
+
+.sass-cache
+spec/coverage
+.project

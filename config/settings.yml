@@ -1,0 +1,4 @@
+# Settings relevant for the jubla wagon
+# Overrides settings from the main application
+application:
+  name: pbsc
