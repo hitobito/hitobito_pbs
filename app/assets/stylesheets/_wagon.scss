@@ -1,0 +1,286 @@
+//  Copyright (c) 2012-2013, Puzzle ITC GmbH. This file is part of
+//  hitobito_generic and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/hitobito/hitobito_generic.
+
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+@import url(http://fonts.googleapis.com/css?family=Quicksand:400,700);
+
+.btn {
+  color: $blueDark;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $white;
+    background: $purple;
+    @include single-text-shadow($purpleDark, 0, -1px, 1px);
+    border-color: $purpleDark;
+
+    .icon,
+    [class^="icon-"],
+    [class*=" icon-"] {
+      background-image: image-url("glyphicons-halflings-white.png");
+    }
+    .caret {
+      border-top-color: $white;
+     }
+  }
+
+  .icon,
+  [class^="icon-"],
+  [class*=" icon-"] {
+    background-image: image-url("glyphicons-halflings-green.png");
+  }
+
+  .caret {
+    border-top-color: $blueDark;
+  }
+}
+
+.btn-primary {
+  color: $white;
+  background: $blue;
+  border-color: $blue;
+  @include single-text-shadow($blueDark, 0, -1px, 1px);
+}
+
+.btn-group.open .btn.dropdown-toggle {
+  background: $purpleDark;
+  color: $white;
+  border-color: $purpleDark;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  color: $grayDarker;
+
+  &:focus {
+    border-color: $purple;
+    @include single-box-shadow(lighten($purple, 5%), 0, 0, 6px, 0, false);
+  }
+}
+
+
+// _navigation.scss
+
+#page-navigation {
+  .nav {
+    font-family: $baseFontFamily;
+    li {
+      &.active a {
+        color: $white;
+        background-color: $blue;
+        @include single-text-shadow(none);
+      }
+      a {
+       @include single-text-shadow(none);
+       color: $white;
+
+       &:hover {
+         @include single-text-shadow($purpleDark, 0, -1px, 0);
+         background-color: $purple;
+       }
+      }
+    }
+  }
+}
+
+.nav-sub {
+   & > li {
+      a {
+       padding: 8px 0;
+       margin-top: 2px;
+       margin-right: 30px;
+       line-height: 14px;
+       border-bottom: 2px solid $white;
+      &:hover {
+        background: none;
+        border-color: $grayLight;
+      }
+    }
+  }
+  & > .active > a {
+    border-color: $blue;
+  }
+  & > .active > a:hover {
+    border-color: $purple;
+  }
+}
+
+
+.nav-pills > .active > a {
+  border-color: $blue;
+}
+.nav-pills > .active > a:hover,
+.nav-pills > .active > a:focus {
+  background-color: $purple;
+  border-color: $purple !important;
+}
+.nav-pills .open .dropdown-toggle {
+  background-color: $purple;
+  border-color: $purple;
+}
+.toolbar-pills {
+  li > a {
+    margin-right: 0px;
+  }
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  background: $purple;
+}
+
+// _typography.scss
+
+#{headings(2)} {
+  font-family: $headingFontFamily;
+  margin-top: 0;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+
+.table,
+.table-basic {
+  td,
+  th {
+    padding-left: 0;
+    border-color: $borderColor;
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background-color: lighten($purple, 50%);
+}
+
+
+
+// application.scss
+
+body {
+  padding: 0;
+}
+
+/* Header */
+#page-header {
+  margin: 0;
+  padding: 10px 10px 0;
+  background: $pageBackground;
+
+  @include responsive(mediaTablet) {
+    padding: 10px 20px 0;
+  }
+
+  .options a {
+    color: lighten($pageBackground, 35%);
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+
+// Logo
+.brand {
+  display: block;
+  width: 230px;
+  height: 30px;
+  padding: 10px 0;
+
+  background: image-url("logo.png") transparent no-repeat 0px 10px;
+
+  // Hide text
+  text-indent: -9999px;
+  white-space: nowrap;
+
+  // Retina version
+  @media
+    only screen and (-webkit-min-device-pixel-ratio : 2),
+    only screen and (min-device-pixel-ratio : 2) {
+      background: image-url("logo@2x.png") transparent no-repeat 0px 10px;
+      background-size: 230px 30px;
+  }
+}
+
+ /* Content */
+#page {
+  padding: 20px 10px 90px;
+  margin: 0;
+  background: $pageBackground;
+
+  @include responsive(mediaTablet) {
+    margin: 0;
+    padding: 20px 20px 90px;
+  }
+}
+
+.sheet.parent {
+  background: lighten($contentBackground, 3%);
+  @include single-box-shadow($shadowColor, 0, 2px, 8px, $shadowColor);
+  .sheet {
+    &.parent {
+      background: lighten($contentBackground, 6%);
+    }
+  }
+}
+
+.sheet,
+#content {
+  @include border-radius($borderRadius);
+}
+
+#content {
+  @include single-box-shadow($shadowColor, 0, 2px, 8px, $shadowColor);
+}
+
+
+/* Footer */
+#page-footer {
+   padding-top: 0;
+
+  & > .container-fluid {
+    @include single-box-shadow(darken($bodyBackground, 10%), 0, 12px, 8px, -8px, true);
+    background: $bodyBackground;
+  }
+}
+
+// well
+.well {
+  border: none;
+  background: $grayLighter;
+}
+
+.ui-datepicker td .ui-state-default:hover {
+  background-color: $purple !important;
+}
+

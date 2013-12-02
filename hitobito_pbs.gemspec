@@ -6,7 +6,7 @@ require "hitobito_pbs/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "hitobito_pbs"
-  s.version     = HitobitoPbsc::VERSION
+  s.version     = HitobitoPbs::VERSION
   s.authors     = ["Andreas Maierhofer"]
   s.email       = ["maierhofer@puzzle.ch"]
   s.summary     = "Pfadi organization specific features"
