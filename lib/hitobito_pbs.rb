@@ -1,7 +1,7 @@
 require 'wagons'
 # require 'your_wagon_dependencies'
-require 'hitobito_pbsc/wagon'
+require 'hitobito_pbs/wagon'
 
-module HitobitoPbsc
+module HitobitoPbs
 end
 

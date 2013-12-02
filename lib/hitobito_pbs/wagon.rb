@@ -1,4 +1,4 @@
-module HitobitoPbsc
+module HitobitoPbs
   class Wagon < Rails::Engine
     include Wagons::Wagon
 
@@ -13,7 +13,7 @@ module HitobitoPbsc
       Group.send  :include, Group::Generic
     end
 
-    initializer "pbsc.add_settings" do |app|
+    initializer "pbs.add_settings" do |app|
       Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
       Settings.reload!
     end

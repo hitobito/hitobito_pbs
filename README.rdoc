@@ -1,0 +1,8 @@
+=== Hitobito PBS
+
+This hitobito wagon defines the organization hierarchy with groups and roles of Pfadibewegung Schweiz.
+
+
+=== Pfadi Organization Hierarchy
+
+(Output of rake hitobito:permissions)

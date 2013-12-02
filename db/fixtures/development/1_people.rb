@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-@encrypted_password = BCrypt::Password.create("pbsc42pbsc", cost: 1)
+@encrypted_password = BCrypt::Password.create("pbs42pbs", cost: 1)
 
 puzzlers = ['Pascal Zumkehr',
             'Pierre Fritsch',
