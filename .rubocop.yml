@@ -1,0 +1,8 @@
+AllCops:
+  RunRailsCops: true
+  Excludes:
+    - db/**
+    - config/**
+    - script/**
+    - spec/**
+    - test/**

@@ -5,10 +5,14 @@ pkg/
 doc/rdoc
 db/*.sqlite3
 zeus.json
+.sass-cache
+.project
 
 # ignore Gemfile.lock for wagons
 Gemfile.lock
 
-.sass-cache
+# reports
 spec/coverage
-.project
+spec/reports
+brakeman-output.tabs
+rubocop-results.xml

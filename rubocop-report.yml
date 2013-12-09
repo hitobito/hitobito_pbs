@@ -1,0 +1,10 @@
+# Rubocop configuration to generate a violation report
+
+inherit_from: ../hitobito/rubocop-report.yml
+
+AllCops:
+  Excludes:
+    - db/**
+    - config/**
+    - script/**
+    - tmp/**
