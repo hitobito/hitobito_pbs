@@ -1,0 +1,431 @@
+
+bund:
+  id: 1
+  parent_id:
+  lft: 1
+  rgt: 78
+  name: Pfadibewegung Schweiz
+  short_name: PBS
+  type: Group::Bund
+  email: aaron_ziegler@example.net
+  address: Ophovener Str. 79a
+  zip_code: 2843
+  town: Neu Carlscheid
+  country:
+  layer_group_id: 1
+
+be:
+  id: 2
+  parent_id: 1
+  lft: 2
+  rgt: 67
+  name: Bern
+  short_name: BE
+  type: Group::Kantonalverband
+  email: bern@be.ch
+  address: Klostergasse 3
+  zip_code: 3333
+  town: Bern
+  country: Svizzera
+  layer_group_id: 2
+
+zh:
+  id: 3
+  parent_id: 1
+  lft: 68
+  rgt: 73
+  name: Zürich
+  short_name: ZH
+  type: Group::Kantonalverband
+  email: zuerich@zh.ch
+  address: Tellgasse 3
+  zip_code: 8888
+  town: Zürich
+  country: Svizzera
+  layer_group_id: 3
+
+vd:
+  id: 4
+  parent_id: 1
+  lft: 74
+  rgt: 77
+  name: Waadt
+  short_name: VD
+  type: Group::Kantonalverband
+  email: vd@scout.ch
+  address: Nordostgasse 3
+  zip_code: 2000
+  town: Lausanne
+  country: Suisse
+  layer_group_id: 4
+
+fg_security:
+  id: 5
+  parent_id: 2
+  lft: 3
+  rgt: 4
+  name: FG Sicherheit
+  type: Group::Gremium
+  layer_group_id: 2
+
+fg_football:
+  id: 6
+  parent_id: 4
+  lft: 75
+  rgt: 76
+  name: FG Football
+  short_name:
+  type: Group::Gremium
+  layer_group_id: 4
+
+bern:
+  id: 7
+  parent_id: 2
+  lft: 5
+  rgt: 38
+  name: Stadt Bern
+  short_name: NJ
+  type: Group::Region
+  email: tanja.schwarzer@example.net
+  address: Am Gierlichshof 36c
+  zip_code: 9924
+  town: Ivanstadt
+  layer_group_id: 7
+
+oberland:
+  id: 8
+  parent_id: 2
+  lft: 39
+  rgt: 66
+  name: Berner Oberland
+  short_name: DN
+  type: Group::Region
+  email: selma_thimm@example.com
+  address: Am Arenzberg 41c
+  zip_code: 6255
+  town: Janoburg
+  layer_group_id: 8
+
+zuerich:
+  id: 9
+  parent_id: 3
+  lft: 69
+  rgt: 72
+  name: Stadt
+  short_name: BJ
+  type: Group::Region
+  email: luka@example.org
+  address: Grunder Wiesen 57
+  zip_code: 4908
+  town: Schindzielorzstadt
+  layer_group_id: 9
+
+kyburg:
+  id: 10
+  parent_id: 8
+  lft: 40
+  rgt: 61
+  name: Verband Kyburg Thun
+  short_name: BJ
+  type: Group::Region
+  email: oscar_winkler@example.com
+  address: An St. Remigius 81c
+  zip_code: 1767
+  town: Colleendorf
+  layer_group_id: 10
+
+patria:
+  id: 11
+  parent_id: 7
+  lft: 6
+  rgt: 9
+  name: Patria
+  short_name: SG
+  type: Group::Abteilung
+  email: lennox.wolfarth@example.com
+  address: Dornierstr. 88
+  zip_code: 4193
+  town: Neu Joliestadt
+  layer_group_id: 11
+
+schweizerstern:
+  id: 12
+  parent_id: 7
+  lft: 10
+  rgt: 13
+  name: Schweizerstern
+  short_name: RN
+  type: Group::Abteilung
+  email: diego.siener@example.com
+  address: Hemmelrather Weg 73a
+  zip_code: 1805
+  town: Neu Estelle
+  layer_group_id: 12
+
+schekka:
+  id: 13
+  parent_id: 7
+  lft: 14
+  rgt: 37
+  name: Schekka
+  short_name: RA
+  type: Group::Abteilung
+  email: anneke@example.com
+  address: Imbach 73
+  zip_code: 9861
+  town: Pompscheid
+  layer_group_id: 13
+
+unspunne:
+  id: 14
+  parent_id: 8
+  lft: 62
+  rgt: 63
+  name: Unspunne
+  short_name: ZM
+  type: Group::Abteilung
+  email: levke.obermaier@example.net
+  address: Ehrlichstr. 54c
+  zip_code: 8788
+  town: Alt Nia
+  layer_group_id: 14
+
+buebeberg:
+  id: 15
+  parent_id: 8
+  lft: 64
+  rgt: 65
+  name: Stärn vo Buebeberg
+  short_name: AD
+  type: Group::Abteilung
+  email: josephin_heberstreit@example.org
+  address: Maurinusstr. 215
+  zip_code: 5930
+  town: Süd Janekdorf
+  layer_group_id: 15
+
+chaeib:
+  id: 16
+  parent_id: 9
+  lft: 70
+  rgt: 71
+  name: Chräis Chäib
+  short_name: PZ
+  type: Group::Abteilung
+  email: tore_gutowicz@example.org
+  address: Im Buchenhain 24c
+  zip_code: 5142
+  town: Leilastadt
+  layer_group_id: 16
+
+berchtold:
+  id: 17
+  parent_id: 10
+  lft: 41
+  rgt: 56
+  name: Berchtold
+  short_name: OP
+  type: Group::Abteilung
+  email: elina@example.com
+  address: Windthorststr. 560
+  zip_code: 3289
+  town: Reiberland
+  layer_group_id: 17
+
+virus:
+  id: 18
+  parent_id: 10
+  lft: 57
+  rgt: 58
+  name: Virus
+  short_name: WS
+  type: Group::Abteilung
+  email: jayson.bormann@example.net
+  address: Mühlenweg 79b
+  zip_code: 8318
+  town: Dariusstadt
+  layer_group_id: 18
+
+nuenenen:
+  id: 19
+  parent_id: 10
+  lft: 59
+  rgt: 60
+  name: Nünenen
+  short_name: PK
+  type: Group::Abteilung
+  email: lene_frenzel@example.com
+  address: Max-Pechstein-Str. 69
+  zip_code: 8139
+  town: Huckesteinstadt
+  layer_group_id: 19
+
+biber:
+  id: 20
+  parent_id: 13
+  lft: 15
+  rgt: 16
+  name: Biber
+  short_name:
+  type: Group::Biber
+  layer_group_id: 13
+
+sunnewirbu:
+  id: 21
+  parent_id: 13
+  lft: 17
+  rgt: 18
+  name: Sunnewirbu
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 13
+
+hathi:
+  id: 22
+  parent_id: 13
+  lft: 19
+  rgt: 20
+  name: Hathi
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 13
+
+aries:
+  id: 23
+  parent_id: 17
+  lft: 42
+  rgt: 49
+  name: Aries
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 17
+
+castor:
+  id: 24
+  parent_id: 17
+  lft: 50
+  rgt: 51
+  name: Castor
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 17
+
+akela:
+  id: 25
+  parent_id: 23
+  lft: 43
+  rgt: 44
+  name: Akela
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 17
+
+balu:
+  id: 26
+  parent_id: 23
+  lft: 45
+  rgt: 46
+  name: Balu
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 17
+
+bagira:
+  id: 27
+  parent_id: 23
+  lft: 47
+  rgt: 48
+  name: Bagira
+  short_name:
+  type: Group::Woelfe
+  layer_group_id: 17
+
+pegasus:
+  id: 28
+  parent_id: 13
+  lft: 21
+  rgt: 26
+  name: Pegasus
+  short_name:
+  type: Group::Pfadi
+  layer_group_id: 13
+
+baereried:
+  id: 29
+  parent_id: 13
+  lft: 27
+  rgt: 28
+  name: Bäreried
+  short_name:
+  type: Group::Pfadi
+  layer_group_id: 13
+
+schloss:
+  id: 30
+  parent_id: 17
+  lft: 52
+  rgt: 53
+  name: Schloss
+  short_name:
+  type: Group::Pfadi
+  layer_group_id: 17
+
+poseidon:
+  id: 31
+  parent_id: 28
+  lft: 22
+  rgt: 23
+  name: Poseidon
+  short_name:
+  type: Group::Pfadi
+  layer_group_id: 13
+
+medusa:
+  id: 32
+  parent_id: 28
+  lft: 24
+  rgt: 25
+  name: Medusa
+  short_name:
+  type: Group::Pfadi
+  layer_group_id: 13
+
+sparta:
+  id: 33
+  parent_id: 13
+  lft: 29
+  rgt: 30
+  name: Sparta
+  short_name:
+  type: Group::Pio
+  layer_group_id: 13
+
+rovers:
+  id: 34
+  parent_id: 13
+  lft: 31
+  rgt: 32
+  name: Rovers
+  short_name:
+  type: Group::Rover
+  layer_group_id: 13
+
+elternrat:
+  id: 35
+  parent_id: 11
+  lft: 7
+  rgt: 8
+  name: Elternrat
+  short_name:
+  type: Group::Elternrat
+  layer_group_id: 11
+
+fussballers:
+  id: 39
+  parent_id: 13
+  lft: 35
+  rgt: 36
+  name: Fussballers
+  short_name:
+  type: Group::Gremium
+  layer_group_id: 13

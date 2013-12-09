@@ -10,12 +10,19 @@ module HitobitoPbs
 
     config.to_prepare do
       # extend application classes here
-      Group.send  :include, Group::Generic
+      Group.send  :include, Pbs::Group
     end
 
     initializer "pbs.add_settings" do |app|
       Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
       Settings.reload!
+    end
+
+    private
+
+    def seed_fixtures
+      fixtures = root.join('db', 'seeds')
+      ENV['NO_ENV'] ? [fixtures] : [fixtures, File.join(fixtures, Rails.env)]
     end
   end
 end
