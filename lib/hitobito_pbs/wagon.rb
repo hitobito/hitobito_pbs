@@ -13,7 +13,7 @@ module HitobitoPbs
       Group.send  :include, Pbs::Group
     end
 
-    initializer "pbs.add_settings" do |app|
+    initializer 'pbs.add_settings' do |app|
       Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
       Settings.reload!
     end

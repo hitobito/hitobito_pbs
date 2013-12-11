@@ -4,4 +4,3 @@ require 'hitobito_pbs/wagon'
 
 module HitobitoPbs
 end
-
