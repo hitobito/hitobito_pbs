@@ -6,17 +6,17 @@
 bulei:
   person: bulei
   group: bund
-  type: Group::Bund::MitgliedGs
+  type: Group::Bund::MitarbeiterGs
 
 al_schekka:
   person: al_schekka
   group: schekka
-  type: Group::Abteilung::Abteilungsleiter
+  type: Group::Abteilung::Abteilungsleitung
 
 al_berchtold:
   person: al_berchtold
   group: berchtold
-  type: Group::Abteilung::Abteilungsleiter
+  type: Group::Abteilung::Abteilungsleitung
 
 pegasus_pfadi:
   person: child

@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Group::Elternrat < Group
 
-  class Praesident < ::Role
+  class Praesidium < ::Role
     self.permissions = [:group_full]
   end
 
@@ -9,7 +9,7 @@ class Group::Elternrat < Group
     self.permissions = [:group_read]
   end
 
-  roles Praesident,
+  roles Praesidium,
         Mitglied
 
 end

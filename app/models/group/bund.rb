@@ -5,11 +5,11 @@ class Group::Bund < Group
 
   children Group::Kantonalverband
 
-  class Adressverwalter < ::Role
+  class Adressverwaltung < ::Role
     self.permissions = [:layer_full]
   end
 
-  class Beisitzer < ::Role
+  class Beisitz < ::Role
     self.permissions = [:group_read]
   end
 
@@ -22,7 +22,7 @@ class Group::Bund < Group
     self.affiliate = true
   end
 
-  class Geschaeftsleiter < ::Role
+  class Geschaeftsleitung < ::Role
     self.permissions = [:layer_read, :contact_data]
   end
 
@@ -47,7 +47,7 @@ class Group::Bund < Group
     self.affiliate = true
   end
 
-  class Leiterkursbetreuer < ::Role
+  class Leitungskursbetreuung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -88,11 +88,11 @@ class Group::Bund < Group
     self.affiliate = true
   end
 
-  class Praesident < ::Role
+  class Praesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class PraesidentApv < ::Role
+  class PraesidiumApv < ::Role
     self.permissions = [:group_read]
   end
 
@@ -124,51 +124,51 @@ class Group::Bund < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherBiberstufe < ::Role
+  class VerantwortungBiberstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherIntegration < ::Role
+  class VerantwortungIntegration < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherLagermeldung < ::Role
+  class VerantwortungLagermeldung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPfadiTrotzAllem < ::Role
+  class VerantwortungPfadiTrotzAllem < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPfadistufe < ::Role
+  class VerantwortungPfadistufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPiostufe < ::Role
+  class VerantwortungPiostufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPr < ::Role
+  class VerantwortungPr < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPraeventionSexuellerAusbeutung < ::Role
+  class VerantwortungPraeventionSexuellerAusbeutung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherRoverstufe < ::Role
+  class VerantwortungRoverstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherWolfstufe < ::Role
+  class VerantwortungWolfstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VertreterPbs < ::Role
+  class VertretungPbs < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VizePraesident < ::Role
+  class VizePraesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -178,14 +178,14 @@ class Group::Bund < Group
 
   roles MitarbeiterGs,
         Sekretariat,
-        Adressverwalter,
-        Praesident,
-        VizePraesident,
-        PraesidentApv,
-        Geschaeftsleiter,
+        Adressverwaltung,
+        Praesidium,
+        VizePraesidium,
+        PraesidiumApv,
+        Geschaeftsleitung,
         Mitarbeiter,
-        VertreterPbs,
-        Beisitzer,
+        VertretungPbs,
+        Beisitz,
 
         Kassier,
         Revisor,
@@ -197,23 +197,23 @@ class Group::Bund < Group
 
         Coach,
         GrossanlassCoach,
-        Leiterkursbetreuer,
+        Leitungskursbetreuung,
 
         LeitungKernaufgabeAusbildung,
         LeitungKernaufgabeKommunikation,
         LeitungKernaufgabeProgramm,
         LeitungKernaufgabeSupport,
 
-        VerantwortlicherBiberstufe,
-        VerantwortlicherWolfstufe,
-        VerantwortlicherPfadistufe,
-        VerantwortlicherPiostufe,
-        VerantwortlicherRoverstufe,
-        VerantwortlicherPfadiTrotzAllem,
-        VerantwortlicherIntegration,
-        VerantwortlicherLagermeldung,
-        VerantwortlicherPr,
-        VerantwortlicherPraeventionSexuellerAusbeutung,
+        VerantwortungBiberstufe,
+        VerantwortungWolfstufe,
+        VerantwortungPfadistufe,
+        VerantwortungPiostufe,
+        VerantwortungRoverstufe,
+        VerantwortungPfadiTrotzAllem,
+        VerantwortungIntegration,
+        VerantwortungLagermeldung,
+        VerantwortungPr,
+        VerantwortungPraeventionSexuellerAusbeutung,
 
         InternationalCommissionerIcWagggs,
         InternationalCommissionerIcWosm,

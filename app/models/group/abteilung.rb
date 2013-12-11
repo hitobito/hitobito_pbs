@@ -12,19 +12,19 @@ class Group::Abteilung < Group
            Group::Elternrat
 
 
-  class Abteilungsleiter < ::Role
+  class Abteilungsleitung < ::Role
     self.permissions = [:layer_full, :contact_data]
   end
 
-  class AbteilungsleiterStv < ::Role
+  class AbteilungsleitungStv < ::Role
     self.permissions = [:layer_full, :contact_data]
   end
 
-  class Adressverwalter < ::Role
+  class Adressverwaltung < ::Role
     self.permissions = [:layer_full]
   end
 
-  class Beisitzer < ::Role
+  class Beisitz < ::Role
     self.permissions = [:group_read]
   end
 
@@ -37,7 +37,7 @@ class Group::Abteilung < Group
     self.affiliate = true
   end
 
-  class Heimverwalter < ::Role
+  class Heimverwaltung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -58,11 +58,11 @@ class Group::Abteilung < Group
     self.permissions = [:group_read]
   end
 
-  class Praesident < ::Role
+  class Praesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class PraesidentApv < ::Role
+  class PraesidiumApv < ::Role
     self.permissions = [:group_read]
   end
 
@@ -82,43 +82,43 @@ class Group::Abteilung < Group
     self.permissions = [:group_read]
   end
 
-  class StufenleiterBiber < ::Role
+  class StufenleitungBiber < ::Role
     self.permissions = [:layer_read]
   end
 
-  class StufenleiterWoelfe < ::Role
+  class StufenleitungWoelfe < ::Role
     self.permissions = [:layer_read]
   end
 
-  class StufenleiterPfadi < ::Role
+  class StufenleitungPfadi < ::Role
     self.permissions = [:layer_read]
   end
 
-  class StufenleiterPio < ::Role
+  class StufenleitungPio < ::Role
     self.permissions = [:layer_read]
   end
 
-  class StufenleiterRover < ::Role
+  class StufenleitungRover < ::Role
     self.permissions = [:layer_read]
   end
 
-  class StufenleiterPta < ::Role
+  class StufenleitungPta < ::Role
     self.permissions = [:layer_read]
   end
 
-  class VerantwortlicherMaterialverkaufsstelle < ::Role
+  class VerantwortungMaterialverkaufsstelle < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPfadiTrotzAllem < ::Role
+  class VerantwortungPfadiTrotzAllem < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPr < ::Role
+  class VerantwortungPr < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VizePraesident < ::Role
+  class VizePraesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -126,22 +126,22 @@ class Group::Abteilung < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  roles Abteilungsleiter,
-        AbteilungsleiterStv,
+  roles Abteilungsleitung,
+        AbteilungsleitungStv,
         Sekretariat,
-        Adressverwalter,
-        Praesident,
-        VizePraesident,
-        PraesidentApv,
+        Adressverwaltung,
+        Praesidium,
+        VizePraesidium,
+        PraesidiumApv,
         Praeses,
-        Beisitzer,
+        Beisitz,
 
-        StufenleiterBiber,
-        StufenleiterWoelfe,
-        StufenleiterPfadi,
-        StufenleiterPio,
-        StufenleiterRover,
-        StufenleiterPta,
+        StufenleitungBiber,
+        StufenleitungWoelfe,
+        StufenleitungPfadi,
+        StufenleitungPio,
+        StufenleitungRover,
+        StufenleitungPta,
 
         Kassier,
         Revisor,
@@ -149,9 +149,9 @@ class Group::Abteilung < Group
         Webmaster,
         Coach,
 
-        VerantwortlicherMaterialverkaufsstelle,
-        VerantwortlicherPfadiTrotzAllem,
-        VerantwortlicherPr,
+        VerantwortungMaterialverkaufsstelle,
+        VerantwortungPfadiTrotzAllem,
+        VerantwortungPr,
 
         Spezialfunktion,
 

@@ -18,6 +18,21 @@ describe Group do
       subject.last.should == Group::Gremium
     end
 
+    it 'is in hierarchical order' do
+      subject.collect(&:name).should eq(
+        [Group::Bund,
+         Group::Kantonalverband,
+         Group::Region,
+         Group::Abteilung,
+         Group::Biber,
+         Group::Woelfe,
+         Group::Pfadi,
+         Group::Pio,
+         Group::Rover,
+         Group::Pta,
+         Group::Elternrat,
+         Group::Gremium].collect(&:name))
+    end
   end
 
 

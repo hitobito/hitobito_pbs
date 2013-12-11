@@ -3,15 +3,15 @@ class Group::Pfadi < Group
 
   children Group::Pfadi
 
-  class Einheitsleiter < ::Role
+  class Einheitsleitung < ::Role
     self.permissions = [:layer_read]
   end
 
-  class Mitleiter < ::Role
+  class Mitleitung < ::Role
     self.permissions = [:layer_read]
   end
 
-  class Adressverwalter < ::Role
+  class Adressverwaltung < ::Role
     self.permissions = [:group_full]
   end
 
@@ -25,9 +25,9 @@ class Group::Pfadi < Group
     self.visible_from_above = false
   end
 
-  roles Einheitsleiter,
-        Mitleiter,
-        Adressverwalter,
+  roles Einheitsleitung,
+        Mitleitung,
+        Adressverwaltung,
         Leitpfadi,
         Pfadi
 

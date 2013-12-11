@@ -56,7 +56,7 @@ Group::Gremium.seed(:name, :parent_id,
    parent_id: states[0].id },
 
   {name: 'FG Fussball',
-   parent_id: states[2].id },
+   parent_id: states[1].id },
 )
 
 regions = Group::Region.seed(:name, :parent_id,
@@ -129,11 +129,11 @@ woelfe = Group::Woelfe.seed(:name, :parent_id,
 )
 
 Group::Woelfe.seed(:name, :parent_id,
-  {name: 'Akela',
+  {name: 'Rudel Akela',
    parent_id: woelfe[2].id},
-  {name: 'Balu',
+  {name: 'Rudel Balu',
    parent_id: woelfe[2].id},
-  {name: 'Bagira',
+  {name: 'Rudel Bagira',
    parent_id: woelfe[2].id}
 )
 
@@ -149,10 +149,10 @@ pfadis = Group::Pfadi.seed(:name, :parent_id,
 )
 
 Group::Pfadi.seed(:name, :parent_id,
-  {name: 'Poseidon',
+  {name: 'Fähnli Poseidon',
    parent_id: pfadis[0].id},
 
-  {name: 'Medusa',
+  {name: 'Fähnli Medusa',
    parent_id: pfadis[0].id},
 )
 

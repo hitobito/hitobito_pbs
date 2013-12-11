@@ -8,11 +8,11 @@ class Group::Region < Group
            Group::Abteilung,
            Group::Rover
 
-  class Adressverwalter < ::Role
+  class Adressverwaltung < ::Role
     self.permissions = [:layer_full]
   end
 
-  class Beisitzer < ::Role
+  class Beisitz < ::Role
     self.permissions = [:group_read]
   end
 
@@ -25,7 +25,7 @@ class Group::Region < Group
     self.affiliate = true
   end
 
-  class Heimverwalter < ::Role
+  class Heimverwaltung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -33,11 +33,7 @@ class Group::Region < Group
     self.permissions = [:layer_read, :contact_data]
   end
 
-  class Regionsleiter < ::Role
-    self.permissions = [:layer_full, :contact_data]
-  end
-
-  class Leiterkursbetreuer < ::Role
+  class Leitungskursbetreuung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -62,16 +58,20 @@ class Group::Region < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  class Praesident < ::Role
+  class Praesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class PraesidentApv < ::Role
+  class PraesidiumApv < ::Role
     self.permissions = [:group_read]
   end
 
   class Redaktor < ::Role
     self.permissions = [:layer_read, :contact_data]
+  end
+
+  class Regionalleitung < ::Role
+    self.permissions = [:layer_full, :contact_data]
   end
 
   class Revisor < ::Role
@@ -86,87 +86,87 @@ class Group::Region < Group
     self.permissions = [:group_read]
   end
 
-  class VerantwortlicherAbteilungen < ::Role
+  class VerantwortungAbteilungen < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherAnimationSpirituelle < ::Role
+  class VerantwortungAnimationSpirituelle < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherAusbildung < ::Role
+  class VerantwortungAusbildung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherBetreuung < ::Role
+  class VerantwortungBetreuung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherBiberstufe < ::Role
+  class VerantwortungBiberstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherIntegration < ::Role
+  class VerantwortungIntegration < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherInternationales < ::Role
+  class VerantwortungInternationales < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherSuchtpraeventionsprogramm < ::Role
+  class VerantwortungSuchtpraeventionsprogramm < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherKrisenteam < ::Role
+  class VerantwortungKrisenteam < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherLagermeldung < ::Role
+  class VerantwortungLagermeldung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherLagerplaetze < ::Role
+  class VerantwortungLagerplaetze < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherMaterialverkaufsstelle < ::Role
+  class VerantwortungMaterialverkaufsstelle < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPfadiTrotzAllem < ::Role
+  class VerantwortungPfadiTrotzAllem < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPfadistufe < ::Role
+  class VerantwortungPfadistufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPiostufe < ::Role
+  class VerantwortungPiostufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPr < ::Role
+  class VerantwortungPr < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherPraeventionSexuellerAusbeutung < ::Role
+  class VerantwortungPraeventionSexuellerAusbeutung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherProgramm < ::Role
+  class VerantwortungProgramm < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherRoverstufe < ::Role
+  class VerantwortungRoverstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortlicherWolfstufe < ::Role
+  class VerantwortungWolfstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VizePraesident < ::Role
+  class VizePraesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -174,15 +174,15 @@ class Group::Region < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  roles Regionsleiter,
+  roles Regionalleitung,
         Sekretariat,
-        Adressverwalter,
-        Praesident,
-        VizePraesident,
-        PraesidentApv,
+        Adressverwaltung,
+        Praesidium,
+        VizePraesidium,
+        PraesidiumApv,
         Praeses,
         Mitarbeiter,
-        Beisitzer,
+        Beisitz,
 
         Kassier,
         Revisor,
@@ -192,28 +192,28 @@ class Group::Region < Group
         MitgliedKrisenteam,
 
         Coach,
-        Leiterkursbetreuer,
+        Leitungskursbetreuung,
 
-        VerantwortlicherBiberstufe,
-        VerantwortlicherWolfstufe,
-        VerantwortlicherPfadistufe,
-        VerantwortlicherPiostufe,
-        VerantwortlicherRoverstufe,
-        VerantwortlicherPfadiTrotzAllem,
-        VerantwortlicherAbteilungen,
-        VerantwortlicherAnimationSpirituelle,
-        VerantwortlicherAusbildung,
-        VerantwortlicherBetreuung,
-        VerantwortlicherIntegration,
-        VerantwortlicherInternationales,
-        VerantwortlicherSuchtpraeventionsprogramm,
-        VerantwortlicherKrisenteam,
-        VerantwortlicherLagermeldung,
-        VerantwortlicherLagerplaetze,
-        VerantwortlicherMaterialverkaufsstelle,
-        VerantwortlicherPr,
-        VerantwortlicherPraeventionSexuellerAusbeutung,
-        VerantwortlicherProgramm,
+        VerantwortungBiberstufe,
+        VerantwortungWolfstufe,
+        VerantwortungPfadistufe,
+        VerantwortungPiostufe,
+        VerantwortungRoverstufe,
+        VerantwortungPfadiTrotzAllem,
+        VerantwortungAbteilungen,
+        VerantwortungAnimationSpirituelle,
+        VerantwortungAusbildung,
+        VerantwortungBetreuung,
+        VerantwortungIntegration,
+        VerantwortungInternationales,
+        VerantwortungSuchtpraeventionsprogramm,
+        VerantwortungKrisenteam,
+        VerantwortungLagermeldung,
+        VerantwortungLagerplaetze,
+        VerantwortungMaterialverkaufsstelle,
+        VerantwortungPr,
+        VerantwortungPraeventionSexuellerAusbeutung,
+        VerantwortungProgramm,
 
         Spezialfunktion,
 
