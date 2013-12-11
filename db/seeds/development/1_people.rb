@@ -1,10 +1,10 @@
 # encoding: utf-8
 
-require Rails.root.join('lib', 'seed', 'person_seeder')
+require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
 
 class Seeder
 
-  include Seed::PersonSeeder
+  include PersonSeeder
 
   def initialize
     @encrypted_password = BCrypt::Password.create("hito42bito", cost: 1)
