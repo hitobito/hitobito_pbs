@@ -241,3 +241,23 @@ de:
 
       group/gremium/leitung: Leitung
       group/gremium/mitglied: Mitglied
+
+    attributes:
+      person:
+        nickname: Pfadiname
+        salutation: Anrede
+        title: Titel
+        grade_of_school: Schulklasse
+        entry_date: Eintrittsdatum
+        leaving_date: Austrittsdatum
+        j_s_number: J+S Personennummer
+        correspondence_language: Korrspondenzsprache
+        brother_and_sisters: Geschwister
+
+      group:
+        pta: PTA
+        vkp: VKP
+        pbs_material_insurance: PBS Lagermaterial Versicherung
+        website: Webseite
+        pbs_shortname: PBS Kürzel
+        bank_account: Bank-/Postverbindung

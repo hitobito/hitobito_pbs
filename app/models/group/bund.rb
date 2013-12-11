@@ -76,7 +76,7 @@ class Group::Bund < Group
   end
 
   class MitarbeiterGs < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_full, :contact_data, :admin]
   end
 
   class MitgliedKrisenteam < ::Role

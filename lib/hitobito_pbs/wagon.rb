@@ -10,7 +10,9 @@ module HitobitoPbs
 
     config.to_prepare do
       # extend application classes here
-      Group.send  :include, Pbs::Group
+      Group.send        :include, Pbs::Group
+      Person.send       :include, Pbs::Person
+      GroupAbility.send :include, Pbs::GroupAbility
     end
 
     initializer 'pbs.add_settings' do |app|

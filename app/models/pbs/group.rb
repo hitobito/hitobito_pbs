@@ -9,7 +9,11 @@ module Pbs::Group
   extend ActiveSupport::Concern
 
   included do
-    # attr_accessible :bank_account
+    attr_accessible :website, :pbs_shortname, :bank_account
+
+    attr_accessible(*(accessible_attributes.to_a + [:pta, :vkp, :pbs_material_insurance]),
+                    as: :superior)
+
 
     # define global children
     children Group::Gremium

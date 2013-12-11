@@ -1,0 +1,8 @@
+
+= field_set_tag do
+  - entry.modifiable_attributes(:pbs_shortname, :website, :bank_account).each do |attr|
+    = f.labeled_input_field attr
+
+= field_set_tag do
+  - entry.modifiable_attributes(:pta, :vkp, :pbs_material_insurance).each do |attr|
+    = f.labeled_input_field attr
