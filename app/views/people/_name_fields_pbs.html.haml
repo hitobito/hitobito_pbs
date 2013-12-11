@@ -1,2 +1,5 @@
-= f.labeled_input_fields(:salutation, :title)
+
+= f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: true }, class: 'span6'
+
+= f.labeled_input_field :title
 

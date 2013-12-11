@@ -15,11 +15,11 @@ describe Group do
     subject { Group.all_types }
 
     it "must have simple group as last item" do
-      subject.last.should == Group::Gremium
+      expect(subject.last).to eq(Group::Gremium)
     end
 
     it 'is in hierarchical order' do
-      subject.collect(&:name).should eq(
+      expect(subject.collect(&:name)).to eq(
         [Group::Bund,
          Group::Kantonalverband,
          Group::Region,

@@ -8,11 +8,20 @@ module HitobitoPbs
     # Add a load path for this specific wagon
     # config.autoload_paths += %W( #{config.root}/lib )
 
+    # Add a load path for this specific wagon
+    config.autoload_paths += %W( #{config.root}/app/abilities
+                                 #{config.root}/app/domain
+                               )
+
     config.to_prepare do
       # extend application classes here
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
+
       GroupAbility.send :include, Pbs::GroupAbility
+
+      Export::CsvPeople::Person.send        :include, Pbs::Export::CsvPeople::Person
+      Export::CsvPeople::PeopleAddress.send :include, Pbs::Export::CsvPeople::PeopleAddress
     end
 
     initializer 'pbs.add_settings' do |app|

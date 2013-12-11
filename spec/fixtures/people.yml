@@ -6,8 +6,12 @@
 bulei:
   first_name: Bundes
   last_name: Leiter
+  nickname: Scout
   email: bulei@hitobito.example.com
+  salutation: sehr_geehrter_titel_nachname
+  title: Dr.
   contact_data_visible: true
+  gender: m
 
 al_schekka:
   first_name: AL

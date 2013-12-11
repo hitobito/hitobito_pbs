@@ -1,0 +1,49 @@
+require 'spec_helper'
+
+describe Export::CsvPeople do
+
+  let(:person) { people(:bulei) }
+  let(:simple_headers) do
+    ['Vorname', 'Nachname', 'Pfadiname', 'Firmenname', 'Firma', 'E-Mail',
+     'Adresse', 'PLZ', 'Ort', 'Land', 'Geschlecht', 'Geburtstag', 'Titel', 'Anrede', 'Rollen']
+  end
+
+  describe Export::CsvPeople do
+
+    let(:list) { [person] }
+    let(:data) { Export::CsvPeople.export_address(list) }
+    let(:csv)  { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
+
+    subject { csv }
+
+    context 'export' do
+      its(:headers) { should == simple_headers }
+
+      context 'first row' do
+        subject { csv[0] }
+
+        its(['Vorname']) { should eq person.first_name }
+        its(['Nachname']) { should eq person.last_name }
+        its(['E-Mail']) { should eq person.email }
+        its(['Ort']) { should eq person.town }
+        its(['Geschlecht']) { should eq person.gender }
+        its(['Rollen']) { should eq 'Mitarbeiter GS Pfadibewegung Schweiz' }
+        its(['Titel']) { should eq 'Dr.' }
+        its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
+      end
+    end
+
+    context 'export_full' do
+      its(:headers) { should include('Titel') }
+      let(:data) { Export::CsvPeople.export_full(list) }
+
+      context 'first row' do
+        subject { csv[0] }
+
+        its(['Titel']) { should eq 'Dr.' }
+        its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
+      end
+    end
+  end
+end
+
