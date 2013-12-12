@@ -27,6 +27,10 @@ module Pbs::Person
     Salutation.new(self).value
   end
 
+  def pbs_number
+    sprintf('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1-")
+  end
+
   def full_name_with_title
     "#{title} #{full_name_without_title}".strip
   end

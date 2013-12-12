@@ -1,6 +1,7 @@
 
 = field_set_tag do
-  = f.labeled_input_fields(:grade_of_school, :entry_date, :leaving_date, :j_s_number,
-                           :correspondence_language)
+  = f.labeled_input_fields(:j_s_number, :correspondence_language, :grade_of_school)
   = f.labeled_input_field(:brother_and_sisters, caption: '(in der Abteilung)')
 
+= field_set_tag do
+  = f.labeled_input_fields(:entry_date, :leaving_date)

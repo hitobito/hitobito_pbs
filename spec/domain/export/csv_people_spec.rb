@@ -30,6 +30,7 @@ describe Export::CsvPeople do
         its(['Rollen']) { should eq 'Mitarbeiter GS Pfadibewegung Schweiz' }
         its(['Titel']) { should eq 'Dr.' }
         its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
+        its(['PBS Personennummber']) { should be_nil }
       end
     end
 
@@ -42,6 +43,7 @@ describe Export::CsvPeople do
 
         its(['Titel']) { should eq 'Dr.' }
         its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
+        its(['PBS Personennummer']) { should eq '337-180-612' }
       end
     end
   end

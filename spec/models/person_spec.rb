@@ -42,5 +42,22 @@ describe Person do
       expect(person.salutation_label).to be_nil
     end
   end
+
+  context '#pbs_number' do
+    it 'handles short numbers' do
+      person.id = 15
+      expect(person.pbs_number).to eq('000-000-015')
+    end
+
+    it 'handles long numbers' do
+      person.id = 123456789
+      expect(person.pbs_number).to eq('123-456-789')
+    end
+
+    it 'handles very long numbers' do
+      person.id = 1234567891234
+      expect(person.pbs_number).to eq('1-234-567-891-234')
+    end
+  end
 end
 

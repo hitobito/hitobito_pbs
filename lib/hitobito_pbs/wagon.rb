@@ -22,6 +22,7 @@ module HitobitoPbs
 
       Export::CsvPeople::Person.send        :include, Pbs::Export::CsvPeople::Person
       Export::CsvPeople::PeopleAddress.send :include, Pbs::Export::CsvPeople::PeopleAddress
+      Export::CsvPeople::PeopleFull.send    :include, Pbs::Export::CsvPeople::PeopleFull
     end
 
     initializer 'pbs.add_settings' do |app|

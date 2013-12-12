@@ -11,6 +11,7 @@ module Pbs
         def initialize_with_salutation(person)
           initialize_without_salutation(person)
           self[:salutation] = person.salutation_value
+          self[:pbs_number] = person.pbs_number
         end
       end
     end

@@ -270,6 +270,7 @@ de:
     attributes:
       person:
         nickname: Pfadiname
+        pbs_number: PBS Personennummer
         salutation: Anrede
         salutation_value: Anrede
         title: Titel
