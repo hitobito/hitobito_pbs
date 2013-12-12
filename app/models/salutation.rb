@@ -33,15 +33,13 @@ class Salutation
     return nil unless person.salutation?
 
     gender = person.gender || 'f'
-    key = "#{I18N_KEY_PREFIX}.#{person.salutation}.value.#{gender}"
-    I18n.translate(key,
+    I18n.translate("#{I18N_KEY_PREFIX}.#{person.salutation}.value.#{gender}",
                    first_name: person.first_name,
                    last_name: person.last_name,
                    nickname: person.nickname,
                    company_name: person.company_name,
                    title: person.title,
-                   title_last_name: "#{person.title} #{person.last_name}".strip
-                   )
+                   title_last_name: "#{person.title} #{person.last_name}".strip)
   end
 
 end

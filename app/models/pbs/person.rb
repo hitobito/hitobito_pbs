@@ -14,7 +14,8 @@ module Pbs::Person
     attr_accessible :salutation, :title, :grade_of_school, :entry_date, :leaving_date,
                     :j_s_number, :correspondence_language, :brother_and_sisters
 
-    validates :salutation, inclusion: { in: ->(person) { Salutation.available.keys } , allow_blank: true }
+    validates :salutation, inclusion: { in: ->(person) { Salutation.available.keys } ,
+                                        allow_blank: true }
     validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }
 
     define_partial_index do
@@ -33,7 +34,7 @@ module Pbs::Person
   end
 
   def pbs_number
-    sprintf('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1-")
+    sprintf('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-')
   end
 
   def full_name_with_title
