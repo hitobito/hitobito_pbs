@@ -201,7 +201,7 @@ body {
     padding: 10px 20px 0;
   }
 
-  .options > ul a {
+  .options > ul > li > a {
     color: lighten($pageBackground, 35%);
     &:hover {
       color: $white;
