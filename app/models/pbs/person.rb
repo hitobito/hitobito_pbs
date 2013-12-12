@@ -10,7 +10,7 @@ module Pbs::Person
                     :j_s_number, :correspondence_language, :brother_and_sisters
 
     validates :salutation, inclusion: { in: ->(person) { Salutation.available.keys } , allow_blank: true }
-
+    validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }
 
     define_partial_index do
       indexes title, j_s_number
