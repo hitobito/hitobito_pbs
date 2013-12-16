@@ -7,14 +7,15 @@
 
 require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 
+seeder = GroupSeeder.new
 
 ch = Group.roots.first
 srand(42)
 
 unless ch.address.present?
-  ch.update_attributes(GroupSeeder.group_attributes)
+  ch.update_attributes(seeder.group_attributes)
   ch.default_children.each do |child_class|
-    child_class.first.update_attributes(GroupSeeder.group_attributes)
+    child_class.first.update_attributes(seeder.group_attributes)
   end
 end
 
@@ -48,7 +49,7 @@ states = Group::Kantonalverband.seed(:name, :parent_id,
 )
 
 states.each do |s|
-  GroupSeeder.seed_social_accounts(s)
+  seeder.seed_social_accounts(s)
 end
 
 Group::Gremium.seed(:name, :parent_id,
@@ -61,52 +62,52 @@ Group::Gremium.seed(:name, :parent_id,
 
 regions = Group::Region.seed(:name, :parent_id,
   {name: 'Stadt Bern',
-   parent_id: states[0].id }.merge(GroupSeeder.group_attributes),
+   parent_id: states[0].id }.merge(seeder.group_attributes),
 
   {name: 'Berner Oberland',
-   parent_id: states[0].id }.merge(GroupSeeder.group_attributes),
+   parent_id: states[0].id }.merge(seeder.group_attributes),
 
   {name: 'Stadt',
-   parent_id: states[1].id }.merge(GroupSeeder.group_attributes)
+   parent_id: states[1].id }.merge(seeder.group_attributes)
 )
 
 regions += Group::Region.seed(:name, :parent_id,
   {name: 'Verband Kyburg Thun',
-   parent_id: regions[1].id }.merge(GroupSeeder.group_attributes)
+   parent_id: regions[1].id }.merge(seeder.group_attributes)
 )
 
 
 regions.each do |r|
-  GroupSeeder.seed_social_accounts(r)
+  seeder.seed_social_accounts(r)
 end
 
 abteilungen = Group::Abteilung.seed(:name, :parent_id,
   {name: 'Patria',
-   parent_id: regions[0].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[0].id }.merge(seeder.group_attributes),
 
   {name: 'Schweizerstern',
-   parent_id: regions[0].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[0].id }.merge(seeder.group_attributes),
 
   {name: 'Schekka',
-   parent_id: regions[0].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[0].id }.merge(seeder.group_attributes),
 
   {name: 'Unspunne',
-   parent_id: regions[1].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[1].id }.merge(seeder.group_attributes),
 
   {name: 'Stärn vo Buebeberg',
-   parent_id: regions[1].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[1].id }.merge(seeder.group_attributes),
 
   {name: 'Chräis Chäib',
-   parent_id: regions[2].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[2].id }.merge(seeder.group_attributes),
 
   {name: 'Berchtold',
-   parent_id: regions[3].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[3].id }.merge(seeder.group_attributes),
 
   {name: 'Virus',
-   parent_id: regions[3].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[3].id }.merge(seeder.group_attributes),
 
   {name: 'Nünenen',
-   parent_id: regions[3].id }.merge(GroupSeeder.group_attributes),
+   parent_id: regions[3].id }.merge(seeder.group_attributes),
 )
 
 Group::Biber.seed(:name, :parent_id,

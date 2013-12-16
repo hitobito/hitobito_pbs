@@ -7,13 +7,7 @@
 
 require Rails.root.join('db', 'seeds', 'support', 'person_seeder')
 
-class Seeder
-
-  include PersonSeeder
-
-  def initialize
-    @encrypted_password = BCrypt::Password.create("hito42bito", cost: 1)
-  end
+class PbsPersonSeeder < PersonSeeder
 
   def amount(role_type)
     case role_type.name.demodulize
@@ -23,10 +17,6 @@ class Seeder
   end
 
 end
-
-seeder = Seeder.new
-
-seeder.seed_all_roles
 
 puzzlers = ['Pascal Zumkehr',
             'Pierre Fritsch',
@@ -38,6 +28,10 @@ devs = {'Olivier Brian' => 'olivier.brian@bfh.ch'}
 puzzlers.each do |puz|
   devs[puz] = "#{puz.split.last.downcase}@puzzle.ch"
 end
+
+seeder = PbsPersonSeeder.new
+
+seeder.seed_all_roles
 
 root = Group.root
 devs.each do |name, email|
