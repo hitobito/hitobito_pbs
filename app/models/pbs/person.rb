@@ -18,10 +18,6 @@ module Pbs::Person
                                         allow_blank: true }
     validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }
 
-    define_partial_index do
-      indexes title, j_s_number
-    end
-
     alias_method_chain :full_name, :title
   end
 
