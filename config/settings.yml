@@ -7,3 +7,8 @@
 # Overrides settings from the main application
 application:
   #name: Pfadi
+
+  languages:
+    de: Deutsch
+    fr: Français
+    it: Italiano

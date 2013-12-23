@@ -9,6 +9,9 @@ class Group::Abteilung < Group
 
   self.layer = true
 
+  attr_accessible(*(accessible_attributes.to_a + [:pbs_shortname, :pta, :vkp, :pbs_material_insurance]),
+                    as: :superior)
+
   children Group::Biber,
            Group::Woelfe,
            Group::Pfadi,

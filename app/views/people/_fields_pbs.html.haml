@@ -5,7 +5,13 @@
 
 
 = field_set_tag do
-  = f.labeled_input_fields(:j_s_number, :correspondence_language, :grade_of_school)
+  = f.labeled_collection_select(:correspondence_language,
+                                Settings.application.languages.to_hash,
+                                :first,
+                                :last,
+                                { prompt: true },
+                                class: 'span6')
+  = f.labeled_input_fields(:j_s_number, :grade_of_school)
   = f.labeled_input_field(:brother_and_sisters, caption: '(in der Abteilung)')
 
 = field_set_tag do
