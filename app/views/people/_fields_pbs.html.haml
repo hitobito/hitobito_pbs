@@ -5,6 +5,8 @@
 
 
 = field_set_tag do
+  = f.labeled_input_field :title
+  = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: true }, class: 'span6'
   = f.labeled_collection_select(:correspondence_language,
                                 Settings.application.languages.to_hash,
                                 :first,
