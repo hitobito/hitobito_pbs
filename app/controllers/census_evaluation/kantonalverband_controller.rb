@@ -12,8 +12,8 @@ class CensusEvaluation::KantonalverbandController < CensusEvaluation::BaseContro
   def remind
     authorize!(:remind_census, group)
 
-    abteilung = sub_groups.find(params[:abteilung_id])
-    CensusReminderJob.new(current_user, current_census, abteilung).enqueue!
+    abteilung = evaluation.sub_groups.find(params[:abteilung_id])
+    CensusReminderJob.new(current_user, evaluation.current_census, abteilung).enqueue!
     notice = "Erinnerungsemail an #{abteilung.to_s} geschickt"
 
     respond_to do |format|

@@ -3,7 +3,7 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- if current_census_year?
+- if @evaluation.current_census_year?
   = muted do
     = @abteilungen[group.id][:confirmed]
     \/

@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
-require_relative 'subgroups_shared_examples'
 
 describe CensusEvaluation::BundController do
 
@@ -17,7 +16,7 @@ describe CensusEvaluation::BundController do
 
   before { sign_in(people(:bulei)) }
 
-  describe 'GET total' do
+  describe 'GET index' do
     before { Date.stub(today: censuses(:two_o_12).finish_at) }
 
     before { get :index, id: ch.id }
@@ -50,12 +49,4 @@ describe CensusEvaluation::BundController do
     end
   end
 
-
-  it_behaves_like 'sub_groups' do
-    let(:parent)              { ch }
-    let(:census)              { censuses(:two_o_12) }
-    let(:subgroups)           { [be, vd, zh] }
-    let(:group_to_delete)     { be }
-    let(:group_without_count) { vd }
-  end
 end

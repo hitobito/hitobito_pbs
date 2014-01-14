@@ -13,7 +13,6 @@ module CensusEvaluationHelper
     send("census_#{group.klass.model_name.element}_group_path", group, options)
   end
 
-
   def count_field(group, field)
     if count = @group_counts[group.id]
       count_value(count.send(field))

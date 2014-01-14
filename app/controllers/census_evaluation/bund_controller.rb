@@ -14,7 +14,7 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
 
     respond_to do |format|
       format.html do
-        @abteilungen = abteilung_confirmation_ratios if current_census_year?
+        @abteilungen = abteilung_confirmation_ratios if evaluation.current_census_year?
       end
     end
   end
@@ -30,7 +30,8 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
   end
 
   def number_of_confirmations(kantonalverband)
-    MemberCount.where(kantonalverband_id: kantonalverband.id, year: year).count(:abteilung_id, distinct: true)
+    MemberCount.where(kantonalverband_id: kantonalverband.id, year: year).
+                count(:abteilung_id, distinct: true)
   end
 
   def number_of_abteilungen(kantonalverband)

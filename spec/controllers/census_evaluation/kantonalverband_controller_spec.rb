@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
-require_relative 'subgroups_shared_examples'
 
 describe CensusEvaluation::KantonalverbandController do
 
@@ -62,83 +61,4 @@ describe CensusEvaluation::KantonalverbandController do
     end
   end
 
-  it_behaves_like 'sub_groups' do
-    let(:parent)              { be }
-    let(:census)              { censuses(:two_o_12) }
-    let(:subgroups)           { [schekka, patria, berchtold] }
-    let(:group_to_delete)     { schekka }
-    let(:group_without_count) { patria }
-
-    before { groups(:schweizerstern).destroy }
-
-    context 'when moving group' do
-      let(:target) { be }
-      let(:chaeib) { groups(:chaeib) }
-
-      context 'before count' do
-        before do
-          Group::Mover.new(chaeib).perform(target).should be_true
-        end
-
-        context 'in new parent' do
-          before { member_counts(:chaeib).destroy }
-
-          include_examples 'sub_groups_examples' do
-            let(:current_census_groups) { subgroups + [chaeib] }
-            let(:past_census_groups)    { subgroups - [group_without_count] }
-            let(:future_census_groups)  { subgroups + [chaeib] }
-          end
-        end
-
-        context 'in old parent' do
-          let(:parent) { groups(:zh) }
-
-          context '' do
-            before { member_counts(:chaeib).destroy }
-            include_examples 'sub_groups_examples' do
-
-              let(:current_census_groups) { [] }
-              let(:past_census_groups)    { [] } # empty for spec implementation reasons, tested in example below
-              let(:future_census_groups)  { [] }
-            end
-          end
-
-          context 'for past census' do
-            subject { assigns(:sub_groups).collect(&:name) }
-            it 'contains moved group' do
-               Census.create!(year: census.year + 1,
-                              start_at: census.start_at + 1.year)
-               get :index, id: parent.id, year: census.year
-               should eq [chaeib].collect(&:name).sort
-            end
-          end
-        end
-
-      end
-
-      context 'after count' do
-        before do
-          Group::Mover.new(chaeib).perform(target).should be_true
-        end
-
-        context 'in new parent' do
-          include_examples 'sub_groups_examples' do
-            let(:current_census_groups) { subgroups }
-            let(:past_census_groups)    { subgroups - [group_without_count] }
-            let(:future_census_groups)  { subgroups + [chaeib] }
-          end
-        end
-
-        context 'in old parent' do
-          let(:parent)          { groups(:zh) }
-
-          include_examples 'sub_groups_examples' do
-            let(:current_census_groups) { [chaeib] }
-            let(:past_census_groups)    { [chaeib] }
-            let(:future_census_groups)  { [] }
-          end
-        end
-      end
-    end
-  end
 end
