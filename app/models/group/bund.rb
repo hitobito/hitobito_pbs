@@ -57,6 +57,10 @@ class Group::Bund < Group
     MemberCount.details_for_bund(year)
   end
 
+  def member_counts
+    MemberCount.scoped
+  end
+
   ### ROLES
 
   class Adressverwaltung < ::Role

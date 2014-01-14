@@ -44,6 +44,8 @@ class Group::Kantonalverband < Group
   children Group::Region,
            Group::Abteilung
 
+  has_many :member_counts
+
   ### INSTANCE METHODS
 
   def census_total(year)

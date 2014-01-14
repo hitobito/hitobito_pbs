@@ -38,8 +38,8 @@ class CensusEvaluation::BaseController < ApplicationController
 
   def sub_groups
     if sub_group_type
-      scope = locked? ? Group.where(id: ids_of_subgroups_in_census) : group.descendants.without_deleted
-      scope.where(type: sub_group_type.sti_name).reorder(:name)
+      scope = locked? ? sub_groups_with_counts : current_census_sub_groups
+      scope.order(:name)
     end
   end
 
@@ -47,8 +47,36 @@ class CensusEvaluation::BaseController < ApplicationController
     current_census && year < current_census.year
   end
 
-  def ids_of_subgroups_in_census
-    group.census_groups(year).pluck(:"#{sub_group_type.model_name.element}_id")
+  def sub_groups_with_counts
+    Group.where(id: group.member_counts.where(year: year).
+                                        select(sub_group_id_col).
+                                        uniq)
+  end
+
+  def current_census_sub_groups
+    sub_group_ids = current_sub_groups.pluck(:id)
+    sub_group_ids -= sub_group_ids_with_other_group_count(sub_group_ids) unless group.class == Group::Bund
+    sub_group_ids += sub_groups_with_counts.pluck(:id)
+    Group.where(id: sub_group_ids.uniq)
+  end
+
+  def current_sub_groups
+    group.descendants.where(type: sub_group_type.sti_name).without_deleted
+  end
+
+  def sub_group_ids_with_other_group_count(sub_group_ids)
+    MemberCount.where(sub_group_id_col => sub_group_ids,
+                      :year => year).
+                where("#{group_id_col} <> ?", group.id).
+                pluck(sub_group_id_col)
+  end
+
+  def sub_group_id_col
+    "#{sub_group_type.model_name.element}_id"
+  end
+
+  def group_id_col
+    "#{group.class.model_name.element}_id"
   end
 
   def counts_by_sub_group

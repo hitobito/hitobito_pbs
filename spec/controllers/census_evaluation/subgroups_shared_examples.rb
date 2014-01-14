@@ -57,7 +57,7 @@ shared_examples 'sub_groups' do
 
   context 'when deleting group' do
     context 'deleting group only' do
-      let(:current_census_groups) { subgroups - [group_to_delete] }
+      let(:current_census_groups) { subgroups }
       let(:past_census_groups)    { subgroups - [group_without_count] } # group included as it has count
       let(:future_census_groups)  { subgroups - [group_to_delete] }
 
@@ -91,7 +91,7 @@ shared_examples 'sub_groups' do
       @dummy = merger.new_group
     end
 
-    let(:current_census_groups) { subgroups - [group_to_delete, group_without_count] + [@dummy] }
+    let(:current_census_groups) { subgroups - [group_without_count] + [@dummy] }
     let(:past_census_groups)    { subgroups - [group_without_count]  } # only groups with count
     let(:future_census_groups)  { subgroups - [group_to_delete, group_without_count] + [@dummy] }
 
