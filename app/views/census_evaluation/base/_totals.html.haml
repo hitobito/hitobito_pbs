@@ -11,5 +11,5 @@
       - MemberCount::COUNT_COLUMNS.each do |col|
         %td.right= count_field(g, col)
       %td.right= count_field(g, :total)
-      %td= render 'total_actions', group: g
+      %td.right= render 'total_actions', group: g
   = render 'total_row'

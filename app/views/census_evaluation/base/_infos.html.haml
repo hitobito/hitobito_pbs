@@ -3,13 +3,16 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- if @current_census && @year == @current_census.year
+- if @census && (@census.year >= Date.today.year || @census == @current_census)
   %p
-    Die aktuellen Bestandesmeldungen für
-    = @current_census.year
+    Die
+    - if @census == @current_census
+      aktuellen
+    Bestandesmeldungen für
+    = @census.year
     können ab dem
-    = f(@current_census.start_at)
+    = f(@census.start_at)
     erfasst werden.
-    - if @current_census.finish_at?
+    - if @census.finish_at?
       Stichtag ist der
-      = f(@current_census.finish_at)
+      = f(@census.finish_at)

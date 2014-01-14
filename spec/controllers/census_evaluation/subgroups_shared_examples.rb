@@ -6,55 +6,60 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 shared_examples 'sub_groups' do
-  subject             { assigns(:sub_groups) }
-  let(:census_open)   { census.finish_at }
-  let(:census_locked) { census.finish_at + 1.day }
+  subject { assigns(:sub_groups).collect(&:name) }
 
   shared_examples 'sub_groups_examples' do
-    context 'before deadline' do
-      before do
-        Date.stub(today: census_open)
-        get :index, id: parent.id
-      end
-      it { should eq before_deadline.sort_by(&:name) }
+
+    context 'for current census' do
+      before { get :index, id: parent.id, year: census.year }
+
+      it { should eq current_census_groups.collect(&:name).sort }
     end
 
-    context 'after deadline' do
+    context 'for past census' do
       before do
-        Date.stub(today: census_locked)
-        get :index, id: parent.id
+        # create another census after the current to make this a past one
+        Census.create!(year: census.year + 1,
+                       start_at: census.start_at + 1.year)
+        get :index, id: parent.id, year: census.year
       end
-      it { should eq after_deadline.sort_by(&:name) }
+
+      it { should eq past_census_groups.collect(&:name).sort }
     end
 
-    context 'next year' do
-      before { get :index, id: parent.id, year: census.year + 1 }
-      it     { should eq next_year.sort_by(&:name) }
+    context 'for future census' do
+      before do
+        Census.create!(year: 2100,
+                       start_at: Date.new(2100,1,1))
+        get :index, id: parent.id, year: 2100
+      end
+
+      it { should eq future_census_groups.collect(&:name).sort }
     end
   end
 
   context 'when noop' do
-    let(:before_deadline) { subgroups }
-    let(:after_deadline)  { subgroups - [group_without_count] }
-    let(:next_year)       { subgroups }
+    let(:current_census_groups) { subgroups }
+    let(:past_census_groups)    { subgroups - [group_without_count] }
+    let(:future_census_groups)  { subgroups }
 
     include_examples 'sub_groups_examples'
   end
 
   context 'when creating new group' do
-    let!(:dummy)          { Fabricate(group_to_delete.class.name.to_sym, parent: parent, name: 'Dummy') }
-    let(:before_deadline) { subgroups + [dummy] }
-    let(:after_deadline)  { subgroups - [group_without_count] } # dummy has no count
-    let(:next_year)       { subgroups + [dummy] }
+    let!(:dummy)                { Fabricate(group_to_delete.class.name.to_sym, parent: parent, name: 'Dummy') }
+    let(:current_census_groups) { subgroups + [dummy] }
+    let(:past_census_groups)    { subgroups - [group_without_count] } # dummy has no count
+    let(:future_census_groups)  { subgroups + [dummy] }
 
     include_examples 'sub_groups_examples'
   end
 
   context 'when deleting group' do
     context 'deleting group only' do
-      let(:before_deadline) { subgroups - [group_to_delete] }
-      let(:after_deadline)  { subgroups - [group_without_count] } # group included as it has count
-      let(:next_year)       { subgroups - [group_to_delete] }
+      let(:current_census_groups) { subgroups - [group_to_delete] }
+      let(:past_census_groups)    { subgroups - [group_without_count] } # group included as it has count
+      let(:future_census_groups)  { subgroups - [group_to_delete] }
 
       before { delete_group_and_children }
 
@@ -62,9 +67,9 @@ shared_examples 'sub_groups' do
     end
 
     context 'deleting group and member count' do
-      let(:before_deadline) { subgroups - [group_to_delete] }
-      let(:after_deadline)  { subgroups - [group_to_delete, group_without_count] } # dummy has no count
-      let(:next_year)       { subgroups - [group_to_delete] }
+      let(:current_census_groups) { subgroups - [group_to_delete] }
+      let(:past_census_groups)    { subgroups - [group_to_delete, group_without_count] } # dummy has no count
+      let(:future_census_groups)  { subgroups - [group_to_delete] }
 
       before do
         delete_group_and_children
@@ -86,9 +91,9 @@ shared_examples 'sub_groups' do
       @dummy = merger.new_group
     end
 
-    let(:before_deadline) { subgroups - [group_to_delete, group_without_count] + [@dummy] }
-    let(:after_deadline)  { subgroups - [group_without_count]  } # only groups with count
-    let(:next_year)       { subgroups - [group_to_delete, group_without_count] + [@dummy] }
+    let(:current_census_groups) { subgroups - [group_to_delete, group_without_count] + [@dummy] }
+    let(:past_census_groups)    { subgroups - [group_without_count]  } # only groups with count
+    let(:future_census_groups)  { subgroups - [group_to_delete, group_without_count] + [@dummy] }
 
     include_examples 'sub_groups_examples'
   end

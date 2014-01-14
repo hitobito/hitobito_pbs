@@ -33,7 +33,7 @@ describe CensusEvaluation::KantonalverbandController do
     end
 
     it 'assigns sub groups' do
-      assigns(:sub_groups).should == [berchtold, schekka]
+      assigns(:sub_groups).should == [berchtold, patria, schekka, groups(:schweizerstern)]
     end
   end
 
@@ -71,44 +71,29 @@ describe CensusEvaluation::KantonalverbandController do
 
     before { groups(:schweizerstern).destroy }
 
-    context 'moving group' do
+    context 'when moving group' do
       let(:target) { be }
-      let(:chaeib)  { groups(:chaeib) }
+      let(:chaeib) { groups(:chaeib) }
 
       before do
-        member_counts(:chaeib).destroy
-        Fabricate(:member_count, year: census.year - 1, abteilung: schekka, kantonalverband: be)
-        Fabricate(:member_count, year: census.year - 1, abteilung: berchtold, kantonalverband: be)
-        Fabricate(:member_count, year: census.year - 1, abteilung: chaeib, kantonalverband: groups(:zh))
         Group::Mover.new(chaeib).perform(target).should be_true
-        Fabricate(:member_count, year: census.year, abteilung: chaeib, kantonalverband: target)
       end
 
-      context 'new parent' do
+      context 'in new parent' do
         include_examples 'sub_groups_examples' do
-          let(:before_deadline) { subgroups + [chaeib] }
-          let(:after_deadline)  { subgroups + [chaeib] - [group_without_count] } # count written for old group
-          let(:next_year)    { subgroups + [chaeib] }
-        end
-
-        context 'last year' do
-          before { get :index, id: parent.id, year: census.year - 1 }
-          it     { should eq (subgroups - [group_without_count]).sort_by(&:name) }
+          let(:current_census_groups) { subgroups + [chaeib] }
+          let(:past_census_groups)    { subgroups - [group_without_count] }
+          let(:future_census_groups)  { subgroups + [chaeib] }
         end
       end
 
-      context 'old parent' do
+      context 'in old parent' do
         let(:parent)          { groups(:zh) }
 
         include_examples 'sub_groups_examples' do
-          let(:before_deadline) { [] }
-          let(:after_deadline)  { [] }
-          let(:next_year)    { [] }
-        end
-
-        context 'last year' do
-          before { get :index, id: parent.id, year: census.year - 1 }
-          it     { should eq [chaeib].sort_by(&:name) }
+          let(:current_census_groups) { [] }
+          let(:past_census_groups)    { [chaeib] }
+          let(:future_census_groups)  { [] }
         end
       end
     end

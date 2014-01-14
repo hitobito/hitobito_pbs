@@ -23,9 +23,12 @@ class CensusEvaluation::BaseController < ApplicationController
 
   decorates :group, :sub_groups
 
+  helper_method :current_census_year?
+
   def index
     current_census
 
+    @census = Census.where(year: year).first
     @sub_groups = sub_groups
     @group_counts = counts_by_sub_group
     @total = group.census_total(year)
@@ -41,10 +44,7 @@ class CensusEvaluation::BaseController < ApplicationController
   end
 
   def locked?
-    census = Census.find_by_year(year)
-    if census
-      census.finish_at < Date.today
-    end
+    current_census && year < current_census.year
   end
 
   def ids_of_subgroups_in_census
@@ -67,6 +67,10 @@ class CensusEvaluation::BaseController < ApplicationController
 
   def current_census
     @current_census ||= Census.current
+  end
+
+  def current_census_year?
+    current_census && year == current_census.year
   end
 
   def default_year

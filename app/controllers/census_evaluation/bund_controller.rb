@@ -14,8 +14,7 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
 
     respond_to do |format|
       format.html do
-        @show_confirmation_ratios = (year == current_year)
-        @abteilungen = abteilung_confirmation_ratios if @show_confirmation_ratios
+        @abteilungen = abteilung_confirmation_ratios if current_census_year?
       end
     end
   end
