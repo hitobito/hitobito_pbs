@@ -1,0 +1,14 @@
+-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+= grouped_table(@people_by_group, 5) do |person, group|
+  %td
+    %strong= link_to_if(can?(:show, person), person.to_s, group_person_path(group, person))
+  %td= person.roles_short(group)
+  %td= person_gender_with_check(person)
+  %td
+    - if can?(:edit, person)
+      = link_action_edit(edit_group_person_path(group, person,
+                                                return_url: population_group_path(@group.id)))

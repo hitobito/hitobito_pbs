@@ -1,0 +1,64 @@
+#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+# == Schema Information
+#
+# Table name: member_counts
+#
+#  id                 :integer          not null, primary key
+#  kantonalverband_id :integer          not null
+#  region_id          :integer
+#  abteilung_id       :integer          not null
+#  year               :integer          not null
+#  leiter_f           :integer
+#  leiter_m           :integer
+#  woelfe_f           :integer
+#  woelfe_m           :integer
+#  pfadis_f           :integer
+#  pfadis_m           :integer
+#  pios_f             :integer
+#  pios_m             :integer
+#  rover_f            :integer
+#  rover_m            :integer
+#  biber_f            :integer
+#  biber_m            :integer
+#  pta_f              :integer
+#  pta_m              :integer
+#
+
+#  Copyright (c) 2012-2013, Jungwacht Blauring Schweiz. This file is part of
+#  hitobito_jubla and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_jubla.
+
+schekka:
+  abteilung: schekka
+  region: bern
+  kantonalverband: be
+  year: 2012
+  leiter_m: 3
+  leiter_f: 2
+  pfadis_m: 3
+  pfadis_f: 4
+
+berchtold:
+  abteilung: berchtold
+  region: kyburg
+  kantonalverband: be
+  year: 2012
+  leiter_m: 2
+  leiter_f: 1
+  pfadis_m: 3
+  pfadis_f: 1
+
+chaeib:
+  abteilung: chaeib
+  kantonalverband: zh
+  year: 2012
+  leiter_m: 2
+  leiter_f: 1
+  pfadis_m: 2
+  pfadis_f: 4
+

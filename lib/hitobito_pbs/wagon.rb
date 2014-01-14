@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2013, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -18,6 +18,7 @@ module HitobitoPbs
     # Add a load path for this specific wagon
     config.autoload_paths += %W( #{config.root}/app/abilities
                                  #{config.root}/app/domain
+                                 #{config.root}/app/jobs
                                )
 
     config.to_prepare do
@@ -25,7 +26,8 @@ module HitobitoPbs
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
 
-      GroupAbility.send :include, Pbs::GroupAbility
+      GroupAbility.send   :include, Pbs::GroupAbility
+      VariousAbility.send :include, Pbs::VariousAbility
 
       Export::CsvPeople::Person.send        :include, Pbs::Export::CsvPeople::Person
       Export::CsvPeople::PeopleAddress.send :include, Pbs::Export::CsvPeople::PeopleAddress
@@ -35,6 +37,12 @@ module HitobitoPbs
     initializer 'pbs.add_settings' do |app|
       Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
       Settings.reload!
+    end
+
+    initializer 'jubla.add_inflections' do |app|
+      ActiveSupport::Inflector.inflections do |inflect|
+        inflect.irregular 'census', 'censuses'
+      end
     end
 
     private
