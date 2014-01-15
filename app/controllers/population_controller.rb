@@ -56,7 +56,7 @@ class PopulationController < ApplicationController
   end
 
   def authorize
-    authorize!(:approve_population, abteilung)
+    authorize!(:show_population, abteilung)
   end
 
 end

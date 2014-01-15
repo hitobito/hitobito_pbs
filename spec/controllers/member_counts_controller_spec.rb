@@ -15,29 +15,25 @@ describe MemberCountsController do
 
   describe 'GET edit' do
     context 'in 2012' do
-      before { get :edit, group_id: abteilung.id, year: 2012 }
+      before { get :edit, group_id: abteilung.id }
 
       it 'assigns counts' do
         assigns(:member_count).should == member_counts(:schekka)
         assigns(:group).should == abteilung
       end
     end
-
-    it 'without year raises exception' do
-      expect { get :edit, group_id: abteilung.id }.to raise_error(ActiveRecord::RecordNotFound)
-    end
   end
 
   describe 'PUT update' do
     context 'as mitarbeiter gs' do
       before do
-        put :update, group_id: abteilung.id, year: 2012, member_count:
+        put :update, group_id: abteilung.id, member_count:
                       { leiter_f: 3, leiter_m: 1, pfadis_f: '', pfadis_m: '0' }
       end
 
       it { should redirect_to(census_abteilung_group_path(abteilung, year: 2012)) }
 
-      it 'should save counts' do
+      it 'saves counts' do
         assert_member_counts(member_counts(:schekka).reload, 3, 1, nil, 0)
       end
     end
@@ -101,6 +97,19 @@ describe MemberCountsController do
         sign_in(guide)
         expect { post :create, group_id: abteilung.id }.to raise_error(CanCan::AccessDenied)
       end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    it 'removes member count' do
+      expect { delete :destroy, group_id: abteilung.id }.to change { MemberCount.count }.by(-1)
+    end
+
+    it 'handles request with redirect' do
+      delete :destroy, group_id: abteilung.id
+
+      should redirect_to(census_abteilung_group_path(abteilung, year: 2012))
+      flash[:notice].should be_present
     end
   end
 

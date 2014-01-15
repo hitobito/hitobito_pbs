@@ -9,23 +9,6 @@ class MemberCountsController < ApplicationController
 
   decorates :group
 
-
-  def edit
-    authorize!(:update_member_counts, abteilung)
-    member_count
-  end
-
-  def update
-    authorize!(:update_member_counts, abteilung)
-
-    if member_count.update_attributes(params[:member_count])
-      flash[:notice] = "Die Mitgliederzahlen für #{year} wurden erfolgreich gespeichert"
-      redirect_to census_abteilung_group_path(abteilung, year: year)
-    else
-      render 'edit'
-    end
-  end
-
   def create
     authorize!(:create_member_counts, abteilung)
 
@@ -36,6 +19,30 @@ class MemberCountsController < ApplicationController
 
     year ||= Date.today.year
     redirect_to census_abteilung_group_path(abteilung, year: year)
+  end
+
+  def edit
+    authorize!(:update_member_counts, abteilung)
+    member_count
+  end
+
+  def update
+    authorize!(:update_member_counts, abteilung)
+
+    if member_count.update_attributes(params[:member_count])
+      redirect_to census_abteilung_group_path(abteilung, year: year),
+                  notice: "Die Mitgliederzahlen für #{year} wurden erfolgreich gespeichert."
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    authorize!(:delete_member_counts, abteilung)
+
+    member_count.destroy
+    redirect_to census_abteilung_group_path(abteilung, year: year),
+                notice: "Die Mitgliederzahlen für #{year} wurden erfolgreich gelöscht."
   end
 
   private
@@ -49,6 +56,7 @@ class MemberCountsController < ApplicationController
   end
 
   def year
-    @year ||= params[:year] ? params[:year].to_i : fail(ActiveRecord::RecordNotFound, 'year required')
+    @year ||= Census.current.try(:year) || fail(ActiveRecord::RecordNotFound, 'No current census found')
   end
+
 end

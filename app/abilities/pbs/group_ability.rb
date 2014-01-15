@@ -15,11 +15,11 @@ module Pbs::GroupAbility
       permission(:any).may(:evaluate_census).unless_external
 
       permission(:layer_full).
-        may(:remind_census, :approve_population, :create_member_counts).
+        may(:show_population, :create_member_counts).
         in_same_layer_or_below
 
       permission(:layer_full).
-        may(:update_member_counts).
+        may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_kalei_or_gs
     end
   end

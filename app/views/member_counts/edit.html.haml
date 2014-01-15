@@ -7,11 +7,9 @@
 
 = crud_form(@member_count,
             url: group_member_counts_path(@group),
-            cancel_url: census_abteilung_group_path(@group),
+            cancel_url: census_abteilung_group_path(@group, year: @year),
             buttons_bottom: true,
             method: :put) do |f|
-  = hidden_field_tag(:year, @year)
-
   - MemberCount::COUNT_CATEGORIES.each do |col|
     = f.labeled(col) do
       = f.input_field "#{col}_f", class: 'span1'

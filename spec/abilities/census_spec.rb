@@ -26,8 +26,12 @@ describe Ability do
       should be_able_to(:create_member_counts, abteilung)
     end
 
-    it 'may approve population' do
-      should be_able_to(:approve_population, abteilung)
+    it 'may delete member counts' do
+      should be_able_to(:delete_member_counts, abteilung)
+    end
+
+    it 'may show population' do
+      should be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
@@ -62,8 +66,13 @@ describe Ability do
       should be_able_to(:create_member_counts, abteilung)
     end
 
-    it 'may approve population' do
-      should be_able_to(:approve_population, abteilung)
+    it 'may delete member counts' do
+      should be_able_to(:delete_member_counts, abteilung)
+    end
+
+
+    it 'may show population' do
+      should be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
@@ -93,8 +102,12 @@ describe Ability do
         should_not be_able_to(:update_member_counts, abteilung)
       end
 
-      it 'may not approve population' do
-        should_not be_able_to(:approve_population, abteilung)
+      it 'may not delete member counts' do
+        should_not be_able_to(:delete_member_counts, abteilung)
+      end
+
+      it 'may not show population' do
+        should_not be_able_to(:show_population, abteilung)
       end
 
       it 'may view census for abteilung' do
@@ -115,12 +128,16 @@ describe Ability do
       should_not be_able_to(:update_member_counts, abteilung)
     end
 
+    it 'may not delete member counts' do
+      should_not be_able_to(:delete_member_counts, abteilung)
+    end
+
     it 'may create member counts' do
       should be_able_to(:create_member_counts, abteilung)
     end
 
-    it 'may approve population' do
-      should be_able_to(:approve_population, abteilung)
+    it 'may show population' do
+      should be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
