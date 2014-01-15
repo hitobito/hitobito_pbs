@@ -12,9 +12,11 @@ class MemberCountsController < ApplicationController
   def create
     authorize!(:create_member_counts, abteilung)
 
-    if year = MemberCounter.create_counts_for(abteilung)
+    year = MemberCounter.create_counts_for(abteilung)
+    if year
       total = MemberCount.total_for_abteilung(year, abteilung).try(:total) || 0
-      flash[:notice] = "Die Zahlen von Total #{total} Mitgliedern wurden für #{year} erfolgreich erzeugt."
+      flash[:notice] = "Die Zahlen von Total #{total} Mitgliedern " +
+                       "wurden für #{year} erfolgreich erzeugt."
     end
 
     year ||= Date.today.year
@@ -56,7 +58,8 @@ class MemberCountsController < ApplicationController
   end
 
   def year
-    @year ||= Census.current.try(:year) || fail(ActiveRecord::RecordNotFound, 'No current census found')
+    @year ||= Census.current.try(:year) ||
+              fail(ActiveRecord::RecordNotFound, 'No current census found')
   end
 
 end

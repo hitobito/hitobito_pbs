@@ -26,7 +26,7 @@ class PopulationController < ApplicationController
     Person.joins(:roles).
            where(roles: { group_id: group,
                           type: MemberCounter::ROLE_MAPPING.values.flatten.collect(&:sti_name),
-                          deleted_at: nil}).
+                          deleted_at: nil }).
            members.
            preload_groups.
            uniq.

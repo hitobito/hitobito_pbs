@@ -41,8 +41,9 @@ class Group::Abteilung < Group
 
   self.layer = true
 
-  attr_accessible(*(accessible_attributes.to_a + [:pbs_shortname, :pta, :vkp, :pbs_material_insurance]),
-                    as: :superior)
+  attr_accessible(*(accessible_attributes.to_a +
+                    [:pbs_shortname, :pta, :vkp, :pbs_material_insurance]),
+                  as: :superior)
 
   children Group::Biber,
            Group::Woelfe,
@@ -61,7 +62,7 @@ class Group::Abteilung < Group
   end
 
   def region
-    ancestors.where(type: Group::Region.sti_name).order("lft DESC").first
+    ancestors.where(type: Group::Region.sti_name).order('lft DESC').first
   end
 
   def census_groups(year)

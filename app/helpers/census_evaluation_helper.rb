@@ -14,7 +14,7 @@ module CensusEvaluationHelper
   end
 
   def count_field(group, field)
-    if count = @group_counts[group.id]
+    if (count = @group_counts[group.id])
       count_value(count.send(field))
     else
       EMPTY_COUNT_VALUE

@@ -47,7 +47,7 @@ module Pbs::Group
                     as: :superior)
 
 
-    validates :description, length: { allow_nil: true, maximum: 2 ** 16 - 1 }
+    validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
 
     # define global children
     children Group::Gremium

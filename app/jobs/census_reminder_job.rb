@@ -34,6 +34,6 @@ class CensusReminderJob < BaseJob
   end
 
   def kalei
-    state = abteilung.kantonalverband
+    abteilung.kantonalverband
   end
 end

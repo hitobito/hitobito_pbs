@@ -1,3 +1,10 @@
+# encoding: utf-8
+
+#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 class CensusEvaluation
 
   attr_reader :year, :group, :sub_group_type
@@ -59,7 +66,7 @@ class CensusEvaluation
   private
 
   def sub_groups_locked?
-    locked = current_census && year < current_census.year
+    current_census && year < current_census.year
   end
 
   def sub_groups_with_counts
@@ -70,7 +77,9 @@ class CensusEvaluation
 
   def current_census_sub_groups
     sub_group_ids = current_sub_groups.pluck(:id)
-    sub_group_ids -= sub_group_ids_with_other_group_count(sub_group_ids) unless group.class == Group::Bund
+    unless group.class == Group::Bund
+      sub_group_ids -= sub_group_ids_with_other_group_count(sub_group_ids)
+    end
     sub_group_ids += sub_groups_with_counts.pluck(:id)
     Group.where(id: sub_group_ids.uniq)
   end

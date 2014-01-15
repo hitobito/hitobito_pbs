@@ -13,12 +13,7 @@ class CensusMailer < ActionMailer::Base
 
   def reminder(sender, census, recipients, abteilung, kalei)
     content = CustomContent.get(CONTENT_REMINDER)
-    values = {
-      'due-date'        => due_date(census),
-      'recipient-names' => recipients.collect(&:first_name).join(', '),
-      'contact-address' => contact_address(kalei),
-      'census-url'      => "<a href=\"#{census_url(abteilung)}\">#{census_url(abteilung)}</a>"
-    }
+    values = content_values(census, recipients, abteilung, kalei)
 
     mail to: recipients.collect(&:email),
          return_path: return_path(sender),
@@ -30,6 +25,15 @@ class CensusMailer < ActionMailer::Base
   end
 
   private
+
+  def content_values(census, recipients, abteilung, kalei)
+    {
+      'due-date'        => due_date(census),
+      'recipient-names' => recipients.collect(&:first_name).join(', '),
+      'contact-address' => contact_address(kalei),
+      'census-url'      => "<a href=\"#{census_url(abteilung)}\">#{census_url(abteilung)}</a>"
+    }
+  end
 
   def due_date(census)
     I18n.l(census.finish_at)
