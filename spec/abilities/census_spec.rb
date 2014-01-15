@@ -45,6 +45,10 @@ describe Ability do
     it 'may remind census for kantonalverband' do
       should be_able_to(:remind_census, abteilung.kantonalverband)
     end
+
+    it 'may create Census' do
+      should be_able_to(:create, Census.new)
+    end
   end
 
   describe 'Kantonsleitung' do
@@ -76,6 +80,10 @@ describe Ability do
 
     it 'may remind census for kantonalverband' do
       should be_able_to(:remind_census, abteilung.kantonalverband)
+    end
+
+    it 'may not create Census' do
+      should_not be_able_to(:create, Census.new)
     end
 
     context 'for other kantonalverband' do
@@ -129,6 +137,10 @@ describe Ability do
 
     it 'may not remind census for kantonalverband' do
       should_not be_able_to(:remind_census, abteilung.kantonalverband)
+    end
+
+    it 'may not create Census' do
+      should_not be_able_to(:create, Census.new)
     end
   end
 end

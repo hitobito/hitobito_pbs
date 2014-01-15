@@ -41,7 +41,7 @@ class MemberCountsController < ApplicationController
   private
 
   def member_count
-    @member_count ||= abteilung.member_counts.where(year: year).first
+    @member_count ||= abteilung.member_counts.where(year: year).first!
   end
 
   def abteilung

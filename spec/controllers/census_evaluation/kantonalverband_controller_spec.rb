@@ -53,6 +53,14 @@ describe CensusEvaluation::KantonalverbandController do
       end
     end
 
+    context '.html' do
+      before { post :remind, id: be.id, abteilung_id: schekka.id }
+
+      it 'redirects to index' do
+        should redirect_to(census_kantonalverband_group_path(be))
+      end
+    end
+
     it 'redirects abteilung leaders' do
       sign_in(people(:al_schekka))
       expect do

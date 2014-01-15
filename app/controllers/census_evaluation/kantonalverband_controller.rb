@@ -17,7 +17,7 @@ class CensusEvaluation::KantonalverbandController < CensusEvaluation::BaseContro
     notice = "Erinnerungsemail an #{abteilung.to_s} geschickt"
 
     respond_to do |format|
-      format.html { redirect_to census_state_group_path(group), notice: notice }
+      format.html { redirect_to census_kantonalverband_group_path(group), notice: notice }
       format.js   { flash.now.notice = notice }
     end
   end
