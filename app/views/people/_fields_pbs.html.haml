@@ -12,7 +12,8 @@
                                 :last,
                                 { prompt: true },
                                 class: 'span6')
-  = f.labeled_input_fields(:j_s_number, :grade_of_school)
+  = f.labeled_input_field :j_s_number
+  = f.labeled_input_field :grade_of_school, help_inline: 'Dies ist kein automatisches Feld und muss manuell angepasst werden.'
   = f.labeled_input_field(:brother_and_sisters, caption: '(in der Abteilung)')
 
 = field_set_tag do
