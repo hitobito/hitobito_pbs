@@ -31,7 +31,7 @@ describe MemberCounter do
     old.destroy # soft delete role, create alumnus
   end
 
-  it 'abteilung has affiliate and deleted people as well' do
+  it 'abteilung has passive and deleted people as well' do
     abteilung.people.count.should == 4
     Person.joins(:roles).where(roles: { group_id: abteilung.id }).count.should == 5
   end

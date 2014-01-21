@@ -37,7 +37,7 @@ describe Salutation do
     end
 
     context 'female' do
-      before { person.gender = 'f' }
+      before { person.gender = 'w' }
       it { expect(subject).to eq('Sehr geehrte Frau Dr. Leiter') }
     end
 

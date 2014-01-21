@@ -603,22 +603,22 @@ de:
             label: Liebe(r) [Pfadiname]
             value:
               m: Lieber %{nickname}
-              f: Liebe %{nickname}
+              w: Liebe %{nickname}
           lieber_vorname:
             label: Liebe(r) [Vorname]
             value:
               m: Lieber %{first_name}
-              f: Liebe %{first_name}
+              w: Liebe %{first_name}
           lieber_titel_nachname:
             label: Liebe(r) Frau/Herr [Titel] [Nachname]
             value:
               m: Lieber Herr %{title_last_name}
-              f: Liebe Frau %{title_last_name}
+              w: Liebe Frau %{title_last_name}
           sehr_geehrter_titel_nachname:
             label: Sehr geehrte(r) Frau/Herr [Titel] [Nachname]
             value:
               m: Sehr geehrter Herr %{title_last_name}
-              f: Sehr geehrte Frau %{title_last_name}
+              w: Sehr geehrte Frau %{title_last_name}
 
     attributes:
       person:

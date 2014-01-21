@@ -32,7 +32,7 @@ class Salutation
   def value
     return nil unless person.salutation?
 
-    gender = person.gender || 'f'
+    gender = person.gender || 'w'
     I18n.translate("#{I18N_KEY_PREFIX}.#{person.salutation}.value.#{gender}",
                    first_name: person.first_name,
                    last_name: person.last_name,

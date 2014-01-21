@@ -58,8 +58,14 @@ module Pbs::Person
     attr_accessible :salutation, :title, :grade_of_school, :entry_date, :leaving_date,
                     :j_s_number, :correspondence_language, :brother_and_sisters
 
-    validates :salutation, inclusion: { in: ->(person) { Salutation.available.keys } ,
-                                        allow_blank: true }
+    validates :salutation,
+              inclusion: { in: ->(person) { Salutation.available.keys } ,
+                           allow_blank: true }
+
+    validates :correspondence_language,
+              inclusion: { in: ->(person) { Settings.application.languages.to_hash.keys.collect(&:to_s) },
+                           allow_blank: true }
+
     validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }
 
     alias_method_chain :full_name, :title
