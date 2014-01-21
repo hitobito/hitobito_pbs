@@ -12,7 +12,7 @@ module Pbs::GroupAbility
     on(Group) do
       permission(:layer_full).may(:modify_superior).if_mitarbeiter_gs
 
-      permission(:any).may(:evaluate_census).unless_external
+      permission(:any).may(:evaluate_census).if_member
 
       permission(:layer_full).
         may(:show_population, :create_member_counts).

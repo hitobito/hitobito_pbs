@@ -22,18 +22,6 @@ class PopulationController < ApplicationController
 
   private
 
-  def load_people(group)
-    Person.joins(:roles).
-           where(roles: { group_id: group,
-                          type: MemberCounter::ROLE_MAPPING.values.flatten.collect(&:sti_name),
-                          deleted_at: nil }).
-           members.
-           preload_groups.
-           uniq.
-           order_by_role.
-           order_by_name
-  end
-
   def abteilung
     @group ||= Group::Abteilung.find(params[:id])
   end
@@ -53,6 +41,17 @@ class PopulationController < ApplicationController
     @people_by_group.values.flatten.all? do |p|
       p.gender.present?
     end
+  end
+
+  def load_people(group)
+    Person.joins(:roles).
+           where(roles: { group_id: group,
+                          type: MemberCounter::ROLE_MAPPING.values.flatten.collect(&:sti_name),
+                          deleted_at: nil }).
+           preload_groups.
+           uniq.
+           order_by_role.
+           order_by_name
   end
 
   def authorize

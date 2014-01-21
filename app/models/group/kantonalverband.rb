@@ -76,7 +76,7 @@ class Group::Kantonalverband < Group
 
   class Ehrenmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Kantonsleitung < ::Role
@@ -105,7 +105,7 @@ class Group::Kantonalverband < Group
 
   class Passivmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Praesidium < ::Role

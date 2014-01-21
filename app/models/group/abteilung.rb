@@ -107,7 +107,7 @@ class Group::Abteilung < Group
 
   class Ehrenmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Heimverwaltung < ::Role
@@ -124,7 +124,7 @@ class Group::Abteilung < Group
 
   class Passivmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Praeses < ::Role

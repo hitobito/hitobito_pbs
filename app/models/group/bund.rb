@@ -77,7 +77,7 @@ class Group::Bund < Group
 
   class Ehrenmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Geschaeftsleitung < ::Role
@@ -102,7 +102,7 @@ class Group::Bund < Group
 
   class Kontaktperson < ::Role
     self.permissions = [:contact_data]
-    self.affiliate = true
+    self.kind = :external
   end
 
   class Leitungskursbetreuung < ::Role
@@ -143,7 +143,7 @@ class Group::Bund < Group
 
   class Passivmitglied < ::Role
     self.permissions = []
-    self.affiliate = true
+    self.kind = :passive
   end
 
   class Praesidium < ::Role
