@@ -7,22 +7,28 @@
 
 Rails.application.routes.draw do
 
-  resources :censuses, only: [:new, :create]
+  extend LanguageRouteScope
 
-  resources :groups do
-    member do
-      scope module: 'census_evaluation' do
-        get 'census/bund' => 'bund#index'
-        get 'census/kantonalverband' => 'kantonalverband#index'
-        get 'census/abteilung' => 'abteilung#index'
+  language_scope do
 
-        post 'census/kantonalverband/remind' => 'kantonalverband#remind'
+    resources :censuses, only: [:new, :create]
+
+    resources :groups do
+      member do
+        scope module: 'census_evaluation' do
+          get 'census/bund' => 'bund#index'
+          get 'census/kantonalverband' => 'kantonalverband#index'
+          get 'census/abteilung' => 'abteilung#index'
+
+          post 'census/kantonalverband/remind' => 'kantonalverband#remind'
+        end
+
+        get 'population' => 'population#index'
       end
 
-      get 'population' => 'population#index'
+      resource :member_counts, only: [:create, :edit, :update, :destroy]
     end
 
-    resource :member_counts, only: [:create, :edit, :update, :destroy]
   end
 
 end
