@@ -40,7 +40,7 @@ class CensusMailer < ActionMailer::Base
   end
 
   def census_url(abteilung)
-    population_group_url(abteilung)
+    population_group_url(id: abteilung)
   end
 
   def contact_address(group)
