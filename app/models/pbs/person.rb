@@ -63,7 +63,9 @@ module Pbs::Person
                            allow_blank: true }
 
     validates :correspondence_language,
-              inclusion: { in: ->(person) { Settings.application.languages.to_hash.keys.collect(&:to_s) },
+              inclusion: { in: lambda do |person|
+                                 Settings.application.languages.to_hash.keys.collect(&:to_s)
+                               end,
                            allow_blank: true }
 
     validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }

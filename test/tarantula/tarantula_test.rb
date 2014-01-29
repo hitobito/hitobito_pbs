@@ -76,7 +76,7 @@ class TarantulaTest < ActionController::IntegrationTest
     t.allow_500_for /groups\/\d+\/events\/\d+\/roles\/\d+$/
 
 
-    t.crawl_timeout = 10.minutes
+    t.crawl_timeout = 15.minutes
     t.crawl
   end
 end
