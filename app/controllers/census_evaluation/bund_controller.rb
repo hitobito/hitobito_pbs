@@ -35,7 +35,7 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
   end
 
   def number_of_abteilungen(kantonalverband)
-    kantonalverband.descendants.where(type: Group::Abteilung.sti_name).count
+    kantonalverband.descendants.without_deleted.where(type: Group::Abteilung.sti_name).count
   end
 
 end

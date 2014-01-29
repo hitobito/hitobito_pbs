@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   language_scope do
 
     resources :censuses, only: [:new, :create]
+    get 'censuses' => 'censuses#new' # route required for language switch
 
     resources :groups do
       member do

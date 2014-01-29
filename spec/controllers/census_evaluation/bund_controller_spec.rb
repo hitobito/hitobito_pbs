@@ -18,6 +18,7 @@ describe CensusEvaluation::BundController do
 
   describe 'GET index' do
     before { Date.stub(today: censuses(:two_o_12).finish_at) }
+    before { groups(:schweizerstern).destroy }
 
     before { get :index, id: ch.id }
 
@@ -38,7 +39,7 @@ describe CensusEvaluation::BundController do
 
     it 'assigns abteilungen' do
       assigns(:abteilungen).should == {
-        be.id => { confirmed: 2, total: 4 },
+        be.id => { confirmed: 2, total: 3 },
         vd.id => { confirmed: 0, total: 0 },
         zh.id => { confirmed: 1, total: 1 },
       }.with_indifferent_access
