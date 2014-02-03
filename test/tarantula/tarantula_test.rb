@@ -21,11 +21,11 @@ class TarantulaTest < ActionController::IntegrationTest
     crawl_as(people(:bulei))
   end
 
-  def test_tarantula_as_abteilungsleiter
+  def no_test_tarantula_as_abteilungsleiter
     crawl_as(people(:al_schekka))
   end
 
-  def test_tarantula_as_child
+  def no_test_tarantula_as_child
     crawl_as(people(:child))
   end
 
@@ -65,6 +65,10 @@ class TarantulaTest < ActionController::IntegrationTest
     t.allow_404_for /event_kinds\/\d+$/
     t.allow_404_for /event_kinds$/
     t.allow_404_for /groups\/\d+\/member_counts$/
+    # kind already deleted in another language
+    t.allow_404_for /qualification_kinds\/\d+$/
+    # groups already deleted in another language
+    t.allow_404_for /it\/groups\/\d+$/
     # custom return_urls end up like that.
     t.allow_404_for /^\-?\d+$/
 

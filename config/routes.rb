@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
 
       resource :member_counts, only: [:create, :edit, :update, :destroy]
+      get 'member_counts' => 'member_counts#edit' # route required for language switch
     end
 
   end
