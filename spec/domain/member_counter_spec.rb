@@ -46,7 +46,7 @@ describe MemberCounter do
 
     its(:region) { should == groups(:bern) }
 
-    its(:members) { should have(11).items }
+    its(:members) { should have(9).items }
 
     it 'creates member counts' do
       expect { subject.count! }.to change { MemberCount.count }.by(1)
