@@ -14,10 +14,11 @@ class PopulationController < ApplicationController
 
 
   def index
+    @member_counter = MemberCounter.new(Time.zone.now.year, abteilung)
     @groups = load_groups
     @people_by_group = load_people_by_group
     @people_data_complete = people_data_complete?
-    @total = MemberCounter.new(Time.zone.now.year, abteilung).count
+    @total = @member_counter.count
   end
 
   private
@@ -44,14 +45,11 @@ class PopulationController < ApplicationController
   end
 
   def load_people(group)
-    Person.joins(:roles).
-           where(roles: { group_id: group,
-                          type: MemberCounter::ROLE_MAPPING.values.flatten.collect(&:sti_name),
-                          deleted_at: nil }).
-           preload_groups.
-           uniq.
-           order_by_role.
-           order_by_name
+    @member_counter.members.
+                    where(roles: { group_id: group }).
+                    preload_groups.
+                    order_by_role.
+                    order_by_name
   end
 
   def authorize

@@ -59,6 +59,10 @@ class MemberCounter
     def current_counts?(abteilung, census = Census.current)
       census && new(census.year, abteilung).exists?
     end
+
+    def counted_roles
+      ROLE_MAPPING.values.flatten
+    end
   end
 
   # create a new counter for with the given year and abteilung.
@@ -77,7 +81,7 @@ class MemberCounter
 
   def count
     count = new_member_count
-    count_members(count, members)
+    count_members(count, members.includes(:roles))
     count
   end
 
@@ -95,9 +99,9 @@ class MemberCounter
 
   def members
     Person.joins(:roles).
-           includes(:roles).
-           where(roles: { group_id: abteilung.self_and_descendants, deleted_at: nil }).
-           members.
+           where(roles: { group_id: abteilung.self_and_descendants,
+                          type: self.class.counted_roles.collect(&:sti_name),
+                          deleted_at: nil }).
            uniq
   end
 
