@@ -33,7 +33,7 @@ class PopulationController < ApplicationController
 
   def load_people_by_group
     @groups.each_with_object({}) do |group, hash|
-      list = PersonDecorator.decorate(load_people(group))
+      list = PersonDecorator.decorate_collection(load_people(group))
       hash[group] = list if list.present?
     end
   end
