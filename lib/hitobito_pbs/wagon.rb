@@ -29,9 +29,9 @@ module HitobitoPbs
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
-      Export::CsvPeople::Person.send        :include, Pbs::Export::CsvPeople::Person
-      Export::CsvPeople::PeopleAddress.send :include, Pbs::Export::CsvPeople::PeopleAddress
-      Export::CsvPeople::PeopleFull.send    :include, Pbs::Export::CsvPeople::PeopleFull
+      Export::Csv::People::Person.send        :include, Pbs::Export::Csv::People::Person
+      Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
+      Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
     end
 
     initializer 'pbs.add_settings' do |app|

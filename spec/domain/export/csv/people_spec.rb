@@ -7,7 +7,7 @@
 
 require 'spec_helper'
 
-describe Export::CsvPeople do
+describe Export::Csv::People do
 
   let(:person) { people(:bulei) }
   let(:simple_headers) do
@@ -15,10 +15,10 @@ describe Export::CsvPeople do
      'Adresse', 'PLZ', 'Ort', 'Land', 'Geschlecht', 'Geburtstag', 'Titel', 'Anrede', 'Rollen']
   end
 
-  describe Export::CsvPeople do
+  describe Export::Csv::People do
 
     let(:list) { [person] }
-    let(:data) { Export::CsvPeople.export_address(list) }
+    let(:data) { Export::Csv::People.export_address(list) }
     let(:csv)  { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }
@@ -43,7 +43,7 @@ describe Export::CsvPeople do
 
     context 'export_full' do
       its(:headers) { should include('Titel') }
-      let(:data) { Export::CsvPeople.export_full(list) }
+      let(:data) { Export::Csv::People.export_full(list) }
 
       context 'first row' do
         subject { csv[0] }
