@@ -29,7 +29,7 @@ module HitobitoPbs
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
-      Export::Csv::People::Person.send        :include, Pbs::Export::Csv::People::Person
+      Export::Csv::People::PersonRow.send        :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
     end

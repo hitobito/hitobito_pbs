@@ -13,11 +13,11 @@ module Pbs
           extend ActiveSupport::Concern
 
           included do
-            alias_method_chain :attributes, :pbs
+            alias_method_chain :person_attributes, :pbs
           end
 
-          def attributes_with_pbs
-            attributes_without_pbs + [:pbs_number]
+          def person_attributes_with_pbs
+            person_attributes_without_pbs + [:pbs_number]
           end
         end
       end
