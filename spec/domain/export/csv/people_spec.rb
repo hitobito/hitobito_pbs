@@ -18,7 +18,7 @@ describe Export::Csv::People do
   describe Export::Csv::People do
 
     let(:list) { [person] }
-    let(:data) { Export::Csv::People.export_address(list) }
+    let(:data) { Export::Csv::People::PeopleAddress.export(list) }
     let(:csv)  { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }
@@ -43,7 +43,7 @@ describe Export::Csv::People do
 
     context 'export_full' do
       its(:headers) { should include('Titel') }
-      let(:data) { Export::Csv::People.export_full(list) }
+      let(:data) { Export::Csv::People::PeopleFull.export(list) }
 
       context 'first row' do
         subject { csv[0] }
