@@ -3,9 +3,9 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
--title "Neue Bestandesmeldungen erfassen"
+-title t('.title')
 
 = entry_form(buttons_bottom: false,
              cancel_url: census_bund_group_path(Group.root))
 
-%p Einmal erfasst, kann eine Bestandesmelung nicht mehr verändert werden.
+%p= t('.frozen_once_gathered')

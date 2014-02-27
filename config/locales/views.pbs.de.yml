@@ -5,3 +5,65 @@
 
 de:
   dummy: dummy
+
+  groups:
+    tabs:
+      population: Bestand
+      statistic: Statistik
+
+  censuses:
+    form:
+      title: Neue Bestandesmeldung erfassen
+      frozen_once_gathered: Einmal erfasst, kann eine Bestandesmelung nicht mehr verändert werden.
+
+  census_evaluation:
+    total: Total
+    base:
+      index:
+        no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
+      infos:
+        census_evaluation:
+          Die Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
+        census_evaluation_active:
+          Die aktuellen Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
+        census_evaluation_reference_date: 
+          Stichtag ist der %{finish_at}
+    abteilung:
+      actions_index:
+        create_population_data: Aktuellen Bestand erzeugen
+    bund:
+      actions_index:
+        request_population_data: Neue Bestandesmeldungen einfordern
+      total_actions:
+        abteilungen_confirmed: Abteilungen bestätigt
+    kantonalverband:
+      total_actions:
+        remind: Erinnern
+
+  census_evaluation/kantonalverband:
+    email_sent: Erinnerungsemail an %{abteilung} geschickt
+
+  member_counts:
+    created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.
+    updated_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gespeichert.
+    deleted_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gelöscht.
+
+
+    edit:
+      title: Mitgliederzahlen %{year} bearbeiten
+
+  membercounts: 
+
+  people:
+    fields_pbs:
+      non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
+      in_abteilung: (in der Abteilung)
+
+  population:
+    index:
+      confirm_census_data: Bestand bestätigen
+      current_census_data: Aktueller Bestand
+      no_census_data_missing: Momentan ist keine Bestandesmeldung ausstehend.
+      please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
+      missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
+

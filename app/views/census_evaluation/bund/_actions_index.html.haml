@@ -4,4 +4,4 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - if can?(:create, Census.new)
-  = action_button('Neue Bestandesmeldungen einfordern', new_census_path, :bullhorn)
+  = action_button(t('.request_population_data'), new_census_path, :bullhorn)
