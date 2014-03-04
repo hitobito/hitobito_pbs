@@ -58,7 +58,7 @@ class Group::Bund < Group
   end
 
   def member_counts
-    MemberCount.scoped
+    MemberCount.all
   end
 
   ### ROLES

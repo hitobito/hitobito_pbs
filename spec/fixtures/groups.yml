@@ -54,7 +54,7 @@ bund:
   zip_code: 2843
   town: Neu Carlscheid
   country:
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:bund) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bund) %>
 
 be:
   parent: bund
@@ -68,7 +68,7 @@ be:
   zip_code: 3333
   town: Bern
   country: Svizzera
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:be) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 zh:
   parent: bund
@@ -82,7 +82,7 @@ zh:
   zip_code: 8888
   town: Zürich
   country: Svizzera
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:zh) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:zh) %>
 
 vd:
   parent: bund
@@ -96,7 +96,7 @@ vd:
   zip_code: 2000
   town: Lausanne
   country: Suisse
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:vd) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:vd) %>
 
 fg_security:
   parent: be
@@ -104,7 +104,7 @@ fg_security:
   rgt: 4
   name: FG Sicherheit
   type: Group::Gremium
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:be) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 fg_football:
   parent: be
@@ -113,7 +113,7 @@ fg_football:
   name: FG Football
   short_name:
   type: Group::Gremium
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:be) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 bern:
   parent: be
@@ -126,7 +126,7 @@ bern:
   address: Am Gierlichshof 36c
   zip_code: 9924
   town: Ivanstadt
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:bern) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bern) %>
 
 oberland:
   parent: be
@@ -139,7 +139,7 @@ oberland:
   address: Am Arenzberg 41c
   zip_code: 6255
   town: Janoburg
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:oberland) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:oberland) %>
 
 zuerich:
   parent: zh
@@ -152,7 +152,7 @@ zuerich:
   address: Grunder Wiesen 57
   zip_code: 4908
   town: Schindzielorzstadt
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:zuerich) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:zuerich) %>
 
 kyburg:
   parent: oberland
@@ -165,7 +165,7 @@ kyburg:
   address: An St. Remigius 81c
   zip_code: 1767
   town: Colleendorf
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:kyburg) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:kyburg) %>
 
 patria:
   parent: bern
@@ -178,7 +178,7 @@ patria:
   address: Dornierstr. 88
   zip_code: 4193
   town: Neu Joliestadt
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:patria) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:patria) %>
 
 schekka:
   parent: bern
@@ -191,7 +191,7 @@ schekka:
   address: Imbach 73
   zip_code: 9861
   town: Pompscheid
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 schweizerstern:
   parent: bern
@@ -204,7 +204,7 @@ schweizerstern:
   address: Hemmelrather Weg 73a
   zip_code: 1805
   town: Neu Estelle
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schweizerstern) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schweizerstern) %>
 
 chaeib:
   parent: zuerich
@@ -217,7 +217,7 @@ chaeib:
   address: Im Buchenhain 24c
   zip_code: 5142
   town: Leilastadt
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:chaeib) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:chaeib) %>
 
 kcbr:
   parent: chaeib
@@ -230,7 +230,7 @@ kcbr:
   address: Im Buchenhain 24c
   zip_code: 5142
   town: Hohltown
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:chaeib) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:chaeib) %>
 
 
 berchtold:
@@ -244,7 +244,7 @@ berchtold:
   address: Windthorststr. 560
   zip_code: 3289
   town: Reiberland
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:berchtold) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:berchtold) %>
 
 sunnewirbu:
   parent: schekka
@@ -253,7 +253,7 @@ sunnewirbu:
   name: Sunnewirbu
   short_name:
   type: Group::Woelfe
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 aries:
   parent: berchtold
@@ -262,7 +262,7 @@ aries:
   name: Aries
   short_name:
   type: Group::Woelfe
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:berchtold) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:berchtold) %>
 
 pegasus:
   parent: schekka
@@ -271,7 +271,7 @@ pegasus:
   name: Pegasus
   short_name:
   type: Group::Pfadi
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 baereried:
   parent: schekka
@@ -280,7 +280,7 @@ baereried:
   name: Bäreried
   short_name:
   type: Group::Pfadi
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 schloss:
   parent: berchtold
@@ -289,7 +289,7 @@ schloss:
   name: Schloss
   short_name:
   type: Group::Pfadi
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:berchtold) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:berchtold) %>
 
 poseidon:
   parent: pegasus
@@ -298,7 +298,7 @@ poseidon:
   name: Poseidon
   short_name:
   type: Group::Pfadi
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 medusa:
   parent: pegasus
@@ -307,7 +307,7 @@ medusa:
   name: Medusa
   short_name:
   type: Group::Pfadi
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 rovers:
   parent: schekka
@@ -316,7 +316,7 @@ rovers:
   name: Rovers
   short_name:
   type: Group::Rover
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 elternrat:
   parent: schekka
@@ -325,7 +325,7 @@ elternrat:
   name: Elternrat
   short_name:
   type: Group::Elternrat
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 fussballers:
   parent: schekka
@@ -334,4 +334,4 @@ fussballers:
   name: Fussballers
   short_name:
   type: Group::Gremium
-  layer_group_id: <%= ActiveRecord::Fixtures.identify(:schekka) %>
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
