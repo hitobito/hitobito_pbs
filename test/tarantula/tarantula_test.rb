@@ -8,7 +8,7 @@
 require "test_helper"
 require "relevance/tarantula"
 
-class TarantulaTest < ActionController::IntegrationTest
+class TarantulaTest < ActionDispatch::IntegrationTest
   # Load enough test data to ensure that there's a link to every page in your
   # application. Doing so allows Tarantula to follow those links and crawl
   # every page.  For many applications, you can load a decent data set by
@@ -21,11 +21,11 @@ class TarantulaTest < ActionController::IntegrationTest
     crawl_as(people(:bulei))
   end
 
-  def no_test_tarantula_as_abteilungsleiter
+  def test_tarantula_as_abteilungsleiter
     crawl_as(people(:al_schekka))
   end
 
-  def no_test_tarantula_as_child
+  def test_tarantula_as_child
     crawl_as(people(:child))
   end
 
@@ -37,6 +37,8 @@ class TarantulaTest < ActionController::IntegrationTest
 
     t = tarantula_crawler(self)
     #t.handlers << Relevance::Tarantula::TidyHandler.new
+    t.skip_uri_patterns.delete(/^http/)
+    t.skip_uri_patterns << /^http(?!:\/\/www\.example\.com)/
     t.skip_uri_patterns << /year=201[04-9]/
     t.skip_uri_patterns << /year=200[0-9]/
     t.skip_uri_patterns << /year=202[0-9]/
