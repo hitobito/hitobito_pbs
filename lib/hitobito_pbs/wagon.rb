@@ -25,6 +25,7 @@ module HitobitoPbs
       # extend application classes here
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
+      Role.send         :include, Pbs::Role
 
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
