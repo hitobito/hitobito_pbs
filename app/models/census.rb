@@ -7,8 +7,6 @@
 
 class Census < ActiveRecord::Base
 
-  attr_accessible :year, :start_at, :finish_at
-
   after_initialize :set_defaults
 
   validates :start_at, presence: true

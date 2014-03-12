@@ -34,8 +34,6 @@ class MemberCount < ActiveRecord::Base
   COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta]
   COUNT_COLUMNS = COUNT_CATEGORIES.collect { |c| [:"#{c}_f", :"#{c}_m"] }.flatten
 
-  attr_accessible(*COUNT_COLUMNS)
-
   belongs_to :abteilung, class_name: 'Group::Abteilung'
   belongs_to :region, class_name: 'Group::Region'
   belongs_to :kantonalverband, class_name: 'Group::Kantonalverband'

@@ -41,11 +41,8 @@ module Pbs::Group
   extend ActiveSupport::Concern
 
   included do
-    attr_accessible :website, :bank_account, :description
-
-    attr_accessible(*(accessible_attributes.to_a + [:pbs_shortname]),
-                    as: :superior)
-
+    self.used_attributes += [:website, :bank_account, :description, :pbs_shortname]
+    self.superior_attributes = [:pbs_shortname]
 
     validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
 

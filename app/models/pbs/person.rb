@@ -55,9 +55,6 @@ module Pbs::Person
   included do
     Person::PUBLIC_ATTRS << :title << :salutation
 
-    attr_accessible :salutation, :title, :grade_of_school, :entry_date, :leaving_date,
-                    :j_s_number, :correspondence_language, :brother_and_sisters
-
     validates :salutation,
               inclusion: { in: ->(person) { Salutation.available.keys } ,
                            allow_blank: true }

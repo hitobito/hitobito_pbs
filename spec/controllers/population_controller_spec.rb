@@ -16,7 +16,12 @@ describe PopulationController do
   let!(:leader) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: abteilung).person }
   let!(:guide) { Fabricate(Group::Abteilung::StufenleitungWoelfe.name.to_sym, group: abteilung).person }
   let!(:webmaster) { Fabricate(Group::Abteilung::Webmaster.name.to_sym, group: abteilung).person }
-  let!(:deleted) { Fabricate(Group::Abteilung::AbteilungsleitungStv.name.to_sym, group: abteilung, deleted_at: 1.year.ago) }
+  let!(:deleted) do
+    Fabricate(Group::Abteilung::AbteilungsleitungStv.name.to_sym,
+              group: abteilung,
+              created_at: 2.years.ago,
+              deleted_at: 1.year.ago)
+  end
   let!(:group_leader) { Fabricate(Group::Pfadi::Mitleitung.name.to_sym, group: pegasus, person: guide).person }
   let!(:child) { Fabricate(Group::Pfadi::Pfadi.name.to_sym, group: pegasus).person }
 

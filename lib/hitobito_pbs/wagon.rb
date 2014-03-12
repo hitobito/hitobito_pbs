@@ -30,6 +30,10 @@ module HitobitoPbs
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
+      PeopleController.permitted_attrs +=
+        [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
+         :j_s_number, :correspondence_language, :brother_and_sisters]
+
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull

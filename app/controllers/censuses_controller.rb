@@ -7,6 +7,8 @@
 
 class CensusesController < CrudController
 
+  self.permitted_attrs = [:year, :start_at, :finish_at]
+
   before_filter :group
 
   decorates :group

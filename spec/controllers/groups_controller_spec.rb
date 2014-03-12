@@ -23,7 +23,8 @@ describe GroupsController do
         let(:params) { { group: { bank_account: 'CH123', vkp: true, pta: false } } }
 
         it 'cannot change superior attributes' do
-          expect { perform_request }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+          perform_request
+          assigns(:group).vkp.should be_false
         end
       end
     end
@@ -34,7 +35,9 @@ describe GroupsController do
         let(:params) { { group: { bank_account: 'CH123', vkp: true, pta: false } } }
 
         it 'cannot change superior attributes' do
-          expect { perform_request }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+          perform_request
+          assigns(:group).vkp.should be_false
+          #expect { perform_request }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
         end
       end
     end

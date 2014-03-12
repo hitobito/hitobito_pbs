@@ -30,7 +30,7 @@ class MemberCountsController < ApplicationController
   def update
     authorize!(:update_member_counts, abteilung)
 
-    if member_count.update_attributes(params[:member_count])
+    if member_count.update_attributes(permitted_params)
       redirect_to census_abteilung_group_path(abteilung, year: year),
                   notice: translate('updated_data_for_year', year: year)
     else
@@ -59,6 +59,10 @@ class MemberCountsController < ApplicationController
   def year
     @year ||= Census.current.try(:year) ||
               fail(ActiveRecord::RecordNotFound, 'No current census found')
+  end
+
+  def permitted_params
+    params.require(:member_count).permit(MemberCount::COUNT_COLUMNS)
   end
 
 end
