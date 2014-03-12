@@ -5,11 +5,13 @@
 
 %p.alert.alert-info
   - if check_approveable?
-    Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".
-  - else
-    Momentan ist keine Bestandesmeldung ausstehend.
+    = t('.please_confirm_census_data')
 
-%h2 Aktueller Bestand
+  - else
+    = t('.no_census_data_requested')
+
+
+%h2= t('.current_census_data')
 = render 'census_evaluation/abteilung/totals'
 
 = render 'people_list'
@@ -17,6 +19,6 @@
 
 - if check_approveable?
   - if @people_data_complete
-    = action_button('Bestand bestätigen', group_member_counts_path(@group), nil, method: :post)
+    = action_button(t('.confirm_census_data'), group_member_counts_path(@group), nil, method: :post)
   - else
-    %p.alert Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
+    %p.alert= t('.missing_gender_information')

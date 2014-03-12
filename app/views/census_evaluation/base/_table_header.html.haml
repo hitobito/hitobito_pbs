@@ -20,8 +20,8 @@
       - before_columns.each do |c|
         %th= c
       - 7.times do
-        %th.right w
-        %th.right m
+        %th.right= t('global.gender.female_short')
+        %th.right= t('global.gender.male_short')
       - after_columns.each do |c|
         %th.right= c
   %tbody

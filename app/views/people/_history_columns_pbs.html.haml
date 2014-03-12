@@ -1,0 +1,4 @@
+- t.col('') do |r|
+  - if can?(:update, r)
+    = link_to edit_group_role_path(r.group, r) do
+      %i.icon.icon-pencil

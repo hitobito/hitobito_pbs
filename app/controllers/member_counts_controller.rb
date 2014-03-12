@@ -15,8 +15,7 @@ class MemberCountsController < ApplicationController
     year = MemberCounter.create_counts_for(abteilung)
     if year
       total = MemberCount.total_for_abteilung(year, abteilung).try(:total) || 0
-      flash[:notice] = "Die Zahlen von Total #{total} Mitgliedern " +
-                       "wurden für #{year} erfolgreich erzeugt."
+      flash[:notice] = translate('.created_data_for_year', total: total, year: year)
     end
 
     year ||= Date.today.year
@@ -33,7 +32,7 @@ class MemberCountsController < ApplicationController
 
     if member_count.update_attributes(params[:member_count])
       redirect_to census_abteilung_group_path(abteilung, year: year),
-                  notice: "Die Mitgliederzahlen für #{year} wurden erfolgreich gespeichert."
+                  notice: translate('updated_data_for_year', year: year)
     else
       render 'edit'
     end
@@ -44,7 +43,7 @@ class MemberCountsController < ApplicationController
 
     member_count.destroy
     redirect_to census_abteilung_group_path(abteilung, year: year),
-                notice: "Die Mitgliederzahlen für #{year} wurden erfolgreich gelöscht."
+                notice: translate('.deleted_data_for_year', year: year)
   end
 
   private

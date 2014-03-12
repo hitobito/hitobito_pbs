@@ -10,5 +10,5 @@
     - if can?(:delete_member_counts, @group)
       = button_action_destroy(group_member_counts_path(@group))
   - elsif can?(:update_member_counts, @group)
-    = action_button('Aktuellen Bestand erzeugen', group_member_counts_path(@group), :plus, method: :post)
+    = action_button(t('.create_population_data'), group_member_counts_path(@group), :plus, method: :post)
 

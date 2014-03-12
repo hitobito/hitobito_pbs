@@ -4,10 +4,10 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - if @group_counts[group.id].nil? && @evaluation.current_census_year? && can?(:remind_census, @group)
-  = action_button('Erinnern',
+  = action_button(t('.remind'),
                   census_kantonalverband_remind_group_path(@group, abteilung_id: group.id),
                   nil,
                   class: 'btn-small',
                   id: "reminder_#{group.id}",
-                  data: {remote: true, method: :post, disable_with: 'Erinnern'})
+                  data: {remote: true, method: :post, disable_with: t('.remind')})
 

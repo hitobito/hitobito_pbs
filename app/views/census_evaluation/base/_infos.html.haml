@@ -5,14 +5,9 @@
 
 - if @evaluation.census_current_or_future?
   %p
-    Die
     - if @evaluation.census_current?
-      aktuellen
-    Bestandesmeldungen für
-    = @evaluation.census.year
-    können ab dem
-    = f(@evaluation.census.start_at)
-    erfasst werden.
+      = t('.census_evaluation_active', year: @evaluation.census.year, start_at: f(@evaluation.census.start_at))
+    - else
+      = t('.census_evaluation', year: @evaluation.census.year, start_at: f(@evaluation.census.start_at))
     - if @evaluation.census.finish_at?
-      Stichtag ist der
-      = f(@evaluation.census.finish_at)
+      = t('.census_evaluation_reference_date', finish_at: f(@evaluation.census.finish_at))

@@ -4,7 +4,7 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = render layout: 'table_header',
-         locals: { before_columns: [''], after_columns: ['Total', '']} do
+         locals: { before_columns: [''], after_columns: [t('census_evaluation.total'), '']} do
   - @sub_groups.each do |g|
     %tr
       %td= link_to(g.to_s, census_evaluation_path(g, year: @year))

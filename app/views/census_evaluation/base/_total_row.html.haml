@@ -4,7 +4,7 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 %tr
-  %th.right Total
+  %th.right= t('census_evaluation.total')
   - MemberCount::COUNT_COLUMNS.each do |col|
     %th.right= count_value(@total.send(col))
   %th.right= count_value(@total.total)

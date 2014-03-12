@@ -671,3 +671,14 @@ de:
         pta_m: PTA m
         pta_f: PTA w
 
+      role:
+        dates: Daten
+        created_at: Von
+        deleted_at: Bis
+
+  activemodel:
+    errors:
+      messages:
+        must_be_in_the_past: muss in der Vergangenheit liegen.
+        cannot_be_before: darf nicht vor dem %{other} liegen.
+
