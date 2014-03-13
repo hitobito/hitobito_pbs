@@ -81,7 +81,7 @@ class TarantulaTest < ActionDispatch::IntegrationTest
     # delete not allowed - not completely clarified - investigate later
     t.allow_500_for /groups\/\d+\/events\/\d+\/roles\/\d+$/
     # roles with invalid created_at and deleted_at values may generate 500 :(
-    t.allow_500_for /group\/\d+\/roles(\/\d+)?$/
+    t.allow_500_for /groups\/\d+\/roles(\/\d+)?$/
 
 
     t.crawl_timeout = 15.minutes
