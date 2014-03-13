@@ -20,7 +20,7 @@ describe Role::TypeList do
       ['Kantonalverband', ['Kantonalverband']],
       ['Region', ['Region']],
       ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio', 'PTA', 'Elternrat']],
-      ['Global', ['Gremium', 'Rover']],
+      ['Global', %w(Gremium Rover)],
     ]
   end
 

@@ -11,5 +11,5 @@ AllCops:
   Excludes:
     - db/**
     - config/**
-    - script/**
+    - bin/**
     - tmp/**

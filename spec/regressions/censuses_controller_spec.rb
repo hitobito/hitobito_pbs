@@ -21,6 +21,6 @@ describe CensusesController, type: :controller do
 
   let(:user) { people(:bulei) }
   let(:test_entry) { censuses(:two_o_12) }
-  let(:test_entry_attrs) { { year: 2013, start_at: Date.new(2013, 8), finish_at: Date.new(2013, 10, 31) }}
+  let(:test_entry_attrs) { { year: 2013, start_at: Date.new(2013, 8), finish_at: Date.new(2013, 10, 31) } }
 
 end

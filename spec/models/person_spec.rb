@@ -108,14 +108,13 @@ describe Person do
     end
 
     it 'handles long numbers' do
-      person.id = 123456789
+      person.id = 123_456_789
       expect(person.pbs_number).to eq('123-456-789')
     end
 
     it 'handles very long numbers' do
-      person.id = 1234567891234
+      person.id = 1_234_567_891_234
       expect(person.pbs_number).to eq('1-234-567-891-234')
     end
   end
 end
-

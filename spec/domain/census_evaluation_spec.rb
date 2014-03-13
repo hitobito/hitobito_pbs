@@ -24,7 +24,7 @@ shared_examples 'sub_groups' do
       let(:year) { 2100 }
       before do
         Census.create!(year: 2100,
-                       start_at: Date.new(2100,1,1))
+                       start_at: Date.new(2100, 1, 1))
       end
 
       it { should eq future_census_groups.collect(&:name).sort }

@@ -21,7 +21,6 @@ describe RolesController, type: :controller do
 
   let(:user) { people(:bulei) }
   let(:test_entry) { roles(:al_schekka) }
-  let(:test_entry_attrs) { { created_at: Date.new(2013, 8, 2) }}
+  let(:test_entry_attrs) { { created_at: Date.new(2013, 8, 2) } }
 
 end
-

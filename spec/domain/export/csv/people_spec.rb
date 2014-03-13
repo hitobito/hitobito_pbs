@@ -12,8 +12,7 @@ describe Export::Csv::People do
 
   let(:person) { people(:bulei) }
   let(:simple_headers) do
-    ['Vorname', 'Nachname', 'Pfadiname', 'Firmenname', 'Firma', 'E-Mail',
-     'Adresse', 'PLZ', 'Ort', 'Land', 'Geschlecht', 'Geburtstag', 'Rollen', 'Titel', 'Anrede']
+    %w(Vorname Nachname Pfadiname Firmenname Firma E-Mail Adresse PLZ Ort Land Geschlecht Geburtstag Rollen Titel Anrede)
   end
 
   describe Export::Csv::People do
@@ -56,4 +55,3 @@ describe Export::Csv::People do
     end
   end
 end
-

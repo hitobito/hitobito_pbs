@@ -38,11 +38,11 @@ describe CensusEvaluation::BundController do
     end
 
     it 'assigns abteilungen' do
-      assigns(:abteilungen).should eq({
+      assigns(:abteilungen).should eq(
         be.id => { confirmed: 2, total: 3 },
         vd.id => { confirmed: 0, total: 0 },
-        zh.id => { confirmed: 1, total: 1 },
-      })
+        zh.id => { confirmed: 1, total: 1 }
+      )
     end
 
     it 'assigns year' do

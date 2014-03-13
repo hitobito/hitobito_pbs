@@ -50,10 +50,10 @@ describe Group do
   include_examples 'group types'
 
 
-  describe "#all_types" do
+  describe '#all_types' do
     subject { Group.all_types }
 
-    it "must have simple group as last item" do
+    it 'must have simple group as last item' do
       expect(subject.last).to eq(Group::Gremium)
     end
 
