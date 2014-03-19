@@ -13,10 +13,22 @@ de:
       group/abteilung:
         one: Abteilung
         other: Abteilungen
+      group/abteilungs_gremium:
+        one: Gremium
+        other: Gremien
+        long: Abteilungsgremium
+      group/abteilungs_rover:
+        one: Rover
+        other: Rovers
+        long: Rover Abteilung
       group/biber:
         one: Biber
         other: Biber
       group/bund: Bund
+      group/bundes_gremium:
+        one: Gremium
+        other: Gremien
+        long: Bundesgremium
       group/elternrat:
         one: Elternrat
         other: Elternräte
@@ -26,6 +38,10 @@ de:
       group/kantonalverband:
         one: Kantonalverband
         other: Kantonalverbände
+      group/kantonales_gremium:
+        one: Gremium
+        other: Gremien
+        long: Kantonales Gremium
       group/pfadi:
         one: Pfadi
         other: Pfadis
@@ -38,6 +54,14 @@ de:
       group/region:
         one: Region
         other: Regionen
+      group/regionales_gremium:
+        one: Gremium
+        other: Gremien
+        long: Regionales Gremium
+      group/regionale_rover:
+        one: Rover
+        other: Rovers
+        long: Regionale Rover
       group/rover:
         one: Rover
         other: Rovers

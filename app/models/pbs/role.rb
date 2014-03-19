@@ -5,6 +5,20 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+
+# == Schema Information
+#
+# Table name: roles
+#
+#  id         :integer          not null, primary key
+#  person_id  :integer          not null
+#  group_id   :integer          not null
+#  type       :string(255)      not null
+#  label      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  deleted_at :datetime
+#
 module Pbs::Role
   extend ActiveSupport::Concern
 

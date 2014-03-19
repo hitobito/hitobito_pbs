@@ -43,7 +43,8 @@ class Group::Region < Group
 
   children Group::Region,
            Group::Abteilung,
-           Group::Rover
+           Group::RegionaleRover,
+           Group::RegionalesGremium
 
 
   ### ROLES

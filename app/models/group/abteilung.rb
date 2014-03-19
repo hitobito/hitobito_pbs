@@ -48,9 +48,10 @@ class Group::Abteilung < Group
            Group::Woelfe,
            Group::Pfadi,
            Group::Pio,
-           Group::Rover,
+           Group::AbteilungsRover,
            Group::Pta,
-           Group::Elternrat
+           Group::Elternrat,
+           Group::AbteilungsGremium
 
   has_many :member_counts
 

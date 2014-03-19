@@ -5,6 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+
 # == Schema Information
 #
 # Table name: groups
@@ -37,31 +38,16 @@
 #  bank_account           :string(255)
 #  description            :text
 #
-class Group::Pio < Group
+class Group::RegionalesGremium < Group::Gremium
 
-  children Group::Pio,
-           Group::AbteilungsGremium
+  children Group::RegionalesGremium
 
-  class Einheitsleitung < ::Role
-    self.permissions = [:layer_read]
+  class Leitung < Group::Gremium::Leitung
   end
 
-  class Mitleitung < ::Role
-    self.permissions = [:layer_read]
+  class Mitglied < Group::Gremium::Mitglied
   end
 
-  class Adressverwaltung < ::Role
-    self.permissions = [:group_full]
-  end
-
-  class Pio < ::Role
-    self.permissions = []
-    self.visible_from_above = false
-  end
-
-  roles Einheitsleitung,
-        Mitleitung,
-        Adressverwaltung,
-        Pio
+  roles Leitung, Mitglied
 
 end

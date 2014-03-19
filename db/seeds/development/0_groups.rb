@@ -52,7 +52,7 @@ states.each do |s|
   seeder.seed_social_accounts(s)
 end
 
-Group::Gremium.seed(:name, :parent_id,
+Group::KantonalesGremium.seed(:name, :parent_id,
   {name: 'FG Sicherheit',
    parent_id: states[0].id },
 
@@ -162,7 +162,7 @@ Group::Pio.seed(:name, :parent_id,
    parent_id: abteilungen[2].id},
 )
 
-Group::Rover.seed(:name, :parent_id,
+Group::AbteilungsRover.seed(:name, :parent_id,
   {name: 'Rovers',
    parent_id: abteilungen[2].id},
 )
@@ -181,7 +181,7 @@ Group::Elternrat.seed(:name, :parent_id,
    parent_id: abteilungen[6].id},
 )
 
-Group::Gremium.seed(:name, :parent_id,
+Group::AbteilungsGremium.seed(:name, :parent_id,
   {name: 'Fussballers',
    parent_id: abteilungen[2].id},
 )

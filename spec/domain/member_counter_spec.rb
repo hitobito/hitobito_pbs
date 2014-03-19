@@ -16,7 +16,7 @@ describe MemberCounter do
     pfadi1 = groups(:pegasus)
     pfadi2 = groups(:baereried)
     leader = Fabricate(Group::Abteilung::StufenleitungPfadi.name, group: abteilung, person: Fabricate(:person, gender: 'w', birthday: '1985-01-01'))
-    rover = Fabricate(Group::Rover::Rover.name, group: groups(:rovers), person: Fabricate(:person, gender: 'm', birthday: '1989-01-01'))
+    rover = Fabricate(Group::AbteilungsRover::Rover.name, group: groups(:rovers), person: Fabricate(:person, gender: 'm', birthday: '1989-01-01'))
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi1, person: Fabricate(:person, gender: 'w', birthday: '1988-01-01'))
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi2, person: rover.person)
     Fabricate(Group::Pfadi::Leitpfadi.name, group: pfadi1, person: Fabricate(:person, gender: 'w', birthday: '1999-01-01'))

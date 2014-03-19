@@ -41,7 +41,8 @@ class Group::Bund < Group
 
   self.layer = true
 
-  children Group::Kantonalverband
+  children Group::Kantonalverband,
+           Group::BundesGremium
 
   ### INSTANCE METHODS
 

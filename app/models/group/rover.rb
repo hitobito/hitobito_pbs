@@ -37,10 +37,8 @@
 #  bank_account           :string(255)
 #  description            :text
 #
+# Abstract Rover group
 class Group::Rover < Group
-
-  children Group::Rover
-
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_read]
@@ -58,10 +56,5 @@ class Group::Rover < Group
     self.permissions = []
     self.visible_from_above = false
   end
-
-  roles Einheitsleitung,
-        Mitleitung,
-        Adressverwaltung,
-        Rover
 
 end

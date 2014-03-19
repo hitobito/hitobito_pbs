@@ -1,10 +1,4 @@
 # encoding: utf-8
-
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
-
 # == Schema Information
 #
 # Table name: groups
@@ -37,31 +31,23 @@
 #  bank_account           :string(255)
 #  description            :text
 #
-class Group::Pio < Group
 
-  children Group::Pio,
-           Group::AbteilungsGremium
 
-  class Einheitsleitung < ::Role
-    self.permissions = [:layer_read]
+#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+class Group::AbteilungsGremium < Group::Gremium
+
+  children Group::AbteilungsGremium
+
+  class Leitung < Group::Gremium::Leitung
   end
 
-  class Mitleitung < ::Role
-    self.permissions = [:layer_read]
+  class Mitglied < Group::Gremium::Mitglied
   end
 
-  class Adressverwaltung < ::Role
-    self.permissions = [:group_full]
-  end
-
-  class Pio < ::Role
-    self.permissions = []
-    self.visible_from_above = false
-  end
-
-  roles Einheitsleitung,
-        Mitleitung,
-        Adressverwaltung,
-        Pio
+  roles Leitung, Mitglied
 
 end

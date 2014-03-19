@@ -16,11 +16,11 @@ describe Role::TypeList do
     end
 
     all_groups.should == [
-      ['Bund', ['Bund']],
-      ['Kantonalverband', ['Kantonalverband']],
-      ['Region', ['Region']],
-      ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio', 'PTA', 'Elternrat']],
-      ['Global', %w(Gremium Rover)],
+      ['Bund', ['Bund', 'Gremium']],
+      ['Kantonalverband', ['Kantonalverband', 'Gremium']],
+      ['Region', ['Region', 'Rover', 'Gremium']],
+      ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio',
+                     'Rover', 'PTA', 'Elternrat', 'Gremium']],
     ]
   end
 

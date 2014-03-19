@@ -39,7 +39,8 @@
 #
 class Group::Biber < Group
 
-  children Group::Biber
+  children Group::Biber,
+           Group::AbteilungsGremium
 
 
   class Einheitsleitung < ::Role

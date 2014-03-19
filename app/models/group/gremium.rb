@@ -37,10 +37,8 @@
 #  bank_account           :string(255)
 #  description            :text
 #
+# Abstract Gremium
 class Group::Gremium < Group
-
-  children Group::Gremium
-
 
   class Leitung < ::Role
     self.permissions = [:group_full]
@@ -49,7 +47,5 @@ class Group::Gremium < Group
   class Mitglied < ::Role
     self.permissions = [:group_read]
   end
-
-  roles Leitung, Mitglied
 
 end

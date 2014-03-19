@@ -103,7 +103,7 @@ fg_security:
   lft: 3
   rgt: 4
   name: FG Sicherheit
-  type: Group::Gremium
+  type: Group::KantonalesGremium
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 fg_football:
@@ -112,7 +112,7 @@ fg_football:
   rgt: 6
   name: FG Football
   short_name:
-  type: Group::Gremium
+  type: Group::KantonalesGremium
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 bern:
@@ -315,7 +315,7 @@ rovers:
   rgt: 22
   name: Rovers
   short_name:
-  type: Group::Rover
+  type: Group::AbteilungsRover
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
 elternrat:
@@ -333,5 +333,5 @@ fussballers:
   rgt: 26
   name: Fussballers
   short_name:
-  type: Group::Gremium
+  type: Group::AbteilungsGremium
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>

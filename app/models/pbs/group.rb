@@ -5,6 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+
 # == Schema Information
 #
 # Table name: groups
@@ -45,9 +46,6 @@ module Pbs::Group
     self.superior_attributes = [:pbs_shortname]
 
     validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
-
-    # define global children
-    children Group::Gremium
 
     root_types Group::Bund
   end

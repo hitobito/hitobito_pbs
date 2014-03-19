@@ -39,7 +39,8 @@
 #
 class Group::Pta < Group
 
-  children Group::Pta
+  children Group::Pta,
+           Group::AbteilungsGremium
 
 
   class Einheitsleitung < ::Role
