@@ -704,9 +704,12 @@ de:
         created_at: Von
         deleted_at: Bis
 
-  activemodel:
     errors:
-      messages:
-        must_be_in_the_past: muss in der Vergangenheit liegen.
-        cannot_be_before: darf nicht vor dem %{other} liegen.
+      models:
+        role:
+          attributes:
+            created_at:
+              on_or_before: muss in der Vergangenheit liegen.
+            deleted_at:
+              after: muss nach "Von" liegen.
 
