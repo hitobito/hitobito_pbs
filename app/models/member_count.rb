@@ -89,7 +89,7 @@ class MemberCount < ActiveRecord::Base
 
     def totals(year)
       columns = 'kantonalverband_id, ' \
-                'region_id, ' +
+                'region_id, ' \
                 'abteilung_id, ' +
                 COUNT_COLUMNS.collect { |c| "SUM(#{c}) AS #{c}" }.join(',')
 

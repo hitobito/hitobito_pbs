@@ -8,7 +8,7 @@
 # Displays a list of all people in an Abteilung that are counted.
 class PopulationController < ApplicationController
 
-  before_filter :authorize
+  before_action :authorize
 
   decorates :groups, :people, :group
 

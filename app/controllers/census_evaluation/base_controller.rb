@@ -19,7 +19,7 @@ class CensusEvaluation::BaseController < ApplicationController
 
   class_attribute :sub_group_type
 
-  before_filter :authorize
+  before_action :authorize
 
   decorates :group, :sub_groups
 

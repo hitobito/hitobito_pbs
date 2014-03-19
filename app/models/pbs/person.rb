@@ -65,7 +65,8 @@ module Pbs::Person
                                end,
                            allow_blank: true }
 
-    validates :entry_date, :leaving_date, timeliness: { type: :date, allow_blank: true }
+    validates :entry_date, :leaving_date,
+              timeliness: { type: :date, allow_blank: true }
 
     alias_method_chain :full_name, :title
   end
@@ -79,7 +80,7 @@ module Pbs::Person
   end
 
   def pbs_number
-    sprintf('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-')
+    format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-')
   end
 
   def full_name_with_title
