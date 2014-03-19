@@ -38,4 +38,21 @@ describe RolesController do
 
   end
 
+
+  describe 'POST #update' do
+
+    context 'with deleted before created at and empty type' do
+
+      let(:role_params) do role_defaults.merge(deleted_at: Date.new(2014, 3, 4),
+                                               created_at: Date.new(2014, 3, 5),
+                                               type: '') end
+
+      it 'does not create role' do
+        expect { post :create, group_id: group.id, role: role_params }.not_to change { Role.with_deleted.count }
+        role.should have(1).error_on(:type)
+        role.should have(1).error_on(:deleted_at)
+      end
+    end
+  end
+
 end
