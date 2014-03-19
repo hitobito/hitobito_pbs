@@ -43,7 +43,12 @@ describe Salutation do
 
     context 'no gender' do
       before { person.gender = nil }
-      it { expect(subject).to eq('Sehr geehrte Frau Dr. Leiter') }
+      it { expect(subject).to eq('Sehr geehrte(r) Dr. Leiter') }
+    end
+
+    context 'empty gender' do
+      before { person.gender = '' }
+      it { expect(subject).to eq('Sehr geehrte(r) Dr. Leiter') }
     end
 
     context 'without salutation' do

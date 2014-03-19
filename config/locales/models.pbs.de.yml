@@ -604,21 +604,25 @@ de:
             value:
               m: Lieber %{nickname}
               w: Liebe %{nickname}
+              other: Liebe(r) %{nickname}
           lieber_vorname:
             label: Liebe(r) [Vorname]
             value:
               m: Lieber %{first_name}
               w: Liebe %{first_name}
+              other: Liebe(r) %{first_name}
           lieber_titel_nachname:
             label: Liebe(r) Frau/Herr [Titel] [Nachname]
             value:
               m: Lieber Herr %{title_last_name}
               w: Liebe Frau %{title_last_name}
+              other: Liebe(r) %{title_last_name}
           sehr_geehrter_titel_nachname:
             label: Sehr geehrte(r) Frau/Herr [Titel] [Nachname]
             value:
               m: Sehr geehrter Herr %{title_last_name}
               w: Sehr geehrte Frau %{title_last_name}
+              other: Sehr geehrte(r) %{title_last_name}
 
     attributes:
       person:
