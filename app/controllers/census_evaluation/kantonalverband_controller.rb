@@ -9,17 +9,4 @@ class CensusEvaluation::KantonalverbandController < CensusEvaluation::BaseContro
 
   self.sub_group_type = Group::Abteilung
 
-  def remind
-    authorize!(:remind_census, group)
-
-    abteilung = evaluation.sub_groups.find(params[:abteilung_id])
-    CensusReminderJob.new(current_user, evaluation.current_census, abteilung).enqueue!
-    notice = translate('email_sent', abteilung: abteilung)
-
-    respond_to do |format|
-      format.html { redirect_to census_kantonalverband_group_path(group), notice: notice }
-      format.js   { flash.now.notice = notice }
-    end
-  end
-
 end
