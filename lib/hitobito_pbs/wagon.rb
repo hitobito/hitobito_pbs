@@ -33,6 +33,7 @@ module HitobitoPbs
       PeopleController.permitted_attrs +=
         [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
          :j_s_number, :correspondence_language, :brother_and_sisters]
+      RolesController.send :include, Pbs::RolesController
 
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
