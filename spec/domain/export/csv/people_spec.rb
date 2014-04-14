@@ -12,7 +12,8 @@ describe Export::Csv::People do
 
   let(:person) { people(:bulei) }
   let(:simple_headers) do
-    %w(Vorname Nachname Pfadiname Firmenname Firma E-Mail Adresse PLZ Ort Land Geschlecht Geburtstag Rollen Titel Anrede)
+    %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
+       Geschlecht Geburtstag Rollen Titel Anrede)
   end
 
   describe Export::Csv::People do
@@ -31,7 +32,7 @@ describe Export::Csv::People do
 
         its(['Vorname']) { should eq person.first_name }
         its(['Nachname']) { should eq person.last_name }
-        its(['E-Mail']) { should eq person.email }
+        its(['Haupt-E-Mail']) { should eq person.email }
         its(['Ort']) { should eq person.town }
         its(['Geschlecht']) { should eq person.gender }
         its(['Rollen']) { should eq 'Mitarbeiter GS Pfadibewegung Schweiz' }
