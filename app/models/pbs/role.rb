@@ -25,12 +25,28 @@ module Pbs::Role
   included do
     self.used_attributes += [:created_at, :deleted_at]
 
-    validates :created_at, :deleted_at,
+    validates :created_at,
               timeliness: { type: :datetime,
                             on_or_before: :now,
                             allow_blank: true }
     validates :deleted_at,
-              timeliness: { after: ->(role) { role.created_at },
+              timeliness: { type: :datetime,
+                            on_or_before: :now,
+                            after: ->(role) { role.created_at },
                             allow_blank: true }
+  end
+
+  def created_at=(value)
+    super(value)
+  rescue ArgumentError => e
+    # could not set value
+    super(nil)
+  end
+
+  def deleted_at=(value)
+    super(value)
+  rescue ArgumentError => e
+    # could not set value
+    super(nil)
   end
 end
