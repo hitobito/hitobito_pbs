@@ -1,6 +1,49 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
-
-fr: {}
+fr:
+  dummy: dummy
+  groups:
+    tabs:
+      population: effectifs
+      statistic: statistique
+  censuses:
+    form:
+      title: saisir une nouvelle déclaration des effectifs
+      frozen_once_gathered: Une fois saisie, la déclaration des effectifs ne peut plus être modifiée.
+  census_evaluation:
+    total: total
+    base:
+      index:
+        no_data_for_this_year: Il n'y a pas de données disponibles pour cette année.
+      infos:
+        census_evaluation: Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
+        census_evaluation_active: Les déclarations des effectifs actuelles pour l'année %{year} peuvent être saisies dès le %{start_at}.
+        census_evaluation_reference_date: La date limite est le %{finish_at}
+    abteilung:
+      actions_index:
+        create_population_data: Créer la liste des effectifs actuelle
+    bund:
+      actions_index:
+        request_population_data: Demander des nouvelles déclarations des effectifs
+      total_actions:
+        abteilungen_confirmed: Groupes confirmés
+    kantonalverband:
+      total_actions:
+        remind: rappel
+  census_evaluation/kantonalverband:
+    email_sent: Un courriel de rappel a été envoyé à %{abteilung}
+  member_counts:
+    created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
+    updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.
+    deleted_data_for_year: Les effectifs pour l'année %{year} ont été effacés avec succès.
+    edit:
+      title: Editer les effectifs %{year}
+  people:
+    fields_pbs:
+      non_automatic_field: Ceci n'est pas un champ automatique et doit être adapté manuellement.
+      in_abteilung: (dans le groupe)
+  population:
+    index:
+      confirm_census_data: confirmer les effectifs
+      current_census_data: effectifs actuels
+      no_census_data_missing: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
+      please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
+      missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.

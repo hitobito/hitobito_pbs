@@ -1,6 +1,51 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
+it:
+  dummy: imitazione
+  groups:
+    tabs:
+      population: organico
+      statistic: statistica
+  censuses:
+    form:
+      title: redigere un nuovo annuncio dell'organico
+      frozen_once_gathered: una volta fatto, l'annuncio dell'organico non può più essere cambiato
+  census_evaluation:
+    total: totale
+    base:
+      index:
+        no_data_for_this_year: Per questo anno non esistono dati.
+      infos:
+        census_evaluation: Gli annunci di organico per il %{year} possono essere fatti a partire dal %{start_at}
+        census_evaluation_active: Gli annunci dell'organico attualizzati per l'anno %{year} possono essere fatti a partire dal %{start_at}
+        census_evaluation_reference_date: la scadenza è per il %{finish_at}
+    abteilung:
+      actions_index:
+        create_population_data: generare l'organico attuale
+    bund:
+      actions_index:
+        request_population_data: esigere un nuovo annuncio dell'organico
+      total_actions:
+        abteilungen_confirmed: confermare le sezioni
+    kantonalverband:
+      total_actions:
+        remind: ricordare
+  census_evaluation/kantonalverband:
+    email_sent: 'promemoria via email spedito a  %{abteilung} '
+  member_counts:
+    created_data_for_year: I numeri per un totale di  %{total} membri per il %{year} sono stati generati con successo.
+    updated_data_for_year: Il numero dei membri per il %{year} è stato registrato con successo.
+    deleted_data_for_year: Il numero dei membri per il %{year} è stato cancellato con successo.
+    edit:
+      title: aggiornare il numero dei membri per il %{year}
+  people:
+    fields_pbs:
+      non_automatic_field: Questo non è un campo automatico e deve essere aggiornato manualmente.
+      in_abteilung: (in sezione)
+  population:
+    index:
+      confirm_census_data: confermare l'organico
+      current_census_data: organico attuale
+      no_census_data_missing: 'al momento non c''è nessun annuncio di organico mancante.
 
-it: {}
+        al momento non c''è nessun annuncio di organico in sospeso.'
+      please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare l''organico della tua sezione con "confermare l''organico"'
+      missing_gender_information: Per poter confermare l'organico, a tutti i membri deve essere assegnato il sesso.
