@@ -14,7 +14,7 @@ de:
   censuses:
     form:
       title: Neue Bestandesmeldung erfassen
-      frozen_once_gathered: Einmal erfasst, kann eine Bestandesmelung nicht mehr verändert werden.
+      frozen_once_gathered: Einmal erfasst, kann eine Bestandesmeldung nicht mehr verändert werden.
 
   census_evaluation:
     total: Total
@@ -26,7 +26,7 @@ de:
           Die Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
         census_evaluation_active:
           Die aktuellen Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
-        census_evaluation_reference_date: 
+        census_evaluation_reference_date:
           Stichtag ist der %{finish_at}
     abteilung:
       actions_index:
@@ -52,7 +52,7 @@ de:
     edit:
       title: Mitgliederzahlen %{year} bearbeiten
 
-  membercounts: 
+  membercounts:
 
   people:
     fields_pbs:
@@ -63,7 +63,7 @@ de:
     index:
       confirm_census_data: Bestand bestätigen
       current_census_data: Aktueller Bestand
-      no_census_data_missing: Momentan ist keine Bestandesmeldung ausstehend.
+      no_census_data_requested: Momentan ist keine Bestandesmeldung ausstehend.
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
 

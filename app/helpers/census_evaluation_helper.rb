@@ -10,7 +10,12 @@ module CensusEvaluationHelper
   EMPTY_COUNT_VALUE = '-'
 
   def census_evaluation_path(group, options = {})
-    send("census_#{group.klass.model_name.element}_group_path", group, options)
+    klass = group.respond_to?(:klass) ? group.klass : group.class
+    send("census_#{klass.model_name.element}_group_path", group, options)
+  end
+
+  def censuses_tab_path(*)
+    censuses_path
   end
 
   def count_field(group, field)

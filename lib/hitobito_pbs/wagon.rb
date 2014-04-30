@@ -38,6 +38,8 @@ module HitobitoPbs
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
+
+      Sheet::Group.send :include, Pbs::Sheet::Group
     end
 
     initializer 'pbs.add_settings' do |app|

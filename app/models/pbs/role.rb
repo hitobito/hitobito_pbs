@@ -38,14 +38,14 @@ module Pbs::Role
 
   def created_at=(value)
     super(value)
-  rescue ArgumentError => e
+  rescue ArgumentError
     # could not set value
     super(nil)
   end
 
   def deleted_at=(value)
     super(value)
-  rescue ArgumentError => e
+  rescue ArgumentError
     # could not set value
     super(nil)
   end
