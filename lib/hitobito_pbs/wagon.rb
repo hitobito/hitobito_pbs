@@ -22,6 +22,7 @@ module HitobitoPbs
                                )
 
     config.to_prepare do
+      # rubocop:disable SingleSpaceBeforeFirstArg
       # extend application classes here
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
@@ -40,14 +41,16 @@ module HitobitoPbs
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
 
       Sheet::Group.send :include, Pbs::Sheet::Group
+
+      # rubocop:enable SingleSpaceBeforeFirstArg
     end
 
-    initializer 'pbs.add_settings' do |app|
+    initializer 'pbs.add_settings' do |_app|
       Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
       Settings.reload!
     end
 
-    initializer 'jubla.add_inflections' do |app|
+    initializer 'jubla.add_inflections' do |_app|
       ActiveSupport::Inflector.inflections do |inflect|
         inflect.irregular 'census', 'censuses'
       end

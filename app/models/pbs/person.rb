@@ -59,11 +59,11 @@ module Pbs::Person
     Person::PUBLIC_ATTRS << :title << :salutation
 
     validates :salutation,
-              inclusion: { in: ->(person) { Salutation.available.keys } ,
+              inclusion: { in: ->(_) { Salutation.available.keys } ,
                            allow_blank: true }
 
     validates :correspondence_language,
-              inclusion: { in: lambda do |person|
+              inclusion: { in: lambda do |_|
                                  Settings.application.languages.to_hash.keys.collect(&:to_s)
                                end,
                            allow_blank: true }

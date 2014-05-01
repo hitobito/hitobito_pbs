@@ -65,7 +65,7 @@ class Group::Abteilung < Group
     ancestors.where(type: Group::Region.sti_name).order('lft DESC').first
   end
 
-  def census_groups(year)
+  def census_groups(_year)
     []
   end
 

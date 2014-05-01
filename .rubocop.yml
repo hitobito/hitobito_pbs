@@ -1,10 +1,11 @@
 inherit_from: ../hitobito/.rubocop.yml
 
 AllCops:
-  Excludes:
-    - db/**
-    - config/**
-    - bin/**
-    - tmp/**
-    - spec/**
-    - test/**
+  Exclude:
+    - Rakefile
+    - db/**/*
+    - config/**/*
+    - bin/**/*
+    - tmp/**/*
+    - spec/**/*
+    - test/**/*
