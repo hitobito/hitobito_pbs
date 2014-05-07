@@ -44,7 +44,7 @@ it:
     index:
       confirm_census_data: confermare l'organico
       current_census_data: organico attuale
-      no_census_data_missing: 'al momento non c''è nessun annuncio di organico mancante.
+      no_census_data_requested: 'al momento non c''è nessun annuncio di organico mancante.
 
         al momento non c''è nessun annuncio di organico in sospeso.'
       please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare l''organico della tua sezione con "confermare l''organico"'
