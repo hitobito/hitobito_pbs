@@ -64,7 +64,7 @@ describe Role do
       it 'created_at has illegal format' do
         role.created_at = '303030'
         role.should_not be_valid
-        role.should have(1).error_on(:created_at)
+        role.should have(2).error_on(:created_at)
         role.created_at.should be_nil
       end
 

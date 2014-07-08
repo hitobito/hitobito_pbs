@@ -25,10 +25,13 @@ module Pbs::Role
   included do
     self.used_attributes += [:created_at, :deleted_at]
 
+    validates_presence_of :created_at, on: :update
+
     validates :created_at,
               timeliness: { type: :datetime,
                             on_or_before: :now,
                             allow_blank: true }
+
     validates :deleted_at,
               timeliness: { type: :datetime,
                             on_or_before: :now,
