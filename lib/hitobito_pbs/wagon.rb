@@ -19,6 +19,7 @@ module HitobitoPbs
     config.autoload_paths += %W( #{config.root}/app/abilities
                                  #{config.root}/app/domain
                                  #{config.root}/app/jobs
+                                 #{config.root}/app/serializers
                                )
 
     config.to_prepare do
@@ -30,6 +31,9 @@ module HitobitoPbs
 
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
+
+      PersonSerializer.send :include, Pbs::PersonSerializer
+      GroupSerializer.send  :include, Pbs::GroupSerializer
 
       PeopleController.permitted_attrs +=
         [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
