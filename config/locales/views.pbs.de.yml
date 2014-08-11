@@ -55,6 +55,8 @@ de:
   membercounts:
 
   people:
+    fields:
+      no_sensitive_information: In diesem Feld keine besonders schützenswerte Personendaten erfassen.
     fields_pbs:
       non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
       in_abteilung: (in der Abteilung)
@@ -67,3 +69,7 @@ de:
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
 
+  devise:
+    sessions:
+      new:
+        usage_advise: Die Daten in der Mitgliederdatenbank dürfen nur im Zusammenhang mit Aktivitäten der Pfadi verwendet werden, sie dürfen z.B. nicht an Drittpersonen oder Organisationen weiter gegeben werden.  Die Bearbeitung und Nutzung hat nach Treu und Glauben zu erfolgen und muss verhältnismässig sein.
