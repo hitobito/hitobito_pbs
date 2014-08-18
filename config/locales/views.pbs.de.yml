@@ -69,6 +69,11 @@ de:
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
 
+  roles:
+    fields_pbs:
+      notification: Benachrichtigung
+      notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
   devise:
     sessions:
       new:

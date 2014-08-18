@@ -4,3 +4,6 @@
 
   = f.labeled(:deleted_at) do
     = f.date_field(:deleted_at, class: 'date span6', value: f(@role.deleted_at.try(:to_date)))
+
+= field_set_tag t('.notification') do
+  %p= t('.notification_hint')

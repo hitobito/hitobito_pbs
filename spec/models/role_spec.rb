@@ -77,4 +77,55 @@ describe Role do
     end
   end
 
+  context 'notification when gaining access to more person data' do
+    let(:actuator)      { people(:al_schekka) }
+    let(:home_group)    { groups(:schekka) }
+    let(:foreign_group) { groups(:chaeib) }
+    let(:person)        { Fabricate(:person, first_name: 'Asdf') }
+
+    before { Person.stamper = actuator }
+    after { Person.reset_stamper }
+
+    it 'is sent on role creation with more access' do
+      Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: foreign_group, person: person)
+
+      role = Role.new(group_id: home_group.id,
+                      person_id: person.id,
+                      type: Group::Abteilung::Sekretariat.sti_name)
+      expect { role.save! }.to change { Delayed::Job.count }.by(1)
+      Delayed::Job.first.handler.should include('GroupMembershipJob')
+    end
+
+    it 'is not sent on role creation with equal access' do
+      Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group, person: person)
+
+      role = Role.new(group_id: home_group.id,
+                      person_id: person.id,
+                      type: Group::Abteilung::Revisor.sti_name)
+      expect { role.save! }.not_to change { Delayed::Job.count }
+    end
+
+    it 'is not sent on role creation for new person' do
+      role = Role.new(group_id: home_group.id,
+                      person_id: person.id,
+                      type: Group::Abteilung::Sekretariat.sti_name)
+      expect { role.save! }.not_to change { Delayed::Job.count }
+    end
+
+    it 'is not sent on role update (not possible to gain access via update)' do
+      child_group = groups(:sunnewirbu)
+      role = Fabricate(Group::Abteilung::Revisor.name.to_sym, group: home_group, person: person)
+
+      role.type = Group::Woelfe::Wolf.sti_name
+      expect { role.save! }.not_to change { Delayed::Job.count }
+    end
+
+    it 'is not sent on role destruction' do
+      role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group, person: person)
+
+      expect { role.destroy! }.not_to change { Delayed::Job.count }
+    end
+
+  end
+
 end
