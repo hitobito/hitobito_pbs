@@ -661,6 +661,7 @@ de:
         j_s_number: J+S Personennummer
         correspondence_language: Korrespondenzsprache
         brother_and_sisters: Geschwister
+        relations_to_tails: Geschwister
 
       group:
         pta: PTA
@@ -670,6 +671,10 @@ de:
         pbs_shortname: PBS Kürzel
         bank_account: Bank-/Postverbindung
         description: Beschreibung
+
+      people_relation:
+        kinds:
+          sibling: Geschwister
 
       census:
         year: Jahr

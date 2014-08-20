@@ -29,6 +29,8 @@ module HitobitoPbs
       Person.send       :include, Pbs::Person
       Role.send         :include, Pbs::Role
 
+      PeopleRelation.kind_opposites['sibling'] = 'sibling'
+
       GroupAbility.send   :include, Pbs::GroupAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
