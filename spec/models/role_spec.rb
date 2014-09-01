@@ -123,7 +123,7 @@ describe Role do
     it 'is not sent on role destruction' do
       role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group, person: person)
 
-      expect { role.destroy! }.not_to change { Delayed::Job.count }
+      expect { role.really_destroy! }.not_to change { Delayed::Job.count }
     end
 
   end
