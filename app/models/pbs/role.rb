@@ -40,6 +40,7 @@ module Pbs::Role
 
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
+    after_save :update_primary_group
   end
 
   def created_at=(value)
@@ -79,5 +80,11 @@ module Pbs::Role
     end
 
     true
+  end
+
+  def update_primary_group
+    if changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
+      reset_primary_group
+    end
   end
 end

@@ -128,4 +128,33 @@ describe Role do
 
   end
 
+  context 'primary group (regression for #7766)' do
+    let(:person) { role.person }
+    before { person.update_column :primary_group_id, role.group.id }
+
+    it 'should be reset if primary role is removed by setting deleted_at' do
+      person.primary_group_id.should eq(role.group.id)
+
+      role.deleted_at = Time.zone.now
+      role.save!
+
+      role.should be_destroyed
+      person.primary_group_id.should be_nil
+    end
+
+    it 'should not be reset if secondary role is removed by setting deleted_at' do
+      another_role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym,
+                               group: groups(:patria), person: person)
+
+      person.primary_group_id.should eq(role.group.id)
+
+      another_role.deleted_at = Time.zone.now
+      another_role.save!
+
+      role.should_not be_destroyed
+      another_role.should be_destroyed
+      person.primary_group_id.should eq role.group.id
+    end
+  end
+
 end
