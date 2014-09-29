@@ -17,3 +17,10 @@ application:
 # Initially, a password reset token may be mailed from the application to this address to set a password.
 root_email: hitobito-pbs@puzzle.ch
 
+<% mail_domain = ENV['RAILS_MAIL_DOMAIN'].presence ||
+                 ENV['RAILS_HOST_NAME'].presence ||
+                 'localhost' %>
+
+email:
+  # Sender for all emails sent by the application
+  sender: <%= "MiData PBS/MSdS/MSS <noreply@#{mail_domain}>" %>
