@@ -11,7 +11,7 @@ class PbsPersonSeeder < PersonSeeder
 
   def amount(role_type)
     case role_type.name.demodulize
-    when 'Passivmitglied', 'Biber', 'Wolf', 'Pfadi', 'Mitglied', 'Pio', 'Rover' then 5
+    when 'Passivmitglied', 'Biber', 'Wolf', 'Pfadi', 'Mitglied', 'Pio', 'Rover' then 3
     else 1
     end
   end

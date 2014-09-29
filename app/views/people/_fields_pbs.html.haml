@@ -14,7 +14,9 @@
                                 class: 'span6')
   = f.labeled_input_field :j_s_number
   = f.labeled_input_field :grade_of_school, help_inline: t('.non_automatic_field')
-  = f.labeled_input_field(:brother_and_sisters, caption: t('.in_abteilung'))
 
 = field_set_tag do
   = f.labeled_input_fields(:entry_date, :leaving_date)
+
+= field_set_tag do
+  = f.labeled_input_field(:brother_and_sisters, caption: t('.in_abteilung'))
