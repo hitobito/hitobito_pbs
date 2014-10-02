@@ -10,7 +10,7 @@ module Pbs::VariousAbility
 
   included do
     on(Census) do
-      permission(:layer_full).may(:manage).if_mitarbeiter_gs
+      permission(:layer_and_below_full).may(:manage).if_mitarbeiter_gs
     end
   end
 

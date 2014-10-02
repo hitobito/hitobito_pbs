@@ -86,15 +86,15 @@ class Group::Abteilung < Group
   ### ROLES
 
   class Abteilungsleitung < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class AbteilungsleitungStv < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_full]
+    self.permissions = [:layer_and_below_full]
   end
 
   class Beisitz < ::Role
@@ -102,7 +102,7 @@ class Group::Abteilung < Group
   end
 
   class Coach < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Ehrenmitglied < ::Role
@@ -115,7 +115,7 @@ class Group::Abteilung < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Materialwart < ::Role
@@ -140,7 +140,7 @@ class Group::Abteilung < Group
   end
 
   class Redaktor < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Revisor < ::Role
@@ -148,7 +148,7 @@ class Group::Abteilung < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class Spezialfunktion < ::Role
@@ -156,27 +156,27 @@ class Group::Abteilung < Group
   end
 
   class StufenleitungBiber < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class StufenleitungWoelfe < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class StufenleitungPfadi < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class StufenleitungPio < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class StufenleitungRover < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class StufenleitungPta < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class VerantwortungMaterialverkaufsstelle < ::Role

@@ -10,15 +10,15 @@ module Pbs::GroupAbility
 
   included do
     on(Group) do
-      permission(:layer_full).may(:modify_superior).if_mitarbeiter_gs
+      permission(:layer_and_below_full).may(:modify_superior).if_mitarbeiter_gs
 
       permission(:any).may(:evaluate_census).if_member
 
-      permission(:layer_full).
+      permission(:layer_and_below_full).
         may(:show_population, :create_member_counts).
         in_same_layer_or_below
 
-      permission(:layer_full).
+      permission(:layer_and_below_full).
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_kalei_or_gs
     end

@@ -43,11 +43,11 @@ class Group::Pio < Group
            Group::AbteilungsGremium
 
   class Einheitsleitung < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class Mitleitung < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_and_below_read]
   end
 
   class Adressverwaltung < ::Role

@@ -64,7 +64,7 @@ class Group::Kantonalverband < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_full]
+    self.permissions = [:layer_and_below_full]
   end
 
   class Beisitz < ::Role
@@ -72,7 +72,7 @@ class Group::Kantonalverband < Group
   end
 
   class Coach < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Ehrenmitglied < ::Role
@@ -81,11 +81,11 @@ class Group::Kantonalverband < Group
   end
 
   class Kantonsleitung < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Leitungskursbetreuung < ::Role
@@ -118,7 +118,7 @@ class Group::Kantonalverband < Group
   end
 
   class Redaktor < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Revisor < ::Role
@@ -126,7 +126,7 @@ class Group::Kantonalverband < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class Spezialfunktion < ::Role

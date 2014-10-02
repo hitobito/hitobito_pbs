@@ -65,7 +65,7 @@ class Group::Bund < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_full]
+    self.permissions = [:layer_and_below_full]
   end
 
   class Beisitz < ::Role
@@ -73,7 +73,7 @@ class Group::Bund < Group
   end
 
   class Coach < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Ehrenmitglied < ::Role
@@ -82,7 +82,7 @@ class Group::Bund < Group
   end
 
   class Geschaeftsleitung < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class GrossanlassCoach < ::Role
@@ -98,7 +98,7 @@ class Group::Bund < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Kontaktperson < ::Role
@@ -135,7 +135,7 @@ class Group::Bund < Group
   end
 
   class MitarbeiterGs < ::Role
-    self.permissions = [:layer_full, :contact_data, :admin]
+    self.permissions = [:layer_and_below_full, :contact_data, :admin]
   end
 
   class MitgliedKrisenteam < ::Role
@@ -156,7 +156,7 @@ class Group::Bund < Group
   end
 
   class Redaktor < ::Role
-    self.permissions = [:layer_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Revisor < ::Role
@@ -164,7 +164,7 @@ class Group::Bund < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data]
   end
 
   class Spezialfunktion < ::Role
