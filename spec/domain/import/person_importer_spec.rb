@@ -10,9 +10,7 @@ describe Import::PersonImporter do
   include CsvImportMacros
 
   let(:importer)  do
-    Import::PersonImporter.new(group: groups(:schekka),
-                               role_type: Group::Abteilung::Sekretariat,
-                               data: data)
+    Import::PersonImporter.new(data, groups(:schekka), Group::Abteilung::Sekretariat)
   end
   subject { importer }
 

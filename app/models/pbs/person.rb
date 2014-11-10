@@ -72,6 +72,8 @@ module Pbs::Person
               timeliness: { type: :date, allow_blank: true }
 
     alias_method_chain :full_name, :title
+
+    i18n_boolean_setter :brother_and_sisters
   end
 
   def salutation_label

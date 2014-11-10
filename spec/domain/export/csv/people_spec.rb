@@ -34,7 +34,7 @@ describe Export::Csv::People do
         its(['Nachname']) { should eq person.last_name }
         its(['Haupt-E-Mail']) { should eq person.email }
         its(['Ort']) { should eq person.town }
-        its(['Geschlecht']) { should eq person.gender }
+        its(['Geschlecht']) { should eq person.gender_label }
         its(['Rollen']) { should eq 'Mitarbeiter GS Pfadibewegung Schweiz' }
         its(['Titel']) { should eq 'Dr.' }
         its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
