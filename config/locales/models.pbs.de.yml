@@ -532,6 +532,7 @@ de:
       group/biber/biber:
         one: Biber
         long: Biber
+        description:
 
       group/woelfe/einheitsleitung:
         one: Einheitsleiter
@@ -542,9 +543,14 @@ de:
       group/woelfe/adressverwaltung:
         one: Adressverwalter
         description:
+      group/woelfe/leitwolf:
+        one: Leitwolf
+        long: Leitwolf
+        description:
       group/woelfe/wolf:
         one: Wolf
         long: Wolf
+        description:
 
       group/pfadi/einheitsleitung:
         one: Einheitsleiter
@@ -717,4 +723,3 @@ de:
               on_or_before: muss in der Vergangenheit liegen.
             deleted_at:
               after: muss nach "Von" liegen.
-

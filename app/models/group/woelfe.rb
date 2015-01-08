@@ -54,6 +54,11 @@ class Group::Woelfe < Group
     self.permissions = [:group_full]
   end
 
+  class Leitwolf < ::Role
+    self.permissions = []
+    self.visible_from_above = false
+  end
+
   class Wolf < ::Role
     self.permissions = []
     self.visible_from_above = false
@@ -62,6 +67,7 @@ class Group::Woelfe < Group
   roles Einheitsleitung,
         Mitleitung,
         Adressverwaltung,
+        Leitwolf,
         Wolf
 
 end
