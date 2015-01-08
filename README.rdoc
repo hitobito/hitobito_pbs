@@ -185,6 +185,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
     * Adressverwalter: [:group_full]
+    * Leitwolf: []
     * Wolf: []
   * Pfadi
     * Einheitsleiter: [:layer_and_below_read]
