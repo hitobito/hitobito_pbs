@@ -70,7 +70,6 @@ describe Ability do
       should be_able_to(:delete_member_counts, abteilung)
     end
 
-
     it 'may show population' do
       should be_able_to(:show_population, abteilung)
     end

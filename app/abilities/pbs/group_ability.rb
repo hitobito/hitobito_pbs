@@ -20,15 +20,19 @@ module Pbs::GroupAbility
 
       permission(:layer_and_below_full).
         may(:remind_census, :update_member_counts, :delete_member_counts).
-        in_same_layer_or_below_if_kalei_or_gs
+        in_same_layer_or_below_if_leader
     end
   end
 
-  def in_same_layer_or_below_if_kalei_or_gs
+  def in_same_layer_or_below_if_leader
     in_same_layer_or_below &&
     user.roles.any? do |r|
+      r.kind_of?(Group::Bund::MitarbeiterGs) ||
+      r.kind_of?(Group::Bund::Sekretariat) ||
       r.kind_of?(Group::Kantonalverband::Kantonsleitung) ||
-      r.kind_of?(Group::Bund::MitarbeiterGs)
+      r.kind_of?(Group::Kantonalverband::Sekretariat) ||
+      r.kind_of?(Group::Region::Regionalleitung) ||
+      r.kind_of?(Group::Region::Sekretariat)
     end
   end
 
