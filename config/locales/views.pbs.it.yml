@@ -37,6 +37,8 @@ it:
     edit:
       title: aggiornare il numero dei membri per il %{year}
   people:
+    fields:
+      no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
     fields_pbs:
       non_automatic_field: Questo non è un campo automatico e deve essere aggiornato manualmente.
       in_abteilung: (in sezione)
@@ -49,3 +51,11 @@ it:
         al momento non c''è nessun annuncio di organico in sospeso.'
       please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare l''organico della tua sezione con "confermare l''organico"'
       missing_gender_information: Per poter confermare l'organico, a tutti i membri deve essere assegnato il sesso.
+  roles:
+    fields_pbs:
+      notification: notifica
+      notification_hint: Le persone esistenti verranno informati per email in caso di cambiamenti, se potrai considerare più dati personali
+  devise:
+    sessions:
+      new:
+        usage_advise: I dati della banca dati degli attivi possono essere utilizzati unicamente in un contesto di attività scout, non possono ad esempio essere inoltrate a terzi o ad altre organizzazioni. L'elaborazione e l'utilizzo devono avvenire in buona fede e in modo proporzionato.

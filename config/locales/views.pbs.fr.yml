@@ -2,24 +2,24 @@ fr:
   dummy: dummy
   groups:
     tabs:
-      population: effectifs
-      statistic: statistique
+      population: Effectifs
+      statistic: Statistiques
   censuses:
     form:
-      title: saisir une nouvelle déclaration des effectifs
+      title: Saisir une nouvelle déclaration des effectifs
       frozen_once_gathered: Une fois saisie, la déclaration des effectifs ne peut plus être modifiée.
   census_evaluation:
-    total: total
+    total: Total
     base:
       index:
         no_data_for_this_year: Il n'y a pas de données disponibles pour cette année.
       infos:
         census_evaluation: Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
-        census_evaluation_active: Les déclarations des effectifs actuelles pour l'année %{year} peuvent être saisies dès le %{start_at}.
+        census_evaluation_active: Les déclarations des effectifs actuels pour l'année %{year} peuvent être saisies dès le %{start_at}.
         census_evaluation_reference_date: La date limite est le %{finish_at}
     abteilung:
       actions_index:
-        create_population_data: Créer la liste des effectifs actuelle
+        create_population_data: Créer la liste des effectifs actuels
     bund:
       actions_index:
         request_population_data: Demander des nouvelles déclarations des effectifs
@@ -27,7 +27,7 @@ fr:
         abteilungen_confirmed: Groupes confirmés
     kantonalverband:
       total_actions:
-        remind: rappel
+        remind: Rappel
   census_evaluation/kantonalverband:
     email_sent: Un courriel de rappel a été envoyé à %{abteilung}
   member_counts:
@@ -37,13 +37,23 @@ fr:
     edit:
       title: Editer les effectifs %{year}
   people:
+    fields:
+      no_sensitive_information: Ne pas saisir de données personnelles sensibles dans ce champ.
     fields_pbs:
       non_automatic_field: Ceci n'est pas un champ automatique et doit être adapté manuellement.
       in_abteilung: (dans le groupe)
   population:
     index:
-      confirm_census_data: confirmer les effectifs
-      current_census_data: effectifs actuels
+      confirm_census_data: Confirmer les effectifs
+      current_census_data: Effectifs actuels
       no_census_data_requested: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
       please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
       missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
+  roles:
+    fields_pbs:
+      notification: notification
+      notification_hint: Les personnes existantes vont être informées par courriel, du moment que tu peux accéder à plus de données personnelles.
+  devise:
+    sessions:
+      new:
+        usage_advise: Les données de la base de données de membres ne peuvent être utilisées qu'en lien avec des activités scoutes. Par exemple, il est interdit de les transmettre à des tiers ou à d'autres organisations. Le traitement et l'utilisation des données sont soumises aux règles de la bonne foi et doivent être proportionnés.

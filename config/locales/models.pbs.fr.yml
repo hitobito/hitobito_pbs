@@ -5,169 +5,169 @@ fr:
         one: Groupe
         other: Groupes
       group/abteilungs_gremium:
-        one: commission
-        other: commissions
-        long: commission de groupe
+        one: Commission
+        other: Commissions
+        long: Commission de groupe
       group/abteilungs_rover:
-        one: routier
-        other: routiers
-        long: routier groupe
+        one: Routier
+        other: Routiers
+        long: Routier groupe
       group/biber:
-        one: castor
-        other: castors
-      group/bund: niveau fédéral
+        one: Castor
+        other: Castors
+      group/bund: Niveau fédéral
       group/bundes_gremium:
-        one: commission
-        other: commissions
-        long: commission fédérale
+        one: Commission
+        other: Commissions
+        long: Commission fédérale
       group/elternrat:
-        one: comité des parents
-        other: comités des parents
+        one: Comité des parents
+        other: Comités des parents
       group/gremium:
-        one: commission
-        other: commissions
+        one: Commission
+        other: Commissions
       group/kantonalverband:
-        one: association cantonale
-        other: associations cantonales
+        one: Association cantonale
+        other: Associations cantonales
       group/kantonales_gremium:
-        one: commission
-        other: commissions
-        long: commission cantonale
+        one: Commission
+        other: Commissions
+        long: Commission cantonale
       group/pfadi:
-        one: éclaireur
-        other: éclaireurs
+        one: Eclaireur
+        other: Eclaireurs
       group/pio:
-        one: pico
-        other: picos
+        one: Pico
+        other: Picos
       group/pta:
         one: SMT
         other: SMTs
       group/region:
-        one: région
-        other: régions
+        one: Région
+        other: Régions
       group/regionales_gremium:
-        one: commission
-        other: commissions
-        long: commission régionale
+        one: Commission
+        other: Commissions
+        long: Commission régionale
       group/regionale_rover:
-        one: routier
-        other: routiers
-        long: routiers régionaux
+        one: Routier
+        other: Routiers
+        long: Routiers régionaux
       group/rover:
-        one: routier
-        other: routiers
+        one: Routier
+        other: Routiers
       group/woelfe:
-        one: louveteau
-        other: louveteaux
+        one: Louveteau
+        other: Louveteaux
       group/bund/mitarbeiter_gs:
-        one: collaborateur du SG
+        one: Collaborateur du SG
       group/bund/sekretariat:
-        one: secrétariat
+        one: Secrétariat
       group/bund/adressverwaltung:
-        one: administrateur/-trice des adresses
+        one: Administrateur/-trice des adresses
         description: Administre les adresses.
       group/bund/praesidium:
-        one: président
+        one: Président
       group/bund/vize_praesidium:
-        one: vice-président
+        one: Cice-président
       group/bund/praesidium_apv:
-        one: président de l'AdA
+        one: Président de l'AdA
       group/bund/geschaeftsleitung:
-        one: secrétaire général
+        one: Secrétaire général
       group/bund/mitarbeiter:
-        one: collaborateur
+        one: Collaborateur
       group/bund/vertretung_pbs:
-        one: représentant du MSdS
+        one: Représentant du MSdS
       group/bund/beisitz:
-        one: assesseur
+        one: Assesseur
       group/bund/kassier:
-        one: trésorier
+        one: Trésorier
       group/bund/revisor:
-        one: réviseur aux comptes
+        one: Réviseur aux comptes
       group/bund/redaktor:
-        one: rédacteur
+        one: Rédacteur
       group/bund/webmaster:
-        one: webmestre
+        one: Webmaster
       group/bund/mediensprecher:
-        one: porte-parole
+        one: Porte-parole
       group/bund/uebersetzer:
-        one: traducteur
+        one: Traducteur
       group/bund/mitglied_krisenteam:
-        one: membre cellule de crise
+        one: Membre cellule de crise
       group/bund/coach:
-        one: coach
+        one: Coach
       group/bund/grossanlass_coach:
-        one: coach grandes manifestations
+        one: Coach grandes manifestations
       group/bund/leitungskursbetreuung:
-        one: conseiller à la formation
+        one: Conseiller à la formation
       group/bund/leitung_kernaufgabe_ausbildung:
-        one: responsable tâche essentielle formation
+        one: Responsable tâche essentielle formation
       group/bund/leitung_kernaufgabe_kommunikation:
-        one: responsable tâche essentielle communication
+        one: Responsable tâche essentielle communication
       group/bund/leitung_kernaufgabe_programm:
-        one: responsable tâche essentielle programme
+        one: Responsable tâche essentielle programme
       group/bund/leitung_kernaufgabe_support:
-        one: responsable tâche essentielle support
+        one: Responsable tâche essentielle support
       group/bund/verantwortung_biberstufe:
-        one: responsable branche Castors
+        one: Responsable branche Castors
       group/bund/verantwortung_wolfstufe:
-        one: responsable branche Louveteaux
+        one: Responsable branche Louveteaux
       group/bund/verantwortung_pfadistufe:
-        one: responsable branche Eclais
+        one: Responsable branche Eclais
       group/bund/verantwortung_piostufe:
-        one: responsable branche Picos
+        one: Responsable branche Picos
       group/bund/verantwortung_roverstufe:
-        one: responsable branche Route
+        one: Responsable branche Route
       group/bund/verantwortung_pfadi_trotz_allem:
-        one: responsable Scout Malgré Tout
+        one: Responsable Scout Malgré Tout
       group/bund/verantwortung_integration:
-        one: responsable intégration
+        one: Responsable intégration
       group/bund/verantwortung_lagermeldung:
-        one: responsable annonce de camp
+        one: Responsable annonce de camp
       group/bund/verantwortung_pr:
-        one: responsable relations publiques
+        one: Responsable relations publiques
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: responsable prévention des abus sexuels
+        one: Responsable prévention des abus sexuels
       group/bund/international_commissioner_ic_wagggs:
-        one: commissaire internationale AMGE
+        one: Commissaire internationale AMGE
       group/bund/international_commissioner_ic_wosm:
-        one: commissaire international OMMS
+        one: Commissaire international OMMS
       group/bund/stv_ic_programme_wagggs:
-        one: commissaire internationale adjointe au programme AMGE
+        one: Commissaire internationale adjointe au programme AMGE
       group/bund/stv_ic_programme_wosm:
-        one: commissaire international adjoint au programme OMMS
+        one: Commissaire international adjoint au programme OMMS
       group/bund/spezialfunktion:
-        one: fonction spéciale
+        one: Fonction spéciale
       group/bund/ehrenmitglied:
-        one: membre d'honneur
+        one: Membre d'honneur
       group/bund/passivmitglied:
-        one: membre passif
+        one: Membre passif
       group/bund/kontaktperson:
-        one: ' personne de contact'
+        one: Personne de contact
       group/kantonalverband/kantonsleitung:
-        one: responsable cantonal
+        one: Responsable cantonal
       group/kantonalverband/sekretariat:
-        one: secrétariat
+        one: Secrétariat
       group/kantonalverband/adressverwaltung:
-        one: administrateur/-trice des adresses
+        one: Administrateur/-trice des adresses
       group/kantonalverband/praesidium:
-        one: président
+        one: Président
       group/kantonalverband/vize_praesidium:
-        one: vice-président
+        one: Vice-président
       group/kantonalverband/praesidium_apv:
-        one: président de l'AdA
+        one: Président de l'AdA
       group/kantonalverband/mitarbeiter:
-        one: collaborateur
+        one: Collaborateur
       group/kantonalverband/beisitz:
-        one: assesseur
+        one: Assesseur
       group/kantonalverband/kassier:
-        one: trésorier
+        one: Trésorier
       group/kantonalverband/revisor:
-        one: réviseur aux comptes
+        one: Réviseur aux comptes
       group/kantonalverband/redaktor:
         one: rédacteur
       group/kantonalverband/webmaster:
-        one: webmestre
+        one: Webmaster
       group/kantonalverband/mediensprecher:
         one: porte-parole
       group/kantonalverband/uebersetzer:
@@ -249,266 +249,273 @@ fr:
       group/region/revisor:
         one: réviseur aux comptes
       group/region/redaktor:
-        one: rédacteur
+        one: Rédacteur
       group/region/webmaster:
-        one: webmestre
+        one: Webmaster
       group/region/mediensprecher:
-        one: porte-parole
+        one: Porte-parole
       group/region/mitglied_krisenteam:
-        one: membre cellule de crise
+        one: Membre cellule de crise
       group/region/coach:
-        one: coach
+        one: Coach
       group/region/leitungskursbetreuung:
-        one: conseiller à la formation
+        one: Conseiller à la formation
       group/region/verantwortung_biberstufe:
-        one: responsable branche Castors
+        one: Responsable branche Castors
       group/region/verantwortung_wolfstufe:
-        one: responsable branche Louveteaux
+        one: Responsable branche Louveteaux
       group/region/verantwortung_pfadistufe:
-        one: responsable branche Eclais
+        one: Responsable branche Eclais
       group/region/verantwortung_piostufe:
-        one: responsable branche Picos
+        one: Responsable branche Picos
       group/region/verantwortung_roverstufe:
-        one: responsable branche Route
+        one: Responsable branche Route
       group/region/verantwortung_pfadi_trotz_allem:
-        one: responsable Scout Malgré Tout
+        one: Responsable Scout Malgré Tout
       group/region/verantwortung_abteilungen:
-        one: responsable groupes
+        one: Responsable groupes
       group/region/verantwortung_animation_spirituelle:
-        one: responsable animation spirituelle
+        one: Responsable animation spirituelle
       group/region/verantwortung_ausbildung:
-        one: responsable formation
+        one: Responsable formation
       group/region/verantwortung_betreuung:
-        one: responsable encadrement
+        one: Responsable encadrement
       group/region/verantwortung_integration:
-        one: responsable intégration
+        one: Responsable intégration
       group/region/verantwortung_internationales:
-        one: responsable international
+        one: Responsable international
       group/region/verantwortung_suchtpraeventionsprogramm:
-        one: responsable du programme cantonal de prévention des dépendances
+        one: Responsable du programme cantonal de prévention des dépendances
       group/region/verantwortung_krisenteam:
-        one: responsable cellule de crise
+        one: Responsable cellule de crise
       group/region/verantwortung_lagermeldung:
-        one: responsable annonces de camp
+        one: Responsable annonces de camp
       group/region/verantwortung_lagerplaetze:
-        one: responsable terrains de camp
+        one: Responsable terrains de camp
       group/region/verantwortung_materialverkaufsstelle:
-        one: responsable économat scout
+        one: Responsable économat scout
       group/region/verantwortung_pr:
-        one: responsable relations publiques
+        one: Responsable relations publiques
       group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: responsable prévention des abus sexuels
+        one: Responsable prévention des abus sexuels
       group/region/verantwortung_programm:
-        one: responsable du programme
+        one: Responsable du programme
       group/region/spezialfunktion:
-        one: fonction spéciale
+        one: Fonction spéciale
       group/region/ehrenmitglied:
-        one: membre d'honneur
+        one: Membre d'honneur
       group/region/passivmitglied:
-        one: membre passif
+        one: Membre passif
       group/abteilung/abteilungsleitung:
-        one: responsable de groupe
+        one: Responsable de groupe
       group/abteilung/abteilungsleitung_stv:
-        one: responsable de groupe adjoint
+        one: Responsable de groupe adjoint
       group/abteilung/sekretariat:
-        one: secrétariat
+        one: Secrétariat
       group/abteilung/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/abteilung/praesidium:
-        one: président
+        one: Président
       group/abteilung/vize_praesidium:
-        one: vice-président
+        one: Vice-président
       group/abteilung/praesidium_apv:
-        one: président de l'AdA
+        one: Président de l'AdA
       group/abteilung/praeses:
-        one: aumônier
+        one: Aumônier
       group/abteilung/beisitz:
-        one: assesseur
+        one: Assesseur
       group/abteilung/stufenleitung_biber:
-        one: responsable de branche Castors
+        one: Responsable de branche Castors
       group/abteilung/stufenleitung_woelfe:
-        one: responsable de branche Louveteaux
+        one: Responsable de branche Louveteaux
       group/abteilung/stufenleitung_pfadi:
-        one: responsable de branche Eclais
+        one: Responsable de branche Eclais
       group/abteilung/stufenleitung_pio:
-        one: responsable de branche Picos
+        one: Responsable de branche Picos
       group/abteilung/stufenleitung_rover:
-        one: responsable de branche Route
+        one: Responsable de branche Route
       group/abteilung/stufenleitung_pta:
-        one: responsable de branche SMT
+        one: Responsable de branche SMT
       group/abteilung/kassier:
-        one: trésorier
+        one: Trésorier
       group/abteilung/revisor:
-        one: réviseur aux comptes
+        one: Réviseur aux comptes
       group/abteilung/redaktor:
-        one: rédacteur
+        one: Rédacteur
       group/abteilung/webmaster:
-        one: webmestre
+        one: Webmaster
       group/abteilung/coach:
-        one: coach
+        one: Coach
       group/abteilung/verantwortung_materialverkaufsstelle:
-        one: responsable économat scout
+        one: Responsable économat scout
       group/abteilung/verantwortung_pfadi_trotz_allem:
-        one: responsable Scout Malgré Tout
+        one: Responsable Scout Malgré Tout
       group/abteilung/verantwortung_pr:
-        one: responsable relations publiques
+        one: Responsable relations publiques
       group/abteilung/spezialfunktion:
-        one: fonction spéciale
+        one: Fonction spéciale
       group/abteilung/ehrenmitglied:
-        one: membre d'honneur
+        one: Membre d'honneur
       group/abteilung/passivmitglied:
-        one: membre passif
+        one: Membre passif
       group/biber/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/biber/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/biber/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/biber/biber:
-        one: castor
-        long: castor
+        one: Castor
+        long: Castor
       group/woelfe/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/woelfe/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/woelfe/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
+      group/woelfe/leitwolf:
+        one: Sizenier/Sizenière
+        long: Sizenier/Sizenière
       group/woelfe/wolf:
-        one: louveteau
-        long: louveteau
+        one: Louveteau
+        long: Louveteau
       group/pfadi/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/pfadi/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/pfadi/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/pfadi/leitpfadi:
-        one: responsable de patrouille
-        long: responsable de patrouille
+        one: Responsable de patrouille
+        long: Responsable de patrouille
       group/pfadi/pfadi:
-        one: écaireur
-        long: éclaireur
+        one: Eclaireur
+        long: Eclaireur
       group/pio/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/pio/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/pio/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/pio/pio:
-        one: pico
-        long: pico
+        one: Pico
+        long: Pico
       group/rover/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/rover/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/rover/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/rover/rover:
-        one: routier
-        long: routier
+        one: Routier
+        long: Routier
       group/pta/einheitsleitung:
-        one: responsable d'unité
+        one: Responsable d'unité
       group/pta/mitleitung:
-        one: responsable auxiliaire
+        one: Responsable adjoint
       group/pta/adressverwaltung:
-        one: administrateur des adresses
+        one: Administrateur des adresses
       group/pta/mitglied:
-        one: membre
+        one: Membre
       group/elternrat/praesidium:
-        one: président
+        one: Président
       group/elternrat/mitglied:
-        one: membre
+        one: Membre
       group/gremium/leitung:
-        one: responsable
+        one: Responsable
       group/gremium/mitglied:
-        one: membre
+        one: Membre
       census:
         one: période couverte par l'annonce des effectifs
-        other: périodes couvertes par une annonce des effectifs
+        other: Périodes couvertes par une annonce des effectifs
       salutation:
-        one: formule de politesse
-        other: formules de politesse
+        one: Formule de politesse
+        other: Formules de politesse
         available:
           lieber_pfadiname:
-            label: cher/chère [totem]
+            label: Cher/Chère [totem]
             value:
-              m: cher %{nickname}
+              m: Cher %{nickname}
               w: Chère %{nickname}
-              other: Cher/chère %{nickname}
+              other: Cher/Chère %{nickname}
           lieber_vorname:
-            label: cher/chère [prénom]
+            label: Cher/Chère [prénom]
             value:
-              m: cher %{first_name}
+              m: Cher %{first_name}
               w: Chère  %{first_name}
-              other: Cher/chère %{first_name}
+              other: Cher/Chère %{first_name}
           lieber_titel_nachname:
-            label: chère Madame/cher Monsieur [Titel] [Nachname]
+            label: Chère Madame/Cher Monsieur [Titel] [Nachname]
             value:
               m: Cher Monsieur %{title_last_name}
               w: Chère Madame %{title_last_name}
-              other: Cher/chère %{title_last_name)
+              other: Cher/Chère %{title_last_name)
           sehr_geehrter_titel_nachname:
-            label: chère Madame / cher Monsieur [Titel] [Nachname]
+            label: Chère Madame / Cher Monsieur [Titel] [Nachname]
             value:
               m: Cher Monsieur %{title_last_name}
               w: Chère Madame %{title_last_name}
-              other: Cher/chère %{title_last_name}
+              other: Cher/Chère %{title_last_name}
     attributes:
       person:
-        nickname: totem
-        pbs_number: identifiant personnel MSdS
-        salutation: formule de politesse
-        salutation_value: formule de politesse
-        title: titre
-        grade_of_school: classe scolaire
-        entry_date: adhérent depuis
-        leaving_date: date de départ
-        j_s_number: identifiant J+S
-        correspondence_language: langue de correspondance
-        brother_and_sisters: fratrie
+        nickname: Totem
+        pbs_number: N° personnel MSdS
+        salutation: Formule de politesse
+        salutation_value: Formule de politesse
+        title: Titre
+        grade_of_school: Classe scolaire
+        entry_date: Membre depuis
+        leaving_date: Date de départ
+        j_s_number: N° personnel J+S
+        correspondence_language: Langue de correspondance
+        brother_and_sisters: Frères et soeurs
+        relations_to_tails: fratrie
       group:
         pta: SMT
         vkp: ASC
-        pbs_material_insurance: assurance matériel de camp MSdS
-        website: site internet
-        pbs_shortname: abbréviation MSdS
-        bank_account: référence bancaire  / postale
-        description: description
+        pbs_material_insurance: Assurance matériel de camp MSdS
+        website: Site internet
+        pbs_shortname: Abréviation MSdS
+        bank_account: Référence bancaire  / postale
+        description: Description
+      people_relation:
+        kinds:
+          sibling: fratrie
       census:
-        year: année
-        start_at: à partir de
-        finish_at: jour fixé
+        year: Année
+        start_at: A partir de
+        finish_at: Jour fixé
       member_count:
-        leiter: responsables
-        leiter_m: responsables masc.
-        leiter_f: responsables fém.
-        biber: castor
-        biber_m: castor masc.
-        biber_f: castor fém.
-        woelfe: louveteaux
-        woelfe_m: louveteaux masc.
-        woelfe_f: louvettes
-        pfadis: éclaireurs
-        pfadis_m: éclaireurs masc.
-        pfadis_f: éclaireurs fém.
-        pios: picos
-        pios_m: picos masc.
-        pios_f: picos fém.
-        rover: routiers
-        rover_m: routiers masc.
-        rover_f: routiers fém.
+        leiter: Responsables
+        leiter_m: Responsables masc.
+        leiter_f: Responsables fém.
+        biber: Castor
+        biber_m: Castor masc.
+        biber_f: Castor fém.
+        woelfe: Louveteaux
+        woelfe_m: Louveteaux masc.
+        woelfe_f: Louvettes
+        pfadis: Eclaireurs
+        pfadis_m: Eclaireurs masc.
+        pfadis_f: Eclaireurs fém.
+        pios: Picos
+        pios_m: Picos masc.
+        pios_f: Picos fém.
+        rover: Routiers
+        rover_m: Routiers masc.
+        rover_f: Routiers fém.
         pta: SMT
         pta_m: SMT masc.
         pta_f: SMT fém.
       role:
-        dates: dates
-        created_at: du
-        deleted_at: au
+        dates: Dates
+        created_at: Du
+        deleted_at: Au
     errors:
       models:
         role:
           attributes:
             created_at:
-              on_or_before: doit être antérieur à la date du jour.
+              on_or_before: Doit être antérieur à la date du jour.
             deleted_at:
-              after: doit être postérieur à la date de début.
+              after: Doit être ultérieur à la date de début.

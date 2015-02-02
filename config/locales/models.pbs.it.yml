@@ -5,16 +5,8 @@ it:
         one: sezione
         other: sezioni
       group/abteilungs_gremium:
-        one: 'commissione
-
-          comitato
-
-          consiglio'
-        other: 'commissioni
-
-          comitati
-
-          consigli'
+        one: commissione
+        other: commissioni
         long: comitato sezionale
       group/abteilungs_rover:
         one: rover
@@ -25,41 +17,21 @@ it:
         other: castori
       group/bund: Confederazione
       group/bundes_gremium:
-        one: 'commissione
-
-          comitato
-
-          consiglio'
-        other: 'commissioni
-
-          comitati
-
-          consigli'
+        one: commissione
+        other: commissioni
         long: comitato federale
       group/elternrat:
         one: consiglio dei genitori
         other: consigli dei genitori
       group/gremium:
-        one: 'comissione
-
-          comitato'
-        other: 'commissioni
-
-          comitati'
+        one: comissione
+        other: commissioni
       group/kantonalverband:
         one: associazione cantonale
         other: associazioni cantonali
       group/kantonales_gremium:
-        one: 'commissione
-
-          comitato
-
-          consiglio'
-        other: 'commissioni
-
-          comitati
-
-          consigli'
+        one: commissione
+        other: commissioni
         long: comitato cantonale
       group/pfadi:
         one: 'esplo
@@ -94,16 +66,8 @@ it:
         one: zona
         other: zone
       group/regionales_gremium:
-        one: 'commissione
-
-          comitato
-
-          consiglio'
-        other: 'commissioni
-
-          comitati
-
-          consigli'
+        one: commissione
+        other: commissioni
         long: comitato regionale
       group/regionale_rover:
         one: rover
@@ -471,6 +435,9 @@ it:
         one: animatore
       group/woelfe/adressverwaltung:
         one: amministratore degli indirizzi
+      group/woelfe/leitwolf:
+        one: capo sestena
+        long: capo sestena
       group/woelfe/wolf:
         one: 'lupetto
 
@@ -582,12 +549,11 @@ it:
         entry_date: 'data d''entrata
 
           data d''ingresso'
-        leaving_date: 'data d''uscita
-
-          data d''uscita'
+        leaving_date: data d'uscita
         j_s_number: numero personale G+S
         correspondence_language: lingua per la corrispondenza
         brother_and_sisters: fratelli
+        relations_to_tails: fratelli
       group:
         pta: 'Scout ad Ogni Costo
 
@@ -604,6 +570,9 @@ it:
           sigla MSS'
         bank_account: coordinate bancarie/postali
         description: descrizione
+      people_relation:
+        kinds:
+          sibling: fratelli
       census:
         year: anno
         start_at: da
