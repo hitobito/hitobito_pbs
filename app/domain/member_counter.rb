@@ -35,13 +35,14 @@ class MemberCounter
                Group::AbteilungsRover::Mitleitung,
                Group::Pta::Einheitsleitung,
                Group::Pta::Mitleitung],
-      biber:  [Group::Biber::Biber],
-      woelfe: [Group::Woelfe::Wolf],
+      pta:    [Group::Pta::Mitglied],
+      rover:  [Group::AbteilungsRover::Rover],
+      pios:   [Group::Pio::Pio],
       pfadis: [Group::Pfadi::Leitpfadi,
                Group::Pfadi::Pfadi],
-      pios:   [Group::Pio::Pio],
-      rover:  [Group::AbteilungsRover::Rover],
-      pta:    [Group::Pta::Mitglied] }
+      woelfe: [Group::Woelfe::Leitwolf,
+               Group::Woelfe::Wolf],
+      biber:  [Group::Biber::Biber] }
 
   attr_reader :year, :abteilung
 

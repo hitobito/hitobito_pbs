@@ -21,8 +21,9 @@ describe MemberCounter do
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi2, person: rover.person)
     Fabricate(Group::Pfadi::Leitpfadi.name, group: pfadi1, person: Fabricate(:person, gender: 'w', birthday: '1999-01-01'))
     Fabricate(Group::Pfadi::Pfadi.name, group: pfadi1, person: Fabricate(:person, gender: 'm', birthday: '1999-01-01'))
-    Fabricate(Group::Pfadi::Pfadi.name, group: pfadi2, person: Fabricate(:person, gender: 'w', birthday: '1999-02-02'))
+    puecki = Fabricate(Group::Pfadi::Pfadi.name, group: pfadi2, person: Fabricate(:person, gender: 'w', birthday: '1999-02-02'))
     Fabricate(Group::Woelfe::Wolf.name, group: woelfe, person: Fabricate(:person, gender: 'w', birthday: '2002-02-02'))
+    Fabricate(Group::Woelfe::Leitwolf.name, group: woelfe, person: puecki.person)
     # external roles, not counted
     Fabricate(Group::Pfadi::Adressverwaltung.name, group: pfadi2, person: Fabricate(:person, gender: 'm', birthday: '1971-01-01'))
     Fabricate(Group::Abteilung::Webmaster.name, group: abteilung, person: Fabricate(:person, gender: 'w', birthday: '1972-01-01'))
