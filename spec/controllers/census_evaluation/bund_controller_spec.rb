@@ -17,28 +17,28 @@ describe CensusEvaluation::BundController do
   before { sign_in(people(:bulei)) }
 
   describe 'GET index' do
-    before { Date.stub(today: censuses(:two_o_12).finish_at) }
+    before { allow(Date).to receive_messages(today: censuses(:two_o_12).finish_at) }
     before { groups(:schweizerstern).destroy }
 
     before { get :index, id: ch.id }
 
     it 'assigns counts' do
       counts = assigns(:group_counts)
-      counts.keys.should =~ [be.id, zh.id]
-      counts[be.id].total.should == 19
-      counts[zh.id].total.should == 9
+      expect(counts.keys).to match_array([be.id, zh.id])
+      expect(counts[be.id].total).to eq(19)
+      expect(counts[zh.id].total).to eq(9)
     end
 
     it 'assigns total' do
-      assigns(:total).should be_kind_of(MemberCount)
+      expect(assigns(:total)).to be_kind_of(MemberCount)
     end
 
     it 'assigns sub groups' do
-      assigns(:sub_groups).should == [be, vd, zh]
+      expect(assigns(:sub_groups)).to eq([be, vd, zh])
     end
 
     it 'assigns abteilungen' do
-      assigns(:abteilungen).should eq(
+      expect(assigns(:abteilungen)).to eq(
         be.id => { confirmed: 2, total: 3 },
         vd.id => { confirmed: 0, total: 0 },
         zh.id => { confirmed: 1, total: 1 }
@@ -46,7 +46,7 @@ describe CensusEvaluation::BundController do
     end
 
     it 'assigns year' do
-      assigns(:year).should == Census.last.year
+      expect(assigns(:year)).to eq(Census.last.year)
     end
   end
 

@@ -29,8 +29,8 @@ describe GroupMembershipJob do
 
   it 'sends email' do
     subject.perform
-    last_email.should be_present
-    last_email.body.should =~ /Hallo #{recipient.greeting_name}.*#{group.to_s}/
+    expect(last_email).to be_present
+    expect(last_email.body).to match(/Hallo #{recipient.greeting_name}.*#{group.to_s}/)
   end
 
   context 'with locale' do
@@ -44,8 +44,8 @@ describe GroupMembershipJob do
     it 'sends localized email' do
       I18n.locale = :de
       subject.perform
-      last_email.should be_present
-      last_email.body.should =~ /Salut #{recipient.greeting_name}.*#{group.to_s}/
+      expect(last_email).to be_present
+      expect(last_email.body).to match(/Salut #{recipient.greeting_name}.*#{group.to_s}/)
     end
   end
 

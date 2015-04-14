@@ -18,8 +18,8 @@ describe MemberCountsController do
       before { get :edit, group_id: abteilung.id }
 
       it 'assigns counts' do
-        assigns(:member_count).should == member_counts(:schekka)
-        assigns(:group).should == abteilung
+        expect(assigns(:member_count)).to eq(member_counts(:schekka))
+        expect(assigns(:group)).to eq(abteilung)
       end
     end
   end
@@ -31,7 +31,7 @@ describe MemberCountsController do
                       { leiter_f: 3, leiter_m: 1, pfadis_f: '', pfadis_m: '0' }
       end
 
-      it { should redirect_to(census_abteilung_group_path(abteilung, year: 2012)) }
+      it { is_expected.to redirect_to(census_abteilung_group_path(abteilung, year: 2012)) }
 
       it 'saves counts' do
         assert_member_counts(member_counts(:schekka).reload, 3, 1, nil, 0)
@@ -52,8 +52,8 @@ describe MemberCountsController do
       censuses(:two_o_12).destroy
       post :create, group_id: abteilung.id
 
-      should redirect_to(census_abteilung_group_path(abteilung, year: 2011))
-      flash[:notice].should be_present
+      is_expected.to redirect_to(census_abteilung_group_path(abteilung, year: 2011))
+      expect(flash[:notice]).to be_present
     end
 
     it 'should not change anything if counts exist' do
@@ -74,7 +74,7 @@ describe MemberCountsController do
       expect { post :create, group_id: abteilung.id }.to change { MemberCount.count }.by(1)
 
       counts = MemberCount.where(abteilung_id: abteilung.id, year: 2011)
-      counts.should have(1).item
+      expect(counts.size).to eq(1)
 
       assert_member_counts(counts[0], 2, 1, 1, 1)
     end
@@ -86,8 +86,8 @@ describe MemberCountsController do
         sign_in(leiter)
         post :create, group_id: abteilung.id
 
-        should redirect_to(census_abteilung_group_path(abteilung, year: 2011))
-        flash[:notice].should be_present
+        is_expected.to redirect_to(census_abteilung_group_path(abteilung, year: 2011))
+        expect(flash[:notice]).to be_present
       end
     end
 
@@ -108,17 +108,17 @@ describe MemberCountsController do
     it 'handles request with redirect' do
       delete :destroy, group_id: abteilung.id
 
-      should redirect_to(census_abteilung_group_path(abteilung, year: 2012))
-      flash[:notice].should be_present
+      is_expected.to redirect_to(census_abteilung_group_path(abteilung, year: 2012))
+      expect(flash[:notice]).to be_present
     end
   end
 
 
   def assert_member_counts(count, leiter_f, leiter_m, pfadis_f, pfadis_m)
-    count.leiter_f.should == leiter_f
-    count.leiter_m.should == leiter_m
-    count.pfadis_f.should == pfadis_f
-    count.pfadis_m.should == pfadis_m
+    expect(count.leiter_f).to eq(leiter_f)
+    expect(count.leiter_m).to eq(leiter_m)
+    expect(count.pfadis_f).to eq(pfadis_f)
+    expect(count.pfadis_m).to eq(pfadis_m)
   end
 
 end

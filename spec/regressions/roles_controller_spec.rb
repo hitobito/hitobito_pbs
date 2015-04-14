@@ -12,7 +12,7 @@ describe RolesController, type: :controller do
   class << self
     def it_should_set_attrs
       it 'should set params as entry attributes' do
-        entry.created_at.to_date.should eq test_attrs.delete(:created_at).to_date
+        expect(entry.created_at.to_date).to eq test_attrs.delete(:created_at).to_date
       end
     end
   end

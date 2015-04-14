@@ -32,7 +32,7 @@ describe Import::PersonImporter do
       Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: foreign_group, person: person)
 
       expect { importer.import }.to change { Delayed::Job.count }.by(1)
-      Delayed::Job.first.handler.should include('GroupMembershipJob')
+      expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
     end
 
     it 'is not sent on role creation for new person' do

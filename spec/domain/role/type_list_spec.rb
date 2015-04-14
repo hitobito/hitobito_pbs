@@ -15,13 +15,13 @@ describe Role::TypeList do
       [layer, groups.keys]
     end
 
-    all_groups.should == [
+    expect(all_groups).to eq([
       ['Bund', ['Bund', 'Gremium']],
       ['Kantonalverband', ['Kantonalverband', 'Gremium']],
       ['Region', ['Region', 'Rover', 'Gremium']],
       ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio',
                      'Rover', 'PTA', 'Elternrat', 'Gremium']],
-    ]
+    ])
   end
 
 end

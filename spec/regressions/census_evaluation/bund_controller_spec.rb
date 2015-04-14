@@ -24,8 +24,8 @@ describe CensusEvaluation::BundController, type: :controller do
       before { get :index, id: ch.id }
 
       it 'renders correct templates' do
-        should render_template('index')
-        should render_template('_totals')
+        is_expected.to render_template('index')
+        is_expected.to render_template('_totals')
       end
     end
 
@@ -34,8 +34,8 @@ describe CensusEvaluation::BundController, type: :controller do
       before { get :index, id: ch.id }
 
       it 'renders correct templates' do
-        should render_template('index')
-        should render_template('_totals')
+        is_expected.to render_template('index')
+        is_expected.to render_template('_totals')
       end
     end
   end

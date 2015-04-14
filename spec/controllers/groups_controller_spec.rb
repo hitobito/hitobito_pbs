@@ -24,7 +24,7 @@ describe GroupsController do
 
         it 'cannot change superior attributes' do
           perform_request
-          assigns(:group).vkp.should be_false
+          expect(assigns(:group).vkp).to be_falsey
         end
       end
     end
@@ -36,7 +36,7 @@ describe GroupsController do
 
         it 'cannot change superior attributes' do
           perform_request
-          assigns(:group).vkp.should be_false
+          expect(assigns(:group).vkp).to be_falsey
           # expect { perform_request }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
         end
       end

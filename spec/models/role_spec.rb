@@ -29,19 +29,19 @@ describe Role do
     let(:now) { Time.zone.parse('2014-05-03 16:32:21') }
 
     before do
-      Time.zone.stub(now: now)
+      allow(Time.zone).to receive_messages(now: now)
       role.update_column(:created_at, '2014-04-03 12:00:00')
     end
 
 
     context 'are valid if' do
       it 'created_at in the past' do
-        role.should be_valid
+        expect(role).to be_valid
       end
 
       it 'created_at after deleted_at in the past' do
         role.update_column(:deleted_at, '2014-04-03 14:00:00')
-        role.should be_valid
+        expect(role).to be_valid
       end
     end
 
@@ -50,29 +50,29 @@ describe Role do
       [:created_at, :deleted_at].each do |field|
         it "#{field} in future" do
           role.update_column(field, '2014-05-03 17:00:00')
-          role.should_not be_valid
-          role.should have(1).error_on(field)
+          expect(role).not_to be_valid
+          expect(role).to have(1).error_on(field)
         end
       end
 
       it 'created_at after deleted_at' do
         role.update_column(:deleted_at, '2014-04-03 11:00:00')
-        role.should_not be_valid
-        role.should have(1).error_on(:deleted_at)
+        expect(role).not_to be_valid
+        expect(role).to have(1).error_on(:deleted_at)
       end
 
       it 'created_at has illegal format' do
         role.created_at = '303030'
-        role.should_not be_valid
-        role.should have(2).error_on(:created_at)
-        role.created_at.should be_nil
+        expect(role).not_to be_valid
+        expect(role).to have(2).error_on(:created_at)
+        expect(role.created_at).to be_nil
       end
 
       it 'deleted_at has illegal format' do
         role.deleted_at = '303030'
-        role.should_not be_valid
-        role.should have(1).error_on(:deleted_at)
-        role.deleted_at.should be_nil
+        expect(role).not_to be_valid
+        expect(role).to have(1).error_on(:deleted_at)
+        expect(role.deleted_at).to be_nil
       end
     end
   end
@@ -93,7 +93,7 @@ describe Role do
                       person_id: person.id,
                       type: Group::Abteilung::Sekretariat.sti_name)
       expect { role.save! }.to change { Delayed::Job.count }.by(1)
-      Delayed::Job.first.handler.should include('GroupMembershipJob')
+      expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
     end
 
     it 'is not sent on role creation with equal access' do
@@ -133,27 +133,27 @@ describe Role do
     before { person.update_column :primary_group_id, role.group.id }
 
     it 'should be reset if primary role is removed by setting deleted_at' do
-      person.primary_group_id.should eq(role.group.id)
+      expect(person.primary_group_id).to eq(role.group.id)
 
       role.deleted_at = Time.zone.now
       role.save!
 
-      role.should be_destroyed
-      person.primary_group_id.should be_nil
+      expect(role).to be_destroyed
+      expect(person.primary_group_id).to be_nil
     end
 
     it 'should not be reset if secondary role is removed by setting deleted_at' do
       another_role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym,
                                group: groups(:patria), person: person)
 
-      person.primary_group_id.should eq(role.group.id)
+      expect(person.primary_group_id).to eq(role.group.id)
 
       another_role.deleted_at = Time.zone.now
       another_role.save!
 
-      role.should_not be_destroyed
-      another_role.should be_destroyed
-      person.primary_group_id.should eq role.group.id
+      expect(role).not_to be_destroyed
+      expect(another_role).to be_destroyed
+      expect(person.primary_group_id).to eq role.group.id
     end
   end
 

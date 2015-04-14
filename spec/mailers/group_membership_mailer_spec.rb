@@ -30,15 +30,15 @@ describe GroupMembershipMailer do
     subject { mail.body }
 
     it 'renders placeholders' do
-      should =~ /Hallo My/
-      should =~ /AL Schekka hat dich zur Gruppe.*Schekka.*hinzugefügt/
+      is_expected.to match(/Hallo My/)
+      is_expected.to match(/AL Schekka hat dich zur Gruppe.*Schekka.*hinzugefügt/)
     end
   end
 
   context 'with additional emails' do
     it 'does not send to them' do
       Fabricate(:additional_email, contactable: recipient)
-      mail.to.should eq [recipient.email]
+      expect(mail.to).to eq [recipient.email]
     end
   end
 

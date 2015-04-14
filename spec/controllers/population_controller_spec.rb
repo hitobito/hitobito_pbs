@@ -34,7 +34,7 @@ describe PopulationController do
       subject { assigns(:groups) }
 
       it do
-        should == [abteilung,
+        is_expected.to eq([abteilung,
                    groups(:sunnewirbu),
                    groups(:pegasus),
                    groups(:poseidon),
@@ -42,22 +42,22 @@ describe PopulationController do
                    groups(:baereried),
                    groups(:rovers),
                    groups(:elternrat),
-                   groups(:fussballers)]
+                   groups(:fussballers)])
       end
     end
 
     describe 'people by group' do
       subject { assigns(:people_by_group) }
 
-      it { subject[abteilung].collect(&:to_s).should =~ [leader, people(:al_schekka), guide].collect(&:to_s) }
-      it { subject[groups(:pegasus)].collect(&:to_s).should =~ [group_leader, child, people(:child)].collect(&:to_s) }
-      it { subject[groups(:baereried)].should be_nil } # no people in group - not displayed at all
+      it { expect(subject[abteilung].collect(&:to_s)).to contain_exactly(*[leader, people(:al_schekka), guide].collect(&:to_s)) }
+      it { expect(subject[groups(:pegasus)].collect(&:to_s)).to contain_exactly(*[group_leader, child, people(:child)].collect(&:to_s)) }
+      it { expect(subject[groups(:baereried)]).to be_nil } # no people in group - not displayed at all
     end
 
     describe 'complete' do
       subject { assigns(:people_data_complete) }
 
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
   end
 
@@ -69,6 +69,6 @@ describe PopulationController do
 
     subject { assigns(:groups) }
 
-    it { should_not include groups(:poseidon) }
+    it { is_expected.not_to include groups(:poseidon) }
   end
 end

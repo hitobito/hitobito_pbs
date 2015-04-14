@@ -51,7 +51,7 @@ describe MemberCount do
     subject { MemberCount.total_by_abteilungen(2012, be).to_a }
 
     it 'counts totals' do
-      should have(2).items
+      is_expected.to have(2).items
 
       schekka_count = subject.detect { |c| c.abteilung_id == schekka.id }
       assert_member_counts(schekka_count, 2, 3, 4, 3)
@@ -82,7 +82,7 @@ describe MemberCount do
     subject { MemberCount.total_by_kantonalverbaende(2012).to_a }
 
     it 'counts totals' do
-      should have(2).items
+      is_expected.to have(2).items
 
       be_count = subject.detect { |c| c.kantonalverband_id == be.id }
       assert_member_counts(be_count, 3, 5, 5, 6)
@@ -93,10 +93,10 @@ describe MemberCount do
   end
 
   def assert_member_counts(count, leiter_f, leiter_m, pfadis_f, pfadis_m)
-    count.leiter_f.should == leiter_f
-    count.leiter_m.should == leiter_m
-    count.pfadis_f.should == pfadis_f
-    count.pfadis_m.should == pfadis_m
+    expect(count.leiter_f).to eq(leiter_f)
+    expect(count.leiter_m).to eq(leiter_m)
+    expect(count.pfadis_f).to eq(pfadis_f)
+    expect(count.pfadis_m).to eq(pfadis_m)
   end
 
 end

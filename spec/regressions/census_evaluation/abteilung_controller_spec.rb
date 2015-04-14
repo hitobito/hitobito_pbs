@@ -21,8 +21,8 @@ describe CensusEvaluation::AbteilungController, type: :controller do
     before { get :index, id: schekka.id }
 
     it 'renders correct templates' do
-      should render_template('index')
-      should render_template('_totals')
+      is_expected.to render_template('index')
+      is_expected.to render_template('_totals')
     end
   end
 

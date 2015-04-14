@@ -19,39 +19,39 @@ describe Ability do
     let(:role) { Fabricate(Group::Bund::MitarbeiterGs.name.to_sym, group: groups(:bund)) }
 
     it 'may update member counts' do
-      should be_able_to(:update_member_counts, abteilung)
+      is_expected.to be_able_to(:update_member_counts, abteilung)
     end
 
     it 'may create member counts' do
-      should be_able_to(:create_member_counts, abteilung)
+      is_expected.to be_able_to(:create_member_counts, abteilung)
     end
 
     it 'may delete member counts' do
-      should be_able_to(:delete_member_counts, abteilung)
+      is_expected.to be_able_to(:delete_member_counts, abteilung)
     end
 
     it 'may show population' do
-      should be_able_to(:show_population, abteilung)
+      is_expected.to be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
-      should be_able_to(:evaluate_census, abteilung)
+      is_expected.to be_able_to(:evaluate_census, abteilung)
     end
 
     it 'may view census for kantonalverband' do
-      should be_able_to(:evaluate_census, abteilung.kantonalverband)
+      is_expected.to be_able_to(:evaluate_census, abteilung.kantonalverband)
     end
 
     it 'may view census for bund' do
-      should be_able_to(:evaluate_census, group)
+      is_expected.to be_able_to(:evaluate_census, group)
     end
 
     it 'may remind census for kantonalverband' do
-      should be_able_to(:remind_census, abteilung.kantonalverband)
+      is_expected.to be_able_to(:remind_census, abteilung.kantonalverband)
     end
 
     it 'may create Census' do
-      should be_able_to(:create, Census.new)
+      is_expected.to be_able_to(:create, Census.new)
     end
   end
 
@@ -59,62 +59,62 @@ describe Ability do
     let(:role) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)) }
 
     it 'may update member counts' do
-      should be_able_to(:update_member_counts, abteilung)
+      is_expected.to be_able_to(:update_member_counts, abteilung)
     end
 
     it 'may create member counts' do
-      should be_able_to(:create_member_counts, abteilung)
+      is_expected.to be_able_to(:create_member_counts, abteilung)
     end
 
     it 'may delete member counts' do
-      should be_able_to(:delete_member_counts, abteilung)
+      is_expected.to be_able_to(:delete_member_counts, abteilung)
     end
 
     it 'may show population' do
-      should be_able_to(:show_population, abteilung)
+      is_expected.to be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
-      should be_able_to(:evaluate_census, abteilung)
+      is_expected.to be_able_to(:evaluate_census, abteilung)
     end
 
     it 'may view census for kantonalverband' do
-      should be_able_to(:evaluate_census, abteilung.kantonalverband)
+      is_expected.to be_able_to(:evaluate_census, abteilung.kantonalverband)
     end
 
     it 'may view census for bund' do
-      should be_able_to(:evaluate_census, groups(:bund))
+      is_expected.to be_able_to(:evaluate_census, groups(:bund))
     end
 
     it 'may remind census for kantonalverband' do
-      should be_able_to(:remind_census, abteilung.kantonalverband)
+      is_expected.to be_able_to(:remind_census, abteilung.kantonalverband)
     end
 
     it 'may not create Census' do
-      should_not be_able_to(:create, Census.new)
+      is_expected.not_to be_able_to(:create, Census.new)
     end
 
     context 'for other kantonalverband' do
       let(:role) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:zh)) }
 
       it 'may not update member counts' do
-        should_not be_able_to(:update_member_counts, abteilung)
+        is_expected.not_to be_able_to(:update_member_counts, abteilung)
       end
 
       it 'may not delete member counts' do
-        should_not be_able_to(:delete_member_counts, abteilung)
+        is_expected.not_to be_able_to(:delete_member_counts, abteilung)
       end
 
       it 'may not show population' do
-        should_not be_able_to(:show_population, abteilung)
+        is_expected.not_to be_able_to(:show_population, abteilung)
       end
 
       it 'may view census for abteilung' do
-        should be_able_to(:evaluate_census, abteilung)
+        is_expected.to be_able_to(:evaluate_census, abteilung)
       end
 
       it 'may not remind census' do
-        should_not be_able_to(:remind_census, abteilung.kantonalverband)
+        is_expected.not_to be_able_to(:remind_census, abteilung.kantonalverband)
       end
     end
   end
@@ -124,39 +124,39 @@ describe Ability do
     let(:role) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:schekka)) }
 
     it 'may not update member counts' do
-      should_not be_able_to(:update_member_counts, abteilung)
+      is_expected.not_to be_able_to(:update_member_counts, abteilung)
     end
 
     it 'may not delete member counts' do
-      should_not be_able_to(:delete_member_counts, abteilung)
+      is_expected.not_to be_able_to(:delete_member_counts, abteilung)
     end
 
     it 'may create member counts' do
-      should be_able_to(:create_member_counts, abteilung)
+      is_expected.to be_able_to(:create_member_counts, abteilung)
     end
 
     it 'may show population' do
-      should be_able_to(:show_population, abteilung)
+      is_expected.to be_able_to(:show_population, abteilung)
     end
 
     it 'may view census for abteilung' do
-      should be_able_to(:evaluate_census, abteilung)
+      is_expected.to be_able_to(:evaluate_census, abteilung)
     end
 
     it 'may view census for kantonalverband' do
-      should be_able_to(:evaluate_census, abteilung.kantonalverband)
+      is_expected.to be_able_to(:evaluate_census, abteilung.kantonalverband)
     end
 
     it 'may view census for bund' do
-      should be_able_to(:evaluate_census, groups(:bund))
+      is_expected.to be_able_to(:evaluate_census, groups(:bund))
     end
 
     it 'may not remind census for kantonalverband' do
-      should_not be_able_to(:remind_census, abteilung.kantonalverband)
+      is_expected.not_to be_able_to(:remind_census, abteilung.kantonalverband)
     end
 
     it 'may not create Census' do
-      should_not be_able_to(:create, Census.new)
+      is_expected.not_to be_able_to(:create, Census.new)
     end
   end
 end

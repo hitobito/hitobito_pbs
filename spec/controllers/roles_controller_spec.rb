@@ -27,7 +27,7 @@ describe RolesController do
         role = roles(:al_schekka)
         role.update_attributes!(created_at: 100.days.ago, deleted_at: 5.days.ago)
         get :edit, group_id: role.group_id, id: role.id
-        should render_template('edit')
+        is_expected.to render_template('edit')
       end
     end
   end
@@ -42,15 +42,15 @@ describe RolesController do
       it 'creates role with dates set' do
         expect { post :create, group_id: group.id, role: role_params }.to change { Role.with_deleted.count }.by(1)
 
-        role.created_at.to_date.should eq Date.new(2014, 3, 4)
-        role.deleted_at.to_date.should eq Date.new(2014, 3, 5)
-        should redirect_to(group_people_path(group.id))
+        expect(role.created_at.to_date).to eq Date.new(2014, 3, 4)
+        expect(role.deleted_at.to_date).to eq Date.new(2014, 3, 5)
+        is_expected.to redirect_to(group_people_path(group.id))
       end
 
       it 'redirects' do
         expect { post :create, group_id: group.id, role: role_params }.to change { Role.with_deleted.count }.by(1)
-        flash[:notice].should eq 'Rolle <i>Mitarbeiter GS</i> für <i>AL Schekka</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
-        should redirect_to(group_people_path(group.id))
+        expect(flash[:notice]).to eq 'Rolle <i>Mitarbeiter GS</i> für <i>AL Schekka</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
+        is_expected.to redirect_to(group_people_path(group.id))
       end
     end
 
@@ -62,7 +62,7 @@ describe RolesController do
 
       it 'does not create role' do
         expect { post :create, group_id: group.id, role: role_params }.not_to change { Role.with_deleted.count }
-        role.should have(1).error_on(:deleted_at)
+        expect(role).to have(1).error_on(:deleted_at)
       end
     end
 
@@ -75,9 +75,9 @@ describe RolesController do
 
       it 'does not create role' do
         expect { post :create, group_id: group.id, role: role_params }.not_to change { Role.with_deleted.count }
-        role.should have(1).error_on(:type)
-        role.should have(1).error_on(:deleted_at)
-        should render_template('crud/new')
+        expect(role).to have(1).error_on(:type)
+        expect(role).to have(1).error_on(:deleted_at)
+        is_expected.to render_template('crud/new')
       end
     end
 
@@ -102,7 +102,7 @@ describe RolesController do
                         type: Group::Abteilung::Sekretariat.sti_name }
         expect { post :create, group_id: home_group.id, role: role_params }.
           to change { Delayed::Job.count }.by(1)
-        Delayed::Job.first.handler.should include('GroupMembershipJob')
+        expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
       end
 
       it 'is not sent on role creation with equal access' do

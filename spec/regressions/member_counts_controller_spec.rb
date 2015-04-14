@@ -19,7 +19,7 @@ describe MemberCountsController, type: :controller do
     before { get :edit, group_id: abteilung.id, year: 2012 }
 
     it 'should render template' do
-      should render_template('edit')
+      is_expected.to render_template('edit')
     end
   end
 

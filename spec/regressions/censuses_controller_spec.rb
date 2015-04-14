@@ -13,7 +13,7 @@ describe CensusesController, type: :controller do
 
   class << self
     def it_should_redirect_to_show
-      it { should redirect_to census_bund_group_path(Group.root) }
+      it { is_expected.to redirect_to census_bund_group_path(Group.root) }
     end
   end
 

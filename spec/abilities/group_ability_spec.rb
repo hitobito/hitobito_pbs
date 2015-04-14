@@ -20,19 +20,19 @@ describe GroupAbility do
 
     context 'in bund' do
       it 'may modify superior attributes' do
-        should be_able_to(:modify_superior, groups(:bund))
+        is_expected.to be_able_to(:modify_superior, groups(:bund))
       end
     end
 
     context 'in kanton' do
       it 'may modify superior attributes' do
-        should be_able_to(:modify_superior, groups(:be))
+        is_expected.to be_able_to(:modify_superior, groups(:be))
       end
     end
 
     context 'in abteilung' do
       it 'may modify superior attributes' do
-        should be_able_to(:modify_superior, groups(:schekka))
+        is_expected.to be_able_to(:modify_superior, groups(:schekka))
       end
     end
   end
@@ -42,13 +42,13 @@ describe GroupAbility do
 
     context 'in kanton' do
       it 'may not modify superior attributes' do
-        should_not be_able_to(:modify_superior, groups(:be))
+        is_expected.not_to be_able_to(:modify_superior, groups(:be))
       end
     end
 
     context 'in abteilung' do
       it 'may not modify superior attributes' do
-        should_not be_able_to(:modify_superior, groups(:schekka))
+        is_expected.not_to be_able_to(:modify_superior, groups(:schekka))
       end
     end
   end

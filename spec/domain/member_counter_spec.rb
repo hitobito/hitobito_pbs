@@ -33,17 +33,17 @@ describe MemberCounter do
   end
 
   it 'abteilung has passive and deleted people as well' do
-    abteilung.people.count.should == 4
-    Person.joins('INNER JOIN roles ON roles.person_id = people.id').
+    expect(abteilung.people.count).to eq(4)
+    expect(Person.joins('INNER JOIN roles ON roles.person_id = people.id').
            where(roles: { group_id: abteilung.id }).
-           count.should == 5
+           count).to eq(5)
   end
 
   context 'instance' do
 
     subject { MemberCounter.new(2011, abteilung) }
 
-    it { should_not be_exists }
+    it { is_expected.not_to be_exists }
 
     its(:kantonalverband) { should == groups(:be) }
 
@@ -54,7 +54,7 @@ describe MemberCounter do
     it 'creates member counts' do
       expect { subject.count! }.to change { MemberCount.count }.by(1)
 
-      should be_exists
+      is_expected.to be_exists
 
       assert_member_counts(leiter_f: 3, leiter_m: 1,
                            pfadis_f: 3, pfadis_m: 1,
@@ -83,17 +83,17 @@ describe MemberCounter do
     subject { MemberCounter.current_counts?(abteilung) }
 
     context 'with counts' do
-      it { should be_true }
+      it { is_expected.to be_truthy }
     end
 
     context 'without counts' do
       before { MemberCount.update_all(year: 2011) }
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
 
     context 'with census' do
       before { Census.destroy_all }
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
   end
 
@@ -101,7 +101,7 @@ describe MemberCounter do
     count = MemberCount.where(abteilung_id: abteilung.id, year: 2011).first
     MemberCount::COUNT_COLUMNS.each do |c|
       expected = fields[c.to_sym] || 0
-      count.send(c).to_i.should be(expected), "#{c} should be #{expected}, was #{count.send(c).to_i}"
+      expect(count.send(c).to_i).to be(expected), "#{c} should be #{expected}, was #{count.send(c).to_i}"
     end
   end
 

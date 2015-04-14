@@ -22,17 +22,17 @@ describe CensusEvaluation::KantonalverbandController do
 
     it 'assigns counts' do
       counts = assigns(:group_counts)
-      counts.keys.should =~ [schekka.id, berchtold.id]
-      counts[schekka.id].total.should == 12
-      counts[berchtold.id].total.should == 7
+      expect(counts.keys).to match_array([schekka.id, berchtold.id])
+      expect(counts[schekka.id].total).to eq(12)
+      expect(counts[berchtold.id].total).to eq(7)
     end
 
     it 'assigns total' do
-      assigns(:total).should be_kind_of(MemberCount)
+      expect(assigns(:total)).to be_kind_of(MemberCount)
     end
 
     it 'assigns sub groups' do
-      assigns(:sub_groups).should == [berchtold, patria, schekka, groups(:schweizerstern)]
+      expect(assigns(:sub_groups)).to eq([berchtold, patria, schekka, groups(:schweizerstern)])
     end
   end
 

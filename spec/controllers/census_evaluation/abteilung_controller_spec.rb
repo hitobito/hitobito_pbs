@@ -18,17 +18,17 @@ describe CensusEvaluation::AbteilungController do
     before { get :index, id: abteilung.id }
 
     it 'assigns counts' do
-      assigns(:group_counts).should be_blank
+      expect(assigns(:group_counts)).to be_blank
     end
 
     it 'assigns total' do
       total = assigns(:total)
-      total.should be_kind_of(MemberCount)
-      total.total.should == 12
+      expect(total).to be_kind_of(MemberCount)
+      expect(total.total).to eq(12)
     end
 
     it 'assigns sub groups' do
-      assigns(:sub_groups).should be_blank
+      expect(assigns(:sub_groups)).to be_blank
     end
 
   end
