@@ -17,7 +17,7 @@ module Pbs
           end
 
           def person_attributes_with_title
-            person_attributes_without_title + [:title, :salutation]
+            person_attributes_without_title + [:title, :salutation, :correspondence_language]
           end
         end
       end
