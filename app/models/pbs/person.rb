@@ -56,7 +56,7 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation
+    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language
 
     validates :salutation,
               inclusion: { in: ->(_) { Salutation.available.keys } ,
