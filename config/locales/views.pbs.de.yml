@@ -43,6 +43,13 @@ de:
   census_evaluation/kantonalverband:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
 
+  events:
+    fields_pbs:
+      language_de: Deutsch
+      language_fr: Französisch
+      language_it: Italienisch
+      language_en: Englisch
+
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.
     updated_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gespeichert.

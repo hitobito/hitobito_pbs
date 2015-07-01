@@ -655,6 +655,10 @@ de:
               other: Sehr geehrte(r) %{title_last_name}
 
     attributes:
+      event:
+        course_languages: Kurssprachen
+        express_fee: Expressgebühr
+
       person:
         nickname: Pfadiname
         pbs_number: PBS Personennummer
