@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
 
   # Do not specify test files due to too long file names
   # s.test_files  = Dir['{test,spec}/**/*']
+  s.add_dependency 'hitobito_youth'
   # rubocop:enable SingleSpaceBeforeFirstArg
 end

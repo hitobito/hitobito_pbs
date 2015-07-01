@@ -19,5 +19,5 @@ eval File.read(File.expand_path('Gemfile', ENV['APP_ROOT']))
 
 group :development, :test do
   # Explicitly define the path for dependencies on other wagons.
-  # gem 'hitobito_other_wagon', :path => "#{ENV['APP_ROOT']}/vendor/wagons"
+  gem 'hitobito_youth', path: "#{ENV['APP_ROOT']}/../"
 end

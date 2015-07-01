@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require 'wagons'
-# require 'your_wagon_dependencies'
+require 'hitobito_youth'
 require 'hitobito_pbs/wagon'
 
 module HitobitoPbs
