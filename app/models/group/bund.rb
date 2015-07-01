@@ -40,6 +40,7 @@
 class Group::Bund < Group
 
   self.layer = true
+  self.event_types = [Event::Course]
 
   children Group::Kantonalverband,
            Group::BundesGremium

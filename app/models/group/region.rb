@@ -40,6 +40,7 @@
 class Group::Region < Group
 
   self.layer = true
+  self.event_types = [Event::Course]
 
   children Group::Region,
            Group::Abteilung,
