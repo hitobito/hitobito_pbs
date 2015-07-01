@@ -40,6 +40,8 @@
 # Abstract Rover group
 class Group::Rover < Group
 
+  self.event_types = [Event::Course]
+
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
   end

@@ -40,6 +40,8 @@
 
 class Group::AbteilungsGremium < Group::Gremium
 
+  self.event_types = [Event::Course]
+
   children Group::AbteilungsGremium
 
   class Leitung < Group::Gremium::Leitung

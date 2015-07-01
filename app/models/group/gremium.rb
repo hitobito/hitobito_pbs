@@ -40,6 +40,8 @@
 # Abstract Gremium
 class Group::Gremium < Group
 
+  self.event_types = [Event::Course]
+
   class Leitung < ::Role
     self.permissions = [:group_full]
   end

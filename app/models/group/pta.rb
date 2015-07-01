@@ -39,6 +39,8 @@
 #
 class Group::Pta < Group
 
+  self.event_types = [Event::Course]
+
   children Group::Pta,
            Group::AbteilungsGremium
 

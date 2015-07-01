@@ -40,6 +40,8 @@
 #
 class Group::AbteilungsRover < Group::Rover
 
+  self.event_types = [Event::Course]
+
   children Group::AbteilungsRover,
            Group::AbteilungsGremium
 
