@@ -7,10 +7,10 @@
 
 class AddCourseFields < ActiveRecord::Migration
   def change
-    add_column :events, :language_de, :boolean
-    add_column :events, :language_fr, :boolean
-    add_column :events, :language_it, :boolean
-    add_column :events, :language_en, :boolean
+    add_column :events, :language_de, :boolean, null: false, default: false
+    add_column :events, :language_fr, :boolean, null: false, default: false
+    add_column :events, :language_it, :boolean, null: false, default: false
+    add_column :events, :language_en, :boolean, null: false, default: false
     add_column :events, :express_fee, :string
   end
 end
