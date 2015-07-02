@@ -19,8 +19,7 @@ module HitobitoPbs
     config.autoload_paths += %W( #{config.root}/app/abilities
                                  #{config.root}/app/domain
                                  #{config.root}/app/jobs
-                                 #{config.root}/app/serializers
-                               )
+                                 #{config.root}/app/serializers)
 
     config.to_prepare do
       # rubocop:disable SingleSpaceBeforeFirstArg
@@ -34,6 +33,10 @@ module HitobitoPbs
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
       GroupAbility.send   :include, Pbs::GroupAbility
+      PersonAbility.send :include, Pbs::PersonAbility
+      EventAbility.send :include, Pbs::EventAbility
+      Event::ParticipationAbility.send :include, Jubla::Event::ParticipationAbility
+      Event::RoleAbility.send :include, Jubla::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       PersonSerializer.send :include, Pbs::PersonSerializer
