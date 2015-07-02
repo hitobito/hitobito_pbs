@@ -21,7 +21,7 @@ class Event::Approver
     # send email to all roles from affected layer(s) with permission :approve_applications
   end
 
-  def approve(layer, comment, user)
+  def approve(_layer, _comment, _user)
     # gemäss 4.103, 4.108
     # find Event::Approval for given layer
     # update fields
@@ -30,7 +30,7 @@ class Event::Approver
     # send email to all roles from affected layer(s) with permission :approve_applications
   end
 
-  def reject(layer, user)
+  def reject(_layer, _user)
     # gemäss 4.1010
     # find Event::Approval for given layer
     # update fields
