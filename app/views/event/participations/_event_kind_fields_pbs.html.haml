@@ -1,0 +1,3 @@
+- if kind.documents_text
+  %dl.dl-horizontal
+    = labeled(Event::Kind.human_attribute_name(:documents_text), kind.documents_text.to_s.html_safe)

@@ -1,0 +1,15 @@
+group_de:
+  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:group) %>
+  locale: de
+  label: Gruppenleiterkurs
+  short_name: GLK
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+coach_de:
+  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:coach) %>
+  locale: de
+  label: Coachkurs
+  short_name: CK
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

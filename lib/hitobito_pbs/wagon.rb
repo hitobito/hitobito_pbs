@@ -44,6 +44,8 @@ module HitobitoPbs
          :j_s_number, :correspondence_language, :brother_and_sisters]
       RolesController.send :include, Pbs::RolesController
 
+      Event::KindsController.permitted_attrs += [:documents_text]
+
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull

@@ -659,6 +659,9 @@ de:
         course_languages: Kurssprachen
         express_fee: Expressgebühr
 
+      event/kind:
+        documents_text: Zusatzformulare
+
       person:
         nickname: Pfadiname
         pbs_number: PBS Personennummer
