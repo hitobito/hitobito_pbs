@@ -13,6 +13,19 @@ module Pbs::Event::Course
 
     LANGUAGES.each { |lang| used_attributes << "language_#{lang}".to_sym }
     used_attributes << :express_fee
+
+    before_save :set_requires_approval
+  end
+
+
+  private
+
+  def set_requires_approval
+    self.requires_approval =
+      requires_approval_abteilung? ||
+      requires_approval_region? ||
+      requires_approval_kantonalverband? ||
+      requires_approval_bund?
   end
 
 end

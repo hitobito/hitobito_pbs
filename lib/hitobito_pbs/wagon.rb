@@ -29,6 +29,7 @@ module HitobitoPbs
       Person.send       :include, Pbs::Person
       Role.send         :include, Pbs::Role
       Event::Course.send :include, Pbs::Event::Course
+      Event::Application.send :include, Pbs::Event::Application
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
