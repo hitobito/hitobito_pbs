@@ -26,6 +26,8 @@ module Pbs::Event::Course
       requires_approval_region? ||
       requires_approval_kantonalverband? ||
       requires_approval_bund?
+
+    true
   end
 
 end
