@@ -4,8 +4,14 @@
 #  https://github.com/hitobito/hitobito_jubla.
 
 
-group:
-  event_kind: group
-  qualification_kind: group
+lpk:
+  event_kind: lpk
+  qualification_kind: alpk
+  category: 'qualification'
+  role: 'participant'
+
+bkws:
+  event_kind: bkws
+  qualification_kind: leiter_js_kind
   category: 'qualification'
   role: 'participant'

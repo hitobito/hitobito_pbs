@@ -33,10 +33,9 @@ module HitobitoPbs
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
       GroupAbility.send   :include, Pbs::GroupAbility
-      PersonAbility.send :include, Pbs::PersonAbility
       EventAbility.send :include, Pbs::EventAbility
-      Event::ParticipationAbility.send :include, Jubla::Event::ParticipationAbility
-      Event::RoleAbility.send :include, Jubla::Event::RoleAbility
+      Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
+      Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       PersonSerializer.send :include, Pbs::PersonSerializer

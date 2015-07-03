@@ -3,18 +3,18 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-group_de:
-  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:group) %>
+lpk_de:
+  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:lpk) %>
   locale: de
-  label: Gruppenleiterkurs
-  short_name: GLK
+  label: Leitpfadikurs
+  short_name: LPK
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
 
-coach_de:
-  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:coach) %>
+bkws_de:
+  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:bkws) %>
   locale: de
-  label: Coachkurs
-  short_name: CK
+  label: Basiskurs Wolfstufe
+  short_name: BKWS
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>

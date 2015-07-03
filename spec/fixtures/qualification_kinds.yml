@@ -3,14 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
 
-top_leader:
-  participation: top_leader
-  type: Event::Role::Leader
+alpk: {}
 
-top_tn:
-  participation: top_participant
-  type: Event::Course::Role::Participant
-
-camp_leader:
-  participation: camp_leader
-  type: Event::Role::Leader
+leiter_js_kind:
+  validity: 2

@@ -40,7 +40,7 @@ top_course:
   name: Top Course
   groups: be
   type: Event::Course
-  kind: group
+  kind: lpk
   priorization: true
   requires_approval: true
   external_applications: true

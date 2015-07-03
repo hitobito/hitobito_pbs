@@ -10,7 +10,7 @@ require 'spec_helper'
 describe EventAbility do
 
   let(:user)    { role.person }
-  let(:group)   { groups(:be_board) }
+  let(:group)   { groups(:be) }
   let(:event)   { Fabricate(:event, groups: [group]) }
 
   def ability(person)
@@ -23,24 +23,24 @@ describe EventAbility do
   end
 
   context 'index_participations_details on event in group ' do
-    it 'FederalBoard::Member is allowed because of :layer_and_below_full' do
-      expect(ability(people(:top_leader))).to be_able_to(:index_participations_details, event)
+    it 'Group::Bund::MitarbeiterGs is allowed because of :layer_and_below_full' do
+      expect(ability(people(:bulei))).to be_able_to(:index_participations_details, event)
     end
 
-    it 'State::GroupAdmin is allowed because of :group_full' do
-      person = Fabricate(Group::StateBoard::Leader.name, group: group).person
+    it 'Group::Kantonalverband::Kantonsleitung is allowed because of :group_full' do
+      person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: group).person
       expect(ability(person)).to be_able_to(:index_participations_details, event)
     end
 
-    it 'Flock::Leader with leader role is allowed' do
-      person = people(:flock_leader)
+    it 'Group::Abteilung::Abteilungsleitung with leader role is allowed' do
+      person = people(:al_schekka)
       create(Event::Role::Leader, person)
 
       expect(ability(person)).to be_able_to(:index_participations_details, event)
     end
 
-    it 'Flock::Leader with participation role is not allowed' do
-      person = people(:flock_leader)
+    it 'Group::Abteilung::Abteilungsleitung with participation role is not allowed' do
+      person = people(:al_schekka)
       create(Event::Role::Participant, person)
 
       expect(ability(person)).not_to be_able_to(:index_participations_details, event)
