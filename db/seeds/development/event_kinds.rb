@@ -39,13 +39,13 @@ QualificationKind::Translation.seed(:qualification_kind_id, :locale,
 
 event_kinds = Event::Kind.seed(:id,
  {id: 1,
-  minimum_age: 13, bsv_id: '1' },
+  minimum_age: 13, kurs_id_fiver: '1', vereinbarungs_id_fiver: '1' },
 
  {id: 2,
-  minimum_age: 17, bsv_id: '2' },
+  minimum_age: 17, kurs_id_fiver: '2', vereinbarungs_id_fiver: '2' },
 
  {id: 3,
-  minimum_age: 17, bsv_id: '3' },
+  minimum_age: 17, kurs_id_fiver: '3', vereinbarungs_id_fiver: '3' },
 
  {id: 4},
 )
