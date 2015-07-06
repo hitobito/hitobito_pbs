@@ -8,6 +8,15 @@
 
 module EventsPbsHelper
 
+  def format_event_application_conditions(entry)
+    if entry.course_kind?
+      safe_join([format_attr(entry.kind, :application_conditions),
+                 simple_format(entry.application_conditions)])
+    else
+      format_attr(entry, :application_conditions)
+    end
+  end
+
   def format_course_languages(entry)
     Event::Course::LANGUAGES.map do |key|
       attr = "language_#{key}"

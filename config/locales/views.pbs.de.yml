@@ -44,6 +44,8 @@ de:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
 
   events:
+    kind_pbs:
+      event_kind_general_information: Kursart Informationen
     fields_pbs:
       language_de: Deutsch
       language_fr: Französisch
