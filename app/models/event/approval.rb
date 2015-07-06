@@ -44,9 +44,12 @@ class Event::Approval < ActiveRecord::Base
 
     # List all pending approvals for a given layer group.
     def pending(layer)
+      # TODO: test
       joins(person: :primary_group).
       where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
       where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
     end
+
   end
+
 end
