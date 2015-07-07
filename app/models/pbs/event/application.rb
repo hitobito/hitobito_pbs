@@ -10,5 +10,16 @@ module Pbs::Event::Application
 
   included do
     has_many :approvals
+
+    after_create :initialize_approval
+  end
+
+  private
+
+  def initialize_approval
+    if participation.present?
+      approver = Event::Approver.new(participation)
+      approver.application_created
+    end
   end
 end
