@@ -12,10 +12,14 @@ describe Event::KindsController do
 
   it 'POST create accepts documents_text' do
     post :create, event_kind: { label: 'Foo',
+                                kurs_id_fiver: 'some id',
+                                vereinbarungs_id_fiver: 'some other id',
                                 documents_text: '<b>bar</b>' }
 
     kind = assigns(:kind)
     expect(kind.reload.documents_text).to eq '<b>bar</b>'
+    expect(kind.kurs_id_fiver).to eq 'some id'
+    expect(kind.vereinbarungs_id_fiver).to eq 'some other id'
   end
 
 end
