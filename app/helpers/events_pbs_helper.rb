@@ -23,4 +23,12 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
+  def format_requires_approval(entry)
+    Event::Course::APPROVALS.map do |key|
+      if entry.send("#{key}?")
+        I18n.t("events.fields_pbs.#{key}")
+      end
+    end.compact.join(', ')
+  end
+
 end

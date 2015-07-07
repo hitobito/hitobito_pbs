@@ -10,10 +10,12 @@ module Pbs::Event::Course
 
   included do
     LANGUAGES = %w(de fr it en)
+    APPROVALS = %w(requires_approval_abteilung requires_approval_region
+                   requires_approval_kantonalverband requires_approval_bund)
 
-    LANGUAGES.each { |lang| used_attributes << "language_#{lang}".to_sym }
-    self.used_attributes += [:express_fee, :requires_approval_abteilung, :requires_approval_region,
-                             :requires_approval_kantonalverband, :requires_approval_bund]
+    LANGUAGES.each { |key| used_attributes << "language_#{key}".to_sym }
+    APPROVALS.each { |key| used_attributes << key.to_sym }
+    self.used_attributes += [:express_fee]
     self.used_attributes -= [:requires_approval]
 
     # states are used for workflow

@@ -6,3 +6,8 @@
 - if entry.course_kind? && entry.kind.documents_text
   %dl.dl-horizontal
     = labeled(Event::Kind.human_attribute_name(:documents_text), entry.kind.documents_text.to_s.html_safe)
+
+- entry.used?(:requires_approval_abteilung) do
+  - if entry.requires_approval? && format_attr(entry, :requires_approval).present?
+    %dl.dl-horizontal
+      = labeled_attr(entry, :requires_approval)
