@@ -660,6 +660,7 @@ de:
         express_fee: Expressgebühr
 
       event/course:
+        requires_approval: Empfehlung der Anmeldungen nötig durch
         states:
           created: Erstellt
           confirmed: Bestätigt

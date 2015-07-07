@@ -12,7 +12,9 @@ module Pbs::Event::Course
     LANGUAGES = %w(de fr it en)
 
     LANGUAGES.each { |lang| used_attributes << "language_#{lang}".to_sym }
-    used_attributes << :express_fee
+    self.used_attributes += [:express_fee, :requires_approval_abteilung, :requires_approval_region,
+                             :requires_approval_kantonalverband, :requires_approval_bund]
+    self.used_attributes -= [:requires_approval]
 
     # states are used for workflow
     # translations in config/locales

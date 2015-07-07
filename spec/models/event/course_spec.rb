@@ -10,12 +10,17 @@ require_relative '../../support/fabrication.rb'
 
 describe Event::Course do
 
+  let(:event) { Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk)) }
+
   subject do
-    event = Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk))
-    Fabricate(Event::Role::Leader.name.to_sym, participation: Fabricate(:event_participation, event: event))
-    Fabricate(Event::Role::AssistantLeader.name.to_sym, participation: Fabricate(:event_participation, event: event))
-    Fabricate(Event::Course::Role::Participant.name.to_sym, participation: Fabricate(:event_participation, event: event))
-    Fabricate(Event::Course::Role::Participant.name.to_sym, participation: Fabricate(:event_participation, event: event))
+    Fabricate(Event::Role::Leader.name.to_sym,
+              participation: Fabricate(:event_participation, event: event))
+    Fabricate(Event::Role::AssistantLeader.name.to_sym,
+              participation: Fabricate(:event_participation, event: event))
+    Fabricate(Event::Course::Role::Participant.name.to_sym,
+              participation: Fabricate(:event_participation, event: event))
+    Fabricate(Event::Course::Role::Participant.name.to_sym,
+              participation: Fabricate(:event_participation, event: event))
     event.reload
   end
 
@@ -64,5 +69,30 @@ describe Event::Course do
     end
 
   end
+
+  describe '.requires_approval' do
+    it 'is false if no approval group is defined' do
+      expect(event.requires_approval).to be_falsy
+    end
+
+    it 'is true if all approval groups are defined' do
+      event.requires_approval_abteilung = true
+      event.requires_approval_region = true
+      event.requires_approval_kantonalverband = true
+      event.requires_approval_bund = true
+      event.save!
+      expect(event.requires_approval).to be_truthy
+    end
+
+    %w(requires_approval_abteilung requires_approval_region requires_approval_kantonalverband
+       requires_approval_bund).each do |approval_attr|
+      it "is true if .#{approval_attr} is true" do
+        event.send(approval_attr + '=', true)
+        event.save!
+        expect(event.requires_approval).to be_truthy
+      end
+    end
+  end
+
 
 end

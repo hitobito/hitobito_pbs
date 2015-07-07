@@ -51,6 +51,10 @@ de:
       language_fr: Französisch
       language_it: Italienisch
       language_en: Englisch
+      requires_approval_abteilung: Abteilung
+      requires_approval_region: Region
+      requires_approval_kantonalverband: Kantonalverband
+      requires_approval_bund: Bundesebene
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.
