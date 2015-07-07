@@ -70,9 +70,6 @@ module HitobitoPbs
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
 
-      ### mailers
-      Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
-
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 

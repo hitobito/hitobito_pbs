@@ -23,8 +23,4 @@ module Pbs::EventAbility
     end
   end
 
-  def for_managed_events
-    permission_in_event?(:event_full) && permission_in_event?(:qualify)
-  end
-
 end
