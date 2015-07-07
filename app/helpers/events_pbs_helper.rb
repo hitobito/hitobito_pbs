@@ -9,12 +9,9 @@
 module EventsPbsHelper
 
   def format_event_application_conditions(entry)
-    if entry.course_kind?
-      texts = [entry.kind.application_conditions, entry.application_conditions]
-      safe_join(texts.select(&:present?).map { |text| simple_format(text) })
-    else
-      format_attr(entry, :application_conditions)
-    end
+    texts = [entry.application_conditions]
+    texts.unshift(entry.kind.application_conditions) if entry.course_kind?
+    safe_join(texts.select(&:present?).map { |text| simple_format(text) })
   end
 
   def format_course_languages(entry)
