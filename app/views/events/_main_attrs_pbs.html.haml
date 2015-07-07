@@ -1,5 +1,5 @@
 - entry.used?(:express_fee) do
-  = labeled_attr(entry, :express_fee)
+  = labeled_attr(entry, :express_fee) if entry.express_fee.present?
 
 - entry.used?(:language_de) do
-  = labeled_attr(entry, :course_languages)
+  = labeled_attr(entry, :course_languages) if format_attr(entry, :course_languages).present?

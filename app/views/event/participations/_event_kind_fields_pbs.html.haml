@@ -7,7 +7,6 @@
   %dl.dl-horizontal
     = labeled_attr(@event, :application_conditions)
 
-
 - if @event.kind.general_information.present?
   %dl.dl-horizontal
     = labeled(t('events.kind_pbs.event_kind_general_information'), format_attr(@event.kind, :general_information))
