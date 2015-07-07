@@ -14,6 +14,7 @@ class Event::Approver
     @participation = participation
   end
 
+  # rubocop:disable all
   def application_created
     # gemäss 4.101
     # return if no approval required
@@ -36,5 +37,6 @@ class Event::Approver
     # update fields
     # set application#rejected to true
   end
+  # rubocop:enable all
 
 end
