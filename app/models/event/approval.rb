@@ -16,7 +16,7 @@
 #  rejected       :boolean          default(FALSE), not null
 #  comment        :text
 #  approved_at    :datetime
-#  person_id      :integer
+#  approver_id    :integer
 #
 
 class Event::Approval < ActiveRecord::Base
@@ -29,10 +29,11 @@ class Event::Approval < ActiveRecord::Base
   ### ASSOCIATIONS
 
   belongs_to :application
+  belongs_to :approver, class_name: 'Person'
 
   has_one :participation, through: :application
   has_one :event, through: :participation
-  has_one :person, through: :participation
+  has_one :approvee, through: :participation, source: :person
 
 
   ### VALIDATIONS

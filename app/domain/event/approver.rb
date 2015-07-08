@@ -14,14 +14,15 @@ class Event::Approver
     @participation = participation
   end
 
-  # rubocop:disable all
   def application_created
-    # gemäss 4.101
-    # return if no approval required
-    # create Event::Approval for first layer from which approval is required (and which has existing :approve_applications roles)
-    # send email to all roles from affected layer(s) with permission :approve_applications
+    layer = first_layer_requiring_approval
+    if layer.present?
+      participation.application.approvals.create!(layer: layer)
+      send_mail_to_approvers(layer)
+    end
   end
 
+  # rubocop:disable all
   def approve(_layer, _comment, _user)
     # gemäss 4.103, 4.108
     # find Event::Approval for given layer
@@ -38,5 +39,50 @@ class Event::Approver
     # set application#rejected to true
   end
   # rubocop:enable all
+
+  private
+
+  def first_layer_requiring_approval
+    primary_group = participation.person.primary_group
+    if primary_group
+      primary_group.layer_hierarchy.reverse.each do |group|
+        if group_requires_approval?(group) && group_has_approvers?(group)
+          return group.class.name.demodulize.downcase
+        end
+      end
+
+      nil
+    end
+  end
+
+  def group_requires_approval?(group)
+    if group.present?
+      group_type_name = group.class.name.demodulize.downcase
+      participation.event.send("requires_approval_#{group_type_name}?")
+    else
+      false
+    end
+  end
+
+  def group_has_approvers?(group)
+    approvers_of_group(group).try('exists?')
+  end
+
+  def approvers_of_group(group)
+    if group.present?
+      role_types = approver_role_types_of_group(group)
+      group.people.where('roles.type IN (?)', role_types.collect(&:sti_name))
+    end
+  end
+
+  def approver_role_types_of_group(group)
+    group.present? && group.role_types.select do |role_type|
+      role_type.permissions.include?(:approve_applications)
+    end
+  end
+
+  def send_mail_to_approvers(group)
+    # TODO
+  end
 
 end
