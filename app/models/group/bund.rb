@@ -87,7 +87,7 @@ class Group::Bund < Group
   end
 
   class Geschaeftsleitung < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data, :approve_applications]
   end
 
   class GrossanlassCoach < ::Role
@@ -116,7 +116,7 @@ class Group::Bund < Group
   end
 
   class LeitungKernaufgabeAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :approve_applications]
   end
 
   class LeitungKernaufgabeKommunikation < ::Role

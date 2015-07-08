@@ -82,7 +82,7 @@ class Group::Kantonalverband < Group
   end
 
   class Kantonsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class Kassier < ::Role
@@ -147,7 +147,7 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :approve_applications]
   end
 
   class VerantwortungBetreuung < ::Role

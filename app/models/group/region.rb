@@ -113,7 +113,7 @@ class Group::Region < Group
   end
 
   class Regionalleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class Revisor < ::Role
@@ -137,7 +137,7 @@ class Group::Region < Group
   end
 
   class VerantwortungAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :approve_applications]
   end
 
   class VerantwortungBetreuung < ::Role

@@ -87,11 +87,11 @@ class Group::Abteilung < Group
   ### ROLES
 
   class Abteilungsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class AbteilungsleitungStv < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class Adressverwaltung < ::Role
