@@ -81,8 +81,10 @@ class Event::Approver
     end
   end
 
+  # rubocop:disable all
   def send_mail_to_approvers(group)
     # TODO
   end
+  # rubocop:enable all
 
 end
