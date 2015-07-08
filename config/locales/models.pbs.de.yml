@@ -78,6 +78,9 @@ de:
       group/bund/adressverwaltung:
         one: Adressverwalter
         description: Verwaltet die Adressen.
+      group/bund/assistenz_ausbildung:
+        one: Assistenz Ausbildung
+        description: Unterstützt bei Ausbildungen.
       group/bund/praesidium:
         one: Präsident
         description:

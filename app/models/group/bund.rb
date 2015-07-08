@@ -69,6 +69,10 @@ class Group::Bund < Group
     self.permissions = [:layer_and_below_full]
   end
 
+  class AssistenzAusbildung < ::Role
+    self.permissions = [:layer_read]
+  end
+
   class Beisitz < ::Role
     self.permissions = [:group_read]
   end
@@ -239,6 +243,7 @@ class Group::Bund < Group
   roles MitarbeiterGs,
         Sekretariat,
         Adressverwaltung,
+        AssistenzAusbildung,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,
