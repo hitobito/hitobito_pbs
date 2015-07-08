@@ -8,16 +8,21 @@
 # Contains all the business logic for the approval process.
 class Event::Approver
 
-  attr_reader :participation
+  attr_reader :participation, :primary_group, :next_open_approval
 
   def initialize(participation)
     @participation = participation
+    @primary_group = participation.person.primary_group
+
+    if participation.application
+      @next_open_approval = participation.application.approvals.find_by(approved: false, rejected: false)
+    end
   end
 
   def application_created
     layer = first_layer_requiring_approval
     if layer.present?
-      participation.application.approvals.create!(layer: layer)
+      participation.application.approvals.create!(layer: layer.class.name.demodulize.downcase)
       send_mail_to_approvers(layer)
     end
   end
@@ -40,43 +45,44 @@ class Event::Approver
   end
   # rubocop:enable all
 
+
+  def approvable_by?(person)
+    if next_open_approval
+      next_layer = "Group::#{next_open_approval.layer.classify}".constantize
+      (next_layer.roles & person.roles.collect(&:class)).present?
+    end
+  end
+
   private
 
   def first_layer_requiring_approval
-    primary_group = participation.person.primary_group
-    if primary_group
-      primary_group.layer_hierarchy.reverse.each do |group|
-        if group_requires_approval?(group) && group_has_approvers?(group)
-          return group.class.name.demodulize.downcase
-        end
-      end
+    return unless primary_group.present?
 
-      nil
+    find_next_approving_layer(primary_group)
+  end
+
+  def find_next_approving_layer(group)
+    group.layer_hierarchy.reverse.find do |group|
+      group_requires_approval?(group) && group_has_approvers?(group)
     end
   end
 
   def group_requires_approval?(group)
-    if group.present?
-      group_type_name = group.class.name.demodulize.downcase
-      participation.event.send("requires_approval_#{group_type_name}?")
-    else
-      false
-    end
+    group_type_name = group.class.name.demodulize.downcase
+    participation.event.send("requires_approval_#{group_type_name}?")
   end
 
   def group_has_approvers?(group)
-    approvers_of_group(group).try('exists?')
+    approvers_of_group(group).exists?
   end
 
   def approvers_of_group(group)
-    if group.present?
-      role_types = approver_role_types_of_group(group)
-      group.people.where('roles.type IN (?)', role_types.collect(&:sti_name))
-    end
+    role_types = approver_role_types_of_group(group)
+    group.people.where(roles: { type: role_types.collect(&:sti_name) })
   end
 
   def approver_role_types_of_group(group)
-    group.present? && group.role_types.select do |role_type|
+    group.role_types.select do |role_type|
       role_type.permissions.include?(:approve_applications)
     end
   end
