@@ -32,12 +32,16 @@ module HitobitoPbs
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
+      ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
       EventAbility.send :include, Pbs::EventAbility
       Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
       Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
       Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
+
+      # load this class after all abilities have been defined
+      Ability.store.register Event::ApprovalAbility
 
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
@@ -63,6 +67,7 @@ module HitobitoPbs
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
+
 
       # rubocop:enable SingleSpaceBeforeFirstArg
     end

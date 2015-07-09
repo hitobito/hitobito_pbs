@@ -10,6 +10,10 @@
 de:
   activerecord:
     models:
+      event/approval:
+        one: Empfehlung
+        other: Empfehlungen
+
       group/abteilung:
         one: Abteilung
         other: Abteilungen

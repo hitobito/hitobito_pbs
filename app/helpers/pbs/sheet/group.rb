@@ -22,6 +22,13 @@ module Pbs::Sheet::Group
                      alt: [:censuses_tab_path, :group_member_counts_path],
                      if: lambda { |view, group|
                        group.census? && view.can?(:evaluate_census, group)
+                     }),
+
+      Sheet::Tab.new('groups.tabs.approvals',
+                     :approvals_group_path,
+                     if: lambda { |view, group|
+                       name = group.type.demodulize.downcase
+                       Event::Approval::LAYERS.include?(name) && view.can?(:approve, Event::Approval.new(layer: name))
                      }))
   end
 

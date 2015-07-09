@@ -33,6 +33,4 @@ module Pbs::Event::ApplicationsController
     params.require(:event_approval).permit(:comment)
   end
 
-
-
 end

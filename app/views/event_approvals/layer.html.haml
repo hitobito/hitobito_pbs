@@ -1,0 +1,5 @@
+- title t('.title', model_name: Event::Approval.model_name.human(count: 2))
+
+#main
+  = list_table do |t|
+    - t.col() { |a| link_to("#{a.approvee} #{a.event}", [a.event.groups.first, a.event, a.participation]) }

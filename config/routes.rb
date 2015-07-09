@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         end
 
         get 'population' => 'population#index'
+        get 'approvals' => 'event_approvals#layer'
       end
 
       resource :member_counts, only: [:create, :edit, :update, :destroy]
@@ -33,9 +34,6 @@ Rails.application.routes.draw do
 
     resources :events, only: [] do # do not redefine events actions, only add new ones
 
-      scope module: 'event' do
-        resources :approvals, only: [:update]
-      end
     end
 
   end

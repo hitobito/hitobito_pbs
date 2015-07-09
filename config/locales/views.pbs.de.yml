@@ -10,6 +10,11 @@ de:
     tabs:
       population: Bestand
       statistic: Statistik
+      approvals: Empfehlungen
+
+  event_approvals:
+    layer:
+      title: Ausstehende %{model_name}
 
   censuses:
     form:
