@@ -177,6 +177,10 @@ describe Event::Approver do
 
       expect(approval_abteilung).to be_approved
       expect(approval_bund).not_to be_approved
+
+      approver = Event::Approver.new(participation.reload)
+      approver.approve('all good', people(:bulei))
+      expect(approval_bund.reload).to be_approved
     end
   end
 
@@ -193,6 +197,8 @@ describe Event::Approver do
       expect(approval_abteilung).to be_rejected
       expect(approval_abteilung.comment).to eq 'not so good'
       expect(approval_abteilung.approver).to eq people(:bulei)
+
+      # expect(last_email).to be_present TODO
     end
 
   end

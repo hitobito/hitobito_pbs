@@ -36,12 +36,12 @@ class Event::Approver
     return unless primary_group.present?
     open_approval.update!(approved: true, comment: comment, approver: user)
 
-    _first, *rest = primary_group.layer_hierarchy.reverse.drop_while { |group| group.class != open_approval.group }
-    layer = find_next_approving_layer(rest.first)
+    _first, *rest = primary_group.layer_hierarchy.reverse.drop_while { |g| open_approval.layer_class != g.class }
 
-    if rest.empty? || !layer
+    if rest.empty? || !find_next_approving_layer(rest.first)
       application.update!(approved: true)
     else
+      layer = find_next_approving_layer(rest.first)
       application.approvals.create!(layer: layer.class.name.demodulize.downcase)
       send_mail_to_approvers(layer)
     end
@@ -54,6 +54,7 @@ class Event::Approver
   def reject(comment, user)
     open_approval.update!(rejected: true, comment: comment, approver: user)
     participation.application.update!(rejected: true)
+    #TODO: send_mail_to_rejecter(user)
   end
   # rubocop:enable all
 
