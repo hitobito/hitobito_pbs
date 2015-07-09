@@ -40,6 +40,13 @@ class Event::Approval < ActiveRecord::Base
 
   validates :layer, inclusion: LAYERS
 
+  def roles
+    group.roles.select { |role| role.permissions.include?(:approve_applications) }
+  end
+
+  def group
+    "Group::#{layer.classify}".constantize
+  end
 
   class << self
 

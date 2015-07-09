@@ -28,4 +28,8 @@ module Pbs::EventAbility
     permission_in_event?(:event_full) && permission_in_event?(:qualify)
   end
 
+  def if_permission_in_layer
+    (subject.roles & user.roles.collect(&:class)).present?
+  end
+
 end

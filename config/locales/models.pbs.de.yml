@@ -662,6 +662,9 @@ de:
         course_languages: Kurssprachen
         express_fee: Expressgebühr
 
+      event/approval:
+        comment: Kommentar
+
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         states:

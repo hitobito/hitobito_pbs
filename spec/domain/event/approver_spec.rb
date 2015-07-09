@@ -18,13 +18,13 @@ describe Event::Approver do
   let(:participation) { Fabricate(:event_participation, person: person, event: course) }
   let(:approver) { Event::Approver.new(participation) }
 
-  describe '#application_created' do
-    def create_application
-      # The #application_create method is called by a callback of the
-      # Event::Application model
-      participation.create_application(priority_1: course)
-    end
+  def create_application
+    # The #application_create method is called by a callback of the
+    # Event::Application model
+    participation.create_application(priority_1: course)
+  end
 
+  describe '#application_created' do
     context 'no approval required' do
       it 'creates no Event::Approval and sends no emails' do
         create_application
@@ -144,7 +144,56 @@ describe Event::Approver do
       end
 
     end
+  end
 
+  describe '#approve' do
+    it 'updates approval and approves application if no upper layers are found' do
+      course.update(requires_approval_abteilung: true)
+      application = create_application
+      approver.approve('all good', people(:bulei))
+
+      expect(application.reload).to be_approved
+      expect(application.approvals.size).to eq 1
+
+      approval_abteilung = application.approvals.find_by_layer('abteilung')
+      expect(approval_abteilung).to be_approved
+      expect(approval_abteilung.comment).to eq 'all good'
+      expect(approval_abteilung.approver).to eq people(:bulei)
+    end
+
+    it 'updates approval, sends email creates additional approval if more approving layers exist' do
+      Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
+
+      course.update(requires_approval_abteilung: true, requires_approval_bund: true)
+      application = create_application
+      approver.approve('all good', people(:bulei))
+
+      expect(application.reload).not_to be_approved
+      expect(application.approvals.size).to eq 2
+      # expect(last_email).to be_present TODO
+
+      approval_abteilung = application.approvals.find_by_layer('abteilung')
+      approval_bund = application.approvals.find_by_layer('bund')
+
+      expect(approval_abteilung).to be_approved
+      expect(approval_bund).not_to be_approved
+    end
+  end
+
+  describe '#reject' do
+    it 'updates approval and rejects application' do
+      course.update(requires_approval_abteilung: true)
+      application = create_application
+      approver.reject('not so good', people(:bulei))
+      expect(application.reload).to be_rejected
+      expect(application.approvals.size).to eq 1
+
+
+      approval_abteilung = application.approvals.find_by_layer('abteilung')
+      expect(approval_abteilung).to be_rejected
+      expect(approval_abteilung.comment).to eq 'not so good'
+      expect(approval_abteilung.approver).to eq people(:bulei)
+    end
 
   end
 

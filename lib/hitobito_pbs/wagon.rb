@@ -34,6 +34,7 @@ module HitobitoPbs
 
       GroupAbility.send :include, Pbs::GroupAbility
       EventAbility.send :include, Pbs::EventAbility
+      Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
       Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
       Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
@@ -45,6 +46,8 @@ module HitobitoPbs
         [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
          :j_s_number, :correspondence_language, :brother_and_sisters]
       RolesController.send :include, Pbs::RolesController
+
+      Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
 
       Event::KindsController.permitted_attrs += [:documents_text]
 

@@ -14,6 +14,10 @@ module Pbs::Event::Application
     after_create :initialize_approval
   end
 
+  def next_open_approval
+    approvals.find_by(approved: false, rejected: false)
+  end
+
   private
 
   def initialize_approval

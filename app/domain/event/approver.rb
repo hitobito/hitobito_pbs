@@ -8,50 +8,54 @@
 # Contains all the business logic for the approval process.
 class Event::Approver
 
-  attr_reader :participation, :primary_group, :next_open_approval
+  attr_reader :participation, :application, :primary_group, :open_approval
 
   def initialize(participation)
     @participation = participation
     @primary_group = participation.person.primary_group
-
-    if participation.application
-      @next_open_approval = participation.application.approvals.find_by(approved: false, rejected: false)
-    end
+    @application = participation.application
+    @open_approval = find_next_open_approval if application
   end
 
   def application_created
     layer = first_layer_requiring_approval
     if layer.present?
-      participation.application.approvals.create!(layer: layer.class.name.demodulize.downcase)
+      application.approvals.create!(layer: layer.class.name.demodulize.downcase)
       send_mail_to_approvers(layer)
     end
   end
 
+  # gemäss 4.103, 4.108
+  # find Event::Approval for given layer
+  # update fields
+  # if no next layer, set application#approved to true and return
+  # create Event::Approval for next layer from which approval is required (and which has existing :approve_applications roles)
+  # send email to all roles from affected layer(s) with permission :approve_applications
   # rubocop:disable all
-  def approve(_layer, _comment, _user)
-    # gemäss 4.103, 4.108
-    # find Event::Approval for given layer
-    # update fields
-    # if no next layer, set application#approved to true and return
-    # create Event::Approval for next layer from which approval is required (and which has existing :approve_applications roles)
-    # send email to all roles from affected layer(s) with permission :approve_applications
-  end
+  def approve(comment, user)
+    return unless primary_group.present?
+    open_approval.update!(approved: true, comment: comment, approver: user)
 
-  def reject(_layer, _comment, _user)
-    # gemäss 4.1010
-    # find Event::Approval for given layer
-    # update fields
-    # set application#rejected to true
-  end
-  # rubocop:enable all
+    _first, *rest = primary_group.layer_hierarchy.reverse.drop_while { |group| group.class != open_approval.group }
+    layer = find_next_approving_layer(rest.first)
 
-
-  def approvable_by?(person)
-    if next_open_approval
-      next_layer = "Group::#{next_open_approval.layer.classify}".constantize
-      (next_layer.roles & person.roles.collect(&:class)).present?
+    if rest.empty? || !layer
+      application.update!(approved: true)
+    else
+      application.approvals.create!(layer: layer.class.name.demodulize.downcase)
+      send_mail_to_approvers(layer)
     end
   end
+
+  # gemäss 4.1010
+  # find Event::Approval for given layer
+  # update fields
+  # set application#rejected to true
+  def reject(comment, user)
+    open_approval.update!(rejected: true, comment: comment, approver: user)
+    participation.application.update!(rejected: true)
+  end
+  # rubocop:enable all
 
   private
 
@@ -59,6 +63,10 @@ class Event::Approver
     return unless primary_group.present?
 
     find_next_approving_layer(primary_group)
+  end
+
+  def find_next_open_approval
+    participation.application.approvals.find_by(approved: false, rejected: false)
   end
 
   def find_next_approving_layer(group)

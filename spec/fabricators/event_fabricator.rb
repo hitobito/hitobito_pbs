@@ -5,23 +5,6 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-
-top_leader:
-  event: top_course
-  person: bulei
-  active: true
-
-top_participant:
-  event: top_course
-  person: al_schekka
-  active: true
-
-camp_leader:
-  event: camp
-  person: al_schekka
-  active: true
-
-camp_child:
-  event: camp
-  person: child
-  active: true
+Fabricator(:pbs_course, from: :course) do
+  kind { Event::Kind.where(short_name: 'LPK').first }
+end
