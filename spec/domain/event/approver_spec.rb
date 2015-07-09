@@ -17,6 +17,12 @@ describe Event::Approver do
   end
   let(:participation) { Fabricate(:event_participation, person: person, event: course) }
   let(:approver) { Event::Approver.new(participation) }
+  let(:mailer) { spy('mailer') }
+  let(:approver_types) { Role.types_with_permission(:approve_applications).collect(&:sti_name) }
+
+  before do
+    allow(Event::ParticipationMailer).to receive(:approval).and_return(mailer)
+  end
 
   def create_application
     # The #application_create method is called by a callback of the
@@ -33,7 +39,10 @@ describe Event::Approver do
 
     context 'approval required' do
       before do
-        # Ensure all layers have approvers
+        # Delete all people with approval permission
+        Person.joins(:roles).where(roles: { type: approver_types }).delete_all
+
+        # Ensure all layers have one approver
         Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
         Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern))
         Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
@@ -105,8 +114,7 @@ describe Event::Approver do
           course.save!
 
           # Delete all people with approval permission in Abteilung
-          approval_roles = [Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv]
-          groups(:schekka).people.where('roles.type IN (?)', approval_roles).delete_all
+          groups(:schekka).people.where(roles: { type: approver_types }).delete_all
         end
 
         it 'skips to kantonalverband which has approvers' do
@@ -125,11 +133,14 @@ describe Event::Approver do
       end
 
       it 'sends email to all roles from affected layer(s) with permission :approve_applications' do
-        # expect(last_email).to be_present
-        # expect(last_email.body).to match(/Hallo #{recipient.greeting_name}/)
-        # expect(last_email.body).not_to match(/#{recipient.reload.reset_password_token}/)
-      end
+        create_application
+        Delayed::Worker.new.work_off
 
+        expect(Event::ParticipationMailer).to have_received(:approval) do |participation, people|
+          expect(participation).to eq(participation)
+          expect(people.length).to eq(1)
+        end
+      end
     end
   end
 

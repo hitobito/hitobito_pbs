@@ -20,8 +20,8 @@ class Event::Approver
   def application_created
     layer = first_layer_requiring_approval
     if layer.present? && application.present?
-      application.approvals.create!(layer: layer.class.name.demodulize.downcase)
-      send_mail_to_approvers(layer)
+      approval = application.approvals.create!(layer: name_of_layer(layer))
+      send_approval_request(layer, approval)
     end
   end
 
@@ -42,8 +42,8 @@ class Event::Approver
       application.update!(approved: true)
     else
       layer = find_next_approving_layer(rest.first)
-      application.approvals.create!(layer: layer.class.name.demodulize.downcase)
-      send_mail_to_approvers(layer)
+      approval = application.approvals.create!(layer: name_of_layer(layer))
+      send_approval_request(layer, approval)
     end
   end
 
@@ -67,18 +67,17 @@ class Event::Approver
   end
 
   def find_next_open_approval
-    participation.application.approvals.find_by(approved: false, rejected: false)
+    application.approvals.find_by(approved: false, rejected: false)
   end
 
   def find_next_approving_layer(group)
-    group.layer_hierarchy.reverse.find do |group|
-      group_requires_approval?(group) && group_has_approvers?(group)
+    group.layer_hierarchy.reverse.find do |g|
+      event_requires_approval_from?(name_of_layer(g)) && group_has_approvers?(g)
     end
   end
 
-  def group_requires_approval?(group)
-    group_type_name = group.class.name.demodulize.downcase
-    participation.event.send("requires_approval_#{group_type_name}?")
+  def event_requires_approval_from?(layer_name)
+    participation.event.send("requires_approval_#{layer_name}?")
   end
 
   def group_has_approvers?(group)
@@ -86,18 +85,22 @@ class Event::Approver
   end
 
   def approvers_of_group(group)
-    role_types = approver_role_types_of_group(group)
-    group.people.where(roles: { type: role_types.collect(&:sti_name) })
+    role_types = approver_role_types_of(group.layer_group.class)
+    group.people.where(roles: { type: role_types.collect(&:sti_name), deleted_at: nil })
   end
 
-  def approver_role_types_of_group(group)
-    group.role_types.select do |role_type|
+  def approver_role_types_of(layer_type)
+    layer_type.role_types.select do |role_type|
       role_type.permissions.include?(:approve_applications)
     end
   end
 
-  def send_mail_to_approvers(group)
+  def name_of_layer(group)
+    group.layer_group.class.name.demodulize.downcase
+  end
 
+  def send_approval_request(layer, approval)
+    Event::ApprovalRequestJob.new(name_of_layer(layer), approval.participation).enqueue!
   end
 
 end

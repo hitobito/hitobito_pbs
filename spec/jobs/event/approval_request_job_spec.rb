@@ -17,11 +17,7 @@ describe Event::ApprovalRequestJob do
   end
   let(:participation) { Fabricate(:event_participation, person: person, event: course) }
 
-  let(:mailer) do
-    mailer = instance_double('mailer')
-    allow(mailer).to receive(:deliver)
-    mailer
-  end
+  let(:mailer) { spy('mailer') }
 
   before do
     SeedFu.quiet = true
