@@ -25,83 +25,73 @@ describe Event::Approver do
   end
 
   describe '#application_created' do
-    context 'no approval required' do
-      it 'creates no Event::Approval and sends no emails' do
+    it 'creates no Event::Approval and sends no emails if no approval is required' do
+      create_application
+      expect(Event::Approval.count).to eq(0)
+      expect(last_email).to be_nil
+    end
+
+    context 'approval required' do
+      before do
+        # Ensure all layers have approvers
+        Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+        Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern))
+        Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
+        Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
+
+        course.update!(requires_approval_abteilung: true)
+      end
+
+      it 'creates no Event::Approval and sends no emails if approvee has no primary group' do
+        person.primary_group = nil
+        person.save!
+
         create_application
         expect(Event::Approval.count).to eq(0)
         expect(last_email).to be_nil
       end
-    end
 
-    context 'approval required' do
-      context 'for approver without primary_group' do
-        before do
-          person.primary_group = nil
-          person.save!
-        end
-
-        it 'creates no Event::Approval and sends no emails' do
-          create_application
-          expect(Event::Approval.count).to eq(0)
-          expect(last_email).to be_nil
-        end
+      it 'creates no Event::Approval and sends no emails if participation has no application' do
+        approver.application_created
+        expect(Event::Approval.count).to eq(0)
+        expect(last_email).to be_nil
       end
 
-      context 'for participation without application' do
-        it 'creates no Event::Approval and sends no emails' do
-          approver.application_created
-          expect(Event::Approval.count).to eq(0)
-          expect(last_email).to be_nil
-        end
-      end
+      [{ abteilung: true, region: false, kantonalverband: false, bund: false,
+         layer: 'abteilung' },
+       { abteilung: true, region: true, kantonalverband: true, bund: true,
+         layer: 'abteilung' },
+       { abteilung: false, region: true, kantonalverband: false, bund: false,
+         layer: 'region' },
+       { abteilung: false, region: false, kantonalverband: true, bund: false,
+         layer: 'kantonalverband' },
+       { abteilung: false, region: false, kantonalverband: false, bund: true,
+         layer: 'bund' }].each do |values|
 
+        approvers = Event::Approval::LAYERS.map do |key|
+          key if values[key.to_sym]
+        end.compact.join(', ')
 
-      context 'all layers having approvers' do
-        before do
-          # Ensure all layers have approvers
-          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
-          Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern))
-          Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
-          Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
-        end
+        context "from #{approvers}" do
+          before do
+            course.update!(requires_approval_abteilung: values[:abteilung],
+                           requires_approval_region: values[:region],
+                           requires_approval_kantonalverband: values[:kantonalverband],
+                           requires_approval_bund: values[:bund])
+          end
 
-        [{ abteilung: true, region: false, kantonalverband: false, bund: false,
-           layer: 'abteilung' },
-         { abteilung: true, region: true, kantonalverband: true, bund: true,
-           layer: 'abteilung' },
-         { abteilung: false, region: true, kantonalverband: false, bund: false,
-           layer: 'region' },
-         { abteilung: false, region: false, kantonalverband: true, bund: false,
-           layer: 'kantonalverband' },
-         { abteilung: false, region: false, kantonalverband: false, bund: true,
-           layer: 'bund' }].each do |values|
-
-          approvers = Event::Approval::LAYERS.map do |key|
-            key if values[key.to_sym]
-          end.compact.join(', ')
-
-          context "requiring approvals from #{approvers}" do
-            before do
-              course.requires_approval_abteilung = values[:abteilung]
-              course.requires_approval_region = values[:region]
-              course.requires_approval_kantonalverband = values[:kantonalverband]
-              course.requires_approval_bund = values[:bund]
-              course.save!
-            end
-
-            it "creates Event::Approval for layer #{values[:layer]}" do
-              application = create_application
-              expect(Event::Approval.count).to eq(1)
-              approval = Event::Approval.first
-              expect(approval.layer).to eq(values[:layer])
-              expect(approval.application).to eq(application)
-              expect(approval.approved).to be_falsy
-              expect(approval.rejected).to be_falsy
-              expect(approval.comment).to be_nil
-              expect(approval.approved_at).to be_nil
-              expect(approval.approver).to be_nil
-              expect(approval.approvee).to eq(person)
-            end
+          it "creates Event::Approval for layer #{values[:layer]}" do
+            application = create_application
+            expect(Event::Approval.count).to eq(1)
+            approval = Event::Approval.first
+            expect(approval.layer).to eq(values[:layer])
+            expect(approval.application).to eq(application)
+            expect(approval.approved).to be_falsy
+            expect(approval.rejected).to be_falsy
+            expect(approval.comment).to be_nil
+            expect(approval.approved_at).to be_nil
+            expect(approval.approver).to be_nil
+            expect(approval.approvee).to eq(person)
           end
         end
       end
@@ -117,9 +107,6 @@ describe Event::Approver do
           # Delete all people with approval permission in Abteilung
           approval_roles = [Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv]
           groups(:schekka).people.where('roles.type IN (?)', approval_roles).delete_all
-
-          # Ensure Kantonalverband has an approver
-          Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
         end
 
         it 'skips to kantonalverband which has approvers' do

@@ -19,7 +19,7 @@ class Event::Approver
 
   def application_created
     layer = first_layer_requiring_approval
-    if layer.present?
+    if layer.present? && application.present?
       application.approvals.create!(layer: layer.class.name.demodulize.downcase)
       send_mail_to_approvers(layer)
     end
@@ -96,10 +96,8 @@ class Event::Approver
     end
   end
 
-  # rubocop:disable all
   def send_mail_to_approvers(group)
-    # TODO
+
   end
-  # rubocop:enable all
 
 end
