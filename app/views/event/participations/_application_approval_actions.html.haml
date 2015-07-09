@@ -8,8 +8,8 @@
 - include_wysiwyg_assets
 
 = content_for(:js_includes) do
-  = render 'approval_application_dialog', action: :approve
-  = render 'approval_application_dialog', action: :reject
+  = render 'application_approval_dialog', action: :approve
+  = render 'application_approval_dialog', action: :reject
 
 
 = action_button("<strong>&#x2713;</strong>&nbsp; #{label_approve}".html_safe,

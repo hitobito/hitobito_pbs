@@ -11,10 +11,10 @@
                     url: send("#{action}_group_event_application_path", @group, @event, @application),
                     method: action == :approve ? :put : :delete,
                     stacked: true) do |f|
-      .modal-header
-        %button.close{"data-dismiss" => "modal", :type => "button"} ×
-        %h4.modal-title #{Event::Participation.model_name.human} #{t("event.participations.actions_show.#{action}_button").downcase}
-
       .modal-body
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        %h1.modal-title #{Event::Participation.model_name.human} #{t("event.participations.actions_show.#{action}_button").downcase}
+        %p.muted= t('.approval_stored')
+
         = f.labeled_input_field(:comment, class: 'span5')
         = save_form_buttons(f, nil, group_event_participation_path(@group, @event, @participation))

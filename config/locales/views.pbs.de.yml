@@ -43,6 +43,14 @@ de:
   census_evaluation/kantonalverband:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
 
+  event:
+    participations:
+      application_approval_dialog:
+        approval_stored: Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
+
+
+
+
   events:
     kind_pbs:
       event_kind_general_information: Kursart Informationen
