@@ -15,13 +15,3 @@ top_participant:
   event: top_course
   person: al_schekka
   active: true
-
-camp_leader:
-  event: camp
-  person: al_schekka
-  active: true
-
-camp_child:
-  event: camp
-  person: child
-  active: true
