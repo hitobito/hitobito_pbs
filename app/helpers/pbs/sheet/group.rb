@@ -28,7 +28,8 @@ module Pbs::Sheet::Group
                      :approvals_group_path,
                      if: lambda { |view, group|
                        name = group.type.demodulize.downcase
-                       Event::Approval::LAYERS.include?(name) && view.can?(:approve, Event::Approval.new(layer: name))
+                       Event::Approval::LAYERS.include?(name) &&
+                         view.can?(:approve, Event::Approval.new(layer: name))
                      }))
   end
 
