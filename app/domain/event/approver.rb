@@ -25,13 +25,13 @@ class Event::Approver
     end
   end
 
+  # rubocop:disable all
   # gemäss 4.103, 4.108
   # find Event::Approval for given layer
   # update fields
   # if no next layer, set application#approved to true and return
   # create Event::Approval for next layer from which approval is required (and which has existing :approve_applications roles)
   # send email to all roles from affected layer(s) with permission :approve_applications
-  # rubocop:disable all
   def approve(comment, user)
     return unless primary_group.present?
     open_approval.update!(approved: true, comment: comment, approver: user)
