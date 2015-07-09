@@ -61,6 +61,9 @@ module HitobitoPbs
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group
 
+      ### jobs
+      Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
+
       # rubocop:enable SingleSpaceBeforeFirstArg
     end
 
