@@ -157,6 +157,7 @@ describe Event::Approver do
       expect(approval_abteilung).to be_approved
       expect(approval_abteilung.comment).to eq 'all good'
       expect(approval_abteilung.approver).to eq people(:bulei)
+      expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
     end
 
     it 'updates approval, sends email creates additional approval if more approving layers exist' do
@@ -195,6 +196,7 @@ describe Event::Approver do
       expect(approval_abteilung).to be_rejected
       expect(approval_abteilung.comment).to eq 'not so good'
       expect(approval_abteilung.approver).to eq people(:bulei)
+      expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
       # expect(last_email).to be_present TODO
     end

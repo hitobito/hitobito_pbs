@@ -34,8 +34,7 @@ class Event::Approver
   # send email to all roles from affected layer(s) with permission :approve_applications
   def approve(comment, user)
     return unless primary_group.present?
-    open_approval.update!(approved: true, comment: comment, approver: user)
-
+    open_approval.update!(approved: true, comment: comment, approver: user, approved_at: Time.zone.now)
     _first, *rest = primary_group.layer_hierarchy.reverse.drop_while { |g| open_approval.layer_class != g.class }
 
     if rest.empty? || !find_next_approving_layer(rest.first)
@@ -52,7 +51,7 @@ class Event::Approver
   # update fields
   # set application#rejected to true
   def reject(comment, user)
-    open_approval.update!(rejected: true, comment: comment, approver: user)
+    open_approval.update!(rejected: true, comment: comment, approver: user, approved_at: Time.zone.now)
     participation.application.update!(rejected: true)
     #TODO: send_mail_to_rejecter(user)
   end
