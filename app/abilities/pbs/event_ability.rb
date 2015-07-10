@@ -21,15 +21,14 @@ module Pbs::EventAbility
       permission(:any).may(:index_participations_details).for_leaded_events
       permission(:group_full).may(:index_participations_details).in_same_group
       permission(:layer_and_below_full).may(:index_participations_details).in_same_layer_or_below
+
+      permission(:any).may(:list_completed_approvals).for_leaded_events
+      permission(:layer_and_below_full).may(:list_completed_approvals).in_same_layer_or_below
     end
   end
 
   def for_managed_events
     permission_in_event?(:event_full) && permission_in_event?(:qualify)
-  end
-
-  def if_permission_in_layer
-    (subject.roles & user.roles.collect(&:class)).present?
   end
 
 end

@@ -40,9 +40,7 @@ module HitobitoPbs
       Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
-      # load this class after all abilities have been defined
-      Ability.store.register Event::ApprovalAbility
-
+      ### Serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
 
@@ -50,6 +48,8 @@ module HitobitoPbs
         [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
          :j_s_number, :correspondence_language, :brother_and_sisters]
       RolesController.send :include, Pbs::RolesController
+      GroupsController.send :include, Pbs::GroupsController
+      EventsController.send :include, Pbs::EventsController
 
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
 
@@ -64,6 +64,7 @@ module HitobitoPbs
 
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group
+      Sheet::Event.send :include, Pbs::Sheet::Event
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

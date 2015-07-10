@@ -1,0 +1,3 @@
+#main
+  = table(@approvals) do |t|
+    - t.col { |a| link_to("#{a.approvee} #{a.event}", [a.event.groups.first, a.event, a.participation]) }

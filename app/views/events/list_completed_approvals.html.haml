@@ -1,0 +1,6 @@
+#main
+  = table(@approvals, class: 'table table-striped table-hover') do |t|
+    - t.col { |a| format_attr(a, :status) }
+    - t.attrs(:approvee, :approver)
+    - t.attr(:comment) { |a| simple_format(a.comment) }
+    - t.attrs(:approved_at)

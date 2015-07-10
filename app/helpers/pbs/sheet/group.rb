@@ -24,12 +24,10 @@ module Pbs::Sheet::Group
                        group.census? && view.can?(:evaluate_census, group)
                      }),
 
-      Sheet::Tab.new('groups.tabs.approvals',
-                     :approvals_group_path,
+     Sheet::Tab.new('groups.tabs.approvals',
+                     :pending_approvals_group_path,
                      if: lambda { |view, group|
-                       name = group.type.demodulize.downcase
-                       Event::Approval::LAYERS.include?(name) &&
-                         view.can?(:approve, Event::Approval.new(layer: name))
+                       group.layer? && view.can?(:list_pending_approvals, group)
                      }))
   end
 

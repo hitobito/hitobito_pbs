@@ -668,6 +668,9 @@ de:
 
       event/approval:
         comment: Kommentar
+        approvee: Teilnehmer
+        approver: Bearbeiter
+        approved_at: Datum
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch

@@ -48,14 +48,26 @@ class Event::Approval < ActiveRecord::Base
     "Group::#{layer.classify}".constantize
   end
 
+  def status
+    return :approved if approved?
+    return :rejected if rejected?
+  end
+
   class << self
 
     # List all pending approvals for a given layer group.
     def pending(layer)
       # TODO: test
+      includes(:approvee, :event).
       joins(approvee: :primary_group).
       where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
       where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
+    end
+
+    def completed(course)
+      joins(:approvee, :event).
+        where(events: { id: course.id }).
+        where('event_approvals.rejected = ? or event_approvals.approved = ?', true, true)
     end
 
   end
