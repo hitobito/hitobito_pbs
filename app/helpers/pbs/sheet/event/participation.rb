@@ -5,12 +5,17 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-module Pbs::GroupsController
+module Pbs::Sheet::Event::Participation
   extend ActiveSupport::Concern
 
-  def pending_approvals
-    authorize!(:pending_approvals, entry)
-    @approvals = Event::Approval.pending(entry).includes(:approvee, :event).order('events.id')
+  included do
+    tab 'global.tabs.info',
+        :group_event_participation_path,
+        no_alt: true
+
+    tab 'event.participations.tabs.approvals',
+        :completed_approvals_group_event_participation_path,
+        if: :completed_approvals
   end
 
 end

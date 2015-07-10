@@ -57,13 +57,13 @@ describe GroupsController do
     it "lists pending approvals for layer" do
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
       sign_in(people(:bulei))
-      get :list_pending_approvals, id: groups(:be).id
+      get :pending_approvals, id: groups(:be).id
       expect(assigns(:approvals)).to have(1).item
     end
 
     it "denies access to listing if not authorized" do
       sign_in(people(:bulei))
-      expect { get :list_pending_approvals, id: groups(:be).id }.to raise_error CanCan::AccessDenied
+      expect { get :pending_approvals, id: groups(:be).id }.to raise_error CanCan::AccessDenied
     end
   end
 

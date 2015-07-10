@@ -26,9 +26,7 @@ module Pbs::Sheet::Group
 
      Sheet::Tab.new('groups.tabs.approvals',
                      :pending_approvals_group_path,
-                     if: lambda { |view, group|
-                       group.layer? && view.can?(:list_pending_approvals, group)
-                     }))
+                     if: :pending_approvals))
   end
 
 end

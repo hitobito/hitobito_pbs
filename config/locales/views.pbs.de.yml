@@ -46,16 +46,12 @@ de:
 
   event:
     participations:
+      tabs:
+        approvals: Empfehlungen
       application_approval_dialog:
         approval_stored: Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
 
-
-
-
   events:
-    tabs:
-      approvals: Empfehlungen
-
     kind_pbs:
       event_kind_general_information: Kursart Informationen
     fields_pbs:

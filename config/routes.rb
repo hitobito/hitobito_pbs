@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
     resources :groups do
       member do
-        get 'pending_approvals' => 'groups#list_pending_approvals'
+        get 'pending_approvals' => 'groups#pending_approvals'
 
         scope module: 'census_evaluation' do
           get 'census/bund' => 'bund#index'
@@ -33,8 +33,10 @@ Rails.application.routes.draw do
       get 'member_counts' => 'member_counts#edit' # route required for language switch
 
       resources :events, only: [] do # do not redefine events actions, only add new ones
-        member do
-          get 'approvals' => 'events#list_completed_approvals'
+        resources :participations, only: [] do
+          member do
+            get 'completed_approvals' => 'event/participations#completed_approvals'
+          end
         end
       end
     end

@@ -10,7 +10,6 @@ require 'spec_helper'
 
 describe GroupAbility do
 
-
   subject { ability }
   let(:ability) { Ability.new(role.person.reload) }
 

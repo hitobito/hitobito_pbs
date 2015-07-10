@@ -22,7 +22,7 @@ module Pbs::GroupAbility
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
 
-      permission(:approve_applications).may(:list_pending_approvals).if_approver_in_group
+      permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_in_group
     end
   end
 
@@ -44,9 +44,9 @@ module Pbs::GroupAbility
     end
   end
 
-  def if_approver_in_group
+  def if_layer_and_approver_in_group
     user_roles = user.roles.collect(&:class)
     approving_group_roles = group.role_types.select { |type| type.permissions.include?(:approve_applications) }
-    (user_roles & approving_group_roles).present?
+    group.layer? && (user_roles & approving_group_roles).present?
   end
 end

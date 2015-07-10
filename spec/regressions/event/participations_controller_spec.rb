@@ -19,33 +19,71 @@ describe Event::ParticipationsController, type: :controller  do
   let(:application) { participation.create_application(priority_1: course) }
   let(:dom) { Capybara::Node::Simple.new(response.body) }
 
-  context 'bulei' do
+  context 'approve and reject buttons' do
     before do
-      sign_in(people(:bulei))
       application.approvals.create!(layer: 'abteilung')
       participant.update!(primary_group: groups(:pegasus))
     end
 
-    it 'hides approve and reject buttons' do
+    it 'bulei does not see approve and reject buttons' do
+      sign_in(people(:bulei))
+
       get :show, group_id: group.id, event_id: course.id, id: participation.id
       expect(dom).not_to have_content 'Freigeben'
       expect(dom).not_to have_content 'Ablehnen'
     end
-  end
 
-  context 'al schekka' do
-    before do
+    it 'al_schekka sees approve and reject buttons' do
       sign_in(al_schekka)
-      application.approvals.create!(layer: 'abteilung')
-      participant.update!(primary_group: groups(:pegasus))
-    end
 
-    it 'shows approve and reject buttons' do
       get :show, group_id: group.id, event_id: course.id, id: participation.id
       expect(dom).to have_content 'Freigeben'
       expect(dom).to have_content 'Ablehnen'
-
     end
   end
 
+  context 'pending approvals' do
+    before { participation.update(application: application) }
+
+    context 'al schekka' do
+      before { sign_in(al_schekka) }
+
+      it 'sees Empfehlungen Tab' do
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).to have_content 'Info'
+        expect(dom).to have_content 'Empfehlungen'
+      end
+
+      it 'sees approval info on participants list' do
+        Fabricate(Event::Course::Role::Participant.name, participation: participation)
+        application.update(approved: true)
+        participation.update(active: true)
+        get :index, group_id: group.id, event_id: course.id
+        expect(dom).to have_css('.badge.badge-success')
+        expect(dom).to have_content '✓'
+      end
+
+      it 'sees approvals list of participant' do
+        application.approvals.create!(layer: 'abteilung', comment: 'all good', approved: true, approver: al_schekka)
+        get :completed_approvals, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).to have_css('.badge.badge-success')
+        expect(dom).to have_content '✓'
+        expect(dom).to have_content 'all good'
+      end
+    end
+
+    context 'participant' do
+      before { sign_in(people(:child)) }
+
+      it 'does not see Empfehlungen Tab' do
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).to have_content 'Info'
+        expect(dom).not_to have_content 'Empfehlungen'
+      end
+
+      it 'cannot list approvals' do
+        expect { get :completed_approvals, group_id: group.id, event_id: course.id, id: participation.id }.to raise_error CanCan::AccessDenied
+      end
+    end
+  end
 end

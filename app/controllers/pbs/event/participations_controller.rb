@@ -5,15 +5,18 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-module Pbs::Sheet::Event
+module Pbs::Event::ParticipationsController
   extend ActiveSupport::Concern
 
-  included do
-    tabs.push(Sheet::Tab.new('events.tabs.approvals',
-                             :approvals_group_event_path,
-                             if: lambda { |view, group, event|
-                               view.can?(:list_completed_approvals, event)
-                             }))
+  def completed_approvals
+    authorize!(:completed_approvals, entry)
+    @approvals = load_approvals
+  end
+
+  private
+
+  def load_approvals
+    Event::Approval.where(application_id: entry.application_id).includes(:approver)
   end
 
 end

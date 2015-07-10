@@ -27,7 +27,6 @@ describe Event::ApplicationsController do
       expect { approve }.to raise_error CanCan::AccessDenied
     end
 
-
     it 'may not reject' do
       expect { reject }.to raise_error CanCan::AccessDenied
     end

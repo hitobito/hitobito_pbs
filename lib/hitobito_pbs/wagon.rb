@@ -31,6 +31,7 @@ module HitobitoPbs
       Event::Application.send :include, Pbs::Event::Application
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
+      Event::ParticipationFilter.load_entries_includes += [:application]
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
@@ -49,9 +50,9 @@ module HitobitoPbs
          :j_s_number, :correspondence_language, :brother_and_sisters]
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
-      EventsController.send :include, Pbs::EventsController
 
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
+      Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
 
       Event::KindsController.permitted_attrs += [:documents_text]
 
@@ -64,7 +65,7 @@ module HitobitoPbs
 
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group
-      Sheet::Event.send :include, Pbs::Sheet::Event
+      Sheet::Event::Participation.send :include, Pbs::Sheet::Event::Participation
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
