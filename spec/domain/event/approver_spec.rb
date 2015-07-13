@@ -52,12 +52,18 @@ describe Event::Approver do
       end
 
       it 'creates no Event::Approval and sends no emails if approvee has no primary group' do
-        person.update!(primary_group: nil)
-        expect { create_application }.to raise_error 'requires primary group'
+        person.primary_group = nil
+        person.save!
+
+        create_application
+        expect(Event::Approval.count).to eq(0)
+        expect(last_email).to be_nil
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
-        expect { approver.application_created }.to raise_error 'requires application'
+        approver.application_created
+        expect(Event::Approval.count).to eq(0)
+        expect(last_email).to be_nil
       end
 
       [{ abteilung: true, region: false, kantonalverband: false, bund: false,
