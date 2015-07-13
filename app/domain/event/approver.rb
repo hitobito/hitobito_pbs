@@ -18,7 +18,7 @@ class Event::Approver
   end
 
   def application_created
-    return unless primary_group and application
+    return unless primary_group && application
 
     layer_name = approval_layers.first
     approval = application.approvals.create!(layer: layer_name)
