@@ -66,7 +66,6 @@ module HitobitoPbs
 
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group
-      Sheet::Event::Participation.send :include, Pbs::Sheet::Event::Participation
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

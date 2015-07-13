@@ -4,13 +4,13 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
-= section_table(Role.model_name.human(count: 2), entry.roles.includes(:participation)) do |role|
-  %td asdf
+- if can?(:completed_approvals, entry) && entry.event.is_a?(Event::Course)
+  - if @errors
+    .alert.alert-error
+      %p= simple_format(@errors.flatten.join("\n"))
 
-- if can?(:completed_approvals, entry)
-  = section_table('foobar', @approvals) do |a|
-    %td
-      %strong= format_attr(a, :status)
-    %td= a.approver
+  = section_table(t('.approvals'), @approvals) do |a|
+    %td= format_attr(a, :status)
+    %td= format_attr(a, :approver)
     %td= simple_format(a.comment)
-    %td= simple_format(a.approved_at)
+    %td= format_attr(a, :approved_at)

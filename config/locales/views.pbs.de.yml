@@ -46,6 +46,9 @@ de:
 
   event:
     participations:
+      asides_pbs:
+        approvals: Empfehlungen
+      missing_preconditions: fehlende Vorbedingungen
       tabs:
         approvals: Empfehlungen
       application_approval_dialog:

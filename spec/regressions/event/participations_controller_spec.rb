@@ -48,10 +48,21 @@ describe Event::ParticipationsController, type: :controller  do
     context 'al schekka' do
       before { sign_in(al_schekka) }
 
-      it 'sees Empfehlungen Tab' do
+      it 'sees missing preconditions' do
+        event_kinds(:lpk).update(minimum_age: 21)
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).to have_content 'Info'
+
+        expect(dom).to have_content 'Vorbedingungen für Anmeldung sind nicht erfüllt.'
+      end
+
+      it 'sees Empfehlungen aside' do
+        application.approvals.create!(layer: 'abteilung', comment: 'all good', approved: true, approver: al_schekka)
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+
         expect(dom).to have_content 'Empfehlungen'
+        expect(dom).to have_css('.badge.badge-success')
+        expect(dom).to have_content '✓'
+        expect(dom).to have_content 'all good'
       end
 
       it 'sees approval info on participants list' do
@@ -62,27 +73,14 @@ describe Event::ParticipationsController, type: :controller  do
         expect(dom).to have_css('.badge.badge-success')
         expect(dom).to have_content '✓'
       end
-
-      it 'sees approvals list of participant' do
-        application.approvals.create!(layer: 'abteilung', comment: 'all good', approved: true, approver: al_schekka)
-        get :completed_approvals, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).to have_css('.badge.badge-success')
-        expect(dom).to have_content '✓'
-        expect(dom).to have_content 'all good'
-      end
     end
 
     context 'participant' do
       before { sign_in(people(:child)) }
 
-      it 'does not see Empfehlungen Tab' do
+      it 'does not see Empfehlungen aside' do
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).to have_content 'Info'
         expect(dom).not_to have_content 'Empfehlungen'
-      end
-
-      it 'cannot list approvals' do
-        expect { get :completed_approvals, group_id: group.id, event_id: course.id, id: participation.id }.to raise_error CanCan::AccessDenied
       end
     end
   end
