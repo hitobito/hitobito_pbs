@@ -50,6 +50,7 @@ module HitobitoPbs
          :j_s_number, :correspondence_language, :brother_and_sisters]
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
+      EventsController.send :include, Pbs::EventsController
 
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController

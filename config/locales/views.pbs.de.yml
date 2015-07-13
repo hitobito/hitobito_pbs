@@ -66,6 +66,8 @@ de:
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
+    show:
+      inform_by_email: Informieren
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.

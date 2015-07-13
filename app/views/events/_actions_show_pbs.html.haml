@@ -1,0 +1,2 @@
+- if can?(:update, entry) && entry.canceled?
+  = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
