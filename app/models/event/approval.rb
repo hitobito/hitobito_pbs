@@ -21,8 +21,8 @@
 
 class Event::Approval < ActiveRecord::Base
 
+  # ordering matters
   LAYERS = %w(abteilung region kantonalverband bund)
-
 
   self.demodulized_route_keys = true
 

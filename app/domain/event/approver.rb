@@ -8,71 +8,55 @@
 # Contains all the business logic for the approval process.
 class Event::Approver
 
-  attr_reader :participation, :application, :primary_group, :open_approval
+  attr_reader :participation, :application, :primary_group, :open_approval, :hierarchy, :approval_layers
 
   def initialize(participation)
     @participation = participation
-    @primary_group = participation.person.primary_group
-    @application = participation.application
-    @open_approval = find_next_open_approval if application
+    @primary_group = participation.person.primary_group || fail('requires primary group')
+    @application = participation.application || fail('requires application')
+    @approval_layers = find_approval_layers
+    @open_approval = find_current_open_approval
   end
 
   def application_created
-    layer = first_layer_requiring_approval
-    if layer.present? && application.present?
-      approval = application.approvals.create!(layer: name_of_layer(layer))
-      send_approval_request(layer, approval)
-    end
+    layer_name = approval_layers.first
+    approval = application.approvals.create!(layer: layer_name)
+    send_approval_request(layer_name, approval)
   end
 
-  # rubocop:disable all
-  # gemäss 4.103, 4.108
-  # find Event::Approval for given layer
-  # update fields
-  # if no next layer, set application#approved to true and return
-  # create Event::Approval for next layer from which approval is required (and which has existing :approve_applications roles)
-  # send email to all roles from affected layer(s) with permission :approve_applications
   def approve(comment, user)
-    return unless primary_group.present?
     open_approval.update!(approved: true, comment: comment, approver: user, approved_at: Time.zone.now)
-    _first, *rest = primary_group.layer_hierarchy.reverse.drop_while { |g| open_approval.layer_class != g.class }
+    next_layer_name = approval_layers.drop_while { |layer| layer != open_approval.layer }.second
 
-    if rest.empty? || !find_next_approving_layer(rest.first)
-      application.update!(approved: true)
+    if next_layer_name
+      approval = application.approvals.create!(layer: next_layer_name)
+      send_approval_request(next_layer_name, approval)
     else
-      layer = find_next_approving_layer(rest.first)
-      approval = application.approvals.create!(layer: name_of_layer(layer))
-      send_approval_request(layer, approval)
+      application.update!(approved: true)
     end
   end
 
-  # gemäss 4.1010
-  # find Event::Approval for given layer
-  # update fields
-  # set application#rejected to true
   def reject(comment, user)
     open_approval.update!(rejected: true, comment: comment, approver: user, approved_at: Time.zone.now)
     participation.application.update!(rejected: true)
-    #TODO: send_mail_to_rejecter(user)
   end
-  # rubocop:enable all
 
   private
 
-  def first_layer_requiring_approval
-    return unless primary_group.present?
-
-    find_next_approving_layer(primary_group)
+  def find_approval_layers
+    Event::Approval::LAYERS.select { |name| event_requires_approval_from?(name) && required?(name) }
   end
 
-  def find_next_open_approval
+  def required?(layer_name)
+    hierarchy.any? { |g| g.layer_group.class.name.demodulize.downcase == layer_name &&  group_has_approvers?(g) }
+  end
+
+  def hierarchy
+    @hierarchy ||= primary_group.layer_hierarchy.reverse
+  end
+
+  def find_current_open_approval
     application.approvals.find_by(approved: false, rejected: false)
-  end
-
-  def find_next_approving_layer(group)
-    group.layer_hierarchy.reverse.find do |g|
-      event_requires_approval_from?(name_of_layer(g)) && group_has_approvers?(g)
-    end
   end
 
   def event_requires_approval_from?(layer_name)
@@ -94,12 +78,8 @@ class Event::Approver
     end
   end
 
-  def name_of_layer(group)
-    group.layer_group.class.name.demodulize.downcase
-  end
-
-  def send_approval_request(layer, approval)
-    Event::ApprovalRequestJob.new(name_of_layer(layer), approval.participation).enqueue!
+  def send_approval_request(layer_name, approval)
+    Event::ApprovalRequestJob.new(layer_name, approval.participation).enqueue!
   end
 
 end
