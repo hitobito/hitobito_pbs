@@ -62,7 +62,7 @@ describe Event::Approver do
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
-        expect { approver.application_created }.to raise_error 'requires application'
+        approver.application_created
         expect(Event::Approval.count).to eq(0)
         Delayed::Worker.new.work_off
         expect(Event::ParticipationMailer).to_not have_received(:approval)
