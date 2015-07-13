@@ -21,7 +21,8 @@ module Pbs::Event::ApplicationsController
 
   def reject_with_approver
     approver.reject(permitted_params[:comment], current_user)
-    flash[:notice] = translate(:rejected)
+    flash[:notice] = [translate(:rejected),
+                      translate(:rejected_inform_participant, participant: participation.person)]
     redirect_to group_event_participation_path(group, participation.event_id, participation)
   end
 

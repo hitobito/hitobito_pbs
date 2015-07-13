@@ -51,6 +51,9 @@ de:
       application_approval_dialog:
         approval_stored: Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
 
+  event/applications:
+    rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
+
   events:
     kind_pbs:
       event_kind_general_information: Kursart Informationen

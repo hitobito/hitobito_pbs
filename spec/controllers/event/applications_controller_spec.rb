@@ -65,7 +65,8 @@ describe Event::ApplicationsController do
       it { is_expected.to redirect_to(group_event_participation_path(group, course, participation)) }
 
       it 'sets flash' do
-        expect(flash[:notice]).to match(/abgelehnt/)
+        expect(flash[:notice].first).to match(/abgelehnt/)
+        expect(flash[:notice].second).to match(/Bitte informiere .* persönlich/)
       end
 
       it 'rejects application' do
