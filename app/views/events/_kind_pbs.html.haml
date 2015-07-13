@@ -1,2 +1,2 @@
-- if entry.kind
+- if entry.kind && entry.kind.general_information.present?
   = labeled(t('.event_kind_general_information'), format_attr(entry.kind, :general_information))
