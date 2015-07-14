@@ -48,13 +48,6 @@ describe Event::ParticipationsController, type: :controller  do
     context 'al schekka' do
       before { sign_in(al_schekka) }
 
-      it 'sees missing preconditions' do
-        event_kinds(:lpk).update(minimum_age: 21)
-        get :show, group_id: group.id, event_id: course.id, id: participation.id
-
-        expect(dom).to have_content 'Vorbedingungen für Anmeldung sind nicht erfüllt.'
-      end
-
       it 'sees Empfehlungen aside' do
         application.approvals.create!(layer: 'abteilung', comment: 'all good', approved: true, approver: al_schekka)
         get :show, group_id: group.id, event_id: course.id, id: participation.id

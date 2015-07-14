@@ -10,7 +10,6 @@ module Pbs::Event::ParticipationsController
 
   included do
     before_render_show :load_approvals
-    before_render_show :populate_errors
     before_render_form :inform_about_email_sent_to_participant
 
     alias_method_chain :send_confirmation_email, :current_user
@@ -20,11 +19,6 @@ module Pbs::Event::ParticipationsController
 
   def load_approvals
     @approvals = Event::Approval.where(application_id: entry.application_id).includes(:approver)
-  end
-
-  def populate_errors
-    checker = Event::PreconditionChecker.new(entry.event, entry.person)
-    @errors = checker.errors_text unless checker.valid?
   end
 
   def send_confirmation_email_with_current_user
