@@ -178,8 +178,8 @@ describe Event::Approver do
       expect(application.approvals.size).to eq 2
       # expect(last_email).to be_present TODO
 
-      approval_abteilung = application.approvals.find_by_layer('abteilung')
-      approval_bund = application.approvals.find_by_layer('bund')
+      approval_abteilung = application.approvals.find_by_layer!('abteilung')
+      approval_bund = application.approvals.find_by_layer!('bund')
 
       expect(approval_abteilung).to be_approved
       expect(approval_bund).not_to be_approved

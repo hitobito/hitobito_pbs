@@ -15,7 +15,18 @@ describe Event::ApprovalRequestJob do
               group: groups(:schekka),
               person: Fabricate(:person, primary_group: groups(:schekka))).person
   end
-  let(:participation) { Fabricate(:event_participation, person: person, event: course) }
+  let(:participation) do
+    Fabricate(:event_participation,
+              person: person,
+              event: course,
+              application: application)
+  end
+  let(:application) do
+    Fabricate(:event_application,
+              priority_1: course,
+              priority_2: course)
+  end
+
 
   let(:mailer) { spy('mailer') }
 
@@ -24,7 +35,7 @@ describe Event::ApprovalRequestJob do
     SeedFu.seed [Rails.root.join('db', 'seeds')]
   end
 
-  subject(:job) { Event::ApprovalRequestJob.new(layer, participation) }
+  subject(:job) { Event::ApprovalRequestJob.new(participation) }
 
   context '#send_approval' do
     let(:layer) { 'region' }
@@ -34,7 +45,7 @@ describe Event::ApprovalRequestJob do
     it 'sends mail to all approvers in layer' do
       # Make sure there are no seeded persons with approval permissions
       approval_roles = [Group::Region::Regionalleitung, Group::Region::VerantwortungAusbildung]
-      groups(:schekka).people.where(roles: { type: approval_roles }).delete_all
+      groups(:schekka).people.where(roles: { type: approval_roles }).destroy_all
 
       leitung = Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern)).person
       ausbildung = Fabricate(Group::Region::VerantwortungAusbildung.name,
@@ -45,6 +56,8 @@ describe Event::ApprovalRequestJob do
       Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
       Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
+
+      application.approvals.create!(layer: layer)
 
       expect(Event::ParticipationMailer).to receive(:approval) do |participation, people|
         expect(participation).to eq(participation)

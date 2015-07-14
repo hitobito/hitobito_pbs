@@ -38,7 +38,7 @@ class Event::Approval < ActiveRecord::Base
 
   ### VALIDATIONS
 
-  validates :layer, inclusion: LAYERS
+  validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id }
 
   def roles
     layer_class.roles.select { |role| role.permissions.include?(:approve_applications) }

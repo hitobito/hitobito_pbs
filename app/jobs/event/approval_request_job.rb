@@ -7,11 +7,10 @@
 
 class Event::ApprovalRequestJob < BaseJob
 
-  self.parameters = [:layer_name, :participation_id, :locale]
+  self.parameters = [:participation_id, :locale]
 
-  def initialize(layer_name, participation)
+  def initialize(participation)
     super()
-    @layer_name = layer_name
     @participation_id = participation.id
   end
 
@@ -23,36 +22,18 @@ class Event::ApprovalRequestJob < BaseJob
   end
 
   def send_approval
-    if participation.event.send("requires_approval_#{@layer_name}?")
-      recipients = approvers
-      if recipients.exists?
-        Event::ParticipationMailer.approval(participation, recipients).deliver
-      end
+    recipients = approvers
+    if recipients.present?
+      Event::ParticipationMailer.approval(participation, recipients).deliver
     end
   end
 
   def approvers
-    approver_group_ids = primary_group.hierarchy.where(type: layer_type.sti_name).pluck(:id)
-    approver_types = layer_type.role_types.select do |role_type|
-      role_type.permissions.include?(:approve_applications)
-    end
-
-    Person.only_public_data.
-           joins(roles: :group).
-           where(roles: { type: approver_types, deleted_at: nil },
-                 groups: { id: approver_group_ids }).
-           uniq
+    Event::Approver.new(participation).current_approvers.only_public_data.to_a
   end
 
   def participation
     @participation ||= Event::Participation.find(@participation_id)
   end
 
-  def primary_group
-    @primary_group ||= participation.person.primary_group
-  end
-
-  def layer_type
-    @layer_type ||= "Group::#{@layer_name.classify}".constantize
-  end
 end

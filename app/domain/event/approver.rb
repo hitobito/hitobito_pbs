@@ -8,79 +8,88 @@
 # Contains all the business logic for the approval process.
 class Event::Approver
 
-  attr_reader :participation, :application, :primary_group, :open_approval, :hierarchy
+  attr_reader :participation
 
   def initialize(participation)
     @participation = participation
-    @primary_group = participation.person.primary_group
-    @application = participation.application
-    @open_approval = find_current_open_approval if application
   end
 
   def application_created
     return unless primary_group && application
-    layer_name = approval_layers.first
 
+    layer_name = next_approval_layer
     if layer_name
-      approval = application.approvals.create!(layer: layer_name)
-      send_approval_request(layer_name, approval)
+      request_approval(layer_name)
     end
   end
 
   def approve(comment, user)
     return unless primary_group
-      open_approval.update!(approved: true, comment: comment, approver: user, approved_at: Time.zone.now)
-      next_layer_name = approval_layers.drop_while { |layer| layer != open_approval.layer }.second
 
-      if next_layer_name
-        approval = application.approvals.create!(layer: next_layer_name)
-        send_approval_request(next_layer_name, approval)
-      else
-        application.update!(approved: true)
-      end
+    update_approval(true, comment, user)
+
+    next_layer_name = next_approval_layer
+    if next_layer_name
+      request_approval(next_layer_name)
+    else
+      application.update!(approved: true)
+    end
   end
 
   def reject(comment, user)
-    open_approval.update!(rejected: true, comment: comment, approver: user, approved_at: Time.zone.now)
-    participation.application.update!(rejected: true)
+    update_approval(false, comment, user)
+    application.update!(rejected: true)
+  end
+
+  def open_approval
+    @open_approval ||= application.approvals.find_by(approved: false, rejected: false)
+  end
+
+  def current_approvers
+    approvers_for_layer(open_approval.layer)
   end
 
   private
 
-  def approval_layers
-    @approval_layers ||= find_approval_layers
-  end
-
-  def find_approval_layers
-    Event::Approval::LAYERS.select do |layer_name|
+  def next_approval_layer
+    unapproved_layers.find do |layer_name|
       event_requires_approval_from?(layer_name) &&
-        hierarchy_has_layer_with_approvers?(layer_name)
+        approvers_for_layer(layer_name).exists?
     end
   end
 
-  def hierarchy_has_layer_with_approvers?(layer_name)
-    hierarchy.any? { |g| g.layer_group.class.name.demodulize.downcase == layer_name &&  group_has_approvers?(g) }
+  def unapproved_layers
+    if open_approval
+      approved_to = Event::Approval::LAYERS.find_index(open_approval.layer) + 1
+      Event::Approval::LAYERS[approved_to..-1]
+    else
+      Event::Approval::LAYERS
+    end
   end
 
-  def hierarchy
-    @hierarchy ||= primary_group.layer_hierarchy.reverse
+  def request_approval(layer_name)
+    approval = application.approvals.create!(layer: layer_name)
+    send_approval_request(layer_name, approval)
   end
 
-  def find_current_open_approval
-    application.approvals.find_by(approved: false, rejected: false)
+  def update_approval(approved, comment, user)
+    attr = approved ? :approved : :rejected
+    open_approval.update!(attr => true,
+                          comment: comment,
+                          approver: user,
+                          approved_at: Time.zone.now)
   end
 
-  def event_requires_approval_from?(layer_name)
-    participation.event.send("requires_approval_#{layer_name}?")
-  end
+  def approvers_for_layer(layer_name)
+    groups = hierarchy.select { |g| g.class.name.demodulize.downcase == layer_name }
+    return Person.none if groups.blank?
 
-  def group_has_approvers?(group)
-    approvers_of_group(group).exists?
-  end
-
-  def approvers_of_group(group)
-    role_types = approver_role_types_of(group.layer_group.class)
-    group.people.where(roles: { type: role_types.collect(&:sti_name), deleted_at: nil })
+    role_types = approver_role_types_of(groups.first.class)
+    Person.joins(:roles).
+           where(roles: { group_id: groups.collect(&:id),
+                          type: role_types.collect(&:sti_name),
+                          deleted_at: nil }).
+           uniq
   end
 
   def approver_role_types_of(layer_type)
@@ -89,8 +98,24 @@ class Event::Approver
     end
   end
 
+  def hierarchy
+    @hierarchy ||= primary_group.layer_hierarchy.reverse
+  end
+
+  def application
+    participation.application
+  end
+
+  def primary_group
+    participation.person.primary_group
+  end
+
+  def event_requires_approval_from?(layer_name)
+    participation.event.send("requires_approval_#{layer_name}?")
+  end
+
   def send_approval_request(layer_name, approval)
-    Event::ApprovalRequestJob.new(layer_name, approval.participation).enqueue!
+    Event::ApprovalRequestJob.new(participation).enqueue!
   end
 
 end
