@@ -15,7 +15,7 @@ module Pbs::EventsController
   private
 
   def canceled?
-    entry.canceled?
+    entry.course_kind? && entry.canceled?
   end
 
   def load_participation_emails
