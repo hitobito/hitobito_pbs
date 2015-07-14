@@ -23,13 +23,6 @@ module Pbs::Event::Course
     self.possible_states = %w(created confirmed application_open application_closed
                               assignment_closed canceled completed closed)
 
-    class_attribute :superior_attributes
-    self.superior_attributes = [:express_fee, :training_days]
-
-    ### VALIDATIONS
-
-    validates :state, inclusion: possible_states
-
     # Define methods to query if a course is in the given state.
     # eg course.canceled?
     possible_states.each do |state|
@@ -37,6 +30,15 @@ module Pbs::Event::Course
         self.state == state
       end
     end
+
+    class_attribute :superior_attributes
+    self.superior_attributes = [:express_fee, :training_days]
+
+
+    ### VALIDATIONS
+
+    validates :state, inclusion: possible_states
+
 
     ### CALLBACKS
 

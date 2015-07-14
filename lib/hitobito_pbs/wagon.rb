@@ -28,6 +28,7 @@ module HitobitoPbs
       Person.send       :include, Pbs::Person
       Role.send         :include, Pbs::Role
       Event::Course.send :include, Pbs::Event::Course
+      Event::Participation.send :include, Pbs::Event::Participation
       Event::Application.send :include, Pbs::Event::Application
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
@@ -41,7 +42,7 @@ module HitobitoPbs
       Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
-      ### Serializers
+      ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
 
@@ -62,6 +63,7 @@ module HitobitoPbs
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
 
       ### decorators
+      Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
 
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group

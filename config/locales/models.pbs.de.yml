@@ -688,6 +688,16 @@ de:
       event/kind:
         documents_text: Zusatzformulare
 
+      event/participation:
+        states:
+          tentative: Provisorisch
+          applied: Angemeldet
+          assigned: Zugeteilt
+          rejected: Abgelehnt
+          canceled: Abgemeldet
+          attended: Teilgenommen
+          absent: Nicht erschienen
+
       person:
         nickname: Pfadiname
         pbs_number: PBS Personennummer
