@@ -10,6 +10,7 @@ module Pbs::EventsController
 
   included do
     before_render_show :load_participation_emails, if: :canceled?
+    alias_method_chain :permitted_attrs, :superior_check
   end
 
   private
@@ -22,4 +23,21 @@ module Pbs::EventsController
     @emails = entry.participations.includes(:person).pluck('people.email').uniq
   end
 
+  def permitted_attrs_with_superior_check
+    attrs = entry.class.used_attributes.dup
+    attrs += self.class.permitted_attrs
+    if entry.class.superior_attributes.present? && !superior_role?
+      attrs -= entry.class.superior_attributes
+    end
+    attrs
+  end
+
+  def superior_role?
+    current_user.roles.any? { |role| superior_roles.include?(role.class) }
+  end
+
+  def superior_roles
+    [Group::Bund::AssistenzAusbildung,
+     Group::Bund::MitarbeiterGs]
+  end
 end

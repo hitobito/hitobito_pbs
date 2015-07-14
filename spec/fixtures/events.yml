@@ -44,3 +44,9 @@ top_course:
   priorization: true
   requires_approval: true
   external_applications: true
+
+bund_course:
+  name: Bund Kurs
+  groups: bund
+  kind: lpk
+  type: Event::Course

@@ -62,7 +62,6 @@ module HitobitoPbs
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
 
       ### decorators
-      ApplicationDecorator.send :include, Pbs::ApplicationDecorator
 
       ### helpers
       Sheet::Group.send :include, Pbs::Sheet::Group

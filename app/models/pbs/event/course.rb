@@ -23,6 +23,9 @@ module Pbs::Event::Course
     self.possible_states = %w(created confirmed application_open application_closed
                               assignment_closed canceled completed closed)
 
+    class_attribute :superior_attributes
+    self.superior_attributes = [:express_fee, :training_days]
+
     ### VALIDATIONS
 
     validates :state, inclusion: possible_states
