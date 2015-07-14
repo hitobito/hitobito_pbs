@@ -21,7 +21,7 @@ module Pbs::Event::ParticipationsController
 
   def populate_errors
     checker = Event::PreconditionChecker.new(entry.event, entry.person)
-    @errors = checker.errors_text if !checker.valid?
+    @errors = checker.errors_text unless checker.valid?
   end
 
 end
