@@ -13,28 +13,35 @@ describe EventAbility do
     Ability.new(person.reload)
   end
 
-  context 'event creation' do
-    allowed_roles = [[:patria, 'Abteilungsleitung'],
+  context 'event creation/update' do
+    allowed_roles = [
+                     # abteilung
+                     [:patria, 'Abteilungsleitung'],
                      [:patria, 'AbteilungsleitungStv'],
                      [:patria, 'Sekretariat'],
+                     # kantonalverband
                      [:be, 'Kantonsleitung'],
                      [:be, 'VerantwortungAusbildung'],
                      [:be, 'Sekretariat'],
+                     # region
                      [:bern, 'Regionalleitung'],
                      [:bern, 'VerantwortungAusbildung'],
                      [:bern, 'Sekretariat'],
-                     [:bund, 'Mitarbeiter'],
-                     [:bund, 'Sekretariat']
-                     # TODO in den Anforderungen sind noch: Ausbildungssekretariat / Assistenz, Ausbildung Sekretariat, welche Rollen sind das genau ?
+                     # bund
+                     [:bund, 'MitarbeiterGs'],
+                     [:bund, 'Sekretariat'],
+                     [:bund, 'AssistenzAusbildung']
     ]
 
     allowed_roles.each do |r| 
-      it "#{r.second} should be allowed to create event in group #{r.first.to_s}" do
+
+      it "#{r.second} should be allowed to create/update event in group #{r.first.to_s}" do
         group = groups(r.first)
         role_name = group.class.name + '::' + r.second
         person = Fabricate(role_name, group: group).person
         event = Fabricate(:event, groups: [group])
         expect(ability(person)).to be_able_to(:create, event)
+        expect(ability(person)).to be_able_to(:update, event)
       end
     end
   end

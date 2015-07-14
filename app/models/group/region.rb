@@ -137,7 +137,7 @@ class Group::Region < Group
   end
 
   class VerantwortungAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data, :approve_applications]
+    self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
   end
 
   class VerantwortungBetreuung < ::Role

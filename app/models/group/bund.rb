@@ -70,7 +70,7 @@ class Group::Bund < Group
   end
 
   class AssistenzAusbildung < ::Role
-    self.permissions = [:layer_read]
+    self.permissions = [:layer_full]
   end
 
   class Beisitz < ::Role
