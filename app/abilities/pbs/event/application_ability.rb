@@ -15,8 +15,10 @@ module Pbs::Event::ApplicationAbility
   end
 
   def for_approvals_in_layer
-    if subject.next_open_approval
-      (subject.next_open_approval.roles & user.roles.collect(&:class)).present?
+    if subject.next_open_approval && subject.participation.person.primary_group
+      approving_roles = subject.next_open_approval.roles
+      layer_ids = subject.participation.person.primary_group.layer_hierarchy.collect(&:id)
+      user.roles.any? { |role| approving_roles.include?(role.class) && layer_ids.include?(role.group_id) }
     end
   end
 
