@@ -38,8 +38,7 @@ describe EventsController, type: :controller  do
     sign_in(bulei)
     course.update!(state: 'canceled')
     get :show, group_id: group.id, id: course.id
-    link = dom.find_link 'Informieren'
-    expect(link[:href]).to eq 'mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com'
+    expect(response.body).to match(/mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com/)
   end
 
 end
