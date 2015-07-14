@@ -47,6 +47,6 @@ module Pbs::GroupAbility
   def if_layer_and_approver_in_group
     user_roles = user.roles.collect(&:class)
     approving_group_roles = group.role_types.select { |type| type.permissions.include?(:approve_applications) }
-    group.layer? && contains_any?(user_roles & approving_group_roles)
+    group.layer? && contains_any?(user_roles, approving_group_roles)
   end
 end
