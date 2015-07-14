@@ -10,7 +10,10 @@ module Pbs::GroupsController
 
   def pending_approvals
     authorize!(:pending_approvals, entry)
-    @approvals = Event::Approval.pending(entry).includes(:approvee, :event).order('events.id')
+    @approvals = Event::Approval.pending(entry).
+      includes(:participation, :approvee, event: [:dates]).
+      order('event_dates.start_at DESC').
+      group_by(&:event)
   end
 
 end
