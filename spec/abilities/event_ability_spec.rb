@@ -9,41 +9,40 @@ require 'spec_helper'
 
 describe EventAbility do
 
-  let(:user)    { role.person }
-  let(:group)   { groups(:be) }
-  let(:event)   { Fabricate(:event, groups: [group]) }
-
   def ability(person)
     Ability.new(person.reload)
   end
 
-  def create(event_role_type, person)
-    participation = Fabricate(:event_participation, person: person, event: event)
-    Fabricate(event_role_type.name, participation: participation)
-  end
+  context 'event creation/update' do
+    allowed_roles = [
+                     # abteilung
+                     [:patria, 'Abteilungsleitung'],
+                     [:patria, 'AbteilungsleitungStv'],
+                     [:patria, 'Sekretariat'],
+                     # kantonalverband
+                     [:be, 'Kantonsleitung'],
+                     [:be, 'VerantwortungAusbildung'],
+                     [:be, 'Sekretariat'],
+                     # region
+                     [:bern, 'Regionalleitung'],
+                     [:bern, 'VerantwortungAusbildung'],
+                     [:bern, 'Sekretariat'],
+                     # bund
+                     [:bund, 'MitarbeiterGs'],
+                     [:bund, 'Sekretariat'],
+                     [:bund, 'AssistenzAusbildung']
+    ]
 
-  context 'index_participations_details on event in group ' do
-    it 'Group::Bund::MitarbeiterGs is allowed because of :layer_and_below_full' do
-      expect(ability(people(:bulei))).to be_able_to(:index_participations_details, event)
-    end
+    allowed_roles.each do |r| 
 
-    it 'Group::Kantonalverband::Kantonsleitung is allowed because of :group_full' do
-      person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: group).person
-      expect(ability(person)).to be_able_to(:index_participations_details, event)
-    end
-
-    it 'Group::Abteilung::Abteilungsleitung with leader role is allowed' do
-      person = people(:al_schekka)
-      create(Event::Role::Leader, person)
-
-      expect(ability(person)).to be_able_to(:index_participations_details, event)
-    end
-
-    it 'Group::Abteilung::Abteilungsleitung with participation role is not allowed' do
-      person = people(:al_schekka)
-      create(Event::Role::Participant, person)
-
-      expect(ability(person)).not_to be_able_to(:index_participations_details, event)
+      it "#{r.second} should be allowed to create/update event in group #{r.first.to_s}" do
+        group = groups(r.first)
+        role_name = group.class.name + '::' + r.second
+        person = Fabricate(role_name, group: group).person
+        event = Fabricate(:event, groups: [group])
+        expect(ability(person)).to be_able_to(:create, event)
+        expect(ability(person)).to be_able_to(:update, event)
+      end
     end
   end
 

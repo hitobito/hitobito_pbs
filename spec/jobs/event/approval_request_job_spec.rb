@@ -10,10 +10,12 @@ require 'spec_helper'
 describe Event::ApprovalRequestJob do
 
   let(:course) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk)) }
+  let(:role) { Group::Abteilung::Sekretariat.name }
+  let(:group) { groups(:schekka) }
   let(:person) do
-    Fabricate(Group::Abteilung::Sekretariat.name,
-              group: groups(:schekka),
-              person: Fabricate(:person, primary_group: groups(:schekka))).person
+    Fabricate(role,
+              group: group,
+              person: Fabricate(:person, primary_group: group)).person
   end
   let(:participation) do
     Fabricate(:event_participation,
@@ -66,6 +68,58 @@ describe Event::ApprovalRequestJob do
         mailer
       end
       job.perform
+    end
+  end
+
+  context '#approvers' do
+    before do
+      # Make sure there are no seeded persons with approval permissions
+      approver_types = Role.types_with_permission(:approve_applications).collect(&:sti_name)
+      Person.joins(roles: :group).where(roles: { type: approver_types })
+
+      Fabricate(Group::Abteilung::Abteilungsleitung.name, group: abteilung)
+      Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
+      Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
+    end
+
+    let(:region1) { groups(:be).children.create!(name: 'region1', type: Group::Region.sti_name) }
+    let(:region2) { region1.children.create!(name: 'region2', type: Group::Region.sti_name) }
+    let(:region3) { region2.children.create!(name: 'region3', type: Group::Region.sti_name) }
+    let(:abteilung) { region3.children.create!(name: 'abteilung', type: Group::Abteilung.sti_name) }
+    let(:group) { abteilung.children.create!(name: 'woelfe', type: Group::Woelfe.sti_name) }
+
+    let(:layer) { 'region' }
+    let(:role) { Group::Woelfe::Wolf.name }
+    let(:approvers) { job.approvers }
+
+    it 'returns approvers of all regions in hierarchy' do
+      Fabricate(Group::Region::Regionalleitung.name, group: region1)
+      Fabricate(Group::Region::Regionalleitung.name, group: region2)
+      Fabricate(Group::Region::VerantwortungAusbildung.name, group: region2)
+      Fabricate(Group::Region::Regionalleitung.name, group: region3)
+      expect(approvers.length).to eq(4)
+    end
+
+    it 'does not return approvers twice' do
+      p = Fabricate(Group::Region::Regionalleitung.name, group: region1).person
+      Fabricate(Group::Region::Regionalleitung.name, group: region2, person: p)
+      expect(approvers.length).to eq(1)
+    end
+
+    it 'does not return non-approvers or approvers from other regions' do
+      Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern))
+      Fabricate(Group::Region::Coach.name, group: region2)
+      expect(approvers.length).to eq(0)
+    end
+
+    it 'is fine with regions that have no approvers' do
+      Fabricate(Group::Region::Regionalleitung.name, group: region2)
+      Fabricate(Group::Region::Regionalleitung.name, group: region3)
+      expect(approvers.length).to eq(2)
+    end
+
+    it 'returns no approver if no region in hierarchy has an approver' do
+      expect(approvers.length).to eq(0)
     end
   end
 

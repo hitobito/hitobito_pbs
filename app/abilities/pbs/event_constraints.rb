@@ -15,6 +15,10 @@ module Pbs::EventConstraints
     at_least_one_group_not_deleted && not_closed_or_admin
   end
 
+  def for_managed_events
+    permission_in_event?(:event_full) && permission_in_event?(:qualify)
+  end
+
   private
 
   def closed_course?

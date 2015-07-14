@@ -34,7 +34,8 @@ describe Event::Approver do
     it 'creates no Event::Approval and sends no emails if no approval is required' do
       create_application
       expect(Event::Approval.count).to eq(0)
-      expect(last_email).to be_nil
+      Delayed::Worker.new.work_off
+      expect(Event::ParticipationMailer).to_not have_received(:approval)
     end
 
     context 'approval required' do
@@ -56,13 +57,15 @@ describe Event::Approver do
         create_application
 
         expect(Event::Approval.count).to eq(0)
-        expect(last_email).to be_nil
+        Delayed::Worker.new.work_off
+        expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
         approver.application_created
         expect(Event::Approval.count).to eq(0)
-        expect(last_email).to be_nil
+        Delayed::Worker.new.work_off
+        expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
       it 'creates no Event::Approval and sends no emails if required layer is not in hiearchy' do
@@ -143,10 +146,11 @@ describe Event::Approver do
         create_application
         Delayed::Worker.new.work_off
 
-        expect(Event::ParticipationMailer).to have_received(:approval) do |participation, people|
-          expect(participation).to eq(participation)
-          expect(people.length).to eq(1)
-        end
+        expect(Event::ParticipationMailer).
+          to have_received(:approval).once do |participation, people|
+            expect(participation).to eq(participation)
+            expect(people.length).to eq(1)
+          end
       end
     end
   end
@@ -165,6 +169,9 @@ describe Event::Approver do
       expect(approval_abteilung.comment).to eq 'all good'
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
+
+      Delayed::Worker.new.work_off
+      expect(Event::ParticipationMailer).to have_received(:approval).once
     end
 
     it 'updates approval, sends email creates additional approval if more approving layers exist' do
@@ -176,7 +183,6 @@ describe Event::Approver do
 
       expect(application.reload).not_to be_approved
       expect(application.approvals.size).to eq 2
-      # expect(last_email).to be_present TODO
 
       approval_abteilung = application.approvals.find_by_layer!('abteilung')
       approval_bund = application.approvals.find_by_layer!('bund')
@@ -187,6 +193,12 @@ describe Event::Approver do
       approver = Event::Approver.new(participation.reload)
       approver.approve('all good', people(:bulei))
       expect(approval_bund.reload).to be_approved
+
+      Delayed::Worker.new.work_off
+      expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation, people|
+        expect(participation).to eq(participation)
+        expect(people.length).to eq(1)
+      end
     end
   end
 
@@ -198,14 +210,14 @@ describe Event::Approver do
       expect(application.reload).to be_rejected
       expect(application.approvals.size).to eq 1
 
-
       approval_abteilung = application.approvals.find_by_layer('abteilung')
       expect(approval_abteilung).to be_rejected
       expect(approval_abteilung.comment).to eq 'not so good'
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
-      # expect(last_email).to be_present TODO
+      Delayed::Worker.new.work_off
+      expect(Event::ParticipationMailer).to have_received(:approval).once
     end
 
   end

@@ -5,10 +5,6 @@
 - #  https://github.com/hitobito/hitobito_pbs.
 
 - if can?(:completed_approvals, entry) && entry.event.is_a?(Event::Course)
-  - if @errors
-    .alert.alert-error
-      %p= simple_format(@errors.flatten.join("\n"))
-
   = section_table(t('.approvals'), @approvals) do |a|
     %td= format_attr(a, :status)
     %td= format_attr(a, :approver)
