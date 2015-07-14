@@ -52,16 +52,23 @@ describe Event::Approver do
       end
 
       it 'creates no Event::Approval and sends no emails if approvee has no primary group' do
-        person.primary_group = nil
-        person.save!
-
+        person.update!(primary_group_id: nil)
         create_application
+
         expect(Event::Approval.count).to eq(0)
         expect(last_email).to be_nil
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
         approver.application_created
+        expect(Event::Approval.count).to eq(0)
+        expect(last_email).to be_nil
+      end
+
+      it 'creates no Event::Approval and sends no emails if required layer is not in hiearchy' do
+        person.update!(primary_group_id: groups(:bund).id)
+        create_application
+
         expect(Event::Approval.count).to eq(0)
         expect(last_email).to be_nil
       end

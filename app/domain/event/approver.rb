@@ -19,10 +19,12 @@ class Event::Approver
 
   def application_created
     return unless primary_group && application
-
     layer_name = approval_layers.first
-    approval = application.approvals.create!(layer: layer_name)
-    send_approval_request(layer_name, approval)
+
+    if layer_name
+      approval = application.approvals.create!(layer: layer_name)
+      send_approval_request(layer_name, approval)
+    end
   end
 
   def approve(comment, user)

@@ -21,9 +21,13 @@ module Pbs::Event::Application
   private
 
   def initialize_approval
-    if participation.present?
+    if participation.present? && event_requires_approval?
       approver = Event::Approver.new(participation)
       approver.application_created
     end
+  end
+
+  def event_requires_approval?
+    Event::Course::APPROVALS.any? { |attr| event.send("#{attr}?") }
   end
 end

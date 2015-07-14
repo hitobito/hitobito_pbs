@@ -20,11 +20,17 @@ class PbsEventSeeder < EventSeeder
   end
 
   def seed_course(values)
-    event = super(values)
-
+    event = super(values.merge(Hash[approvals]))
     event.reload
     event.state = Event::Course.possible_states.shuffle.first
     event.save!
+  end
+
+  def approvals
+    count = rand(Event::Course::APPROVALS.size + 1)
+    Event::Course::APPROVALS.sample(count).map do |attr|
+      [attr, true]
+    end
   end
 end
 
