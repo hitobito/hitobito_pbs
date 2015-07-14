@@ -46,6 +46,8 @@ de:
 
   event:
     participations:
+      new:
+        inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
       asides_pbs:
         approvals: Empfehlungen
       missing_preconditions: fehlende Vorbedingungen

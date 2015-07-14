@@ -10,20 +10,26 @@ require 'spec_helper'
 describe Event::ParticipationConfirmationJob do
 
   let(:participation) { Fabricate(:event_participation) }
+  let(:mailer) { instance_double('mailer') }
 
   before do
     SeedFu.quiet = true
     SeedFu.seed [Rails.root.join('db', 'seeds')]
-  end
 
-  subject { Event::ParticipationConfirmationJob.new(participation) }
+    allow(mailer).to receive(:deliver)
+  end
 
   it 'sends only confirmation email, not approval' do
-    mailer = instance_double('mailer')
-    allow(mailer).to receive(:deliver)
     expect(Event::ParticipationMailer).to receive(:confirmation).and_return(mailer)
     expect(Event::ParticipationMailer).to_not receive(:approval)
-    subject.perform
+    Event::ParticipationConfirmationJob.new(participation, participation.person).perform
   end
+
+  it 'sends only confirmation other email, if user is not participation user' do
+    expect(Event::ParticipationMailer).to receive(:confirmation_other).and_return(mailer)
+    expect(Event::ParticipationMailer).to_not receive(:approval)
+    Event::ParticipationConfirmationJob.new(participation, people(:bulei)).perform
+  end
+
 
 end

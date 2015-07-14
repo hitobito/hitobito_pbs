@@ -11,6 +11,9 @@ module Pbs::Event::ParticipationsController
   included do
     before_render_show :load_approvals
     before_render_show :populate_errors
+    before_render_form :inform_about_email_sent_to_participant
+
+    alias_method_chain :send_confirmation_email, :current_user
   end
 
   private
@@ -24,4 +27,13 @@ module Pbs::Event::ParticipationsController
     @errors = checker.errors_text unless checker.valid?
   end
 
+  def send_confirmation_email_with_current_user
+    Event::ParticipationConfirmationJob.new(entry, current_user).enqueue!
+  end
+
+  def inform_about_email_sent_to_participant
+    if entry.new_record? && entry.person != current_user
+      flash.now[:notice] = t('.inform_about_email_sent_to_participant')
+    end
+  end
 end
