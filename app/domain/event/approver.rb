@@ -69,7 +69,7 @@ class Event::Approver
 
   def request_approval(layer_name)
     approval = application.approvals.create!(layer: layer_name)
-    send_approval_request(layer_name, approval)
+    send_approval_request
   end
 
   def update_approval(approved, comment, user)
@@ -114,7 +114,7 @@ class Event::Approver
     participation.event.send("requires_approval_#{layer_name}?")
   end
 
-  def send_approval_request(layer_name, approval)
+  def send_approval_request
     Event::ApprovalRequestJob.new(participation).enqueue!
   end
 

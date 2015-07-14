@@ -35,6 +35,7 @@ describe Event::ApprovalRequestJob do
   before do
     SeedFu.quiet = true
     SeedFu.seed [Rails.root.join('db', 'seeds')]
+    application.approvals.create!(layer: layer)
   end
 
   subject(:job) { Event::ApprovalRequestJob.new(participation) }
@@ -58,8 +59,6 @@ describe Event::ApprovalRequestJob do
       Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be))
       Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
-
-      application.approvals.create!(layer: layer)
 
       expect(Event::ParticipationMailer).to receive(:approval) do |participation, people|
         expect(participation).to eq(participation)
