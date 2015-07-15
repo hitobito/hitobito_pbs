@@ -47,18 +47,27 @@ describe GroupsController do
     let(:course) { events(:top_course) }
     let(:person) { people(:child) }
     let(:participation) { Fabricate(:event_participation, event: course, person: person) }
-    let!(:application) { participation.create_application(priority_1: course)}
+    let(:other_participation) { event_participations(:top_participant) }
 
-    before do
-      person.update(primary_group: groups(:pegasus))
+    def create_application_and_approval(participation)
+      application = participation.create_application(priority_1: course)
       application.approvals.create!(layer: 'kantonalverband')
     end
 
-    it "lists pending approvals for layer" do
+    before do
+      person.update(primary_group: groups(:pegasus))
+      people(:al_schekka).update(primary_group: groups(:be))
+      other_participation.update(created_at: 1.year.ago)
+      create_application_and_approval(participation)
+      @other_approval = create_application_and_approval(other_participation)
+    end
+
+    it "lists pending approvals for layers oldest at the top" do
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
       sign_in(people(:bulei))
       get :pending_approvals, id: groups(:be).id
-      expect(assigns(:approvals)).to have(1).item
+      expect(assigns(:approvals)).to have(2).item
+      expect(assigns(:approvals).first).to eq @other_approval
     end
 
     it "denies access to listing if not authorized" do

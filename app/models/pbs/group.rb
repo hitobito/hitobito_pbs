@@ -50,6 +50,14 @@ module Pbs::Group
     root_types Group::Bund
   end
 
+  def pending_approvals?
+    pending_approvals_count > 0
+  end
+
+  def pending_approvals_count
+    @pending_approvals_count ||= Event::Approval.pending(self).count
+  end
+
   def census?
     respond_to?(:census_total)
   end

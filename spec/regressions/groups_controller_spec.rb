@@ -25,7 +25,7 @@ describe GroupsController, type: :controller do
 
         sign_in(person)
         get :show, id: groups(name).id
-        expect(dom).to have_link 'Freigaben'
+        expect(dom).to have_link 'Kursfreigaben (0)'
       end
     end
 
@@ -34,7 +34,7 @@ describe GroupsController, type: :controller do
 
     sign_in(person)
     get :show, id: groups(:be).id
-    expect(dom).not_to have_link 'Freigaben'
+    expect(dom).not_to have_link 'Kursfreigaben'
   end
 
 end

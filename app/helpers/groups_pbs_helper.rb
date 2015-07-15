@@ -14,4 +14,8 @@ module GroupsPbsHelper
     end
   end
 
+  def pending_approvals_tab(entry)
+    I18n.t('groups.tabs.approvals', count: entry.pending_approvals_count)
+  end
+
 end

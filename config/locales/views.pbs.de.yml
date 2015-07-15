@@ -10,7 +10,7 @@ de:
     tabs:
       population: Bestand
       statistic: Statistik
-      approvals: Freigaben
+      approvals: Kursfreigaben (%{count})
 
   censuses:
     form:

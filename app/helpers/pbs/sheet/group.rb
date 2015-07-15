@@ -24,9 +24,11 @@ module Pbs::Sheet::Group
                        group.census? && view.can?(:evaluate_census, group)
                      }),
 
-     Sheet::Tab.new('groups.tabs.approvals',
+     Sheet::Tab.new(:pending_approvals_tab,
                      :pending_approvals_group_path,
-                     if: :pending_approvals))
+                     if: lambda { |view, group|
+                       view.can?(:pending_approvals, group)
+                     }))
   end
 
 end
