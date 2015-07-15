@@ -15,7 +15,7 @@ module Pbs::Event::Course
 
     LANGUAGES.each { |key| used_attributes << "language_#{key}".to_sym }
     APPROVALS.each { |key| used_attributes << key.to_sym }
-    self.used_attributes += [:express_fee]
+    self.used_attributes += [:express_fee, :tentative_applications]
     self.used_attributes -= [:requires_approval]
 
     # states are used for workflow

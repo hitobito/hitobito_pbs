@@ -673,6 +673,7 @@ de:
         approved_at: Datum
 
       event/course:
+        tentative_applications: Provisorische Anmeldungen
         requires_approval: Empfehlung der Anmeldungen nötig durch
         states:
           created: Erstellt

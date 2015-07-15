@@ -1,4 +1,4 @@
--#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 -#  hitobito_pbs and licensed under the Affero General Public License version 3
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
@@ -10,3 +10,11 @@
 
 - entry.used?(:express_fee) do
   = f.labeled_text_area :express_fee
+
+- entry.used?(:requires_approval_abteilung) do
+  = f.labeled(:requires_approval) do
+    - %w(requires_approval_abteilung requires_approval_region requires_approval_kantonalverband requires_approval_bund).each do |approval|
+      = f.boolean_field(approval.to_sym, {caption: t(".#{approval}")})
+
+- entry.used?(:tentative_applications) do
+  = f.labeled_input_field :tentative_applications

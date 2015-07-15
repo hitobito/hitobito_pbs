@@ -11,3 +11,7 @@
   - if entry.requires_approval? && format_attr(entry, :requires_approval).present?
     %dl.dl-horizontal
       = labeled_attr(entry, :requires_approval)
+
+- entry.used?(:tentative_applications) do
+  %dl.dl-horizontal
+    = labeled_attr(entry, :tentative_applications)

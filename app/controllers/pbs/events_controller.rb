@@ -9,6 +9,8 @@ module Pbs::EventsController
   extend ActiveSupport::Concern
 
   included do
+    self.permitted_attrs += [:tentative_applications]
+
     before_render_show :load_participation_emails, if: :canceled?
     alias_method_chain :permitted_attrs, :superior_check
   end
