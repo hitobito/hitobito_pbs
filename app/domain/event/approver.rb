@@ -68,7 +68,7 @@ class Event::Approver
   end
 
   def request_approval(layer_name)
-    approval = application.approvals.create!(layer: layer_name)
+    application.approvals.create!(layer: layer_name)
     send_approval_request
   end
 

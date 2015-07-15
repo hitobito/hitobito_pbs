@@ -21,7 +21,12 @@ describe Event::Approver do
   let(:approver_types) { Role.types_with_permission(:approve_applications).collect(&:sti_name) }
 
   before do
+    Delayed::Worker.delay_jobs = false
     allow(Event::ParticipationMailer).to receive(:approval).and_return(mailer)
+  end
+
+  after do
+    Delayed::Worker.delay_jobs = true
   end
 
   def create_application
@@ -34,7 +39,6 @@ describe Event::Approver do
     it 'creates no Event::Approval and sends no emails if no approval is required' do
       create_application
       expect(Event::Approval.count).to eq(0)
-      Delayed::Worker.new.work_off
       expect(Event::ParticipationMailer).to_not have_received(:approval)
     end
 
@@ -57,14 +61,12 @@ describe Event::Approver do
         create_application
 
         expect(Event::Approval.count).to eq(0)
-        Delayed::Worker.new.work_off
         expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
         approver.application_created
         expect(Event::Approval.count).to eq(0)
-        Delayed::Worker.new.work_off
         expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
@@ -144,8 +146,6 @@ describe Event::Approver do
 
       it 'sends email to all roles from affected layer(s) with permission :approve_applications' do
         create_application
-        Delayed::Worker.new.work_off
-
         expect(Event::ParticipationMailer).
           to have_received(:approval).once do |participation, people|
             expect(participation).to eq(participation)
@@ -157,7 +157,7 @@ describe Event::Approver do
 
   describe '#approve' do
     it 'updates approval and approves application if no upper layers are found' do
-      course.update(requires_approval_abteilung: true)
+      course.update!(requires_approval_abteilung: true)
       application = create_application
       approver.approve('all good', people(:bulei))
 
@@ -170,14 +170,13 @@ describe Event::Approver do
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
-      Delayed::Worker.new.work_off
       expect(Event::ParticipationMailer).to have_received(:approval).once
     end
 
     it 'updates approval, sends email creates additional approval if more approving layers exist' do
       Fabricate(Group::Bund::Geschaeftsleitung.name, group: groups(:bund))
 
-      course.update(requires_approval_abteilung: true, requires_approval_bund: true)
+      course.update!(requires_approval_abteilung: true, requires_approval_bund: true)
       application = create_application
       approver.approve('all good', people(:bulei))
 
@@ -194,8 +193,8 @@ describe Event::Approver do
       approver.approve('all good', people(:bulei))
       expect(approval_bund.reload).to be_approved
 
-      Delayed::Worker.new.work_off
-      expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation, people|
+      expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation,
+                                                                               people|
         expect(participation).to eq(participation)
         expect(people.length).to eq(1)
       end
@@ -204,7 +203,7 @@ describe Event::Approver do
 
   describe '#reject' do
     it 'updates approval and rejects application' do
-      course.update(requires_approval_abteilung: true)
+      course.update!(requires_approval_abteilung: true)
       application = create_application
       approver.reject('not so good', people(:bulei))
       expect(application.reload).to be_rejected
@@ -216,7 +215,6 @@ describe Event::Approver do
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
-      Delayed::Worker.new.work_off
       expect(Event::ParticipationMailer).to have_received(:approval).once
     end
 
