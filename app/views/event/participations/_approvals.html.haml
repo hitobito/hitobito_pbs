@@ -5,7 +5,7 @@
 - #  https://github.com/hitobito/hitobito_pbs.
 
 - if can?(:show_approvals, entry.application) && entry.event.is_a?(Event::Course)
-  = section_table(t('.approvals'), @approvals) do |a|
+  = section_table(t('.title'), @approvals) do |a|
     %td= format_attr(a, :status)
     %td= format_attr(a, :approver)
     %td= simple_format(a.comment)

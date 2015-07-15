@@ -57,15 +57,6 @@ describe Event::ParticipationsController, type: :controller  do
         expect(dom).to have_content '✓'
         expect(dom).to have_content 'all good'
       end
-
-      it 'sees approval info on participants list' do
-        Fabricate(Event::Course::Role::Participant.name, participation: participation)
-        application.update(approved: true)
-        participation.update(active: true)
-        get :index, group_id: group.id, event_id: course.id
-        expect(dom).to have_css('.badge.badge-success')
-        expect(dom).to have_content '✓'
-      end
     end
 
     context 'participant' do
