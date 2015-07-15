@@ -9,7 +9,6 @@ module Pbs::GroupsController
   extend ActiveSupport::Concern
 
   def pending_approvals
-    authorize!(:pending_approvals, entry)
     @approvals = Event::Approval.pending(entry).
       includes(:participation, :approvee, event: [:dates, :groups]).
       order('event_participations.created_at ASC')
