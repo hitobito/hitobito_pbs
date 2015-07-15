@@ -12,7 +12,7 @@ module EventApprovalHelper
   end
 
   def format_event_approval_approver(approval)
-    layer_label = t("events.fields_pbs.requires_approval_#{approval.layer}")
+    layer_label = t("events.application_fields_pbs.requires_approval_#{approval.layer}")
     if approval.approver
       safe_join([link_to(approval.approver, approval.approver), layer_label], ' ')
     else
@@ -23,16 +23,30 @@ module EventApprovalHelper
   def format_event_approval_status(approval)
     prefix = 'event/application_decorator'
 
-    label, css, desc =  if approval.approved?
-      %W(&#x2713; success #{t("#{prefix}.confirmation.approved")})
-    elsif approval.rejected?
-      %W(&#x00D7; important #{t("#{prefix}.confirmation.rejected")})
-    else
-      %W(? warning #{t("#{prefix}.confirmation.missing")})
-    end
+    label, type, tooltip =
+      if approval.approved?
+        %W(&#x2713; success #{t("#{prefix}.confirmation.approved")})
+      elsif approval.rejected?
+        %W(&#x00D7; important #{t("#{prefix}.confirmation.rejected")})
+      else
+        %W(? warning #{t("#{prefix}.confirmation.missing")})
+      end
 
-    content_tag(:span, label.html_safe, class: "badge badge-#{css}",
-                title: "#{t("#{prefix}.course_acceptance")} #{desc}")
+    approval_status_badge(label, type, "#{t("#{prefix}.course_acceptance")} #{tooltip}")
+  end
+
+  private
+
+  def approval_status_badge(label, type, tooltip)
+    options = { class: "badge badge-#{type || 'default'}" }
+    if tooltip.present?
+      options.merge!(rel: :tooltip,
+                     'data-container' => 'body',
+                     'data-html' => 'true',
+                     'data-placement' => 'bottom',
+                     title: tooltip)
+    end
+    content_tag(:span, label.html_safe, options)
   end
 
 end

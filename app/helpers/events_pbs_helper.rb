@@ -20,7 +20,7 @@ module EventsPbsHelper
   def format_requires_approval(entry)
     Event::Course::APPROVALS.map do |key|
       if entry.send("#{key}?")
-        I18n.t("events.fields_pbs.#{key}")
+        I18n.t("events.application_fields_pbs.#{key}")
       end
     end.compact.join(', ')
   end
