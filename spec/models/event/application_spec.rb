@@ -13,7 +13,7 @@ describe Event::Application do
   let(:course2) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk)) }
 
   describe 'approval' do
-    let(:participation) { Fabricate(:event_participation, person: people(:al_schekka)) }
+    let(:participation) { Fabricate(:pbs_participation, person: people(:al_schekka)) }
 
     [true, false].each do |requires_approval|
       context requires_approval && 'required' || 'not required' do

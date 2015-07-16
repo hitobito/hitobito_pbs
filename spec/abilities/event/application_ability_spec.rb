@@ -15,7 +15,7 @@ describe Event::ApplicationAbility do
   def create_application(role, group, approving_layer)
     person = Fabricate(role.name, group: group).person
     application = Fabricate(:event_application, priority_1: course, priority_2: nil)
-    Fabricate(:event_participation, event: course, application: application, person: person)
+    Fabricate(:pbs_participation, event: course, application: application, person: person)
     application.approvals.create!(layer: approving_layer)
     @application = application.reload
   end

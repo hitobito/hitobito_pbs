@@ -25,7 +25,7 @@ describe Event::Participation do
       expect(p).to_not be_valid
     end
 
-    %w(provisional applied assigned rejected canceled attended absent).each do |state|
+    %w(tentative applied assigned rejected canceled attended absent).each do |state|
       it "allows \"#{state}\" state" do
         p = Event::Participation.new(event: event, person: person, state: state)
         expect(p).to be_valid

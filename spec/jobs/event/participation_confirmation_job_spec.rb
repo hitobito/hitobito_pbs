@@ -9,7 +9,7 @@ require 'spec_helper'
 
 describe Event::ParticipationConfirmationJob do
 
-  let(:participation) { Fabricate(:event_participation) }
+  let(:participation) { Fabricate(:pbs_participation) }
   let(:mailer) { instance_double('mailer') }
 
   before do

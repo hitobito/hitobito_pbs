@@ -46,7 +46,7 @@ describe GroupsController do
   context '#pending_approvals' do
     let(:course) { events(:top_course) }
     let(:person) { people(:child) }
-    let(:participation) { Fabricate(:event_participation, event: course, person: person) }
+    let(:participation) { Fabricate(:pbs_participation, event: course, person: person) }
     let(:other_participation) { event_participations(:top_participant) }
 
     def create_application_and_approval(participation)

@@ -15,7 +15,7 @@ describe Event::Approver do
               group: groups(:schekka),
               person: Fabricate(:person, primary_group: groups(:schekka))).person
   end
-  let(:participation) { Fabricate(:event_participation, person: person, event: course) }
+  let(:participation) { Fabricate(:pbs_participation, person: person, event: course) }
   let(:approver) { Event::Approver.new(participation) }
   let(:mailer) { spy('mailer') }
   let(:approver_types) { Role.types_with_permission(:approve_applications).collect(&:sti_name) }

@@ -18,7 +18,7 @@ describe Event::ApprovalRequestJob do
               person: Fabricate(:person, primary_group: group)).person
   end
   let(:participation) do
-    Fabricate(:event_participation,
+    Fabricate(:pbs_participation,
               person: person,
               event: course,
               application: application)

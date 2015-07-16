@@ -13,7 +13,7 @@ describe Event::ApplicationsController do
   let(:al_schekka) { people(:al_schekka) }
   let(:participant) { people(:child) }
   let(:course) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk), requires_approval_abteilung: true) }
-  let(:participation) {  Fabricate(:event_participation, event: course, person: participant) }
+  let(:participation) {  Fabricate(:pbs_participation, event: course, person: participant) }
   let(:application) { participation.create_application(priority_1: course) }
 
   context 'bulei' do

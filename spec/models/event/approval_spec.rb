@@ -32,7 +32,7 @@ describe Event::Approval do
 
   def create_approval(layer, role, group_name, attrs = {}, course = events(:top_course))
     person = Fabricate(role.name, group: groups(group_name)).person
-    participation = Fabricate(:event_participation, event: course, person: person)
+    participation = Fabricate(:pbs_participation, event: course, person: person)
     application = participation.create_application!(priority_1: course)
     application.approvals.create!(attrs.merge(layer: layer))
   end

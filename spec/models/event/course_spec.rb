@@ -14,13 +14,13 @@ describe Event::Course do
 
   subject do
     Fabricate(Event::Role::Leader.name.to_sym,
-              participation: Fabricate(:event_participation, event: event))
+              participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Role::AssistantLeader.name.to_sym,
-              participation: Fabricate(:event_participation, event: event))
+              participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::Participant.name.to_sym,
-              participation: Fabricate(:event_participation, event: event))
+              participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::Participant.name.to_sym,
-              participation: Fabricate(:event_participation, event: event))
+              participation: Fabricate(:pbs_participation, event: event))
     event.reload
   end
 
