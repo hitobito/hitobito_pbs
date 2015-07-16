@@ -55,6 +55,7 @@ module HitobitoPbs
 
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
+      Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
 
       Event::KindsController.permitted_attrs += [:documents_text]
 

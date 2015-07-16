@@ -10,8 +10,10 @@ top_leader:
   event: top_course
   person: bulei
   active: true
+  state: assigned
 
 top_participant:
   event: top_course
   person: al_schekka
   active: true
+  state: applied

@@ -13,6 +13,7 @@ module Pbs::Event::ParticipationsController
     before_render_form :inform_about_email_sent_to_participant
 
     alias_method_chain :send_confirmation_email, :current_user
+    alias_method_chain :build_application, :state
   end
 
   private
@@ -26,8 +27,18 @@ module Pbs::Event::ParticipationsController
   end
 
   def inform_about_email_sent_to_participant
-    if entry.new_record? && entry.person != current_user
+    if new_record_for_someone_else?(entry)
       flash.now[:notice] = t('.inform_about_email_sent_to_participant')
     end
   end
+
+  def build_application_with_state(participation)
+    build_application_without_state(participation)
+    participation.state = new_record_for_someone_else?(participation) ? 'assigned' : 'applied'
+  end
+
+  def new_record_for_someone_else?(participation)
+    participation.new_record? && participation.person != current_user
+  end
+
 end
