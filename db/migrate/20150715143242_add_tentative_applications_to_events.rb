@@ -7,6 +7,8 @@
 
 class AddTentativeApplicationsToEvents < ActiveRecord::Migration
   def change
-    add_column(:events, :tentative_applications, :boolean, default: false)
+    add_column(:events, :tentative_applications, :boolean, null: false, default: false)
+
+    Event.reset_column_information # to make new column appear
   end
 end
