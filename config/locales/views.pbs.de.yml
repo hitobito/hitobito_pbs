@@ -46,8 +46,10 @@ de:
 
   event:
     participations:
-      new:
-        inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
+      created_tentative: Provisorische Anmeldung für %{participant} wurde erstellt.
+      inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
+      new_tentative:
+        title: Provisorisch Anmelden
       approvals:
         title: Empfehlungen
       missing_preconditions: fehlende Vorbedingungen
@@ -67,6 +69,8 @@ de:
       language_fr: Französisch
       language_it: Italienisch
       language_en: Englisch
+    actions_show_pbs:
+      create_tentative_application: Provisorisch Anmelden
     show:
       inform_by_email: Informieren
     application_fields_pbs:

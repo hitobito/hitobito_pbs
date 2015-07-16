@@ -1,0 +1,22 @@
+- # encoding: utf-8
+- #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+- #  hitobito_pbs and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_pbs.
+
+- title t('.title')
+
+= entry_form(stacked: true,
+             buttons_top: false,
+             submit_label: t('.title'),
+             url: create_tentative_group_event_participations_path(@group, @event),
+             cancel_url: group_event_path(@group, @event)) do |f|
+
+  = render_extensions :event_kind_fields
+
+  = f.labeled(:person) do
+    = f.hidden_field(:person_id)
+    = f.string_field(:person, placeholder: I18n.t('global.search.placeholder_with_model', model: Person.model_name.human),
+                              data: { provide: 'entity', id_field: "#{f.object_name}_person_id", url: query_tentative_people_path })
+
+  = f.labeled_text_area(:additional_information)

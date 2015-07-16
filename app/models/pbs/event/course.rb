@@ -41,9 +41,11 @@ module Pbs::Event::Course
 
 
     ### CALLBACKS
-
     before_save :set_requires_approval
+
+    alias_method_chain :count_applicants_scope, :tentative
   end
+
 
   # may participants apply now?
   def application_possible?
@@ -58,6 +60,15 @@ module Pbs::Event::Course
 
   def state
     super || possible_states.first
+  end
+
+  def tentative_application_possible?
+    tentative_applications? && %w(created confirmed).include?(state)
+  end
+
+  # participations can be created form members of these groups
+  def tentative_group_ids
+    groups.flat_map { |g| g.self_and_descendants.pluck(:id) + g.hierarchy.pluck(:id) }
   end
 
   private
@@ -79,4 +90,9 @@ module Pbs::Event::Course
 
     true
   end
+
+  def count_applicants_scope_with_tentative
+    count_applicants_scope_without_tentative.countable
+  end
+
 end

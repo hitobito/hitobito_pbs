@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     resources :censuses, only: [:new, :create]
     get 'censuses' => 'censuses#new' # route required for language switch
 
+    resources :people, only: [] do # do not redefine actions
+      collection do
+        get :query_tentative
+      end
+    end
+
     resources :groups do
       member do
         get 'pending_approvals' => 'groups#pending_approvals'
@@ -31,6 +37,16 @@ Rails.application.routes.draw do
 
       resource :member_counts, only: [:create, :edit, :update, :destroy]
       get 'member_counts' => 'member_counts#edit' # route required for language switch
+      resources :events, only: [] do # do not redefine events actions, only add new ones
+        scope module: 'event' do
+          resources :participations, only: [] do
+            collection do
+              get :new_tentative
+              post :create_tentative
+            end
+          end
+        end
+      end
     end
   end
 

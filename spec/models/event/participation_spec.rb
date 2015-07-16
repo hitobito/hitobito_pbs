@@ -8,12 +8,11 @@
 require 'spec_helper'
 
 describe Event::Participation do
-
-  let(:event) { Fabricate(:event, groups: [groups(:be)]) }
-  let(:person) { people(:al_schekka) }
+  let(:course) { events(:top_course) }
 
   describe '#state' do
     let(:event) { Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk)) }
+    let(:person) { people(:al_schekka) }
 
     it 'does not allow nil state' do
       p = Event::Participation.new(event: event, person: person, state: nil)
@@ -29,6 +28,62 @@ describe Event::Participation do
       it "allows \"#{state}\" state" do
         p = Event::Participation.new(event: event, person: person, state: state)
         expect(p).to be_valid
+      end
+    end
+  end
+
+  context 'destroying tentative_applications' do
+    let(:participation) { event_participations(:top_participant) }
+
+    before { participation.update!(state: 'tentative', active: false) }
+
+    it "applying for that course deletes tentative participation" do
+      expect do
+        Fabricate(:pbs_participation, event: course, person: participation.person)
+      end.not_to change { Event::Participation.count }
+      expect { participation.reload }.to raise_error ActiveRecord::RecordNotFound
+    end
+
+    it "applying for that course kind deletes tentative participation" do
+      other_course = Fabricate(:pbs_course, groups: [groups(:zh)])
+      expect do
+        Fabricate(:pbs_participation, event: other_course, person: participation.person)
+      end.not_to change { Event::Participation.count }
+      expect { participation.reload }.to raise_error ActiveRecord::RecordNotFound
+    end
+
+    it "applying for different course kind does not delete tentative participation" do
+      other_course = Fabricate(:pbs_course, kind: event_kinds(:bkws), groups: [groups(:zh)])
+      expect do
+        Fabricate(:pbs_participation, event: other_course, person: participation.person)
+      end.to change { Event::Participation.count }.by(1)
+      expect { participation.reload }.not_to raise_error
+    end
+
+    it "applying with invalid state does not delete tentative participation" do
+      Event::Participation.create(event: course, person: participation.person, state: 'invalid')
+      expect { participation.reload }.not_to raise_error
+    end
+  end
+
+
+  context 'verifying participatable counts' do
+    before { course.refresh_participant_counts! } # to create existing participatiots
+
+    def create_participant(state)
+      participation = Fabricate(:pbs_participation, event: course, state: state)
+      participation.roles.create!(type: Event::Course::Role::Participant.name)
+    end
+
+    %w(tentative canceled rejected).each do |state|
+      it "creating #{state} application does not increase course#applicant_count" do
+        expect { create_participant(state) }.not_to change { course.reload.applicant_count }
+      end
+    end
+
+    %w(applied assigned attended absent).each do |state|
+      it "creating #{state} application does increase course#application_count" do
+        expect { create_participant(state) }.to change { course.reload.applicant_count }.by(1)
       end
     end
   end

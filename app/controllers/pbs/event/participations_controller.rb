@@ -14,6 +14,24 @@ module Pbs::Event::ParticipationsController
 
     alias_method_chain :send_confirmation_email, :current_user
     alias_method_chain :build_application, :state
+
+    skip_load_and_authorize_resource only: [:new_tentative]
+  end
+
+
+  def create_tentative
+    authorize!(:create_tentative, entry)
+    entry.attributes = { active: false, state: 'tentative', application: nil }
+    if entry.save
+      flash[:notice] = t('event.participations.created_tentative', participant: entry.person)
+      redirect_to group_event_path(group, event)
+    else
+      render :new
+    end
+  end
+
+  def new_tentative
+    authorize!(:create_tentative, @event.participations.new)
   end
 
   private
@@ -27,8 +45,8 @@ module Pbs::Event::ParticipationsController
   end
 
   def inform_about_email_sent_to_participant
-    if new_record_for_someone_else?(entry)
-      flash.now[:notice] = t('.inform_about_email_sent_to_participant')
+    if new_record_for_someone_else?(entry) && !event.tentative_applications?
+      flash.now[:notice] = t('event.participations.inform_about_email_sent_to_participant')
     end
   end
 

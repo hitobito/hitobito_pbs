@@ -23,15 +23,19 @@ module HitobitoPbs
 
     config.to_prepare do
       # rubocop:disable SingleSpaceBeforeFirstArg
-      # extend application classes here
+
+      ### models
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
       Role.send         :include, Pbs::Role
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::Application.send :include, Pbs::Event::Application
+      Event::Course::Role::Participant.send :include, Pbs::Event::Course::Role::Participant
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
+
+      ## domain
       Event::ParticipationFilter.load_entries_includes += [:application]
 
       ### abilities
@@ -46,9 +50,8 @@ module HitobitoPbs
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
 
-      PeopleController.permitted_attrs +=
-        [:salutation, :title, :grade_of_school, :entry_date, :leaving_date,
-         :j_s_number, :correspondence_language, :brother_and_sisters]
+      ### controllers
+      PeopleController.send :include, Pbs::PeopleController
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
       EventsController.send :include, Pbs::EventsController
@@ -59,6 +62,7 @@ module HitobitoPbs
 
       Event::KindsController.permitted_attrs += [:documents_text]
 
+      ### exports
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
@@ -66,7 +70,7 @@ module HitobitoPbs
       ### decorators
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
 
-      ### helpers
+      ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
 
       ### jobs

@@ -19,14 +19,28 @@ describe Event::ApplicationMarketController do
     sign_in(people(:bulei))
   end
 
-  it 'PUT participant sets application state to assigned' do
+  it 'PUT#add_participant sets application state to assigned' do
     put :add_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
     expect(participation.reload.state).to eq 'assigned'
   end
 
-  it 'DELETE participant sets application state to applied' do
+  it 'DELETE#remove_participant sets application state to applied' do
     delete :remove_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
     expect(participation.reload.state).to eq 'applied'
+  end
+
+  def create_participant(state = 'applied')
+    participation = Fabricate(:pbs_participation, event: course, state: state)
+    participation.roles.create!(type: Event::Course::Role::Participant.name)
+  end
+
+  it 'GET#index does not list tentative applications' do
+    other = create_participant.participation
+    tentative = create_participant('tentative')
+
+    get :index, group_id: group.id, event_id: course.id
+    expect(assigns(:participants)).to include(other)
+    expect(assigns(:participants)).not_to include(tentative)
   end
 
 end

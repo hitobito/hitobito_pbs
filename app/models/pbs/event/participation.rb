@@ -23,10 +23,40 @@ module Pbs::Event::Participation
       end
     end
 
+    ### SCOPES
+
+    scope :definite, -> { where.not(state: 'tentative') }
+    scope :tentative, -> { where(state: 'tentative') }
+    scope :countable, -> { where(state: %w(applied assigned attended absent)) }
 
     ### VALIDATIONS
 
-    validates :state, inclusion: possible_states, if: -> { event.instance_of?(Event::Course) }
+    validates :state, inclusion: possible_states, if: :course?
+
+    ### CALLBACKS
+
+    before_create :set_default_state, if: :course?
+    before_validation :delete_tentatives, if: :course?, unless: :tentative?, on: :create
+  end
+
+  def course?
+    event.instance_of?(Event::Course)
+  end
+
+  private
+
+  def set_default_state
+    self[:state] ||= 'applied'
+  end
+
+  # custom join event belongs_to kind is not defined in core
+  def delete_tentatives
+    Event::Participation.
+      tentative.
+      joins('INNER JOIN "events" ON "events"."id" = "event_participations"."event_id"').
+      joins('INNER JOIN "event_kinds" ON "event_kinds"."id" = "events"."kind_id"').
+      where(events: { kind_id: event.kind_id }, person_id: person.id).
+      delete_all
   end
 
 end

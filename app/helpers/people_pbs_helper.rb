@@ -13,4 +13,5 @@ module PeoplePbsHelper
       Settings.application.languages.to_hash.with_indifferent_access[lang]
     end
   end
+
 end

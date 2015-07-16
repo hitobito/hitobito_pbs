@@ -1,2 +1,7 @@
-- if can?(:update, entry) && entry.is_a?(Event::Course) && entry.canceled?
-  = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
+- if entry.is_a?(Event::Course)
+  - if can?(:update, entry) && entry.canceled?
+    = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
+
+  - if entry.tentative_application_possible? && can?(:create_tentative, entry.participations.new)
+    = action_button ti('.create_tentative_application'), new_tentative_group_event_participations_path(@group, entry, for_someone_else: true), :check
+
