@@ -20,9 +20,10 @@ module Pbs::Event::ParticipationDecorator
     end
   end
 
-  def to_s_with_state
-    s = to_s_without_state
+  def to_s_with_state(*args)
+    s = to_s_without_state(*args)
     s << " (#{state_translated})" if %w(rejected canceled absent).include?(model.state)
     s
   end
+
 end

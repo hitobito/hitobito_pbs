@@ -40,6 +40,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
 
         it 'does not append state' do
           expect(decorator.to_s).to eq('John Doe')
+          expect(decorator.to_s(:list)).to eq('Doe John')
         end
       end
     end
@@ -52,6 +53,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
 
         it 'appends translated state name' do
           expect(decorator.to_s).to eq("John Doe (#{translation})")
+          expect(decorator.to_s(:list)).to eq("Doe John (#{translation})")
         end
       end
     end
