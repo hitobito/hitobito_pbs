@@ -72,6 +72,7 @@ module HitobitoPbs
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
+      Sheet::Event.send :include, Pbs::Sheet::Event
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

@@ -25,4 +25,8 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
+  def tentatives_participations_tab(entry)
+    I18n.t('events.tabs.tentatives', count: entry.tentatives_count)
+  end
+
 end

@@ -13,6 +13,20 @@ module Pbs::EventsController
 
     before_render_show :load_participation_emails, if: :canceled?
     alias_method_chain :permitted_attrs, :superior_check
+
+    skip_load_and_authorize_resource only: :tentatives
+  end
+
+  def tentatives
+    #TODO what permission?
+    #TODO irgendwas mit views war noch nicht in ordnung
+    authorize!(:update, entry)
+
+    @grouped_participations = entry.
+      participations.
+      tentative.
+      includes(person: :primary_group).
+      group_by { |p| p.person.primary_group }
   end
 
   private

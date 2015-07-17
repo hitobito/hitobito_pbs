@@ -71,10 +71,12 @@ de:
       language_en: Englisch
     actions_show_pbs:
       create_tentative_application: Provisorisch Anmelden
+    tabs:
+      tentatives: Provisorische Anmeldungen (%{count})
     show:
       inform_by_email: Informieren
     application_fields_pbs:
-      tentative_applications: Gruppenleiter könne Personen provisorisch anmelden
+      tentative_applications: Gruppenleiter können Personen provisorisch anmelden
       requires_approval_abteilung: Abteilung
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband

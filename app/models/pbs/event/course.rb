@@ -66,6 +66,10 @@ module Pbs::Event::Course
     tentative_applications? && %w(created confirmed).include?(state)
   end
 
+  def tentatives_count
+    participations.tentative.count
+  end
+
   # participations can be created form members of these groups
   def tentative_group_ids
     groups.flat_map { |g| g.self_and_descendants.pluck(:id) + g.hierarchy.pluck(:id) }
