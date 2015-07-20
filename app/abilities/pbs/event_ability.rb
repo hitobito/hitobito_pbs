@@ -20,7 +20,17 @@ module Pbs::EventAbility
       permission(:any).may(:index_participations_details).for_leaded_events
       permission(:group_full).may(:index_participations_details).in_same_group
       permission(:layer_and_below_full).may(:index_participations_details).in_same_layer_or_below
+      permission(:any).may(:modify_superior).if_education_responsible
     end
+  end
+
+  def if_education_responsible
+    user.roles.any? { |role| education_responsible_roles.include?(role.class) }
+  end
+
+  def education_responsible_roles
+    [Group::Bund::AssistenzAusbildung,
+     Group::Bund::MitarbeiterGs]
   end
 
 end

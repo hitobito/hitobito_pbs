@@ -15,22 +15,22 @@ describe EventAbility do
 
   context 'event creation/update' do
     allowed_roles = [
-                     # abteilung
-                     [:patria, 'Abteilungsleitung'],
-                     [:patria, 'AbteilungsleitungStv'],
-                     [:patria, 'Sekretariat'],
-                     # kantonalverband
-                     [:be, 'Kantonsleitung'],
-                     [:be, 'VerantwortungAusbildung'],
-                     [:be, 'Sekretariat'],
-                     # region
-                     [:bern, 'Regionalleitung'],
-                     [:bern, 'VerantwortungAusbildung'],
-                     [:bern, 'Sekretariat'],
-                     # bund
-                     [:bund, 'MitarbeiterGs'],
-                     [:bund, 'Sekretariat'],
-                     [:bund, 'AssistenzAusbildung']
+      # abteilung
+      [:patria, 'Abteilungsleitung'],
+      [:patria, 'AbteilungsleitungStv'],
+      [:patria, 'Sekretariat'],
+      # kantonalverband
+      [:be, 'Kantonsleitung'],
+      [:be, 'VerantwortungAusbildung'],
+      [:be, 'Sekretariat'],
+      # region
+      [:bern, 'Regionalleitung'],
+      [:bern, 'VerantwortungAusbildung'],
+      [:bern, 'Sekretariat'],
+      # bund
+      [:bund, 'MitarbeiterGs'],
+      [:bund, 'Sekretariat'],
+      [:bund, 'AssistenzAusbildung']
     ]
 
     allowed_roles.each do |r| 
@@ -44,6 +44,60 @@ describe EventAbility do
         expect(ability(person)).to be_able_to(:update, event)
       end
     end
+  end
+
+  context 'permissions' do
+    subject { ability }
+    let(:ability) { Ability.new(role.person.reload) }
+
+    context 'mitarbeiter gs' do
+      let(:role) { Fabricate(Group::Bund::MitarbeiterGs.name.to_sym, group: groups(:bund)) }
+
+      context 'in bund' do
+        it 'may modify superior attributes' do
+          is_expected.to be_able_to(:modify_superior, events(:bund_course))
+        end
+      end
+
+      context 'in kanton' do
+        it 'may modify superior attributes' do
+          is_expected.to be_able_to(:modify_superior, events(:top_course))
+        end
+      end
+    end
+
+    context 'mitarbeiter gs' do
+      let(:role) { Fabricate(Group::Bund::AssistenzAusbildung.name.to_sym, group: groups(:bund)) }
+
+      context 'in bund' do
+        it 'may modify superior attributes' do
+          is_expected.to be_able_to(:modify_superior, events(:bund_course))
+        end
+      end
+
+      context 'in kanton' do
+        it 'may modify superior attributes' do
+          is_expected.to be_able_to(:modify_superior, events(:top_course))
+        end
+      end
+    end
+
+    context 'sekretariat' do
+      let(:role) { Fabricate(Group::Bund::Sekretariat.name.to_sym, group: groups(:bund)) }
+
+      context 'in bund' do
+        it 'may modify superior attributes' do
+          is_expected.not_to be_able_to(:modify_superior, events(:bund_course))
+        end
+      end
+
+      context 'in kanton' do
+        it 'may modify superior attributes' do
+          is_expected.not_to be_able_to(:modify_superior, events(:top_course))
+        end
+      end
+    end
+
   end
 
 end

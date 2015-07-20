@@ -42,18 +42,10 @@ module Pbs::EventsController
   def permitted_attrs_with_superior_check
     attrs = entry.class.used_attributes.dup
     attrs += self.class.permitted_attrs
-    if entry.class.superior_attributes.present? && !superior_role?
+    if entry.superior_attributes.present? && !can?(:modify_superior, entry)
       attrs -= entry.class.superior_attributes
     end
     attrs
   end
 
-  def superior_role?
-    current_user.roles.any? { |role| superior_roles.include?(role.class) }
-  end
-
-  def superior_roles
-    [Group::Bund::AssistenzAusbildung,
-     Group::Bund::MitarbeiterGs]
-  end
 end

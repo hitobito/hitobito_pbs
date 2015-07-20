@@ -8,5 +8,6 @@
     - Event::Course::LANGUAGES.each do |lang|
       = f.boolean_field("language_#{lang}".to_sym, {caption: t(".language_#{lang}")})
 
-- entry.used?(:express_fee) do
-  = f.labeled_text_area :express_fee
+- if can?(:modify_superior, entry)
+  - entry.used?(:express_fee) do
+    = f.labeled_text_area :express_fee
