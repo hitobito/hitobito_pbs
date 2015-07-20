@@ -3,9 +3,9 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- if entry.course_kind? && entry.kind.documents_text
+- if entry.course_kind? && entry.kind.documents_text.present?
   %dl.dl-horizontal
-    = labeled(Event::Kind.human_attribute_name(:documents_text), entry.kind.documents_text.to_s.html_safe)
+    = labeled_attr(entry.kind, :documents_text)
 
 - entry.used?(:requires_approval_abteilung) do
   - if entry.requires_approval? && format_attr(entry, :requires_approval).present?
