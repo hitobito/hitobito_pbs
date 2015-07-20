@@ -2,5 +2,5 @@
   = table(@approvals, class: 'table table-striped') do |t|
     - t.col(Event::Person.model_name.human) { |a| link_to(a.approvee, [a.event.groups.first, a.event, a.participation]) }
     - t.col(Event::Course.model_name.human) { |a| link_to(a.event, [a.event.groups.first, a.event]) }
-    - t.col(Event.human_attribute_name(:dates)) { |a| format_attr(a.event, :dates) }
+    - t.col(Event.human_attribute_name(:dates)) { |a| a.event.decorate.dates_full }
     - t.col(Event::Participation.human_attribute_name(:created_at)) { |a| format_attr(a.participation, :created_at) }
