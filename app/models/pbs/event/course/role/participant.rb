@@ -13,7 +13,7 @@ module Pbs::Event::Course::Role::Participant
   end
 
   def set_participation_active_with_tentative
-    if !participation.tentative?
+    unless participation.tentative?
       set_participation_active_without_tentative
     end
   end
