@@ -9,7 +9,9 @@
 module EventKindsPbsHelper
 
   def format_event_kind_documents_text(entry)
-    entry.documents_text.to_s.html_safe
+    text = entry.documents_text
+    text = text.gsub!(/\n/, '<br/>').html_safe
+    auto_link(text)
   end
 
 end

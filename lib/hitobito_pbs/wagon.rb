@@ -37,6 +37,8 @@ module HitobitoPbs
 
       ## domain
       Event::ParticipationFilter.load_entries_includes += [:application]
+      Export::Pdf::Participation.send :include, Pbs::Export::Pdf::Participation
+      Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility

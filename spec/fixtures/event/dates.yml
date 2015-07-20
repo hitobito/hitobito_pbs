@@ -24,3 +24,9 @@ third:
   event: camp
   start_at: <%= Time.zone.parse("2012-6-01") %>
   finish_at: <%= Time.zone.parse("2012-6-08") %>
+
+fourth:
+  label: Bundeskurs
+  event: bund_course
+  start_at: <%= Time.zone.parse("2012-6-01") %>
+  finish_at: <%= Time.zone.parse("2012-6-08") %>
