@@ -689,6 +689,7 @@ de:
         documents_text: Zusatzformulare
 
       event/participation:
+        canceled_at: Abmeldedatum
         states:
           tentative: Provisorisch
           applied: Angemeldet

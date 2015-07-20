@@ -39,8 +39,6 @@
 
 class Group::Biber < Group
 
-  self.event_types = [Event::Course]
-
   children Group::Biber,
            Group::AbteilungsGremium
 

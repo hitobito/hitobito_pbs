@@ -15,8 +15,10 @@ module Pbs::Event::Participation
     # translations in config/locales
     self.possible_states = %w(tentative applied assigned rejected canceled attended absent)
 
-    # Define methods to query if a course is in the given state.
-    # eg course.canceled?
+    ACTIVE_STATES = %w(assigned attended)
+
+    # Define methods to query if a participation is in the given state.
+    # eg participation.canceled?
     possible_states.each do |state|
       define_method "#{state}?" do
         self.state == state
@@ -25,18 +27,20 @@ module Pbs::Event::Participation
 
     ### SCOPES
 
-    scope :definite, -> { where.not(state: 'tentative') }
     scope :tentative, -> { where(state: 'tentative') }
-    scope :countable, -> { where(state: %w(applied assigned attended absent)) }
+    scope :countable_applicants, -> { where(state: %w(applied assigned attended absent)) }
 
     ### VALIDATIONS
 
     validates :state, inclusion: possible_states, if: :course?
+    validates :canceled_at, presence: true, if: :canceled?
 
     ### CALLBACKS
 
-    before_create :set_default_state, if: :course?
+    before_validation :set_default_state, if: :course?
     before_validation :delete_tentatives, if: :course?, unless: :tentative?, on: :create
+    before_validation :set_active_based_on_state, if: :course?
+    before_validation :clear_canceled_at, unless: :canceled?
   end
 
   def course?
@@ -46,7 +50,7 @@ module Pbs::Event::Participation
   private
 
   def set_default_state
-    self[:state] ||= 'applied'
+    self.state ||= 'applied'
   end
 
   # custom join event belongs_to kind is not defined in core
@@ -56,7 +60,17 @@ module Pbs::Event::Participation
       joins('INNER JOIN events ON events.id = event_participations.event_id').
       joins('INNER JOIN event_kinds ON event_kinds.id = events.kind_id').
       where(events: { kind_id: event.kind_id }, person_id: person.id).
-      delete_all
+      destroy_all
+  end
+
+  def set_active_based_on_state
+    self.active = ACTIVE_STATES.include?(state)
+    true
+  end
+
+  def clear_canceled_at
+    self.canceled_at = nil
+    true
   end
 
 end

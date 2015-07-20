@@ -40,8 +40,6 @@
 
 class Group::RegionaleRover < Group::Rover
 
-  self.event_types = [Event::Course]
-
   children Group::RegionaleRover,
            Group::RegionalesGremium
 

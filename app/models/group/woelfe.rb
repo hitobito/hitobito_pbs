@@ -39,8 +39,6 @@
 
 class Group::Woelfe < Group
 
-  self.event_types = [Event::Course]
-
   children Group::Woelfe,
            Group::AbteilungsGremium
 

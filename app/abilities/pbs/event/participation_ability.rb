@@ -15,6 +15,11 @@ module Pbs::Event::ParticipationAbility
       general(:update, :destroy).not_closed_or_admin
       general(:create).at_least_one_group_not_deleted_and_not_closed_or_admin
 
+      permission(:any).may(:cancel).for_participations_full_events
+      permission(:group_full).may(:cancel).in_same_group
+      permission(:layer_full).may(:cancel).in_same_layer
+      permission(:layer_and_below_full).may(:cancel).in_same_layer
+
       permission(:group_full).may(:create_tentative).person_in_same_group
       permission(:layer_full).may(:create_tentative).person_in_same_layer
       permission(:layer_and_below_full).may(:create_tentative).person_in_same_layer_or_visible_below

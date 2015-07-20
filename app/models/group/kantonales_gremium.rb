@@ -40,8 +40,6 @@
 
 class Group::KantonalesGremium < Group::Gremium
 
-  self.event_types = [Event::Course]
-
   children Group::KantonalesGremium
 
   class Leitung < Group::Gremium::Leitung

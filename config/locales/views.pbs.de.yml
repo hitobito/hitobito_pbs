@@ -47,6 +47,7 @@ de:
   event:
     participations:
       created_tentative: Provisorische Anmeldung für %{participant} wurde erstellt.
+      canceled_notice: "%{participant} wurde abgemeldet."
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
       new_tentative:
         title: Provisorisch Anmelden
@@ -55,8 +56,16 @@ de:
       missing_preconditions: fehlende Vorbedingungen
       tabs:
         approvals: Empfehlungen
-      application_approval_dialog:
-        approval_stored: Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
+      actions_approval:
+        approve_title: Teilnahme freigeben
+        reject_title: Teilname ablehnen
+      popover_approval:
+        approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
+      popover_cancel:
+        cancel_info: Die Kursleitung, der Kursorganisator und die Abteilungsleiter werden über die Abmeldung informiert.
+      actions_show_pbs:
+        cancel_button: Abmelden
+        cancel_title: Teilnehmer abmelden
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.

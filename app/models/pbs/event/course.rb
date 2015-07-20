@@ -96,7 +96,7 @@ module Pbs::Event::Course
   end
 
   def count_applicants_scope_with_tentative
-    count_applicants_scope_without_tentative.countable
+    count_applicants_scope_without_tentative.countable_applicants
   end
 
 end

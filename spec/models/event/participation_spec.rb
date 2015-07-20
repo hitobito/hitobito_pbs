@@ -14,9 +14,10 @@ describe Event::Participation do
     let(:event) { Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk)) }
     let(:person) { people(:al_schekka) }
 
-    it 'does not allow nil state' do
+    it 'sets default state' do
       p = Event::Participation.new(event: event, person: person, state: nil)
-      expect(p).to_not be_valid
+      expect(p).to be_valid
+      expect(p.state).to eq 'applied'
     end
 
     it 'does not allow "foo" state' do
@@ -26,7 +27,7 @@ describe Event::Participation do
 
     %w(tentative applied assigned rejected canceled attended absent).each do |state|
       it "allows \"#{state}\" state" do
-        p = Event::Participation.new(event: event, person: person, state: state)
+        p = Event::Participation.new(event: event, person: person, state: state, canceled_at: Date.today)
         expect(p).to be_valid
       end
     end
@@ -71,7 +72,7 @@ describe Event::Participation do
     before { course.refresh_participant_counts! } # to create existing participatiots
 
     def create_participant(state)
-      participation = Fabricate(:pbs_participation, event: course, state: state)
+      participation = Fabricate(:pbs_participation, event: course, state: state, canceled_at: Date.today)
       participation.roles.create!(type: Event::Course::Role::Participant.name)
     end
 

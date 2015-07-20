@@ -1,0 +1,14 @@
+- # encoding: utf-8
+- #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+- #  hitobito_pbs and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_pbs.
+
+- if !entry.canceled? && can?(:cancel, entry)
+  = action_button(t('.cancel_button'),
+                  '#',
+                  :'remove-circle',
+                  title: t('.cancel_title'),
+                  data: { toggle: 'popover', content: render('popover_cancel').to_str })
+
+

@@ -18,6 +18,16 @@ module Pbs::Event::ParticipationsController
     skip_load_and_authorize_resource only: [:new_tentative]
   end
 
+  def cancel
+    entry.canceled_at = params[:event_participation][:canceled_at]
+    entry.state = 'canceled'
+    if entry.save
+      flash[:notice] = t('event.participations.canceled_notice', participant: entry.person)
+    else
+      flash[:alert] = entry.errors.full_messages
+    end
+    redirect_to group_event_participation_path(group, event, entry)
+  end
 
   def create_tentative
     authorize!(:create_tentative, entry)

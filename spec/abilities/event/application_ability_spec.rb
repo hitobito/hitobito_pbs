@@ -124,15 +124,6 @@ describe Event::ApplicationAbility do
     end
 
     context 'group and layers' do
-      it ':group_full of organising group may show_approvals' do
-        course.groups = [groups(:pegasus)]
-        course.save!
-
-        create_approver(Group::Pfadi::Adressverwaltung, groups(:pegasus))
-        create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
-        is_expected.to be_able_to(:show_approvals, application)
-      end
-
       it ':layer_full of may show approvals of same layer group' do
         create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')

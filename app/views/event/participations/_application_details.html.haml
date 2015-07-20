@@ -1,0 +1,4 @@
+- if @event.is_a?(Event::Course) && entry.canceled?
+  = render_attrs(entry, :created_at, :canceled_at)
+- else
+  = render_attrs(entry, :created_at)

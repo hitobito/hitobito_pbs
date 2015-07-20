@@ -39,8 +39,6 @@
 
 class Group::Elternrat < Group
 
-  self.event_types = [Event::Course]
-
   children Group::AbteilungsGremium
 
   class Praesidium < ::Role

@@ -39,8 +39,6 @@
 
 class Group::Pfadi < Group
 
-  self.event_types = [Event::Course]
-
   children Group::Pfadi,
            Group::AbteilungsGremium
 

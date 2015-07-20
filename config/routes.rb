@@ -45,6 +45,9 @@ Rails.application.routes.draw do
               get :new_tentative
               post :create_tentative
             end
+            member do
+              post :cancel
+            end
           end
         end
       end
