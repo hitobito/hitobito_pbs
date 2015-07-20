@@ -11,6 +11,10 @@ module Pbs::Sheet::Group
   included do
     tabs.insert(
       -2,
+      Sheet::Tab.new('groups.tabs.education',
+                     :educations_path,
+                     if: :education),
+
       Sheet::Tab.new(:tab_population_label,
                      :population_group_path,
                      if: lambda do |view, group|
@@ -24,11 +28,9 @@ module Pbs::Sheet::Group
                        group.census? && view.can?(:evaluate_census, group)
                      end),
 
-      Sheet::Tab.new(:pending_approvals_tab,
-                     :pending_approvals_group_path,
-                     if: lambda do |view, group|
-                       view.can?(:pending_approvals, group)
-                     end))
+     Sheet::Tab.new(:pending_approvals_tab,
+                    :pending_approvals_group_path,
+                    if: :pending_approvals))
   end
 
 end

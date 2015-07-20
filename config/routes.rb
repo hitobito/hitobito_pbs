@@ -33,9 +33,14 @@ Rails.application.routes.draw do
         end
 
         get 'population' => 'population#index'
+
+        scope module: 'group' do
+          resources :educations, only: :index
+        end
       end
 
       resource :member_counts, only: [:create, :edit, :update, :destroy]
+
       get 'member_counts' => 'member_counts#edit' # route required for language switch
       resources :events, only: [] do # do not redefine events actions, only add new ones
         get :list_tentatives, on: :member

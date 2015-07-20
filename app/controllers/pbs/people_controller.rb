@@ -13,7 +13,7 @@ module Pbs::PeopleController
                              :leaving_date, :j_s_number, :correspondence_language,
                              :brother_and_sisters]
 
-    skip_load_and_authorize_resource only: :query_tentative
+    skip_load_and_authorize_resource only: [:query_tentative]
   end
 
   def query_tentative
@@ -33,12 +33,6 @@ module Pbs::PeopleController
     end
 
     render json: people.collect(&:as_typeahead)
-  end
-
-  def pending_approvals
-    @approvals = Event::Approval.pending(entry).
-      includes(:participation, :approvee, event: [:dates, :groups]).
-      order('event_participations.created_at ASC')
   end
 
 end

@@ -4,6 +4,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 de:
+  dummy: dummy
 
   censuses:
     form:
@@ -102,6 +103,12 @@ de:
       population: Bestand
       statistic: Statistik
       approvals: Kursfreigaben (%{count})
+      education: Ausbildung
+
+  group:
+    educations:
+      index:
+        tentative_participation: Provisorische Anmeldung
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.

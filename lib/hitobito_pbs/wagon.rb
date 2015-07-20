@@ -54,6 +54,7 @@ module HitobitoPbs
 
       ### controllers
       PeopleController.send :include, Pbs::PeopleController
+      PeopleFiltersController.send :include, Pbs::PeopleFiltersController
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
       EventsController.send :include, Pbs::EventsController
@@ -77,6 +78,9 @@ module HitobitoPbs
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
       Sheet::Event.send :include, Pbs::Sheet::Event
+
+      ### filter
+      FilterNavigation::People.send :include, Pbs::FilterNavigation::People
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

@@ -23,6 +23,10 @@ module Pbs::GroupAbility
         in_same_layer_or_below_if_leader
 
       permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_in_group
+
+      permission(:group_full).may(:education).in_same_group
+      permission(:layer_full).may(:education).in_same_layer
+      permission(:layer_and_below_full).may(:education).in_same_layer_or_below
     end
   end
 
