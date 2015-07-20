@@ -53,8 +53,8 @@ module Pbs::Event::Participation
   def delete_tentatives
     Event::Participation.
       tentative.
-      joins('INNER JOIN "events" ON "events"."id" = "event_participations"."event_id"').
-      joins('INNER JOIN "event_kinds" ON "event_kinds"."id" = "events"."kind_id"').
+      joins('INNER JOIN events ON events.id = event_participations.event_id').
+      joins('INNER JOIN event_kinds ON event_kinds.id = events.kind_id').
       where(events: { kind_id: event.kind_id }, person_id: person.id).
       delete_all
   end
