@@ -90,7 +90,7 @@ module HitobitoPbs
       Settings.reload!
     end
 
-    initializer 'jubla.add_inflections' do |_app|
+    initializer 'pbs.add_inflections' do |_app|
       ActiveSupport::Inflector.inflections do |inflect|
         inflect.irregular 'census', 'censuses'
       end
