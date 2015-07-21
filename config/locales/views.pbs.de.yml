@@ -4,13 +4,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 de:
-  dummy: dummy
-
-  groups:
-    tabs:
-      population: Bestand
-      statistic: Statistik
-      approvals: Kursfreigaben (%{count})
 
   censuses:
     form:
@@ -43,6 +36,11 @@ de:
 
   census_evaluation/kantonalverband:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
+
+  devise:
+    sessions:
+      new:
+        usage_advise: Die Daten in der Mitgliederdatenbank dürfen nur im Zusammenhang mit Aktivitäten der Pfadi verwendet werden, sie dürfen z.B. nicht an Drittpersonen oder Organisationen weiter gegeben werden.  Die Bearbeitung und Nutzung hat nach Treu und Glauben zu erfolgen und muss verhältnismässig sein.
 
   event:
     participations:
@@ -91,16 +89,22 @@ de:
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
 
+  filter_navigation/event/participations:
+    predefined_filters:
+      revoked: Abgemeldete
+
+  groups:
+    tabs:
+      population: Bestand
+      statistic: Statistik
+      approvals: Kursfreigaben (%{count})
+
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.
     updated_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gespeichert.
     deleted_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gelöscht.
-
-
     edit:
       title: Mitgliederzahlen %{year} bearbeiten
-
-  membercounts:
 
   people:
     fields:
@@ -121,8 +125,3 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
-
-  devise:
-    sessions:
-      new:
-        usage_advise: Die Daten in der Mitgliederdatenbank dürfen nur im Zusammenhang mit Aktivitäten der Pfadi verwendet werden, sie dürfen z.B. nicht an Drittpersonen oder Organisationen weiter gegeben werden.  Die Bearbeitung und Nutzung hat nach Treu und Glauben zu erfolgen und muss verhältnismässig sein.

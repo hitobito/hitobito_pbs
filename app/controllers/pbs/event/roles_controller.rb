@@ -5,15 +5,19 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+module Pbs::Event::RolesController
+  extend ActiveSupport::Concern
 
-top_leader:
-  event: top_course
-  person: bulei
-  active: true
-  state: assigned
+  included do
+    alias_method_chain :build_entry, :state
+  end
 
-top_participant:
-  event: top_course
-  person: al_schekka
-  active: true
-  state: assigned
+  private
+
+  def build_entry_with_state
+    role = build_entry_without_state
+    role.participation.state ||= 'assigned'
+    role
+  end
+
+end

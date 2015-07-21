@@ -16,6 +16,7 @@ module Pbs::Event::Participation
     self.possible_states = %w(tentative applied assigned rejected canceled attended absent)
 
     ACTIVE_STATES = %w(assigned attended)
+    REVOKED_STATES = %w(rejected canceled absent)
 
     # Define methods to query if a participation is in the given state.
     # eg participation.canceled?
@@ -45,7 +46,7 @@ module Pbs::Event::Participation
   end
 
   def course?
-    event.instance_of?(Event::Course)
+    event.is_a?(Event::Course)
   end
 
   private

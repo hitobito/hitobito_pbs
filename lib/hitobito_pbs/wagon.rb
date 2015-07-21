@@ -36,8 +36,7 @@ module HitobitoPbs
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
       ## domain
-      Event::ParticipationFilter.load_entries_includes += [:application]
-      Export::Pdf::Participation.send :include, Pbs::Export::Pdf::Participation
+      Event::ParticipationFilter.send :include, Pbs::Event::ParticipationFilter
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
 
       ### abilities
@@ -61,6 +60,9 @@ module HitobitoPbs
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
+      require 'event/roles_controller'
+      require 'pbs/event/roles_controller'
+      Event::RolesController.send :include, Pbs::Event::RolesController
 
       Event::KindsController.permitted_attrs += [:documents_text]
 
