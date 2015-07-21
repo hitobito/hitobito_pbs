@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-desc "Crawl app with tarantula"
+desc 'Crawl app with tarantula'
 task :tarantula do
   sh 'rm -rf ../../../tmp/tarantula'
   sh 'rm -rf ../hitobito/tmp/tarantula'

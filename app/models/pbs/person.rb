@@ -59,7 +59,7 @@ module Pbs::Person
     Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language
 
     validates :salutation,
-              inclusion: { in: ->(_) { Salutation.available.keys } ,
+              inclusion: { in: ->(_) { Salutation.available.keys },
                            allow_blank: true }
 
     validates :correspondence_language,

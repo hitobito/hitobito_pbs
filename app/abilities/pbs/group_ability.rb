@@ -29,12 +29,12 @@ module Pbs::GroupAbility
   def in_same_layer_or_below_if_leader
     in_same_layer_or_below &&
     user.roles.any? do |r|
-      r.kind_of?(Group::Bund::MitarbeiterGs) ||
-      r.kind_of?(Group::Bund::Sekretariat) ||
-      r.kind_of?(Group::Kantonalverband::Kantonsleitung) ||
-      r.kind_of?(Group::Kantonalverband::Sekretariat) ||
-      r.kind_of?(Group::Region::Regionalleitung) ||
-      r.kind_of?(Group::Region::Sekretariat)
+      r.is_a?(Group::Bund::MitarbeiterGs) ||
+      r.is_a?(Group::Bund::Sekretariat) ||
+      r.is_a?(Group::Kantonalverband::Kantonsleitung) ||
+      r.is_a?(Group::Kantonalverband::Sekretariat) ||
+      r.is_a?(Group::Region::Regionalleitung) ||
+      r.is_a?(Group::Region::Sekretariat)
     end
   end
 
@@ -46,7 +46,9 @@ module Pbs::GroupAbility
 
   def if_layer_and_approver_in_group
     user_roles = user.roles.collect(&:class)
-    approving_group_roles = group.role_types.select { |type| type.permissions.include?(:approve_applications) }
+    approving_group_roles = group.role_types.select do |type|
+      type.permissions.include?(:approve_applications)
+    end
     group.layer? && contains_any?(user_roles, approving_group_roles)
   end
 end

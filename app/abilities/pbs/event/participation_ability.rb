@@ -36,7 +36,7 @@ module Pbs::Event::ParticipationAbility
   end
 
   def person_in_same_layer_or_visible_below
-    person ? ( person_in_same_layer || visible_below ) : true
+    person ? ( person_in_same_layer || visible_below) : true
   end
 
   def event_tentative_and_person_in_tentative_group

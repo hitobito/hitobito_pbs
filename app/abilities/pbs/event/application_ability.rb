@@ -17,14 +17,19 @@ module Pbs::Event::ApplicationAbility
       permission(:any).may(:show_approvals).for_participations_full_events
       permission(:group_full).may(:show_approvals).in_same_group
       permission(:layer_full).may(:show_approvals).in_same_layer_or_different_prio
-      permission(:layer_and_below_full).may(:show_approvals).in_same_layer_or_below_or_different_prio
+      permission(:layer_and_below_full).
+        may(:show_approvals).
+        in_same_layer_or_below_or_different_prio
     end
   end
 
   def for_approvals_in_same_layer
     if primary_group && next_open_approval
       approving_roles = next_open_approval.roles
-      user.roles.any? { |role| approving_roles.include?(role.class) && layer_ids.include?(role.group_id) }
+      user.roles.any? do |role|
+        approving_roles.include?(role.class) &&
+        layer_ids.include?(role.group_id)
+      end
     end
   end
 

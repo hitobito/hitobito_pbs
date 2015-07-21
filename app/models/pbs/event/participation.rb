@@ -39,7 +39,6 @@ module Pbs::Event::Participation
     ### CALLBACKS
 
     before_validation :set_default_state, if: :course?
-    # TODO check if in transaction
     before_validation :delete_tentatives, if: :course?, unless: :tentative?, on: :create
     before_validation :set_active_based_on_state, if: :course?
     before_validation :clear_canceled_at, unless: :canceled?
@@ -52,7 +51,7 @@ module Pbs::Event::Participation
   private
 
   def set_default_state
-    self.state ||= 'applied'
+    self.state ||= application.present? ? 'applied' : 'assigned'
   end
 
   # custom join event belongs_to kind is not defined in core

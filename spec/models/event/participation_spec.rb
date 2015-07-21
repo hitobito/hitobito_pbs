@@ -17,6 +17,12 @@ describe Event::Participation do
     it 'sets default state' do
       p = Event::Participation.new(event: event, person: person, state: nil)
       expect(p).to be_valid
+      expect(p.state).to eq 'assigned'
+    end
+
+    it 'sets default state with application' do
+      p = Event::Participation.new(event: event, person: person, state: nil, application: Event::Application.new(priority_1: event))
+      expect(p).to be_valid
       expect(p.state).to eq 'applied'
     end
 
@@ -62,7 +68,10 @@ describe Event::Participation do
     end
 
     it "applying with invalid state does not delete tentative participation" do
-      Event::Participation.create(event: course, person: participation.person, state: 'invalid')
+      expect do
+        other = Event::Participation.create(event: course, person: participation.person, state: 'invalid')
+        expect(other.errors.full_messages).to be_present
+      end.not_to change { Event::Participation.count }
       expect { participation.reload }.not_to raise_error
     end
   end

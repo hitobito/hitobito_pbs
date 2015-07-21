@@ -18,8 +18,8 @@ module Pbs::EventsController
   end
 
   def tentatives
-    #TODO what permission?
-    #TODO irgendwas mit views war noch nicht in ordnung
+    # TODO what permission?
+    # TODO irgendwas mit views war noch nicht in ordnung
     authorize!(:update, entry)
 
     @grouped_participations = entry.

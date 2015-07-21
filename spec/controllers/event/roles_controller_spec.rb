@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
-require 'event/roles_controller'
 
 describe Event::RolesController do
 
