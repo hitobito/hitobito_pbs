@@ -37,7 +37,6 @@ class Event::CanceledParticipationJob < BaseJob
 
   def send_notification
     list = recipients
-    binding.pry
     if list.present?
       Event::ParticipationMailer.canceled(participation, list).deliver
     end

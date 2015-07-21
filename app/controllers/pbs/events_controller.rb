@@ -11,7 +11,10 @@ module Pbs::EventsController
   included do
     self.permitted_attrs += [:tentative_applications]
 
+    before_action :remove_restricted, only: [:create, :update]
+
     before_render_show :load_participation_emails, if: :canceled?
+
     alias_method_chain :permitted_attrs, :superior_check
 
     skip_load_and_authorize_resource only: :tentatives
@@ -46,6 +49,10 @@ module Pbs::EventsController
       attrs -= entry.class.superior_attributes
     end
     attrs
+  end
+
+  def remove_restricted
+    model_params.delete(:coach)
   end
 
 end

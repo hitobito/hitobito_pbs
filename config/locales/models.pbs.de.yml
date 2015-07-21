@@ -628,6 +628,22 @@ de:
         one: Mitglied
         description:
 
+      event/course/role/leader:
+        one: Kursleitung
+        other: Kursleitungen
+
+      event/course/role/class_leader:
+        one: Klassenlehrer
+        other: Klassenlehrer
+
+      event/course/role/helper:
+        one: Kurshelfer
+        other: Kurshelfer
+
+      event/course/role/advisor:
+        one: LKB
+        other: LKBs
+
       census:
         one: Bestandesmeldungsperiode
         other: Bestandesmeldungsperioden
@@ -675,6 +691,8 @@ de:
       event/course:
         tentative_applications: Provisorische Anmeldungen
         requires_approval: Empfehlung der Anmeldungen nötig durch
+        advisor: LKB
+        advisor_id: LKB
         states:
           created: Erstellt
           confirmed: Bestätigt

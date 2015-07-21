@@ -8,15 +8,29 @@
 module Pbs::Event::Course
   extend ActiveSupport::Concern
 
-  included do
-    LANGUAGES = %w(de fr it en)
-    APPROVALS = %w(requires_approval_abteilung requires_approval_region
-                   requires_approval_kantonalverband requires_approval_bund)
+  LANGUAGES = %w(de fr it en)
+  APPROVALS = %w(requires_approval_abteilung requires_approval_region
+                 requires_approval_kantonalverband requires_approval_bund)
 
-    LANGUAGES.each { |key| used_attributes << "language_#{key}".to_sym }
-    APPROVALS.each { |key| used_attributes << key.to_sym }
-    self.used_attributes += [:express_fee, :tentative_applications]
+  included do
+    include Event::RestrictedRole
+
+    self.used_attributes += [:advisor_id, :express_fee, :tentative_applications] +
+                            LANGUAGES.collect { |key| "language_#{key}".to_sym } +
+                            APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval]
+
+    self.superior_attributes = [:express_fee, :training_days]
+
+
+    self.role_types = [Event::Course::Role::Leader,
+                       Event::Course::Role::ClassLeader,
+                       Event::Role::Speaker,
+                       Event::Course::Role::Helper,
+                       Event::Role::Cook,
+                       Event::Course::Role::Participant]
+
+    restricted_role :advisor, Event::Course::Role::Advisor
 
     # states are used for workflow
     # translations in config/locales
@@ -30,9 +44,6 @@ module Pbs::Event::Course
         self.state == state
       end
     end
-
-    self.superior_attributes = [:express_fee, :training_days]
-
 
     ### VALIDATIONS
 
