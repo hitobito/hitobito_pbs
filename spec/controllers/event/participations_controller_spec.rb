@@ -16,7 +16,6 @@ describe Event::ParticipationsController do
   before { sign_in(people(:bulei)) }
 
   context 'GET#new' do
-
     it 'informs about email sent to participant' do
       get :new,
           group_id: group.id,
@@ -24,12 +23,10 @@ describe Event::ParticipationsController do
           event_participation: { person_id: people(:child).id }
       expect(flash[:notice]).to be_present
     end
-
   end
 
 
   context 'GET#index' do
-
     it 'does not include tentative participants' do
       Fabricate(:event_participation,
                 event: course,
@@ -39,7 +36,6 @@ describe Event::ParticipationsController do
       get :index, group_id: group.id, event_id: course.id
       expect(assigns(:participations)).to be_empty
     end
-
   end
 
   context 'POST#create' do
@@ -126,11 +122,13 @@ describe Event::ParticipationsController do
     let(:participation) { Fabricate(:pbs_participation, event: course) }
 
     it 'cancels participation' do
-      post :cancel,
-           group_id: group.id,
-           event_id: course.id,
-           id: participation.id,
-           event_participation: { canceled_at: Date.today }
+      expect do
+        post :cancel,
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id,
+             event_participation: { canceled_at: Date.today }
+      end.to change { Delayed::Job.count }.by(1)
       expect(flash[:notice]).to be_present
       participation.reload
       expect(participation.canceled_at).to eq Date.today
@@ -139,11 +137,13 @@ describe Event::ParticipationsController do
     end
 
     it 'requires canceled_at date' do
-      post :cancel,
-           group_id: group.id,
-           event_id: course.id,
-           id: participation.id,
-           event_participation: { canceled_at: ' ' }
+      expect do
+        post :cancel,
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id,
+             event_participation: { canceled_at: ' ' }
+      end.not_to change { Delayed::Job.count }
       expect(flash[:alert]).to be_present
       participation.reload
       expect(participation.canceled_at).to eq nil

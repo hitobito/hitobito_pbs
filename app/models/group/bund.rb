@@ -116,7 +116,7 @@ class Group::Bund < Group
   end
 
   class LeitungKernaufgabeAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data, :approve_applications]
+    self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
   end
 
   class LeitungKernaufgabeKommunikation < ::Role

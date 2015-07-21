@@ -22,6 +22,7 @@ module Pbs::Event::ParticipationsController
     entry.canceled_at = params[:event_participation][:canceled_at]
     entry.state = 'canceled'
     if entry.save
+      Event::CanceledParticipationJob.new(entry).enqueue!
       flash[:notice] = t('event.participations.canceled_notice', participant: entry.person)
     else
       flash[:alert] = entry.errors.full_messages

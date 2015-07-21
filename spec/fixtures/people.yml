@@ -63,18 +63,21 @@ bulei:
   title: Dr.
   contact_data_visible: true
   gender: m
+  primary_group: bund
 
 al_schekka:
   first_name: AL
   last_name: Schekka
   email: al.schekka@hitobito.example.com
   contact_data_visible: true
+  primary_group: schekka
 
 al_berchtold:
   first_name: AL
   last_name: Berchtold
   email: al.berchtold@hitobito.example.com
   contact_data_visible: true
+  primary_group: berchtold
 
 child:
   first_name: My

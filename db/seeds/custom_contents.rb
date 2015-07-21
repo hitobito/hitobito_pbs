@@ -14,10 +14,14 @@ CustomContent.seed_once(:key,
     placeholders_required: 'event-details, application-url',
     placeholders_optional: 'recipient-name' },
 
+  {key: Event::ParticipationMailer::CONTENT_CANCELED_PARTICIPATION,
+   placeholders_required: 'participant-name',
+   placeholders_optional: 'event-name, canceled-at, application-url, event-details'},
 )
 
-group_membership_id = CustomContent.where(key: GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).first.id
+group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
 participation_confirmation_other_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CONFIRMATION_OTHER).id
+participation_canceled_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CANCELED_PARTICIPATION).id
 
 CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: group_membership_id,
@@ -61,5 +65,26 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: participation_confirmation_other_id,
     locale: 'it',
     label: "Evento: Altro E-mail per l'affermazione della inscrizione" },
+
+  { custom_content_id: participation_canceled_id,
+    locale: 'de',
+    label: 'Anlass: E-Mail Abmeldung',
+    subject: 'Kursabmeldung',
+    body: "Hallo zusammen<br/><br/>" \
+          "{participant-name} wurde per {canceled-at} vom Kurs {event-name} abgemeldet.<br/><br/>" \
+          "Siehe {application-url}<br/><br/>" \
+          "Kursdetails:<br/>{event-details}<br/>" },
+
+  { custom_content_id: participation_canceled_id,
+    locale: 'fr',
+    label: "Événement: E-Mail d'annonce de départ" },
+
+  { custom_content_id: participation_canceled_id,
+    locale: 'en',
+    label: 'Event: Unsubscription email' },
+
+  { custom_content_id: participation_canceled_id,
+    locale: 'it',
+    label: "Evento: E-mail della notifica della partenza" },
 )
 

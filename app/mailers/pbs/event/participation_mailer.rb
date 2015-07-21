@@ -10,6 +10,8 @@ module Pbs::Event::ParticipationMailer
 
   CONTENT_CONFIRMATION_OTHER = 'event_application_confirmation_other'
 
+  CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'
+
   def confirmation_other(participation)
     @participation = participation
 
@@ -18,6 +20,16 @@ module Pbs::Event::ParticipationMailer
     compose(CONTENT_CONFIRMATION_OTHER,
             [person],
             'recipient-name' => person.greeting_name)
+  end
+
+  def canceled(participation, recipients)
+    @participation = participation
+
+    compose(CONTENT_CANCELED_PARTICIPATION,
+            recipients,
+            'canceled-at' => I18n.l(participation.canceled_at),
+            'event-name' => event.to_s,
+            'participant-name' => person.to_s)
   end
 
 end
