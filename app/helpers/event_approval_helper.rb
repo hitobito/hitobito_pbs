@@ -21,32 +21,8 @@ module EventApprovalHelper
   end
 
   def format_event_approval_status(approval)
-    prefix = 'event/application_decorator'
-
-    label, type, tooltip =
-      if approval.approved?
-        %W(&#x2713; success #{t("#{prefix}.confirmation.approved")})
-      elsif approval.rejected?
-        %W(&#x00D7; important #{t("#{prefix}.confirmation.rejected")})
-      else
-        %W(? warning #{t("#{prefix}.confirmation.missing")})
-      end
-
-    approval_status_badge(label, type, "#{t("#{prefix}.course_acceptance")} #{tooltip}")
-  end
-
-  private
-
-  def approval_status_badge(label, type, tooltip)
-    options = { class: "badge badge-#{type || 'default'}" }
-    if tooltip.present?
-      options.merge!(rel: :tooltip,
-                     'data-container' => 'body',
-                     'data-html' => 'true',
-                     'data-placement' => 'bottom',
-                     title: tooltip)
-    end
-    content_tag(:span, label.html_safe, options)
+    args = @participation.application.approval_fields(approval.approved?, approval.rejected?)
+    badge(*args)
   end
 
 end

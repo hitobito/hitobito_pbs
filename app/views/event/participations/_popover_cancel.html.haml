@@ -4,10 +4,11 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
+%p.muted= t('.cancel_info')
+
 = standard_form(entry,
                 url: cancel_group_event_participation_path(@group, @event, entry),
                 method: :post) do |f|
-  %p.muted= t('.cancel_info')
 
   = f.labeled_input_field(:canceled_at, value: f(Date.today))
   = save_form_buttons(f, t('event.participations.actions_show_pbs.cancel_button'), '#')

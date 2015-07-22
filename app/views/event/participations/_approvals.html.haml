@@ -4,9 +4,9 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
-- if can?(:show_approvals, entry.application) && entry.event.is_a?(Event::Course)
+- if entry.event.requires_approval? && entry.application && can?(:show_approvals, entry.application)
   = section_table(t('.title'), @approvals) do |a|
     %td= format_attr(a, :status)
     %td= format_attr(a, :approver)
     %td= simple_format(a.comment)
-    %td= format_attr(a, :approved_at)
+    %td= f(a.approved_at.try(:to_date))

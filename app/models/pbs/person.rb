@@ -69,7 +69,7 @@ module Pbs::Person
                            allow_blank: true }
 
     validates :entry_date, :leaving_date,
-              timeliness: { type: :date, allow_blank: true }
+              timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
     alias_method_chain :full_name, :title
 
