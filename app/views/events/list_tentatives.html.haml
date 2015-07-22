@@ -3,9 +3,6 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-#main
-  = table(@approvals, class: 'table table-striped table-hover') do |t|
-    - t.col { |a| format_attr(a, :status) }
-    - t.attrs(:approvee, :approver)
-    - t.attr(:comment) { |a| simple_format(a.comment) }
-    - t.attrs(:approved_at)
+= table(@grouped_participations, class: 'table table-striped') do |t|
+  - t.col(t('.tentatives_count')) { |group, participations| participations.count.to_s }
+  - t.col(Group.model_name.human) { |group, participations| link_to(group, group) }

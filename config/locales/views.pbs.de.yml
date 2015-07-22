@@ -80,6 +80,8 @@ de:
       create_tentative_application: Provisorisch Anmelden
     tabs:
       tentatives: Provisorische Anmeldungen (%{count})
+    list_tentatives:
+      tentatives_count: Provisorisch
     show:
       inform_by_email: Informieren
     application_fields_pbs:

@@ -10,13 +10,21 @@ module Pbs::EventAbility
 
   included do
     on(Event) do
-      permission(:any).may(:index_revoked_participations).for_participations_full_events
-      permission(:group_full).may(:index_revoked_participations).in_same_group
-      permission(:layer_full).may(:index_revoked_participations).in_same_layer
-      permission(:layer_and_below_full).may(:index_revoked_participations).in_same_layer_or_below
-
       permission(:any).may(:modify_superior).if_education_responsible
     end
+
+    on(Event::Course) do
+      permission(:any).may(:index_revoked_participations, :list_tentatives).for_participations_full_events
+      permission(:group_full).may(:index_revoked_participations, :list_tentatives).in_same_group
+      permission(:layer_full).may(:index_revoked_participations, :list_tentatives).in_same_layer
+      permission(:layer_and_below_full).may(:index_revoked_participations, :list_tentatives).in_same_layer_or_below
+
+      general(:list_tentatives).if_tentative_applications?
+    end
+  end
+
+  def if_tentative_applications?
+    subject.tentative_applications?
   end
 
   def if_education_responsible

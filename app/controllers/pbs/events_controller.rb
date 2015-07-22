@@ -17,13 +17,11 @@ module Pbs::EventsController
 
     alias_method_chain :permitted_attrs, :superior_check
 
-    skip_load_and_authorize_resource only: :tentatives
+    skip_load_and_authorize_resource only: :list_tentatives
   end
 
-  def tentatives
-    # TODO what permission?
-    # TODO irgendwas mit views war noch nicht in ordnung
-    authorize!(:update, entry)
+  def list_tentatives
+    authorize!(:list_tentatives, entry)
 
     @grouped_participations = entry.
       participations.

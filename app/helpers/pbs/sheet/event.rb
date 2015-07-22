@@ -12,11 +12,8 @@ module Pbs::Sheet::Event
     tabs.insert(
       -2,
       Sheet::Tab.new(:tentatives_participations_tab,
-                     :tentatives_group_event_path,
-                     if: lambda do |view, _group, event|
-                       view.can?(:update, event) && event.tentative_applications?
-                     end
-                    ))
+                     :list_tentatives_group_event_path,
+                     if: :list_tentatives))
   end
 
 end
