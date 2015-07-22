@@ -45,6 +45,17 @@ module Pbs::Event::ParticipationsController
     authorize!(:create_tentative, @event.participations.new)
   end
 
+  def reject
+    entry.state = 'rejected'
+    if entry.save
+      mailto = ''
+      flash[:notice] = t('event.participations.rejected_notice', participant: entry.person, mailto: mailto)
+    else
+      flash[:alert] = entry.errors.full_messages
+    end
+    redirect_to group_event_participation_path(group, event, entry)
+  end
+
   private
 
   def load_approvals
