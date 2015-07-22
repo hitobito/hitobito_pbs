@@ -20,7 +20,7 @@ module Pbs::Event::ParticipationFilter
     @predefined_filters ||=
       predefined_filters_without_revoked.dup.tap do |predefined|
         if event.supports_applications? &&
-           Ability.new(user).can?(:index_participations_details, event)
+           Ability.new(user).can?(:index_revoked_participations, event)
           predefined << 'revoked'
         end
       end

@@ -64,10 +64,6 @@ module Pbs::Event::Course
     (!application_closing_at || application_closing_at > ::Date.today)
   end
 
-  def qualification_possible?
-    !completed? && !closed?
-  end
-
   def state
     super || possible_states.first
   end

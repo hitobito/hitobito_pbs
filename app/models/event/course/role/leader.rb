@@ -18,7 +18,7 @@
 # Kursleitung
 class Event::Course::Role::Leader < Event::Role
 
-  self.permissions = [:event_full, :participations_full]
+  self.permissions = [:event_full, :participations_full, :qualify]
 
   self.kind = :leader
 

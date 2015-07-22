@@ -8,18 +8,13 @@
 module Pbs::EventAbility
   extend ActiveSupport::Concern
 
-  include Pbs::EventConstraints
-
   included do
     on(Event) do
-      general(:update, :destroy, :application_market, :qualify).
-        at_least_one_group_not_deleted_and_not_closed_or_admin
+      permission(:any).may(:index_revoked_participations).for_participations_full_events
+      permission(:group_full).may(:index_revoked_participations).in_same_group
+      permission(:layer_full).may(:index_revoked_participations).in_same_layer
+      permission(:layer_and_below_full).may(:index_revoked_participations).in_same_layer_or_below
 
-      permission(:any).may(:update).for_managed_events
-
-      permission(:any).may(:index_participations_details).for_leaded_events
-      permission(:group_full).may(:index_participations_details).in_same_group
-      permission(:layer_and_below_full).may(:index_participations_details).in_same_layer_or_below
       permission(:any).may(:modify_superior).if_education_responsible
     end
   end

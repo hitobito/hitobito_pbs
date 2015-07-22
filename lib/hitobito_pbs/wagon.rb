@@ -45,7 +45,6 @@ module HitobitoPbs
       EventAbility.send :include, Pbs::EventAbility
       Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
       Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
-      Event::RoleAbility.send :include, Pbs::Event::RoleAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### serializers
