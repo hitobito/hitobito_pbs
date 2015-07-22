@@ -47,6 +47,7 @@ Rails.application.routes.draw do
             end
             member do
               post :cancel
+              get :reject
             end
           end
         end

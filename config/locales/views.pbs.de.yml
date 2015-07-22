@@ -46,6 +46,7 @@ de:
     participations:
       created_tentative: Provisorische Anmeldung für %{participant} wurde erstellt.
       canceled_notice: "%{participant} wurde abgemeldet."
+      rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
       new_tentative:
         title: Provisorisch Anmelden
@@ -64,6 +65,7 @@ de:
       actions_show_pbs:
         cancel_button: Abmelden
         cancel_title: Teilnehmer abmelden
+        reject_button: Ablehnen
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.

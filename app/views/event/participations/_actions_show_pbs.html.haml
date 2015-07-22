@@ -4,11 +4,14 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
-- if @application.present? && !entry.canceled? && can?(:cancel, entry)
+- if @application.present? && show_event_participation_cancel_button?
   = action_button(t('.cancel_button'),
                   '#',
                   :'remove-circle',
                   title: t('.cancel_title'),
                   data: { toggle: 'popover', content: render('popover_cancel').to_str })
 
-
+- if @application.present? && show_event_participation_reject_button?
+  = action_button(t('.reject_button'),
+                  reject_group_event_participation_path,
+                  :'thumbs-down')
