@@ -27,6 +27,7 @@ module Pbs::EventsController
       participations.
       tentative.
       includes(person: :primary_group).
+      order('groups.layer_group_id').
       group_by { |p| p.person.primary_group }
   end
 
