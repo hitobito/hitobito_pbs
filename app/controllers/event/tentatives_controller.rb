@@ -49,11 +49,8 @@ class Event::TentativesController < ApplicationController
         includes(roles: :group).
         only_public_data.
         order_by_name.
-        accessible_by(current_ability).
-        limit(10).
-        select { |p| can?(:update, p) }
-
-      people = people.map { |p| p.decorate }
+        accessible_by(PersonWritables.new(current_user)).
+        limit(10).decorate
     end
 
     render json: people.collect(&:as_typeahead)
