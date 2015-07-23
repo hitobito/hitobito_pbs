@@ -53,7 +53,9 @@ module HitobitoPbs
       GroupSerializer.send  :include, Pbs::GroupSerializer
 
       ### controllers
-      PeopleController.send :include, Pbs::PeopleController
+      PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
+                                           :leaving_date, :j_s_number, :correspondence_language,
+                                           :brother_and_sisters]
       PeopleFiltersController.send :include, Pbs::PeopleFiltersController
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController

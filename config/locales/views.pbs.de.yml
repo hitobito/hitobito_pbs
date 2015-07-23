@@ -45,12 +45,9 @@ de:
 
   event:
     participations:
-      created_tentative: Provisorische Anmeldung für %{participant} wurde erstellt.
       canceled_notice: "%{participant} wurde abgemeldet."
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
-      new_tentative:
-        title: Provisorisch Anmelden
       approvals:
         title: Empfehlungen
       missing_preconditions: fehlende Vorbedingungen
@@ -67,6 +64,12 @@ de:
         cancel_button: Abmelden
         cancel_title: Teilnehmer abmelden
         reject_button: Ablehnen
+    tentatives:
+      created: Provisorische Anmeldung für %{participant} wurde erstellt.
+      index:
+        tentatives_count: Provisorisch
+      new:
+        title: Provisorisch Anmelden
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
@@ -91,11 +94,6 @@ de:
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
-
-  event:
-    tentatives:
-      index:
-        tentatives_count: Provisorisch
 
   filter_navigation/event/participations:
     predefined_filters:

@@ -30,21 +30,6 @@ module Pbs::Event::ParticipationsController
     redirect_to group_event_participation_path(group, event, entry)
   end
 
-  def create_tentative
-    authorize!(:create_tentative, entry)
-    entry.attributes = { active: false, state: 'tentative', application: nil }
-    if entry.save
-      flash[:notice] = t('event.participations.created_tentative', participant: entry.person)
-      redirect_to group_event_path(group, event)
-    else
-      render :new
-    end
-  end
-
-  def new_tentative
-    authorize!(:create_tentative, @event.participations.new)
-  end
-
   def reject
     entry.state = 'rejected'
     if entry.save

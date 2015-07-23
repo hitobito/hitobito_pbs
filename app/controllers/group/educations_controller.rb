@@ -22,7 +22,9 @@ class Group::EducationsController < ApplicationController
   end
 
   def education_entries
-    filter_entries.includes(qualifications: [qualification_kind: :translations], event_participations: [event: :groups])
+    filter_entries.
+      includes(qualifications: [qualification_kind: :translations],
+               event_participations: [event: :groups])
   end
 
   def filter_entries
