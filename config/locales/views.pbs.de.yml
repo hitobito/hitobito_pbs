@@ -83,8 +83,6 @@ de:
       create_tentative_application: Provisorisch Anmelden
     tabs:
       tentatives: Provisorische Anmeldungen (%{count})
-    list_tentatives:
-      tentatives_count: Provisorisch
     show:
       inform_by_email: Informieren
     application_fields_pbs:
@@ -93,6 +91,11 @@ de:
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
+
+  event:
+    tentatives:
+      index:
+        tentatives_count: Provisorisch
 
   filter_navigation/event/participations:
     predefined_filters:

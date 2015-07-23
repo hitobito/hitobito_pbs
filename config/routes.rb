@@ -43,8 +43,9 @@ Rails.application.routes.draw do
 
       get 'member_counts' => 'member_counts#edit' # route required for language switch
       resources :events, only: [] do # do not redefine events actions, only add new ones
-        get :list_tentatives, on: :member
         scope module: 'event' do
+          resources :tentatives, only: [:index]
+
           resources :participations, only: [] do
             collection do
               get :new_tentative

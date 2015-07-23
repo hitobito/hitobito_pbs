@@ -16,19 +16,6 @@ module Pbs::EventsController
     before_render_show :load_participation_emails, if: :canceled?
 
     alias_method_chain :permitted_attrs, :superior_check
-
-    skip_load_and_authorize_resource only: :list_tentatives
-  end
-
-  def list_tentatives
-    authorize!(:list_tentatives, entry)
-
-    @grouped_participations = entry.
-      participations.
-      tentative.
-      includes(person: :primary_group).
-      order('groups.layer_group_id').
-      group_by { |p| p.person.primary_group }
   end
 
   private

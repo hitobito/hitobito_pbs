@@ -39,36 +39,4 @@ describe EventsController do
 
   end
 
-
-  context 'tentatives' do
-    let(:group) { groups(:schekka) }
-    let(:course) { Fabricate(:pbs_course, groups: [group], tentative_applications: true) }
-
-    it 'lists tentative applications' do
-      sign_in(people(:bulei))
-      course = Fabricate(:pbs_course, groups: [groups(:schekka)], tentative_applications: true)
-      app1 = Fabricate(:pbs_participation, event: course, state: 'tentative', person: people(:al_schekka))
-      Fabricate(:pbs_participation, event: course, state: 'tentative', person: people(:bulei))
-      Fabricate(:pbs_participation, event: course, state: 'assigned', person: people(:al_berchtold))
-
-      get :list_tentatives, group_id: course.groups.first.id, id: course.id
-
-      grouped_participations = assigns(:grouped_participations)
-      expect(grouped_participations).to have(2).items
-
-      first_group = grouped_participations.first
-
-      expect(groups(:schekka)).to eq first_group[0]
-      expect([app1]).to eq first_group[1]
-    end
-
-    it 'raises AccessDenied if not permitted to list_tentatives on event' do
-      sign_in(people(:al_schekka))
-      course = Fabricate(:pbs_course, groups: [groups(:bund)], tentative_applications: true)
-      expect do
-        get :list_tentatives, group_id: course.groups.first.id, id: course.id
-      end.to raise_error CanCan::AccessDenied
-    end
-
-  end
 end
