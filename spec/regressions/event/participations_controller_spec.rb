@@ -68,4 +68,48 @@ describe Event::ParticipationsController, type: :controller  do
       end
     end
   end
+
+  context 'reject participation' do
+    before { participation.update(application: application) }
+
+    context 'show reject button' do
+      before { sign_in(al_schekka) }
+
+      it 'does not see Anmeldung ablehnen when participation canceled' do
+        participation.update_attribute(:state, 'canceled')
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).not_to have_content 'Anmeldung ablehnen'
+      end
+
+      it 'does not see Anmeldung ablehnen when participation rejected' do
+        participation.update_attribute(:state, 'rejected')
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).not_to have_content 'Anmeldung ablehnen'
+      end
+
+      it 'sees Anmeldung ablehnen when participation applied' do
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).to have_content 'Anmeldung ablehnen'
+      end
+
+      it 'sees Anmeldung ablehnen when participation assigned' do
+        participation.update_attribute(:state, 'assigned')
+        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        expect(dom).to have_content 'Anmeldung ablehnen'
+      end
+    end
+    
+    context 'reject participation' do
+      before { sign_in(al_schekka) }
+
+      it 'rejects participation and show mailto link in flash' do
+        get :reject, group_id: group.id, event_id: course.id, id: participation.id
+        is_expected.to redirect_to group_event_participation_path(group, course, participation)
+        expect(flash[:notice]).to match(/wurde abgelehnt/)
+        # TODO check for mail_to links with email addresses
+      end
+
+    end
+
+  end
 end
