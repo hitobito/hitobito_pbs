@@ -103,4 +103,37 @@ describe Event::ParticipationsController do
     end
   end
 
+  context 'POST reject' do
+    render_views
+
+    let(:participation) { Fabricate(:pbs_participation, event: course) }
+    let(:dom) { Capybara::Node::Simple.new(response.body) }
+
+    it 'rejects participation with mailto link if email present' do
+      post :reject,
+        group_id: group.id,
+        event_id: course.id,
+        id: participation.id
+      participation.reload
+      expect(participation.state).to eq 'rejected'
+      expect(participation.active).to eq false
+      expect(flash[:notice]).to include "Teilnehmer informieren"
+      expect(flash[:notice]).to include "mailto:#{participation.person.email}"
+      expect(flash[:notice]).to include "cc=bulei%40hitobito.example.com"
+    end
+
+    it 'rejects participation without mailto link if email missing' do
+      participation.person.update(email: nil)
+      post :reject,
+        group_id: group.id,
+        event_id: course.id,
+        id: participation.id
+      expect(flash[:notice]).to be_present
+      expect(flash[:notice]).not_to include "Teilnehmer informieren"
+      participation.reload
+      expect(participation.state).to eq 'rejected'
+      expect(participation.active).to eq false
+    end
+  end
+
 end

@@ -33,7 +33,7 @@ module Pbs::Event::ParticipationsController
   def reject
     entry.state = 'rejected'
     if entry.save
-      inform_about_rejected_participation
+      flash[:notice] = t('event.participations.rejected_notice', participant: entry.person, mailto: mailto_link)
     else
       flash[:alert] = entry.errors.full_messages
     end
@@ -65,13 +65,13 @@ module Pbs::Event::ParticipationsController
     participation.new_record? && participation.person != current_user
   end
 
-  # TODO add cc email addresses for Bewilligungsinstanzen, Gruppenleitung
-  def inform_about_rejected_participation
-    email = entry.person.email
-    return if email.blank?
-    mailto = view_context.mail_to(email.html_safe, 
-                                  t('event.participations.rejected_email_link'))
-    flash[:notice] = t('event.participations.rejected_notice', participant: entry.person, mailto: mailto)
+  def mailto_link
+    if email = entry.person.email
+      cc = (entry.event.organizers + entry.approvers).collect(&:email).compact.join(',')
+      view_context.mail_to(email.html_safe,
+                           t('event.participations.rejected_email_link'),
+                           cc: cc.html_safe)
+    end
   end
 
 end

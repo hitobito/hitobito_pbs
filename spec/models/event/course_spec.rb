@@ -172,4 +172,31 @@ describe Event::Course do
 
   end
 
+  context '#organizers' do
+    def person(name, role)
+      group = groups(name)
+      Fabricate("#{group.class.name}::#{role}", group: group).person
+    end
+
+    before do
+      @be_adressverwaltung = person(:be, 'Adressverwaltung')
+      @be_verantwortung_ausbildung = person(:be, 'VerantwortungAusbildung')
+
+      @zh_adressverwaltung = person(:zh, 'Adressverwaltung')
+      @zh_verantwortung_ausbildung = person(:zh, 'VerantwortungAusbildung')
+    end
+
+    it 'includes people with layer_full or layer_and_below_full from organising group' do
+      expect(event.organizers).to have(2).items
+      expect(event.organizers).to include(@be_adressverwaltung, @be_verantwortung_ausbildung)
+    end
+
+    it 'includes people from all organising event groups' do
+      event.groups << groups(:zh)
+      expect(event.organizers).to have(4).items
+      expect(event.organizers).to include(@be_adressverwaltung, @be_verantwortung_ausbildung,
+                                          @zh_adressverwaltung, @zh_verantwortung_ausbildung)
+    end
+  end
+
 end

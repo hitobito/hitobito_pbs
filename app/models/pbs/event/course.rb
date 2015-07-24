@@ -81,6 +81,13 @@ module Pbs::Event::Course
     groups.flat_map { |g| g.self_and_descendants.pluck(:id) + g.hierarchy.pluck(:id) }
   end
 
+  def organizers
+    Person.
+      includes(:roles).
+      where(roles: { type: organizing_role_types,
+                     group_id: groups.collect(&:id) })
+  end
+
   private
 
   module ClassMethods
@@ -103,6 +110,10 @@ module Pbs::Event::Course
 
   def count_applicants_scope_with_tentative
     count_applicants_scope_without_tentative.countable_applicants
+  end
+
+  def organizing_role_types
+    ::Role.types_with_permission(:layer_full) + ::Role.types_with_permission(:layer_and_below_full)
   end
 
 end

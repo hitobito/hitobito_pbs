@@ -48,6 +48,10 @@ module Pbs::Event::Participation
     event.is_a?(Event::Course)
   end
 
+  def approvers
+    Person.where(id: application && application.approvals.collect(&:approver_id))
+  end
+
   private
 
   def set_default_state
