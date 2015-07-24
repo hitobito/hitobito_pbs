@@ -14,17 +14,17 @@ describe PeopleFiltersController do
 
   context 'GET#new' do
     render_views
+    let(:dom) { Capybara::Node::Simple.new(response.body) }
 
     it 'sets education value to true if education param present' do
       get :new, group_id: group.id, education: true
-      dom = Capybara::Node::Simple.new(response.body)
-      expect(dom.find('input[name="education"]').value).to eq "true"
+      expect(dom).to have_selector('input[name="education"]')
+      expect(dom.find('input[name="education"]').value).to eq 'true'
     end
 
     it 'sets education value to nil if education param missing' do
       get :new, group_id: group.id
-      dom = Capybara::Node::Simple.new(response.body)
-      expect(dom.find('input[name="education"]').value).to be_blank
+      expect(dom).not_to have_selector('input[name="education"]')
     end
   end
 

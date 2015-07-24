@@ -39,7 +39,7 @@ module Pbs::FilterNavigation::People
     if education?
       template.group_people_filter_path(group, filter, education: true)
     else
-      delete_group_people_filter_path_without_education
+      delete_group_people_filter_path_without_education(filter)
     end
   end
 

@@ -27,6 +27,7 @@ module Pbs::GroupAbility
       permission(:group_full).may(:education).in_same_group
       permission(:layer_full).may(:education).in_same_layer
       permission(:layer_and_below_full).may(:education).in_same_layer_or_below
+      general(:education).if_layer_group
     end
   end
 
@@ -53,6 +54,10 @@ module Pbs::GroupAbility
     approving_group_roles = group.role_types.select do |type|
       type.permissions.include?(:approve_applications)
     end
-    group.layer? && contains_any?(user_roles, approving_group_roles)
+    if_layer_group && contains_any?(user_roles, approving_group_roles)
+  end
+
+  def if_layer_group
+    group.layer?
   end
 end
