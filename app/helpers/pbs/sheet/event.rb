@@ -11,7 +11,7 @@ module Pbs::Sheet::Event
   included do
     tabs.insert(
       -2,
-      Sheet::Tab.new(:tentatives_participations_tab,
+      Sheet::Tab.new('events.tabs.tentatives',
                      :group_event_tentatives_path,
                      if: :list_tentatives))
   end

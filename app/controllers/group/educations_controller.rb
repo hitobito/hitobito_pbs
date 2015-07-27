@@ -30,6 +30,7 @@ class Group::EducationsController < ApplicationController
   def filter_entries
     filter = Person::ListFilter.new(group, current_user, params[:kind], params[:role_type_ids])
     entries = filter.filter_entries.order_by_name
+    @multiple_groups = filter.multiple_groups
     @all_count = filter.all_count if html_request?
     entries
   end

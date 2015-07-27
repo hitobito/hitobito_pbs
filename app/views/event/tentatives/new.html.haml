@@ -7,19 +7,16 @@
 - title t('.title')
 
 = standard_form(@participation,
-                stacked: true,
                 buttons_top: false,
                 submit_label: t('.title'),
                 url: group_event_tentatives_path(@group, @event)) do |f|
 
   = f.error_messages
-  = render_extensions :event_kind_fields
 
   = f.labeled(:person) do
     = f.hidden_field(:person_id)
     = f.string_field(:person, placeholder: I18n.t('global.search.placeholder_with_model', model: Person.model_name.human),
                               data: { provide: 'entity', id_field: "#{f.object_name}_person_id", url: query_group_event_tentatives_path })
 
-  = f.labeled_text_area(:additional_information)
   = save_form_buttons(f, nil, group_event_path(@group, @event))
 

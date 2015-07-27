@@ -69,6 +69,8 @@ de:
       created: Provisorische Anmeldung für %{participant} wurde erstellt.
       index:
         tentatives_count: Provisorisch
+        total_info_html: "Total <strong>%{count}</strong> provisorische Anmeldungen."
+        layer: Ebene
       new:
         title: Provisorisch Anmelden
 
@@ -86,7 +88,7 @@ de:
     actions_show_pbs:
       create_tentative_application: Provisorisch Anmelden
     tabs:
-      tentatives: Provisorische Anmeldungen (%{count})
+      tentatives: Provisorische Anmeldungen
     show:
       inform_by_email: Informieren
     application_fields_pbs:

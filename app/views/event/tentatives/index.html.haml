@@ -3,6 +3,10 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
+%p= t('.total_info_html', count: @counts.values.sum)
+
 = table(@counts, class: 'table table-striped') do |t|
-  - t.col(t('.tentatives_count')) { |(group_id, group_name), tentatives_count| tentatives_count.to_s }
-  - t.col(Group.model_name.human) { |(group_id, group_name), tentatives_count| link_to(group_name, group_path(id: group_id)) }
+  - t.col(t('.tentatives_count'), style: 'width: 100px;') do |_, tentatives_count|
+    - fnumber(tentatives_count)
+  - t.col(t('.layer')) do |(group_id, group_name), tentatives_count|
+    - link_to(group_name, group_path(id: group_id))

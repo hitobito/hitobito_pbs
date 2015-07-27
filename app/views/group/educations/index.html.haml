@@ -21,7 +21,10 @@
 
   - if @people.total_count > 0
     = table(@people, class: 'table table-striped') do |t|
-      - t.col(Person.model_name.human) { |person| link_to(person, [@group, person]) }
+      - t.col(Person.model_name.human) do |person|
+        %strong
+          = link_to(person.to_s(:list),
+                    @multiple_groups ? group_person_path(person.default_group_id, person) : group_person_path(@group, person))
       - t.col(Qualification.model_name.human(count: 2)) { |person| joined_qualification_kind_labels(person) }
       - t.col(Event::Application.model_name.human(count: 2)) { |person| joined_event_participations(person) }
 

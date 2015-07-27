@@ -21,7 +21,7 @@ class Event::TentativesController < ApplicationController
       joins(person: :primary_group).
       joins('LEFT OUTER JOIN groups layer_groups on groups.layer_group_id = layer_groups.id').
       group('layer_groups.id', 'layer_groups.name').
-      order('layer_groups.id desc').
+      order('layer_groups.lft').
       count
   end
 
