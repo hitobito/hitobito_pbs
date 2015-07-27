@@ -53,7 +53,7 @@ module Pbs::Event::Course
     ### CALLBACKS
     before_save :set_requires_approval
 
-    alias_method_chain :count_applicants_scope, :tentative
+    alias_method_chain :applicants_scope, :tentative
   end
 
 
@@ -108,8 +108,8 @@ module Pbs::Event::Course
     true
   end
 
-  def count_applicants_scope_with_tentative
-    count_applicants_scope_without_tentative.countable_applicants
+  def applicants_scope_with_tentative
+    applicants_scope_without_tentative.countable_applicants
   end
 
   def organizing_role_types

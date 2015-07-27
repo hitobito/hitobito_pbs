@@ -27,7 +27,7 @@ describe Group::EducationsController do
 
   it 'does list participant participations' do
     get :index, id: groups(:schekka).id
-    expect(response.body).to have_content 'AL Schekka'
+    expect(response.body).to have_content 'Schekka AL'
     expect(response.body).to have_content 'Top Course'
   end
 
