@@ -8,19 +8,11 @@
 module EventParticipationPbsHelper
 
   def show_event_participation_cancel_button?
-    if can?(:cancel, entry)
-      if !entry.canceled? && !entry.rejected?
-        return true
-      end
-    end
+    (entry.assigned? || entry.applied?) && can?(:cancel, entry)
   end
 
   def show_event_participation_reject_button?
-    if can?(:reject, entry)
-      if entry.assigned? || entry.applied?
-        return true
-      end
-    end
+    (entry.assigned? || entry.applied?) && can?(:reject, entry)
   end
 
 end

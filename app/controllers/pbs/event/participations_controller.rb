@@ -68,7 +68,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def rejected_mailto_link
-    to = Person.mailing_emails_for(entry.person)
+    to = Person.mailing_emails_for([entry.person])
     if to.present?
       cc = Person.mailing_emails_for(entry.event.organizers + entry.approvers)
       view_context.mail_to(to.join(',').html_safe,

@@ -78,27 +78,27 @@ describe Event::ParticipationsController, type: :controller  do
       it 'does not see Anmeldung ablehnen when participation canceled' do
         participation.update_attribute(:state, 'canceled')
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).not_to have_content 'Anmeldung ablehnen'
+        expect(dom).not_to have_content 'Ablehnen'
       end
 
       it 'does not see Anmeldung ablehnen when participation rejected' do
         participation.update_attribute(:state, 'rejected')
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).not_to have_content 'Anmeldung ablehnen'
+        expect(dom).not_to have_content 'Ablehnen'
       end
 
       it 'sees Anmeldung ablehnen when participation applied' do
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).to have_content 'Anmeldung ablehnen'
+        expect(dom).to have_content 'Ablehnen'
       end
 
       it 'sees Anmeldung ablehnen when participation assigned' do
         participation.update_attribute(:state, 'assigned')
         get :show, group_id: group.id, event_id: course.id, id: participation.id
-        expect(dom).to have_content 'Anmeldung ablehnen'
+        expect(dom).to have_content 'Ablehnen'
       end
     end
-    
+
     context 'reject participation' do
       before { sign_in(al_schekka) }
 
