@@ -33,7 +33,9 @@ module Pbs::Event::ParticipationsController
   def reject
     entry.state = 'rejected'
     if entry.save
-      flash[:notice] = t('event.participations.rejected_notice', participant: entry.person, mailto: mailto_link)
+      flash[:notice] = t('event.participations.rejected_notice',
+                         participant: entry.person,
+                         mailto: rejected_mailto_link)
     else
       flash[:alert] = entry.errors.full_messages
     end
@@ -65,12 +67,13 @@ module Pbs::Event::ParticipationsController
     participation.new_record? && participation.person != current_user
   end
 
-  def mailto_link
-    if email = entry.person.email
-      cc = (entry.event.organizers + entry.approvers).collect(&:email).compact.join(',')
-      view_context.mail_to(email.html_safe,
+  def rejected_mailto_link
+    to = Person.mailing_emails_for(entry.person)
+    if to.present?
+      cc = Person.mailing_emails_for(entry.event.organizers + entry.approvers)
+      view_context.mail_to(to.join(',').html_safe,
                            t('event.participations.rejected_email_link'),
-                           cc: cc.html_safe)
+                           cc: cc.join(',').html_safe)
     end
   end
 

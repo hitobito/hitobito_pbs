@@ -64,7 +64,7 @@ de:
       actions_show_pbs:
         cancel_button: Abmelden
         cancel_title: Teilnehmer abmelden
-        reject_button: Anmeldung ablehnen
+        reject_button: Ablehnen
     tentatives:
       created: Provisorische Anmeldung für %{participant} wurde erstellt.
       index:

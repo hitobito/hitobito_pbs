@@ -25,7 +25,7 @@ module Pbs::EventsController
   end
 
   def load_participation_emails
-    @emails = entry.participations.includes(:person).pluck('people.email').uniq
+    @emails = Person.mailing_emails_for(entry.people)
   end
 
   def permitted_attrs_with_superior_check
