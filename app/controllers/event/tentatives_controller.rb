@@ -45,16 +45,14 @@ class Event::TentativesController < ApplicationController
     people = []
 
     if params.key?(:q) && params[:q].size >= 3
-      people = Person.where(search_condition(*PeopleController::QUERY_FIELDS)).
-        includes(roles: :group).
-        only_public_data.
+      people = Person.accessible_by(PersonWritables.new(current_user)).
+        where(search_condition(*PeopleController::QUERY_FIELDS)).
         order_by_name.
-        accessible_by(PersonWritables.new(current_user)).
-        limit(10).decorate
+        limit(10).
+        decorate
     end
 
     render json: people.collect(&:as_typeahead)
-
   end
 
   private
