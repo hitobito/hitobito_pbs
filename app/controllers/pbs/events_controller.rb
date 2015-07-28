@@ -9,8 +9,6 @@ module Pbs::EventsController
   extend ActiveSupport::Concern
 
   included do
-    self.permitted_attrs += [:tentative_applications]
-
     before_action :remove_restricted, only: [:create, :update]
 
     before_render_show :load_participation_emails, if: :canceled?

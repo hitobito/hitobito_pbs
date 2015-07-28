@@ -32,20 +32,16 @@ module HitobitoPbs
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::Application.send :include, Pbs::Event::Application
-      Event::Course::Role::Participant.send :include, Pbs::Event::Course::Role::Participant
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
       ## domain
-      Event::ParticipationFilter.send :include, Pbs::Event::ParticipationFilter
-      Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
       EventAbility.send :include, Pbs::EventAbility
       Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
-      Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### serializers
@@ -56,33 +52,21 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      PeopleFiltersController.send :include, Pbs::PeopleFiltersController
+      Event::KindsController.permitted_attrs += [:documents_text]
+
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
       EventsController.send :include, Pbs::EventsController
-
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
-      require 'event/roles_controller'
-      require 'pbs/event/roles_controller'
-      Event::RolesController.send :include, Pbs::Event::RolesController
-
-      Event::KindsController.permitted_attrs += [:documents_text]
 
       ### exports
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
 
-      ### decorators
-      Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
-
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
-      Sheet::Event.send :include, Pbs::Sheet::Event
-
-      ### filter
-      FilterNavigation::People.send :include, Pbs::FilterNavigation::People
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

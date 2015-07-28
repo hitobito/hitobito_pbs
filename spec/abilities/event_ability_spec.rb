@@ -13,7 +13,7 @@ describe EventAbility do
     Ability.new(person.reload)
   end
 
-  context 'event creation/update/list_tentatives' do
+  context 'event creation/update' do
     allowed_roles = [
       # abteilung
       [:patria, 'Abteilungsleitung'],
@@ -44,23 +44,6 @@ describe EventAbility do
         expect(ability(person)).to be_able_to(:update, event)
       end
 
-      it "#{r.second} should be allowed to list_tentatives for event in group #{r.first.to_s}" do
-        group = groups(r.first)
-        role_name = group.class.name + '::' + r.second
-        person = Fabricate(role_name, group: group).person
-        event = Fabricate(:pbs_course, groups: [group], tentative_applications: true)
-
-        expect(ability(person)).to be_able_to(:list_tentatives, event)
-      end
-
-      it "#{r.second} should be allowed to index_revoked_participations for event in group #{r.first.to_s}" do
-        group = groups(r.first)
-        role_name = group.class.name + '::' + r.second
-        person = Fabricate(role_name, group: group).person
-        event = Fabricate(:pbs_course, groups: [group])
-
-        expect(ability(person)).to be_able_to(:index_revoked_participations, event)
-      end
     end
   end
 

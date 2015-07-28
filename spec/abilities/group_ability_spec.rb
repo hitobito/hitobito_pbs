@@ -52,48 +52,4 @@ describe GroupAbility do
     end
   end
 
-  context 'education' do
-    def ability(name, role)
-      group = groups(name)
-      Ability.new(Fabricate("#{group.class.name}::#{role}", group: group).person)
-    end
-
-    context :layer_and_below_full do
-      it 'may show education in layer group' do
-        expect(ability(:bund, "MitarbeiterGs")).to be_able_to(:education, groups(:bund))
-      end
-
-      it 'may show education in layer below' do
-        expect(ability(:bund, "MitarbeiterGs")).to be_able_to(:education, groups(:be))
-      end
-
-      it 'may not show education in group below' do
-        expect(ability(:be, "Kantonsleitung")).not_to be_able_to(:education, groups(:fg_security))
-      end
-
-      it 'may not show education in upper layer' do
-        expect(ability(:be, "Kantonsleitung")).not_to be_able_to(:education, groups(:bund))
-      end
-    end
-
-    context :layer_full do
-      it 'may show education in layer group' do
-        expect(ability(:bund, "AssistenzAusbildung")).to be_able_to(:education, groups(:bund))
-      end
-
-      it 'may not show education in layer below' do
-        expect(ability(:bund, "AssistenzAusbildung")).not_to be_able_to(:education, groups(:be))
-      end
-
-      it 'may not show education in group below' do
-        expect(ability(:be, "VerantwortungAusbildung")).not_to be_able_to(:education, groups(:fg_security))
-      end
-
-      it 'may not show education in upper layer' do
-        expect(ability(:be, "VerantwortungAusbildung")).not_to be_able_to(:education, groups(:bund))
-      end
-    end
-  end
-
-
 end

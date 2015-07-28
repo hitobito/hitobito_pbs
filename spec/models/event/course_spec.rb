@@ -24,6 +24,26 @@ describe Event::Course do
     event.reload
   end
 
+  describe "#tentative_application_possible?" do
+    Event::Course.possible_states.each do |state|
+      it "is false for state #{state} when tentative_applications flag is not set" do
+        expect(Event::Course.new(state: state)).not_to be_tentative_application_possible
+      end
+    end
+
+    Event::Course.possible_states[0..1].each do |state|
+      it "is true for state #{state} when tentative_applications flag is set" do
+        expect(Event::Course.new(state: state, tentative_applications: true)).to be_tentative_application_possible
+      end
+    end
+
+    Event::Course.possible_states[2..-1].each do |state|
+      it "is false for state #{state} when tentative_applications flag is set" do
+        expect(Event::Course.new(state: state, tentative_applications: true)).not_to be_tentative_application_possible
+      end
+    end
+  end
+
   describe '.role_types' do
     subject { Event::Course.role_types }
 
@@ -92,28 +112,6 @@ describe Event::Course do
       end
     end
   end
-
-  describe "#tentative_application_possible?" do
-    Event::Course.possible_states.each do |state|
-      it "is false for state #{state} when tentative_applications flag is not set" do
-        expect(Event::Course.new(state: state)).not_to be_tentative_application_possible
-      end
-    end
-
-    Event::Course.possible_states[0..1].each do |state|
-      it "is true for state #{state} when tentative_applications flag is set" do
-        expect(Event::Course.new(state: state, tentative_applications: true)).to be_tentative_application_possible
-      end
-    end
-
-    Event::Course.possible_states[2..-1].each do |state|
-      it "is false for state #{state} when tentative_applications flag is set" do
-        expect(Event::Course.new(state: state, tentative_applications: true)).not_to be_tentative_application_possible
-      end
-    end
-
-  end
-
 
   context '#advisor' do
     let(:person)  { Fabricate(:person) }

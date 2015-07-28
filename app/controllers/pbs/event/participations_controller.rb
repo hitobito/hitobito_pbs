@@ -12,34 +12,10 @@ module Pbs::Event::ParticipationsController
     before_render_show :load_approvals
     before_render_form :inform_about_email_sent_to_participant
 
+    after_cancel :send_canceled_info
+    after_reject :notice_with_mailto
+
     alias_method_chain :send_confirmation_email, :current_user
-    alias_method_chain :build_application, :state
-
-    skip_load_and_authorize_resource only: [:new_tentative]
-  end
-
-  def cancel
-    entry.canceled_at = params[:event_participation][:canceled_at]
-    entry.state = 'canceled'
-    if entry.save
-      Event::CanceledParticipationJob.new(entry).enqueue!
-      flash[:notice] = t('event.participations.canceled_notice', participant: entry.person)
-    else
-      flash[:alert] = entry.errors.full_messages
-    end
-    redirect_to group_event_participation_path(group, event, entry)
-  end
-
-  def reject
-    entry.state = 'rejected'
-    if entry.save
-      flash[:notice] = t('event.participations.rejected_notice',
-                         participant: entry.person,
-                         mailto: rejected_mailto_link)
-    else
-      flash[:alert] = entry.errors.full_messages
-    end
-    redirect_to group_event_participation_path(group, event, entry)
   end
 
   private
@@ -52,19 +28,20 @@ module Pbs::Event::ParticipationsController
     Event::ParticipationConfirmationJob.new(entry, current_user).enqueue!
   end
 
+  def send_canceled_info
+    Event::CanceledParticipationJob.new(entry).enqueue!
+  end
+
   def inform_about_email_sent_to_participant
     if new_record_for_someone_else?(entry) && !event.tentative_applications?
       flash.now[:notice] = t('event.participations.inform_about_email_sent_to_participant')
     end
   end
 
-  def build_application_with_state(participation)
-    build_application_without_state(participation)
-    participation.state = new_record_for_someone_else?(participation) ? 'assigned' : 'applied'
-  end
-
-  def new_record_for_someone_else?(participation)
-    participation.new_record? && participation.person != current_user
+  def notice_with_mailto
+    flash[:notice] = t('event.participations.rejected_notice',
+                        participant: entry.person,
+                       mailto: rejected_mailto_link)
   end
 
   def rejected_mailto_link

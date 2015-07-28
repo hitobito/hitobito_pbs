@@ -25,19 +25,6 @@ describe Event::ParticipationsController do
     end
   end
 
-
-  context 'GET#index' do
-    it 'does not include tentative participants' do
-      Fabricate(:event_participation,
-                event: course,
-                state: 'applied',
-                person: people(:child),
-                active: true)
-      get :index, group_id: group.id, event_id: course.id
-      expect(assigns(:participations)).to be_empty
-    end
-  end
-
   context 'POST#create' do
 
     # TODO ama this allows creating participations for people which are not visible to user
@@ -50,22 +37,6 @@ describe Event::ParticipationsController do
         expect(participation).to be_valid
       end.to change { Delayed::Job.count }.by(1)
       expect(flash[:notice]).not_to include 'Für die definitive Anmeldung musst du diese Seite über <i>Drucken</i> ausdrucken, '
-    end
-
-    it 'sets participation state to applied' do
-      post :create,
-           group_id: group.id,
-           event_id: course.id,
-           event_participation: { person_id: people(:bulei).id }
-      expect(participation.state).to eq 'applied'
-    end
-
-    it 'sets participation state to assigned when created by organisator' do
-      post :create,
-           group_id: group.id,
-           event_id: course.id,
-           event_participation: { person_id: people(:child).id }
-      expect(participation.state).to eq 'assigned'
     end
 
   end
@@ -89,18 +60,6 @@ describe Event::ParticipationsController do
       expect(participation.active).to eq false
     end
 
-    it 'requires canceled_at date' do
-      expect do
-        post :cancel,
-             group_id: group.id,
-             event_id: course.id,
-             id: participation.id,
-             event_participation: { canceled_at: ' ' }
-      end.not_to change { Delayed::Job.count }
-      expect(flash[:alert]).to be_present
-      participation.reload
-      expect(participation.canceled_at).to eq nil
-    end
   end
 
   context 'POST reject' do

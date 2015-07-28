@@ -4,8 +4,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 de:
-  dummy: dummy
-
   censuses:
     form:
       title: Neue Bestandesmeldung erfassen
@@ -45,7 +43,6 @@ de:
 
   event:
     participations:
-      canceled_notice: "%{participant} wurde abgemeldet."
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       rejected_email_link: Teilnehmer informieren
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
@@ -61,18 +58,6 @@ de:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:
         cancel_info: Die Kursleitung, der Kursorganisator und die Abteilungsleiter werden über die Abmeldung informiert.
-      actions_show_pbs:
-        cancel_button: Abmelden
-        cancel_title: Teilnehmer abmelden
-        reject_button: Ablehnen
-    tentatives:
-      created: Provisorische Anmeldung für %{participant} wurde erstellt.
-      index:
-        tentatives_count: Provisorisch
-        total_info_html: "Total <strong>%{count}</strong> provisorische Anmeldungen."
-        layer: Ebene
-      new:
-        title: Provisorisch Anmelden
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
@@ -85,34 +70,19 @@ de:
       language_fr: Französisch
       language_it: Italienisch
       language_en: Englisch
-    actions_show_pbs:
-      create_tentative_application: Provisorisch Anmelden
-    tabs:
-      tentatives: Provisorische Anmeldungen
     show:
       inform_by_email: Informieren
     application_fields_pbs:
-      tentative_applications: Gruppenleiter können Personen provisorisch anmelden
       requires_approval_abteilung: Abteilung
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
-
-  filter_navigation/event/participations:
-    predefined_filters:
-      revoked: Abgemeldete
 
   groups:
     tabs:
       population: Bestand
       statistic: Statistik
       approvals: Kursfreigaben (%{count})
-      education: Ausbildung
-
-  group:
-    educations:
-      index:
-        tentative_participation: Provisorische Anmeldung
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.

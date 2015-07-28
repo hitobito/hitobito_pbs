@@ -25,10 +25,4 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
-  def participates_in?(event)
-    event.participations.
-      where(person: current_user).
-      where.not(state: 'tentative').exists?
-  end
-
 end

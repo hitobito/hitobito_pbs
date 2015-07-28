@@ -15,7 +15,7 @@ module Pbs::Event::Course
   included do
     include Event::RestrictedRole
 
-    self.used_attributes += [:advisor_id, :express_fee, :tentative_applications] +
+    self.used_attributes += [:advisor_id, :express_fee] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval]
@@ -37,6 +37,8 @@ module Pbs::Event::Course
     self.possible_states = %w(created confirmed application_open application_closed
                               assignment_closed canceled completed closed)
 
+    self.tentative_states = %w(created confirmed)
+
     # Define methods to query if a course is in the given state.
     # eg course.canceled?
     possible_states.each do |state|
@@ -52,8 +54,6 @@ module Pbs::Event::Course
 
     ### CALLBACKS
     before_save :set_requires_approval
-
-    alias_method_chain :applicants_scope, :tentative
   end
 
 
@@ -68,25 +68,6 @@ module Pbs::Event::Course
     super || possible_states.first
   end
 
-  def tentative_application_possible?
-    tentative_applications? && %w(created confirmed).include?(state)
-  end
-
-  def tentatives_count
-    participations.tentative.count
-  end
-
-  # participations can be created form members of these groups
-  def tentative_group_ids
-    groups.flat_map { |g| g.self_and_descendants.pluck(:id) + g.hierarchy.pluck(:id) }
-  end
-
-  def organizers
-    Person.
-      includes(:roles).
-      where(roles: { type: organizing_role_types,
-                     group_id: groups.collect(&:id) })
-  end
 
   private
 
@@ -106,14 +87,6 @@ module Pbs::Event::Course
       requires_approval_bund?
 
     true
-  end
-
-  def applicants_scope_with_tentative
-    applicants_scope_without_tentative.countable_applicants
-  end
-
-  def organizing_role_types
-    ::Role.types_with_permission(:layer_full) + ::Role.types_with_permission(:layer_and_below_full)
   end
 
 end
