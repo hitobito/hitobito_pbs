@@ -37,6 +37,8 @@ module HitobitoPbs
 
       ## domain
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
+      Export::Csv::People::ParticipationNdbjsRow.send :include,
+        Pbs::Export::Csv::People::ParticipationNdbjsRow
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
