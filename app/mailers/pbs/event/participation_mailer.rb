@@ -12,6 +12,10 @@ module Pbs::Event::ParticipationMailer
 
   CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'
 
+  CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST = 'event_participation_assigned_from_waiting_list'
+
+  CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST = 'event_participation_removed_from_waiting_list'
+
   def confirmation_other(participation)
     @participation = participation
 
@@ -29,6 +33,30 @@ module Pbs::Event::ParticipationMailer
             recipients,
             'canceled-at' => I18n.l(participation.canceled_at),
             'event-name' => event.to_s,
+            'participant-name' => person.to_s)
+  end
+
+  def removed_from_waiting_list(participation, current_user)
+    @participation = participation
+    waiting_list_setter = participation.waiting_list_setter
+
+    compose(CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST,
+            Array(waiting_list_setter),
+            'waiting-list-setter' => waiting_list_setter.greeting_name,
+            'event-name' => event.to_s,
+            'leader-name' => current_user.to_s,
+            'participant-name' => person.to_s)
+  end
+
+  def assigned_from_waiting_list(participation, current_user)
+    @participation = participation
+    waiting_list_setter = participation.waiting_list_setter
+
+    compose(CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST,
+            Array(waiting_list_setter),
+            'waiting-list-setter' => waiting_list_setter.greeting_name,
+            'event-name' => event.to_s,
+            'leader-name' => current_user.to_s,
             'participant-name' => person.to_s)
   end
 

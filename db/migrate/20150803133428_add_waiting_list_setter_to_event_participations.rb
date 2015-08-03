@@ -5,15 +5,10 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-module Pbs::Event::Participation
-  extend ActiveSupport::Concern
+class AddWaitingListSetterToEventParticipations < ActiveRecord::Migration
 
-  included do
-    belongs_to :waiting_list_setter, class_name: 'Person'
-  end
-
-  def approvers
-    Person.where(id: application && application.approvals.collect(&:approver_id))
+  def change
+    add_column(:event_participations, :waiting_list_setter_id, :integer)
   end
 
 end

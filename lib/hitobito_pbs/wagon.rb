@@ -60,6 +60,7 @@ module HitobitoPbs
       GroupsController.send :include, Pbs::GroupsController
       EventsController.send :include, Pbs::EventsController
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
+      Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
 
       ### exports

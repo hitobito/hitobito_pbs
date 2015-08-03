@@ -17,11 +17,21 @@ CustomContent.seed_once(:key,
   {key: Event::ParticipationMailer::CONTENT_CANCELED_PARTICIPATION,
    placeholders_required: 'participant-name',
    placeholders_optional: 'event-name, canceled-at, application-url, event-details'},
+
+  {key: Event::ParticipationMailer::CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST,
+   placeholders_required: 'participant-name',
+   placeholders_optional: 'event-name, canceled-at, application-url, event-details, waiting-list-setter, leader-name'},
+
+  {key: Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST,
+   placeholders_required: 'participant-name',
+   placeholders_optional: 'event-name, canceled-at, application-url, event-details, waiting-list-setter, leader-name'},
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
 participation_confirmation_other_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CONFIRMATION_OTHER).id
 participation_canceled_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CANCELED_PARTICIPATION).id
+participation_assigned_from_waiting_list_id = CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST).id
+participation_removed_from_waiting_list_id = CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
 
 CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: group_membership_id,
@@ -86,5 +96,47 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: participation_canceled_id,
     locale: 'it',
     label: "Evento: E-mail della notifica della partenza" },
+
+  { custom_content_id: participation_assigned_from_waiting_list_id,
+    locale: 'de',
+    label: 'Anlass: E-Mail Teilnehmer/-in aus der Warteliste zuweisen',
+    subject: 'Zuweisung aus Warteliste',
+    body: "Hallo {waiting-list-setter}<br/><br/>" \
+          "{participant-name} wurde von {leader-name} von der Warteliste in den Kurs {event-name} übernommen.<br/><br/>" \
+          "Siehe {application-url}<br/><br/>" \
+          "Kursdetails:<br/>{event-details}<br/>" },
+
+  { custom_content_id: participation_assigned_from_waiting_list_id,
+    locale: 'fr',
+    label: "Événement: E-Mail Abonné a été assigné  de la liste d'attente" },
+
+  { custom_content_id: participation_assigned_from_waiting_list_id,
+    locale: 'en',
+    label: 'Event: E-mail Participant assigned from waiting list' },
+
+  { custom_content_id: participation_removed_from_waiting_list_id,
+    locale: 'it',
+    label: "Evento: E-mail Abbonato è stato assegnato dalla lista d'attesa" },
+
+  { custom_content_id: participation_removed_from_waiting_list_id,
+    locale: 'de',
+    label: 'Anlass: E-Mail Teilnehmer/-in von der Warteliste nehmen',
+    subject: 'Von der Warteliste genommen',
+    body: "Hallo {waiting-list-setter}<br/><br/>" \
+          "{participant-name} wurde von {leader-name} von der Warteliste genommen.<br/><br/>" \
+          "Siehe {application-url}<br/><br/>" \
+          "Kursdetails:<br/>{event-details}<br/>" },
+
+  { custom_content_id: participation_removed_from_waiting_list_id,
+    locale: 'fr',
+    label: "Événement: E-Mail Abonné a été supprimé de la liste d'attente" },
+
+  { custom_content_id: participation_removed_from_waiting_list_id,
+    locale: 'en',
+    label: 'Event: E-mail Participant Removed from waiting list' },
+
+  { custom_content_id: participation_removed_from_waiting_list_id,
+    locale: 'it',
+    label: "Evento: E-mail Abbonato è stato rimosso dalla lista di attesa" },
 )
 
