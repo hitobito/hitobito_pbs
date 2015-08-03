@@ -32,25 +32,6 @@ module Pbs::Event::Course
 
     restricted_role :advisor, Event::Course::Role::Advisor
 
-    # states are used for workflow
-    # translations in config/locales
-    self.possible_states = %w(created confirmed application_open application_closed
-                              assignment_closed canceled completed closed)
-
-    self.tentative_states = %w(created confirmed)
-
-    # Define methods to query if a course is in the given state.
-    # eg course.canceled?
-    possible_states.each do |state|
-      define_method "#{state}?" do
-        self.state == state
-      end
-    end
-
-    ### VALIDATIONS
-
-    validates :state, inclusion: possible_states
-
 
     ### CALLBACKS
     before_save :set_requires_approval
@@ -64,20 +45,7 @@ module Pbs::Event::Course
     (!application_closing_at || application_closing_at > ::Date.today)
   end
 
-  def state
-    super || possible_states.first
-  end
-
-
   private
-
-  module ClassMethods
-    def application_possible
-      where(state: 'application_open').
-      where('events.application_opening_at IS NULL OR events.application_opening_at <= ?',
-            ::Date.today)
-    end
-  end
 
   def set_requires_approval
     self.requires_approval =
