@@ -22,7 +22,7 @@ module Pbs::Event::ParticipationMailer
     filename = Export::Pdf::Participation.filename(participation)
     attachments[filename] = Export::Pdf::Participation.render(participation)
     compose(CONTENT_CONFIRMATION_OTHER,
-            [person],
+            person,
             'recipient-name' => person.greeting_name)
   end
 
@@ -36,25 +36,23 @@ module Pbs::Event::ParticipationMailer
             'participant-name' => person.to_s)
   end
 
-  def removed_from_waiting_list(participation, current_user)
+  def removed_from_waiting_list(participation, setter, current_user)
     @participation = participation
-    waiting_list_setter = participation.waiting_list_setter
 
     compose(CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST,
-            Array(waiting_list_setter),
-            'waiting-list-setter' => waiting_list_setter.greeting_name,
+            setter,
+            'waiting-list-setter' => setter.greeting_name,
             'event-name' => event.to_s,
             'leader-name' => current_user.to_s,
             'participant-name' => person.to_s)
   end
 
-  def assigned_from_waiting_list(participation, current_user)
+  def assigned_from_waiting_list(participation, setter, current_user)
     @participation = participation
-    waiting_list_setter = participation.waiting_list_setter
 
     compose(CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST,
-            Array(waiting_list_setter),
-            'waiting-list-setter' => waiting_list_setter.greeting_name,
+            setter,
+            'waiting-list-setter' => setter.greeting_name,
             'event-name' => event.to_s,
             'leader-name' => current_user.to_s,
             'participant-name' => person.to_s)

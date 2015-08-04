@@ -9,10 +9,10 @@ require 'spec_helper'
 
 describe Event::AssignedFromWaitingListJob do
 
-  let(:participation) { Fabricate(:pbs_participation, waiting_list_setter: people(:bulei)) }
+  let(:participation) { Fabricate(:pbs_participation) }
   let(:event) { participation.event }
 
-  subject { Event::AssignedFromWaitingListJob.new(participation, people(:al_schekka)) }
+  subject { Event::AssignedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka)) }
 
   before do
     SeedFu.quiet = true

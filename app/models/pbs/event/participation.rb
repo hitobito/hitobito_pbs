@@ -6,11 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module Pbs::Event::Participation
-  extend ActiveSupport::Concern
-
-  included do
-    belongs_to :waiting_list_setter, class_name: 'Person'
-  end
 
   def approvers
     Person.where(id: application && application.approvals.collect(&:approver_id))

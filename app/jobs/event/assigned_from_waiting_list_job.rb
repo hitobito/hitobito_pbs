@@ -7,11 +7,12 @@
 
 class Event::AssignedFromWaitingListJob < BaseJob
 
-  self.parameters = [:participation_id, :current_user_id, :locale]
+  self.parameters = [:participation_id, :setter_id, :current_user_id, :locale]
 
-  def initialize(participation, current_user)
+  def initialize(participation, setter, current_user)
     super()
     @participation_id = participation.id
+    @setter_id = setter.id
     @current_user_id = current_user.id
   end
 
@@ -21,13 +22,17 @@ class Event::AssignedFromWaitingListJob < BaseJob
     set_locale
 
     Event::ParticipationMailer.
-      assigned_from_waiting_list(participation, current_user).deliver
+      assigned_from_waiting_list(participation, setter, current_user).deliver
   end
 
   private
 
   def participation
     @participation ||= Event::Participation.find(@participation_id)
+  end
+
+  def setter
+    @setter ||= Person.find(@setter_id)
   end
 
   def current_user

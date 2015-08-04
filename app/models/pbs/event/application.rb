@@ -9,6 +9,8 @@ module Pbs::Event::Application
   extend ActiveSupport::Concern
 
   included do
+    belongs_to :waiting_list_setter, class_name: 'Person'
+
     has_many :approvals
 
     after_create :initialize_approval

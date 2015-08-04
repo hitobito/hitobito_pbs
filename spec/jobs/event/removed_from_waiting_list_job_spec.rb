@@ -9,9 +9,9 @@ require 'spec_helper'
 
 describe Event::RemovedFromWaitingListJob do
 
-  let(:participation) { Fabricate(:pbs_participation, waiting_list_setter: people(:bulei)) }
+  let(:participation) { Fabricate(:pbs_participation) }
 
-  subject { Event::RemovedFromWaitingListJob.new(participation, people(:al_schekka)) }
+  subject { Event::RemovedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka)) }
 
   before do
     SeedFu.quiet = true
@@ -22,7 +22,7 @@ describe Event::RemovedFromWaitingListJob do
     subject.perform
     expect(last_email).to be_present
     expect(last_email.body).to match(/Hallo #{people(:bulei).greeting_name}/)
-    expect(last_email.body).to match(/wurde von #{people(:al_schekka)} von der Warteliste genommen/)
+    expect(last_email.body).to match(/wurde von #{people(:al_schekka)} von der Warteliste entfernt/)
   end
 
 end
