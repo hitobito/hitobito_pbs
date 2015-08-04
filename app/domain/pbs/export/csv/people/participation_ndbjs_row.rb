@@ -13,7 +13,7 @@ module Pbs::Export::Csv::People::ParticipationNdbjsRow
   end
 
   def first_language_with_correspondence_language
-    lang = entry.correspondence_language
-    lang ? lang.first.capitalize : 'D'
+    lang = entry.correspondence_language.presence
+    lang ? lang.first.upcase : 'D'
   end
 end
