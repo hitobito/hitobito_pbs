@@ -83,8 +83,12 @@ module Pbs::Role
   end
 
   def update_primary_group
-    if changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
+    if soft_deleted_change?
       reset_primary_group
     end
+  end
+
+  def soft_deleted_change?
+    changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
   end
 end

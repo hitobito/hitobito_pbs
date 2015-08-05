@@ -15,6 +15,11 @@ module Pbs
           def salutation
             entry.salutation_value
           end
+
+          def kv
+            entry.kantonalverband.try(:pbs_shortname)
+          end
+
         end
       end
     end

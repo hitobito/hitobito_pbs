@@ -57,7 +57,7 @@ require 'spec_helper'
 
 describe Person do
 
-  let(:person)     { people(:bulei) }
+  let(:person) { people(:bulei) }
 
   context 'validation' do
     it 'succeeds for available' do
@@ -112,6 +112,112 @@ describe Person do
     it 'handles very long numbers' do
       person.id = 1_234_567_891_234
       expect(person.pbs_number).to eq('1-234-567-891-234')
+    end
+  end
+
+  context '#kantonalverband' do
+
+    context 'unique' do
+      before { person.reset_kantonalverband! }
+
+      context 'bund' do
+        it 'is CH' do
+          expect(person.kantonalverband).to eq(groups(:bund))
+        end
+      end
+
+      context 'in kantonalverband' do
+        let(:person) { Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person }
+
+        it 'is BE' do
+          expect(person.kantonalverband).to eq(groups(:be))
+        end
+      end
+
+      context 'in kantonalverband layer' do
+        let(:person) { Fabricate(Group::KantonalesGremium::Mitglied.name, group: groups(:fg_football)).person }
+
+        it 'is BE' do
+          expect(person.kantonalverband).to eq(groups(:be))
+        end
+
+        it 'is BE even if primary group is nil' do
+          person.update!(primary_group: nil)
+          expect(person.kantonalverband).to eq(groups(:be))
+        end
+      end
+
+      context 'in abteilung' do
+        let(:person) { people(:al_schekka) }
+
+        it 'is BE' do
+          expect(person.kantonalverband).to eq(groups(:be))
+        end
+      end
+    end
+
+    context 'several' do
+      context 'one bund, one kv' do
+
+        it 'uses bund if primary group is there' do
+          group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
+          person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
+
+          person.reload
+          person.reset_kantonalverband!
+
+          expect(person.kantonalverband).to eq(groups(:bund))
+        end
+
+        it 'changes kantonalverband if primary group changes' do
+          group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
+          person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
+
+          person.reload
+          person.update!(primary_group: groups(:zh))
+
+          expect(person.reload.kantonalverband).to eq(groups(:zh))
+        end
+
+      end
+
+      context 'two kv' do
+
+        it 'uses primary group' do
+          person = Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
+
+          person.reload
+          person.reset_kantonalverband!
+
+          expect(person.kantonalverband).to eq(groups(:be))
+        end
+
+        it 'is nil if primary group is nil' do
+          person = Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
+
+          person.update!(primary_group: nil)
+
+          expect(person.kantonalverband).to be_nil
+        end
+
+        it 'changes kantonalverband if primary group changes' do
+          group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
+          person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be), person: person)
+          Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
+
+          person.reload
+          person.update!(primary_group: groups(:zh))
+
+          expect(person.reload.kantonalverband).to eq(groups(:zh))
+        end
+
+      end
+
     end
   end
 end

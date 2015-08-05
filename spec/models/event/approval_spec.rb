@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: event_approvals
+#
+#  id             :integer          not null, primary key
+#  application_id :integer          not null
+#  layer          :string(255)      not null
+#  approved       :boolean          default(FALSE), not null
+#  rejected       :boolean          default(FALSE), not null
+#  comment        :text
+#  approved_at    :datetime
+#  approver_id    :integer
+#
+
 require 'spec_helper'
 
 describe Event::Approval do
