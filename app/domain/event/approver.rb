@@ -46,7 +46,7 @@ class Event::Approver
   end
 
   def current_approvers
-    if open_approval
+    if open_approval && primary_group
       approvers_for_layer(open_approval.layer)
     else
       Person.none
