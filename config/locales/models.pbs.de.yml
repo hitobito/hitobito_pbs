@@ -681,6 +681,10 @@ de:
       event:
         course_languages: Kurssprachen
         express_fee: Expressgebühr
+        language_de: Kurssprache Deutsch
+        language_fr: Kurssprache Französisch
+        language_it: Kurssprache Italienisch
+        language_en: Kurssprache Englisch
 
       event/approval:
         comment: Kommentar

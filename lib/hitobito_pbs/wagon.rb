@@ -38,6 +38,8 @@ module HitobitoPbs
       ## domain
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
+      Export::Csv::Events::List.send :include, Pbs::Export::Csv::Events::List
+      Export::Csv::Events::Row.send :include, Pbs::Export::Csv::Events::Row
       Export::Csv::People::ParticipationNdbjsRow.send :include,
         Pbs::Export::Csv::People::ParticipationNdbjsRow
 
