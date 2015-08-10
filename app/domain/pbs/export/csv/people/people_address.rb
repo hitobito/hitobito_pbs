@@ -18,8 +18,12 @@ module Pbs
           end
 
           def initialize_with_kv(list)
-            initialize_without_kv(
-              list.includes(list.klass < Person ? :kantonalverband : { person: :kantonalverband }))
+            if list.respond_to?(:klass)
+              incl = list.klass < Person ? :kantonalverband : { person: :kantonalverband }
+              initialize_without_kv(list.includes(incl))
+            else
+              initialize_without_kv(list)
+            end
           end
 
           def person_attributes_with_title
