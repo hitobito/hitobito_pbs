@@ -23,5 +23,7 @@ class CreateEventApprovals < ActiveRecord::Migration
     add_column :events, :requires_approval_region, :boolean, null: false, default: false
     add_column :events, :requires_approval_kantonalverband, :boolean, null: false, default: false
     add_column :events, :requires_approval_bund, :boolean, null: false, default: false
+
+    Event.reset_column_information
   end
 end
