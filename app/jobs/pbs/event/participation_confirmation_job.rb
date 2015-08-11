@@ -30,7 +30,7 @@ module Pbs::Event::ParticipationConfirmationJob
       send_confirmation_without_current_user
     else
       if participation.person.email.present?
-        Event::ParticipationMailer.confirmation_other(participation).deliver
+        Event::ParticipationMailer.confirmation_other(participation).deliver_now
       end
     end
   end

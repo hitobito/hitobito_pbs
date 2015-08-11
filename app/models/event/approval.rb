@@ -38,6 +38,7 @@ class Event::Approval < ActiveRecord::Base
 
   ### VALIDATIONS
 
+  validates_by_schema
   validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id }
 
   def roles

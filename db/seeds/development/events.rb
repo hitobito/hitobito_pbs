@@ -49,3 +49,5 @@ seeder.course_group_ids.each do |group_id|
     seeder.seed_event(group_id, :course)
   end
 end
+
+Event::Participation.update_all(state: 'assigned', active: true)

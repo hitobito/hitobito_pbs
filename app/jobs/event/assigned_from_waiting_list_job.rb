@@ -22,7 +22,7 @@ class Event::AssignedFromWaitingListJob < BaseJob
     set_locale
 
     Event::ParticipationMailer.
-      assigned_from_waiting_list(participation, setter, current_user).deliver
+      assigned_from_waiting_list(participation, setter, current_user).deliver_now
   end
 
   private

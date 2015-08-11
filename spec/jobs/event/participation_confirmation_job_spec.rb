@@ -16,7 +16,7 @@ describe Event::ParticipationConfirmationJob do
     SeedFu.quiet = true
     SeedFu.seed [Rails.root.join('db', 'seeds')]
 
-    allow(mailer).to receive(:deliver)
+    allow(mailer).to receive(:deliver_now)
   end
 
   it 'sends only confirmation email, not approval' do

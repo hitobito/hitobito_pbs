@@ -24,7 +24,7 @@ class Event::ApprovalRequestJob < BaseJob
   def send_approval
     recipients = approvers
     if recipients.present?
-      Event::ParticipationMailer.approval(participation, recipients).deliver
+      Event::ParticipationMailer.approval(participation, recipients).deliver_now
     end
   end
 

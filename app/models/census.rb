@@ -19,6 +19,8 @@ class Census < ActiveRecord::Base
 
   after_initialize :set_defaults
 
+  validates_by_schema
+  validates :year, uniqueness: true
   validates :start_at, presence: true
   validates :start_at, :finish_at,
             timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }

@@ -275,5 +275,5 @@ end
 # we first delete children, then group and validate return values
 def delete_group_and_children(deleted_at = Time.zone.now)
   group_to_delete.update_column(:deleted_at, deleted_at)
-  expect(group_to_delete).to be_destroyed
+  expect(group_to_delete).to be_deleted
 end

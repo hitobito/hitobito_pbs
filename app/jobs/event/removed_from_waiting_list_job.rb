@@ -22,7 +22,7 @@ class Event::RemovedFromWaitingListJob < BaseJob
     set_locale
 
     Event::ParticipationMailer.
-      removed_from_waiting_list(participation, setter, current_user).deliver
+      removed_from_waiting_list(participation, setter, current_user).deliver_now
   end
 
   private
