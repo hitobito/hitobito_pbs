@@ -42,6 +42,7 @@ module HitobitoPbs
       Export::Csv::Events::Row.send :include, Pbs::Export::Csv::Events::Row
       Export::Csv::People::ParticipationNdbjsRow.send :include,
         Pbs::Export::Csv::People::ParticipationNdbjsRow
+      Export::Csv::Events::BsvRow.send :include, Pbs::Export::Csv::Events::BsvRow
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
