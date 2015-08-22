@@ -16,7 +16,12 @@ describe Export::Csv::Events::BsvRow do
   subject { row }
 
   it { expect(row.fetch(:leader_count)).to eq 3 }
-  it { expect(row.fetch(:languages_count)).to eq 3 }
+  it { expect(row.fetch(:language_count)).to eq 3 }
+
+  it 'does not render headers' do
+    csv = Export::Csv::Events::BsvList.export([course])
+    expect(CSV.parse(csv)).to have(1).row
+  end
 
 end
 

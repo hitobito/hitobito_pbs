@@ -6,18 +6,17 @@
 #  https://github.com/hitobito/hitobito_jubla.
 
 module Pbs::Export::Csv::Events
-  module BsvRow
+  module BsvList
     extend ActiveSupport::Concern
 
     included do
-      alias_method :language_count, :language_count_pbs
+      alias_method :to_csv, :to_csv_without_headers
     end
 
-    def language_count_pbs
-      langs = [:language_de, :language_fr, :language_it, :language_en]
-      count = 0
-      langs.each { |l| count += 1 if entry.send(l) }
-      count
+    def to_csv_without_headers(generator)
+      list.each do |entry|
+        generator << values(entry)
+      end
     end
 
   end
