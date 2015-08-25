@@ -25,5 +25,6 @@ class CreateEventApprovals < ActiveRecord::Migration
     add_column :events, :requires_approval_bund, :boolean, null: false, default: false
 
     Event.reset_column_information
+    Event::Course.reset_column_information
   end
 end
