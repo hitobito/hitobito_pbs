@@ -31,10 +31,10 @@ module Pbs::Export::Pdf
         [Export::Pdf::Participation::Header,
          Export::Pdf::Participation::PersonAndEvent,
          Export::Pdf::Participation::Specifics,
-         Export::Pdf::Participation::Confirmation,
          Export::Pdf::Participation::EventDetails,
          DocumentsText,
-         Export::Pdf::Participation::GeneralInformation]
+         Export::Pdf::Participation::GeneralInformation,
+         Export::Pdf::Participation::Confirmation]
       end
     end
 

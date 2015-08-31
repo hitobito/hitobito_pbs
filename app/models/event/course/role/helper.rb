@@ -20,6 +20,6 @@ class Event::Course::Role::Helper < Event::Role
 
   self.permissions = [:participations_read]
 
-  self.kind = :helper
+  self.kind = :leader
 
 end

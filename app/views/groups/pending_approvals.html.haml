@@ -4,6 +4,8 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 #main
+  %p= t('.info')
+
   = table(@approvals, class: 'table table-striped') do |t|
     - t.col(Event::Person.model_name.human) { |a| link_to(a.approvee, [a.event.groups.first, a.event, a.participation]) }
     - t.col(Event::Course.model_name.human) { |a| link_to(a.event, [a.event.groups.first, a.event]) }

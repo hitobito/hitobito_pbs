@@ -79,6 +79,8 @@ de:
       requires_approval_bund: Bundesebene
 
   groups:
+    pending_approvals:
+      info: Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden.
     tabs:
       population: Bestand
       statistic: Statistik

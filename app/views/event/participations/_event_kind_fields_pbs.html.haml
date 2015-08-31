@@ -3,14 +3,16 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- if format_attr(@event, :application_conditions).present?
-  %dl.dl-horizontal
-    = labeled_attr(@event, :application_conditions)
+- if entry.roles.any? { |r| r.class.participant? }
 
-- if @event.kind.general_information.present?
-  %dl.dl-horizontal
-    = labeled(t('events.kind_pbs.event_kind_general_information'), format_attr(@event.kind, :general_information))
+  - if format_attr(@event, :application_conditions).present?
+    %dl.dl-horizontal
+      = labeled_attr(@event, :application_conditions)
 
-- if @event.kind.documents_text.present?
-  %dl.dl-horizontal
-    = labeled(Event::Kind.human_attribute_name(:documents_text), @event.kind.documents_text.to_s.html_safe)
+  - if @event.kind.general_information.present?
+    %dl.dl-horizontal
+      = labeled(t('events.kind_pbs.event_kind_general_information'), format_attr(@event.kind, :general_information))
+
+  - if @event.kind.documents_text.present?
+    %dl.dl-horizontal
+      = labeled(Event::Kind.human_attribute_name(:documents_text), @event.kind.documents_text.to_s.html_safe)
