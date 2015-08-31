@@ -13,9 +13,9 @@ describe Event::Course do
   let(:event) { Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk)) }
 
   subject do
-    Fabricate(Event::Role::Leader.name.to_sym,
+    Fabricate(Event::Course::Role::Leader.name.to_sym,
               participation: Fabricate(:pbs_participation, event: event))
-    Fabricate(Event::Role::AssistantLeader.name.to_sym,
+    Fabricate(Event::Course::Role::ClassLeader.name.to_sym,
               participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::Participant.name.to_sym,
               participation: Fabricate(:pbs_participation, event: event))

@@ -61,7 +61,7 @@ class Event::CanceledParticipationJob < BaseJob
   def kurs_leiter
     Person.joins(:event_participations => :roles).
            where(event_participations: { event_id: participation.event_id },
-                 event_roles: { type: Event::Role::Leader.sti_name })
+                 event_roles: { type: Event::Course::Role::Leader.sti_name })
   end
 
   def kurs_organisatoren

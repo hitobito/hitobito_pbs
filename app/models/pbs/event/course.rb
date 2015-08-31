@@ -33,6 +33,8 @@ module Pbs::Event::Course
     restricted_role :advisor, Event::Course::Role::Advisor
 
 
+    validates :number, presence: true
+
     ### CALLBACKS
     before_save :set_requires_approval
   end

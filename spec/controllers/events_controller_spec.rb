@@ -16,6 +16,7 @@ describe EventsController do
 
     let(:event_attrs) { { group_ids: [group.id], name: 'foo',
                           kind_id: Event::Kind.where(short_name: 'LPK').first.id,
+                          number: 234,
                           dates_attributes: [date], type: 'Event::Course' } }
 
 

@@ -7,7 +7,7 @@
 
 top_leader:
   participation: top_leader
-  type: Event::Role::Leader
+  type: Event::Course::Role::Leader
 
 top_tn:
   participation: top_participant
