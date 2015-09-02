@@ -18,7 +18,7 @@ class MemberCountsController < ApplicationController
       flash[:notice] = translate('.created_data_for_year', total: total, year: year)
     end
 
-    year ||= Date.today.year
+    year ||= Time.zone.today.year
     redirect_to census_abteilung_group_path(abteilung, year: year)
   end
 

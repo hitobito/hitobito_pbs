@@ -23,7 +23,7 @@ class Census < ActiveRecord::Base
   validates :year, uniqueness: true
   validates :start_at, presence: true
   validates :start_at, :finish_at,
-            timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
+            timeliness: { type: :date, allow_blank: true, before: Date.new(10_000, 1, 1) }
 
   class << self
     # The last census defined (may be the current one)
@@ -33,7 +33,7 @@ class Census < ActiveRecord::Base
 
     # The currently active census
     def current
-      where('start_at <= ?', Date.today).order('start_at DESC').first
+      where('start_at <= ?', Time.zone.today).order('start_at DESC').first
     end
   end
 
@@ -45,8 +45,8 @@ class Census < ActiveRecord::Base
 
   def set_defaults
     if new_record?
-      self.start_at  ||= Date.today
-      self.year      ||= start_at.year
+      self.start_at ||= Time.zone.today
+      self.year ||= start_at.year
       if Settings.census
         self.finish_at ||= Date.new(year,
                                     Settings.census.default_finish_month,

@@ -40,9 +40,7 @@ module Pbs::Event::ApplicationAbility
     end
   end
 
-  def next_open_approval
-    subject.next_open_approval
-  end
+  delegate :next_open_approval, to: :subject
 
   def primary_group
     participation.person.primary_group
@@ -52,8 +50,6 @@ module Pbs::Event::ApplicationAbility
     primary_group.layer_hierarchy.collect(&:id)
   end
 
-  def participation
-    subject.participation
-  end
+  delegate :participation, to: :subject
 
 end
