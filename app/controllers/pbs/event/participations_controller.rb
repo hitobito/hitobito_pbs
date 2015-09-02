@@ -40,7 +40,7 @@ module Pbs::Event::ParticipationsController
 
   def notice_with_mailto
     flash[:notice] = t('event.participations.rejected_notice',
-                        participant: entry.person,
+                       participant: entry.person,
                        mailto: rejected_mailto_link)
   end
 

@@ -115,7 +115,7 @@ module Pbs::Person
   end
 
   def kantonalverband_for(group)
-    group.hierarchy.select(:id).where(type: ::Group::Kantonalverband.sti_name).first ||
+    group.hierarchy.select(:id).find_by(type: ::Group::Kantonalverband.sti_name) ||
     Group.select(:id).root
   end
 end

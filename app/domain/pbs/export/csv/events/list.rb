@@ -34,7 +34,7 @@ module Pbs::Export::Csv::Events::List
   end
 
   def translated_prefix_with_advisor(prefix)
-    prefix == :advisor ?  human_attribute(:advisor) : translated_prefix_without_advisor(prefix)
+    prefix == :advisor ? human_attribute(:advisor) : translated_prefix_without_advisor(prefix)
   end
 
 end

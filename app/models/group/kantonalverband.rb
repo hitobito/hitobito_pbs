@@ -51,7 +51,7 @@ class Group::Kantonalverband < Group
   ### INSTANCE METHODS
 
   def census_total(year)
-    MemberCount.total_by_kantonalverbaende(year).where(kantonalverband_id: id).first
+    MemberCount.total_by_kantonalverbaende(year).find_by(kantonalverband_id: id)
   end
 
   def census_groups(year)

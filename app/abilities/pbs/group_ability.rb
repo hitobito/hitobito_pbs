@@ -8,6 +8,13 @@
 module Pbs::GroupAbility
   extend ActiveSupport::Concern
 
+  MEMBER_COUNT_MANAGERS = [Group::Bund::MitarbeiterGs,
+                           Group::Bund::Sekretariat,
+                           Group::Kantonalverband::Kantonsleitung,
+                           Group::Kantonalverband::Sekretariat,
+                           Group::Region::Regionalleitung,
+                           Group::Region::Sekretariat]
+
   included do
     on(Group) do
       permission(:layer_and_below_full).may(:modify_superior).if_mitarbeiter_gs
@@ -28,14 +35,7 @@ module Pbs::GroupAbility
 
   def in_same_layer_or_below_if_leader
     in_same_layer_or_below &&
-    user.roles.any? do |r|
-      r.is_a?(Group::Bund::MitarbeiterGs) ||
-      r.is_a?(Group::Bund::Sekretariat) ||
-      r.is_a?(Group::Kantonalverband::Kantonsleitung) ||
-      r.is_a?(Group::Kantonalverband::Sekretariat) ||
-      r.is_a?(Group::Region::Regionalleitung) ||
-      r.is_a?(Group::Region::Sekretariat)
-    end
+    contains_any?(MEMBER_COUNT_MANAGERS, user.roles.collect(&:class))
   end
 
   def if_mitarbeiter_gs

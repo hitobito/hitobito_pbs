@@ -36,13 +36,13 @@ module HitobitoPbs
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
 
       ## domain
-      Bsv::Info.leader_roles += [ Event::Course::Role::Helper ]
+      Bsv::Info.leader_roles += [Event::Course::Role::Helper]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
       Export::Csv::Events::List.send :include, Pbs::Export::Csv::Events::List
       Export::Csv::Events::Row.send :include, Pbs::Export::Csv::Events::Row
-      Export::Csv::People::ParticipationNdbjsRow.send :include,
-        Pbs::Export::Csv::People::ParticipationNdbjsRow
+      Export::Csv::People::ParticipationNdbjsRow.send(
+        :include, Pbs::Export::Csv::People::ParticipationNdbjsRow)
       Export::Csv::Events::BsvList.send :include, Pbs::Export::Csv::Events::BsvList
       Export::Csv::Events::BsvRow.send :include, Pbs::Export::Csv::Events::BsvRow
 

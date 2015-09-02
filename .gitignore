@@ -8,6 +8,9 @@ zeus.json
 .sass-cache
 .project
 .envrc
+*.iml
+.generators
+.idea
 
 # ignore Gemfile.lock for wagons
 Gemfile.lock

@@ -59,7 +59,7 @@ class Group::Abteilung < Group
   ### INSTANCE METHODS
 
   def kantonalverband
-    ancestors.where(type: Group::Kantonalverband.sti_name).first
+    ancestors.find_by(type: Group::Kantonalverband.sti_name)
   end
 
   def region

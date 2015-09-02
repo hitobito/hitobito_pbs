@@ -29,9 +29,8 @@ class CensusEvaluation
   def counts_by_sub_group
     if sub_group_type
       sub_group_field = :"#{sub_group_type.model_name.element}_id"
-      group.census_groups(year).inject({}) do |hash, count|
+      group.census_groups(year).each_with_object({}) do |count, hash|
         hash[count.send(sub_group_field)] = count
-        hash
       end
     end
   end
@@ -55,7 +54,7 @@ class CensusEvaluation
 
   # Is the displayed census the current or a future one?
   def census_current_or_future?
-    census && (census.year >= Date.today.year || census_current?)
+    census && (census.year >= Time.zonw.today.year || census_current?)
   end
 
   # Is the displayed year the year of the current census?
