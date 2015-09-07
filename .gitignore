@@ -11,6 +11,7 @@ zeus.json
 *.iml
 .generators
 .idea
+.rakeTasks
 
 # ignore Gemfile.lock for wagons
 Gemfile.lock

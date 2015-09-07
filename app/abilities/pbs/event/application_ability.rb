@@ -16,6 +16,7 @@ module Pbs::Event::ApplicationAbility
 
       permission(:any).may(:show_approvals).for_participations_full_events
       permission(:group_full).may(:show_approvals).in_same_group
+      permission(:group_and_below_full).may(:show_approvals).in_same_group_or_below
       permission(:layer_full).may(:show_approvals).in_same_layer_or_different_prio
       permission(:layer_and_below_full).
         may(:show_approvals).
