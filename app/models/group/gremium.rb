@@ -40,7 +40,7 @@
 class Group::Gremium < Group
 
   class Leitung < ::Role
-    self.permissions = [:group_full]
+    self.permissions = [:group_and_below_full]
   end
 
   class Mitglied < ::Role
