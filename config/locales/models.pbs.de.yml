@@ -761,6 +761,9 @@ de:
         created_at: Von
         deleted_at: Bis
 
+      qualification_kind:
+        manual: Manuell erfassbar
+
     errors:
       models:
         role:

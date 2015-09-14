@@ -55,6 +55,7 @@ module HitobitoPbs
       Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
       Event::ParticipationAbility.send :include, Pbs::Event::Constraints
       Event::RoleAbility.send :include, Pbs::Event::Constraints
+      QualificationAbility.send :include, Pbs::QualificationAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### serializers
@@ -66,6 +67,7 @@ module HitobitoPbs
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
       Event::KindsController.permitted_attrs += [:documents_text]
+      QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
@@ -73,6 +75,7 @@ module HitobitoPbs
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
+      QualificationsController.send :include, Pbs::QualificationsController
 
       ### exports
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow

@@ -108,6 +108,10 @@ de:
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.
 
+  qualification_kinds:
+    fields_pbs:
+      manual_help: Qualifikationsart ist frei erfassbar. Sonst kann sie nur innerhalb eines Kurses vergeben werden.
+
   roles:
     fields_pbs:
       notification: Benachrichtigung
