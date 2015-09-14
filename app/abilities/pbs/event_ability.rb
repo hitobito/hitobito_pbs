@@ -11,6 +11,9 @@ module Pbs::EventAbility
   included do
     on(Event) do
       permission(:any).may(:modify_superior).if_education_responsible
+      permission(:layer_and_below_full).
+        may(:create, :destroy, :application_market, :qualify).
+        in_same_layer_or_course_in_below_abteilung
     end
   end
 

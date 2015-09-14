@@ -49,7 +49,12 @@ module HitobitoPbs
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
       EventAbility.send :include, Pbs::EventAbility
+      EventAbility.send :include, Pbs::Event::Constraints
       Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
+      Event::ApplicationAbility.send :include, Pbs::Event::Constraints
+      Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
+      Event::ParticipationAbility.send :include, Pbs::Event::Constraints
+      Event::RoleAbility.send :include, Pbs::Event::Constraints
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### serializers

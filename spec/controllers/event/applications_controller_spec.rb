@@ -12,9 +12,18 @@ describe Event::ApplicationsController do
   let(:group) { course.groups.first }
   let(:al_schekka) { people(:al_schekka) }
   let(:participant) { people(:child) }
-  let(:course) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk), requires_approval_abteilung: true) }
-  let(:participation) {  Fabricate(:pbs_participation, event: course, person: participant) }
-  let(:application) { participation.create_application(priority_1: course) }
+  let(:course) do
+    Fabricate(:course,
+              groups: [groups(:schekka)],
+              kind: event_kinds(:lpk),
+              requires_approval_abteilung: true)
+  end
+  let(:participation) do
+    Fabricate(:pbs_participation, event: course, person: participant, application: application)
+  end
+  let(:application) { Fabricate(:pbs_application, priority_1: course) }
+
+  before { participation.application.reload }
 
   context 'bulei' do
     before do

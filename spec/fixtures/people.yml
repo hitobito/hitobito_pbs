@@ -86,6 +86,7 @@ child:
   first_name: My
   last_name: Child
   email: child1@hitobito.example.com
+  primary_group: pegasus
   kantonalverband: be
 
 root:

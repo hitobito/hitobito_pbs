@@ -14,17 +14,23 @@ describe Event::ParticipationsController, type: :controller  do
   let(:group) { course.groups.first }
   let(:al_schekka) { people(:al_schekka) }
   let(:participant) { people(:child) }
-  let(:course) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk), requires_approval_abteilung: true) }
-  let(:participation) {  Fabricate(:pbs_participation, event: course, person: participant) }
-  let(:application) { participation.create_application(priority_1: course) }
+  let(:course) do
+    Fabricate(:course,
+              groups: [groups(:schekka)],
+              kind: event_kinds(:lpk),
+              requires_approval_abteilung: true)
+  end
+  let(:participation) do
+    Fabricate(:pbs_participation,
+              event: course,
+              person: participant,
+              application: Fabricate(:pbs_application, priority_1: course))
+  end
+
   let(:dom) { Capybara::Node::Simple.new(response.body) }
 
   context 'approve and reject buttons' do
-    before do
-      application.approvals.create!(layer: 'abteilung')
-      participant.update!(primary_group: groups(:pegasus))
-    end
-
+    before { participation.application.approvals.create!(layer: 'abteilung') }
     it 'bulei does not see approve and reject buttons' do
       sign_in(people(:bulei))
 
@@ -33,7 +39,7 @@ describe Event::ParticipationsController, type: :controller  do
       expect(dom).not_to have_content 'Ablehnen'
     end
 
-    it 'al_schekka sees approve and reject buttons' do
+    it 'al schekka sees approve and reject buttons' do
       sign_in(al_schekka)
 
       get :show, group_id: group.id, event_id: course.id, id: participation.id
@@ -43,13 +49,15 @@ describe Event::ParticipationsController, type: :controller  do
   end
 
   context 'pending approvals' do
-    before { participation.update(application: application) }
-
     context 'al schekka' do
       before { sign_in(al_schekka) }
 
       it 'sees Empfehlungen aside' do
-        application.approvals.create!(layer: 'abteilung', comment: 'all good', approved: true, approver: al_schekka)
+        participation.application.approvals.create!(layer: 'abteilung',
+                                                    comment: 'all good',
+                                                    approved: true,
+                                                    approver: al_schekka)
+
         get :show, group_id: group.id, event_id: course.id, id: participation.id
 
         expect(dom).to have_content 'Empfehlungen'
