@@ -48,9 +48,9 @@ module Pbs::Event::ParticipationsController
     to = Person.mailing_emails_for([entry.person])
     if to.present?
       cc = Person.mailing_emails_for(entry.event.organizers + entry.approvers)
-      view_context.mail_to(to.join(',').html_safe,
+      view_context.mail_to(to.join(','),
                            t('event.participations.rejected_email_link'),
-                           cc: cc.join(',').html_safe)
+                           cc: cc.join(','))
     end
   end
 
