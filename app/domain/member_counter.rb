@@ -126,7 +126,7 @@ class MemberCounter
   def count_field(person)
     ROLE_MAPPING.each do |field, roles|
       if (person.roles.collect(&:class) & roles).present?
-        return person.male? ? :"#{field}_m" : :"#{field}_f"
+        return person.gender == 'm' ? :"#{field}_m" : :"#{field}_f"
       end
     end
     nil
