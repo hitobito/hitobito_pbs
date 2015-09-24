@@ -1,46 +1,81 @@
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
-
 it:
-  dummy: imitazione
-  groups:
-    tabs:
-      population: organico
-      statistic: statistica
   censuses:
     form:
-      title: redigere un nuovo annuncio dell'organico
-      frozen_once_gathered: una volta fatto, l'annuncio dell'organico non può più essere cambiato
+      title: Inviare il censimento dei membri
+      frozen_once_gathered: 'Una volta inviati i censimenti, non sarà più possibile modificarli. '
   census_evaluation:
-    total: totale
+    total: Totale
     base:
       index:
-        no_data_for_this_year: Per questo anno non esistono dati.
+        no_data_for_this_year: Per questo anno non esistono censimenti dei membri.
       infos:
-        census_evaluation: Gli annunci di organico per il %{year} possono essere fatti a partire dal %{start_at}
-        census_evaluation_active: Gli annunci dell'organico attualizzati per l'anno %{year} possono essere fatti a partire dal %{start_at}
-        census_evaluation_reference_date: la scadenza è per il %{finish_at}
+        census_evaluation: I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
+        census_evaluation_active: I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
+        census_evaluation_reference_date: Il termine è fissato per il %{finish_at}
     abteilung:
       actions_index:
-        create_population_data: generare l'organico attuale
+        create_population_data: Generare i censimenti
     bund:
       actions_index:
-        request_population_data: esigere un nuovo annuncio dell'organico
+        request_population_data: Richiedere un nuovo censimento dei membri
       total_actions:
-        abteilungen_confirmed: confermare le sezioni
+        abteilungen_confirmed: Confermare i censimenti per le sezioni
     kantonalverband:
       total_actions:
-        remind: ricordare
+        remind: Ricordare
   census_evaluation/kantonalverband:
-    email_sent: 'promemoria via email spedito a  %{abteilung} '
+    email_sent: 'Promemoria spedito a %{abteilung} '
+  devise:
+    sessions:
+      new:
+        usage_advise: I dati della banca dati degli attivi possono essere utilizzati unicamente in un contesto di attività scout, non possono ad esempio essere inoltrate a terzi o ad altre organizzazioni. L'elaborazione e l'utilizzo devono avvenire in buona fede e in modo proporzionato.
+  event:
+    participations:
+      rejected_notice: "%{participant} è stato rifiutato. %{mailto}"
+      rejected_email_link: Informare i partecipanti
+      inform_about_email_sent_to_participant: Il partecipante viene informato sull'iscrizione per email.
+      approvals:
+        title: Suggerimenti
+      missing_preconditions: Condizioni preliminari mancanti
+      tabs:
+        approvals: Suggerimenti
+      actions_approval:
+        approve_title: Sbloccare la partecipazione
+        reject_title: Rifiutare la partecipazione
+      popover_approval:
+        approval_stored: La raccomandazione viene salvata elettronicamente e può venir ammessa dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone
+      popover_cancel:
+        cancel_info: La direzione del corso, l'organizzatore del corso e il capo sezione verrano informati riguardo all'iscrizione
+  event/applications:
+    rejected_inform_participant: Per favore informare %{participant} e il capo gruppo personalmente a riguardo
+  events:
+    kind_pbs:
+      event_kind_general_information: Informazioni riguardo al tipo di corso
+    fields_pbs:
+      language_de: Tedesco
+      language_fr: Francese
+      language_it: Italiano
+      language_en: Inglese
+    show:
+      inform_by_email: Informare
+    application_fields_pbs:
+      requires_approval_abteilung: Sezione
+      requires_approval_region: Zona
+      requires_approval_kantonalverband: Associazione cantonale
+      requires_approval_bund: Livello federale
+  groups:
+    pending_approvals:
+      info: Le seguenti persone hanno firmato per un corso e devono essere approvati da voi.
+    tabs:
+      population: Censimento dei membri
+      statistic: Statistica
+      approvals: Attivazione del corso (%{count})
   member_counts:
-    created_data_for_year: I numeri per un totale di  %{total} membri per il %{year} sono stati generati con successo.
+    created_data_for_year: I censimenti per %{total} attivi nell'anno %{year} sono stati generati con successo.
     updated_data_for_year: Il numero dei membri per il %{year} è stato registrato con successo.
     deleted_data_for_year: Il numero dei membri per il %{year} è stato cancellato con successo.
     edit:
-      title: aggiornare il numero dei membri per il %{year}
+      title: Aggiornare il numero dei membri per il %{year}
   people:
     fields:
       no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
@@ -49,18 +84,15 @@ it:
       in_abteilung: (in sezione)
   population:
     index:
-      confirm_census_data: confermare l'organico
-      current_census_data: organico attuale
-      no_census_data_requested: 'al momento non c''è nessun annuncio di organico mancante.
-
-        al momento non c''è nessun annuncio di organico in sospeso.'
-      please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare l''organico della tua sezione con "confermare l''organico"'
-      missing_gender_information: Per poter confermare l'organico, a tutti i membri deve essere assegnato il sesso.
+      confirm_census_data: Confermare i censimenti
+      current_census_data: Censimenti attuali
+      no_census_data_requested: Al momento non c'è nessun censimento ancora in sospeso.
+      please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare i censimenti della tua sezione con "Confermare i censimenti"'
+      missing_gender_information: Per poter inviare i censimenti, a tutti i membri deve essere assegnato il sesso.
+  qualification_kinds:
+    fields_pbs:
+      manual_help: Tipo di Qualifica è liberamente determinabile. Altrimenti, possono essere assegnati in un corso.
   roles:
     fields_pbs:
-      notification: notifica
-      notification_hint: Le persone esistenti verranno informati per email in caso di cambiamenti, se potrai considerare più dati personali
-  devise:
-    sessions:
-      new:
-        usage_advise: I dati della banca dati degli attivi possono essere utilizzati unicamente in un contesto di attività scout, non possono ad esempio essere inoltrate a terzi o ad altre organizzazioni. L'elaborazione e l'utilizzo devono avvenire in buona fede e in modo proporzionato.
+      notification: Notifica
+      notification_hint: 'Queste persone saranno informate per email in caso di cambiamenti. '

@@ -1,14 +1,4 @@
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
-
 fr:
-  dummy: dummy
-  groups:
-    tabs:
-      population: Effectifs
-      statistic: Statistiques
   censuses:
     form:
       title: Saisir une nouvelle déclaration des effectifs
@@ -35,6 +25,51 @@ fr:
         remind: Rappel
   census_evaluation/kantonalverband:
     email_sent: Un courriel de rappel a été envoyé à %{abteilung}
+  devise:
+    sessions:
+      new:
+        usage_advise: Les données de la base de données de membres ne peuvent être utilisées qu'en lien avec des activités scoutes. Par exemple, il est interdit de les transmettre à des tiers ou à d'autres organisations. Le traitement et l'utilisation des données sont soumises aux règles de la bonne foi et doivent être proportionnés.
+  event:
+    participations:
+      rejected_notice: "%{participant} est refusé. %{mailto}"
+      rejected_email_link: Informer les participants
+      inform_about_email_sent_to_participant: Le participant sera averti de son inscription par email.
+      approvals:
+        title: Recommandations
+      missing_preconditions: Conditions préalables manquent
+      tabs:
+        approvals: Recommandations
+      actions_approval:
+        approve_title: Accepter la participation
+        reject_title: Refuser la participation
+      popover_approval:
+        approval_stored: La recommandation a été enregistrée par l'organisateur du cours (rôle), responsable de cours (personne) et peut être transmise à d'autres instances de recommandation.
+      popover_cancel:
+        cancel_info: La maîtrise de cours, l'organisateur de cours et le responsable de groupe seront avisés de l'annulation.
+  event/applications:
+    rejected_inform_participant: Veuillez svp en informer le %{participant} et le responsable de groupe personnellement.
+  events:
+    kind_pbs:
+      event_kind_general_information: Information sur la nature du cours
+    fields_pbs:
+      language_de: Allemand
+      language_fr: Français
+      language_it: Italien
+      language_en: Anglais
+    show:
+      inform_by_email: Informer
+    application_fields_pbs:
+      requires_approval_abteilung: Groupe
+      requires_approval_region: Région
+      requires_approval_kantonalverband: Association cantonale
+      requires_approval_bund: Niveau fédéral
+  groups:
+    pending_approvals:
+      info: Les personnes suivantes ont signé pour un cours et doivent être approuvés par vous.
+    tabs:
+      population: Effectifs
+      statistic: Statistiques
+      approvals: Validation du cours (%{count})
   member_counts:
     created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
     updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.
@@ -54,11 +89,10 @@ fr:
       no_census_data_requested: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
       please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
       missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
+  qualification_kinds:
+    fields_pbs:
+      manual_help: Type de qualification est librement déterminable. Sinon, ils ne peuvent être affectées dans un cours.
   roles:
     fields_pbs:
       notification: notification
       notification_hint: Les personnes existantes vont être informées par courriel, du moment que tu peux accéder à plus de données personnelles.
-  devise:
-    sessions:
-      new:
-        usage_advise: Les données de la base de données de membres ne peuvent être utilisées qu'en lien avec des activités scoutes. Par exemple, il est interdit de les transmettre à des tiers ou à d'autres organisations. Le traitement et l'utilisation des données sont soumises aux règles de la bonne foi et doivent être proportionnés.
