@@ -19,7 +19,7 @@ class GroupMembershipJob < BaseJob
   def perform
     set_locale
     if recipient.email?
-      GroupMembershipMailer.added_to_group(recipient, actuator, group).deliver
+      GroupMembershipMailer.added_to_group(recipient, actuator, group).deliver_now
     end
   end
 

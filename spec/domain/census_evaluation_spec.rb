@@ -1,3 +1,10 @@
+# encoding: utf-8
+
+#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 require 'spec_helper'
 
 
@@ -268,5 +275,5 @@ end
 # we first delete children, then group and validate return values
 def delete_group_and_children(deleted_at = Time.zone.now)
   group_to_delete.update_column(:deleted_at, deleted_at)
-  expect(group_to_delete).to be_destroyed
+  expect(group_to_delete).to be_deleted
 end

@@ -21,12 +21,12 @@ describe GroupsPbsHelper do
 
     it 'adds http if missing' do
       group.website = 'schekka.ch'
-      expect(subject).to eq('<a href="http://schekka.ch" target="_blank">schekka.ch</a>')
+      expect(subject).to eq('<a target="_blank" href="http://schekka.ch">schekka.ch</a>')
     end
 
     it 'keeps http if present' do
       group.website = 'https://schekka.ch'
-      expect(subject).to eq('<a href="https://schekka.ch" target="_blank">https://schekka.ch</a>')
+      expect(subject).to eq('<a target="_blank" href="https://schekka.ch">https://schekka.ch</a>')
     end
   end
 

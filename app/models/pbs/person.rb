@@ -56,10 +56,18 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language
+    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language << :kantonalverband_id
+
+    alias_method_chain :full_name, :title
+
+    i18n_boolean_setter :brother_and_sisters
+
+
+    belongs_to :kantonalverband, class_name: 'Group' # might also be Group::Bund
+
 
     validates :salutation,
-              inclusion: { in: ->(_) { Salutation.available.keys } ,
+              inclusion: { in: ->(_) { Salutation.available.keys },
                            allow_blank: true }
 
     validates :correspondence_language,
@@ -69,11 +77,10 @@ module Pbs::Person
                            allow_blank: true }
 
     validates :entry_date, :leaving_date,
-              timeliness: { type: :date, allow_blank: true }
+              timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
-    alias_method_chain :full_name, :title
 
-    i18n_boolean_setter :brother_and_sisters
+    after_save :reset_kantonalverband!, if: :primary_group_id_changed?
   end
 
   def salutation_label
@@ -92,4 +99,23 @@ module Pbs::Person
     "#{title} #{full_name_without_title}".strip
   end
 
+  def reset_kantonalverband!
+    update_column(:kantonalverband_id, find_kantonalverband.try(:id))
+  end
+
+  private
+
+  def find_kantonalverband
+    if primary_group
+      kantonalverband_for(primary_group)
+    else
+      kvs = groups.collect { |group| kantonalverband_for(group) }.uniq
+      kvs.first if kvs.size == 1
+    end
+  end
+
+  def kantonalverband_for(group)
+    group.hierarchy.select(:id).find_by(type: ::Group::Kantonalverband.sti_name) ||
+    Group.select(:id).root
+  end
 end

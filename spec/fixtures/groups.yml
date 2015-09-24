@@ -2,7 +2,7 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
+#
 # == Schema Information
 #
 # Table name: groups
@@ -20,8 +20,8 @@
 #  town                   :string(255)
 #  country                :string(255)
 #  contact_id             :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  deleted_at             :datetime
 #  layer_group_id         :integer
 #  creator_id             :integer
@@ -35,11 +35,6 @@
 #  bank_account           :string(255)
 #  description            :text
 #
-
-#  Copyright (c) 2012-2013, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
 
 
 bund:
@@ -55,6 +50,7 @@ bund:
   town: Neu Carlscheid
   country:
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bund) %>
+  pbs_shortname: CH
 
 be:
   parent: bund
@@ -69,6 +65,7 @@ be:
   town: Bern
   country: Svizzera
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
+  pbs_shortname: BE
 
 zh:
   parent: bund
@@ -83,6 +80,7 @@ zh:
   town: Zürich
   country: Svizzera
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:zh) %>
+  pbs_shortname: ZH
 
 vd:
   parent: bund
@@ -97,6 +95,7 @@ vd:
   town: Lausanne
   country: Suisse
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:vd) %>
+  pbs_shortname: VD
 
 fg_security:
   parent: be

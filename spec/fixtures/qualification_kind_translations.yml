@@ -1,0 +1,13 @@
+alpk_de:
+  qualification_kind_id: <%= ActiveRecord::FixtureSet.identify(:alpk) %>
+  locale: de
+  label: Experte
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+leiter_js_kind_de:
+  qualification_kind_id: <%= ActiveRecord::FixtureSet.identify(:leiter_js_kind) %>
+  locale: de
+  label: Gruppenleitung
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

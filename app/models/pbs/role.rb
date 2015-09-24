@@ -25,7 +25,7 @@ module Pbs::Role
   included do
     self.used_attributes += [:created_at, :deleted_at]
 
-    validates_presence_of :created_at, on: :update
+    validates :created_at, presence: true, on: :update
 
     validates :created_at,
               timeliness: { type: :datetime,
@@ -58,7 +58,7 @@ module Pbs::Role
   end
 
   def detect_group_membership_notification
-    @send_notification = false;
+    @send_notification = false
 
     return unless Person.stamper
     @current_user = Person.find(Person.stamper)
@@ -83,8 +83,12 @@ module Pbs::Role
   end
 
   def update_primary_group
-    if changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
+    if soft_deleted_change?
       reset_primary_group
     end
+  end
+
+  def soft_deleted_change?
+    changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
   end
 end

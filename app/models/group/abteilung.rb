@@ -4,7 +4,6 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 # == Schema Information
 #
 # Table name: groups
@@ -22,8 +21,8 @@
 #  town                   :string(255)
 #  country                :string(255)
 #  contact_id             :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  deleted_at             :datetime
 #  layer_group_id         :integer
 #  creator_id             :integer
@@ -37,9 +36,11 @@
 #  bank_account           :string(255)
 #  description            :text
 #
+
 class Group::Abteilung < Group
 
   self.layer = true
+  self.event_types = [Event, Event::Course]
 
   self.used_attributes += [:pta, :vkp, :pbs_material_insurance]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
@@ -58,7 +59,7 @@ class Group::Abteilung < Group
   ### INSTANCE METHODS
 
   def kantonalverband
-    ancestors.where(type: Group::Kantonalverband.sti_name).first
+    ancestors.find_by(type: Group::Kantonalverband.sti_name)
   end
 
   def region
@@ -86,11 +87,11 @@ class Group::Abteilung < Group
   ### ROLES
 
   class Abteilungsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class AbteilungsleitungStv < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class Adressverwaltung < ::Role

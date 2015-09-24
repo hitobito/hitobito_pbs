@@ -24,6 +24,7 @@ puzzlers = ['Pascal Zumkehr',
             'Andre Kunz',
             'Roland Studer',
             'Mathis Hofer',
+            'Pascal Simon',
             'Bruno Santschi']
 
 devs = {'Olivier Brian' => 'olivier.brian@bfh.ch'}

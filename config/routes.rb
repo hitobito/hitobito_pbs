@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
     resources :groups do
       member do
+        get 'pending_approvals' => 'groups#pending_approvals'
+
         scope module: 'census_evaluation' do
           get 'census/bund' => 'bund#index'
           get 'census/kantonalverband' => 'kantonalverband#index'
@@ -28,9 +30,9 @@ Rails.application.routes.draw do
       end
 
       resource :member_counts, only: [:create, :edit, :update, :destroy]
+
       get 'member_counts' => 'member_counts#edit' # route required for language switch
     end
-
   end
 
 end

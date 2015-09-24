@@ -8,6 +8,13 @@
 module Pbs::GroupAbility
   extend ActiveSupport::Concern
 
+  MEMBER_COUNT_MANAGERS = [Group::Bund::MitarbeiterGs,
+                           Group::Bund::Sekretariat,
+                           Group::Kantonalverband::Kantonsleitung,
+                           Group::Kantonalverband::Sekretariat,
+                           Group::Region::Regionalleitung,
+                           Group::Region::Sekretariat]
+
   included do
     on(Group) do
       permission(:layer_and_below_full).may(:modify_superior).if_mitarbeiter_gs
@@ -21,19 +28,14 @@ module Pbs::GroupAbility
       permission(:layer_and_below_full).
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
+
+      permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_in_group
     end
   end
 
   def in_same_layer_or_below_if_leader
     in_same_layer_or_below &&
-    user.roles.any? do |r|
-      r.kind_of?(Group::Bund::MitarbeiterGs) ||
-      r.kind_of?(Group::Bund::Sekretariat) ||
-      r.kind_of?(Group::Kantonalverband::Kantonsleitung) ||
-      r.kind_of?(Group::Kantonalverband::Sekretariat) ||
-      r.kind_of?(Group::Region::Regionalleitung) ||
-      r.kind_of?(Group::Region::Sekretariat)
-    end
+    contains_any?(MEMBER_COUNT_MANAGERS, user.roles.collect(&:class))
   end
 
   def if_mitarbeiter_gs
@@ -41,4 +43,13 @@ module Pbs::GroupAbility
       r.is_a?(Group::Bund::MitarbeiterGs)
     end
   end
+
+  def if_layer_and_approver_in_group
+    user_roles = user.roles.collect(&:class)
+    approving_group_roles = group.role_types.select do |type|
+      type.permissions.include?(:approve_applications)
+    end
+    if_layer_group && contains_any?(user_roles, approving_group_roles)
+  end
+
 end

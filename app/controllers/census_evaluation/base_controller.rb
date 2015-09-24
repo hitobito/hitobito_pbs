@@ -44,7 +44,7 @@ class CensusEvaluation::BaseController < ApplicationController
   end
 
   def current_year
-    @current_year ||= Date.today.year
+    @current_year ||= Time.zone.today.year
   end
 
   def year_range

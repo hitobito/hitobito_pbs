@@ -38,6 +38,7 @@ class MemberCount < ActiveRecord::Base
   belongs_to :region, class_name: 'Group::Region'
   belongs_to :kantonalverband, class_name: 'Group::Kantonalverband'
 
+  validates_by_schema
   validates :year, uniqueness: { scope: :abteilung_id }
   validates(*COUNT_COLUMNS,
             numericality: { greater_than_or_equal_to: 0, allow_nil: true })

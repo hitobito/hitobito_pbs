@@ -13,12 +13,12 @@ describe Export::Csv::People do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
     %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache)
+       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband)
   end
 
   describe Export::Csv::People do
 
-    let(:list) { [person] }
+    let(:list) { Person.where(id: person) }
     let(:data) { Export::Csv::People::PeopleAddress.export(list) }
     let(:csv)  { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
@@ -39,6 +39,7 @@ describe Export::Csv::People do
         its(['Titel']) { should eq 'Dr.' }
         its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
         its(['PBS Personennummber']) { should be_nil }
+        its(['Kantonalverband']) { is_expected.to eq 'CH' }
       end
     end
 

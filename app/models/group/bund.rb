@@ -4,7 +4,6 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 # == Schema Information
 #
 # Table name: groups
@@ -22,8 +21,8 @@
 #  town                   :string(255)
 #  country                :string(255)
 #  contact_id             :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  deleted_at             :datetime
 #  layer_group_id         :integer
 #  creator_id             :integer
@@ -37,9 +36,11 @@
 #  bank_account           :string(255)
 #  description            :text
 #
+
 class Group::Bund < Group
 
   self.layer = true
+  self.event_types = [Event, Event::Course]
 
   children Group::Kantonalverband,
            Group::BundesGremium
@@ -68,6 +69,10 @@ class Group::Bund < Group
     self.permissions = [:layer_and_below_full]
   end
 
+  class AssistenzAusbildung < ::Role
+    self.permissions = [:layer_full]
+  end
+
   class Beisitz < ::Role
     self.permissions = [:group_read]
   end
@@ -82,7 +87,7 @@ class Group::Bund < Group
   end
 
   class Geschaeftsleitung < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data, :approve_applications]
   end
 
   class GrossanlassCoach < ::Role
@@ -111,7 +116,7 @@ class Group::Bund < Group
   end
 
   class LeitungKernaufgabeAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
   end
 
   class LeitungKernaufgabeKommunikation < ::Role
@@ -238,6 +243,7 @@ class Group::Bund < Group
   roles MitarbeiterGs,
         Sekretariat,
         Adressverwaltung,
+        AssistenzAusbildung,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,

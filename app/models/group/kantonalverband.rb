@@ -4,7 +4,6 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 # == Schema Information
 #
 # Table name: groups
@@ -22,8 +21,8 @@
 #  town                   :string(255)
 #  country                :string(255)
 #  contact_id             :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  deleted_at             :datetime
 #  layer_group_id         :integer
 #  creator_id             :integer
@@ -37,9 +36,11 @@
 #  bank_account           :string(255)
 #  description            :text
 #
+
 class Group::Kantonalverband < Group
 
   self.layer = true
+  self.event_types = [Event, Event::Course]
 
   children Group::Region,
            Group::Abteilung,
@@ -50,7 +51,7 @@ class Group::Kantonalverband < Group
   ### INSTANCE METHODS
 
   def census_total(year)
-    MemberCount.total_by_kantonalverbaende(year).where(kantonalverband_id: id).first
+    MemberCount.total_by_kantonalverbaende(year).find_by(kantonalverband_id: id)
   end
 
   def census_groups(year)
@@ -81,7 +82,7 @@ class Group::Kantonalverband < Group
   end
 
   class Kantonsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
   end
 
   class Kassier < ::Role
@@ -146,7 +147,7 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungAusbildung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
   end
 
   class VerantwortungBetreuung < ::Role

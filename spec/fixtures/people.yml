@@ -63,23 +63,31 @@ bulei:
   title: Dr.
   contact_data_visible: true
   gender: m
+  primary_group: bund
+  kantonalverband: bund
 
 al_schekka:
   first_name: AL
   last_name: Schekka
   email: al.schekka@hitobito.example.com
   contact_data_visible: true
+  primary_group: schekka
+  kantonalverband: be
 
 al_berchtold:
   first_name: AL
   last_name: Berchtold
   email: al.berchtold@hitobito.example.com
   contact_data_visible: true
+  primary_group: berchtold
+  kantonalverband: be
 
 child:
   first_name: My
   last_name: Child
   email: child1@hitobito.example.com
+  primary_group: pegasus
+  kantonalverband: be
 
 root:
   company_name: 'Puzzle ITC'

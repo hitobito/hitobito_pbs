@@ -10,6 +10,10 @@
 de:
   activerecord:
     models:
+      event/approval:
+        one: Empfehlung
+        other: Empfehlungen
+
       group/abteilung:
         one: Abteilung
         other: Abteilungen
@@ -78,6 +82,9 @@ de:
       group/bund/adressverwaltung:
         one: Adressverwalter
         description: Verwaltet die Adressen.
+      group/bund/assistenz_ausbildung:
+        one: Assistenz Ausbildung
+        description: Unterstützt bei Ausbildungen.
       group/bund/praesidium:
         one: Präsident
         description:
@@ -621,6 +628,22 @@ de:
         one: Mitglied
         description:
 
+      event/course/role/leader:
+        one: Kursleitung
+        other: Kursleitungen
+
+      event/course/role/class_leader:
+        one: Klassenlehrer
+        other: Klassenlehrer
+
+      event/course/role/helper:
+        one: Kurshelfer
+        other: Kurshelfer
+
+      event/course/role/advisor:
+        one: LKB
+        other: LKBs
+
       census:
         one: Bestandesmeldungsperiode
         other: Bestandesmeldungsperioden
@@ -655,6 +678,28 @@ de:
               other: Sehr geehrte(r) %{title_last_name}
 
     attributes:
+      event:
+        course_languages: Kurssprachen
+        express_fee: Expressgebühr
+        language_de: Kurssprache Deutsch
+        language_fr: Kurssprache Französisch
+        language_it: Kurssprache Italienisch
+        language_en: Kurssprache Englisch
+
+      event/approval:
+        comment: Kommentar
+        approvee: Teilnehmer
+        approver: Bearbeiter
+        approved_at: Datum
+
+      event/course:
+        requires_approval: Empfehlung der Anmeldungen nötig durch
+        advisor: LKB
+        advisor_id: LKB
+
+      event/kind:
+        documents_text: Zusatzformulare
+
       person:
         nickname: Pfadiname
         pbs_number: PBS Personennummer
@@ -668,6 +713,7 @@ de:
         correspondence_language: Korrespondenzsprache
         brother_and_sisters: Geschwister
         relations_to_tails: Geschwister
+        kv: Kantonalverband
 
       group:
         pta: PTA
@@ -714,6 +760,9 @@ de:
         dates: Daten
         created_at: Von
         deleted_at: Bis
+
+      qualification_kind:
+        manual: Manuell erfassbar
 
     errors:
       models:

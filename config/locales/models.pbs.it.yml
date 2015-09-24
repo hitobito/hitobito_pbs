@@ -1,38 +1,41 @@
 it:
   activerecord:
     models:
+      event/approval:
+        one: Suggerimento
+        other: Suggerimenti
       group/abteilung:
         one: sezione
-        other: sezioni
+        other: Sezioni
       group/abteilungs_gremium:
-        one: commissione
-        other: commissioni
-        long: comitato sezionale
+        one: Comitato
+        other: Comitati
+        long: Comitato sezionale
       group/abteilungs_rover:
-        one: rover
-        other: rover
-        long: sezione rover
+        one: Rover
+        other: Rover
+        long: Clan Rover
       group/biber:
         one: castoro
-        other: castori
+        other: Castori
       group/bund: Confederazione
       group/bundes_gremium:
-        one: commissione
-        other: commissioni
-        long: comitato federale
+        one: Commissione MSS
+        other: Commissioni MSS
+        long: Comitato federale
       group/elternrat:
         one: consiglio dei genitori
-        other: consigli dei genitori
+        other: Consigli dei genitori
       group/gremium:
         one: comissione
-        other: commissioni
+        other: Commissioni
       group/kantonalverband:
         one: associazione cantonale
-        other: associazioni cantonali
+        other: Associazioni cantonali
       group/kantonales_gremium:
-        one: commissione
-        other: commissioni
-        long: comitato cantonale
+        one: Commissione
+        other: Commissioni
+        long: Comitato cantonale
       group/pfadi:
         one: 'esplo
 
@@ -41,601 +44,531 @@ it:
           esploratrice (f)
 
           scout'
-        other: 'esplo
-
-          esploratori
-
-          esploratrici
-
-          scout'
+        other: Esploratori
       group/pio:
         one: 'pio
 
           pioniere'
-        other: 'pio
-
-          pionieri'
+        other: Pionieri
       group/pta:
         one: 'Scout ad Ogni Costo
 
           SOC'
-        other: 'Scout ad Ogni Costo
-
-          SOC'
+        other: Scout a Ogni Costo
       group/region:
         one: zona
-        other: zone
+        other: Zone
       group/regionales_gremium:
-        one: commissione
-        other: commissioni
-        long: comitato regionale
+        one: Commissione
+        other: Commissioni
+        long: Comitato di zona
       group/regionale_rover:
-        one: rover
-        other: rover
-        long: rover di zona
+        one: Rover
+        other: Rover
+        long: Rover di zona
       group/rover:
         one: rover
-        other: rover
+        other: Rover
       group/woelfe:
         one: 'lupo
 
           lupetto
 
           lupetta'
-        other: 'lupi
-
-          lupetti
-
-          lupette'
+        other: Lupetti
       group/bund/mitarbeiter_gs:
-        one: collaboratore del segretariato generale SG
+        one: Collaboratore del segretariato generale
       group/bund/sekretariat:
-        one: segretariato
+        one: Segretariato
       group/bund/adressverwaltung:
-        one: amministratore degli indirizzi
-        description: amministra gli indirizzi
+        one: Amministratore bancadati
+        description: Amministra i dati contenuti in questa bancadati
+      group/bund/assistenz_ausbildung:
+        one: Assistenza nella formazione
+        description: Sostenuto nelle formazioni
       group/bund/praesidium:
-        one: presidente
+        one: Presidente
       group/bund/vize_praesidium:
-        one: vicepresidente
+        one: Vicepresidente
       group/bund/praesidium_apv:
-        one: presidente degli scout anziani
+        one: Presidente degli scout anziani
       group/bund/geschaeftsleitung:
-        one: segretario generale
+        one: Segretario generale
       group/bund/mitarbeiter:
-        one: collaboratore
+        one: Collaboratore
       group/bund/vertretung_pbs:
-        one: 'delegato MSS
-
-          rappresentante MSS'
+        one: Delegato MSS
       group/bund/beisitz:
-        one: 'assistente
-
-          membro di commissione'
+        one: Delegato
       group/bund/kassier:
-        one: cassiere
+        one: Cassiere
       group/bund/revisor:
-        one: revisore
+        one: Revisore
       group/bund/redaktor:
-        one: redattore
+        one: Redattore
       group/bund/webmaster:
-        one: webmaster
+        one: Webmaster
       group/bund/mediensprecher:
-        one: portavoce
+        one: Portavoce
       group/bund/uebersetzer:
-        one: traduttore
+        one: Traduttore
       group/bund/mitglied_krisenteam:
-        one: membro della cellula di crisi
+        one: Membro della cellula di crisi
       group/bund/coach:
-        one: coach
+        one: Coach
       group/bund/grossanlass_coach:
-        one: grande evento coach
+        one: Coach grandi eventi
       group/bund/leitungskursbetreuung:
-        one: consigliere alla formazione
+        one: Consigliere alla formazione
       group/bund/leitung_kernaufgabe_ausbildung:
-        one: 'direzione del compito principale formazione
-
-          direzione del settore formazione'
+        one: Responsabile compito fondamentale formazione
       group/bund/leitung_kernaufgabe_kommunikation:
-        one: 'direzione del compito principale comunicazione
-
-          direzione del settore comunicazione'
+        one: Responsabile compito fondamentale comunicazione
       group/bund/leitung_kernaufgabe_programm:
-        one: 'direzione del compito principale programma
-
-          direzione del settore programma'
+        one: Responsabile compito fondamentale programma
       group/bund/leitung_kernaufgabe_support:
-        one: 'direzione del compito principale support
-
-          direzione del settore support'
+        one: Responsabile compito fondamentale supporto
       group/bund/verantwortung_biberstufe:
-        one: responsabile branca castori
+        one: Responsabile branca castori
       group/bund/verantwortung_wolfstufe:
-        one: responsabile branca lupetti
+        one: Responsabile branca lupetti
       group/bund/verantwortung_pfadistufe:
-        one: responsabile branca esploratori
+        one: Responsabile branca esploratori
       group/bund/verantwortung_piostufe:
-        one: responsabile branca pionieri
+        one: Responsabile branca pionieri
       group/bund/verantwortung_roverstufe:
-        one: responsabile branca rover
+        one: Responsabile branca rover
       group/bund/verantwortung_pfadi_trotz_allem:
-        one: responsabile Scout ad Ogni Costo
+        one: responsabile SOC
       group/bund/verantwortung_integration:
-        one: responsabile integrazione
+        one: Responsabile integrazione
       group/bund/verantwortung_lagermeldung:
-        one: responsabile annuncio campeggi
+        one: Responsabile annuncio campi
       group/bund/verantwortung_pr:
-        one: responsabile PR
+        one: Responsabile PR
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: responsabile della prevenzione degli abusi sessuali
+        one: Responsabile della prevenzione degli abusi sessuali
       group/bund/international_commissioner_ic_wagggs:
-        one: 'responsabile internazionale IC WAGGGS
-
-          responsabile internazionale IC AMGE'
+        one: Commissario internazionale WAGGGS
       group/bund/international_commissioner_ic_wosm:
-        one: 'responsabile internazionale IC WOSM
-
-          responsabile internazionale IC OMMS'
+        one: Commissario internazionale WOSM
       group/bund/stv_ic_programme_wagggs:
-        one: 'sostituto IC programma WAGGGS
-
-          sostituto IC programma AMGE'
+        one: Commissario internazionale aggiunto WAGGGS
       group/bund/stv_ic_programme_wosm:
-        one: 'sostituto IC programma WOSM
-
-          sostituto IC programma OMMS'
+        one: Commissario internazionale aggiunto WOSM
       group/bund/spezialfunktion:
-        one: funzione speciale
+        one: Funzione speciale
       group/bund/ehrenmitglied:
-        one: membro onorario
+        one: Membro onorario
       group/bund/passivmitglied:
-        one: membro passivo
+        one: Membro passivo
       group/bund/kontaktperson:
-        one: 'contatto
-
-          persona di contatto'
+        one: Persona di contatto
       group/kantonalverband/kantonsleitung:
-        one: responsabile cantonale
+        one: Responsabile cantonale
       group/kantonalverband/sekretariat:
-        one: segretariato
+        one: Segretariato
       group/kantonalverband/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/kantonalverband/praesidium:
-        one: presidente
+        one: Presidente
       group/kantonalverband/vize_praesidium:
-        one: vicepresidente
+        one: Vicepresidente
       group/kantonalverband/praesidium_apv:
-        one: presidente scout anziani
+        one: Presidente scout anziani
       group/kantonalverband/mitarbeiter:
-        one: collaboratore
+        one: Collaboratore
       group/kantonalverband/beisitz:
-        one: 'assistente
-
-          membro di commissione'
+        one: Delegato
       group/kantonalverband/kassier:
-        one: cassiere
+        one: Cassiere
       group/kantonalverband/revisor:
-        one: revisore
+        one: Revisore
       group/kantonalverband/redaktor:
-        one: redattore
+        one: Redattore
       group/kantonalverband/webmaster:
-        one: webmaster
+        one: Webmaster
       group/kantonalverband/mediensprecher:
-        one: portavoce
+        one: Portavoce
       group/kantonalverband/uebersetzer:
-        one: traduttore
+        one: Traduttore
       group/kantonalverband/mitglied_krisenteam:
-        one: membro della cellula di crisi
+        one: Membro della cellula di crisi
       group/kantonalverband/coach:
-        one: coach
+        one: Coach
       group/kantonalverband/leitungskursbetreuung:
-        one: consigliere alla formazione
+        one: Consigliere alla formazione
       group/kantonalverband/verantwortung_biberstufe:
-        one: responsabile branca castori
+        one: Responsabile branca castori
       group/kantonalverband/verantwortung_wolfstufe:
-        one: responsabile branca lupetti
+        one: Responsabile branca lupetti
       group/kantonalverband/verantwortung_pfadistufe:
-        one: responsabile branca esploratori
+        one: Responsabile branca esploratori
       group/kantonalverband/verantwortung_piostufe:
-        one: responsabile branca pionieri
+        one: Responsabile branca pionieri
       group/kantonalverband/verantwortung_roverstufe:
-        one: responsabile branca rover
+        one: Responsabile branca rover
       group/kantonalverband/verantwortung_pfadi_trotz_allem:
-        one: responsabile Scout ad Ogni Costo
+        one: Responsabile SOC
       group/kantonalverband/verantwortung_abteilungen:
-        one: responsabile delle sezioni
+        one: Responsabile delle sezioni
       group/kantonalverband/verantwortung_animation_spirituelle:
-        one: responsabile dell'animazione spirituale
+        one: Responsabile dell'animazione spirituale
       group/kantonalverband/verantwortung_ausbildung:
-        one: responsabile della formazione
+        one: Responsabile della formazione
       group/kantonalverband/verantwortung_betreuung:
-        one: responsabile dell'accompagnamento
+        one: Responsabile dell'accompagnamento
       group/kantonalverband/verantwortung_integration:
-        one: responsabile integrazione
+        one: Responsabile integrazione
       group/kantonalverband/verantwortung_internationales:
-        one: responsabile internazionale
+        one: Responsabile internazionale
       group/kantonalverband/verantwortung_suchtpraeventionsprogramm:
-        one: responsabile cantonale del programma di prevenzione dalle dipendenze
+        one: Responsabile cantonale del programma di prevenzione dalle dipendenze
       group/kantonalverband/verantwortung_kantonsarchiv:
-        one: responsabile dell'archivio cantonale
+        one: Responsabile dell'archivio cantonale
       group/kantonalverband/verantwortung_krisenteam:
-        one: responsabile della cellula di crisi
+        one: Responsabile della cellula di crisi
       group/kantonalverband/verantwortung_lagermeldung:
-        one: responsabile annuncio campeggi
+        one: Responsabile annuncio campi
       group/kantonalverband/verantwortung_lagerplaetze:
-        one: responsabile dei posti dei campi
+        one: Responsabile dei luoghi da campo
       group/kantonalverband/verantwortung_materialverkaufsstelle:
-        one: 'responsabile dello spaccio del materiale
-
-          responsabile della vendita del materiale'
+        one: Responsabile economato
       group/kantonalverband/verantwortung_pr:
-        one: responsabile PR
+        one: Responsabile PR
       group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
-        one: responsabile della prevenzione degli abusi sessuali
+        one: Responsabile della prevenzione degli abusi sessuali
       group/kantonalverband/verantwortung_programm:
-        one: responsabile del programma
+        one: Responsabile del programma
       group/kantonalverband/spezialfunktion:
-        one: funzione speciale
+        one: Funzione speciale
       group/kantonalverband/ehrenmitglied:
-        one: membro onorario
+        one: Membro onorario
       group/kantonalverband/passivmitglied:
-        one: membro passivo
+        one: Membro passivo
       group/region/regionalleitung:
-        one: responsabile di zona
+        one: Responsabile di zona
       group/region/sekretariat:
-        one: segretariato
+        one: Segretariato
       group/region/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/region/praesidium:
-        one: presidente
+        one: Presidente
       group/region/vize_praesidium:
-        one: vicepresidente
+        one: Vicepresidente
       group/region/praesidium_apv:
-        one: presidente degli scout anziani
+        one: Presidente degli scout anziani
       group/region/praeses:
-        one: assistente spirituale
+        one: Assistente spirituale
       group/region/mitarbeiter:
-        one: collaboratore
+        one: Collaboratore
       group/region/beisitz:
-        one: 'assistente
-
-          membro di commissione'
+        one: Delegato
       group/region/kassier:
-        one: cassiere
+        one: Cassiere
       group/region/revisor:
-        one: revisore
+        one: Revisore
       group/region/redaktor:
-        one: redattore
+        one: Redattore
       group/region/webmaster:
-        one: webmaster
+        one: Webmaster
       group/region/mediensprecher:
-        one: portavoce
+        one: Portavoce
       group/region/mitglied_krisenteam:
-        one: membro della cellula di crisi
+        one: Membro della cellula di crisi
       group/region/coach:
-        one: coach
+        one: Coach
       group/region/leitungskursbetreuung:
-        one: consigliere alla formazione
+        one: Consigliere alla formazione
       group/region/verantwortung_biberstufe:
-        one: responsabile branca castori
+        one: Responsabile branca castori
       group/region/verantwortung_wolfstufe:
-        one: responsabile branca lupetti
+        one: Responsabile branca lupetti
       group/region/verantwortung_pfadistufe:
-        one: responsabile branca esploratori
+        one: Responsabile branca esploratori
       group/region/verantwortung_piostufe:
-        one: responsabile branca pionieri
+        one: Responsabile branca pionieri
       group/region/verantwortung_roverstufe:
-        one: responsabile branca rover
+        one: Responsabile branca rover
       group/region/verantwortung_pfadi_trotz_allem:
-        one: responsabile Scout ad Ogni Costo
+        one: Responsabile SOC
       group/region/verantwortung_abteilungen:
-        one: responsabile delle sezioni
+        one: Responsabile delle sezioni
       group/region/verantwortung_animation_spirituelle:
-        one: responsabile dell'animazione spirituale
+        one: Responsabile dell'animazione spirituale
       group/region/verantwortung_ausbildung:
-        one: responsabile della formazione
+        one: Responsabile della formazione
       group/region/verantwortung_betreuung:
-        one: responsabile dell'accompagnamento
+        one: Responsabile dell'accompagnamento
       group/region/verantwortung_integration:
-        one: responsabile integrazione
+        one: Responsabile integrazione
       group/region/verantwortung_internationales:
-        one: responsabile internazionale
+        one: Responsabile internazionale
       group/region/verantwortung_suchtpraeventionsprogramm:
-        one: responsabile cantonale del programma di prevenzione dalle dipendenze
+        one: Responsabile cantonale del programma di prevenzione dalle dipendenze
       group/region/verantwortung_krisenteam:
-        one: responsabile della cellula di crisi
+        one: Responsabile della cellula di crisi
       group/region/verantwortung_lagermeldung:
-        one: responsabile annuncio campeggi
+        one: Responsabile annuncio campi
       group/region/verantwortung_lagerplaetze:
-        one: responsabile dei posti dei campi
+        one: Responsabile dei luoghi da campo
       group/region/verantwortung_materialverkaufsstelle:
-        one: 'responsabile dello spaccio del materiale
-
-          responsabile della vendita del materiale'
+        one: Responsabile economato
       group/region/verantwortung_pr:
-        one: responsabile PR
+        one: Responsabile PR
       group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: responsabile della prevenzione degli abusi sessuali
+        one: Responsabile della prevenzione degli abusi sessuali
       group/region/verantwortung_programm:
-        one: responsabile del programma
+        one: Responsabile del programma
       group/region/spezialfunktion:
-        one: funzione speciale
+        one: Funzione speciale
       group/region/ehrenmitglied:
-        one: membro onorario
+        one: Membro onorario
       group/region/passivmitglied:
-        one: membro passivo
+        one: Membro passivo
       group/abteilung/abteilungsleitung:
-        one: capo sezione
+        one: Capo sezione
       group/abteilung/abteilungsleitung_stv:
-        one: vice caposezione
+        one: Vice caposezione
       group/abteilung/sekretariat:
-        one: segretariato
+        one: Segretariato
       group/abteilung/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/abteilung/praesidium:
-        one: presidente
+        one: Presidente
       group/abteilung/vize_praesidium:
-        one: vicepresidente
+        one: Vicepresidente
       group/abteilung/praesidium_apv:
-        one: presidente degli scout anziani
+        one: Presidente degli scout anziani
       group/abteilung/praeses:
-        one: assistente spirituale
+        one: Assistente spirituale
       group/abteilung/beisitz:
-        one: 'assistente
-
-          membro di commissione'
+        one: Delegato
       group/abteilung/stufenleitung_biber:
-        one: capo branca castori
+        one: Capo branca castori
       group/abteilung/stufenleitung_woelfe:
-        one: capo branca lupetti
+        one: Capo branca lupetti
       group/abteilung/stufenleitung_pfadi:
-        one: capo branca esploratori
+        one: Capo branca esploratori
       group/abteilung/stufenleitung_pio:
-        one: capo branca pionieri
+        one: Capo branca pionieri
       group/abteilung/stufenleitung_rover:
-        one: capo branca rover
+        one: Capo branca rover
       group/abteilung/stufenleitung_pta:
-        one: capo branca SOC
+        one: Capo branca SOC
       group/abteilung/kassier:
-        one: cassiere
+        one: Cassiere
       group/abteilung/revisor:
-        one: revisore
+        one: Revisore
       group/abteilung/redaktor:
-        one: redattore
+        one: Redattore
       group/abteilung/webmaster:
-        one: webmaster
+        one: Webmaster
       group/abteilung/coach:
-        one: coach
+        one: Coach
       group/abteilung/verantwortung_materialverkaufsstelle:
-        one: 'responsabile dello spaccio del materiale
-
-          responsabile della vendita del materiale'
+        one: Responsabile economato
       group/abteilung/verantwortung_pfadi_trotz_allem:
-        one: responsabile Scout ad Ogni Costo
+        one: Responsabile SOC
       group/abteilung/verantwortung_pr:
-        one: responsabile PR
+        one: Responsabile PR
       group/abteilung/spezialfunktion:
-        one: funzione speciale
+        one: Funzione speciale
       group/abteilung/ehrenmitglied:
-        one: membro onorario
+        one: Membro onorario
       group/abteilung/passivmitglied:
-        one: membro passivo
+        one: Membro passivo
       group/biber/einheitsleitung:
-        one: capo unità
+        one: Capo colonia
       group/biber/mitleitung:
-        one: animatore
+        one: Aggiunto capo colonia
       group/biber/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/biber/biber:
-        one: castoro
-        long: castoro
+        one: Castoro
+        long: Castoro
       group/woelfe/einheitsleitung:
-        one: capo unità
+        one: Capo muta
       group/woelfe/mitleitung:
-        one: animatore
+        one: Aggiunto capo muta
       group/woelfe/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/woelfe/leitwolf:
-        one: capo sestena
-        long: capo sestena
+        one: Capo sestena
+        long: Capo sestena
       group/woelfe/wolf:
-        one: 'lupetto
-
-          lupo'
-        long: 'lupetto
-
-          lupo'
+        one: Lupetto
+        long: Lupetto
       group/pfadi/einheitsleitung:
-        one: capo unità
+        one: Capo reparto
       group/pfadi/mitleitung:
-        one: animatore
+        one: Aggiunto capo reparto
       group/pfadi/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/pfadi/leitpfadi:
-        one: 'capo pattuglia
-
-          CP'
-        long: 'capo pattuglia
-
-          CP'
+        one: Capo pattuglia
+        long: Capo pattuglia
       group/pfadi/pfadi:
-        one: scoutismo
-        long: scoutismo
+        one: Esploratore
+        long: Esploratore
       group/pio/einheitsleitung:
-        one: capo unità
+        one: Capo posto
       group/pio/mitleitung:
-        one: animatore
+        one: Aggiunto capo posto
       group/pio/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/pio/pio:
-        one: 'pioniere
-
-          pio'
-        long: 'pioniere
-
-          pio'
+        one: Pioniere
+        long: Pioniere
       group/rover/einheitsleitung:
-        one: capo unità
+        one: Capo clan
       group/rover/mitleitung:
-        one: animatore
+        one: Aggiunto capo clan
       group/rover/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/rover/rover:
-        one: rover
-        long: rover
+        one: Rover
+        long: Rover
       group/pta/einheitsleitung:
-        one: capo unità
+        one: Capo unità SOC
       group/pta/mitleitung:
-        one: animatore
+        one: Aggiunto capo unità SOC
       group/pta/adressverwaltung:
-        one: amministratore degli indirizzi
+        one: Amministratore bancadati
       group/pta/mitglied:
-        one: membro
+        one: Collaboratore
       group/elternrat/praesidium:
-        one: presidente
+        one: Presidente
       group/elternrat/mitglied:
-        one: membro
+        one: Membro
       group/gremium/leitung:
-        one: direzione
+        one: Responsabile
       group/gremium/mitglied:
-        one: membro
+        one: Membro
+      event/course/role/leader:
+        one: Direzione del corso
+        other: Direzioni dei corsi
+      event/course/role/class_leader:
+        one: Docente di classe
+        other: Docenti di classe
+      event/course/role/helper:
+        one: Aiuto ai corsi
+        other: Aiuti ai corsi
+      event/course/role/advisor:
+        one: CaF
+        other: CaF
       census:
-        one: periodo dell'annuncio di organico
-        other: periodi dell'annuncio di organico
+        one: Periodo considerato per i censimenti
+        other: Periodi considerati per i censimenti
       salutation:
-        one: 'titolo
-
-          appellativo'
-        other: 'titoli
-
-          appellativi'
+        one: Appellativo
+        other: Appellativi
         available:
           lieber_pfadiname:
-            label: cara(o) [totem]
+            label: Caro/a [totem]
             value:
-              m: caro %{nickname}
-              w: cara %{nickname}
-              other: Cara(o) %{nickname}
+              m: Caro %{nickname}
+              w: Cara %{nickname}
+              other: Caro/a %{nickname}
           lieber_vorname:
-            label: cara(o) [nome]
+            label: Caro/a [nome]
             value:
-              m: caro %{first_name}
-              w: cara %{first_name}
-              other: Cara(o) %{first_name}
+              m: Caro %{first_name}
+              w: Cara %{first_name}
+              other: Caro/a %{first_name}
           lieber_titel_nachname:
-            label: cara(o) signora/signor [titolo] [cognome]
+            label: Egregio Signor / Gentile Signora [titolo] [cognome]
             value:
-              m: caro signor %{title_last_name}
-              w: cara signora %{title_last_name}
-              other: Cara(o) %{title_last_name}
+              m: Egregio Signor %{title_last_name}
+              w: Gentile Signora %{title_last_name}
+              other: Gentile Signora, Egregio Signore %{title_last_name}
           sehr_geehrter_titel_nachname:
-            label: Gentile/Egregio signora(signor) [titolo] [cognome]
+            label: Egregio Signor / Gentile Signora [titolo] [cognome]
             value:
-              m: Egregio signor %{title_last_name}
-              w: Gentile signora %{title_last_name}
-              other: Gentile signora (Egregio signore) %{title_last_name}
+              m: Egregio Signor %{title_last_name}
+              w: Gentile Signora %{title_last_name}
+              other: Gentile Signora, Egregio Signore %{title_last_name}
     attributes:
+      event:
+        course_languages: Corso di lingue
+        express_fee: Spese per un'elaborazione espresso
+        language_de: Corso di tedesco
+        language_fr: Corso di francese
+        language_it: Corso di italiano
+        language_en: Corso di inglese
+      event/approval:
+        comment: Commento
+        approvee: Partecipante
+        approver: Operatore
+        approved_at: Data
+      event/course:
+        requires_approval: Raccomandazione per l'iscrizione è necessaria attraverso
+        advisor: CaF
+        advisor_id: CaF
+      event/kind:
+        documents_text: Formulari aggiuntivi
       person:
-        nickname: totem
-        pbs_number: numero personale MSS
-        salutation: 'titolo
-
-          appellativo'
-        salutation_value: 'titolo
-
-          appellativo'
-        title: titolo
-        grade_of_school: classe
-        entry_date: 'data d''entrata
-
-          data d''ingresso'
-        leaving_date: data d'uscita
-        j_s_number: numero personale G+S
-        correspondence_language: lingua per la corrispondenza
-        brother_and_sisters: fratelli
-        relations_to_tails: fratelli
+        nickname: Totem
+        pbs_number: Numero personale MSS
+        salutation: Appellativo
+        salutation_value: Appellativo
+        title: Titolo
+        grade_of_school: Classe scolastica
+        entry_date: Data d'entrata
+        leaving_date: Data d'uscita
+        j_s_number: Numero personale G+S
+        correspondence_language: Lingua di corrispondenza
+        brother_and_sisters: Fratelli
+        relations_to_tails: Fratelli
+        kv: Associazione cantonale
       group:
-        pta: 'Scout ad Ogni Costo
-
-          SOC'
-        vkp: 'Associazione Esploratori Esploratrici Cattolici
-
-          AEEC'
-        pbs_material_insurance: assicurazione per il materiale da campo del MSS
-        website: 'sito internet
-
-          pagina web'
-        pbs_shortname: 'abbreviazione MSS
-
-          sigla MSS'
-        bank_account: coordinate bancarie/postali
-        description: descrizione
+        pta: Scout a ogni costo
+        vkp: Federazione scout cattolici VKP
+        pbs_material_insurance: Assicurazione per il materiale da campo del MSS
+        website: Sito web
+        pbs_shortname: Abbreviazione MSS
+        bank_account: Coordinate bancarie/postali
+        description: Descrizione
       people_relation:
         kinds:
-          sibling: fratelli
+          sibling: Fratelli
       census:
-        year: anno
-        start_at: da
-        finish_at: scadenza
+        year: Anno
+        start_at: Da
+        finish_at: Al
       member_count:
-        leiter: 'dirigente
-
-          capo'
-        leiter_m: 'dirigente
-
-          capo'
-        leiter_f: 'dirigente
-
-          capo'
-        biber: castori
-        biber_m: 'castori
-
-          castorini'
-        biber_f: 'castori
-
-          castorine'
-        woelfe: 'lupetti
-
-          lupi'
-        woelfe_m: 'lupi
-
-          lupetti'
-        woelfe_f: 'lupi
-
-          lupette'
-        pfadis: 'esploratori
-
-          esplo'
-        pfadis_m: 'esplo
-
-          esploratori'
-        pfadis_f: 'esplo
-
-          esploratrici'
-        pios: 'pio
-
-          pionieri'
-        pios_m: 'pio
-
-          pionieri'
-        pios_f: 'pio
-
-          pioniere'
-        rover: rover
-        rover_m: rover
-        rover_f: rover
+        leiter: Responsabile
+        leiter_m: Responsabile M
+        leiter_f: Responsabile F
+        biber: Castori
+        biber_m: Castori M
+        biber_f: Castori F
+        woelfe: Lupetti
+        woelfe_m: Lupetti M
+        woelfe_f: Lupetti F
+        pfadis: Esploratori
+        pfadis_m: Esploratori M
+        pfadis_f: Esploratori F
+        pios: Pionieri
+        pios_m: Pionieri M
+        pios_f: Pionieri F
+        rover: Rover
+        rover_m: Rover M
+        rover_f: Rover F
         pta: SOC
-        pta_m: SOC
-        pta_f: SOC
+        pta_m: SOC M
+        pta_f: SOC F
       role:
-        dates: dati
-        created_at: da
-        deleted_at: a
+        dates: Date
+        created_at: Da
+        deleted_at: A
+      qualification_kind:
+        manual: Inserire manualmente
     errors:
       models:
         role:
           attributes:
             created_at:
-              on_or_before: 'deve trovarsi nel passato '
+              on_or_before: non può essere nel futuro.
             deleted_at:
-              after: deve essere dopo "da".
+              after: non può essere prima della data d'inizio.

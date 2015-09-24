@@ -12,7 +12,12 @@ class AddPfadiAttributes < ActiveRecord::Migration
     add_column :people, :grade_of_school, :integer
     add_column :people, :entry_date, :date
     add_column :people, :leaving_date, :date
-    add_column :people, :j_s_number, :string
+
+    # column added by youth wagon
+    if !column_exists?(:people, :j_s_number)
+      add_column :people, :j_s_number, :string
+    end
+
     add_column :people, :correspondence_language, :string, limit: 5
     add_column :people, :brother_and_sisters, :boolean, default: false, null: false
 

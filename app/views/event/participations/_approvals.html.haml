@@ -1,0 +1,12 @@
+- # encoding: utf-8
+- #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+- #  hitobito_pbs and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_pbs.
+
+- if show_application_approval?(entry)
+  = section_table(t('.title'), @approvals) do |a|
+    %td= format_attr(a, :status)
+    %td= format_attr(a, :approver)
+    %td= simple_format(a.comment)
+    %td= f(a.approved_at.try(:to_date))

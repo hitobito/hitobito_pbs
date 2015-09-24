@@ -138,7 +138,7 @@ describe Role do
       role.deleted_at = Time.zone.now
       role.save!
 
-      expect(role).to be_destroyed
+      expect(role).to be_deleted
       expect(person.primary_group_id).to be_nil
     end
 
@@ -151,8 +151,8 @@ describe Role do
       another_role.deleted_at = Time.zone.now
       another_role.save!
 
-      expect(role).not_to be_destroyed
-      expect(another_role).to be_destroyed
+      expect(role).not_to be_deleted
+      expect(another_role).to be_deleted
       expect(person.primary_group_id).to eq role.group.id
     end
   end

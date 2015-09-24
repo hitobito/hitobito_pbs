@@ -11,18 +11,24 @@ module Pbs::Sheet::Group
   included do
     tabs.insert(
       -2,
+
+      Sheet::Tab.new(:pending_approvals_tab,
+                     :pending_approvals_group_path,
+                     if: :pending_approvals),
+
       Sheet::Tab.new(:tab_population_label,
                      :population_group_path,
-                     if: lambda { |view, group|
-                       group.kind_of?(Group::Abteilung) && view.can?(:show_population, group)
-                     }),
+                     if: lambda do |view, group|
+                       group.is_a?(Group::Abteilung) && view.can?(:show_population, group)
+                     end),
 
       Sheet::Tab.new('groups.tabs.statistic',
                      :census_evaluation_path,
                      alt: [:censuses_tab_path, :group_member_counts_path],
-                     if: lambda { |view, group|
+                     if: lambda do |view, group|
                        group.census? && view.can?(:evaluate_census, group)
-                     }))
+                     end)
+    )
   end
 
 end

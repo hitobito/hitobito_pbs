@@ -22,10 +22,9 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
   private
 
   def abteilung_confirmation_ratios
-    @sub_groups.inject({}) do |hash, kantonalverband|
+    @sub_groups.each_with_object({}) do |kantonalverband, hash|
       hash[kantonalverband.id] = { confirmed: number_of_confirmations(kantonalverband),
                                    total: number_of_abteilungen(kantonalverband) }
-      hash
     end
   end
 

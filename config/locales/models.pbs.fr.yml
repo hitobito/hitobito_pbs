@@ -1,6 +1,9 @@
 fr:
   activerecord:
     models:
+      event/approval:
+        one: Recommandation
+        other: Recommandations
       group/abteilung:
         one: Groupe
         other: Groupes
@@ -66,6 +69,9 @@ fr:
       group/bund/adressverwaltung:
         one: Administrateur/-trice des adresses
         description: Administre les adresses.
+      group/bund/assistenz_ausbildung:
+        one: Assistance formation
+        description: Soutien pour la formation
       group/bund/praesidium:
         one: Président
       group/bund/vize_praesidium:
@@ -425,6 +431,18 @@ fr:
         one: Responsable
       group/gremium/mitglied:
         one: Membre
+      event/course/role/leader:
+        one: Maîtrise de cours
+        other: Maîtrises de cours
+      event/course/role/class_leader:
+        one: Enseignant
+        other: Enseignant
+      event/course/role/helper:
+        one: Aide de cours
+        other: Aide de cours
+      event/course/role/advisor:
+        one: CAF
+        other: CAFs
       census:
         one: période couverte par l'annonce des effectifs
         other: Périodes couvertes par une annonce des effectifs
@@ -457,6 +475,24 @@ fr:
               w: Chère Madame %{title_last_name}
               other: Cher/Chère %{title_last_name}
     attributes:
+      event:
+        course_languages: Langues de cours
+        express_fee: Finances express
+        language_de: Langue de cours allemand
+        language_fr: Langue de cours français
+        language_it: Langue de cours italien
+        language_en: Langue de cours anglais
+      event/approval:
+        comment: Commentaire
+        approvee: Participant
+        approver: Examinateur
+        approved_at: Date
+      event/course:
+        requires_approval: Recommandation de l'inscription nécessaire par
+        advisor: CAF
+        advisor_id: CAF
+      event/kind:
+        documents_text: Formulaire supplémentaire
       person:
         nickname: Totem
         pbs_number: N° personnel MSdS
@@ -470,6 +506,7 @@ fr:
         correspondence_language: Langue de correspondance
         brother_and_sisters: Frères et soeurs
         relations_to_tails: fratrie
+        kv: Assocation cantonale
       group:
         pta: SMT
         vkp: ASC
@@ -511,6 +548,8 @@ fr:
         dates: Dates
         created_at: Du
         deleted_at: Au
+      qualification_kind:
+        manual: Entrer manuellement
     errors:
       models:
         role:
