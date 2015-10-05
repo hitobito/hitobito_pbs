@@ -10,10 +10,11 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Mitarbeiter GS: [:layer_and_below_full, :contact_data, :admin]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
+    * Assistenz Ausbildung: [:layer_full]
     * Präsident: [:group_read, :contact_data]
     * Vize Präsident: [:group_read, :contact_data]
     * Präsident APV: [:group_read]
-    * Geschäftsleiter: [:layer_and_below_read, :contact_data]
+    * Geschäftsleiter: [:layer_and_below_read, :contact_data, :approve_applications]
     * Mitarbeiter: [:group_read, :contact_data]
     * Vertreter PBS: [:group_read, :contact_data]
     * Beisitzer: [:group_read]
@@ -27,7 +28,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Coach: [:layer_and_below_read, :contact_data]
     * Grossanlass Coach: [:group_read, :contact_data]
     * Leiterkursbetreuer: [:group_read, :contact_data]
-    * Leitung Kernaufgabe Ausbildung: [:group_read, :contact_data]
+    * Leitung Kernaufgabe Ausbildung: [:layer_full, :group_read, :contact_data, :approve_applications]
     * Leitung Kernaufgabe Kommunikation: [:group_read, :contact_data]
     * Leitung Kernaufgabe Programm: [:group_read, :contact_data]
     * Leitung Kernaufgabe Support: [:group_read, :contact_data]
@@ -50,11 +51,11 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Passivmitglied: []
     * Kontaktperson: [:contact_data]
   * Gremium
-    * Leitung: [:group_full]
+    * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
 * Kantonalverband
   * Kantonalverband
-    * Kantonsleiter: [:layer_and_below_full, :contact_data]
+    * Kantonsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
     * Präsident: [:group_read, :contact_data]
@@ -79,7 +80,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Verantwortlicher Pfadi Trotz Allem: [:group_read, :contact_data]
     * Verantwortlicher Abteilungen: [:group_read, :contact_data]
     * Verantwortlicher Animation Spirituelle: [:group_read, :contact_data]
-    * Verantwortlicher Ausbildung: [:group_read, :contact_data]
+    * Verantwortlicher Ausbildung: [:layer_full, :group_read, :contact_data, :approve_applications]
     * Verantwortlicher Betreuung: [:group_read, :contact_data]
     * Verantwortlicher Integration: [:group_read, :contact_data]
     * Verantwortlicher Internationales: [:group_read, :contact_data]
@@ -96,11 +97,11 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Ehrenmitglied: []
     * Passivmitglied: []
   * Gremium
-    * Leitung: [:group_full]
+    * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
 * Region
   * Region
-    * Regionsleiter: [:layer_and_below_full, :contact_data]
+    * Regionsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
     * Präsident: [:group_read, :contact_data]
@@ -125,7 +126,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Verantwortlicher Pfadi Trotz Allem: [:group_read, :contact_data]
     * Verantwortlicher Abteilungen: [:group_read, :contact_data]
     * Verantwortlicher Animation Spirituelle: [:group_read, :contact_data]
-    * Verantwortlicher Ausbildung: [:group_read, :contact_data]
+    * Verantwortlicher Ausbildung: [:layer_full, :group_read, :contact_data, :approve_applications]
     * Verantwortlicher Betreuung: [:group_read, :contact_data]
     * Verantwortlicher Integration: [:group_read, :contact_data]
     * Verantwortlicher Internationales: [:group_read, :contact_data]
@@ -146,12 +147,12 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Adressverwalter: [:group_full]
     * Rover: []
   * Gremium
-    * Leitung: [:group_full]
+    * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
 * Abteilung
   * Abteilung
-    * Abteilungsleiter: [:layer_and_below_full, :contact_data]
-    * Abteilungsleiter Stv: [:layer_and_below_full, :contact_data]
+    * Abteilungsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
+    * Abteilungsleiter Stv: [:layer_and_below_full, :contact_data, :approve_applications]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
     * Präsident: [:group_read, :contact_data]
@@ -212,7 +213,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Präsident: [:group_full]
     * Mitglied: [:group_read]
   * Gremium
-    * Leitung: [:group_full]
+    * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
 
 (Output of rake app:hitobito:roles)
