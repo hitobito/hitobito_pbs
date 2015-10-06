@@ -628,6 +628,46 @@ de:
         one: Mitglied
         description:
 
+      event/camp:
+        one: Lager
+        other: Lager
+
+      event/camp/role/leader:
+        one: Hauptleitung
+
+      event/camp/role/assistant_leader:
+        one: Leitung
+
+      event/camp/role/helper:
+        one: Küche / Helfer/-in
+
+      event/camp/role/participant:
+        one: Teilnehmer/-in
+
+      event/camp/role/leader_mountain_security:
+        one: Leiter-/in Sicherheitsaktivität Berg
+
+      event/camp/role/leader_snow_security:
+        one: Leiter-/in Sicherheitsaktivität Schnee
+
+      event/camp/role/leader_water_security:
+        one: Leiter-/in Sicherheitsaktivität Wasser
+
+      event/camp/role/abteilungsleitung:
+        one: Abteilungsleitung
+
+      event/camp/role/coach:
+        one: Coach
+
+      event/camp/role/advisor_mountain_security:
+        one: Betreuung Sicherheitsaktivität Berg
+
+      event/camp/role/advisor_schnee_security:
+        one: Betreuung Sicherheitsaktivität Schnee
+
+      event/camp/role/advisor_wasser_security:
+        one: Betreuung Sicherheitsaktivität Wasser
+
       event/course/role/leader:
         one: Kursleitung
         other: Kursleitungen

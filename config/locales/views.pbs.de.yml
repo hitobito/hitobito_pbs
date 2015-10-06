@@ -63,6 +63,9 @@ de:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
 
   events:
+    global:
+      link:
+        add_event/camp: Lager erstellen
     kind_pbs:
       event_kind_general_information: Kursart Informationen
     fields_pbs:
