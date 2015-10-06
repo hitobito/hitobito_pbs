@@ -15,6 +15,14 @@ module Pbs::EventAbility
         may(:create, :destroy, :application_market, :qualify).
         in_same_layer_or_course_in_below_abteilung
     end
+
+    on(Event::Camp) do
+      permission(:any).may(:index_revoked_participations).for_participations_full_events
+      permission(:group_full).may(:index_revoked_participations).in_same_group
+      permission(:group_and_below_full).may(:index_revoked_participations).in_same_group_or_below
+      permission(:layer_full).may(:index_revoked_participations).in_same_layer
+      permission(:layer_and_below_full).may(:index_revoked_participations).in_same_layer_or_below
+    end
   end
 
   def if_education_responsible

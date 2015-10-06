@@ -52,6 +52,14 @@ class Event::Camp < Event
   # translations in config/locales
   self.possible_states = %w(created confirmed assignment_closed canceled closed)
 
+  self.possible_participation_states = %w(applied_electronically assigned canceled absent)
+
+  self.active_participation_states = %w(applied_electronically assigned)
+
+  self.revoked_participation_states = %w(canceled absent)
+
+  self.countable_participation_states = %w(applied_electronically assigned absent)
+
 
   ### VALIDATIONS
 
@@ -70,6 +78,15 @@ class Event::Camp < Event
 
   def state
     super || possible_states.first
+  end
+
+  def default_participation_state(participation)
+    if participation.roles.blank? || participation.roles.any? { |role| role.kind != :participant }
+      'assigned'
+    else
+      # TODO check if paper application required
+      'assigned'
+    end
   end
 
 end

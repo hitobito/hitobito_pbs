@@ -52,3 +52,8 @@ bund_course:
   kind: lpk
   type: Event::Course
   number: 876
+
+schekka_camp:
+  name: Sommerlager
+  groups: schekka
+  type: Event::Camp

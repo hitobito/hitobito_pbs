@@ -27,7 +27,7 @@ class Event::CanceledParticipationJob < BaseJob
   end
 
   def perform
-    return unless participation || !participation.canceled? # may have been deleted again
+    return unless participation || participation.state != 'canceled' # may have been deleted again
 
     set_locale
     send_notification

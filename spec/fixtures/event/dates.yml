@@ -21,7 +21,7 @@ second:
 
 third:
   label: Lager
-  event: camp
+  event: schekka_camp
   start_at: <%= Time.zone.parse("2012-6-01") %>
   finish_at: <%= Time.zone.parse("2012-6-08") %>
 

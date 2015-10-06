@@ -701,6 +701,11 @@ de:
           assignment_closed: Teilnehmende erfasst
           canceled: Abgesagt
           closed: Abgeschlossen
+        participation_states:
+          applied_electronically: Elektronisch angemeldet
+          assigned: Zugewiesen
+          canceled: Abgemeldet
+          absent: Nicht erschienen
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch

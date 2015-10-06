@@ -8,15 +8,15 @@
 require 'spec_helper'
 
 describe Event::Participation do
-  let(:course) { events(:top_course) }
+  let(:event) { events(:top_course) }
 
   context '#approvers' do
     it 'is empty if no application exists' do
-      expect(Fabricate(:pbs_participation, event: course).approvers).to be_empty
+      expect(Fabricate(:pbs_participation, event: event).approvers).to be_empty
     end
 
     it 'returns people that approved or rejected participation' do
-      participation = Fabricate(:pbs_participation, event: course, application: Event::Application.new(priority_1: course))
+      participation = Fabricate(:pbs_participation, event: event, application: Event::Application.new(priority_1: event))
       participation.application.approvals.create!(layer: 'abteilung', approved: true, approver: people(:al_schekka))
       participation.application.approvals.create!(layer: 'region', rejected: true, approver: people(:bulei))
       participation.application.approvals.create!(layer: 'kantonalverband')
@@ -26,5 +26,53 @@ describe Event::Participation do
     end
   end
 
+  context 'verifying participatable counts' do
+
+    before { event.refresh_participant_counts! } # to create existing participatiots
+
+    def create_participant(state)
+      participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Date.today)
+      participation.roles.create!(type: event.class.participant_types.first.name)
+    end
+
+    context 'simple' do
+      let(:event) { events(:top_event) }
+
+      it "creating application does increase event#application_count" do
+        expect { create_participant(nil) }.to change { event.reload.applicant_count }.by(1)
+      end
+    end
+
+    context 'course' do
+      %w(tentative canceled rejected).each do |state|
+        it "creating #{state} application does not increase event#applicant_count" do
+          expect { create_participant(state) }.not_to change { event.reload.applicant_count }
+        end
+      end
+
+      %w(applied assigned attended absent).each do |state|
+        it "creating #{state} application does increase event#application_count" do
+          expect { create_participant(state) }.to change { event.reload.applicant_count }.by(1)
+        end
+      end
+    end
+
+    context 'camp' do
+      let(:event) { events(:schekka_camp) }
+
+      %w(canceled).each do |state|
+        it "creating #{state} application does not increase event#applicant_count" do
+          expect { create_participant(state) }.not_to change { event.reload.applicant_count }
+        end
+      end
+
+      %w(applied_electronically assigned absent).each do |state|
+        it "creating #{state} application does increase event#application_count" do
+          expect { create_participant(state) }.to change { event.reload.applicant_count }.by(1)
+        end
+      end
+    end
+
+  end
 
 end
