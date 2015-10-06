@@ -14,3 +14,5 @@
 - if can?(:modify_superior, entry)
   - entry.used?(:express_fee) do
     = f.labeled_text_area :express_fee
+
+= render 'expected_participants_fields', f: f
