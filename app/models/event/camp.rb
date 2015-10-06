@@ -13,9 +13,9 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
-  # rubocop:disable LineLength
-  self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id, :advisor_mountain_security_id,
-                           :advisor_snow_security_id, :advisor_water_security_id,
+  self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
+                           :advisor_mountain_security_id, :advisor_snow_security_id,
+                           :advisor_water_security_id,
                            :expected_participants_wolf_f, :expected_participants_wolf_m,
                            :expected_participants_pfadi_f, :expected_participants_pfadi_m,
                            :expected_participants_pio_f, :expected_participants_pio_m,
@@ -47,5 +47,29 @@ class Event::Camp < Event
   restricted_role :advisor_mountain_security, Event::Camp::Role::AdvisorMountainSecurity
   restricted_role :advisor_snow_security, Event::Camp::Role::AdvisorSnowSecurity
   restricted_role :advisor_water_security, Event::Camp::Role::AdvisorWaterSecurity
+
+  # states are used for workflow
+  # translations in config/locales
+  self.possible_states = %w(created confirmed assignment_closed canceled closed)
+
+
+  ### VALIDATIONS
+
+  validates :state, inclusion: possible_states
+
+
+  ### INSTANCE METHODS
+
+  # Define methods to query if a course is in the given state.
+  # eg course.canceled?
+  possible_states.each do |state|
+    define_method "#{state}?" do
+      self.state == state
+    end
+  end
+
+  def state
+    super || possible_states.first
+  end
 
 end

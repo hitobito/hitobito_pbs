@@ -692,6 +692,16 @@ de:
         approver: Bearbeiter
         approved_at: Datum
 
+      event/camp:
+        state: Status
+        state_translated: Status
+        states:
+          created: Erstellt
+          confirmed: Bestätigt
+          assignment_closed: Teilnehmende erfasst
+          canceled: Abgesagt
+          closed: Abgeschlossen
+
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB
