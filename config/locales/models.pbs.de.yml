@@ -685,6 +685,12 @@ de:
         language_fr: Kurssprache Französisch
         language_it: Kurssprache Italienisch
         language_en: Kurssprache Englisch
+        expected_participants: Erwartete Anzahl Teilnehmer
+        expected_participants_wolf: Wölfe
+        expected_participants_pfadi: Pfadi
+        expected_participants_pio: Pios
+        expected_participants_rover: Rovers
+        expected_participants_leitung: Leitung
 
       event/approval:
         comment: Kommentar
