@@ -14,8 +14,9 @@ class PbsEventSeeder < EventSeeder
   def seed_event(group_id, type)
     values = event_values(group_id)
     case type
-    when :course then seed_course(values)
-    when :base then seed_base_event(values)
+      when :course then seed_course(values)
+      when :camp then seed_camp(values)
+      when :base then seed_base_event(values)
     end
   end
 
@@ -26,11 +27,39 @@ class PbsEventSeeder < EventSeeder
     event.save!
   end
 
+  def seed_camp(values)
+    event = Event::Camp.seed(:name, camp_attributes(values)).first
+
+    seed_dates(event, values[:application_opening_at] + 90.days)
+    seed_questions(event)
+    seed_leaders(event)
+    seed_participants(event)
+
+    event
+  end
+
   def approvals
     count = rand(Event::Course::APPROVALS.size + 1)
     Event::Course::APPROVALS.sample(count).map do |attr|
       [attr, true]
     end
+  end
+
+  def camp_group_types
+    Group.subclasses.select { |type| type.event_types.include?(Event::Camp) }
+  end
+
+  def camp_group_ids
+    Group.where(type: camp_group_types).pluck(:id)
+  end
+
+  def camp_attributes(values)
+    kind = @@kinds.shuffle.first
+    values.merge(name: "#{kind.try(:short_name)} #{values[:number]}".strip,
+                 kind_id: kind.try(:id),
+                 state: Event::Camp.possible_states.shuffle.first,
+                 signature: Event::Camp.used_attributes.include?(:signature),
+                 external_applications: Event::Camp.used_attributes.include?(:external_applications))
   end
 end
 
@@ -47,6 +76,12 @@ end
 seeder.course_group_ids.each do |group_id|
   3.times do
     seeder.seed_event(group_id, :course)
+  end
+end
+
+seeder.camp_group_ids.each do |group_id|
+  3.times do
+    seeder.seed_event(group_id, :camp)
   end
 end
 

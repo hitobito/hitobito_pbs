@@ -645,10 +645,10 @@ de:
         one: Teilnehmer/-in
 
       event/camp/role/leader_mountain_security:
-        one: Leiter-/in Sicherheitsaktivität Berg
+        one: Leiter-/in Sicherheitsaktivität Berg
 
       event/camp/role/leader_snow_security:
-        one: Leiter-/in Sicherheitsaktivität Schnee
+        one: Leiter-/in Sicherheitsaktivität Schnee
 
       event/camp/role/leader_water_security:
         one: Leiter-/in Sicherheitsaktivität Wasser
