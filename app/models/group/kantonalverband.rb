@@ -40,7 +40,7 @@
 class Group::Kantonalverband < Group
 
   self.layer = true
-  self.event_types = [Event, Event::Course]
+  self.event_types = [Event, Event::Course, Event::Camp]
 
   children Group::Region,
            Group::Abteilung,

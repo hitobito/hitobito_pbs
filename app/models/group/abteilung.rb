@@ -40,7 +40,7 @@
 class Group::Abteilung < Group
 
   self.layer = true
-  self.event_types = [Event, Event::Course]
+  self.event_types = [Event, Event::Course, Event::Camp]
 
   self.used_attributes += [:pta, :vkp, :pbs_material_insurance]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
