@@ -39,6 +39,8 @@
 
 class Group::Rover < Group
 
+  self.event_types = [Event::Camp]
+
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
   end

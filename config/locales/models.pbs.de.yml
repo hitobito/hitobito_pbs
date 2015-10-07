@@ -628,6 +628,46 @@ de:
         one: Mitglied
         description:
 
+      event/camp:
+        one: Lager
+        other: Lager
+
+      event/camp/role/leader:
+        one: Hauptleitung
+
+      event/camp/role/assistant_leader:
+        one: Leitung
+
+      event/camp/role/helper:
+        one: Küche / Helfer/-in
+
+      event/camp/role/participant:
+        one: Teilnehmer/-in
+
+      event/camp/role/leader_mountain_security:
+        one: Leiter-/in Sicherheitsaktivität Berg
+
+      event/camp/role/leader_snow_security:
+        one: Leiter-/in Sicherheitsaktivität Schnee
+
+      event/camp/role/leader_water_security:
+        one: Leiter-/in Sicherheitsaktivität Wasser
+
+      event/camp/role/abteilungsleitung:
+        one: Abteilungsleitung
+
+      event/camp/role/coach:
+        one: Coach
+
+      event/camp/role/advisor_mountain_security:
+        one: Betreuung Sicherheitsaktivität Berg
+
+      event/camp/role/advisor_schnee_security:
+        one: Betreuung Sicherheitsaktivität Schnee
+
+      event/camp/role/advisor_wasser_security:
+        one: Betreuung Sicherheitsaktivität Wasser
+
       event/course/role/leader:
         one: Kursleitung
         other: Kursleitungen
@@ -692,6 +732,8 @@ de:
         expected_participants_rover: Rovers
         expected_participants_leitung: Leitung
         expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
+        camp_days: Anzahl Lagertage 
+        camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
 
       event/approval:
         comment: Kommentar

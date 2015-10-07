@@ -25,4 +25,10 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
+  def format_camp_days(entry)
+    if entry.camp_days.present?
+      entry.camp_days.round(1)
+    end
+  end
+
 end

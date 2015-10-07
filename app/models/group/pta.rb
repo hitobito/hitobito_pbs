@@ -39,9 +39,10 @@
 
 class Group::Pta < Group
 
+  self.event_types = [Event::Camp]
+
   children Group::Pta,
            Group::AbteilungsGremium
-
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
