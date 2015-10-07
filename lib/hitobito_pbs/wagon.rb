@@ -29,6 +29,7 @@ module HitobitoPbs
       Person.send       :include, Pbs::Person
       Role.send         :include, Pbs::Role
       Event.send        :include, Pbs::Event
+      Event::Kind.send  :include, Pbs::Event::Kind
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::Application.send :include, Pbs::Event::Application
