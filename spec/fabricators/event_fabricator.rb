@@ -10,5 +10,4 @@ Fabricator(:pbs_course, from: :course) do
 end
 
 Fabricator(:pbs_participation, from: :event_participation) do
-  state 'applied'
 end

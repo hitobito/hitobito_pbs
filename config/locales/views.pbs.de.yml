@@ -41,6 +41,9 @@ de:
       new:
         usage_advise: Die Daten in der Mitgliederdatenbank dürfen nur im Zusammenhang mit Aktivitäten der Pfadi verwendet werden, sie dürfen z.B. nicht an Drittpersonen oder Organisationen weiter gegeben werden.  Die Bearbeitung und Nutzung hat nach Treu und Glauben zu erfolgen und muss verhältnismässig sein.
 
+  dropdown/event/camp_participant_status:
+    change_state: Status ändern
+
   event:
     participations:
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"

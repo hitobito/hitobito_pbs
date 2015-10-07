@@ -71,6 +71,29 @@ describe Event::Participation do
           expect { create_participant(state) }.to change { event.reload.applicant_count }.by(1)
         end
       end
+
+      it 'assigns participant directly if no paper application required' do
+        p = Event::Participation.new(event: event, person: Fabricate(:person))
+        p.roles.build(type: Event::Camp::Role::Participant.sti_name)
+        p.save!
+        expect(p.state).to eq('assigned')
+      end
+
+      it 'assigns leader directly if paper application required' do
+        event.update!(paper_application_required: true)
+        p = Event::Participation.new(event: event, person: Fabricate(:person))
+        p.roles.build(type: Event::Camp::Role::Helper.sti_name)
+        p.save!
+        expect(p.state).to eq('assigned')
+      end
+
+      it 'set participant applied_electronically if paper application required' do
+        event.update!(paper_application_required: true)
+        p = Event::Participation.new(event: event, person: Fabricate(:person))
+        p.roles.build(type: Event::Camp::Role::Participant.sti_name)
+        p.save!
+        expect(p.state).to eq('applied_electronically')
+      end
     end
 
   end

@@ -1,4 +1,11 @@
 # encoding: utf-8
+
+#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+
 # == Schema Information
 #
 # Table name: events
@@ -77,13 +84,6 @@
 #  camp_reminder_sent                :boolean          default(FALSE), not null
 #  paper_application_required        :boolean          default(FALSE), not null
 #
-
-
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
-
 class Event::Camp < Event
 
   # This statement is required because this class would not be loaded otherwise.
@@ -160,11 +160,12 @@ class Event::Camp < Event
   end
 
   def default_participation_state(participation)
-    if participation.roles.blank? || participation.roles.any? { |role| role.kind != :participant }
+    if participation.roles.blank? ||
+      participation.roles.any? { |role| role.kind != :participant } ||
+      !paper_application_required?
       'assigned'
     else
-      # TODO check if paper application required
-      'assigned'
+      'applied_electronically'
     end
   end
 

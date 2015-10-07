@@ -11,7 +11,6 @@ describe Event::ParticipationsController do
 
   let(:group) { course.groups.first }
   let(:course) { Fabricate(:pbs_course, groups: [groups(:bund)]) }
-  let(:participation) { assigns(:participation).reload }
 
   before { sign_in(people(:bulei)) }
 
@@ -33,8 +32,8 @@ describe Event::ParticipationsController do
   end
 
   context 'POST#create' do
+    let(:participation) { assigns(:participation).reload }
 
-    # TODO ama this allows creating participations for people which are not visible to user
     it 'creates confirmation job when creating for other user' do
       expect do
         post :create,
@@ -99,6 +98,39 @@ describe Event::ParticipationsController do
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
+    end
+  end
+
+  context 'PUT update' do
+    let(:participation) { Fabricate(:pbs_participation, event: course) }
+
+    context 'camp' do
+      let(:course) { events(:schekka_camp) }
+
+      it 'updates state' do
+        put :update,
+            group_id: group.id,
+            event_id: course.id,
+            id: participation.id,
+            event_participation: { state: 'absent' }
+        expect(flash[:notice]).to be_present
+        participation.reload
+        expect(participation.state).to eq 'absent'
+      end
+    end
+
+    context 'course' do
+      it 'does not update state' do
+        state = participation.state
+        put :update,
+            group_id: group.id,
+            event_id: course.id,
+            id: participation.id,
+            event_participation: { state: 'cancelled' }
+        expect(flash[:notice]).to be_present
+        participation.reload
+        expect(participation.state).to eq state
+      end
     end
   end
 

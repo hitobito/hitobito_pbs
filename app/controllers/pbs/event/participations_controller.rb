@@ -16,6 +16,7 @@ module Pbs::Event::ParticipationsController
     after_reject :notice_with_mailto
 
     alias_method_chain :send_confirmation_email, :current_user
+    alias_method_chain :permitted_attrs, :state
   end
 
   private
@@ -52,6 +53,12 @@ module Pbs::Event::ParticipationsController
                            t('event.participations.rejected_email_link'),
                            cc: cc.join(','))
     end
+  end
+
+  def permitted_attrs_with_state
+    attrs = permitted_attrs_without_state.dup
+    attrs << :state if event.is_a?(Event::Camp)
+    attrs
   end
 
 end

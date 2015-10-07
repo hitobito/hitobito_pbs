@@ -31,4 +31,10 @@ module EventsPbsHelper
     end
   end
 
+  def show_camp_participation_status_dropdown?
+    @event.is_a?(Event::Camp) &&
+    entry.roles.any? { |r| Event::Camp.participant_types.any? { |t| r.is_a?(t) } } &&
+    can?(:update, entry)
+  end
+
 end
