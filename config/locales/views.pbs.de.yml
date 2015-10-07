@@ -45,6 +45,25 @@ de:
     change_state: Status ändern
 
   event:
+    lists:
+      nav_left_pbs:
+        all_camps: Lager ganze Schweiz
+        kantonalverband_camps: Lager %{group}
+        camps_in_canton: Lager in %{canton}
+        camps_abroad: Lager im Ausland
+      all_camps:
+        title: Bevorstehende Lager in der ganzen Schweiz
+        explanation: 'Hier werden alle Lager der gesamten PBS angezeigt, welche aktuell oder in drei oder weniger Wochen durchgeführt werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und die nicht abgesagt sind.'
+      kantonalverband_camps:
+        title: Alle Lager im Kantonalverband %{group}
+        explanation: 'Hier werden alle Lager, welche innerhalb des entsprechenden Kantonalverbandes organisiert werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+      camps_in_canton:
+        title: Alle Lager im Kanton %{canton}
+        explanation: 'Hier werden alle Lager, welche aktuell oder in drei oder weniger Wochen im entsprechenden Kanton stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+      camps_abroad:
+        title: Alle Lager im Ausland
+        explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+
     participations:
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       rejected_email_link: Teilnehmer informieren
@@ -80,6 +99,8 @@ de:
       j_s_kind_j_s_child: J+S Kindersport
       j_s_kind_j_s_youth: J+S Jugendsport
       j_s_kind_j_s_mixed: Gemischtes J+S Lager
+    camp_location_fields:
+      landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
     show:
       inform_by_email: Informieren
     application_fields_pbs:

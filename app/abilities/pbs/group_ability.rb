@@ -40,14 +40,11 @@ module Pbs::GroupAbility
   end
 
   def in_same_layer_or_below_if_leader
-    in_same_layer_or_below &&
-    contains_any?(MEMBER_COUNT_MANAGERS, user.roles.collect(&:class))
+    in_same_layer_or_below && role_type?(*MEMBER_COUNT_MANAGERS)
   end
 
   def if_mitarbeiter_gs
-    user.roles.any? do |r|
-      r.is_a?(Group::Bund::MitarbeiterGs)
-    end
+    role_type?(Group::Bund::MitarbeiterGs)
   end
 
   def if_layer_and_approver_in_group

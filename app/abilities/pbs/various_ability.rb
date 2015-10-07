@@ -15,9 +15,7 @@ module Pbs::VariousAbility
   end
 
   def if_mitarbeiter_gs
-    user.roles.any? do |r|
-      r.is_a?(Group::Bund::MitarbeiterGs)
-    end
+    role_type?(Group::Bund::MitarbeiterGs)
   end
 
 end

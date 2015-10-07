@@ -1,0 +1,13 @@
+-#  Copyright (c) 2015, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+#main
+  %section
+    = grouped_table(@camps, 4) do |event|
+      %td
+        %strong
+          = event.labeled_link
+      %td= event.dates_full
+      %td= event.description_short

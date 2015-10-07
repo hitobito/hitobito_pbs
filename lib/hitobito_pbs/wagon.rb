@@ -75,6 +75,7 @@ module HitobitoPbs
       EventsController.send :include, Pbs::EventsController
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
+      Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       QualificationsController.send :include, Pbs::QualificationsController
 
@@ -93,6 +94,12 @@ module HitobitoPbs
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
 
       # rubocop:enable SingleSpaceBeforeFirstArg
+
+      if defined? Bullet
+        Bullet.add_whitelist type: :n_plus_one_query,
+                             class_name: 'Group::Kantonalverband',
+                             association: :kantonalverband_cantons
+      end
     end
 
     initializer 'pbs.add_settings' do |_app|

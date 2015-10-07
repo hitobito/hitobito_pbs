@@ -3,9 +3,7 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- entry.used?(:camp_location) do
+- entry.used?(:canton) do
   = field_set_tag t('Lagerort') do
-    = f.labeled_input_fields(:camp_location, :camp_location_address,
-      :camp_location_coordinates, :camp_location_altitude, 
-      :camp_location_emergency_phone, :camp_location_owner)
-    = f.labeled_input_field(:camp_location_approved, help_inline: t('activerecord.attributes.event.camp_location_approved_help_inline'))
+    = f.labeled_input_fields(:canton, :location, :coordinates, :altitude, :emergency_phone, :landlord)
+    = f.labeled_input_field(:landlord_permission_obtained, caption: t('.landlord_permission_obtained_caption'))

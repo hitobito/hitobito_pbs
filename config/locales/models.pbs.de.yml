@@ -744,15 +744,13 @@ de:
         expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
         camp_days: Anzahl Lagertage
         camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
-        camp_location: Kanton / Land
-        camp_location_address: Ort / Adresse
-        camp_location_coordinates: Koordinaten
-        camp_location_altitude: Höhe über Meer
-        camp_location_emergency_phone: Notfalltelefon
-        camp_location_owner: BesitzerIn / VermieterIn
-        camp_location_approved: Einverständnis Eigentümer
-        camp_location_approved_help_inline: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
         j_s_kind: J+S-Rahmen
+        canton: Kanton / Land
+        coordinates: Koordinaten
+        altitude: Höhe über Meer
+        emergency_phone: Notfalltelefon
+        landlord: BesitzerIn / VermieterIn
+        landlord_permission_obtained: Einverständnis Eigentümer
 
       event/approval:
         comment: Kommentar

@@ -9,5 +9,8 @@ Fabricator(:pbs_course, from: :course) do
   kind { Event::Kind.where(short_name: 'LPK').first }
 end
 
+Fabricator(:pbs_camp, from: :event, class_name: :'Event::Camp') do
+end
+
 Fabricator(:pbs_participation, from: :event_participation) do
 end

@@ -24,4 +24,57 @@ describe EventsPbsHelper do
 
   end
 
+  context '#camp_list_permitting_kantonalverbaende' do
+
+    subject { camp_list_permitting_kantonalverbaende }
+
+    context 'as kantonsleitung' do
+      let(:current_user) do
+        person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:zh)).person
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be), person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh), person: person)
+        person
+      end
+
+      it { is_expected.to eq(groups(:be, :zh)) }
+    end
+
+    context 'as bundesleitung' do
+      let(:current_user) { people(:bulei) }
+
+      it { is_expected.to eq([]) }
+    end
+  end
+
+  context '#camp_list_permitted_cantons' do
+
+    subject { camp_list_permitted_cantons }
+
+    context 'as kantonsleitung' do
+      let(:current_user) do
+        person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:zh)).person
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be), person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh), person: person)
+        person
+      end
+
+      before do
+        groups(:be).update!(cantons: %w(be fr ag))
+        groups(:zh).update!(cantons: %w(zh ag))
+      end
+
+      it do
+        is_expected.to eq([['ag', 'Aargau'],
+                           ['be', 'Bern'],
+                           ['fr', 'Freiburg'],
+                           ['zh', 'Zürich']])
+      end
+    end
+
+    context 'as bundesleitung' do
+      let(:current_user) { people(:bulei) }
+
+      it { is_expected.to eq([]) }
+    end
+  end
 end

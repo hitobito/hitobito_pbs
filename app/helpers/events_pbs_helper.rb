@@ -41,4 +41,20 @@ module EventsPbsHelper
     Event::Camp::EXPECTED_PARTICIPANT_ATTRS.any? { |a| entry.send(a).present? }
   end
 
+  def camp_list_permitting_kantonalverbaende
+    roles = current_user.roles.select do |role|
+      EventAbility::CANTONAL_CAMP_LIST_ROLES.any? { |t| role.is_a?(t) }
+    end
+    roles.collect(&:group).uniq.sort_by(&:to_s)
+  end
+
+  def camp_list_permitted_cantons
+    camp_list_permitting_kantonalverbaende.
+      collect(&:cantons).
+      flatten.
+      uniq.
+      collect { |c| [c, Cantons.full_name(c)] }.
+      sort_by(&:last)
+  end
+
 end

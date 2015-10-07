@@ -56,13 +56,12 @@
 #  expected_participants_leitung_f   :integer
 #  expected_participants_leitung_m   :integer
 #  camp_days                         :decimal(5, 1)
-#  camp_location                     :string
-#  camp_location_address             :string
-#  camp_location_coordinates         :string
-#  camp_location_altitude            :string
-#  camp_location_emergency_phone     :string
-#  camp_location_owner               :string
-#  camp_location_approved            :boolean          default(FALSE), not null
+#  canton                            :string(2)
+#  coordinates                       :string
+#  altitude                          :string
+#  emergency_phone                   :string
+#  landlord                          :text
+#  landlord_permission_obtained      :boolean          default(FALSE), not null
 #  j_s_kind                          :integer
 #  j_s_security_snow                 :boolean          default(FALSE), not null
 #  j_s_security_mountain             :boolean          default(FALSE), not null
@@ -80,6 +79,8 @@
 #  camp_submitted                    :boolean          default(FALSE), not null
 #  camp_reminder_sent                :boolean          default(FALSE), not null
 #  paper_application_required        :boolean          default(FALSE), not null
+#  creator_id                        :integer
+#  updater_id                        :integer
 #
 
 top_event:

@@ -5,7 +5,6 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-
 # == Schema Information
 #
 # Table name: events
@@ -59,13 +58,12 @@
 #  expected_participants_leitung_f   :integer
 #  expected_participants_leitung_m   :integer
 #  camp_days                         :decimal(5, 1)
-#  camp_location                     :string
-#  camp_location_address             :string
-#  camp_location_coordinates         :string
-#  camp_location_altitude            :string
-#  camp_location_emergency_phone     :string
-#  camp_location_owner               :string
-#  camp_location_approved            :boolean          default(FALSE), not null
+#  canton                            :string(2)
+#  coordinates                       :string
+#  altitude                          :string
+#  emergency_phone                   :string
+#  landlord                          :text
+#  landlord_permission_obtained      :boolean          default(FALSE), not null
 #  j_s_kind                          :integer
 #  j_s_security_snow                 :boolean          default(FALSE), not null
 #  j_s_security_mountain             :boolean          default(FALSE), not null
@@ -83,7 +81,10 @@
 #  camp_submitted                    :boolean          default(FALSE), not null
 #  camp_reminder_sent                :boolean          default(FALSE), not null
 #  paper_application_required        :boolean          default(FALSE), not null
+#  creator_id                        :integer
+#  updater_id                        :integer
 #
+
 class Event::Camp < Event
 
   # This statement is required because this class would not be loaded otherwise.
@@ -96,8 +97,9 @@ class Event::Camp < Event
                                 :expected_participants_pfadi_f, :expected_participants_pfadi_m,
                                 :expected_participants_pio_f, :expected_participants_pio_m,
                                 :expected_participants_rover_f, :expected_participants_rover_m,
-                                :expected_participants_leitung_f, :expected_participants_leitung_m
-                               ]
+                                :expected_participants_leitung_f, :expected_participants_leitung_m]
+
+  ABROAD_CANTON = 'zz'
 
   self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
@@ -108,9 +110,8 @@ class Event::Camp < Event
                            :expected_participants_rover_f, :expected_participants_rover_m,
                            :expected_participants_leitung_f, :expected_participants_leitung_m,
                            :camp_days,
-                           :camp_location, :camp_location_address, :camp_location_coordinates,
-                           :camp_location_altitude, :camp_location_emergency_phone,
-                           :camp_location_owner, :camp_location_approved,
+                           :canton, :coordinates, :altitude, :emergency_phone,
+                           :landlord, :landlord_permission_obtained,
                            :j_s_kind,
                            :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
                            :signature,
@@ -118,8 +119,7 @@ class Event::Camp < Event
                            :al_present, :al_visiting, :al_visiting_date,
                            :coach_visiting, :coach_visiting_date, :coach_confirmed,
                            :local_scout_contact_present, :local_scout_contact,
-                           :camp_submitted
-                          ]
+                           :camp_submitted, :paper_application_required]
 
   self.role_types = [Event::Camp::Role::Leader,
                      Event::Camp::Role::AssistantLeader,
@@ -154,6 +154,9 @@ class Event::Camp < Event
   validates *EXPECTED_PARTICIPANT_ATTRS, numericality:
     { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+  validates :canton, inclusion: { in: Cantons.short_name_strings + [ABROAD_CANTON],
+                                  allow_blank: true }
+
 
   ### INSTANCE METHODS
 
