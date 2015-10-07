@@ -14,6 +14,10 @@ module GroupsPbsHelper
     end
   end
 
+  def format_group_cantons(group)
+    group.cantons.collect { |c| Cantons.full_name(c) }.sort.join(', ')
+  end
+
   def pending_approvals_tab(entry)
     I18n.t('groups.tabs.approvals', count: entry.pending_approvals_count)
   end

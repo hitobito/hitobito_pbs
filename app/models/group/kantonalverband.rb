@@ -42,11 +42,18 @@ class Group::Kantonalverband < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
+  self.used_attributes += [:cantons]
+
   children Group::Region,
            Group::Abteilung,
            Group::KantonalesGremium
 
+
   has_many :member_counts
+  has_many :kantonalverband_cantons, -> { order(:canton) }
+
+  accepts_nested_attributes_for :kantonalverband_cantons, allow_destroy: true
+
 
   ### INSTANCE METHODS
 
@@ -60,6 +67,17 @@ class Group::Kantonalverband < Group
 
   def census_details(year)
     MemberCount.details_for_kantonalverband(year, self)
+  end
+
+  def cantons
+    # use collect instead of pluck to benefit from association cache
+    kantonalverband_cantons.collect(&:canton)
+  end
+
+  def cantons=(list)
+    self.kantonalverband_cantons_attributes =
+      kantonalverband_cantons.collect { |c| { id: c.id, _destroy: true } } +
+      list.select(&:present?).collect { |c| { canton: c, kantonalverband: self } }
   end
 
   ### ROLES

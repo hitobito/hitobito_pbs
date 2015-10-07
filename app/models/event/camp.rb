@@ -1,4 +1,83 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: events
+#
+#  id                                :integer          not null, primary key
+#  type                              :string(255)
+#  name                              :string(255)      not null
+#  number                            :string(255)
+#  motto                             :string(255)
+#  cost                              :string(255)
+#  maximum_participants              :integer
+#  contact_id                        :integer
+#  description                       :text
+#  location                          :text
+#  application_opening_at            :date
+#  application_closing_at            :date
+#  application_conditions            :text
+#  kind_id                           :integer
+#  state                             :string(60)
+#  priorization                      :boolean          default(FALSE), not null
+#  requires_approval                 :boolean          default(FALSE), not null
+#  created_at                        :datetime
+#  updated_at                        :datetime
+#  participant_count                 :integer          default(0)
+#  application_contact_id            :integer
+#  external_applications             :boolean          default(FALSE)
+#  applicant_count                   :integer          default(0)
+#  teamer_count                      :integer          default(0)
+#  signature                         :boolean
+#  signature_confirmation            :boolean
+#  signature_confirmation_text       :string(255)
+#  training_days                     :decimal(12, 1)
+#  language_de                       :boolean          default(FALSE), not null
+#  language_fr                       :boolean          default(FALSE), not null
+#  language_it                       :boolean          default(FALSE), not null
+#  language_en                       :boolean          default(FALSE), not null
+#  express_fee                       :string(255)
+#  requires_approval_abteilung       :boolean          default(FALSE), not null
+#  requires_approval_region          :boolean          default(FALSE), not null
+#  requires_approval_kantonalverband :boolean          default(FALSE), not null
+#  requires_approval_bund            :boolean          default(FALSE), not null
+#  tentative_applications            :boolean          default(FALSE), not null
+#  expected_participants_wolf_f      :integer
+#  expected_participants_wolf_m      :integer
+#  expected_participants_pfadi_f     :integer
+#  expected_participants_pfadi_m     :integer
+#  expected_participants_pio_f       :integer
+#  expected_participants_pio_m       :integer
+#  expected_participants_rover_f     :integer
+#  expected_participants_rover_m     :integer
+#  expected_participants_leitung_f   :integer
+#  expected_participants_leitung_m   :integer
+#  camp_days                         :decimal(5, 1)
+#  camp_location                     :string
+#  camp_location_address             :string
+#  camp_location_coordinates         :string
+#  camp_location_altitude            :string
+#  camp_location_emergency_phone     :string
+#  camp_location_owner               :string
+#  camp_location_approved            :boolean          default(FALSE), not null
+#  j_s_kind                          :integer
+#  j_s_security_snow                 :boolean          default(FALSE), not null
+#  j_s_security_mountain             :boolean          default(FALSE), not null
+#  j_s_security_water                :boolean          default(FALSE), not null
+#  participants_can_apply            :boolean          default(FALSE), not null
+#  participants_can_cancel           :boolean          default(FALSE), not null
+#  al_present                        :boolean          default(FALSE), not null
+#  al_visiting                       :boolean          default(FALSE), not null
+#  al_visiting_date                  :date
+#  coach_visiting                    :boolean          default(FALSE), not null
+#  coach_visiting_date               :date
+#  coach_confirmed                   :boolean          default(FALSE), not null
+#  local_scout_contact_present       :boolean          default(FALSE), not null
+#  local_scout_contact               :text
+#  camp_submitted                    :boolean          default(FALSE), not null
+#  camp_reminder_sent                :boolean          default(FALSE), not null
+#  paper_application_required        :boolean          default(FALSE), not null
+#
+
 
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
