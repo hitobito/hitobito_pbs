@@ -691,6 +691,7 @@ de:
         expected_participants_pio: Pios
         expected_participants_rover: Rovers
         expected_participants_leitung: Leitung
+        expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
 
       event/approval:
         comment: Kommentar

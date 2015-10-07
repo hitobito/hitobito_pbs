@@ -26,3 +26,6 @@
       = f.string_field(:expected_participants_pio_m, class: 'span1', maxlength: 4)
       = f.string_field(:expected_participants_rover_m, class: 'span1', maxlength: 4)
       = f.string_field(:expected_participants_leitung_m, class: 'span1', maxlength: 4)
+    %div.row
+      %p.span6
+        = f.help_inline t('activerecord.attributes.event.expected_participants_help_inline')
