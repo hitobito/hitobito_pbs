@@ -9,6 +9,9 @@
 - entry.used?(:language_de) do
   = labeled_attr(entry, :course_languages) if format_attr(entry, :course_languages).present?
 
+- entry.used?(:camp_days) do
+  = labeled_attr(entry, :camp_days) if format_attr(entry, :camp_days).present?
+
 - entry.used?(:expected_participants_wolf_f) do
   = labeled(t('activerecord.attributes.event.expected_participants')) do
     %table.table
