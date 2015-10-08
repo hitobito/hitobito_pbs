@@ -121,6 +121,8 @@ class Event::Camp < Event
                      Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
 
+  enum j_s_kind: %w(j_s_child j_s_youth j_s_mixed)
+
   restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
   restricted_role :coach, Event::Camp::Role::Coach
   restricted_role :advisor_mountain_security, Event::Camp::Role::AdvisorMountainSecurity

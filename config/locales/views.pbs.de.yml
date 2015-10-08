@@ -76,6 +76,10 @@ de:
       language_fr: Französisch
       language_it: Italienisch
       language_en: Englisch
+      j_s_kind_none: Nicht J+S
+      j_s_kind_j_s_child: J+S Kindersport
+      j_s_kind_j_s_youth: J+S Jugendsport
+      j_s_kind_j_s_mixed: Gemischtes J+S Lager
     show:
       inform_by_email: Informieren
     application_fields_pbs:
