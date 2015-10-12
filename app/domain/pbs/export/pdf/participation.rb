@@ -15,7 +15,7 @@ module Pbs::Export::Pdf
       end
 
       def render_documents_text
-        return unless event.kind.documents_text?
+        return unless event.kind.documents_text.present?
 
         with_header(I18n.t('activerecord.attributes.event/kind.documents_text')) do
           text event.kind.documents_text
