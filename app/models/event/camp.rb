@@ -92,6 +92,13 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
+  EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
+                                :expected_participants_pfadi_f, :expected_participants_pfadi_m,
+                                :expected_participants_pio_f, :expected_participants_pio_m,
+                                :expected_participants_rover_f, :expected_participants_rover_m,
+                                :expected_participants_leitung_f, :expected_participants_leitung_m
+                               ]
+
   self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
                            :advisor_water_security_id,
@@ -144,11 +151,7 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validates :expected_participants_wolf_f, :expected_participants_wolf_m, numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
-  validates :expected_participants_pfadi_f, :expected_participants_pfadi_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
-  validates :expected_participants_pio_f, :expected_participants_pio_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
-  validates :expected_participants_rover_f, :expected_participants_rover_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
-  validates :expected_participants_leitung_f, :expected_participants_leitung_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
+  validates *EXPECTED_PARTICIPANT_ATTRS, :expected_participants_wolf_m, numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
 
   ### INSTANCE METHODS
 
