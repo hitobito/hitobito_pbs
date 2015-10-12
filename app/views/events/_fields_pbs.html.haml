@@ -15,11 +15,19 @@
   - entry.used?(:express_fee) do
     = f.labeled_text_area :express_fee
 
--#- entry.used?(:j_s_kind) do
--#  = f.labeled(:j_s_kind) do
--#    = f.inline_radio_button(:j_s_kind, nil, t('.j_s_kind_none'), false)
--#    - Event::Camp.j_s_kinds.keys.each do |kind|
--#      = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
+- entry.used?(:j_s_kind) do
+  = f.labeled(:j_s_kind) do
+    = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
+    - Event::Camp.possible_j_s_kinds.each do |kind|
+      = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
+
+- j_s_security_attrs = entry.used_attributes(:j_s_security_snow,
+                                             :j_s_security_mountain,
+                                             :j_s_security_water)
+- if j_s_security_attrs.present?
+  = f.labeled(:j_s_security) do
+    - j_s_security_attrs.each do |attr|
+      = f.boolean_field(attr, {caption: Event.human_attribute_name(attr)})
 
 = render 'expected_participants_fields', f: f
 

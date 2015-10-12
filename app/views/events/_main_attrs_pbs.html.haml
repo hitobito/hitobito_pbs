@@ -12,6 +12,16 @@
 - entry.used?(:camp_days) do
   = labeled_attr(entry, :camp_days) if format_attr(entry, :camp_days).present?
 
+- entry.used?(:j_s_kind) do
+  = labeled_attr(entry, :j_s_kind)
+
+- j_s_security_values = entry.used_attributes(:j_s_security_snow,
+                                             :j_s_security_mountain,
+                                             :j_s_security_water).select { |attr| entry.send(attr) }
+- if j_s_security_values.present?
+  = labeled(Event.human_attribute_name(:j_s_security)) do
+    = j_s_security_values.map { |attr| Event.human_attribute_name(attr) }.join(', ')
+
 - entry.used?(:expected_participants_wolf_f) do
   - if expected_participants_value_present?(entry)
     = labeled(t('activerecord.attributes.event.expected_participants')) do

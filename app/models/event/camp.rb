@@ -93,6 +93,8 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
+  class_attribute :possible_j_s_kinds
+
   EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
                                 :expected_participants_pfadi_f, :expected_participants_pfadi_m,
                                 :expected_participants_pio_f, :expected_participants_pio_m,
@@ -138,14 +140,12 @@ class Event::Camp < Event
   # states are used for workflow
   # translations in config/locales
   self.possible_states = %w(created confirmed assignment_closed canceled closed)
-
   self.possible_participation_states = %w(applied_electronically assigned canceled absent)
-
   self.active_participation_states = %w(applied_electronically assigned)
-
   self.revoked_participation_states = %w(canceled absent)
-
   self.countable_participation_states = %w(applied_electronically assigned absent)
+
+  self.possible_j_s_kinds = %w(j_s_child j_s_youth j_s_mixed)
 
 
   ### VALIDATIONS
@@ -154,6 +154,7 @@ class Event::Camp < Event
   validates *EXPECTED_PARTICIPANT_ATTRS, numericality:
     { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+  validates :j_s_kind, inclusion: { in: possible_j_s_kinds, allow_nil: true, allow_blank: true }
   validates :canton, inclusion: { in: Cantons.short_name_strings + [ABROAD_CANTON],
                                   allow_blank: true }
 

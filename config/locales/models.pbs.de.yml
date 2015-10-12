@@ -745,6 +745,10 @@ de:
         camp_days: Anzahl Lagertage
         camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
         j_s_kind: J+S-Rahmen
+        j_s_security: Sicherheitsbereich
+        j_s_security_snow: Schnee
+        j_s_security_mountain: Berg
+        j_s_security_water: Wasser
         canton: Kanton / Land
         coordinates: Koordinaten
         altitude: Höhe über Meer

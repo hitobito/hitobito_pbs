@@ -31,6 +31,14 @@ module EventsPbsHelper
     end
   end
 
+  def format_event_j_s_kind(entry)
+    if entry.j_s_kind.present?
+      t("events.fields_pbs.j_s_kind_#{entry.j_s_kind}")
+    else
+      t('events.fields_pbs.j_s_kind_none')
+    end
+  end
+
   def show_camp_participation_status_dropdown?
     @event.is_a?(Event::Camp) &&
     entry.roles.any? { |r| Event::Camp.participant_types.any? { |t| r.is_a?(t) } } &&
