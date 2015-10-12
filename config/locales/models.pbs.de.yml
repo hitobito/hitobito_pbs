@@ -725,12 +725,22 @@ de:
         language_fr: Kurssprache Französisch
         language_it: Kurssprache Italienisch
         language_en: Kurssprache Englisch
-        expected_participants: Erwartete Anzahl Teilnehmer
+        expected_participants: Erwartete Teilnehmer
         expected_participants_wolf: Wölfe
+        expected_participants_wolf_f: Anzahl Wölfe weiblich
+        expected_participants_wolf_m: Anzahl Wölfe männlich
         expected_participants_pfadi: Pfadi
+        expected_participants_pfadi_f: Anzahl Pfadi weiblich
+        expected_participants_pfadi_m: Anzahl Pfadi männlich
         expected_participants_pio: Pios
+        expected_participants_pio_f: Anzahl Pio weiblich
+        expected_participants_pio_m: Anzahl Pio männlich
         expected_participants_rover: Rovers
-        expected_participants_leitung: Leitung
+        expected_participants_rover_f: Anzahl Rover weiblich
+        expected_participants_rover_m: Anzahl Rover männlich
+        expected_participants_leitung: Leiter
+        expected_participants_leitung_f: Anzahl Leiter weiblich
+        expected_participants_leitung_m: Anzahl Leiter männlich
         expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
         camp_days: Anzahl Lagertage
         camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.

@@ -37,4 +37,14 @@ module EventsPbsHelper
     can?(:update, entry)
   end
 
+  def expected_participants_value_present?(entry)
+    attrs = [:expected_participants_wolf_f, :expected_participants_wolf_m,
+             :expected_participants_pfadi_f, :expected_participants_pfadi_m,
+             :expected_participants_pio_f, :expected_participants_pio_m,
+             :expected_participants_rover_f, :expected_participants_pio_m,
+             :expected_participants_leitung_f, :expected_participants_leitung_m
+    ]
+    attrs.any? { |a| entry.send(a).present? }
+  end
+
 end

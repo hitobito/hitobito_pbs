@@ -145,7 +145,11 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-
+  validates :expected_participants_wolf_f, :expected_participants_wolf_m, numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
+  validates :expected_participants_pfadi_f, :expected_participants_pfadi_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
+  validates :expected_participants_pio_f, :expected_participants_pio_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
+  validates :expected_participants_rover_f, :expected_participants_rover_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
+  validates :expected_participants_leitung_f, :expected_participants_leitung_m, numericality: { greater_than_or_equal_to: 0, only_integer: true , allow_blank: true}
 
   ### INSTANCE METHODS
 
