@@ -151,7 +151,8 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validates *EXPECTED_PARTICIPANT_ATTRS, :expected_participants_wolf_m, numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
+  validates *EXPECTED_PARTICIPANT_ATTRS, numericality:
+    { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
 
   ### INSTANCE METHODS
