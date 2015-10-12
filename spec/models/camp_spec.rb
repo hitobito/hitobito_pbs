@@ -22,4 +22,17 @@ describe Event::Camp do
     end
   end
 
+  context 'camp days' do
+    it 'does not accept negative values' do
+      subject.camp_days = -44
+      is_expected.not_to be_valid
+    end
+
+    it 'accepts any positive integer' do
+      subject.camp_days = 4
+      is_expected.to be_valid
+    end
+
+  end
+
 end
