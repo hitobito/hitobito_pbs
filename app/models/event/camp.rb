@@ -106,6 +106,7 @@ class Event::Camp < Event
                            :camp_location_owner, :camp_location_approved,
                            :j_s_kind,
                            :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
+                           :signature,
                            :participants_can_apply, :participants_can_cancel,
                            :al_present, :al_visiting, :al_visiting_date,
                            :coach_visiting, :coach_visiting_date, :coach_confirmed,
@@ -120,8 +121,6 @@ class Event::Camp < Event
                      Event::Camp::Role::LeaderSnowSecurity,
                      Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
-
-  enum j_s_kind: %w(j_s_child j_s_youth j_s_mixed)
 
   restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
   restricted_role :coach, Event::Camp::Role::Coach
