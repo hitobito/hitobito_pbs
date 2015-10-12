@@ -18,14 +18,14 @@ top_participant:
   active: true
   state: assigned
 
-top_camp_leader:
-  event: top_camp
+schekka_camp_leader:
+  event: schekka_camp
   person: bulei
   active: true
   state: assigned
 
-top_camp_participant:
-  event: top_camp
+schekka_camp_participant:
+  event: schekka_camp
   person: al_schekka
   active: true
   state: assigned
