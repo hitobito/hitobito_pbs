@@ -755,6 +755,7 @@ de:
         emergency_phone: Notfalltelefon
         landlord: BesitzerIn / VermieterIn
         landlord_permission_obtained: Einverständnis Eigentümer
+        paper_application_required: Papieranmeldung zwingend
 
       event/approval:
         comment: Kommentar

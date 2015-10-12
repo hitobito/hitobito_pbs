@@ -80,6 +80,9 @@ de:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:
         cancel_info: Die Kursleitung, der Kursorganisator und die Abteilungsleiter werden über die Abmeldung informiert.
+      print:
+        heading_event/camp: Lageranmeldung %{year}
+        read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
@@ -104,6 +107,7 @@ de:
     show:
       inform_by_email: Informieren
     application_fields_pbs:
+      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
       requires_approval_abteilung: Abteilung
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband

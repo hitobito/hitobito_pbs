@@ -116,7 +116,7 @@ class Event::Camp < Event
                            :landlord, :landlord_permission_obtained,
                            :j_s_kind,
                            :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
-                           :signature,
+                           :paper_application_required,
                            :participants_can_apply, :participants_can_cancel,
                            :al_present, :al_visiting, :al_visiting_date,
                            :coach_visiting, :coach_visiting_date, :coach_confirmed,
