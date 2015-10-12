@@ -65,4 +65,13 @@ module EventsPbsHelper
       sort_by(&:last)
   end
 
+  def camp_possible_canton_values
+    Event::Camp.possible_canton_values.
+      collect do |c|
+        # TODO add abroad locale key
+        label = (c == Event::Camp::ABROAD_CANTON) ? t('Abroad') : c.upcase
+        [c, label]
+      end
+  end
+
 end

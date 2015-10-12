@@ -7,3 +7,5 @@
   = field_set_tag t('Lagerort') do
     = f.labeled_input_fields(:canton, :location, :coordinates, :altitude, :emergency_phone, :landlord)
     = f.labeled_input_field(:landlord_permission_obtained, caption: t('.landlord_permission_obtained_caption'))
+    = f.labeled_collection_select(:canton, camp_possible_canton_values, :first, :last, { include_blank: true }, class: 'span2')
+    = f.labeled_input_fields(:coordinates, :altitude, :emergency_phone, :landlord)

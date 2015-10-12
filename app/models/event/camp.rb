@@ -94,6 +94,7 @@ class Event::Camp < Event
   include Event::RestrictedRole
 
   class_attribute :possible_j_s_kinds
+  class_attribute :possible_canton_values
 
   EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
                                 :expected_participants_pfadi_f, :expected_participants_pfadi_m,
@@ -147,6 +148,7 @@ class Event::Camp < Event
 
   self.possible_j_s_kinds = %w(j_s_child j_s_youth j_s_mixed)
 
+  self.possible_canton_values = Cantons.short_name_strings + [ABROAD_CANTON]
 
   ### VALIDATIONS
 
@@ -155,9 +157,7 @@ class Event::Camp < Event
     { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
   validates :j_s_kind, inclusion: { in: possible_j_s_kinds, allow_nil: true, allow_blank: true }
-  validates :canton, inclusion: { in: Cantons.short_name_strings + [ABROAD_CANTON],
-                                  allow_blank: true }
-
+  validates :canton, inclusion: { in: possible_canton_values, allow_blank: true }
 
   ### INSTANCE METHODS
 
