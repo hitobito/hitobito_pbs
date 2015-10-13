@@ -39,6 +39,13 @@ module EventsPbsHelper
     end
   end
 
+  def format_event_js_security_attrs(entry)
+    attrs = entry.used_attributes(:j_s_security_snow, :j_s_security_mountain, :j_s_security_water)
+    human_names = attrs.select { |attr| entry.send(attr) }
+                       .map { |attr| Event.human_attribute_name(attr) }.join(', ')
+    human_names.present? ? human_names : t('events.fields_pbs.j_s_security_none')
+  end
+
   def show_camp_participation_status_dropdown?
     @event.is_a?(Event::Camp) &&
     entry.roles.any? { |r| Event::Camp.participant_types.any? { |t| r.is_a?(t) } } &&

@@ -102,6 +102,7 @@ de:
       j_s_kind_j_s_child: J+S Kindersport
       j_s_kind_j_s_youth: J+S Jugendsport
       j_s_kind_j_s_mixed: Gemischtes J+S Lager
+      j_s_security_none: Keiner
     location_fields:
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
     show:
