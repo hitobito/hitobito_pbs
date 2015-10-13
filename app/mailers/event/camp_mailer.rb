@@ -12,9 +12,19 @@ class Event::CampMailer < ApplicationMailer
     # values['event-details']  = event_details
     # ...
 
-    #mail(to: Person.mailing_emails_for(recipient), subject: content.subject) do |format|
-    #  format.html { render text: content.body_with_values(values) }
-    #end
+    # mail(to: Person.mailing_emails_for(recipient), subject: content.subject) do |format|
+    #   format.html { render text: content.body_with_values(values) }
+    # end
+  end
+
+  def participant_applied_info(participation, recipients)
+    # content = CustomContent.get(CONTENT_KEY)
+    # values['event-details']  = event_details
+    # ...
+
+    # mail(to: Person.mailing_emails_for(recipients), subject: content.subject) do |format|
+    #   format.html { render text: content.body_with_values(values) }
+    # end
   end
 
 end

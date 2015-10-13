@@ -56,4 +56,21 @@ describe Event::Camp do
     end
   end
 
+  context '#application_possible' do
+    it 'is possible if application dates are open and flag is set' do
+      subject.application_opening_at = 5.days.ago
+      subject.application_closing_at = 10.days.from_now
+
+      expect(subject).not_to be_application_possible
+
+      subject.participants_can_apply = true
+
+      expect(subject).to be_application_possible
+
+      subject.application_opening_at = 1.day.from_now
+
+      expect(subject).not_to be_application_possible
+    end
+  end
+
 end

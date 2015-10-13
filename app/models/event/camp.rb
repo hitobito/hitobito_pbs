@@ -177,6 +177,10 @@ class Event::Camp < Event
     canton == ABROAD_CANTON
   end
 
+  def application_possible?
+    super && participants_can_apply?
+  end
+
   def default_participation_state(participation)
     if participation.roles.blank? ||
       participation.roles.any? { |role| role.kind != :participant } ||
