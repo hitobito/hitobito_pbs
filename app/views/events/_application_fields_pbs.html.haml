@@ -10,3 +10,9 @@
 
 - entry.used?(:paper_application_required) do
   = f.labeled_boolean_field(:paper_application_required, {caption: t('.paper_application_required_caption')})
+
+- entry.used?(:participants_can_apply) do
+  = f.labeled_boolean_field(:participants_can_apply, {caption: t('.participants_can_apply_caption')})
+
+- entry.used?(:participants_can_cancel) do
+  = f.labeled_boolean_field(:participants_can_cancel, {caption: t('.participants_can_cancel_caption')})

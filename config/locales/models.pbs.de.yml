@@ -759,6 +759,8 @@ de:
         landlord: BesitzerIn / VermieterIn
         landlord_permission_obtained: Einverständnis Eigentümer
         paper_application_required: Papieranmeldung zwingend
+        participants_can_apply: Anmeldung möglich
+        participants_can_cancel: Abmeldung möglich
 
       event/approval:
         comment: Kommentar

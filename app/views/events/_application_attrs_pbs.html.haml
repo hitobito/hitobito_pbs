@@ -12,6 +12,7 @@
     %dl.dl-horizontal
       = labeled_attr(entry, :requires_approval)
 
-- entry.used?(:paper_application_required) do
-  %dl.dl-horizontal
-    = labeled_attr(entry, :paper_application_required)
+- flags = entry.used_attributes(*[:paper_application_required,
+                                  :participants_can_apply,
+                                  :participants_can_cancel]).select { |flag| entry.send(flag) }
+= render_attrs(entry, *flags)

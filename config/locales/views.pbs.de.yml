@@ -108,6 +108,8 @@ de:
       inform_by_email: Informieren
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
+      participants_can_apply_caption: Teilnehmende können sich selbst anmelden
+      participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
       requires_approval_abteilung: Abteilung
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
