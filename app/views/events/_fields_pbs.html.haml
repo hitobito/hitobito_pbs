@@ -17,9 +17,9 @@
 
 - entry.used?(:j_s_kind) do
   = f.labeled(:j_s_kind) do
-    = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'))
+    = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
     - Event::Camp::J_S_KINDS.each do |kind|
-      = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"))
+      = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
 
 - j_s_security_attrs = entry.used_attributes(:j_s_security_snow,
                                              :j_s_security_mountain,
@@ -27,8 +27,6 @@
 - if j_s_security_attrs.present?
   = f.labeled(:j_s_security) do
     - j_s_security_attrs.each do |attr|
-      = f.label(attr, class: 'checkbox inline') do
-        = f.check_box(attr)
-        = Event.human_attribute_name(attr)
+      = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
 
 = render 'expected_participants_fields', f: f
