@@ -94,6 +94,8 @@ de:
       confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
+      participants_can_apply_caption: Teilnehmende können sich selbst anmelden
+      participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
       requires_approval_abteilung: Abteilung
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
@@ -107,6 +109,8 @@ de:
       j_s_kind_j_s_child: J+S Kindersport
       j_s_kind_j_s_youth: J+S Jugendsport
       j_s_kind_j_s_mixed: Gemischtes J+S Lager
+      j_s_security_none: Keiner
+      al_present_caption: Die Abteilungsleitung ist im Lager anwesend
     global:
       link:
         add_event/camp: Lager erstellen
