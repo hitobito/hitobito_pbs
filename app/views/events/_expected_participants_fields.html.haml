@@ -2,7 +2,7 @@
   = f.labeled(:expected_participants, t('activerecord.attributes.event.expected_participants'), nil, class: 'controls-row') do
     %div.row
       %p.span1
-      %p.span1 
+      %p.span1
         = t('activerecord.attributes.event.expected_participants_wolf')
       %p.span1
         = t('activerecord.attributes.event.expected_participants_pfadi')
@@ -27,5 +27,5 @@
       = f.string_field(:expected_participants_rover_m, class: 'span1', maxlength: 4)
       = f.string_field(:expected_participants_leitung_m, class: 'span1', maxlength: 4)
     %div.row
-      %p.span6
-        = f.help_inline t('activerecord.attributes.event.expected_participants_help_inline')
+      %div.span12
+        .help-block= t('activerecord.attributes.event.expected_participants_help_inline')

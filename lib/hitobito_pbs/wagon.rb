@@ -95,6 +95,10 @@ module HitobitoPbs
 
       # rubocop:enable SingleSpaceBeforeFirstArg
 
+      if Delayed::Job.table_exists?
+        Event::CampReminderJob.new.schedule
+      end
+
       if defined? Bullet
         Bullet.add_whitelist type: :n_plus_one_query,
                              class_name: 'Group::Kantonalverband',

@@ -172,6 +172,10 @@ class Event::Camp < Event
     super || possible_states.first
   end
 
+  def abroad?
+    canton == ABROAD_CANTON
+  end
+
   def default_participation_state(participation)
     if participation.roles.blank? ||
       participation.roles.any? { |role| role.kind != :participant } ||
