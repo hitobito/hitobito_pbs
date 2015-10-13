@@ -42,8 +42,8 @@ end
 
 private
 def ndbjs_person
-  Location.create!(zip_code: 4000, name: 'Basel', canton: 'BS')
-  person = Fabricate(:person, 
+  Location.create!(zip_code: 4000, name: 'Basel', canton: 'bs')
+  person = Fabricate(:person,
                      email: 'foo@example.com',
                      first_name: 'Peter',
                      last_name: 'Muster',
