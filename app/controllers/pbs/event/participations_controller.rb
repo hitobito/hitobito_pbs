@@ -19,6 +19,13 @@ module Pbs::Event::ParticipationsController
     alias_method_chain :permitted_attrs, :state
   end
 
+  def cancel_own
+    entry.update!(state: 'canceled')
+    Event::CanceledCampParticipationJob.new(entry).enqueue!
+    flash[:notice] ||= t("event.participations.canceled_notice", participant: entry.person)
+    redirect_to group_event_participation_path(group, event, entry)
+  end
+
   private
 
   def load_approvals
@@ -30,7 +37,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def send_canceled_info
-    Event::CanceledParticipationJob.new(entry).enqueue!
+    Event::CanceledCourseParticipationJob.new(entry).enqueue!
   end
 
   def inform_about_email_sent_to_participant

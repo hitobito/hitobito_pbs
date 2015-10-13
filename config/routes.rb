@@ -37,6 +37,14 @@ Rails.application.routes.draw do
         collection do
           get 'camp' => 'events#index', type: 'Event::Camp'
         end
+
+        scope module: 'event' do
+          resources :participations, only: [] do
+            member do
+              put :cancel_own
+            end
+          end
+        end
       end
 
     end

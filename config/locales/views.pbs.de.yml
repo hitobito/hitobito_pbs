@@ -76,6 +76,9 @@ de:
       actions_approval:
         approve_title: Teilnahme freigeben
         reject_title: Teilname ablehnen
+      actions_show_pbs:
+        cancel_button: Abmelden
+        confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
       popover_approval:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:

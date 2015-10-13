@@ -134,4 +134,24 @@ describe Event::ParticipationsController do
     end
   end
 
+  context 'PUT cancel_own' do
+    let(:camp) { events(:schekka_camp) }
+    let(:participation) { Fabricate(:pbs_participation, event: camp) }
+
+    it 'updates state and enqueues job' do
+      camp.update!(participants_can_cancel: true, state: 'confirmed')
+
+      expect do
+        put :cancel_own,
+            group_id: camp.groups.first.id,
+            event_id: camp.id,
+            id: participation.id
+      end.to change { Delayed::Job.count }.by(1)
+
+      expect(flash[:notice]).to be_present
+      participation.reload
+      expect(participation.state).to eq('canceled')
+    end
+  end
+
 end

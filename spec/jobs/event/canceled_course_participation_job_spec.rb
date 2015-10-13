@@ -1,16 +1,16 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Jungwacht Blauring Schweiz. This file is part of
-#  hitobito and licensed under the Affero General Public License version 3
+#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito.
+#  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
 
-describe Event::CanceledParticipationJob do
+describe Event::CanceledCourseParticipationJob do
 
   let(:event) { participation.event }
-  let(:job) { Event::CanceledParticipationJob.new(participation) }
+  let(:job) { Event::CanceledCourseParticipationJob.new(participation) }
   let(:participation) { event_participations(:top_participant) }
 
   let(:recipients) { job.send(:recipients) }

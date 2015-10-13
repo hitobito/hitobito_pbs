@@ -27,4 +27,14 @@ class Event::CampMailer < ApplicationMailer
     # end
   end
 
+  def participant_canceled_info(participation, recipients)
+    # content = CustomContent.get(CONTENT_KEY)
+    # values['event-details']  = event_details
+    # ...
+
+    # mail(to: Person.mailing_emails_for(recipients), subject: content.subject) do |format|
+    #   format.html { render text: content.body_with_values(values) }
+    # end
+  end
+
 end

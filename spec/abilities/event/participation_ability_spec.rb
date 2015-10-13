@@ -93,4 +93,56 @@ describe Event::ParticipationAbility do
     end
 
   end
+
+  context 'cancel_own' do
+    let(:role) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:baereried)) }
+    let(:event) { events(:schekka_camp) }
+    let(:person) { role.person }
+    let(:participation) { Fabricate(:event_participation, event: event, person: person) }
+
+    it 'is allowed to cancel if state is confirmed' do
+      event.update!(participants_can_cancel: true, state: 'confirmed')
+      is_expected.to be_able_to(:cancel_own, participation)
+    end
+
+    it 'is not allowed to cancel if state is assignment closed' do
+      event.update!(participants_can_cancel: true, state: 'assignment_closed')
+      is_expected.not_to be_able_to(:cancel_own, participation)
+    end
+
+    it 'is not allowed to cancel if can_cancel is false' do
+      event.update!(participants_can_cancel: false, state: 'confirmed')
+      is_expected.not_to be_able_to(:cancel_own, participation)
+    end
+
+    it 'is not allowed to cancel if already canceled' do
+      event.update!(participants_can_cancel: true, state: 'confirmed')
+      participation = Fabricate(:event_participation, event: event, person: role.person, state: 'canceled')
+      is_expected.not_to be_able_to(:cancel_own, participation)
+    end
+
+    it 'is not allowed to cancel if already canceled' do
+      event.update!(participants_can_cancel: true, state: 'confirmed')
+      participation = Fabricate(:event_participation, event: event, person: role.person, state: 'canceled')
+      is_expected.not_to be_able_to(:cancel_own, participation)
+    end
+
+    context 'simple event' do
+      let(:event) { Fabricate(:event) }
+
+      it 'is not allowed to cancel if simple event' do
+        is_expected.not_to be_able_to(:cancel_own, participation)
+      end
+    end
+
+    context 'other participation' do
+      let(:role) { Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)) }
+      let(:person) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:baereried)).person }
+
+      it 'is not allowed to cancel if simple event' do
+        event.update!(participants_can_cancel: true, state: 'confirmed')
+        is_expected.not_to be_able_to(:cancel_own, participation)
+      end
+    end
+  end
 end
