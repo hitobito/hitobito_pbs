@@ -30,3 +30,6 @@
       = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
 
 = render 'expected_participants_fields', f: f
+
+- entry.used?(:al_present) do
+  = f.labeled_boolean_field(:al_present, {caption: t('.al_present_caption')})

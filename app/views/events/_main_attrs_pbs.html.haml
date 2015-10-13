@@ -63,3 +63,6 @@
               = entry.expected_participants_rover_m
             %td.right
               = entry.expected_participants_leitung_m
+
+- entry.used?(:al_present) do
+  = labeled_attr(entry, :al_present) if entry.al_present
