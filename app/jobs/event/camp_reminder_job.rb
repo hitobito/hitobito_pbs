@@ -32,6 +32,8 @@ class Event::CampReminderJob < RecurringJob
     starting_soon(camps)
   end
 
+  private
+
   def starting_soon(camps)
     tonight = Time.zone.now.midnight
     camps.includes(:dates).

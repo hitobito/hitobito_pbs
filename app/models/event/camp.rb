@@ -104,6 +104,10 @@ class Event::Camp < Event
 
   ABROAD_CANTON = 'zz'
 
+  J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed)
+
+  CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
+
   self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
                            :advisor_water_security_id,
@@ -146,18 +150,14 @@ class Event::Camp < Event
   self.revoked_participation_states = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
-  self.possible_j_s_kinds = %w(j_s_child j_s_youth j_s_mixed)
-
-  self.possible_canton_values = Cantons.short_name_strings + [ABROAD_CANTON]
-
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validates *EXPECTED_PARTICIPANT_ATTRS, numericality:
-    { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
+  validates *EXPECTED_PARTICIPANT_ATTRS,
+            numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
-  validates :j_s_kind, inclusion: { in: possible_j_s_kinds, allow_nil: true, allow_blank: true }
-  validates :canton, inclusion: { in: possible_canton_values, allow_blank: true }
+  validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
+  validates :canton, inclusion: { in: CANTONS, allow_blank: true }
 
   ### INSTANCE METHODS
 

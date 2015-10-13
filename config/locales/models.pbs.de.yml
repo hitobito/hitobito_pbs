@@ -718,6 +718,9 @@ de:
               other: Sehr geehrte(r) %{title_last_name}
 
     attributes:
+      cantons:
+        zz: Ausland
+
       event:
         course_languages: Kurssprachen
         express_fee: Expressgebühr
