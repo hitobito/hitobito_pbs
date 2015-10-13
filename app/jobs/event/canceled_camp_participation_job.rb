@@ -44,5 +44,3 @@ class Event::CanceledCampParticipationJob < BaseJob
   end
 
 end
-
-

@@ -5,3 +5,9 @@
 
 - if entry.is_a?(Event::Course) && entry.canceled? && can?(:update, entry)
   = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
+
+- if show_camp_cancel_own_button?
+  = action_button(t('.cancel_button'),
+                  cancel_own_group_event_participation_path(@group, @event, @user_participation),
+                  'remove-circle',
+                  data: { method: :put, confirm: t('.confirm_cancel') })

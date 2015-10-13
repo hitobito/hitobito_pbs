@@ -22,8 +22,8 @@ module Pbs::Event::ParticipationsController
   def cancel_own
     entry.update!(state: 'canceled')
     Event::CanceledCampParticipationJob.new(entry).enqueue!
-    flash[:notice] ||= t("event.participations.canceled_notice", participant: entry.person)
-    redirect_to group_event_participation_path(group, event, entry)
+    redirect_to group_event_path(group, event),
+                notice: t('event.participations.canceled_own_notice')
   end
 
   private

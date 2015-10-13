@@ -6,9 +6,3 @@
 
 - if show_camp_participation_status_dropdown?
   = Dropdown::Event::CampParticipantStatus.new(self, @group, @event, entry).to_s
-
-- if can?(:cancel_own, entry)
-  = action_button(t('.cancel_button'),
-                  cancel_own_group_event_participation_path(@group, @event, entry),
-                  :'remove-circle',
-                  data: { method: :put, confirm: t('.confirm_cancel') })

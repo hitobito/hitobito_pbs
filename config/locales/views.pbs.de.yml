@@ -65,6 +65,7 @@ de:
         explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
 
     participations:
+      canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       rejected_email_link: Teilnehmer informieren
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
@@ -76,9 +77,6 @@ de:
       actions_approval:
         approve_title: Teilnahme freigeben
         reject_title: Teilname ablehnen
-      actions_show_pbs:
-        cancel_button: Abmelden
-        confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
       popover_approval:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:
@@ -91,11 +89,15 @@ de:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
 
   events:
-    global:
-      link:
-        add_event/camp: Lager erstellen
-    kind_pbs:
-      event_kind_general_information: Kursart Informationen
+    actions_show_pbs:
+      cancel_button: Abmelden
+      confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
+    application_fields_pbs:
+      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
+      requires_approval_abteilung: Abteilung
+      requires_approval_region: Region
+      requires_approval_kantonalverband: Kantonalverband
+      requires_approval_bund: Bundesebene
     fields_pbs:
       language_de: Deutsch
       language_fr: Französisch
@@ -105,16 +107,15 @@ de:
       j_s_kind_j_s_child: J+S Kindersport
       j_s_kind_j_s_youth: J+S Jugendsport
       j_s_kind_j_s_mixed: Gemischtes J+S Lager
+    global:
+      link:
+        add_event/camp: Lager erstellen
+    kind_pbs:
+      event_kind_general_information: Kursart Informationen
     location_fields:
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
     show:
       inform_by_email: Informieren
-    application_fields_pbs:
-      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
-      requires_approval_abteilung: Abteilung
-      requires_approval_region: Region
-      requires_approval_kantonalverband: Kantonalverband
-      requires_approval_bund: Bundesebene
 
   groups:
     pending_approvals:

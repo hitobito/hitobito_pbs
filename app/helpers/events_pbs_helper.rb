@@ -45,6 +45,15 @@ module EventsPbsHelper
     can?(:update, entry)
   end
 
+  def show_camp_cancel_own_button?
+    if entry.respond_to?(:cancel_possible?) && entry.cancel_possible?
+      @user_participation = entry.participations.where(person_id: current_user.id).first
+      @user_participation && can?(:cancel_own, @user_participation)
+    else
+      false
+    end
+  end
+
   def expected_participants_value_present?(entry)
     Event::Camp::EXPECTED_PARTICIPANT_ATTRS.any? { |a| entry.send(a).present? }
   end
