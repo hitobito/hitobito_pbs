@@ -95,7 +95,9 @@ module EventsPbsHelper
   def event_secondary_attrs(entry)
     secondary_attrs = [:description, :location]
     if entry.is_a?(Event::Camp)
-      secondary_attrs += [:canton, :coordinates, :altitude, :emergency_phone, :landlord, :landlord_permission_obtained]
+      secondary_attrs += [:canton, :coordinates, :altitude,
+                          :emergency_phone, :landlord,
+                          :landlord_permission_obtained]
     end
     secondary_attrs
   end
