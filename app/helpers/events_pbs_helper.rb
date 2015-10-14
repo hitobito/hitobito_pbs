@@ -116,4 +116,13 @@ module EventsPbsHelper
     Cantons.full_name(entry.canton.to_sym)
   end
 
+  def save_camp_caption_text
+    items = t('events.edit.save_camp_caption').split(/\n/)
+    content_tag(:ul) do
+      items.collect do |i|
+        content_tag(:li, i)
+      end.join.html_safe
+    end
+  end
+
 end

@@ -112,7 +112,6 @@ de:
       j_s_security_none: Keiner
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
-      coach_visiting_caption: Der Coach besucht das Lager
     global:
       link:
         add_event/camp: Lager erstellen
@@ -122,6 +121,11 @@ de:
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
     show:
       inform_by_email: Informieren
+    edit:
+      save_camp_caption: |
+       Das Reglement zur Planung und Durchführung von Lagern („Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten.
+       Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt.
+       Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten. 
 
   groups:
     pending_approvals:
