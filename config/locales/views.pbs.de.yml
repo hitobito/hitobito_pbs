@@ -119,6 +119,7 @@ de:
       event_kind_general_information: Kursart Informationen
     location_fields:
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
+      local_scout_contact_present_caption: Kontakt zu lokalem Pfadfinder vorhanden
     show:
       inform_by_email: Informieren
     edit:

@@ -126,14 +126,29 @@ describe EventsPbsHelper do
 
   context '#event_secondary_attrs' do
 
-    it 'returns event secondary attributes for event' do
+    it 'returns secondary attributes for event' do
       event = events(:top_event)
       expect(event_secondary_attrs(event).count).to eq 2
     end
 
-    it 'returns camp secondary attributes for camp' do
+    it 'returns secondary attributes for camp' do
       camp = events(:schekka_camp)
       expect(event_secondary_attrs(camp).count).to eq 8
+    end
+
+    it 'returns secondary attributes for camp with local scout contact info' do
+      camp = events(:schekka_camp)
+      camp.update_attribute(:local_scout_contact_present, true)
+      camp.update_attribute(:local_scout_contact, 'contact info')
+      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
+      expect(event_secondary_attrs(camp).count).to eq 10
+    end
+
+    it 'returns secondary attributes for camp with local scout contact' do
+      camp = events(:schekka_camp)
+      camp.update_attribute(:local_scout_contact_present, false)
+      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
+      expect(event_secondary_attrs(camp).count).to eq 9
     end
 
   end

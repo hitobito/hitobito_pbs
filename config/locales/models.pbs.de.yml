@@ -766,6 +766,8 @@ de:
         al_visiting_date: AL Besuchsdatum
         coach_visiting: Coachbesuch
         coach_visiting_date: Coach Besuchsdatum
+        local_scout_contact_present: Lokaler Pfadfinder Kontakt
+        local_scout_contact: Lokaler Pfadfinder Kontaktinfos
 
       event/approval:
         comment: Kommentar

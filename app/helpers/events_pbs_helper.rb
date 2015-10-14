@@ -108,8 +108,18 @@ module EventsPbsHelper
       secondary_attrs += [:canton, :coordinates, :altitude,
                           :emergency_phone, :landlord,
                           :landlord_permission_obtained]
+      secondary_attrs += camp_local_scout_contact_attrs(entry)
     end
     secondary_attrs
+  end
+
+  def camp_local_scout_contact_attrs(entry)
+    attrs = []
+    if entry.abroad?
+      attrs = [:local_scout_contact_present]
+      attrs += [:local_scout_contact] if entry.local_scout_contact_present?
+    end
+    attrs
   end
 
   def format_event_canton(entry)
