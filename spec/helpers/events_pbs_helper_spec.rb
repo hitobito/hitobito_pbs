@@ -95,4 +95,34 @@ describe EventsPbsHelper do
     end
 
   end
+
+  context '#event_secondary_attrs' do
+
+    it 'returns event secondary attributes for event' do
+      event = events(:top_event)
+      expect(event_secondary_attrs(event).count).to eq 2
+    end
+
+    it 'returns camp secondary attributes for camp' do
+      camp = events(:schekka_camp)
+      expect(event_secondary_attrs(camp).count).to eq 8
+    end
+
+  end
+
+  context '#format_event_canton' do
+
+    it 'returns canton full name' do
+      camp = events(:schekka_camp)
+      camp.update_attribute(:canton, 'so')
+      expect(format_event_canton(camp)).to eq 'Solothurn'
+    end
+
+    it 'returns ausland' do
+      camp = events(:schekka_camp)
+      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
+      expect(format_event_canton(camp)).to eq 'Ausland'
+    end
+
+  end
 end

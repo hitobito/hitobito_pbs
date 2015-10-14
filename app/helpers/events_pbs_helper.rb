@@ -92,4 +92,16 @@ module EventsPbsHelper
     al_visiting
   end
 
+  def event_secondary_attrs(entry)
+    secondary_attrs = [:description, :location]
+    if entry.is_a?(Event::Camp)
+      secondary_attrs += [:canton, :coordinates, :altitude, :emergency_phone, :landlord, :landlord_permission_obtained]
+    end
+    secondary_attrs
+  end
+
+  def format_event_canton(entry)
+    Cantons.full_name(entry.canton.to_sym)
+  end
+
 end
