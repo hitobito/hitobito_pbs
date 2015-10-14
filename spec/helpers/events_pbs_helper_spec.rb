@@ -94,6 +94,34 @@ describe EventsPbsHelper do
       expect(format_event_al_visiting(subject)).to eq('ja, 15.05.2011')
     end
 
+    it 'shows no date if al not visiting' do
+      subject.update_attribute(:al_visiting, false)
+      subject.update_attribute(:al_visiting_date, Date.parse('15.05.2011'))
+      expect(format_event_al_visiting(subject)).to eq('nein')
+    end
+
+  end
+
+  context '#format_event_coach_visiting' do
+
+    subject { events(:schekka_camp) }
+    before { subject.update_attribute(:coach_visiting, true) }
+
+    it 'shows value without date if date missing' do
+      expect(format_event_coach_visiting(subject)).to eq('ja')
+    end
+
+    it 'shows date if date present' do
+      subject.update_attribute(:coach_visiting_date, Date.parse('15.05.2011'))
+      expect(format_event_coach_visiting(subject)).to eq('ja, 15.05.2011')
+    end
+
+    it 'shows no date if coach not visiting' do
+      subject.update_attribute(:coach_visiting, false)
+      subject.update_attribute(:coach_visiting_date, Date.parse('15.05.2011'))
+      expect(format_event_coach_visiting(subject)).to eq('nein')
+    end
+
   end
 
   context '#event_secondary_attrs' do

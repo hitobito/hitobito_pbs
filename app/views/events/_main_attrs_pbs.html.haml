@@ -65,8 +65,10 @@
               = entry.expected_participants_leitung_m
 
 - entry.used?(:al_present) do
-  = labeled_attr(entry, :al_present) if entry.al_present
+  = labeled_attr(entry, :al_present)
 
 - entry.used?(:al_visiting) do
-  = labeled(Event.human_attribute_name(:al_visiting)) do
-    = format_event_al_visiting(entry)
+  = labeled_attr(entry, :al_visiting)
+
+- entry.used?(:coach_visiting) do
+  = labeled_attr(entry, :coach_visiting)

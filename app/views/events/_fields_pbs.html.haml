@@ -39,3 +39,9 @@
 
 - entry.used?(:al_visiting_date) do
   = f.labeled_date_field(:al_visiting_date)
+
+- entry.used?(:coach_visiting) do
+  = f.labeled_boolean_field(:coach_visiting, {caption: t('.coach_visiting_caption')})
+
+- entry.used?(:coach_visiting_date) do
+  = f.labeled_date_field(:coach_visiting_date)

@@ -88,8 +88,18 @@ module EventsPbsHelper
 
   def format_event_al_visiting(entry)
     al_visiting = f(entry.al_visiting)
-    al_visiting += ', ' + f(entry.al_visiting_date) if entry.al_visiting_date.present?
+    if entry.al_visiting && entry.al_visiting_date.present?
+      al_visiting += ', ' + f(entry.al_visiting_date)
+    end
     al_visiting
+  end
+
+  def format_event_coach_visiting(entry)
+    coach_visiting = f(entry.coach_visiting)
+    if entry.coach_visiting && entry.coach_visiting_date.present?
+      coach_visiting += ', ' + f(entry.coach_visiting_date)
+    end
+    coach_visiting
   end
 
   def event_secondary_attrs(entry)

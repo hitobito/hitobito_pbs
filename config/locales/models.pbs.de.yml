@@ -764,6 +764,8 @@ de:
         al_present: AL anwesend
         al_visiting: AL besucht das Lager
         al_visiting_date: AL Besuchsdatum
+        coach_visiting: Coachbesuch
+        coach_visiting_date: Coach Besuchsdatum
 
       event/approval:
         comment: Kommentar
