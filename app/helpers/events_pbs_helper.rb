@@ -86,4 +86,10 @@ module EventsPbsHelper
       [[Event::Camp::ABROAD_CANTON, Cantons.full_name(Event::Camp::ABROAD_CANTON)]]
   end
 
+  def format_event_al_visiting(entry)
+    al_visiting = f(entry.al_visiting)
+    al_visiting += ', ' + f(entry.al_visiting_date) if entry.al_visiting_date.present?
+    al_visiting
+  end
+
 end

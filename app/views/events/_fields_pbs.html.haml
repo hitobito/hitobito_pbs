@@ -33,3 +33,9 @@
 
 - entry.used?(:al_present) do
   = f.labeled_boolean_field(:al_present, {caption: t('.al_present_caption')})
+
+- entry.used?(:al_visiting) do
+  = f.labeled_boolean_field(:al_visiting, {caption: t('.al_visiting_caption')})
+
+- entry.used?(:al_visiting_date) do
+  = f.labeled_date_field(:al_visiting_date)
