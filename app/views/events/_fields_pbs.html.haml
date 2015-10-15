@@ -6,6 +6,24 @@
 - entry.used?(:advisor_id) do
   = f.labeled_person_field :advisor
 
+- entry.used?(:abteilungsleitung_id) do
+  = f.labeled_person_field :abteilungsleitung
+
+- entry.used?(:advisor_mountain_security_id) do
+  = f.labeled_person_field :advisor_mountain_security
+
+- entry.used?(:advisor_snow_security_id) do
+  = f.labeled_person_field :advisor_snow_security
+
+- entry.used?(:advisor_water_security_id) do
+  = f.labeled_person_field :advisor_water_security
+
+- entry.used?(:coach_id) do
+  = f.labeled_person_field :coach
+
+- entry.used?(:coach_confirmed) do
+  = f.labeled_boolean_field :coach_confirmed
+
 - entry.used?(:language_de) do
   = f.labeled(:course_languages) do
     - Event::Course::LANGUAGES.each do |lang|

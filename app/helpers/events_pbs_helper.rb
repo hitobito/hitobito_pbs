@@ -135,4 +135,9 @@ module EventsPbsHelper
     end
   end
 
+  # TODO add link, move to core ?, use format attr ?
+  def labeled_person_attr(entry, attr)
+    labeled_attr(entry, attr)
+  end
+
 end
