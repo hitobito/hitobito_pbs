@@ -40,4 +40,28 @@ describe EventsController do
 
   end
 
+  context 'GET show_camp_application' do
+    let(:event) { events(:schekka_camp) }
+
+    context 'when authorized' do
+      before { sign_in(people(:bulei)) }
+
+      it 'renders pdf' do
+        get :show_camp_application, group_id: event.groups.first.id, id: event.id
+        expect(response).to be_ok
+      end
+    end
+
+    context 'when unauthorized' do
+
+      before { sign_in(people(:al_berchtold)) }
+
+      it 'raises 401' do
+        expect do
+          get :show_camp_application, group_id: event.groups.first.id, id: event.id
+        end.to raise_error(CanCan::AccessDenied)
+      end
+    end
+  end
+
 end

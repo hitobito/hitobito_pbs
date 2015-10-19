@@ -44,6 +44,10 @@ de:
   dropdown/event/camp_participant_status:
     change_state: Status ändern
 
+  export/pdf/camp_application:
+    title: Lageranmeldung %{camp}
+    group_header: Abteilung und Einheit
+
   event:
     lists:
       nav_left_pbs:
@@ -90,8 +94,10 @@ de:
 
   events:
     actions_show_pbs:
+      camp_application: Lageranmeldung PBS
       cancel_button: Abmelden
       confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
+      submit_camp: Einreichen
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
       participants_can_apply_caption: Teilnehmende können sich selbst anmelden
@@ -126,7 +132,7 @@ de:
       save_camp_caption: |
        Das Reglement zur Planung und Durchführung von Lagern („Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten.
        Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt.
-       Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten. 
+       Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten.
 
   groups:
     pending_approvals:

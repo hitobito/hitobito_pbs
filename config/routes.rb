@@ -37,6 +37,10 @@ Rails.application.routes.draw do
         collection do
           get 'camp' => 'events#index', type: 'Event::Camp'
         end
+        member do
+          get 'camp_application' => 'events#show_camp_application'
+          put 'camp_application' => 'events#create_camp_application'
+        end
 
         scope module: 'event' do
           resources :participations, only: [] do

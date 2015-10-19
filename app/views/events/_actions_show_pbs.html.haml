@@ -6,8 +6,21 @@
 - if entry.is_a?(Event::Course) && entry.canceled? && can?(:update, entry)
   = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
 
+- if entry.is_a?(Event::Camp) && can?(:create_camp_application, entry)
+  = action_button ti('.submit_camp'),
+                  camp_application_group_event_path(@group, entry),
+                  :share,
+                  data: { method: :put }
+
+- if entry.is_a?(Event::Camp) && can?(:show_camp_application, entry)
+  = action_button ti('.camp_application'),
+                  camp_application_group_event_path(@group, entry),
+                  :file,
+                  target: :blank
+
 - if show_camp_cancel_own_button?
   = action_button(t('.cancel_button'),
-                  cancel_own_group_event_participation_path(@group, @event, @user_participation),
+                  cancel_own_group_event_participation_path(@group, entry, @user_participation),
                   'remove-circle',
                   data: { method: :put, confirm: t('.confirm_cancel') })
+
