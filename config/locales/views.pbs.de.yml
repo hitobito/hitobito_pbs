@@ -47,6 +47,13 @@ de:
   export/pdf/camp_application:
     title: Lageranmeldung %{camp}
     group_header: Abteilung und Einheit
+    leader_header: Lagerleiter/-in
+    assistant_leaders_header: Lagerleitung
+    name: Name
+    address: Adresse
+    zip_town: PLZ / Ort
+    birthday: Geburtstag
+    qualifications: Ausbildung
 
   event:
     lists:
