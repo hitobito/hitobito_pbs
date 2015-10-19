@@ -70,10 +70,10 @@ module Export::Pdf
       section('leader_header') do
         leader = camp.participations_for(Event::Camp::Role::Leader).first.try(:person)
         if leader
-          with_label('name', leader.to_s)
+          with_label('name', leader)
           with_label('address', leader.address)
           with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
-          with_label('birthday', I18n.l(leader.birthday))
+          with_label('birthday', leader.birthday.presence && I18n.l(leader.birthday))
           with_label('qualifications', active_qualifications(leader))
         end
       end
@@ -83,9 +83,9 @@ module Export::Pdf
       section('assistant_leaders_header') do
         leaders = camp.participations_for(Event::Camp::Role::AssistantLeader).collect(&:person)
         cells = leaders.collect do |person|
-          [person.to_s, person.birthday.year.to_s, active_qualifications(person)]
+          [person.to_s, person.birthday.try(:year).to_s, active_qualifications(person)]
         end
-        table(cells, width: 500, cell_style: { border_width: 0.25 })
+        table(cells, width: 500, cell_style: { border_width: 0.25 }) if cells.present?
       end
     end
 
@@ -127,7 +127,7 @@ module Export::Pdf
     def with_label(key, value)
       label = translate(key)
       text_box(label, at: [0, cursor], width: 120, style: :italic)
-      text_box(value, at: [120, cursor])
+      text_box(value.to_s, at: [120, cursor])
       move_down_line
     end
 
