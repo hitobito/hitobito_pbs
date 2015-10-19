@@ -64,4 +64,45 @@ describe EventsController do
     end
   end
 
+  context 'PUT create_camp_application' do
+    let(:event) { events(:schekka_camp) }
+
+    context 'when authorized' do
+      before { sign_in(people(:al_berchtold)) }
+      before { event.update!(coach_id: people(:al_berchtold).id) }
+
+      it 'fails if no canton given' do
+        group = event.groups.first
+        put :create_camp_application, group_id: group.id, id: event.id
+        expect(response).to redirect_to(group_event_path(group, event))
+        expect(flash[:alert]).to match /Kanton.* muss ausgefüllt werden/
+        expect(event.reload).not_to be_camp_submitted
+      end
+
+      it 'sends mail if all is present' do
+        group = event.groups.first
+        event.update!(camp_days: 3, canton: 'be')
+
+        mail = double('mail', deliver_later: nil)
+        expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)
+
+        put :create_camp_application, group_id: group.id, id: event.id
+        expect(response).to redirect_to(group_event_path(group, event))
+        expect(flash[:notice]).to match /eingereicht/
+        expect(event.reload).to be_camp_submitted
+      end
+    end
+
+    context 'when unauthorized' do
+
+      before { sign_in(people(:bulei)) }
+
+      it 'raises 401' do
+        expect do
+          put :create_camp_application, group_id: event.groups.first.id, id: event.id
+        end.to raise_error(CanCan::AccessDenied)
+      end
+    end
+  end
+
 end

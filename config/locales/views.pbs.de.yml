@@ -106,6 +106,10 @@ de:
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
+    create_camp_application:
+      flash:
+        success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
+        error: 'Das Lager konnte nicht eingereicht werden:'
     fields_pbs:
       language_de: Deutsch
       language_fr: Französisch

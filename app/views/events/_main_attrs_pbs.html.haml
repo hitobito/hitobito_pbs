@@ -21,6 +21,9 @@
   = labeled(Event.human_attribute_name(:j_s_security)) do
     = format_event_js_security_attrs(entry)
 
+- entry.used?(:camp_submitted) do
+  = labeled_attr(entry, :camp_submitted)
+
 - entry.used?(:expected_participants_wolf_f) do
   - if expected_participants_value_present?(entry)
     = labeled(t('activerecord.attributes.event.expected_participants')) do

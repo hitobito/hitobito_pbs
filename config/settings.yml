@@ -24,3 +24,7 @@ root_email: hitobito-pbs@puzzle.ch
 email:
   # Sender for all emails sent by the application
   sender: <%= "MiData PBS/MSdS/MSS <noreply@#{mail_domain}>" %>
+
+  camp:
+    submit_recipient: lager@pbs.ch
+    submit_abroad_recipient: auslandlager@pbs.ch

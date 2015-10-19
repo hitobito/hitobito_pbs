@@ -37,12 +37,30 @@ class Event::CampMailer < ApplicationMailer
     # end
   end
 
-  def advisor_assigned(camp, advisor, key, user)
+  def advisor_assigned(camp, advisor, key, user_id)
     # content = CustomContent.get(fetch_advisor_content_key(key))
     # values['event-details']  = event_details
     # ...
 
     # mail(to: Person.mailing_emails_for(advisor), subject: content.subject) do |format|
+    #   format.html { render text: content.body_with_values(values) }
+    # end
+  end
+
+  def submit_camp(camp)
+    # content = CustomContent.get(CONTENT_KEY)
+    # values['event-details']  = event_details
+    # ...
+    recipients = [Settings.email.camp.submit_recipient]
+    recipients << Settings.email.camp.submit_abroad_recipient if camp.abroad?
+
+    copies = [camp.coach,
+              camp.abteilungsleitung,
+              *camp.participations_for(Event::Camp::Role::Leader).collect(&:person)].compact
+
+    # mail(to: recipients,
+    #      cc: Person.mailing_emails_for(copies),
+    #      subject: content.subject) do |format|
     #   format.html { render text: content.body_with_values(values) }
     # end
   end

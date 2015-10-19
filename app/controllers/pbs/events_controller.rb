@@ -24,9 +24,12 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    # Validierung, ob Anzahl Ausbildungstage und Lagerort/Kanton ausgefüllt sind.
-    # eine Bestätigungsemail an den Coach, die Lagerleiter und den AL; an die PBS Geschäftsstelle (lager@pbs.ch); Bei Lagern mit Kanton = Ausland soll zusätzlich eine Nachricht an auslandlager@pbs.ch verschickt werden.
-    # camp_submitted` = true setzen.
+    if validate_present?(:camp_days, :canton)
+      Event::CampMailer.submit_camp(entry).deliver_later
+      entry.update!(camp_submitted: true)
+      set_success_notice
+    end
+    redirect_to path_args(entry)
   end
 
   private
@@ -50,6 +53,21 @@ module Pbs::EventsController
 
   def remove_restricted
     model_params.delete(:coach)
+  end
+
+  def validate_present?(*attrs)
+    errors = attrs.select { |attr| entry.send(attr).blank? }.
+                   collect { |attr| blank_message(attr) }
+    if errors.present?
+      errors.unshift(I18n.t('events.create_camp_application.flash.error'))
+      flash[:alert] = errors.join("\n")
+    end
+    errors.blank?
+  end
+
+  def blank_message(attr)
+    Event::Camp.human_attribute_name(attr) + ' ' +
+      I18n.t('errors.messages.blank', attribute: attr) + '.'
   end
 
 end
