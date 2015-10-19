@@ -220,7 +220,8 @@ class Event::Camp < Event
     if person &&
        person != Person.stamper &&
        (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
-      Event::CampMailer.delay.advisor_assigned(self, person, advisor_key, Person.stamper)
+      Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper).
+        deliver_later
     end
   end
 

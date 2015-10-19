@@ -51,8 +51,8 @@ class Event::CampMailer < ApplicationMailer
 
   #def fetch_advisor_content(advisor_key)
   #  case advisor_key
-  #  when :coach then COACH_KEY
-  #  when :abteilungsleitung then AL_KEY
+  #  when 'coach' then COACH_KEY
+  #  when 'abteilungsleitung' then AL_KEY
   #  else
   #    ADVISOR_KEY
   #  end

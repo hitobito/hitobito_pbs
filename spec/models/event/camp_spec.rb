@@ -82,55 +82,52 @@ describe Event::Camp do
     end
 
     it 'is not sent if nothing changed' do
-      expect(subject).not_to receive(:delay)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
       subject.update!(location: 'Bern')
     end
 
     it 'is not sent if state set to created' do
-      expect(subject).not_to receive(:delay)
+      expect(Event::CampMailer).not_to receive(:advisor_assignedy)
       subject.update!(location: 'Bern', state: 'created')
     end
 
     it 'is not sent if state set to nil' do
-      expect(subject).not_to receive(:delay)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
       subject.update!(location: 'Bern', state: nil)
     end
 
     it 'is not sent if state set to assignment_closed' do
-      expect(subject).not_to receive(:delay)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
       subject.update!(location: 'Bern', state: 'assignment_closed')
     end
 
     it 'is not sent to freshly assigned if state is created' do
       subject.update!(state: 'created')
-      expect(subject).not_to receive(:delay)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
       subject.update!(location: 'Bern', abteilungsleitung_id: people(:al_schekka).id, coach_id: people(:al_schekka).id)
     end
 
     it 'is sent to assigned if state changed from nil to assignment_closed' do
       subject.update!(state: nil)
-      delay = double('delay')
-      expect(Event::CampMailer).to receive(:delay).and_return(delay).twice
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:al_berchtold), :coach, nil)
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:bulei), :advisor_snow_security, nil)
+      mail = double('mail', deliver_later: nil)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold), 'coach', nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei), 'advisor_snow_security', nil).and_return(mail)
       subject.update!(location: 'Bern', state: 'assignment_closed')
     end
 
     it 'is sent to assigned if state changed from created to confirmed' do
       subject.update!(state: 'created')
-      delay = double('delay')
-      expect(Event::CampMailer).to receive(:delay).and_return(delay).exactly(3).times
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:al_berchtold), :coach, nil)
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:bulei), :advisor_snow_security, nil)
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:al_schekka), :abteilungsleitung, nil)
+      mail = double('mail', deliver_later: nil)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold), 'coach', nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei), 'advisor_snow_security', nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'abteilungsleitung', nil).and_return(mail)
       subject.update!(location: 'Bern', state: 'confirmed', abteilungsleitung_id: people(:al_schekka).id)
     end
 
     it 'is sent to freshly assigned' do
-      delay = double('delay')
-      expect(Event::CampMailer).to receive(:delay).and_return(delay).exactly(2).times
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:al_schekka), :abteilungsleitung, nil)
-      expect(delay).to receive(:advisor_assigned).with(subject, people(:al_schekka), :coach, nil)
+      mail = double('mail', deliver_later: nil)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'abteilungsleitung', nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'coach', nil).and_return(mail)
       subject.update!(location: 'Bern',
                       abteilungsleitung_id: people(:al_schekka).id,
                       coach_id: people(:al_schekka).id,
