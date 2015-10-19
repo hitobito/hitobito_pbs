@@ -37,4 +37,25 @@ class Event::CampMailer < ApplicationMailer
     # end
   end
 
+  def advisor_assigned(camp, advisor, key, user)
+    # content = CustomContent.get(fetch_advisor_content_key(key))
+    # values['event-details']  = event_details
+    # ...
+
+    # mail(to: Person.mailing_emails_for(advisor), subject: content.subject) do |format|
+    #   format.html { render text: content.body_with_values(values) }
+    # end
+  end
+
+  private
+
+  #def fetch_advisor_content(advisor_key)
+  #  case advisor_key
+  #  when :coach then COACH_KEY
+  #  when :abteilungsleitung then AL_KEY
+  #  else
+  #    ADVISOR_KEY
+  #  end
+  #end
+
 end

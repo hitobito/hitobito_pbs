@@ -150,6 +150,7 @@ class Event::Camp < Event
   self.revoked_participation_states = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
+
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
@@ -158,6 +159,12 @@ class Event::Camp < Event
   validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
   validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
   validates :canton, inclusion: { in: CANTONS, allow_blank: true }
+
+
+  ### CALLBACKS
+
+  after_save :send_assignment_infos
+
 
   ### INSTANCE METHODS
 
@@ -193,6 +200,36 @@ class Event::Camp < Event
     else
       'applied_electronically'
     end
+  end
+
+  private
+
+  def send_assignment_infos
+    [:coach,
+     :abteilungsleitung,
+     :advisor_mountain_security,
+     :advisor_snow_security,
+     :advisor_mountain_security
+    ].each do |advisor_key|
+      send_advisor_assignment_info(advisor_key)
+    end
+  end
+
+  def send_advisor_assignment_info(advisor_key)
+    person = send(advisor_key)
+    if person &&
+       person != Person.stamper &&
+       (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
+      Event::CampMailer.delay.advisor_assigned(self, person, advisor_key, Person.stamper)
+    end
+  end
+
+  def state_changed_from_created?
+    state_changed? && (state_change.first == 'created' || state_change.first.nil?)
+  end
+
+  def advisor_changed_except_in_created?(advisor_key)
+    restricted_role_changes[advisor_key] && state != 'created' && !state.blank?
   end
 
 end
