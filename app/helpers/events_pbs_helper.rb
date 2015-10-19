@@ -135,9 +135,15 @@ module EventsPbsHelper
     end
   end
 
-  # TODO add link, move to core ?, use format attr ?
   def labeled_person_attr(entry, attr)
-    labeled_attr(entry, attr)
+    person = entry.send(attr)
+    if can?(:show, person)
+      labeled(captionize(attr, entry.class)) do
+        link_to(format_attr(entry, attr), group_person_path(@group, person))
+      end
+    else
+      labeled_attr(entry, attr)
+    end
   end
 
 end
