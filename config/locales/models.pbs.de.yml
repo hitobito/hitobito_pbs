@@ -648,7 +648,7 @@ de:
         one: Leiter-/in Sicherheitsaktivität Berg
 
       event/camp/role/leader_snow_security:
-        one: Leiter-/in Sicherheitsaktivität Schnee
+        one: Leiter-/in Sicherheitsaktivität Winter
 
       event/camp/role/leader_water_security:
         one: Leiter-/in Sicherheitsaktivität Wasser
@@ -663,7 +663,7 @@ de:
         one: Betreuung Sicherheitsaktivität Berg
 
       event/camp/role/advisor_schnee_security:
-        one: Betreuung Sicherheitsaktivität Schnee
+        one: Betreuung Sicherheitsaktivität Winter
 
       event/camp/role/advisor_wasser_security:
         one: Betreuung Sicherheitsaktivität Wasser
@@ -749,7 +749,7 @@ de:
         camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
         j_s_kind: J+S-Rahmen
         j_s_security: Sicherheitsbereich
-        j_s_security_snow: Schnee
+        j_s_security_snow: Winter
         j_s_security_mountain: Berg
         j_s_security_water: Wasser
         canton: Kanton / Land
@@ -789,12 +789,12 @@ de:
           assigned: Zugewiesen
           canceled: Abgemeldet
           absent: Nicht erschienen
-        abteilungsleitung_id: Abteilungsleitung
-        coach_id: Coach
+        abteilungsleitung: Abteilungsleitung
+        coach: Coach
         coach_confirmed: Coach bestätigt
         advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
         advisor_water_security: Betreuung Sicherheitsaktivität Wasser
-        advisor_snow_security: Betreuung Sicherheitsaktivität Schnee
+        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
