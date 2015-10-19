@@ -50,16 +50,18 @@
 = render 'expected_participants_fields', f: f
 
 - entry.used?(:al_present) do
-  = f.labeled_boolean_field(:al_present, {caption: t('.al_present_caption')})
+  = f.labeled_boolean_field(:al_present, caption: t('.al_present_caption'))
 
 - entry.used?(:al_visiting) do
-  = f.labeled_boolean_field(:al_visiting, {caption: t('.al_visiting_caption')})
+  = f.labeled_boolean_field(:al_visiting, caption: t('.al_visiting_caption'),
+                                          'data-enable' => 'event_al_visiting_date')
 
 - entry.used?(:al_visiting_date) do
   = f.labeled_date_field(:al_visiting_date)
 
 - entry.used?(:coach_visiting) do
-  = f.labeled_boolean_field(:coach_visiting, {caption: t('.coach_visiting_caption')})
+  = f.labeled_boolean_field(:coach_visiting, caption: t('.coach_visiting_caption'),
+                                             'data-enable' => 'event_coach_visiting_date')
 
 - entry.used?(:coach_visiting_date) do
   = f.labeled_date_field(:coach_visiting_date)
