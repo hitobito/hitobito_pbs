@@ -30,16 +30,22 @@ describe Event::CampMailer do
     coach.update_attributes(first_name: 'Heftige', last_name: 'Boe')
     coach
   end
+  let(:abteilungsleitung) { Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person }
   let(:other_person) do
     other_person = Fabricate(Group::Woelfe::Wolf.name.to_sym,
                              group: groups(:sunnewirbu)).person
     other_person.update_attributes(first_name: 'Wind', last_name: 'Hose')
     other_person
   end
+  let(:leader) do
+    role = Fabricate(:event_role, type: Event::Camp::Role::Leader.sti_name)
+    Fabricate(:event_participation, event: camp, roles: [role], active: true).person
+  end
   let(:participation) { Fabricate(:event_participation, person: other_person, event: camp) }
 
   before do
     camp.update_attributes(coach_id: coach.id)
+    camp.update_attributes(abteilungsleitung_id: abteilungsleitung.id)
   end
 
   describe '#camp_created' do
@@ -149,10 +155,22 @@ describe Event::CampMailer do
     let(:mail) { Event::CampMailer.submit_camp(camp) }
 
     context 'headers' do
-      subject { mail }
-      its(:subject) { should eq 'Einreichung Lager' }
-      # its(:to)      { should eq ['al.schekka@hitobito.example.com'] }
-      # its(:from)    { should eq ['noreply@localhost'] }
+      context 'domestic' do
+        subject { mail }
+        its(:subject) { should eq 'Einreichung Lager' }
+        its(:to)      { should eq ['lager@pbs.ch'] }
+        its(:cc)      { should eq [coach.email, abteilungsleitung.email, leader.email] }
+        its(:from)    { should eq ['noreply@localhost'] }
+      end
+
+      context 'foreign' do
+        before { camp.update_attribute(:canton, 'zz') }
+        subject { mail }
+        its(:subject) { should eq 'Einreichung Lager' }
+        its(:to)      { should eq ['lager@pbs.ch', 'auslandlager@pbs.ch'] }
+        its(:cc)      { should eq [coach.email, abteilungsleitung.email, leader.email] }
+        its(:from)    { should eq ['noreply@localhost'] }
+      end
     end
 
     context 'body' do
