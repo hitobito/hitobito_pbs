@@ -728,7 +728,7 @@ de:
         language_fr: Kurssprache Französisch
         language_it: Kurssprache Italienisch
         language_en: Kurssprache Englisch
-        expected_participants: Erwartete Teilnehmer
+        expected_participants: Erwartete Teilnahmen
         expected_participants_wolf: Wölfe
         expected_participants_wolf_f: Anzahl Wölfe weiblich
         expected_participants_wolf_m: Anzahl Wölfe männlich
@@ -757,8 +757,8 @@ de:
         coordinates: Koordinaten
         altitude: Höhe über Meer
         emergency_phone: Notfalltelefon
-        landlord: BesitzerIn / VermieterIn
-        landlord_permission_obtained: Einverständnis Eigentümer
+        landlord: Besitzer/-in / Vermieter/-in
+        landlord_permission_obtained: Einverständnis Eigentümer/-in
         paper_application_required: Papieranmeldung zwingend
         participants_can_apply: Anmeldung möglich
         participants_can_cancel: Abmeldung möglich
@@ -767,8 +767,8 @@ de:
         al_visiting_date: AL Besuchsdatum
         coach_visiting: Coachbesuch
         coach_visiting_date: Coach Besuchsdatum
-        local_scout_contact_present: Lokaler Pfadfinder Kontakt
-        local_scout_contact: Lokaler Pfadfinder Kontaktinfos
+        local_scout_contact_present: Lokaler Pfadi Kontakt
+        local_scout_contact: Lokale Pfadi Kontaktinfos
 
       event/approval:
         comment: Kommentar
@@ -791,12 +791,17 @@ de:
           canceled: Abgemeldet
           absent: Nicht erschienen
         abteilungsleitung_id: Abteilungsleitung
+        abteilungsleitung: Abteilungsleitung
         coach_id: Coach
+        coach: Coach
         coach_confirmed: Coach bestätigt
         coach_confirmed_inline: bestätigt
         advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
+        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
         advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
+        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
         advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
+        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
