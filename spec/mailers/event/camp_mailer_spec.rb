@@ -27,7 +27,7 @@ describe Event::CampMailer do
   let(:actuator_id) { actuator.id }
   let(:coach) do
     coach = Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person
-    coach.update_attributes(first_name: 'Heftige', last_name: 'Böe')
+    coach.update_attributes(first_name: 'Heftige', last_name: 'Boe')
     coach
   end
   let(:other_person) do
@@ -77,7 +77,7 @@ describe Event::CampMailer do
         subject { mail.body }
 
         it 'renders placeholders' do
-          is_expected.to match(/Wirbel Sturm.*hat im Lager \"Wirbelcamp\" Heftige Böe.*als Coach definiert/)
+          is_expected.to match(/Wirbel Sturm.*hat im Lager \"Wirbelcamp\" Heftige Boe.*als Coach definiert/)
           is_expected.to match(camp_url)
         end
       end
@@ -159,7 +159,7 @@ describe Event::CampMailer do
       subject { mail.body }
 
       it 'renders placeholders' do
-        is_expected.to match(/Heftige Böe.*reicht das Lager \"Wirbelcamp\" ein.*PDF: http.*\/camp_application/)
+        is_expected.to match(/Heftige Boe.*reicht das Lager \"Wirbelcamp\" ein.*PDF:.*http.*\/camp_application/)
         is_expected.to match(camp_url)
       end
     end
