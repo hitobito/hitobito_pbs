@@ -86,11 +86,13 @@ class Event::CampMailer < ApplicationMailer
   end
 
   def camp_url
-    group_event_url(camp.groups.first, camp)
+    url = group_event_url(camp.groups.first, camp)
+    "<a href=\"#{url}\">#{url}</a>"
   end
 
   def camp_application_url
-    camp_application_group_event_url(camp.groups.first, camp)
+    url = camp_application_group_event_url(camp.groups.first, camp)
+    "<a href=\"#{url}\">#{url}</a>"
   end
 
   def camp_state
