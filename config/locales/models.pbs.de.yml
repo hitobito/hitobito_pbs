@@ -790,12 +790,13 @@ de:
           assigned: Zugewiesen
           canceled: Abgemeldet
           absent: Nicht erschienen
-        abteilungsleitung: Abteilungsleitung
-        coach: Coach
+        abteilungsleitung_id: Abteilungsleitung
+        coach_id: Coach
         coach_confirmed: Coach bestätigt
-        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
-        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
-        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        coach_confirmed_inline: bestätigt
+        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
+        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
+        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch

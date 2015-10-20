@@ -5,4 +5,4 @@
 
 = render_present_attrs(entry, *event_secondary_attrs(entry))
 
-= render 'restricted_roles_attrs'
+= render_attrs(entry, *entry.used_attributes(*event_restricted_role_attributes))

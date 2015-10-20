@@ -25,7 +25,7 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      advisor_mountain_link = group_person_path(group_id: groups(:bund), id: advisor_mountain)
+      advisor_mountain_link = person_path(id: advisor_mountain)
       expect(dom.find_link(advisor_mountain.to_s)[:href]).to eq advisor_mountain_link
     end
 

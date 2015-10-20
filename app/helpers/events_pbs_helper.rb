@@ -135,15 +135,36 @@ module EventsPbsHelper
     end
   end
 
-  def labeled_person_attr(entry, attr)
-    person = entry.send(attr)
-    if can?(:show, person)
-      labeled(captionize(attr, entry.class)) do
-        link_to(format_attr(entry, attr), group_person_path(@group, person))
-      end
-    else
-      labeled_attr(entry, attr)
+  def format_event_abteilungsleitung_id(entry)
+    person_link(entry.abteilungsleitung)
+  end
+
+  def format_event_advisor_mountain_security_id(entry)
+    person_link(entry.advisor_mountain_security)
+  end
+
+  def format_event_advisor_snow_security_id(entry)
+    person_link(entry.advisor_snow_security)
+  end
+
+  def format_event_advisor_water_security_id(entry)
+    person_link(entry.advisor_water_security)
+  end
+
+  def format_event_coach_id(entry)
+    formatted_attr = person_link(entry.coach)
+    if entry.coach
+      confirmed_label = t('activerecord.attributes.event/camp.coach_confirmed_inline')
+      formatted_attr += ", #{confirmed_label}: #{format_attr(entry, :coach_confirmed)}"
     end
+    formatted_attr
+  end
+
+  def event_restricted_role_attributes
+    [ :abteilungsleitung_id, :advisor_mountain_security_id, 
+      :advisor_snow_security_id, :advisor_water_security_id,
+      :coach_id
+    ]
   end
 
 end
