@@ -86,6 +86,11 @@ describe Event::Camp do
       subject.update!(location: 'Bern')
     end
 
+    it 'is not sent if nothing changed even if id is set as string (as done by controller)' do
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
+      subject.update!(location: 'Bern', coach_id: people(:al_berchtold).id.to_s)
+    end
+
     it 'is not sent if state set to created' do
       expect(Event::CampMailer).not_to receive(:advisor_assignedy)
       subject.update!(location: 'Bern', state: 'created')
