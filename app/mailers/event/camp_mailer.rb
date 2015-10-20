@@ -18,68 +18,69 @@ class Event::CampMailer < ApplicationMailer
 
   attr_reader :camp
 
-  def created_info(camp, recipients, actuator)
+  def camp_created(camp, recipients, user_id)
     @camp = camp
-    compose(CONTENT_CAMP_CREATED, recipients, 'actuator-name' => actuator.to_s)
+    compose(CONTENT_CAMP_CREATED, Person.mailing_emails_for(recipients),
+            'actuator-name' => Person.find(user_id).to_s)
   end
 
-  def coach_assigned_info(camp, recipients, actuator)
+  def advisor_assigned(camp, advisor, key, user_id)
     @camp = camp
-    compose(CONTENT_COACH_ASSIGNED, recipients,
-            'actuator-name' => actuator.to_s,
-            'coach-name' => camp.coach.to_s)
-  end
 
-  def security_advisor_assigned_info(camp, recipients, actuator, advisor)
-    @camp = camp
-    compose(CONTENT_SECURITY_ADVISOR_ASSIGNED, recipients,
-            'actuator-name' => actuator.to_s,
+    recipients = Person.mailing_emails_for(advisor)
+
+    compose(fetch_advisor_content_key(key), recipients,
+            'actuator-name' => Person.find(user_id).to_s,
             'advisor-name' => advisor.to_s)
-  end
-
-  def al_assigned_info(camp, recipients, actuator)
-    @camp = camp
-    compose(CONTENT_AL_ASSIGNED, recipients,
-            'actuator-name' => actuator.to_s,
-            'al-name' => camp.abteilungsleitung.to_s)
   end
 
   def remind(camp, recipient)
     @camp = camp
-    compose(CONTENT_SUBMIT_REMINDER, recipient,
+    compose(CONTENT_SUBMIT_REMINDER, Person.mailing_emails_for(recipient),
             'recipient-name' => recipient.greeting_name)
   end
 
-  def submit(camp, recipient, actuator)
+  def submit_camp(camp)
     @camp = camp
-    compose(CONTENT_SUBMIT, recipient,
-            'recipient-name' => recipient.greeting_name,
-            'actuator-name' => actuator.to_s,
-            'camp-application-url' => camp_application_url)
+
+    recipients = [Settings.email.camp.submit_recipient]
+    recipients << Settings.email.camp.submit_abroad_recipient if camp.abroad?
+
+    copies = [camp.coach,
+              camp.abteilungsleitung,
+              *camp.participations_for(Event::Camp::Role::Leader).collect(&:person)].compact
+
+    compose(CONTENT_SUBMIT, recipients,
+            { 'coach-name' => camp.coach.to_s,
+              'camp-application-url' => camp_application_url},
+            Person.mailing_emails_for(copies))
   end
 
   def participant_applied_info(participation, recipients)
     @camp = participation.event
-    compose(CONTENT_PARTICIPANT_APPLIED, recipients,
+    compose(CONTENT_PARTICIPANT_APPLIED, Person.mailing_emails_for(recipients),
             'participant-name' => participation.person.to_s)
   end
 
   def participant_canceled_info(participation, recipients)
     @camp = participation.event
-    compose(CONTENT_PARTICIPANT_CANCELED, recipients,
+    compose(CONTENT_PARTICIPANT_CANCELED, Person.mailing_emails_for(recipients),
             'participant-name' => participation.person.to_s)
   end
 
   private
 
-  def compose(content_key, recipients, values)
+  def compose(content_key, recipients, values, copies = nil)
     content = CustomContent.get(content_key)
 
     values['camp-name'] = camp.name
     values['camp-url'] = camp_url
     values['camp-state'] = camp_state
 
-    mail(to: Person.mailing_emails_for(recipients), subject: content.subject) do |format|
+    envelope = { to: recipients, subject: content.subject }
+    envelope[:cc] = copies if copies.present?
+
+    mail(envelope) do |format|
       format.html { render text: content.body_with_values(values) }
     end
   end
@@ -96,43 +97,12 @@ class Event::CampMailer < ApplicationMailer
     I18n.t("activerecord.attributes.event/camp.states.#{camp.state}")
   end
 
-  def advisor_assigned(camp, advisor, key, user_id)
-    # content = CustomContent.get(fetch_advisor_content_key(key))
-    # values['event-details']  = event_details
-    # ...
-
-    # mail(to: Person.mailing_emails_for(advisor), subject: content.subject) do |format|
-    #   format.html { render text: content.body_with_values(values) }
-    # end
+  def fetch_advisor_content_key(advisor_key)
+    case advisor_key
+    when 'coach' then CONTENT_COACH_ASSIGNED
+    when 'abteilungsleitung' then CONTENT_AL_ASSIGNED
+    else
+      CONTENT_SECURITY_ADVISOR_ASSIGNED
+    end
   end
-
-  def submit_camp(camp)
-    # content = CustomContent.get(CONTENT_KEY)
-    # values['event-details']  = event_details
-    # ...
-    recipients = [Settings.email.camp.submit_recipient]
-    recipients << Settings.email.camp.submit_abroad_recipient if camp.abroad?
-
-    copies = [camp.coach,
-              camp.abteilungsleitung,
-              *camp.participations_for(Event::Camp::Role::Leader).collect(&:person)].compact
-
-    # mail(to: recipients,
-    #      cc: Person.mailing_emails_for(copies),
-    #      subject: content.subject) do |format|
-    #   format.html { render text: content.body_with_values(values) }
-    # end
-  end
-
-  private
-
-  #def fetch_advisor_content(advisor_key)
-  #  case advisor_key
-  #  when 'coach' then COACH_KEY
-  #  when 'abteilungsleitung' then AL_KEY
-  #  else
-  #    ADVISOR_KEY
-  #  end
-  #end
-
 end

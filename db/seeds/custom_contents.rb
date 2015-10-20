@@ -31,7 +31,7 @@ CustomContent.seed_once(:key,
     placeholders_optional: 'camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_COACH_ASSIGNED,
-    placeholders_required: 'actuator-name, coach-name, camp-url',
+    placeholders_required: 'actuator-name, advisor-name, camp-url',
     placeholders_optional: 'camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_SECURITY_ADVISOR_ASSIGNED,
@@ -39,7 +39,7 @@ CustomContent.seed_once(:key,
     placeholders_optional: 'camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_AL_ASSIGNED,
-    placeholders_required: 'actuator-name, al-name, camp-url',
+    placeholders_required: 'actuator-name, advisor-name, camp-url',
     placeholders_optional: 'camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_SUBMIT_REMINDER,
@@ -47,8 +47,8 @@ CustomContent.seed_once(:key,
     placeholders_optional: 'recipient-name, camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_SUBMIT,
-    placeholders_required: 'actuator-name, camp-url',
-    placeholders_optional: 'recipient-name, camp-name, camp-state, camp-application-url' },
+    placeholders_required: 'camp-url',
+    placeholders_optional: 'coach-name, camp-name, camp-state, camp-application-url' },
 
   { key: Event::CampMailer::CONTENT_PARTICIPANT_APPLIED,
     placeholders_required: 'participant-name, camp-url',
@@ -199,7 +199,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     label: 'Lager: E-Mail Coach zugeordnet',
     subject: 'Lager: Coach zugeordnet',
     body: 'Hallo<br><br>' \
-          '{actuator-name} hat im Lager "{camp-name}" {coach-name} als Coach definiert.<br><br>' \
+          '{actuator-name} hat im Lager "{camp-name}" {advisor-name} als Coach definiert.<br><br>' \
           '{camp-url}<br>' },
 
   { custom_content_id: camp_security_advisor_assigned_id,
@@ -216,7 +216,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     label: 'Lager: E-Mail Abteilungsleitung zugeordnet',
     subject: 'Lager: Abteilungsleitung zugeordnet',
     body: 'Hallo<br><br>' \
-          '{actuator-name} hat im Lager "{camp-name}" {al-name} als Abteilungsleitung ' \
+          '{actuator-name} hat im Lager "{camp-name}" {advisor-name} als Abteilungsleitung ' \
           'definiert.<br><br>' \
           '{camp-url}<br>' },
 
@@ -233,7 +233,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     label: 'Lager: E-Mail Lager einreichen',
     subject: 'Einreichung Lager',
     body: 'Hallo<br><br>' \
-          '{actuator-name} reicht das Lager "{camp-name}" ein.<br><br>' \
+          '{coach-name} reicht das Lager "{camp-name}" ein.<br><br>' \
           'PDF: {camp-application-url}<br>' \
           'Lager: {camp-url}<br>' },
 
