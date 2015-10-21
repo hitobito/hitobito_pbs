@@ -769,6 +769,7 @@ de:
         coach_visiting_date: Coach Besuchsdatum
         local_scout_contact_present: Lokaler Pfadi Kontakt
         local_scout_contact: Lokale Pfadi Kontaktinfos
+        location_help_inline: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
 
       event/approval:
         comment: Kommentar

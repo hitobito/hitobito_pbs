@@ -13,7 +13,8 @@
                             { include_blank: true },
                              class: 'chosen-select',
                              data: { placeholder: ' ' })
-  = f.labeled_input_fields(:location, :coordinates, :altitude, :emergency_phone, :landlord)
+  = f.labeled_input_field(:location, help: t('activerecord.attributes.event.location_help_inline'))
+  = f.labeled_input_fields(:coordinates, :altitude, :emergency_phone, :landlord)
   = f.labeled_input_field(:landlord_permission_obtained, caption: t('.landlord_permission_obtained_caption'))
   = f.labeled_input_field(:local_scout_contact_present, caption: t('.local_scout_contact_present_caption'),
                                                         'data-enable' => 'event_local_scout_contact')
