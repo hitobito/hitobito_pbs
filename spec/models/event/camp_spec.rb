@@ -138,6 +138,24 @@ describe Event::Camp do
                       coach_id: people(:al_schekka).id,
                       advisor_snow_security_id: nil)
     end
+
+    %w(abteilungsleitung coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+      context "mail for #{key}" do
+        it 'is sent' do
+          subject.update!(state: nil, coach_id: '', advisor_snow_security_id: '')
+          mail = double('mail', deliver_later: nil)
+
+          person = Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person
+          person.update_attribute(:first_name, key)
+          expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, person, key, nil)
+                                                                 .and_return(mail)
+          subject.send("#{key}_id=", person.id)
+          subject.state = 'assignment_closed'
+          subject.save!
+        end
+      end
+    end
+
   end
 
 end

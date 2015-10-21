@@ -209,7 +209,7 @@ class Event::Camp < Event
      :abteilungsleitung,
      :advisor_mountain_security,
      :advisor_snow_security,
-     :advisor_mountain_security
+     :advisor_water_security
     ].each do |advisor_key|
       send_advisor_assignment_info(advisor_key)
     end

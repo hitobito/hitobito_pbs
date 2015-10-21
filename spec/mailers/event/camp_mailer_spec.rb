@@ -90,7 +90,7 @@ describe Event::CampMailer do
     end
 
     context 'advisor' do
-      let(:mail) { Event::CampMailer.advisor_assigned(camp, other_person, 'advisor', actuator_id) }
+      let(:mail) { Event::CampMailer.advisor_assigned(camp, other_person, 'advisor_mountain_security', actuator_id) }
 
       context 'headers' do
         subject { mail }
