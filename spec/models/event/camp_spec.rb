@@ -158,4 +158,91 @@ describe Event::Camp do
 
   end
 
+  context 'camp created info' do
+    before do
+      subject.state = 'created'
+      subject.save!
+    end
+
+    it 'is not sent if state stays created' do
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern')
+    end
+
+    it 'is not sent if state stays confirmed' do
+      subject.update!(state: 'confirmed')
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern')
+    end
+
+    it 'is not sent if state set to nil' do
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern', state: nil)
+    end
+
+    it 'is not sent if state set from confirmed to assignment_closed' do
+      subject.update!(state: 'confirmed')
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern', state: 'assignment_closed')
+    end
+
+    it 'is not sent if state set from assignment_closed to canceled' do
+      subject.update!(state: 'assignment_closed')
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern', state: 'canceled')
+    end
+
+    it 'is not sent if state set from confirmed to created' do
+      subject.update!(state: 'confirmed')
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern', state: 'created')
+    end
+
+    it 'is not sent if state set from canceled to closed' do
+      subject.update!(state: 'canceled')
+      expect(Event::CampMailer).not_to receive(:camp_created)
+      subject.update!(location: 'Bern', state: 'closed')
+    end
+
+    context 'state set to confirmed' do
+      [{ group_type: Group::Bund, role_type: Group::Bund::MitarbeiterGs },
+       { group_type: Group::Kantonalverband, role_type: Group::Kantonalverband::Kantonsleitung },
+       { group_type: Group::Region, role_type: Group::Region::Regionalleitung },
+       { group_type: Group::Abteilung, role_type: Group::Abteilung::Abteilungsleitung },
+       { group_type: Group::Biber, role_type: Group::Abteilung::Abteilungsleitung },
+       { group_type: Group::Woelfe, role_type: Group::Abteilung::Abteilungsleitung },
+       { group_type: Group::Pfadi, role_type: Group::Abteilung::Abteilungsleitung },
+       { group_type: Group::Pio, role_type: Group::Abteilung::Abteilungsleitung },
+       { group_type: Group::Pta, role_type: Group::Abteilung::Abteilungsleitung }
+      ].each do |entry|
+
+        context "camp on #{entry[:group_type].name.demodulize.downcase}" do
+          let(:group) do
+            if entry[:group_type].layer
+              Fabricate(entry[:group_type].name)
+            else
+              Fabricate(entry[:group_type].name, parent: Fabricate(Group::Abteilung.name))
+            end
+          end
+          let(:leader) do
+            leader_group = entry[:group_type].layer ? group : group.parent
+            Fabricate(entry[:role_type].name, group: leader_group).person
+          end
+
+          before do
+            subject.update!(groups: [group])
+          end
+
+          it "is sent to #{entry[:role_type].name.demodulize.downcase}" do
+            mail = double('mail', deliver_later: nil)
+            expect(Event::CampMailer).to receive(:camp_created).with(subject, leader, nil).and_return(mail)
+            subject.update!(location: 'Bern', state: 'confirmed')
+          end
+        end
+
+      end
+    end
+
+  end
+
 end

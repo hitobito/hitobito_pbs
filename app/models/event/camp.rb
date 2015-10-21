@@ -164,6 +164,7 @@ class Event::Camp < Event
   ### CALLBACKS
 
   after_save :send_assignment_infos
+  after_save :send_created_infos
 
 
   ### INSTANCE METHODS
@@ -231,6 +232,33 @@ class Event::Camp < Event
 
   def advisor_changed_except_in_created?(advisor_key)
     restricted_role_changes[advisor_key] && state != 'created' && !state.blank?
+  end
+
+  def send_created_infos
+    layer_leaders.each { |person| send_created_info(person) }
+  end
+
+  def send_created_info(person)
+    if person && person != Person.stamper &&
+      (state_changed_from_created? && state == 'confirmed')
+      Event::CampMailer.camp_created(self, person, Person.stamper).deliver_later
+    end
+  end
+
+  def layer_leaders
+    layer_group = groups.first.layer_group
+    Person.joins(:roles, :groups)
+          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name] },
+                 groups: { id: layer_group.id })
+  end
+
+  def layer_leader_roles
+    @leader_roles ||= {
+      Group::Bund.sti_name => Group::Bund::MitarbeiterGs.sti_name,
+      Group::Kantonalverband.sti_name => Group::Kantonalverband::Kantonsleitung.sti_name,
+      Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
+      Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
+    }
   end
 
 end
