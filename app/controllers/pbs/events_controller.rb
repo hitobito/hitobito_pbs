@@ -15,7 +15,7 @@ module Pbs::EventsController
 
     before_render_show :load_participation_emails, if: :canceled?
 
-    alias_method_chain :permitted_attrs, :superior_check
+    alias_method_chain :permitted_attrs, :superior_and_coach_check
   end
 
   def show_camp_application
@@ -42,11 +42,26 @@ module Pbs::EventsController
     @emails = Person.mailing_emails_for(entry.people)
   end
 
-  def permitted_attrs_with_superior_check
+  def permitted_attrs_with_superior_and_coach_check
     attrs = entry.class.used_attributes.dup
     attrs += self.class.permitted_attrs
+
+    attrs = check_superior_attrs(attrs)
+    attrs = check_coach_attrs(attrs)
+
+    attrs
+  end
+
+  def check_superior_attrs(attrs)
     if entry.superior_attributes.present? && !can?(:modify_superior, entry)
       attrs -= entry.class.superior_attributes
+    end
+    attrs
+  end
+
+  def check_coach_attrs(attrs)
+    if entry.is_a?(Event::Camp) && entry.coach != current_user
+      attrs.delete(:coach_confirmed)
     end
     attrs
   end

@@ -22,7 +22,7 @@
   = f.labeled_person_field :coach
 
 - entry.used?(:coach_confirmed) do
-  = f.labeled_boolean_field :coach_confirmed
+  = f.labeled_boolean_field :coach_confirmed if entry.coach == current_user
 
 - entry.used?(:language_de) do
   = f.labeled(:course_languages) do
