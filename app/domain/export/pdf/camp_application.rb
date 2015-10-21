@@ -10,6 +10,8 @@ module Export::Pdf
 
     include Translatable
 
+    EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung)
+
     attr_reader :camp, :pdf
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
@@ -63,7 +65,64 @@ module Export::Pdf
 
     def render_group
       section('group_header') do
+        with_label('abteilung', abteilung_name)
+        with_label('einheit', einheit_name) if einheit_name
+        expected_participant_table
       end
+    end
+
+    def expected_participant_table
+      move_down_line
+      text translate('expected_participants')
+      move_down_line
+      cells = []
+      cells << expected_participant_table_header
+      cells << expected_participant_table_row(:f)
+      cells << expected_participant_table_row(:m)
+      table(cells, cell_style: { align: :center, border_width: 0.25, width: 50})
+    end
+
+    def expected_participant_table_header
+      headers = ['']
+      headers += EXPECTED_PARTICIPANT_KEYS.collect do |h|
+        key = 'expected_participants_' + h
+        t_camp_attr(key)
+      end
+    end
+
+    def expected_participant_table_row(gender)
+      row = [gender.to_s.upcase]
+      row += EXPECTED_PARTICIPANT_KEYS.collect do |a|
+        attr = "expected_participants_#{a}_#{gender.to_s}"
+        @camp.send(attr.to_sym)
+      end
+    end
+
+    def abteilung_name
+      camp_abteilung ? camp_abteilung.to_s : camp_group.to_s
+    end
+
+    def einheit_name
+      unless camp_at_or_above_abteilung?
+        camp_group.to_s
+      end
+    end
+
+    def camp_abteilung
+      @camp_abteilung ||=
+        camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
+    end
+
+    def camp_at_or_above_abteilung?
+      camp_at_abteilung? || !camp_abteilung
+    end
+
+    def camp_at_abteilung?
+      camp_group.is_a?(Group::Abteilung)
+    end
+
+    def camp_group
+      @camp_group ||= @camp.groups.first
     end
 
     def render_leader
@@ -143,6 +202,10 @@ module Export::Pdf
                         list.
                         collect(&:to_s).
                         join("\n")
+    end
+
+    def t_camp_attr(key)
+      I18n.t('activerecord.attributes.event.' + key)
     end
 
   end

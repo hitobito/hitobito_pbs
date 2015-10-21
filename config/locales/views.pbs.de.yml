@@ -54,6 +54,9 @@ de:
     zip_town: PLZ / Ort
     birthday: Geburtstag
     qualifications: Ausbildung
+    abteilung: Abteilung
+    einheit: Einheit
+    expected_participants: Erwartete Anzahl Teilnehmende
 
   event:
     lists:
