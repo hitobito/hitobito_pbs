@@ -134,6 +134,8 @@ module Export::Pdf
           with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
           with_label('birthday', leader.birthday.presence && I18n.l(leader.birthday))
           with_label('qualifications', active_qualifications(leader))
+        else
+          text_nobody
         end
       end
     end
@@ -144,8 +146,16 @@ module Export::Pdf
         cells = leaders.collect do |person|
           [person.to_s, person.birthday.try(:year).to_s, active_qualifications(person)]
         end
-        table(cells, width: 500, cell_style: { border_width: 0.25 }) if cells.present?
+        if cells.present?
+          table(cells, width: 500, cell_style: { border_width: 0.25 }, column_widths: [210, 40, 250])
+        else
+          text_nobody
+        end
       end
+    end
+
+    def text_nobody
+      text "(#{I18n.t('global.nobody')})"
     end
 
     def render_dates
