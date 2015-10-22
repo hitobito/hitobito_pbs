@@ -17,7 +17,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [abteilung])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:abteilung_name)).to eq(abteilung.to_s)
+        expect(data.abteilung_name).to eq(abteilung.to_s)
       end
       
       it 'returns Abteilung name if camp below Abteilung' do
@@ -25,7 +25,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [pfadi])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:abteilung_name)).to eq(groups(:schekka).to_s)
+        expect(data.abteilung_name).to eq(groups(:schekka).to_s)
       end
       
       it 'returns Group name if camp above Abteilung' do
@@ -33,7 +33,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [bund])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:abteilung_name)).to eq(bund.to_s)
+        expect(data.abteilung_name).to eq(bund.to_s)
       end
 
     end
@@ -45,7 +45,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [abteilung])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:einheit_name)).to be_nil
+        expect(data.einheit_name).to be_nil
       end
       
       it 'returns Einheit name if camp below Abteilung' do
@@ -53,7 +53,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [pfadi])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:einheit_name)).to eq(pfadi.to_s)
+        expect(data.einheit_name).to eq(pfadi.to_s)
       end
 
       it 'does not return Einheit name if camp above Abteilung' do
@@ -61,7 +61,7 @@ describe Export::Pdf::CampApplicationData do
         camp = Fabricate(:pbs_camp, groups: [bund])
         data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(data.send(:einheit_name)).to be_nil
+        expect(data.einheit_name).to be_nil
       end
 
     end
@@ -72,7 +72,7 @@ describe Export::Pdf::CampApplicationData do
       let(:data) { Export::Pdf::CampApplicationData.new(camp) }
 
       it 'has 6 header columns' do
-        header_column = data.send(:expected_participant_table_header)
+        header_column = data.expected_participant_table_header
         expect(header_column).to eq ['', 'Wölfe', 'Pfadi', 'Pios', 'Rovers', 'Leiter']
       end
 
@@ -85,7 +85,7 @@ describe Export::Pdf::CampApplicationData do
           expected_participants_leitung_f: 99
         ) 
 
-        row_f = data.send(:expected_participant_table_row, :f)
+        row_f = data.expected_participant_table_row(:f)
         expect(row_f).to eq ['F', 1, 42, 33, 3, 99]
 
         camp.update_attributes(
@@ -96,7 +96,7 @@ describe Export::Pdf::CampApplicationData do
           expected_participants_leitung_m: 9 
         ) 
 
-        row_m = data.send(:expected_participant_table_row, :m)
+        row_m = data.expected_participant_table_row(:m)
         expect(row_m).to eq ['M', 3, 4, 9, 12, 9]
       end
 
@@ -114,9 +114,9 @@ describe Export::Pdf::CampApplicationData do
 
         quali1_text = quali1.qualification_kind.to_s
         quali2_text = quali2.qualification_kind.to_s
-        expect(data.send(:active_qualifications, leader)).to match quali1_text
-        expect(data.send(:active_qualifications, leader)).to match /\n/
-        expect(data.send(:active_qualifications, leader)).to match quali2_text
+        expect(data.active_qualifications(leader)).to match quali1_text
+        expect(data.active_qualifications(leader)).to match /\n/
+        expect(data.active_qualifications(leader)).to match quali2_text
       end
 
     end

@@ -7,6 +7,9 @@
 
 module Export::Pdf
   class CampApplicationData
+
+    # TODO move not from the outside used methods to private
+    # TODO test not tested methods
     
     attr_reader :camp, :camp_group
 
@@ -19,7 +22,6 @@ module Export::Pdf
       @camp_group = camp.groups.first
     end
 
-    # participant table
     def expected_participant_table_header
       headers = ['']
       headers += EXPECTED_PARTICIPANT_KEYS.collect do |h|
@@ -63,7 +65,7 @@ module Export::Pdf
       value = @camp.send(attr)
       if boolean?(value)
         value = t_boolean(value)
-      elsif attr == :canton
+      elsif attr == :canton && value.present?
         value = Cantons.full_name(value.to_sym)
       else
         value
