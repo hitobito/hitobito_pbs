@@ -803,6 +803,8 @@ de:
         advisor_water_security: Betreuung Sicherheitsaktivität Wasser
         advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
         advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        advisor_unassigned: nicht zugeordnet
+        leader_unassigned: Leiter nicht zugeordnet
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch

@@ -136,23 +136,23 @@ module EventsPbsHelper
   end
 
   def format_event_abteilungsleitung_id(entry)
-    person_link(entry.abteilungsleitung)
+    advisor_link(entry.abteilungsleitung)
   end
 
   def format_event_advisor_mountain_security_id(entry)
-    person_link(entry.advisor_mountain_security)
+    advisor_link(entry.advisor_mountain_security)
   end
 
   def format_event_advisor_snow_security_id(entry)
-    person_link(entry.advisor_snow_security)
+    advisor_link(entry.advisor_snow_security)
   end
 
   def format_event_advisor_water_security_id(entry)
-    person_link(entry.advisor_water_security)
+    advisor_link(entry.advisor_water_security)
   end
 
   def format_event_coach_id(entry)
-    formatted_attr = person_link(entry.coach)
+    formatted_attr = advisor_link(entry.coach)
     if entry.coach
       confirmed_label = t('activerecord.attributes.event/camp.coach_confirmed_inline')
       formatted_attr += ", #{confirmed_label}: #{format_attr(entry, :coach_confirmed)}"
@@ -160,11 +160,20 @@ module EventsPbsHelper
     formatted_attr
   end
 
+  def advisor_link(advisor)
+    if advisor.present?
+      person_link(advisor)
+    else
+      content_tag(:span, class: 'label label-warning') do
+        t('activerecord.attributes.event/camp.advisor_unassigned')
+      end
+    end
+  end
+
   def event_restricted_role_attributes
-    [ :abteilungsleitung_id, :advisor_mountain_security_id, 
-      :advisor_snow_security_id, :advisor_water_security_id,
-      :coach_id
-    ]
+    [:abteilungsleitung_id, :advisor_mountain_security_id,
+     :advisor_snow_security_id, :advisor_water_security_id,
+     :coach_id]
   end
 
 end
