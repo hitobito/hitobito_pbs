@@ -16,6 +16,7 @@ module Export::Pdf
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
              to: :pdf
+    delegate :t, :l, to: I18n
 
     def initialize(camp)
       @camp = camp
@@ -29,7 +30,7 @@ module Export::Pdf
 
       render_sections
 
-      pdf.number_pages(I18n.t('event.participations.print.page_of_pages'),
+      pdf.number_pages(t('event.participations.print.page_of_pages'),
                        at: [0, 0],
                        align: :right,
                        size: 9)
@@ -48,8 +49,7 @@ module Export::Pdf
       render_group
       render_leader
       render_assistant_leaders
-      render_dates
-      render_location
+      render_camp
       render_j_s
       render_state
       render_abteilungsleitung
@@ -132,7 +132,7 @@ module Export::Pdf
           with_label('name', leader)
           with_label('address', leader.address)
           with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
-          with_label('birthday', leader.birthday.presence && I18n.l(leader.birthday))
+          with_label('birthday', leader.birthday.presence && l(leader.birthday))
           with_label('qualifications', active_qualifications(leader))
         else
           text_nobody
@@ -147,7 +147,9 @@ module Export::Pdf
           [person.to_s, person.birthday.try(:year).to_s, active_qualifications(person)]
         end
         if cells.present?
-          table(cells, width: 500, cell_style: { border_width: 0.25 }, column_widths: [210, 40, 250])
+          table(cells, width: 500,
+                cell_style: { border_width: 0.25 },
+                column_widths: [210, 40, 250])
         else
           text_nobody
         end
@@ -155,19 +157,40 @@ module Export::Pdf
     end
 
     def text_nobody
-      text "(#{I18n.t('global.nobody')})"
+      text "(#{t('global.nobody')})"
+    end
+
+    def text_no_entry
+      text "(#{t('global.nobody')})"
+    end
+
+    def render_camp
+      section('camp') do
+        sub_section('camp_dates') do
+          render_dates
+        end
+        sub_section('camp_location') do
+          render_location
+        end
+      end
     end
 
     def render_dates
-
+      @camp.dates.each do |d|
+        labeled_value(d.label, d.duration.to_s)
+      end
     end
 
     def render_location
-
+      labeled_camp_attr(:canton)
+      labeled_camp_attr(:location)
+      labeled_camp_attr(:coordinates)
+      labeled_camp_attr(:altitude)
+      labeled_camp_attr(:landlord)
+      labeled_camp_attr(:landlord_permission_obtained)
     end
 
     def render_j_s
-
     end
 
     def render_state
@@ -189,14 +212,49 @@ module Export::Pdf
       2.times { move_down_line }
     end
 
+    def sub_section(header)
+      heading { text translate(header), style: :bold, size: 10 }
+      move_down_line
+      yield
+      move_down_line
+    end
+
     def heading
       font_size(14) { yield }
     end
 
     def with_label(key, value)
       label = translate(key)
-      text_box(label, at: [0, cursor], width: 120, style: :italic)
-      text_box(value.to_s, at: [120, cursor])
+      labeled_value(label, value)
+    end
+
+    def labeled_camp_attr(attr)
+      value = camp_attr_value(attr)
+      return unless value.present?
+      label = t_camp_attr(attr.to_s)
+      labeled_value(label, value)
+      move_down_if_multiline(value)
+    end
+
+    def move_down_if_multiline(value)
+      count = value.scan("\n").count
+      count.times { move_down_line } if count > 0
+    end
+
+    def camp_attr_value(attr)
+      value = @camp.send(attr)
+      if boolean?(value)
+        value = t_boolean(value)
+      elsif attr == :canton
+        value = Cantons.full_name(value.to_sym)
+      else
+        value
+      end
+    end
+
+    def labeled_value(label, value)
+      text_box(label, at: [0, cursor], width: 150, style: :italic)
+      text_box(value.to_s, at: [150, cursor])
       move_down_line
     end
 
@@ -215,7 +273,15 @@ module Export::Pdf
     end
 
     def t_camp_attr(key)
-      I18n.t('activerecord.attributes.event.' + key)
+      t('activerecord.attributes.event.' + key)
+    end
+
+    def t_boolean(value)
+      value ? t('global.yes') : t('global.no')
+    end
+
+    def boolean?(value)
+      value.is_a?(TrueClass) || value.is_a?(FalseClass)
     end
 
   end

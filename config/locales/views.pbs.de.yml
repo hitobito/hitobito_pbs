@@ -57,6 +57,9 @@ de:
     abteilung: Abteilung
     einheit: Einheit
     expected_participants: Erwartete Anzahl Teilnehmende
+    camp: Lager
+    camp_dates: Lagerdaten
+    camp_location: Lagerort
 
   event:
     lists:
