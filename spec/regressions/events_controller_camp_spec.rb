@@ -43,37 +43,142 @@ describe EventsController, type: :controller do
       expect(dom).to have_selector('.dl-horizontal dd', text: advisor_mountain.to_s)
     end
 
-    %w(abteilungsleitung coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
-      context key do
-        it 'is marked as unassigned if not set' do
-          sign_in(bulei)
+    def find_node_for_field(dom, key)
+      dom.find('.dl-horizontal dt',
+               text: /^#{Event::Camp.human_attribute_name(key)}$/)
+         .find(:xpath, 'following-sibling::*[1]')
+    end
 
-          get :show, group_id: group.id, id: camp.id
+    def assert_advisor(advisor_key, text, warning)
+      get :show, group_id: group.id, id: camp.id
 
-          coach_node = dom.find('.dl-horizontal dt',
-                                text: /^#{Event::Camp.human_attribute_name(key)}$/)
-                          .find(:xpath, 'following-sibling::*[1]')
-          expect(coach_node.text).to eq('nicht zugeordnet')
-          expect(coach_node).to have_selector('.label-warning')
-        end
+      node = find_node_for_field(dom, advisor_key)
+      expect(node.text).to eq(text)
+      if warning
+        expect(node).to have_selector('.label-warning')
+      else
+        expect(node).not_to have_selector('.label-warning')
+      end
+    end
 
-        it 'is marked as assigned if set' do
-          sign_in(bulei)
-          camp.update_attribute("#{key}_id", bulei.id)
+    describe 'coach/abeilungsleitung warnings' do
+      before do
+        camp.participations.destroy_all
+        sign_in(bulei)
+      end
 
-          get :show, group_id: group.id, id: camp.id
+      %w(abteilungsleitung coach).each do |key|
+        context key do
+          it 'is marked as unassigned if not set' do
+            assert_advisor(key, 'nicht zugeordnet', true)
+          end
 
-          value_node = dom.find('.dl-horizontal dt',
-                                text: /^#{Event::Camp.human_attribute_name(key)}$/)
-                          .find(:xpath, 'following-sibling::*[1]')
-          text = bulei.to_s
-          text += ', bestätigt: nein' if key == 'coach'
-          expect(value_node.text).to eq(text)
-          expect(value_node).not_to have_selector('.label-warning')
+          it 'is marked as assigned if set' do
+            camp.update_attribute("#{key}_id", bulei.id)
+
+            text = bulei.to_s
+            text += ', bestätigt: nein' if key == 'coach'
+            assert_advisor(key, text, false)
+          end
         end
       end
     end
 
+    describe 'advisor warnings' do
+      before do
+        camp.participations.destroy_all
+        sign_in(bulei)
+      end
+
+      context 'security flags not set' do
+        context 'no security leaders assigned' do
+          %w(advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+            context key do
+              it 'is marked as unassigned if advisor not set' do
+                camp.participations.destroy_all
+                assert_advisor(key, '(niemand)', false)
+              end
+
+              it 'is marked as assigned if advisor set' do
+                camp.update_attribute("#{key}_id", bulei.id)
+                assert_advisor(key, bulei.to_s, false)
+              end
+            end
+          end
+        end
+
+        context 'security leaders assigned' do
+          before do
+            [Event::Camp::Role::LeaderMountainSecurity, Event::Camp::Role::LeaderSnowSecurity,
+             Event::Camp::Role::LeaderWaterSecurity].each do |role|
+              Fabricate(role.name.to_sym, participation: Fabricate(:event_participation, event: camp))
+            end
+          end
+
+          %w(advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+            context key do
+              it 'is marked as unassigned if advisor not set' do
+                camp.participations.destroy_all
+                assert_advisor(key, '(niemand)', false)
+              end
+
+              it 'is marked as assigned if advisor set' do
+                camp.update_attribute("#{key}_id", bulei.id)
+                assert_advisor(key, bulei.to_s, false)
+              end
+            end
+          end
+        end
+      end
+
+      context 'security flags set' do
+        before do
+          camp.update_attributes(j_s_security_mountain: true,
+                                 j_s_security_snow: true,
+                                 j_s_security_water: true)
+        end
+
+        context 'no security leaders assigned' do
+          %w(advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+            context key do
+              it 'is marked as unassigned if advisor not set' do
+                camp.participations.destroy_all
+                assert_advisor(key, 'nicht zugeordnet', true)
+              end
+
+              it 'is marked as assigned if advisor set but with leader warning' do
+                camp.update_attribute("#{key}_id", bulei.id)
+                assert_advisor(key, "#{bulei.to_s} Leiter nicht zugeordnet", true)
+              end
+            end
+          end
+        end
+
+        context 'security leaders assigned' do
+          before do
+            [Event::Camp::Role::LeaderMountainSecurity, Event::Camp::Role::LeaderSnowSecurity,
+             Event::Camp::Role::LeaderWaterSecurity].each do |role|
+              Fabricate(role.name.to_sym, participation: Fabricate(:event_participation, event: camp))
+            end
+          end
+
+          %w(advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+            context key do
+              it 'is marked as unassigned if advisor not set' do
+                camp.participations.destroy_all
+                assert_advisor(key, 'nicht zugeordnet', true)
+              end
+
+              it 'is marked as assigned if advisor set' do
+                camp.update_attribute("#{key}_id", bulei.id)
+                assert_advisor(key, bulei.to_s, false)
+              end
+            end
+          end
+        end
+      end
+
+    end
 
   end
 
