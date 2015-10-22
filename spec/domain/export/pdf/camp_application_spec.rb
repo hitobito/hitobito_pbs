@@ -68,17 +68,15 @@ describe Export::Pdf::CampApplication do
 
     context 'expected participations table' do
 
-      it 'has 6 header columns' do
-        camp = Fabricate(:pbs_camp)
-        pdf = Export::Pdf::CampApplication.new(camp)
+      let(:camp) { Fabricate(:pbs_camp) }
+      let(:pdf) { Export::Pdf::CampApplication.new(camp) }
 
+      it 'has 6 header columns' do
         header_column = pdf.send(:expected_participant_table_header)
         expect(header_column).to eq ['', 'Wölfe', 'Pfadi', 'Pios', 'Rovers', 'Leiter']
       end
 
       it 'includes rows with expected participants count' do
-        camp = Fabricate(:pbs_camp)
-        pdf = Export::Pdf::CampApplication.new(camp)
         camp.update_attributes(
           expected_participants_wolf_f: 1,
           expected_participants_pfadi_f: 42,
@@ -100,6 +98,25 @@ describe Export::Pdf::CampApplication do
 
         row_m = pdf.send(:expected_participant_table_row, :m)
         expect(row_m).to eq ['M', 3, 4, 9, 12, 9]
+      end
+
+    end
+
+    context 'leader' do
+
+      let(:camp) { Fabricate(:pbs_camp) }
+      let(:leader) { Fabricate(:person) }
+      let(:pdf) { Export::Pdf::CampApplication.new(camp) }
+
+      it 'lists the leaders qualifications' do
+        quali1 = Fabricate(:qualification, person: leader)
+        quali2 = Fabricate(:qualification, person: leader)
+
+        quali1_text = quali1.qualification_kind.to_s
+        quali2_text = quali2.qualification_kind.to_s
+        expect(pdf.send(:active_qualifications, leader)).to match quali1_text
+        expect(pdf.send(:active_qualifications, leader)).to match /\n/
+        expect(pdf.send(:active_qualifications, leader)).to match quali2_text
       end
 
     end
