@@ -10,9 +10,7 @@ module Export::Pdf
 
     include Translatable
 
-    EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung)
-
-    attr_reader :camp, :pdf
+    attr_reader :camp, :pdf, :data
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
              to: :pdf
@@ -20,6 +18,7 @@ module Export::Pdf
 
     def initialize(camp)
       @camp = camp
+      @data = CampApplicationData.new(camp)
     end
 
     def render
@@ -65,75 +64,32 @@ module Export::Pdf
 
     def render_group
       section('group_header') do
-        with_label('abteilung', abteilung_name)
-        with_label('einheit', einheit_name) if einheit_name
-        expected_participant_table
+        with_label('abteilung', data.abteilung_name)
+        with_label('einheit', data.einheit_name) if data.einheit_name
+        render_expected_participant_table
       end
     end
 
-    def expected_participant_table
+    def render_expected_participant_table
       move_down_line
       text translate('expected_participants')
       move_down_line
       cells = []
-      cells << expected_participant_table_header
-      cells << expected_participant_table_row(:f)
-      cells << expected_participant_table_row(:m)
+      cells << data.expected_participant_table_header
+      cells << data.expected_participant_table_row(:f)
+      cells << data.expected_participant_table_row(:m)
       table(cells, cell_style: { align: :center, border_width: 0.25, width: 50})
-    end
-
-    def expected_participant_table_header
-      headers = ['']
-      headers += EXPECTED_PARTICIPANT_KEYS.collect do |h|
-        key = 'expected_participants_' + h
-        t_camp_attr(key)
-      end
-    end
-
-    def expected_participant_table_row(gender)
-      row = [gender.to_s.upcase]
-      row += EXPECTED_PARTICIPANT_KEYS.collect do |a|
-        attr = "expected_participants_#{a}_#{gender.to_s}"
-        @camp.send(attr.to_sym)
-      end
-    end
-
-    def abteilung_name
-      camp_abteilung ? camp_abteilung.to_s : camp_group.to_s
-    end
-
-    def einheit_name
-      unless camp_at_or_above_abteilung?
-        camp_group.to_s
-      end
-    end
-
-    def camp_abteilung
-      @camp_abteilung ||=
-        camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
-    end
-
-    def camp_at_or_above_abteilung?
-      camp_at_abteilung? || !camp_abteilung
-    end
-
-    def camp_at_abteilung?
-      camp_group.is_a?(Group::Abteilung)
-    end
-
-    def camp_group
-      @camp_group ||= @camp.groups.first
     end
 
     def render_leader
       section('leader_header') do
-        leader = camp.participations_for(Event::Camp::Role::Leader).first.try(:person)
+        leader = data.camp_leader
         if leader
           with_label('name', leader)
           with_label('address', leader.address)
           with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
           with_label('birthday', leader.birthday.presence && l(leader.birthday))
-          with_label('qualifications', active_qualifications(leader))
+          with_label('qualifications', data.active_qualifications(leader))
         else
           text_nobody
         end
@@ -142,9 +98,8 @@ module Export::Pdf
 
     def render_assistant_leaders
       section('assistant_leaders_header') do
-        leaders = camp.participations_for(Event::Camp::Role::AssistantLeader).collect(&:person)
-        cells = leaders.collect do |person|
-          [person.to_s, person.birthday.try(:year).to_s, active_qualifications(person)]
+        cells = data.camp_assistant_leaders.collect do |person|
+          [person.to_s, person.birthday.try(:year).to_s, data.active_qualifications(person)]
         end
         if cells.present?
           table(cells, width: 500,
@@ -161,7 +116,7 @@ module Export::Pdf
     end
 
     def text_no_entry
-      text "(#{t('global.nobody')})"
+      text "(#{t('global.no_entry')})"
     end
 
     def render_camp
@@ -176,7 +131,7 @@ module Export::Pdf
     end
 
     def render_dates
-      @camp.dates.each do |d|
+      camp.dates.each do |d|
         labeled_value(d.label, d.duration.to_s)
       end
     end
@@ -229,9 +184,9 @@ module Export::Pdf
     end
 
     def labeled_camp_attr(attr)
-      value = camp_attr_value(attr)
+      value = data.camp_attr_value(attr)
       return unless value.present?
-      label = t_camp_attr(attr.to_s)
+      label = data.t_camp_attr(attr.to_s)
       labeled_value(label, value)
       move_down_if_multiline(value)
     end
@@ -239,17 +194,6 @@ module Export::Pdf
     def move_down_if_multiline(value)
       count = value.scan("\n").count
       count.times { move_down_line } if count > 0
-    end
-
-    def camp_attr_value(attr)
-      value = @camp.send(attr)
-      if boolean?(value)
-        value = t_boolean(value)
-      elsif attr == :canton
-        value = Cantons.full_name(value.to_sym)
-      else
-        value
-      end
     end
 
     def labeled_value(label, value)
@@ -260,28 +204,6 @@ module Export::Pdf
 
     def move_down_line(line = 12)
       move_down(line)
-    end
-
-    def active_qualifications(person)
-      QualificationKind.joins(:qualifications).
-                        where(qualifications: { person_id: person.id }).
-                        merge(Qualification.active).
-                        uniq.
-                        list.
-                        collect(&:to_s).
-                        join("\n")
-    end
-
-    def t_camp_attr(key)
-      t('activerecord.attributes.event.' + key)
-    end
-
-    def t_boolean(value)
-      value ? t('global.yes') : t('global.no')
-    end
-
-    def boolean?(value)
-      value.is_a?(TrueClass) || value.is_a?(FalseClass)
     end
 
   end

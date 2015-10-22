@@ -7,61 +7,61 @@
 
 require 'spec_helper'
 
-describe Export::Pdf::CampApplication do
+describe Export::Pdf::CampApplicationData do
 
   describe 'section group' do
     context 'abteilung' do
       
-      it 'shows Abteilung name if camp at Abteilung' do
+      it 'returns Abteilung name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:abteilung_name)).to eq(abteilung.to_s)
+        expect(data.send(:abteilung_name)).to eq(abteilung.to_s)
       end
       
-      it 'shows Abteilung name if camp below Abteilung' do
+      it 'returns Abteilung name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:abteilung_name)).to eq(groups(:schekka).to_s)
+        expect(data.send(:abteilung_name)).to eq(groups(:schekka).to_s)
       end
       
-      it 'shows Group name if camp above Abteilung' do
+      it 'returns Group name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:abteilung_name)).to eq(bund.to_s)
+        expect(data.send(:abteilung_name)).to eq(bund.to_s)
       end
 
     end
 
     context 'einheit' do
 
-      it 'does not show Einheit name if camp at Abteilung' do
+      it 'does not return Einheit name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:einheit_name)).to be_nil
+        expect(data.send(:einheit_name)).to be_nil
       end
       
-      it 'shows Einheit name if camp below Abteilung' do
+      it 'returns Einheit name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:einheit_name)).to eq(pfadi.to_s)
+        expect(data.send(:einheit_name)).to eq(pfadi.to_s)
       end
 
-      it 'does not show Einheit name if camp above Abteilung' do
+      it 'does not return Einheit name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
-        pdf = Export::Pdf::CampApplication.new(camp)
+        data = Export::Pdf::CampApplicationData.new(camp)
 
-        expect(pdf.send(:einheit_name)).to be_nil
+        expect(data.send(:einheit_name)).to be_nil
       end
 
     end
@@ -69,10 +69,10 @@ describe Export::Pdf::CampApplication do
     context 'expected participations table' do
 
       let(:camp) { Fabricate(:pbs_camp) }
-      let(:pdf) { Export::Pdf::CampApplication.new(camp) }
+      let(:data) { Export::Pdf::CampApplicationData.new(camp) }
 
       it 'has 6 header columns' do
-        header_column = pdf.send(:expected_participant_table_header)
+        header_column = data.send(:expected_participant_table_header)
         expect(header_column).to eq ['', 'Wölfe', 'Pfadi', 'Pios', 'Rovers', 'Leiter']
       end
 
@@ -85,7 +85,7 @@ describe Export::Pdf::CampApplication do
           expected_participants_leitung_f: 99
         ) 
 
-        row_f = pdf.send(:expected_participant_table_row, :f)
+        row_f = data.send(:expected_participant_table_row, :f)
         expect(row_f).to eq ['F', 1, 42, 33, 3, 99]
 
         camp.update_attributes(
@@ -96,7 +96,7 @@ describe Export::Pdf::CampApplication do
           expected_participants_leitung_m: 9 
         ) 
 
-        row_m = pdf.send(:expected_participant_table_row, :m)
+        row_m = data.send(:expected_participant_table_row, :m)
         expect(row_m).to eq ['M', 3, 4, 9, 12, 9]
       end
 
@@ -106,7 +106,7 @@ describe Export::Pdf::CampApplication do
 
       let(:camp) { Fabricate(:pbs_camp) }
       let(:leader) { Fabricate(:person) }
-      let(:pdf) { Export::Pdf::CampApplication.new(camp) }
+      let(:data) { Export::Pdf::CampApplicationData.new(camp) }
 
       it 'lists the leaders qualifications' do
         quali1 = Fabricate(:qualification, person: leader)
@@ -114,9 +114,9 @@ describe Export::Pdf::CampApplication do
 
         quali1_text = quali1.qualification_kind.to_s
         quali2_text = quali2.qualification_kind.to_s
-        expect(pdf.send(:active_qualifications, leader)).to match quali1_text
-        expect(pdf.send(:active_qualifications, leader)).to match /\n/
-        expect(pdf.send(:active_qualifications, leader)).to match quali2_text
+        expect(data.send(:active_qualifications, leader)).to match quali1_text
+        expect(data.send(:active_qualifications, leader)).to match /\n/
+        expect(data.send(:active_qualifications, leader)).to match quali2_text
       end
 
     end
