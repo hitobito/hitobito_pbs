@@ -89,7 +89,7 @@ module Export::Pdf
           render_person(leader)
           with_label('qualifications', data.active_qualifications(leader))
         else
-          data.text_nobody
+          text_nobody
         end
       end
     end
@@ -104,7 +104,7 @@ module Export::Pdf
                 cell_style: { border_width: 0.25 },
                 column_widths: [210, 40, 250])
         else
-          data.text_nobody
+          text_nobody
         end
       end
     end

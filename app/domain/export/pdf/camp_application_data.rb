@@ -8,7 +8,6 @@
 module Export::Pdf
   class CampApplicationData
 
-    # TODO move not from the outside used methods to private
     # TODO test not tested methods
 
     attr_reader :camp, :camp_group
@@ -51,14 +50,6 @@ module Export::Pdf
       unless camp_at_or_above_abteilung?
         camp_group.to_s
       end
-    end
-
-    def camp_at_or_above_abteilung?
-      camp_at_abteilung? || !camp_abteilung
-    end
-
-    def camp_at_abteilung?
-      camp_group.is_a?(Group::Abteilung)
     end
 
     def camp_attr_value(attr)
@@ -127,10 +118,21 @@ module Export::Pdf
     end
 
     def format_coach_visiting(value)
-      value = format_boolean(value)
       visiting_date = camp.coach_visiting_date
-      value += ", #{format_date(visiting_date)}" if visiting_date.present?
-      value
+      format_visiting(value, visiting_date)
+    end
+
+    def format_al_visiting(value)
+      visiting_date = camp.al_visiting_date
+      format_visiting(value, visiting_date)
+    end
+
+    def format_visiting(value, visiting_date)
+      formatted_value = format_boolean(value)
+      if value && visiting_date.present? 
+        formatted_value += ", #{format_date(visiting_date)}"
+      end
+      formatted_value
     end
 
     def format_date_time(value)
@@ -151,6 +153,14 @@ module Export::Pdf
 
     def text_no_entry
       t('global.associations.no_entry')
+    end
+
+    def camp_at_or_above_abteilung?
+      camp_at_abteilung? || !camp_abteilung
+    end
+
+    def camp_at_abteilung?
+      camp_group.is_a?(Group::Abteilung)
     end
 
   end
