@@ -105,7 +105,7 @@ module Export::Pdf
     private
 
     def format_canton(value)
-      Cantons.full_name(value.to_sym)
+      Cantons.full_name(value.to_sym) if value.present?
     end
 
     def format_j_s_kind(value)
@@ -121,7 +121,9 @@ module Export::Pdf
     end
 
     def format_updated_at(value)
-      format_date(value)
+      date = format_date(value)
+      person = @camp.updater.to_s
+      "#{date} #{t('export/pdf/camp_application.by')} #{person}"
     end
 
     def format_date(value)
