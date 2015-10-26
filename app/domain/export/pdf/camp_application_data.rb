@@ -63,20 +63,13 @@ module Export::Pdf
 
     def camp_attr_value(attr)
       value = @camp.send(attr)
-      if boolean?(value)
-        value = t_boolean(value)
-      elsif attr == :canton && value.present?
-        value = Cantons.full_name(value.to_sym)
-      elsif value.is_a?(Person)
-        value.to_s
-      elsif attr == :j_s_kind
-        value = t_j_s_kind(value)
-      elsif attr == :state
-        value = t_state(value)
-      elsif value.is_a?(ActiveSupport::TimeWithZone)
-        value = l(value, format: :date_time)
+      format_method = "format_#{attr.to_s}".to_sym
+      if respond_to?(format_method, include_private: true)
+        value = send(format_method, value)
+      elsif boolean?(value)
+        value = format_boolean(value)
       else
-        value
+        value.to_s
       end
     end
 
@@ -110,7 +103,12 @@ module Export::Pdf
     end
 
     private
-    def t_j_s_kind(value)
+
+    def format_canton(value)
+      Cantons.full_name(value.to_sym)
+    end
+
+    def format_j_s_kind(value)
       if value.present?
         t("events.fields_pbs.j_s_kind_#{value}")
       else
@@ -118,11 +116,19 @@ module Export::Pdf
       end
     end
 
-    def t_state(value)
+    def format_state(value)
       t("activerecord.attributes.event/camp.states.#{value}")
     end
 
-    def t_boolean(value)
+    def format_updated_at(value)
+      format_date(value)
+    end
+
+    def format_date(value)
+      l(value, format: :date_time)
+    end
+
+    def format_boolean(value)
       value ? t('global.yes') : t('global.no')
     end
 
