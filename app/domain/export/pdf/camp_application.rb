@@ -122,6 +122,8 @@ module Export::Pdf
       section('camp') do
         sub_section('camp_dates') do
           render_dates
+          move_down_line
+          labeled_camp_attr(:camp_days)
         end
         sub_section('camp_location') do
           render_location
@@ -140,6 +142,7 @@ module Export::Pdf
       labeled_camp_attr(:location)
       labeled_camp_attr(:coordinates)
       labeled_camp_attr(:altitude)
+      labeled_camp_attr(:emergency_phone)
       labeled_camp_attr(:landlord)
       labeled_camp_attr(:landlord_permission_obtained)
     end
@@ -210,6 +213,7 @@ module Export::Pdf
     end
 
     def move_down_if_multiline(value)
+      return unless value.is_a?(String)
       count = value.scan("\n").count
       count.times { move_down_line } if count > 0
     end
