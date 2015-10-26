@@ -63,6 +63,8 @@ de:
     j_s: J+S Rahmen
     state: Lagerstatus
     by: durch
+    abteilungsleitung: Abteilungsleitung
+    coach: Coach
 
   event:
     lists:

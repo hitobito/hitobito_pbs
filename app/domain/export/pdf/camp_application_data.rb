@@ -121,13 +121,24 @@ module Export::Pdf
     end
 
     def format_updated_at(value)
-      date = format_date(value)
+      date = format_date_time(value)
       person = @camp.updater.to_s
       "#{date} #{t('export/pdf/camp_application.by')} #{person}"
     end
 
-    def format_date(value)
+    def format_coach_visiting(value)
+      value = format_boolean(value)
+      visiting_date = camp.coach_visiting_date
+      value += ", #{format_date(visiting_date)}" if visiting_date.present?
+      value
+    end
+
+    def format_date_time(value)
       l(value, format: :date_time)
+    end
+
+    def format_date(value)
+      l(value, format: :default)
     end
 
     def format_boolean(value)

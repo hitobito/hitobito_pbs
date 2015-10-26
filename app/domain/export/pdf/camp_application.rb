@@ -37,6 +37,7 @@ module Export::Pdf
     end
 
     def filename
+      # TODO filename !
       "TODO.pdf"
     end
 
@@ -85,16 +86,10 @@ module Export::Pdf
       section('leader_header') do
         leader = data.camp_leader
         if leader
-          with_label('name', leader)
-          with_label('address', leader.address)
-          with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
-          labeled_email(leader)
-          labeled_phone_number(leader, 'Privat')
-          labeled_phone_number(leader, 'Mobil')
-          with_label('birthday', leader.birthday.presence && l(leader.birthday))
+          render_person(leader)
           with_label('qualifications', data.active_qualifications(leader))
         else
-          text_nobody
+          data.text_nobody
         end
       end
     end
@@ -109,13 +104,9 @@ module Export::Pdf
                 cell_style: { border_width: 0.25 },
                 column_widths: [210, 40, 250])
         else
-          text_nobody
+          data.text_nobody
         end
       end
-    end
-
-    def text_nobody
-      text "(#{t('global.nobody')})"
     end
 
     def render_camp
@@ -164,10 +155,34 @@ module Export::Pdf
     end
 
     def render_abteilungsleitung
+      section('abteilungsleitung') do
+        abteilungsleitung = camp.abteilungsleitung
+        if abteilungsleitung
+          render_person(abteilungsleitung)
+        end
+        labeled_camp_attr(:al_present)
+        labeled_camp_attr(:al_visiting)
+      end
     end
 
     def render_coach
+      section('coach') do
+        coach = camp.coach
+        if coach
+          render_person(coach)
+        end
+        labeled_camp_attr(:coach_visiting)
+      end
+    end
 
+    def render_person(person)
+      with_label('name', person)
+      with_label('address', person.address)
+      with_label('zip_town', [person.zip_code, person.town].compact.join(' '))
+      labeled_email(person)
+      labeled_phone_number(person, 'Privat')
+      labeled_phone_number(person, 'Mobil')
+      with_label('birthday', person.birthday.presence && l(person.birthday))
     end
 
     def section(header)
@@ -230,6 +245,10 @@ module Export::Pdf
 
     def move_down_line(line = 12)
       move_down(line)
+    end
+
+    def text_nobody
+      text "(#{t('global.nobody')})"
     end
 
   end
