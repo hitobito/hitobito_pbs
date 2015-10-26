@@ -71,6 +71,10 @@ module Export::Pdf
         value.to_s
       elsif attr == :j_s_kind
         value = t_j_s_kind(value)
+      elsif attr == :state
+        value = t_state(value)
+      elsif value.is_a?(ActiveSupport::TimeWithZone)
+        value = l(value, format: :date_time)
       else
         value
       end
@@ -112,6 +116,10 @@ module Export::Pdf
       else
         t('events.fields_pbs.j_s_kind_none')
       end
+    end
+
+    def t_state(value)
+      t("activerecord.attributes.event/camp.states.#{value}")
     end
 
     def t_boolean(value)

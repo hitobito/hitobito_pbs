@@ -157,6 +157,10 @@ module Export::Pdf
     end
 
     def render_state
+      section('state') do
+        labeled_camp_attr(:updated_at)
+        labeled_camp_attr(:state)
+      end
     end
 
     def render_abteilungsleitung

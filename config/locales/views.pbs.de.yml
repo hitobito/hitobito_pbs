@@ -61,6 +61,7 @@ de:
     camp_dates: Lagerdaten
     camp_location: Lagerort
     j_s: J+S Rahmen
+    state: Lagerstatus
 
   event:
     lists:
