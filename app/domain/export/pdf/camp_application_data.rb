@@ -67,6 +67,10 @@ module Export::Pdf
         value = t_boolean(value)
       elsif attr == :canton && value.present?
         value = Cantons.full_name(value.to_sym)
+      elsif value.is_a?(Person)
+        value.to_s
+      elsif attr == :j_s_kind
+        value = t_j_s_kind(value)
       else
         value
       end
@@ -83,7 +87,9 @@ module Export::Pdf
     end
 
     def t_camp_attr(key)
-      t('activerecord.attributes.event.' + key)
+      text = t('activerecord.attributes.event.' + key)
+      text = t('activerecord.attributes.event/camp.' + key) if text.match /translation missing/
+      text
     end
 
     def camp_leader
@@ -95,6 +101,13 @@ module Export::Pdf
     end
 
     private
+    def t_j_s_kind(value)
+      if value.present?
+        t("events.fields_pbs.j_s_kind_#{value}")
+      else
+        t('events.fields_pbs.j_s_kind_none')
+      end
+    end
 
     def t_boolean(value)
       value ? t('global.yes') : t('global.no')

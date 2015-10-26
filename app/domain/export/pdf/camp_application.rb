@@ -146,10 +146,15 @@ module Export::Pdf
     end
 
     def render_j_s
+      section('j_s') do
+        labeled_camp_attr(:j_s_kind)
+        labeled_camp_attr(:advisor_mountain_security)
+        labeled_camp_attr(:advisor_water_security)
+        labeled_camp_attr(:advisor_snow_security)
+      end
     end
 
     def render_state
-
     end
 
     def render_abteilungsleitung
@@ -197,8 +202,8 @@ module Export::Pdf
     end
 
     def labeled_value(label, value)
-      text_box(label, at: [0, cursor], width: 150, style: :italic)
-      text_box(value.to_s, at: [150, cursor])
+      text_box(label, at: [0, cursor], width: 180, style: :italic)
+      text_box(value.to_s, at: [180, cursor])
       move_down_line
     end
 
