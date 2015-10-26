@@ -165,6 +165,7 @@ class Event::Camp < Event
 
   before_create :assign_abteilungsleitung
   after_save :send_assignment_infos
+  after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
 
 
@@ -222,7 +223,6 @@ class Event::Camp < Event
 
   def send_assignment_infos
     [:coach,
-     :abteilungsleitung,
      :advisor_mountain_security,
      :advisor_snow_security,
      :advisor_water_security
@@ -247,6 +247,14 @@ class Event::Camp < Event
 
   def advisor_changed_except_in_created?(advisor_key)
     restricted_role_changes[advisor_key] && state != 'created' && !state.blank?
+  end
+
+  def send_abteilungsleitung_assignment_info
+    if abteilungsleitung && abteilungsleitung != Person.stamper &&
+       restricted_role_changes[:abteilungsleitung]
+      Event::CampMailer.advisor_assigned(self, abteilungsleitung, 'abteilungsleitung',
+                                         Person.stamper).deliver_later
+    end
   end
 
   def send_created_infos
