@@ -88,6 +88,9 @@ module Export::Pdf
           with_label('name', leader)
           with_label('address', leader.address)
           with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
+          labeled_email(leader)
+          labeled_phone_number(leader, 'Privat')
+          labeled_phone_number(leader, 'Mobil')
           with_label('birthday', leader.birthday.presence && l(leader.birthday))
           with_label('qualifications', data.active_qualifications(leader))
         else
@@ -113,10 +116,6 @@ module Export::Pdf
 
     def text_nobody
       text "(#{t('global.nobody')})"
-    end
-
-    def text_no_entry
-      text "(#{t('global.no_entry')})"
     end
 
     def render_camp
@@ -194,6 +193,20 @@ module Export::Pdf
       label = data.t_camp_attr(attr.to_s)
       labeled_value(label, value)
       move_down_if_multiline(value)
+    end
+
+    def labeled_phone_number(person, phone_label)
+      value = data.phone_number(person, phone_label)
+      return unless value.present?
+      label = t("events.fields_pbs.phone_#{phone_label.downcase}")
+      labeled_value(label, value)
+    end
+
+    def labeled_email(person)
+      value = person.email
+      return unless value.present?
+      label = t("events.fields_pbs.email")
+      labeled_value(label, value)
     end
 
     def move_down_if_multiline(value)

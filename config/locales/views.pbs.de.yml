@@ -137,6 +137,9 @@ de:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
       coach_visiting_caption: Coach besucht das Lager
+      phone_privat: Telefon Privat
+      phone_mobil: Telefon Mobil
+      email: E-Mail
     global:
       link:
         add_event/camp: Lager erstellen

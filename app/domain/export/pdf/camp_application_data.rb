@@ -10,7 +10,7 @@ module Export::Pdf
 
     # TODO move not from the outside used methods to private
     # TODO test not tested methods
-    
+
     attr_reader :camp, :camp_group
 
     delegate :t, :l, to: I18n
@@ -44,7 +44,7 @@ module Export::Pdf
 
     def camp_abteilung
       @camp_abteilung ||=
-       camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
+        camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
     end
 
     def einheit_name
@@ -77,18 +77,19 @@ module Export::Pdf
     end
 
     def active_qualifications(person)
-      QualificationKind.joins(:qualifications).
-                        where(qualifications: { person_id: person.id }).
-                        merge(Qualification.active).
-                        uniq.
-                        list.
-                        collect(&:to_s).
-                        join("\n")
+      qualis = QualificationKind.joins(:qualifications).
+        where(qualifications: { person_id: person.id }).
+        merge(Qualification.active).
+        uniq.
+        list.
+        collect(&:to_s).
+        join("\n")
+      qualis.present? ? qualis : text_no_entry
     end
 
     def t_camp_attr(key)
       text = t('activerecord.attributes.event.' + key)
-      text = t('activerecord.attributes.event/camp.' + key) if text.match /translation missing/
+      text = t('activerecord.attributes.event/camp.' + key) if text.match(/translation missing/)
       text
     end
 
@@ -98,6 +99,10 @@ module Export::Pdf
 
     def camp_assistant_leaders
       camp.participations_for(Event::Camp::Role::AssistantLeader).collect(&:person)
+    end
+
+    def phone_number(person, label)
+      person.phone_numbers.find_by(label: label).try(:number)
     end
 
     private
@@ -115,6 +120,10 @@ module Export::Pdf
 
     def boolean?(value)
       value.is_a?(TrueClass) || value.is_a?(FalseClass)
+    end
+
+    def text_no_entry
+      t('global.associations.no_entry')
     end
 
   end
