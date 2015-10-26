@@ -2,7 +2,15 @@ require 'spec_helper'
 
 describe Event::Camp do
 
-  subject { events(:schekka_camp) }
+  subject do
+    camp = events(:schekka_camp)
+
+    # Prevent automatic abteilungsleitung assignement
+    Fabricate(Group::Abteilung::Abteilungsleitung.name, group: camp.groups.first)
+    Fabricate(Group::Abteilung::Abteilungsleitung.name, group: camp.groups.first)
+
+    camp
+  end
   before { is_expected.to be_valid }
 
   context 'expected_participants' do
@@ -70,6 +78,61 @@ describe Event::Camp do
       subject.application_opening_at = 1.day.from_now
 
       expect(subject).not_to be_application_possible
+    end
+  end
+
+  context 'abteilungsleitung assignement' do
+    before do
+      Group::Abteilung::Abteilungsleitung.destroy_all
+    end
+
+    %w(bund be bern).each do |group_name|
+      context "camp above abteilung (:#{group_name})" do
+        before { Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)) }
+
+        it 'is not assigned' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+      end
+    end
+
+    %w(schekka sunnewirbu pegasus poseidon).each do |group_name|
+      context "camp within abteilung (:#{group_name})" do
+        it 'is not assigned if no abteilungsleitung is available' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is not assigned if multiple abteilungsleitung' do
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is assigned if single abteilungsleitung' do
+          al = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)).person
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to eq(al)
+        end
+
+        it 'is not assigned if single abteilungsleiter on update' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          camp.save!
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is not overwritten if already assigned' do
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          al = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:patria)).person
+
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)], abteilungsleitung_id: al.id)
+          expect(camp.abteilungsleitung).to eq(al)
+        end
+      end
     end
   end
 

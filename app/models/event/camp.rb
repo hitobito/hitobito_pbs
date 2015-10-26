@@ -163,6 +163,7 @@ class Event::Camp < Event
 
   ### CALLBACKS
 
+  before_create :assign_abteilungsleitung
   after_save :send_assignment_infos
   after_save :send_created_infos
 
@@ -204,6 +205,20 @@ class Event::Camp < Event
   end
 
   private
+
+  def assign_abteilungsleitung
+    if abteilungsleitung_id.blank? && abteilung.present? && abteilungsleitung_roles.count == 1
+      self.abteilungsleitung_id = abteilungsleitung_roles.first.person.id
+    end
+  end
+
+  def abteilung
+    groups.first.hierarchy.find_by(type: Group::Abteilung.sti_name)
+  end
+
+  def abteilungsleitung_roles
+    Group::Abteilung::Abteilungsleitung.where(group: abteilung)
+  end
 
   def send_assignment_infos
     [:coach,
