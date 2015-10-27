@@ -8,8 +8,6 @@
 module Export::Pdf
   class CampApplicationData
 
-    # TODO test not tested methods
-
     attr_reader :camp, :camp_group
 
     delegate :t, :l, to: I18n

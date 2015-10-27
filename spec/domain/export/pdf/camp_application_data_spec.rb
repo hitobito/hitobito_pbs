@@ -119,6 +119,10 @@ describe Export::Pdf::CampApplicationData do
         expect(data.active_qualifications(leader)).to match quali2_text
       end
 
+      it 'returns none if leader has no qualifications' do
+        expect(data.active_qualifications(leader)).to match(/keine/)
+      end
+
     end
 
     context 'camp attribute value formatting' do
