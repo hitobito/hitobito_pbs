@@ -13,7 +13,7 @@ module Export::Pdf
     attr_reader :camp, :pdf, :data
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
-             to: :pdf
+      to: :pdf
     delegate :t, :l, to: I18n
 
     def initialize(camp)
@@ -37,8 +37,7 @@ module Export::Pdf
     end
 
     def filename
-      # TODO filename !
-      "TODO.pdf"
+      title + '.pdf'
     end
 
     private
@@ -58,7 +57,7 @@ module Export::Pdf
 
     def render_title
       font_size(20) do
-        text translate('title', camp: camp.name), style: :bold
+        text title, style: :bold
       end
       move_down_line
     end
@@ -214,7 +213,6 @@ module Export::Pdf
       return unless value.present?
       label = data.t_camp_attr(attr.to_s)
       labeled_value(label, value)
-      move_down_if_multiline(value)
     end
 
     def labeled_phone_number(person, phone_label)
@@ -231,16 +229,12 @@ module Export::Pdf
       labeled_value(label, value)
     end
 
-    def move_down_if_multiline(value)
-      return unless value.is_a?(String)
-      count = value.scan("\n").count
-      count.times { move_down_line } if count > 0
-    end
-
     def labeled_value(label, value)
-      text_box(label, at: [0, cursor], width: 180, style: :italic)
-      text_box(value.to_s, at: [180, cursor])
-      move_down_line
+      cells = [[label, value.to_s]]
+      cell_style = { border_width: 0, padding: 0 }
+      table(cells, cell_style: cell_style, column_widths: [180, 300]) do
+        column(0).style font_style: :italic
+      end
     end
 
     def move_down_line(line = 12)
@@ -249,6 +243,10 @@ module Export::Pdf
 
     def text_nobody
       text "(#{t('global.nobody')})"
+    end
+
+    def title
+      @title ||= translate('title', camp: camp.name)
     end
 
   end
