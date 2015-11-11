@@ -25,7 +25,7 @@ describe Export::Csv::People::ParticipationNdbjsRow do
   it { expect(row.fetch(:zip_code)).to eq '4000' }
   it { expect(row.fetch(:town)).to eq 'Basel' }
   it { expect(row.fetch(:canton)).to eq 'BS' }
-  it { expect(row.fetch(:country)).to eq 'A' }
+  it { expect(row.fetch(:country)).to eq 'CH' }
   it { expect(row.fetch(:phone_private)).to eq '11 12 13' }
   it { expect(row.fetch(:phone_work)).to eq '42 42 42' }
   it { expect(row.fetch(:phone_mobile)).to eq '99 99 99' }
@@ -54,7 +54,7 @@ def ndbjs_person
                      address: 'Hauptstrasse 33',
                      zip_code: '4000',
                      town: 'Basel',
-                     country: 'AT',
+                     country: 'CH',
                      nationality_j_s: 'FL',
                      correspondence_language: 'it'
                     )

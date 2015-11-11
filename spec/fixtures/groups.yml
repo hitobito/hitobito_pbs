@@ -63,7 +63,7 @@ be:
   address: Klostergasse 3
   zip_code: 3333
   town: Bern
-  country: Svizzera
+  country: CH
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
   pbs_shortname: BE
 
@@ -78,7 +78,7 @@ zh:
   address: Tellgasse 3
   zip_code: 8888
   town: Zürich
-  country: Svizzera
+  country: CH
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:zh) %>
   pbs_shortname: ZH
 
@@ -93,7 +93,7 @@ vd:
   address: Nordostgasse 3
   zip_code: 2000
   town: Lausanne
-  country: Suisse
+  country: CH
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:vd) %>
   pbs_shortname: VD
 
