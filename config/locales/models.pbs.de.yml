@@ -770,6 +770,7 @@ de:
         local_scout_contact_present: Lokaler Pfadi Kontakt
         local_scout_contact: Lokale Pfadi Kontaktinfos
         location_help_inline: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
+        updated_at: Zuletzt aktualisiert
 
       event/approval:
         comment: Kommentar
@@ -803,6 +804,8 @@ de:
         advisor_water_security: Betreuung Sicherheitsaktivität Wasser
         advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
         advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        advisor_unassigned: nicht zugeordnet
+        leader_unassigned: Leiter nicht zugeordnet
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch

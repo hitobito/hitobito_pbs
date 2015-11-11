@@ -2,7 +2,15 @@ require 'spec_helper'
 
 describe Event::Camp do
 
-  subject { events(:schekka_camp) }
+  subject do
+    camp = events(:schekka_camp)
+
+    # Prevent automatic abteilungsleitung assignement
+    Fabricate(Group::Abteilung::Abteilungsleitung.name, group: camp.groups.first)
+    Fabricate(Group::Abteilung::Abteilungsleitung.name, group: camp.groups.first)
+
+    camp
+  end
   before { is_expected.to be_valid }
 
   context 'expected_participants' do
@@ -73,6 +81,61 @@ describe Event::Camp do
     end
   end
 
+  context 'automatic abteilungsleitung assignement' do
+    before do
+      Group::Abteilung::Abteilungsleitung.destroy_all
+    end
+
+    %w(bund be bern).each do |group_name|
+      context "camp above abteilung (:#{group_name})" do
+        before { Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)) }
+
+        it 'is not assigned' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+      end
+    end
+
+    %w(schekka sunnewirbu pegasus poseidon).each do |group_name|
+      context "camp within abteilung (:#{group_name})" do
+        it 'is not assigned if no abteilungsleitung is available' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is not assigned if multiple abteilungsleitung' do
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is assigned if single abteilungsleitung' do
+          al = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)).person
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          expect(camp.abteilungsleitung).to eq(al)
+        end
+
+        it 'is not assigned if single abteilungsleiter on update' do
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)])
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          camp.save!
+          expect(camp.abteilungsleitung).to be_nil
+        end
+
+        it 'is not overwritten if already assigned' do
+          Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka))
+          al = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:patria)).person
+
+          camp = Fabricate(:pbs_camp, groups: [groups(group_name)], abteilungsleitung_id: al.id)
+          expect(camp.abteilungsleitung).to eq(al)
+        end
+      end
+    end
+  end
+
   context 'advisor assignment info' do
     before do
       subject.coach_id = people(:al_berchtold).id
@@ -109,7 +172,7 @@ describe Event::Camp do
     it 'is not sent to freshly assigned if state is created' do
       subject.update!(state: 'created')
       expect(Event::CampMailer).not_to receive(:advisor_assigned)
-      subject.update!(location: 'Bern', abteilungsleitung_id: people(:al_schekka).id, coach_id: people(:al_schekka).id)
+      subject.update!(location: 'Bern', coach_id: people(:al_schekka).id)
     end
 
     it 'is sent to assigned if state changed from nil to assignment_closed' do
@@ -125,21 +188,18 @@ describe Event::Camp do
       mail = double('mail', deliver_later: nil)
       expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold), 'coach', nil).and_return(mail)
       expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei), 'advisor_snow_security', nil).and_return(mail)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'abteilungsleitung', nil).and_return(mail)
-      subject.update!(location: 'Bern', state: 'confirmed', abteilungsleitung_id: people(:al_schekka).id)
+      subject.update!(location: 'Bern', state: 'confirmed')
     end
 
     it 'is sent to freshly assigned' do
       mail = double('mail', deliver_later: nil)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'abteilungsleitung', nil).and_return(mail)
       expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), 'coach', nil).and_return(mail)
       subject.update!(location: 'Bern',
-                      abteilungsleitung_id: people(:al_schekka).id,
                       coach_id: people(:al_schekka).id,
                       advisor_snow_security_id: nil)
     end
 
-    %w(abteilungsleitung coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
+    %w(coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
       context "mail for #{key}" do
         it 'is sent' do
           subject.update!(state: nil, coach_id: '', advisor_snow_security_id: '')
@@ -156,6 +216,61 @@ describe Event::Camp do
       end
     end
 
+  end
+
+  context 'abteilungsleitung assignment info' do
+    before do
+      subject.state = 'confirmed'
+      subject.save!
+    end
+
+    it 'is not sent if not set' do
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
+      subject.update!(location: 'Bern')
+    end
+
+    it 'is not sent if nothing changed' do
+      subject.update!(abteilungsleitung_id: people(:al_berchtold).id)
+
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
+      subject.update!(location: 'Bern')
+    end
+
+    it 'is sent if abteilungsleitung changed' do
+      mail = double('mail', deliver_later: nil)
+      expect(Event::CampMailer).to receive(:advisor_assigned).
+                                   with(subject, people(:al_berchtold), 'abteilungsleitung', nil).
+                                   and_return(mail)
+      subject.update!(location: 'Bern',
+                      abteilungsleitung_id: people(:al_berchtold).id)
+    end
+
+    [{ from: nil, to: :created },
+     { from: :created, to: :confirmed },
+     { from: :confirmed, to: :assignment_closed },
+     { from: :assignment_closed, to: :canceled },
+     { from: :canceled, to: :closed },
+     { from: :confirmed, to: :created }].each do |state_change|
+      it "is not sent if abteilungsleitung did not change and state changed from #{state_change[:from]} to #{state_change[:to]}" do
+        subject.update!(state: state_change[:from],
+                        abteilungsleitung_id: people(:al_berchtold).id)
+
+        expect(Event::CampMailer).not_to receive(:advisor_assigned)
+        subject.update!(location: 'Bern', state: state_change[:to])
+      end
+
+      it "is sent if abteilungsleitung changed and state changed from #{state_change[:from]} to #{state_change[:to]}" do
+        subject.update!(state: state_change[:from])
+
+        mail = double('mail', deliver_later: nil)
+        expect(Event::CampMailer).to receive(:advisor_assigned).
+                                     with(subject, people(:al_berchtold), 'abteilungsleitung', nil).
+                                     and_return(mail)
+
+        subject.update!(location: 'Bern', state: state_change[:to],
+                        abteilungsleitung_id: people(:al_berchtold).id)
+      end
+    end
   end
 
   context 'camp created info' do

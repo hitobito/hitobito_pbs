@@ -10,15 +10,15 @@ module Export::Pdf
 
     include Translatable
 
-    EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung)
-
-    attr_reader :camp, :pdf
+    attr_reader :camp, :pdf, :data
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
-             to: :pdf
+      to: :pdf
+    delegate :t, :l, to: I18n
 
     def initialize(camp)
       @camp = camp
+      @data = CampApplicationData.new(camp)
     end
 
     def render
@@ -29,7 +29,7 @@ module Export::Pdf
 
       render_sections
 
-      pdf.number_pages(I18n.t('event.participations.print.page_of_pages'),
+      pdf.number_pages(t('event.participations.print.page_of_pages'),
                        at: [0, 0],
                        align: :right,
                        size: 9)
@@ -37,7 +37,7 @@ module Export::Pdf
     end
 
     def filename
-      "TODO.pdf"
+      title + '.pdf'
     end
 
     private
@@ -48,8 +48,7 @@ module Export::Pdf
       render_group
       render_leader
       render_assistant_leaders
-      render_dates
-      render_location
+      render_camp
       render_j_s
       render_state
       render_abteilungsleitung
@@ -58,117 +57,131 @@ module Export::Pdf
 
     def render_title
       font_size(20) do
-        text translate('title', camp: camp.name), style: :bold
+        text title, style: :bold
       end
       move_down_line
     end
 
     def render_group
       section('group_header') do
-        with_label('abteilung', abteilung_name)
-        with_label('einheit', einheit_name) if einheit_name
-        expected_participant_table
+        with_label('abteilung', data.abteilung_name)
+        with_label('einheit', data.einheit_name) if data.einheit_name
+        render_expected_participant_table
       end
     end
 
-    def expected_participant_table
+    def render_expected_participant_table
       move_down_line
       text translate('expected_participants')
       move_down_line
       cells = []
-      cells << expected_participant_table_header
-      cells << expected_participant_table_row(:f)
-      cells << expected_participant_table_row(:m)
+      cells << data.expected_participant_table_header
+      cells << data.expected_participant_table_row(:f)
+      cells << data.expected_participant_table_row(:m)
       table(cells, cell_style: { align: :center, border_width: 0.25, width: 50})
-    end
-
-    def expected_participant_table_header
-      headers = ['']
-      headers += EXPECTED_PARTICIPANT_KEYS.collect do |h|
-        key = 'expected_participants_' + h
-        t_camp_attr(key)
-      end
-    end
-
-    def expected_participant_table_row(gender)
-      row = [gender.to_s.upcase]
-      row += EXPECTED_PARTICIPANT_KEYS.collect do |a|
-        attr = "expected_participants_#{a}_#{gender.to_s}"
-        @camp.send(attr.to_sym)
-      end
-    end
-
-    def abteilung_name
-      camp_abteilung ? camp_abteilung.to_s : camp_group.to_s
-    end
-
-    def einheit_name
-      unless camp_at_or_above_abteilung?
-        camp_group.to_s
-      end
-    end
-
-    def camp_abteilung
-      @camp_abteilung ||=
-        camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
-    end
-
-    def camp_at_or_above_abteilung?
-      camp_at_abteilung? || !camp_abteilung
-    end
-
-    def camp_at_abteilung?
-      camp_group.is_a?(Group::Abteilung)
-    end
-
-    def camp_group
-      @camp_group ||= @camp.groups.first
     end
 
     def render_leader
       section('leader_header') do
-        leader = camp.participations_for(Event::Camp::Role::Leader).first.try(:person)
+        leader = data.camp_leader
         if leader
-          with_label('name', leader)
-          with_label('address', leader.address)
-          with_label('zip_town', [leader.zip_code, leader.town].compact.join(' '))
-          with_label('birthday', leader.birthday.presence && I18n.l(leader.birthday))
-          with_label('qualifications', active_qualifications(leader))
+          render_person(leader)
+          with_label('qualifications', data.active_qualifications(leader))
+        else
+          text_nobody
         end
       end
     end
 
     def render_assistant_leaders
       section('assistant_leaders_header') do
-        leaders = camp.participations_for(Event::Camp::Role::AssistantLeader).collect(&:person)
-        cells = leaders.collect do |person|
-          [person.to_s, person.birthday.try(:year).to_s, active_qualifications(person)]
+        cells = data.camp_assistant_leaders.collect do |person|
+          [person.to_s, person.birthday.try(:year).to_s, data.active_qualifications(person)]
         end
-        table(cells, width: 500, cell_style: { border_width: 0.25 }) if cells.present?
+        if cells.present?
+          table(cells, width: 500,
+                cell_style: { border_width: 0.25 },
+                column_widths: [210, 40, 250])
+        else
+          text_nobody
+        end
+      end
+    end
+
+    def render_camp
+      section('camp') do
+        sub_section('camp_dates') do
+          render_dates
+          move_down_line
+          labeled_camp_attr(:camp_days)
+        end
+        sub_section('camp_location') do
+          render_location
+        end
       end
     end
 
     def render_dates
-
+      camp.dates.each do |d|
+        labeled_value(d.label, d.duration.to_s)
+      end
     end
 
     def render_location
-
+      labeled_camp_attr(:canton)
+      labeled_camp_attr(:location)
+      labeled_camp_attr(:coordinates)
+      labeled_camp_attr(:altitude)
+      labeled_camp_attr(:emergency_phone)
+      labeled_camp_attr(:landlord)
+      labeled_camp_attr(:landlord_permission_obtained)
     end
 
     def render_j_s
-
+      section('j_s') do
+        labeled_camp_attr(:j_s_kind)
+        labeled_camp_attr(:advisor_mountain_security)
+        labeled_camp_attr(:advisor_water_security)
+        labeled_camp_attr(:advisor_snow_security)
+      end
     end
 
     def render_state
-
+      section('state') do
+        labeled_camp_attr(:updated_at)
+        labeled_camp_attr(:state)
+      end
     end
 
     def render_abteilungsleitung
+      section('abteilungsleitung') do
+        abteilungsleitung = camp.abteilungsleitung
+        if abteilungsleitung
+          render_person(abteilungsleitung)
+        end
+        labeled_camp_attr(:al_present)
+        labeled_camp_attr(:al_visiting)
+      end
     end
 
     def render_coach
+      section('coach') do
+        coach = camp.coach
+        if coach
+          render_person(coach)
+        end
+        labeled_camp_attr(:coach_visiting)
+      end
+    end
 
+    def render_person(person)
+      with_label('name', person)
+      with_label('address', person.address)
+      with_label('zip_town', [person.zip_code, person.town].compact.join(' '))
+      labeled_email(person)
+      labeled_phone_number(person, 'Privat')
+      labeled_phone_number(person, 'Mobil')
+      with_label('birthday', person.birthday.presence && l(person.birthday))
     end
 
     def section(header)
@@ -179,33 +192,61 @@ module Export::Pdf
       2.times { move_down_line }
     end
 
+    def sub_section(header)
+      heading { text translate(header), style: :bold, size: 10 }
+      move_down_line
+      yield
+      move_down_line
+    end
+
     def heading
       font_size(14) { yield }
     end
 
     def with_label(key, value)
       label = translate(key)
-      text_box(label, at: [0, cursor], width: 120, style: :italic)
-      text_box(value.to_s, at: [120, cursor])
-      move_down_line
+      labeled_value(label, value)
+    end
+
+    def labeled_camp_attr(attr)
+      value = data.camp_attr_value(attr)
+      return unless value.present?
+      label = data.t_camp_attr(attr.to_s)
+      labeled_value(label, value)
+    end
+
+    def labeled_phone_number(person, phone_label)
+      value = data.phone_number(person, phone_label)
+      return unless value.present?
+      label = t("events.fields_pbs.phone_#{phone_label.downcase}")
+      labeled_value(label, value)
+    end
+
+    def labeled_email(person)
+      value = person.email
+      return unless value.present?
+      label = t("events.fields_pbs.email")
+      labeled_value(label, value)
+    end
+
+    def labeled_value(label, value)
+      cells = [[label, value.to_s]]
+      cell_style = { border_width: 0, padding: 0 }
+      table(cells, cell_style: cell_style, column_widths: [180, 300]) do
+        column(0).style font_style: :italic
+      end
     end
 
     def move_down_line(line = 12)
       move_down(line)
     end
 
-    def active_qualifications(person)
-      QualificationKind.joins(:qualifications).
-                        where(qualifications: { person_id: person.id }).
-                        merge(Qualification.active).
-                        uniq.
-                        list.
-                        collect(&:to_s).
-                        join("\n")
+    def text_nobody
+      text "(#{t('global.nobody')})"
     end
 
-    def t_camp_attr(key)
-      I18n.t('activerecord.attributes.event.' + key)
+    def title
+      @title ||= translate('title', camp: camp.name)
     end
 
   end

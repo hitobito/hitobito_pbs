@@ -57,6 +57,14 @@ de:
     abteilung: Abteilung
     einheit: Einheit
     expected_participants: Erwartete Anzahl Teilnehmende
+    camp: Lager
+    camp_dates: Lagerdaten
+    camp_location: Lagerort
+    j_s: J+S Rahmen
+    state: Lagerstatus
+    by: durch
+    abteilungsleitung: Abteilungsleitung
+    coach: Coach
 
   event:
     lists:
@@ -133,6 +141,9 @@ de:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
       coach_visiting_caption: Coach besucht das Lager
+      phone_privat: Telefon Privat
+      phone_mobil: Telefon Mobil
+      email: E-Mail
     global:
       link:
         add_event/camp: Lager erstellen

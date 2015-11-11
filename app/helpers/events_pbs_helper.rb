@@ -136,23 +136,38 @@ module EventsPbsHelper
   end
 
   def format_event_abteilungsleitung_id(entry)
-    person_link(entry.abteilungsleitung)
+    advisor_link(entry.abteilungsleitung)
   end
 
   def format_event_advisor_mountain_security_id(entry)
-    person_link(entry.advisor_mountain_security)
+    if entry.j_s_security_mountain.present?
+      advisor_link(entry.advisor_mountain_security,
+                   !camp_has_person_with_role(Event::Camp::Role::LeaderMountainSecurity))
+    else
+      person_link(entry.advisor_mountain_security)
+    end
   end
 
   def format_event_advisor_snow_security_id(entry)
-    person_link(entry.advisor_snow_security)
+    if entry.j_s_security_snow.present?
+      advisor_link(entry.advisor_snow_security,
+                   !camp_has_person_with_role(Event::Camp::Role::LeaderSnowSecurity))
+    else
+      person_link(entry.advisor_snow_security)
+    end
   end
 
   def format_event_advisor_water_security_id(entry)
-    person_link(entry.advisor_water_security)
+    if entry.j_s_security_water.present?
+      advisor_link(entry.advisor_water_security,
+                   !camp_has_person_with_role(Event::Camp::Role::LeaderWaterSecurity))
+    else
+      person_link(entry.advisor_water_security)
+    end
   end
 
   def format_event_coach_id(entry)
-    formatted_attr = person_link(entry.coach)
+    formatted_attr = advisor_link(entry.coach)
     if entry.coach
       confirmed_label = t('activerecord.attributes.event/camp.coach_confirmed_inline')
       formatted_attr += ", #{confirmed_label}: #{format_attr(entry, :coach_confirmed)}"
@@ -160,11 +175,33 @@ module EventsPbsHelper
     formatted_attr
   end
 
+  def advisor_link(advisor, leader_warning = false)
+    content = []
+    if advisor.present?
+      content << person_link(advisor)
+      content << advisor_warning(:leader_unassigned) if leader_warning
+    else
+      content << advisor_warning(:advisor_unassigned)
+    end
+    content.join(' ').html_safe
+  end
+
+  def advisor_warning(key)
+    content_tag(:span, class: 'label label-warning') do
+      t("activerecord.attributes.event/camp.#{key.to_s}")
+    end
+  end
+
   def event_restricted_role_attributes
-    [ :abteilungsleitung_id, :advisor_mountain_security_id, 
-      :advisor_snow_security_id, :advisor_water_security_id,
-      :coach_id
-    ]
+    [:abteilungsleitung_id, :advisor_mountain_security_id,
+     :advisor_snow_security_id, :advisor_water_security_id,
+     :coach_id]
+  end
+
+  private
+
+  def camp_has_person_with_role(role)
+    role.joins(:event).where(event_participations: { event_id: entry.id }).exists?
   end
 
 end
