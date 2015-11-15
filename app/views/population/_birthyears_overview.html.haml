@@ -1,0 +1,23 @@
+-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+%h2= t('population.index.birthyears_overview')
+
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= t('population.index.year')
+      %th= t('population.index.age')
+      %th{colspan: 2}= t('population.index.count')
+  %tbody
+    - @years.each do |year, count_rel, count|
+      %tr
+        %td
+          %strong= year || t('population.index.no_birthday_given')
+        %td= age(year)
+        %td= count
+        %td{style: 'width: 100%'}
+          %div{style: "background: #9ec6c6; width: #{(count_rel * 97).to_i}%"}
+            &nbsp;
