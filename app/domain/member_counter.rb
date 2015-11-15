@@ -86,6 +86,19 @@ class MemberCounter
     count
   end
 
+  def members_per_year
+    years = members.pluck(:birthday).map{|b| b.try :year}
+    year_counts = years.inject(Hash.new(0)) do |total, e|
+      total[e] +=1
+      total
+    end
+    maxcount = year_counts.values.max
+    oldest, latest = years.select{|y| !y.nil?}.minmax
+    (oldest..latest).map do |year|
+      [year, year_counts[year].to_f / maxcount, year_counts[year]]
+    end + [[nil, year_counts[nil].to_f / maxcount, year_counts[nil]]]
+  end
+
   def exists?
     MemberCount.where(abteilung_id: abteilung.id, year: year).exists?
   end

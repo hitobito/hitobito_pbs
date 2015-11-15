@@ -10,12 +10,12 @@
   - else
     = t('.no_census_data_requested')
 
-
 %h2= t('.current_census_data')
 = render 'census_evaluation/abteilung/totals'
 
-= render 'people_list'
+= render 'birthyears_overview'
 
+= render 'people_list'
 
 - if check_approveable?
   - if @people_data_complete

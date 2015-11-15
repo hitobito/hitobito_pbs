@@ -27,4 +27,14 @@ module PopulationHelper
     group.population_approveable? && can?(:create_member_counts, group)
   end
 
+  def age(year)
+    return '-' if year.nil?
+    age = DateTime.now.year - year
+    if age < 0
+      '-'
+    else
+      age
+    end
+  end
+
 end
