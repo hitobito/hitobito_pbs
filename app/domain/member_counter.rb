@@ -90,16 +90,13 @@ class MemberCounter
   # the ones of the youngest and oldest active members of the organization
   # is evaluated.
   def members_per_birthyear
-    years = members.pluck(:birthday).map{|b| b.try :year}
+    # pluck :birthday breaks the function because distinct is used in the query
+    years = members.map(&:birthday).map{|b| b.try :year}
     year_counts = years.inject(Hash.new(0)) do |total, e|
       total[e] +=1
       total
     end
-    maxcount = year_counts.values.max
-    oldest, latest = years.select{|y| !y.nil?}.minmax
-    (oldest..latest).map do |year|
-      [year, year_counts[year].to_f / maxcount, year_counts[year]]
-    end + [[nil, year_counts[nil].to_f / maxcount, year_counts[nil]]]
+    complete_year_histogram year_counts
   end
 
   def exists?
@@ -123,6 +120,35 @@ class MemberCounter
   end
 
   private
+
+  # completes the histogram by also considering years which don't appear
+  # in the members list
+  def complete_year_histogram(year_counts)
+    if year_counts.count == 0
+      return []
+    end
+    if (year_counts.keys - [nil]).count == 0
+      return nil_year_if_necessary(year_counts, year_counts.values[0])
+    end
+    maxcount = year_counts.values.max
+    oldest, latest = year_counts.keys.select{|y| !y.nil?}.minmax
+    (latest).downto(oldest).map do |year|
+      OpenStruct.new(
+        year: year,
+        count: year_counts[year],
+        count_relative: year_counts[year].to_f / maxcount
+      )
+    end + nil_year_if_necessary(year_counts, maxcount)
+  end
+
+  def nil_year_if_necessary(year_counts, maxcount)
+    return [] if year_counts[nil] == 0
+    [OpenStruct.new(
+      year: nil,
+      count: year_counts[nil],
+      count_relative: year_counts[nil].to_f / maxcount
+    )]
+  end
 
   def new_member_count
     count = MemberCount.new

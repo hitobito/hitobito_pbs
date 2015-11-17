@@ -12,12 +12,12 @@
       %th= t('population.index.age')
       %th{colspan: 2}= t('population.index.count')
   %tbody
-    - @years.each do |year, count_rel, count|
+    - @years.each do |y|
       %tr
         %td
-          %strong= year || t('population.index.no_birthday_given')
-        %td= age(year)
-        %td= count
+          %strong= y.year || t('population.index.no_birthday_given')
+        %td= age(y.year)
+        %td{style: 'padding-right: 1em;'}= y.count
         %td{style: 'width: 100%'}
-          %div{style: "background: #9ec6c6; width: #{(count_rel * 97).to_i}%"}
+          %div{style: "background: #9ec6c6; width: #{(y.count_relative * 98).to_i}%"}
             &nbsp;
