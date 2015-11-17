@@ -86,7 +86,10 @@ class MemberCounter
     count
   end
 
-  def members_per_year
+  # Gives back a population birthyear/age histogram. Each birthyear between
+  # the ones of the youngest and oldest active members of the organization
+  # is evaluated.
+  def members_per_birthyear
     years = members.pluck(:birthday).map{|b| b.try :year}
     year_counts = years.inject(Hash.new(0)) do |total, e|
       total[e] +=1
