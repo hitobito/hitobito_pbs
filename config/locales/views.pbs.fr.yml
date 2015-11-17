@@ -90,7 +90,7 @@ fr:
       count: Nombre
       age: Âge
       year: Année
-      no_birthday_given: Année n'est pas disponible
+      no_birthday_given: Inconnu
       no_census_data_requested: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
       please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
       missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
