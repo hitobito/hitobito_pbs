@@ -59,6 +59,12 @@ describe PopulationController do
 
       it { is_expected.to be_falsey }
     end
+
+    describe 'shows year data' do
+      subject { assigns(:years) }
+
+      it { expect(subject.map(&:count).sum).to eq(assigns(:total).total) }
+    end
   end
 
   describe 'GET index does not include deleted groups' do
