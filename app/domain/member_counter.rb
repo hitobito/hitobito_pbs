@@ -96,7 +96,7 @@ class MemberCounter
       total[e] +=1
       total
     end
-    complete_year_histogram year_counts
+    add_relative_count complete_year_histogram(year_counts)
   end
 
   def exists?
@@ -124,30 +124,25 @@ class MemberCounter
   # completes the histogram by also considering years which don't appear
   # in the members list
   def complete_year_histogram(year_counts)
-    if year_counts.count == 0
-      return []
-    end
-    if (year_counts.keys - [nil]).count == 0
-      return nil_year_if_necessary(year_counts, year_counts.values[0])
-    end
-    maxcount = year_counts.values.max
+    return [] if year_counts.empty?
     oldest, latest = year_counts.keys.select{|y| !y.nil?}.minmax
+    return nil_year_if_necessary(year_counts) if oldest.nil?
     (latest).downto(oldest).map do |year|
-      OpenStruct.new(
-        year: year,
-        count: year_counts[year],
-        count_relative: year_counts[year].to_f / maxcount
-      )
-    end + nil_year_if_necessary(year_counts, maxcount)
+      OpenStruct.new(year: year, count: year_counts[year])
+    end + nil_year_if_necessary(year_counts)
   end
 
-  def nil_year_if_necessary(year_counts, maxcount)
+  def nil_year_if_necessary(year_counts)
     return [] if year_counts[nil] == 0
-    [OpenStruct.new(
-      year: nil,
-      count: year_counts[nil],
-      count_relative: year_counts[nil].to_f / maxcount
-    )]
+    [OpenStruct.new(year: nil, count: year_counts[nil])]
+  end
+
+  def add_relative_count(year_histogram)
+    maxcount = year_histogram.map(&:count).max
+    year_histogram.each do |y|
+      y.count_relative = y.count.to_f / maxcount
+    end
+    year_histogram
   end
 
   def new_member_count
