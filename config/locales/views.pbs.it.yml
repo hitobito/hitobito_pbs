@@ -86,6 +86,11 @@ it:
     index:
       confirm_census_data: Confermare i censimenti
       current_census_data: Censimenti attuali
+      birthyears_overview: Annata
+      count: Numero
+      age: Età
+      year: Annata
+      no_birthday_given: Nessuna disponibile
       no_census_data_requested: Al momento non c'è nessun censimento ancora in sospeso.
       please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare i censimenti della tua sezione con "Confermare i censimenti"'
       missing_gender_information: Per poter inviare i censimenti, a tutti i membri deve essere assegnato il sesso.
