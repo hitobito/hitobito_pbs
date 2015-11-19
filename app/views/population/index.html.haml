@@ -13,7 +13,7 @@
 %h2= t('.current_census_data')
 = render 'census_evaluation/abteilung/totals'
 
-- unless @years.empty?
+- unless @members_per_birthyear.empty?
   = render 'birthyears_overview'
 
 = render 'people_list'

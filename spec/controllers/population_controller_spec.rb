@@ -61,7 +61,7 @@ describe PopulationController do
     end
 
     describe 'shows year data' do
-      subject { assigns(:years) }
+      subject { assigns(:members_per_birthyear) }
 
       it { expect(subject.map(&:count).sum).to eq(assigns(:total).total) }
     end

@@ -12,7 +12,7 @@
       %th= t('population.index.age')
       %th{colspan: 2}= t('population.index.count')
   %tbody
-    - @years.each do |y|
+    - @members_per_birthyear.each do |y|
       %tr
         %td
           %strong= y.year || t('population.index.no_birthday_given')
