@@ -12,7 +12,7 @@ describe PopulationHelper do
   context '#age' do
 
     before do
-      allow(DateTime).to receive(:now).and_return(DateTime.new(2014, 6, 10))
+      allow(Time).to receive_message_chain(:zone, :now).and_return(DateTime.new(2014, 6, 10))
     end
 
     it 'accepts nil' do
