@@ -29,7 +29,7 @@ module PopulationHelper
 
   def age(year)
     return '-' if year.nil?
-    age = DateTime.now.year - year
+    age = Time.zone.now.year - year
     if age < 0
       '-'
     else

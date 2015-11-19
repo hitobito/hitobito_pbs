@@ -91,10 +91,9 @@ class MemberCounter
   # is evaluated.
   def members_per_birthyear
     # pluck :birthday breaks the function because distinct is used in the query
-    years = members.map(&:birthday).map{|b| b.try :year}
-    year_counts = years.inject(Hash.new(0)) do |total, e|
-      total[e] +=1
-      total
+    years = members.map(&:birthday).map { |b| b.try :year }
+    year_counts = years.each_with_object(Hash.new(0)) do |year, total|
+      total[year] += 1
     end
     add_relative_count complete_year_histogram(year_counts)
   end
@@ -125,7 +124,7 @@ class MemberCounter
   # in the members list
   def complete_year_histogram(year_counts)
     return [] if year_counts.empty?
-    oldest, latest = year_counts.keys.select{|y| !y.nil?}.minmax
+    oldest, latest = year_counts.keys.select { |y| !y.nil? }.minmax
     return nil_year_if_necessary(year_counts) if oldest.nil?
     (latest).downto(oldest).map do |year|
       OpenStruct.new(year: year, count: year_counts[year])
