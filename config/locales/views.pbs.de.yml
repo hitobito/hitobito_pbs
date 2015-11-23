@@ -186,6 +186,11 @@ de:
     index:
       confirm_census_data: Bestand bestätigen
       current_census_data: Aktueller Bestand
+      birthyears_overview: Jahrgangsübersicht
+      count: Anzahl
+      age: Alter
+      year: Jahrgang
+      no_birthday_given: Unbekannt
       no_census_data_requested: Momentan ist keine Bestandesmeldung ausstehend.
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.

@@ -105,4 +105,42 @@ describe MemberCounter do
     end
   end
 
+  context 'members_per_birthyear' do
+
+    subject { MemberCounter.new(2011, abteilung).members_per_birthyear }
+
+    it 'counts all active members' do
+      expect(subject.map(&:count).sum).to eq(9)
+    end
+
+    it 'counts correct amount of members per year' do
+      expect(subject.select{|y| y.year == 1999}[0].count).to eq(3)
+      expect(subject.select{|y| y.year == 1988}[0].count).to eq(1)
+    end
+
+    it 'counts nil birthdays' do
+      expect(subject.select{|y| y.year.nil?}[0].count).to eq(2)
+    end
+
+    it 'works with only nil birthdays' do
+      Person.where('birthday IS NOT NULL').delete_all
+      expect(subject[0].count).to eq(2)
+    end
+
+    it 'works if no people present' do
+      Person.delete_all
+      expect(subject).to be_empty
+    end
+
+    it 'doesn\'t show counted nils if there are none' do
+      Person.where('birthday IS NULL').delete_all
+      expect(subject.select{|y| y.year.nil?}).to be_empty
+    end
+
+    it 'gives count relative to maximum count' do
+      expect(subject.select{|y| y.year == 1999}[0].count_relative).to eq(1)
+      expect(subject.select{|y| y.year == 1988}[0].count_relative).to eq(1.0/3)
+    end
+  end
+
 end
