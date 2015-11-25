@@ -744,9 +744,7 @@ de:
         expected_participants_leitung: Leiter
         expected_participants_leitung_f: Anzahl Leiter weiblich
         expected_participants_leitung_m: Anzahl Leiter männlich
-        expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
         camp_days: Anzahl Lagertage
-        camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
         camp_submitted: Eingereicht
         j_s_kind: J+S-Rahmen
         j_s_security: Sicherheitsbereich
@@ -769,7 +767,6 @@ de:
         coach_visiting_date: Coach Besuchsdatum
         local_scout_contact_present: Lokaler Pfadi Kontakt
         local_scout_contact: Lokale Pfadi Kontaktinfos
-        location_help_inline: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
         updated_at: Zuletzt aktualisiert
 
       event/approval:
