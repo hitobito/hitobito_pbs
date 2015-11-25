@@ -114,7 +114,7 @@ de:
     actions_show_pbs:
       camp_application: Lageranmeldung PBS
       cancel_button: Abmelden
-      confirm_cancel: Willst Du Dich wirklich von diesem Anlass abmelden?
+      confirm_cancel: Willst Du Dich wirklich von diesem Lager abmelden?
       submit_camp: Einreichen
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
