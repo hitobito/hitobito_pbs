@@ -360,4 +360,22 @@ describe Event::Camp do
 
   end
 
+  context 'reset coach confirmed' do
+    it 'sets to false if changed' do
+      subject.update!(coach_id: people(:bulei).id)
+      subject.update!(coach_confirmed: true)
+
+      subject.update!(coach_id: people(:al_berchtold).id)
+      expect(subject.coach_confirmed).to eq false
+    end
+
+    it 'keeps if unchanged' do
+      subject.update!(coach_id: people(:bulei).id)
+      subject.update!(coach_confirmed: true)
+
+      subject.update!(camp_days: 22)
+      expect(subject.coach_confirmed).to eq true
+    end
+  end
+
 end

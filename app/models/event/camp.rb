@@ -167,6 +167,7 @@ class Event::Camp < Event
   after_save :send_assignment_infos
   after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
+  after_save :reset_coach_confirmed_if_changed
 
 
   ### INSTANCE METHODS
@@ -219,6 +220,13 @@ class Event::Camp < Event
 
   def abteilungsleitung_roles
     Group::Abteilung::Abteilungsleitung.where(group: abteilung)
+  end
+
+  def reset_coach_confirmed_if_changed
+    if coach_confirmed? && restricted_role_changes[:coach]
+      update_column(:coach_confirmed, false)
+    end
+    true
   end
 
   def send_assignment_infos
