@@ -126,7 +126,7 @@ module Export::Pdf
 
     def render_dates
       camp.dates.each do |d|
-        labeled_value(d.label, d.duration.to_s)
+        labeled_value(d.duration.to_s, d.label)
       end
     end
 
