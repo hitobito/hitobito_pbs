@@ -161,9 +161,7 @@ module Export::Pdf
     def render_abteilungsleitung
       section('abteilungsleitung') do
         abteilungsleitung = camp.abteilungsleitung
-        if abteilungsleitung
-          render_person(abteilungsleitung)
-        end
+        render_person(abteilungsleitung, false) if abteilungsleitung
         labeled_camp_attr(:al_present)
         labeled_camp_attr(:al_visiting)
       end
@@ -172,21 +170,19 @@ module Export::Pdf
     def render_coach
       section('coach') do
         coach = camp.coach
-        if coach
-          render_person(coach)
-        end
+        render_person(coach, false) if coach
         labeled_camp_attr(:coach_visiting)
       end
     end
 
-    def render_person(person)
+    def render_person(person, details = true)
       with_label('name', person)
       with_label('address', person.address)
       with_label('zip_town', [person.zip_code, person.town].compact.join(' '))
       labeled_email(person)
       labeled_phone_number(person, 'Privat')
       labeled_phone_number(person, 'Mobil')
-      with_label('birthday', person.birthday.presence && l(person.birthday))
+      with_label('birthday', person.birthday.presence && l(person.birthday)) if details
     end
 
     def section(header)
