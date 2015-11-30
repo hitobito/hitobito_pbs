@@ -3,65 +3,32 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- entry.used?(:advisor_id) do
-  = f.labeled_person_field :advisor
+= field_set_tag do
+  - entry.used?(:language_de) do
+    = f.labeled(:course_languages) do
+      - Event::Course::LANGUAGES.each do |lang|
+        = f.boolean_field("language_#{lang}".to_sym, caption: t(".language_#{lang}"))
 
-- entry.used?(:abteilungsleitung_id) do
-  = f.labeled_person_field :abteilungsleitung
+  - if can?(:modify_superior, entry)
+    - entry.used?(:express_fee) do
+      = f.labeled_text_area :express_fee
 
-- entry.used?(:advisor_mountain_security_id) do
-  = f.labeled_person_field :advisor_mountain_security
+    - entry.used?(:training_days) do
+      = f.labeled_input_field(:training_days, maxlength: 10)
 
-- entry.used?(:advisor_snow_security_id) do
-  = f.labeled_person_field :advisor_snow_security
+  - entry.used?(:j_s_kind) do
+    = f.labeled(:j_s_kind) do
+      = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
+      - Event::Camp::J_S_KINDS.each do |kind|
+        = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
 
-- entry.used?(:advisor_water_security_id) do
-  = f.labeled_person_field :advisor_water_security
+  - j_s_security_attrs = entry.used_attributes(:j_s_security_snow,
+                                               :j_s_security_mountain,
+                                               :j_s_security_water)
+  - if j_s_security_attrs.present?
+    = f.labeled(:j_s_security) do
+      - j_s_security_attrs.each do |attr|
+        = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
 
-- entry.used?(:coach_id) do
-  = f.labeled_person_field :coach
+  = render 'expected_participants_fields', f: f
 
-- entry.used?(:coach_confirmed) do
-  = f.labeled_boolean_field :coach_confirmed if entry.coach == current_user
-
-- entry.used?(:language_de) do
-  = f.labeled(:course_languages) do
-    - Event::Course::LANGUAGES.each do |lang|
-      = f.boolean_field("language_#{lang}".to_sym, caption: t(".language_#{lang}"))
-
-- if can?(:modify_superior, entry)
-  - entry.used?(:express_fee) do
-    = f.labeled_text_area :express_fee
-
-- entry.used?(:j_s_kind) do
-  = f.labeled(:j_s_kind) do
-    = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
-    - Event::Camp::J_S_KINDS.each do |kind|
-      = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
-
-- j_s_security_attrs = entry.used_attributes(:j_s_security_snow,
-                                             :j_s_security_mountain,
-                                             :j_s_security_water)
-- if j_s_security_attrs.present?
-  = f.labeled(:j_s_security) do
-    - j_s_security_attrs.each do |attr|
-      = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
-
-= render 'expected_participants_fields', f: f
-
-- entry.used?(:al_present) do
-  = f.labeled_boolean_field(:al_present, caption: t('.al_present_caption'))
-
-- entry.used?(:al_visiting) do
-  = f.labeled_boolean_field(:al_visiting, caption: t('.al_visiting_caption'),
-                                          'data-enable' => 'event_al_visiting_date')
-
-- entry.used?(:al_visiting_date) do
-  = f.labeled_date_field(:al_visiting_date)
-
-- entry.used?(:coach_visiting) do
-  = f.labeled_boolean_field(:coach_visiting, caption: t('.coach_visiting_caption'),
-                                             'data-enable' => 'event_coach_visiting_date')
-
-- entry.used?(:coach_visiting_date) do
-  = f.labeled_date_field(:coach_visiting_date)

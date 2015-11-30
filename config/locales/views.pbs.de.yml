@@ -154,12 +154,13 @@ de:
       j_s_kind_j_s_youth: J+S Jugendsport
       j_s_kind_j_s_mixed: Gemischtes J+S Lager
       j_s_security_none: (keiner)
-      al_present_caption: Die Abteilungsleitung ist im Lager anwesend
-      al_visiting_caption: Die Abteilungsleitung besucht das Lager
-      coach_visiting_caption: Coach besucht das Lager
       phone_privat: Telefon Privat
       phone_mobil: Telefon Mobil
       email: E-Mail
+    form_tab_pane_advisors:
+      al_present_caption: Die Abteilungsleitung ist im Lager anwesend
+      al_visiting_caption: Die Abteilungsleitung besucht das Lager
+      coach_visiting_caption: Coach besucht das Lager
     global:
       link:
         add_event/camp: Lager erstellen

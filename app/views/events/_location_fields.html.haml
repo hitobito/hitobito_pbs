@@ -4,6 +4,7 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - if entry.is_a?(Event::Camp)
+  = f.labeled_input_field(:location, label: t('.location_caption'), help: t('.location_help'), placeholder: t('.location_placeholder'))
   = f.labeled(:canton) do
     .span6{style: 'margin-left: 0px'}
       = f.collection_select(:canton,
@@ -13,7 +14,6 @@
                             { include_blank: true },
                              class: 'chosen-select',
                              data: { placeholder: ' ' })
-  = f.labeled_input_field(:location, label: t('.location_caption'), help: t('.location_help'), placeholder: t('.location_placeholder'))
   = f.labeled_input_fields(:coordinates, help_inline: t('.coordinates_help'))
   = f.labeled_input_fields(:altitude, :emergency_phone, :landlord)
   = f.labeled_input_field(:landlord_permission_obtained, caption: t('.landlord_permission_obtained_caption'))
