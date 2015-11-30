@@ -776,7 +776,7 @@ de:
         approved_at: Datum
 
       event/camp:
-        state: Status
+        state: Lagerstatus
         state_translated: Status
         states:
           created: Erstellt

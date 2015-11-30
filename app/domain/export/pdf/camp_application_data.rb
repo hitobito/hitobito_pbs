@@ -79,9 +79,7 @@ module Export::Pdf
     end
 
     def t_camp_attr(key)
-      text = t('activerecord.attributes.event.' + key)
-      text = t('activerecord.attributes.event/camp.' + key) if text.match(/translation missing/)
-      text
+      t('activerecord.attributes.event/camp.' + key, default: t('activerecord.attributes.event.' + key))
     end
 
     def camp_leader
