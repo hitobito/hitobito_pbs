@@ -142,10 +142,12 @@ module Export::Pdf
 
     def render_j_s
       section('j_s') do
+        blank_text = "(#{t('global.nobody')})"
         labeled_camp_attr(:j_s_kind)
-        labeled_camp_attr(:advisor_mountain_security)
-        labeled_camp_attr(:advisor_water_security)
-        labeled_camp_attr(:advisor_snow_security)
+        labeled_value(translate('js_security'), data.js_security_value)
+        labeled_camp_attr(:advisor_mountain_security, blank_text)
+        labeled_camp_attr(:advisor_water_security, blank_text)
+        labeled_camp_attr(:advisor_snow_security, blank_text)
       end
     end
 
@@ -211,10 +213,11 @@ module Export::Pdf
       labeled_value(label, value)
     end
 
-    def labeled_camp_attr(attr)
+    def labeled_camp_attr(attr, show_blank = false)
       value = data.camp_attr_value(attr)
-      return unless value.present?
+      return unless value.present? || show_blank
       label = data.t_camp_attr(attr.to_s)
+      value = show_blank unless value.present?
       labeled_value(label, value)
     end
 
