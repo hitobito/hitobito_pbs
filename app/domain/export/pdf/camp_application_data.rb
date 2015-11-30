@@ -50,6 +50,11 @@ module Export::Pdf
       end
     end
 
+    def kantonalverband
+      camp_group.layer_hierarchy.
+        detect {|g| g.is_a?(Group::Kantonalverband) }
+    end
+
     def camp_attr_value(attr)
       value = @camp.send(attr)
       format_method = "format_#{attr.to_s}".to_sym

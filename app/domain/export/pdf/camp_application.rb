@@ -66,6 +66,7 @@ module Export::Pdf
       section('group_header') do
         with_label('abteilung', data.abteilung_name)
         with_label('einheit', data.einheit_name) if data.einheit_name
+        with_label('kantonalverband', data.kantonalverband) if data.kantonalverband
         render_expected_participant_table
       end
     end
