@@ -66,6 +66,7 @@ module Export::Pdf
       section('group_header') do
         with_label('abteilung', data.abteilung_name)
         with_label('einheit', data.einheit_name) if data.einheit_name
+        with_label('kantonalverband', data.kantonalverband) if data.kantonalverband
         render_expected_participant_table
       end
     end
@@ -99,9 +100,11 @@ module Export::Pdf
           [person.to_s, person.birthday.try(:year).to_s, data.active_qualifications(person)]
         end
         if cells.present?
+          header_row = assistant_leaders_header_row
+          cells = cells.unshift(header_row)
           table(cells, width: 500,
                 cell_style: { border_width: 0.25 },
-                column_widths: [210, 40, 250])
+                column_widths: [210, 55, 235])
         else
           text_nobody
         end
@@ -123,7 +126,7 @@ module Export::Pdf
 
     def render_dates
       camp.dates.each do |d|
-        labeled_value(d.label, d.duration.to_s)
+        labeled_value(d.duration.to_s, d.label)
       end
     end
 
@@ -247,6 +250,13 @@ module Export::Pdf
 
     def title
       @title ||= translate('title', camp: camp.name)
+    end
+
+    def assistant_leaders_header_row
+      name = translate('assistant_leader_name')
+      year = translate('assistant_leader_year')
+      qualifications = translate('assistant_leader_qualifications')
+      [name, year, qualifications]
     end
 
   end

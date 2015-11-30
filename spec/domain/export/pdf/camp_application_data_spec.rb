@@ -66,6 +66,32 @@ describe Export::Pdf::CampApplicationData do
 
     end
 
+    context 'kantonalverband' do
+      it 'does not return Kantonalverband if camp at Bund' do
+        bund = groups(:bund)
+        camp = Fabricate(:pbs_camp, groups: [bund])
+        data = Export::Pdf::CampApplicationData.new(camp)
+
+        expect(data.kantonalverband).to be_nil
+      end
+      
+      it 'returns Kantonalverband if camp at Kantonalverband' do
+        canton = groups(:be)
+        camp = Fabricate(:pbs_camp, groups: [canton])
+        data = Export::Pdf::CampApplicationData.new(camp)
+
+        expect(data.kantonalverband).to eq(canton)
+      end
+
+      it 'returns Kantonalverband if camp below Kantonalverband' do
+        kyburg = groups(:kyburg)
+        camp = Fabricate(:pbs_camp, groups: [kyburg])
+        data = Export::Pdf::CampApplicationData.new(camp)
+
+        expect(data.kantonalverband).to eq(groups(:be))
+      end
+    end
+
     context 'expected participations table' do
 
       let(:camp) { Fabricate(:pbs_camp) }
