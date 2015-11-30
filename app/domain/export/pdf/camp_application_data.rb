@@ -79,7 +79,8 @@ module Export::Pdf
     end
 
     def t_camp_attr(key)
-      t('activerecord.attributes.event/camp.' + key, default: t('activerecord.attributes.event.' + key))
+      t('activerecord.attributes.event/camp.' + key, 
+        default: t('activerecord.attributes.event.' + key))
     end
 
     def camp_leader
