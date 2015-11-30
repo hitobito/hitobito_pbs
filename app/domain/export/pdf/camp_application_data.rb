@@ -96,6 +96,13 @@ module Export::Pdf
       person.phone_numbers.find_by(label: label).try(:number)
     end
 
+    def js_security_value
+      attrs = [:j_s_security_snow, :j_s_security_mountain, :j_s_security_water]
+      human_names = attrs.select { |attr| camp.send(attr) }
+                         .map { |attr| Event.human_attribute_name(attr) }.join(', ')
+      human_names.present? ? human_names : t('events.fields_pbs.j_s_security_none')
+    end
+
     private
 
     def format_canton(value)

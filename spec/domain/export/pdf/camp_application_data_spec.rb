@@ -223,6 +223,18 @@ describe Export::Pdf::CampApplicationData do
         end
       end
 
+      context 'format j+s security' do
+        it 'prints none' do
+          expect(data.js_security_value).to eq '(keiner)'
+        end
+
+        it 'prints snow and water' do
+          camp.update_attribute(:j_s_security_snow, true)
+          camp.update_attribute(:j_s_security_mountain, true)
+          expect(data.js_security_value).to eq 'Winter, Berg'
+        end
+      end
+
     end
 
   end

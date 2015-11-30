@@ -69,6 +69,7 @@ de:
     assistant_leader_name: Vorname Name / Pfaidname
     assistant_leader_year: Jahrgang
     assistant_leader_qualifications: Gültige Ausbildungen
+    js_security: Sicherheitsbereich
 
   event:
     lists:
