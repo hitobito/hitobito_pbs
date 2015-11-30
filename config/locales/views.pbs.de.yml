@@ -110,6 +110,18 @@ de:
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
 
+  event/camp:
+    al_present_info:
+      'true': Im Lager anwesend
+      'false': Nicht im Lager anwesend
+    visiting_info:
+      at: Besucht das Lager am %{date}
+      'true': Besucht das Lager
+      'false': Besucht das Lager nicht
+    coach_confirmed_info:
+      'true': Bestätigt
+      'false': Nicht bestätigt
+
   events:
     actions_show_pbs:
       camp_application: Lageranmeldung PBS
@@ -162,6 +174,8 @@ de:
       local_scout_contact_present_caption: Kontakt zu lokalem Pfadfinder vorhanden
     show:
       inform_by_email: Informieren
+    show_left_1_advisors:
+      advisors: Betreuung
     edit:
       save_camp_caption: |
        Das Reglement zur Planung und Durchführung von Lagern („Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten.

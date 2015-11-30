@@ -80,78 +80,28 @@ describe EventsPbsHelper do
     end
   end
 
-  context '#format_event_al_visiting' do
+  context '#camp_visiting_info' do
 
     subject { events(:schekka_camp) }
     before { subject.update_attribute(:al_visiting, true) }
 
     it 'shows value without date if date missing' do
-      expect(format_event_al_visiting(subject)).to eq('ja')
+      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager')
     end
 
     it 'shows date if date present' do
       subject.update_attribute(:al_visiting_date, Date.parse('15.05.2011'))
-      expect(format_event_al_visiting(subject)).to eq('ja, 15.05.2011')
+      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager am 15.05.2011')
     end
 
     it 'shows no date if al not visiting' do
       subject.update_attribute(:al_visiting, false)
       subject.update_attribute(:al_visiting_date, Date.parse('15.05.2011'))
-      expect(format_event_al_visiting(subject)).to eq('nein')
+      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager nicht')
     end
 
   end
 
-  context '#format_event_coach_visiting' do
-
-    subject { events(:schekka_camp) }
-    before { subject.update_attribute(:coach_visiting, true) }
-
-    it 'shows value without date if date missing' do
-      expect(format_event_coach_visiting(subject)).to eq('ja')
-    end
-
-    it 'shows date if date present' do
-      subject.update_attribute(:coach_visiting_date, Date.parse('15.05.2011'))
-      expect(format_event_coach_visiting(subject)).to eq('ja, 15.05.2011')
-    end
-
-    it 'shows no date if coach not visiting' do
-      subject.update_attribute(:coach_visiting, false)
-      subject.update_attribute(:coach_visiting_date, Date.parse('15.05.2011'))
-      expect(format_event_coach_visiting(subject)).to eq('nein')
-    end
-
-  end
-
-  context '#event_secondary_attrs' do
-
-    it 'returns secondary attributes for event' do
-      event = events(:top_event)
-      expect(event_secondary_attrs(event).count).to eq 2
-    end
-
-    it 'returns secondary attributes for camp' do
-      camp = events(:schekka_camp)
-      expect(event_secondary_attrs(camp).count).to eq 8
-    end
-
-    it 'returns secondary attributes for camp with local scout contact info' do
-      camp = events(:schekka_camp)
-      camp.update_attribute(:local_scout_contact_present, true)
-      camp.update_attribute(:local_scout_contact, 'contact info')
-      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
-      expect(event_secondary_attrs(camp).count).to eq 10
-    end
-
-    it 'returns secondary attributes for camp with local scout contact' do
-      camp = events(:schekka_camp)
-      camp.update_attribute(:local_scout_contact_present, false)
-      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
-      expect(event_secondary_attrs(camp).count).to eq 9
-    end
-
-  end
 
   context '#format_event_canton' do
 

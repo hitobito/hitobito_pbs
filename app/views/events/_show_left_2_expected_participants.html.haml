@@ -3,30 +3,9 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- entry.used?(:express_fee) do
-  = labeled_attr(entry, :express_fee) if entry.express_fee.present?
-
-- entry.used?(:language_de) do
-  = labeled_attr(entry, :course_languages) if format_attr(entry, :course_languages).present?
-
-- entry.used?(:camp_days) do
-  = labeled_attr(entry, :camp_days) if format_attr(entry, :camp_days).present?
-
-- entry.used?(:j_s_kind) do
-  = labeled_attr(entry, :j_s_kind)
-
-- if entry.used_attributes(:j_s_security_snow,
-                           :j_s_security_mountain,
-                           :j_s_security_water).present?
-  = labeled(Event.human_attribute_name(:j_s_security)) do
-    = format_event_js_security_attrs(entry)
-
-- entry.used?(:camp_submitted) do
-  = labeled_attr(entry, :camp_submitted)
-
 - entry.used?(:expected_participants_wolf_f) do
   - if expected_participants_value_present?(entry)
-    = labeled(t('activerecord.attributes.event.expected_participants')) do
+    = section(t('activerecord.attributes.event.expected_participants')) do
       %table.table
         %tr
           %th
@@ -66,12 +45,3 @@
               = entry.expected_participants_rover_m
             %td.right
               = entry.expected_participants_leitung_m
-
-- entry.used?(:al_present) do
-  = labeled_attr(entry, :al_present)
-
-- entry.used?(:al_visiting) do
-  = labeled_attr(entry, :al_visiting)
-
-- entry.used?(:coach_visiting) do
-  = labeled_attr(entry, :coach_visiting)

@@ -86,40 +86,12 @@ module EventsPbsHelper
       [[Event::Camp::ABROAD_CANTON, Cantons.full_name(Event::Camp::ABROAD_CANTON)]]
   end
 
-  def format_event_al_visiting(entry)
-    al_visiting = f(entry.al_visiting)
-    if entry.al_visiting && entry.al_visiting_date.present?
-      al_visiting += ', ' + f(entry.al_visiting_date)
+  def camp_visiting_info(visiting, date)
+    if visiting && date
+      t('event/camp.visiting_info.at', date: f(date))
+    else
+      t("event/camp.visiting_info.#{visiting}")
     end
-    al_visiting
-  end
-
-  def format_event_coach_visiting(entry)
-    coach_visiting = f(entry.coach_visiting)
-    if entry.coach_visiting && entry.coach_visiting_date.present?
-      coach_visiting += ', ' + f(entry.coach_visiting_date)
-    end
-    coach_visiting
-  end
-
-  def event_secondary_attrs(entry)
-    secondary_attrs = [:description, :location]
-    if entry.is_a?(Event::Camp)
-      secondary_attrs += [:canton, :coordinates, :altitude,
-                          :emergency_phone, :landlord,
-                          :landlord_permission_obtained]
-      secondary_attrs += camp_local_scout_contact_attrs(entry)
-    end
-    secondary_attrs
-  end
-
-  def camp_local_scout_contact_attrs(entry)
-    attrs = []
-    if entry.abroad?
-      attrs = [:local_scout_contact_present]
-      attrs += [:local_scout_contact] if entry.local_scout_contact_present?
-    end
-    attrs
   end
 
   def format_event_canton(entry)
@@ -139,51 +111,53 @@ module EventsPbsHelper
     advisor_link(entry.abteilungsleitung)
   end
 
+  def format_event_coach_id(entry)
+    advisor_link(entry.coach)
+  end
+
   def format_event_advisor_mountain_security_id(entry)
-    if entry.j_s_security_mountain.present?
-      advisor_link(entry.advisor_mountain_security,
-                   !camp_has_person_with_role(Event::Camp::Role::LeaderMountainSecurity))
-    else
-      person_link(entry.advisor_mountain_security)
-    end
+    advisor_link(entry.advisor_mountain_security,
+                 entry.j_s_security_mountain,
+                 Event::Camp::Role::LeaderMountainSecurity)
   end
 
   def format_event_advisor_snow_security_id(entry)
-    if entry.j_s_security_snow.present?
-      advisor_link(entry.advisor_snow_security,
-                   !camp_has_person_with_role(Event::Camp::Role::LeaderSnowSecurity))
-    else
-      person_link(entry.advisor_snow_security)
-    end
+    advisor_link(entry.advisor_snow_security,
+                 entry.j_s_security_snow,
+                 Event::Camp::Role::LeaderSnowSecurity)
   end
 
   def format_event_advisor_water_security_id(entry)
-    if entry.j_s_security_water.present?
-      advisor_link(entry.advisor_water_security,
-                   !camp_has_person_with_role(Event::Camp::Role::LeaderWaterSecurity))
-    else
-      person_link(entry.advisor_water_security)
-    end
+    advisor_link(entry.advisor_water_security,
+                 entry.j_s_security_water,
+                 Event::Camp::Role::LeaderWaterSecurity)
   end
 
-  def format_event_coach_id(entry)
-    formatted_attr = advisor_link(entry.coach)
-    if entry.coach
-      confirmed_label = t('activerecord.attributes.event/camp.coach_confirmed_inline')
-      formatted_attr += ", #{confirmed_label}: #{format_attr(entry, :coach_confirmed)}"
-    end
-    formatted_attr
-  end
-
-  def advisor_link(advisor, leader_warning = false)
+  def advisor_link(advisor, required = true, required_leader = nil)
     content = []
-    if advisor.present?
+    if required
+      append_required_advisor(content, advisor)
+      append_leader_warning(content, required_leader)
+    else
       content << person_link(advisor)
-      content << advisor_warning(:leader_unassigned) if leader_warning
+    end
+    content.join('<br/>'.html_safe).html_safe
+  end
+
+  private
+
+  def append_required_advisor(content, advisor)
+    if advisor
+      content << person_link(advisor)
     else
       content << advisor_warning(:advisor_unassigned)
     end
-    content.join(' ').html_safe
+  end
+
+  def append_leader_warning(content, required_leader = nil)
+    if required_leader && !camp_has_person_with_role(required_leader)
+      content << advisor_warning(:leader_unassigned)
+    end
   end
 
   def advisor_warning(key)
@@ -191,14 +165,6 @@ module EventsPbsHelper
       t("activerecord.attributes.event/camp.#{key.to_s}")
     end
   end
-
-  def event_restricted_role_attributes
-    [:abteilungsleitung_id, :advisor_mountain_security_id,
-     :advisor_snow_security_id, :advisor_water_security_id,
-     :coach_id]
-  end
-
-  private
 
   def camp_has_person_with_role(role)
     role.joins(:event).where(event_participations: { event_id: entry.id }).exists?

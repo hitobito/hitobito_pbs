@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
-require_relative '../support/fabrication.rb'
+
 describe EventsController, type: :controller do
   render_views
 
@@ -39,12 +39,12 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      expect(dom).to have_no_selector('.dl-horizontal a', text: advisor_mountain.to_s)
-      expect(dom).to have_selector('.dl-horizontal dd', text: advisor_mountain.to_s)
+      expect(dom).to have_no_selector('dl a', text: advisor_mountain.to_s)
+      expect(dom).to have_selector('dl dd', text: advisor_mountain.to_s)
     end
 
     def find_node_for_field(dom, key)
-      dom.find('.dl-horizontal dt',
+      dom.find('dl dt',
                text: /^#{Event::Camp.human_attribute_name(key)}$/)
          .find(:xpath, 'following-sibling::*[1]')
     end
@@ -70,14 +70,15 @@ describe EventsController, type: :controller do
       %w(abteilungsleitung coach).each do |key|
         context key do
           it 'is marked as unassigned if not set' do
-            assert_advisor(key, 'nicht zugeordnet', true)
+            assert_advisor(key, "Niemand zugeordnet\n", true)
           end
 
           it 'is marked as assigned if set' do
             camp.update_attribute("#{key}_id", bulei.id)
 
             text = bulei.to_s
-            text += ', bestätigt: nein' if key == 'coach'
+            text += "\n\nNicht bestätigt\n\nBesucht das Lager nicht\n" if key == 'coach'
+            text += "\n\nNicht im Lager anwesend\n\nBesucht das Lager nicht\n" if key == 'abteilungsleitung'
             assert_advisor(key, text, false)
           end
         end
@@ -143,12 +144,12 @@ describe EventsController, type: :controller do
             context key do
               it 'is marked as unassigned if advisor not set' do
                 camp.participations.destroy_all
-                assert_advisor(key, 'nicht zugeordnet', true)
+                assert_advisor(key, 'Niemand zugeordnetKeine Leitenden erfasst', true)
               end
 
               it 'is marked as assigned if advisor set but with leader warning' do
                 camp.update_attribute("#{key}_id", bulei.id)
-                assert_advisor(key, "#{bulei.to_s} Leiter nicht zugeordnet", true)
+                assert_advisor(key, "#{bulei.to_s}Keine Leitenden erfasst", true)
               end
             end
           end
@@ -166,7 +167,7 @@ describe EventsController, type: :controller do
             context key do
               it 'is marked as unassigned if advisor not set' do
                 camp.participations.destroy_all
-                assert_advisor(key, 'nicht zugeordnet', true)
+                assert_advisor(key, 'Niemand zugeordnet', true)
               end
 
               it 'is marked as assigned if advisor set' do

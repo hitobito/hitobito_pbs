@@ -747,7 +747,7 @@ de:
         camp_days: Anzahl Lagertage
         camp_submitted: Eingereicht
         j_s_kind: J+S-Rahmen
-        j_s_security: Sicherheitsbereich
+        j_s_security: Sicherheitsbereiche
         j_s_security_snow: Winter
         j_s_security_mountain: Berg
         j_s_security_water: Wasser
@@ -794,15 +794,14 @@ de:
         coach_id: Coach
         coach: Coach
         coach_confirmed: Coach bestätigt
-        coach_confirmed_inline: bestätigt
         advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
         advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
         advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
         advisor_water_security: Betreuung Sicherheitsaktivität Wasser
         advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
         advisor_snow_security: Betreuung Sicherheitsaktivität Winter
-        advisor_unassigned: nicht zugeordnet
-        leader_unassigned: Leiter nicht zugeordnet
+        advisor_unassigned: Niemand zugeordnet
+        leader_unassigned: Keine Leitenden erfasst
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
