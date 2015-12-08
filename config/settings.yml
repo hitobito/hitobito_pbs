@@ -6,7 +6,7 @@
 # Settings relevant for the jubla wagon
 # Overrides settings from the main application
 application:
-
+  name: MiData PBS/MSdS/MSS
   languages:
     de: Deutsch
     fr: Français
@@ -28,3 +28,4 @@ email:
   camp:
     submit_recipient: lager@pbs.ch
     submit_abroad_recipient: auslandlager@pbs.ch
+
