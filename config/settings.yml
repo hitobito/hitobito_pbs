@@ -6,7 +6,7 @@
 # Settings relevant for the jubla wagon
 # Overrides settings from the main application
 application:
-
+  name: MiData PBS/MSdS/MSS
   languages:
     de: Deutsch
     fr: Français
@@ -24,3 +24,4 @@ root_email: hitobito-pbs@puzzle.ch
 email:
   # Sender for all emails sent by the application
   sender: <%= "MiData PBS/MSdS/MSS <noreply@#{mail_domain}>" %>
+
