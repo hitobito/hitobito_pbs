@@ -43,6 +43,10 @@ describe Event::ListsController do
         get :all_camps
         is_expected.to eq([@current, @upcoming, @upcoming2])
       end
+
+      it 'via list_camps' do
+        expect(get :camps).to redirect_to(list_all_camps_path)
+      end
     end
 
     context 'as abteilungsleitung' do
@@ -50,6 +54,10 @@ describe Event::ListsController do
 
       it 'is not allowed' do
         expect { get :all_camps }.to raise_error(CanCan::AccessDenied)
+      end
+
+      it 'is not allowed via list_camp' do
+        expect { get :camps }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
@@ -85,6 +93,9 @@ describe Event::ListsController do
         is_expected.to match_array([@current, @early, @late])
       end
 
+      it 'via list_camps' do
+        expect(get :camps).to redirect_to(list_kantonalverband_camps_path(group_id: groups(:be).id))
+      end
     end
 
     context 'as bulei' do
@@ -128,6 +139,9 @@ describe Event::ListsController do
         is_expected.to match_array([@current, @upcoming])
       end
 
+      it 'via list_camps' do
+        expect(get :camps).to redirect_to(list_kantonalverband_camps_path(group_id: groups(:be).id))
+      end
     end
 
   end
@@ -162,6 +176,9 @@ describe Event::ListsController do
         is_expected.to match_array([@current, @early])
       end
 
+      it 'via list_camps' do
+        expect(get :camps).to redirect_to(list_camps_abroad_path)
+      end
     end
   end
 end

@@ -93,6 +93,23 @@ module HitobitoPbs
       ### mailers
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
 
+      # Main navigation
+      i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }
+      NavigationHelper::MAIN.insert(
+        i + 1,
+        label: :camps,
+        url: :list_camps_path,
+        active_for: %w(list_all_camps
+                       list_camps_abroad
+                       list_kantonalverband_camps
+                       list_camps_in_canton),
+        if: lambda do |_|
+          can?(:list_all, Event::Camp) ||
+            can?(:list_abroad, Event::Camp) ||
+            can?(:list_cantonal, Event::Camp)
+        end
+      )
+
       # rubocop:enable SingleSpaceBeforeFirstArg
 
       if Delayed::Job.table_exists?

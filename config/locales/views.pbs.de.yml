@@ -73,7 +73,7 @@ de:
 
   event:
     lists:
-      nav_left_pbs:
+      nav_left_camps:
         all_camps: Lager ganze Schweiz
         kantonalverband_camps: Lager %{group}
         camps_in_canton: Lager in %{canton}
@@ -202,6 +202,9 @@ de:
     deleted_data_for_year: Die Mitgliederzahlen für %{year} wurden erfolgreich gelöscht.
     edit:
       title: Mitgliederzahlen %{year} bearbeiten
+
+  navigation:
+    camps: Lager
 
   people:
     fields:

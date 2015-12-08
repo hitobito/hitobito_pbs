@@ -9,14 +9,32 @@ module Pbs::Event::ListsController
   extend ActiveSupport::Concern
 
   included do
-    skip_authorize_resource only: [:all_camps, :kantonalverband_camps,
+    skip_authorization_check only: :camps
+    skip_authorize_resource only: [:camps, :all_camps, :kantonalverband_camps,
                                    :camps_in_canton, :camps_abroad]
+  end
+
+  # simple redirect action acting as a generic entry point from the main navigation
+  def camps
+    if can?(:list_all, Event::Camp)
+      redirect_to list_all_camps_path
+    elsif can?(:list_abroad, Event::Camp)
+      redirect_to list_camps_abroad_path
+    elsif can?(:list_cantonal, Event::Camp)
+      role = current_user.roles.find do |role|
+        EventAbility::CANTONAL_CAMP_LIST_ROLES.any? { |t| role.is_a?(t) }
+      end
+      redirect_to list_kantonalverband_camps_path(group_id: role.group_id)
+    else
+      fail(CanCan::AccessDenied)
+    end
   end
 
   # List all camps everywhere coming up.
   def all_camps
     authorize!(:list_all, Event::Camp)
 
+    @nav_left = 'camps'
     @camps = grouped(all_upcoming_camps)
   end
 
@@ -24,6 +42,7 @@ module Pbs::Event::ListsController
   def kantonalverband_camps
     authorize!(:list_cantonal, Event::Camp)
 
+    @nav_left = 'camps'
     @group = Group::Kantonalverband.find(params[:group_id])
     @camps = grouped(all_kantonalverband_camps)
   end
@@ -32,6 +51,7 @@ module Pbs::Event::ListsController
   def camps_in_canton
     authorize!(:list_cantonal, Event::Camp)
 
+    @nav_left = 'camps'
     @camps = grouped(all_camps_in_canton)
   end
 
@@ -39,7 +59,7 @@ module Pbs::Event::ListsController
   def camps_abroad
     authorize!(:list_abroad, Event::Camp)
 
-
+    @nav_left = 'camps'
     @camps = grouped(all_camps_abroad)
   end
 

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
     end
 
+    get 'list_camps' => 'event/lists#camps', as: :list_camps
     get 'list_all_camps' => 'event/lists#all_camps', as: :list_all_camps
     get 'list_kantonalverband_camps' => 'event/lists#kantonalverband_camps',
         as: :list_kantonalverband_camps
