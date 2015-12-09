@@ -99,7 +99,7 @@ describe Export::Pdf::CampApplicationData do
 
       it 'has 6 header columns' do
         header_column = data.expected_participant_table_header
-        expect(header_column).to eq ['', 'Wölfe', 'Pfadi', 'Pios', 'Rovers', 'Leiter']
+        expect(header_column).to eq ['', 'Wolf', 'Pfadi', 'Pio', 'Rover', 'Leiter']
       end
 
       it 'includes rows with expected participants count' do

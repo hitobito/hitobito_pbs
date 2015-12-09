@@ -729,16 +729,16 @@ de:
         language_it: Kurssprache Italienisch
         language_en: Kurssprache Englisch
         expected_participants: Erwartete Teilnehmer/-innen
-        expected_participants_wolf: Wölfe
+        expected_participants_wolf: Wolf
         expected_participants_wolf_f: Anzahl Wölfe weiblich
         expected_participants_wolf_m: Anzahl Wölfe männlich
         expected_participants_pfadi: Pfadi
         expected_participants_pfadi_f: Anzahl Pfadi weiblich
         expected_participants_pfadi_m: Anzahl Pfadi männlich
-        expected_participants_pio: Pios
+        expected_participants_pio: Pio
         expected_participants_pio_f: Anzahl Pio weiblich
         expected_participants_pio_m: Anzahl Pio männlich
-        expected_participants_rover: Rovers
+        expected_participants_rover: Rover
         expected_participants_rover_f: Anzahl Rover weiblich
         expected_participants_rover_m: Anzahl Rover männlich
         expected_participants_leitung: Leiter
