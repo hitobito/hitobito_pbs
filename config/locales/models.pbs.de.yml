@@ -633,7 +633,7 @@ de:
         other: Lager
 
       event/camp/role/leader:
-        one: Hauptleitung
+        one: Lagerleitung
 
       event/camp/role/assistant_leader:
         one: Leitung
