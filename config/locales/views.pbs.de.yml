@@ -178,6 +178,7 @@ de:
       coordinates_help: CH1903+ / LV95 (Beispiel 2604'870, 1211'271)
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
       local_scout_contact_present_caption: Kontakt zu lokalem Pfadfinder vorhanden
+      emergency_phone_field: Notfallnummer, Notfallkontakt
     show:
       inform_by_email: Informieren
     show_left_1_advisors:
