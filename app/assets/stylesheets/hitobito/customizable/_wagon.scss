@@ -1,7 +1,7 @@
 .brand {
   display: block;
   float: left;
-  width: 230px;
+  width: 219px;
   height: 76px;
   padding: 0px 0;
   margin-right: 40px;
@@ -24,4 +24,20 @@
       background: image-url("logo@2x.png") transparent no-repeat 0px 10px;
       background-size: 230px 30px;
   }
+
 }
+
+/* Content */
+#page {
+  padding: 5px 10px 90px;
+  margin: 0;
+  background: $pageBackground;
+
+  @include responsive(mediaTablet) {
+    margin: 0;
+    padding: 5px 10px 90px;
+  }
+
+  & > .sheet { margin: 0 20px; }
+}
+
