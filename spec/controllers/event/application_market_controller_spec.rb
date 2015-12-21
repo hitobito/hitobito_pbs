@@ -96,13 +96,15 @@ describe Event::ApplicationMarketController do
   def create_participant(state = 'applied')
     participation = Fabricate(:pbs_participation, event: course, state: state)
     participation.roles.create!(type: Event::Course::Role::Participant.name)
+    participation.reload
   end
 
   it 'GET#index does not list tentative applications' do
-    other = create_participant.participation
+    other = create_participant('assigned')
     tentative = create_participant('tentative')
 
     get :index, group_id: group.id, event_id: course.id
+
     expect(assigns(:participants)).to include(other)
     expect(assigns(:participants)).not_to include(tentative)
   end
