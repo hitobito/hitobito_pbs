@@ -28,12 +28,30 @@ module Pbs::Event::ParticipationConfirmationJob
   def send_confirmation_with_current_user
     if participation.person_id == current_user_id
       send_confirmation_without_current_user
-    else
-      if participation.person.email.present?
-        Event::ParticipationMailer.confirmation_other(participation).deliver_now
-      end
+      send_camp_leader_information
+    elsif participation.person.email.present?
+      Event::ParticipationMailer.confirmation_other(participation).deliver_now
     end
   end
 
-  def send_approval_with_noop; end
+  def send_approval_with_noop
+  end
+
+  def send_camp_leader_information
+    return unless participation.event.is_a?(Event::Camp)
+
+    recipients = camp_leaders
+    if recipients.present?
+      Event::CampMailer.participant_applied_info(participation, recipients).deliver_now
+    end
+  end
+
+  def camp_leaders
+    participation.event.people.
+      joins(event_participations: :roles).
+      where(event_participations: { active: true }).
+      where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
+      uniq.
+      includes(:additional_emails)
+  end
 end

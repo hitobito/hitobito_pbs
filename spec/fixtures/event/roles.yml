@@ -12,3 +12,11 @@ top_leader:
 top_tn:
   participation: top_participant
   type: Event::Course::Role::Participant
+
+schekka_camp_leader:
+  participation: schekka_camp_leader
+  type: Event::Camp::Role::Leader
+
+schekka_camp_tn:
+  participation: schekka_camp_participant
+  type: Event::Camp::Role::Participant

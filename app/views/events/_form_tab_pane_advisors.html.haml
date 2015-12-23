@@ -1,0 +1,33 @@
+-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- if entry.is_a?(Event::Camp)
+  #advisors.tab-pane
+    = field_set_tag do
+      = f.labeled_person_field :abteilungsleitung
+
+      = f.labeled_boolean_field(:al_present, caption: t('.al_present_caption'))
+
+      = f.labeled_boolean_field(:al_visiting, caption: t('.al_visiting_caption'),
+                                              'data-enable' => 'event_al_visiting_date')
+
+      = f.labeled_date_field(:al_visiting_date)
+
+    = field_set_tag do
+      = f.labeled_person_field :coach
+
+      = f.labeled_boolean_field :coach_confirmed if entry.coach == current_user
+
+      = f.labeled_boolean_field(:coach_visiting, caption: t('.coach_visiting_caption'),
+                                                 'data-enable' => 'event_coach_visiting_date')
+
+      = f.labeled_date_field(:coach_visiting_date)
+
+    = field_set_tag do
+      = f.labeled_person_field :advisor_mountain_security
+      = f.labeled_person_field :advisor_snow_security
+      = f.labeled_person_field :advisor_water_security
+
+

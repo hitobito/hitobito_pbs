@@ -628,6 +628,46 @@ de:
         one: Mitglied
         description:
 
+      event/camp:
+        one: Lager
+        other: Lager
+
+      event/camp/role/leader:
+        one: Lagerleitung
+
+      event/camp/role/assistant_leader:
+        one: Leitung
+
+      event/camp/role/helper:
+        one: Küche / Helfer/-in
+
+      event/camp/role/participant:
+        one: Teilnehmer/-in
+
+      event/camp/role/leader_mountain_security:
+        one: Leiter-/in Sicherheitsaktivität Berg
+
+      event/camp/role/leader_snow_security:
+        one: Leiter-/in Sicherheitsaktivität Winter
+
+      event/camp/role/leader_water_security:
+        one: Leiter-/in Sicherheitsaktivität Wasser
+
+      event/camp/role/abteilungsleitung:
+        one: Abteilungsleitung
+
+      event/camp/role/coach:
+        one: Coach
+
+      event/camp/role/advisor_mountain_security:
+        one: Betreuung Sicherheitsaktivität Berg
+
+      event/camp/role/advisor_schnee_security:
+        one: Betreuung Sicherheitsaktivität Winter
+
+      event/camp/role/advisor_wasser_security:
+        one: Betreuung Sicherheitsaktivität Wasser
+
       event/course/role/leader:
         one: Kursleitung
         other: Kursleitungen
@@ -678,6 +718,9 @@ de:
               other: Sehr geehrte(r) %{title_last_name}
 
     attributes:
+      cantons:
+        zz: Ausland
+
       event:
         course_languages: Kurssprachen
         express_fee: Expressgebühr
@@ -685,12 +728,80 @@ de:
         language_fr: Kurssprache Französisch
         language_it: Kurssprache Italienisch
         language_en: Kurssprache Englisch
+        expected_participants: Erwartete Teilnehmer/-innen
+        expected_participants_wolf: Wolf
+        expected_participants_wolf_f: Anzahl Wölfe weiblich
+        expected_participants_wolf_m: Anzahl Wölfe männlich
+        expected_participants_pfadi: Pfadi
+        expected_participants_pfadi_f: Anzahl Pfadi weiblich
+        expected_participants_pfadi_m: Anzahl Pfadi männlich
+        expected_participants_pio: Pio
+        expected_participants_pio_f: Anzahl Pio weiblich
+        expected_participants_pio_m: Anzahl Pio männlich
+        expected_participants_rover: Rover
+        expected_participants_rover_f: Anzahl Rover weiblich
+        expected_participants_rover_m: Anzahl Rover männlich
+        expected_participants_leitung: Leiter
+        expected_participants_leitung_f: Anzahl Leiter weiblich
+        expected_participants_leitung_m: Anzahl Leiter männlich
+        camp_days: Anzahl Lagertage
+        camp_submitted: Eingereicht
+        j_s_kind: J+S-Rahmen
+        j_s_security: Sicherheitsbereiche
+        j_s_security_snow: Winter
+        j_s_security_mountain: Berg
+        j_s_security_water: Wasser
+        canton: Kanton / Land
+        coordinates: Koordinaten
+        altitude: Höhe über Meer
+        emergency_phone: Notfallnummer
+        landlord: Besitzer/-in / Vermieter/-in
+        landlord_permission_obtained: Einverständnis Eigentümer/-in
+        paper_application_required: Papieranmeldung zwingend
+        participants_can_apply: Anmeldung möglich
+        participants_can_cancel: Abmeldung möglich
+        al_present: AL anwesend
+        al_visiting: AL Besuch
+        al_visiting_date: AL Besuchsdatum
+        coach_visiting: Coach Besuch
+        coach_visiting_date: Coach Besuchsdatum
+        local_scout_contact_present: Lokaler Pfadi Kontakt
+        local_scout_contact: Lokale Pfadi Kontaktinfos
+        updated_at: Zuletzt aktualisiert
 
       event/approval:
         comment: Kommentar
         approvee: Teilnehmer
         approver: Bearbeiter
         approved_at: Datum
+
+      event/camp:
+        state: Lagerstatus
+        state_translated: Status
+        states:
+          created: Erstellt
+          confirmed: Bestätigt
+          assignment_closed: Teilnehmende erfasst
+          canceled: Abgesagt
+          closed: Abgeschlossen
+        participation_states:
+          applied_electronically: Elektronisch angemeldet
+          assigned: Angemeldet
+          canceled: Abgemeldet
+          absent: Nicht erschienen
+        abteilungsleitung_id: Abteilungsleitung
+        abteilungsleitung: Abteilungsleitung
+        coach_id: Coach
+        coach: Coach
+        coach_confirmed: Coach bestätigt
+        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
+        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
+        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
+        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
+        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
+        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        advisor_unassigned: Niemand zugeordnet
+        leader_unassigned: Keine Leitenden erfasst
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
@@ -723,6 +834,7 @@ de:
         pbs_shortname: PBS Kürzel
         bank_account: Bank-/Postverbindung
         description: Beschreibung
+        cantons: Kantone
 
       people_relation:
         kinds:

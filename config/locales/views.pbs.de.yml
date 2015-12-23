@@ -41,8 +41,58 @@ de:
       new:
         usage_advise: Die Daten in der Mitgliederdatenbank dürfen nur im Zusammenhang mit Aktivitäten der Pfadi verwendet werden, sie dürfen z.B. nicht an Drittpersonen oder Organisationen weiter gegeben werden.  Die Bearbeitung und Nutzung hat nach Treu und Glauben zu erfolgen und muss verhältnismässig sein.
 
+  dropdown/event/camp_participant_status:
+    change_state: Status ändern
+
+  export/pdf/camp_application:
+    title: Lageranmeldung %{camp}
+    group_header: Abteilung und Einheit
+    leader_header: Lagerleiter/-in
+    assistant_leaders_header: Lagerleitung
+    name: Name
+    address: Adresse
+    zip_town: PLZ / Ort
+    birthday: Geburtstag
+    qualifications: Ausbildung
+    abteilung: Abteilung
+    einheit: Einheit
+    expected_participants: Erwartete Anzahl Teilnehmende
+    camp: Lager
+    camp_dates: Lagerdaten
+    camp_location: Lagerort
+    j_s: J+S Rahmen
+    state: Lagerstatus
+    by: durch
+    abteilungsleitung: Abteilungsleitung
+    coach: Coach
+    kantonalverband: Kantonalverband
+    assistant_leader_name: Vorname Name / Pfadiname
+    assistant_leader_year: Jahrgang
+    assistant_leader_qualifications: Gültige Ausbildungen
+    js_security: Sicherheitsbereich
+
   event:
+    lists:
+      nav_left_camps:
+        all_camps: Lager ganze Schweiz
+        kantonalverband_camps: Lager %{group}
+        camps_in_canton: Lager in %{canton}
+        camps_abroad: Lager im Ausland
+      all_camps:
+        title: Bevorstehende Lager in der ganzen Schweiz
+        explanation: 'Hier werden alle Lager der gesamten PBS angezeigt, welche aktuell oder in drei oder weniger Wochen durchgeführt werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und die nicht abgesagt sind.'
+      kantonalverband_camps:
+        title: Alle Lager im Kantonalverband %{group}
+        explanation: 'Hier werden alle Lager, welche innerhalb des entsprechenden Kantonalverbandes organisiert werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+      camps_in_canton:
+        title: Alle Lager im Kanton %{canton}
+        explanation: 'Hier werden alle Lager, welche aktuell oder in drei oder weniger Wochen im entsprechenden Kanton stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+      camps_abroad:
+        title: Alle Lager im Ausland
+        explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+
     participations:
+      canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
       rejected_email_link: Teilnehmer informieren
       inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
@@ -58,25 +108,86 @@ de:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:
         cancel_info: Die Kursleitung, der Kursorganisator und die Abteilungsleiter werden über die Abmeldung informiert.
+      print:
+        heading_event/camp: Lageranmeldung %{year}
+        read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
 
+  event/camp:
+    al_present_info:
+      'true': Im Lager anwesend
+      'false': Nicht im Lager anwesend
+    visiting_info:
+      at: Besucht das Lager am %{date}
+      'true': Besucht das Lager
+      'false': Besucht das Lager nicht
+    coach_confirmed_info:
+      'true': Bestätigt
+      'false': Nicht bestätigt
+
   events:
-    kind_pbs:
-      event_kind_general_information: Kursart Informationen
+    actions_show_pbs:
+      camp_application: Lageranmeldung PBS
+      cancel_button: Abmelden
+      confirm_cancel: Willst Du Dich wirklich von diesem Lager abmelden?
+      submit_camp: Einreichen
+    application_fields_pbs:
+      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
+      participants_can_apply_caption: Teilnehmende können sich selbst anmelden
+      participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
+      requires_approval_abteilung: Abteilung
+      requires_approval_region: Region
+      requires_approval_kantonalverband: Kantonalverband
+      requires_approval_bund: Bundesebene
+    create_camp_application:
+      flash:
+        success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
+        error: 'Das Lager konnte nicht eingereicht werden:'
+    date_fields_pbs:
+      camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
+    expected_participants_fields:
+      expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
     fields_pbs:
       language_de: Deutsch
       language_fr: Französisch
       language_it: Italienisch
       language_en: Englisch
+      j_s_kind_none: Nicht J+S
+      j_s_kind_j_s_child: J+S Kindersport
+      j_s_kind_j_s_youth: J+S Jugendsport
+      j_s_kind_j_s_mixed: Gemischtes J+S Lager
+      j_s_security_none: (keiner)
+      phone_privat: Telefon Privat
+      phone_mobil: Telefon Mobil
+      email: E-Mail
+    form_tab_pane_advisors:
+      al_present_caption: Die Abteilungsleitung ist im Lager anwesend
+      al_visiting_caption: Die Abteilungsleitung besucht das Lager
+      coach_visiting_caption: Coach besucht das Lager
+    global:
+      link:
+        add_event/camp: Lager erstellen
+    kind_pbs:
+      event_kind_general_information: Kursart Informationen
+    location_fields:
+      location_caption: Lageradresse
+      location_placeholder: Adresse, Platz, Flurname, etc.
+      location_help: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
+      coordinates_help: CH1903+ / LV95 (Beispiel 2604'870, 1211'271)
+      landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
+      local_scout_contact_present_caption: Kontakt zu lokalem Pfadfinder vorhanden
+      emergency_phone_field: Notfallnummer, Notfallkontakt
     show:
       inform_by_email: Informieren
-    application_fields_pbs:
-      requires_approval_abteilung: Abteilung
-      requires_approval_region: Region
-      requires_approval_kantonalverband: Kantonalverband
-      requires_approval_bund: Bundesebene
+    show_left_1_advisors:
+      advisors: Betreuung
+    edit:
+      save_camp_caption: |
+       Das Reglement zur Planung und Durchführung von Lagern („Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten.
+       Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt.
+       Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten.
 
   groups:
     pending_approvals:
@@ -93,6 +204,9 @@ de:
     edit:
       title: Mitgliederzahlen %{year} bearbeiten
 
+  navigation:
+    camps: Lager
+
   people:
     fields:
       no_sensitive_information: In diesem Feld keine besonders schützenswerte Personendaten erfassen.
@@ -104,6 +218,11 @@ de:
     index:
       confirm_census_data: Bestand bestätigen
       current_census_data: Aktueller Bestand
+      birthyears_overview: Jahrgangsübersicht
+      count: Anzahl
+      age: Alter
+      year: Jahrgang
+      no_birthday_given: Unbekannt
       no_census_data_requested: Momentan ist keine Bestandesmeldung ausstehend.
       please_confirm_census_data: 'Bitte ergänze das Geschlecht aller Mitglieder und bestätige den Bestand deiner Abteilung mit "Bestand bestätigen".'
       missing_gender_information: Um den Bestand bestätigen zu können, muss bei allen Mitgliedern das Geschlecht ausgefüllt sein.

@@ -75,6 +75,7 @@ module HitobitoPbs
       EventsController.send :include, Pbs::EventsController
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
+      Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       QualificationsController.send :include, Pbs::QualificationsController
 
@@ -92,7 +93,34 @@ module HitobitoPbs
       ### mailers
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
 
+      # Main navigation
+      i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }
+      NavigationHelper::MAIN.insert(
+        i + 1,
+        label: :camps,
+        url: :list_camps_path,
+        active_for: %w(list_all_camps
+                       list_camps_abroad
+                       list_kantonalverband_camps
+                       list_camps_in_canton),
+        if: lambda do |_|
+          can?(:list_all, Event::Camp) ||
+            can?(:list_abroad, Event::Camp) ||
+            can?(:list_cantonal, Event::Camp)
+        end
+      )
+
       # rubocop:enable SingleSpaceBeforeFirstArg
+
+      if Delayed::Job.table_exists?
+        Event::CampReminderJob.new.schedule
+      end
+
+      if defined? Bullet
+        Bullet.add_whitelist type: :n_plus_one_query,
+                             class_name: 'Group::Kantonalverband',
+                             association: :kantonalverband_cantons
+      end
     end
 
     initializer 'pbs.add_settings' do |_app|

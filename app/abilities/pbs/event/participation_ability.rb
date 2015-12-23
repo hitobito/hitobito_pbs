@@ -10,9 +10,18 @@ module Pbs::Event::ParticipationAbility
 
   included do
     on(Event::Participation) do
+      permission(:any).may(:cancel_own).her_own_if_participant_can_cancel
+
       permission(:layer_and_below_full).
         may(:create, :destroy).
         in_same_layer_or_course_in_below_abteilung
     end
+  end
+
+  def her_own_if_participant_can_cancel
+    participation.person == user &&
+    event.respond_to?(:cancel_possible?) &&
+    event.cancel_possible? &&
+    participation.active?
   end
 end

@@ -39,6 +39,8 @@
 
 class Group::Pio < Group
 
+  self.event_types = [Event::Camp]
+
   children Group::Pio,
            Group::AbteilungsGremium
 

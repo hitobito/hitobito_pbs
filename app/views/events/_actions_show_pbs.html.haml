@@ -3,6 +3,24 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- if entry.is_a?(Event::Course)
-  - if can?(:update, entry) && entry.canceled?
-    = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
+- if entry.is_a?(Event::Course) && entry.canceled? && can?(:update, entry)
+  = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
+
+- if entry.is_a?(Event::Camp) && !entry.camp_submitted? && can?(:create_camp_application, entry)
+  = action_button ti('.submit_camp'),
+                  camp_application_group_event_path(@group, entry),
+                  :share,
+                  data: { method: :put }
+
+- if entry.is_a?(Event::Camp) && can?(:show_camp_application, entry)
+  = action_button ti('.camp_application'),
+                  camp_application_group_event_path(@group, entry),
+                  :file,
+                  target: :blank
+
+- if show_camp_cancel_own_button?
+  = action_button(t('.cancel_button'),
+                  cancel_own_group_event_participation_path(@group, entry, @user_participation),
+                  'remove-circle',
+                  data: { method: :put, confirm: t('.confirm_cancel') })
+

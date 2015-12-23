@@ -8,10 +8,22 @@
 module Pbs::GroupsController
   extend ActiveSupport::Concern
 
+  included do
+    alias_method_chain :permitted_attrs, :cantons
+  end
+
   def pending_approvals
     @approvals = Event::Approval.pending(entry).
       includes(:participation, :approvee, event: [:dates, :groups]).
       order('event_participations.created_at ASC')
+  end
+
+  private
+
+  def permitted_attrs_with_cantons
+    attrs = permitted_attrs_without_cantons
+    attrs << { cantons: [] } if entry.class.used_attributes.include?(:cantons)
+    attrs
   end
 
 end

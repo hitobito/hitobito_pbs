@@ -1,0 +1,20 @@
+- # encoding: utf-8
+- #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+- #  hitobito_pbs and licensed under the Affero General Public License version 3
+- #  or later. See the COPYING file at the top-level directory or at
+- #  https://github.com/hitobito/hitobito_pbs.
+
+%ul.nav-left-list
+  - if can?(:list_all, Event::Camp)
+    = nav t('.all_camps'), list_all_camps_path
+
+  - if can?(:list_abroad, Event::Camp)
+    = nav t('.camps_abroad'), list_camps_abroad_path
+
+  - if can?(:list_cantonal, Event::Camp)
+    - camp_list_permitting_kantonalverbaende.each do |group|
+      = nav t('.kantonalverband_camps', group: group.to_s), list_kantonalverband_camps_path(group_id: group.id)
+    - camp_list_permitted_cantons.each do |key, caption|
+      - label = t('.camps_in_canton', canton: caption)
+      = nav label, list_camps_in_canton_path(canton: key)
+

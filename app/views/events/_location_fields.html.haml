@@ -1,0 +1,28 @@
+-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- if entry.is_a?(Event::Camp)
+  = f.labeled_input_field(:location, label: t('.location_caption'), help: t('.location_help'), placeholder: t('.location_placeholder'))
+  = f.labeled(:canton) do
+    .span6{style: 'margin-left: 0px'}
+      = f.collection_select(:canton,
+                            camp_possible_canton_labels,
+                            :first,
+                            :last,
+                            { include_blank: true },
+                             class: 'chosen-select',
+                             data: { placeholder: ' ' })
+  = f.labeled_input_fields(:coordinates, help_inline: t('.coordinates_help'))
+  = f.labeled_input_field(:altitude)
+  = f.labeled_input_field(:emergency_phone, label: t('.emergency_phone_field'))
+  = f.labeled_input_field(:landlord)
+  = f.labeled_input_field(:landlord_permission_obtained, caption: t('.landlord_permission_obtained_caption'))
+  = f.labeled_input_field(:local_scout_contact_present, caption: t('.local_scout_contact_present_caption'),
+                                                        'data-enable' => 'event_local_scout_contact')
+  = f.labeled_input_field(:local_scout_contact)
+
+- else
+  - entry.used?(:location) do
+    = f.labeled_input_field(:location)

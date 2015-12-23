@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class Event::CanceledParticipationJob < BaseJob
+class Event::CanceledCourseParticipationJob < BaseJob
 
   ORGANIZER_ROLES = [Group::Abteilung::Abteilungsleitung,
                      Group::Abteilung::AbteilungsleitungStv,
@@ -27,7 +27,7 @@ class Event::CanceledParticipationJob < BaseJob
   end
 
   def perform
-    return unless participation || !participation.canceled? # may have been deleted again
+    return if participation.nil? || participation.state != 'canceled' # may have been deleted again
 
     set_locale
     send_notification
@@ -74,7 +74,7 @@ class Event::CanceledParticipationJob < BaseJob
   end
 
   def participation
-    @participation ||= Event::Participation.find(@participation_id)
+    @participation ||= Event::Participation.where(id: @participation_id).first
   end
 
 end

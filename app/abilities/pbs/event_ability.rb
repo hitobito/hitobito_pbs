@@ -8,6 +8,12 @@
 module Pbs::EventAbility
   extend ActiveSupport::Concern
 
+  CANTONAL_CAMP_LIST_ROLES = [Group::Kantonalverband::Kantonsleitung,
+                              Group::Kantonalverband::VerantwortungKrisenteam]
+
+  ABROAD_CAMP_LIST_ROLES = [Group::Bund::InternationalCommissionerIcWagggs,
+                            Group::Bund::InternationalCommissionerIcWosm]
+
   included do
     on(Event) do
       permission(:any).may(:modify_superior).if_education_responsible
@@ -15,15 +21,47 @@ module Pbs::EventAbility
         may(:create, :destroy, :application_market, :qualify).
         in_same_layer_or_course_in_below_abteilung
     end
+
+    on(Event::Camp) do
+      class_side(:list_all).if_mitarbeiter_gs
+      class_side(:list_cantonal).if_kantonsleitung_or_krisenverantwortlich
+      class_side(:list_abroad).if_international_commissioner
+
+      permission(:any).may(:show_camp_application).for_leaded_events
+      permission(:any).may(:create_camp_application).for_coached_events
+
+      permission(:any).may(:index_revoked_participations).for_participations_full_events
+
+      permission(:group_full).
+        may(:index_revoked_participations, :show_camp_application).in_same_group
+      permission(:group_and_below_full).
+        may(:index_revoked_participations, :show_camp_application).in_same_group_or_below
+      permission(:layer_full).
+        may(:index_revoked_participations, :show_camp_application).in_same_layer
+      permission(:layer_and_below_full).
+        may(:index_revoked_participations, :show_camp_application).in_same_layer_or_below
+    end
   end
 
   def if_education_responsible
-    user.roles.any? { |role| education_responsible_roles.include?(role.class) }
+    role_type?(Group::Bund::AssistenzAusbildung,
+               Group::Bund::MitarbeiterGs)
   end
 
-  def education_responsible_roles
-    [Group::Bund::AssistenzAusbildung,
-     Group::Bund::MitarbeiterGs]
+  def if_mitarbeiter_gs
+    role_type?(Group::Bund::MitarbeiterGs)
+  end
+
+  def if_kantonsleitung_or_krisenverantwortlich
+    role_type?(*CANTONAL_CAMP_LIST_ROLES)
+  end
+
+  def if_international_commissioner
+    role_type?(*ABROAD_CAMP_LIST_ROLES)
+  end
+
+  def for_coached_events
+    event.coach_id == user.id
   end
 
 end

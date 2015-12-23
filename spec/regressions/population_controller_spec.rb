@@ -23,7 +23,7 @@ describe PopulationController, type: :controller do
       let(:group) { groups(:schekka) }
 
       it 'does not show any approveable content if there is no current census' do
-        expect(dom.all('#content h2').count).to eq 3
+        expect(dom.all('#content h2').count).to eq 4
         expect(dom).to have_no_selector('a', text: 'Bestand bestätigen')
         expect(dom).to have_no_selector('.alert.alert-info.approveable')
         expect(dom).to have_no_selector('.alert.alert-alert.approveable')

@@ -8,3 +8,11 @@
     - %w(requires_approval_abteilung requires_approval_region requires_approval_kantonalverband requires_approval_bund).each do |approval|
       = f.boolean_field(approval.to_sym, {caption: t(".#{approval}")})
 
+- entry.used?(:paper_application_required) do
+  = f.labeled_boolean_field(:paper_application_required, {caption: t('.paper_application_required_caption')})
+
+- entry.used?(:participants_can_apply) do
+  = f.labeled_boolean_field(:participants_can_apply, {caption: t('.participants_can_apply_caption')})
+
+- entry.used?(:participants_can_cancel) do
+  = f.labeled_boolean_field(:participants_can_cancel, {caption: t('.participants_can_cancel_caption')})

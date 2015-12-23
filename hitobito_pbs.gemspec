@@ -7,7 +7,6 @@ require 'hitobito_pbs/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  # rubocop:disable SingleSpaceBeforeFirstArg
   s.name        = 'hitobito_pbs'
   s.version     = HitobitoPbs::VERSION
   s.authors     = ['Andreas Maierhofer']
@@ -20,5 +19,4 @@ Gem::Specification.new do |s|
   # Do not specify test files due to too long file names
   # s.test_files  = Dir['{test,spec}/**/*']
   s.add_dependency 'hitobito_youth'
-  # rubocop:enable SingleSpaceBeforeFirstArg
 end

@@ -19,6 +19,7 @@ class PopulationController < ApplicationController
     @people_by_group = load_people_by_group
     @people_data_complete = people_data_complete?
     @total = @member_counter.count
+    @members_per_birthyear = @member_counter.members_per_birthyear
   end
 
   private

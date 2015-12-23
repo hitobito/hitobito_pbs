@@ -13,7 +13,37 @@ describe GroupsController do
 
   let(:entry) { assigns(:group) }
 
-  context 'as kantonsleitung' do
+  context 'PUT update cantons' do
+
+    let(:user) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person }
+
+    describe_action :put, :update, id: true do
+      let(:test_entry) { groups(:be) }
+
+      context 'with multiple cantons' do
+        let(:params) { { group: { cantons: %w(be bs zh) } } }
+
+        it 'updates cantons' do
+          test_entry.update!(cantons: %w(be ge))
+          expect { perform_request }.to change { KantonalverbandCanton.count }.by(1)
+          expect(assigns(:group).cantons).to eq %w(be bs zh)
+        end
+      end
+
+      context 'with no cantons' do
+        let(:params) { { group: { cantons: [''] } } }
+
+        it 'removes cantons' do
+          test_entry.update!(cantons: %w(be ge))
+          expect { perform_request }.to change { KantonalverbandCanton.count }.by(-2)
+          expect(assigns(:group).cantons).to eq []
+        end
+      end
+    end
+
+  end
+
+  context 'update superior attributes as kantonsleitung' do
 
     let(:user) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person }
 
@@ -22,7 +52,7 @@ describe GroupsController do
         let(:test_entry) { groups(:be) }
         let(:params) { { group: { bank_account: 'CH123', vkp: true, pta: false } } }
 
-        it 'cannot change superior attributes' do
+        it 'cannot change' do
           perform_request
           expect(assigns(:group).vkp).to be_falsey
         end
@@ -34,10 +64,9 @@ describe GroupsController do
         let(:test_entry) { groups(:schekka) }
         let(:params) { { group: { bank_account: 'CH123', vkp: true, pta: false } } }
 
-        it 'cannot change superior attributes' do
+        it 'cannot change' do
           perform_request
           expect(assigns(:group).vkp).to be_falsey
-          # expect { perform_request }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
         end
       end
     end

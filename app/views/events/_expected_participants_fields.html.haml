@@ -1,0 +1,24 @@
+- entry.used?(:expected_participants_wolf_f) do
+  = f.labeled(:expected_participants, t('activerecord.attributes.event.expected_participants'), nil, class: 'controls-row') do
+    .row
+      .span1
+      .span1= t('activerecord.attributes.event.expected_participants_wolf')
+      .span1= t('activerecord.attributes.event.expected_participants_pfadi')
+      .span1= t('activerecord.attributes.event.expected_participants_pio')
+      .span1= t('activerecord.attributes.event.expected_participants_rover')
+      .span1= t('activerecord.attributes.event.expected_participants_leitung')
+    .row
+      .span1 F
+      = f.string_field(:expected_participants_wolf_f, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_pfadi_f, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_pio_f, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_rover_f, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_leitung_f, class: 'span1', maxlength: 4)
+    .row
+      .span1 M
+      = f.string_field(:expected_participants_wolf_m, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_pfadi_m, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_pio_m, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_rover_m, class: 'span1', maxlength: 4)
+      = f.string_field(:expected_participants_leitung_m, class: 'span1', maxlength: 4)
+    .row.help-block= t('.expected_participants_help_inline')

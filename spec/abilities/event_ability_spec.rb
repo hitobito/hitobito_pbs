@@ -37,12 +37,23 @@ describe EventAbility do
           event = Fabricate(:event, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
+          is_expected.not_to be_able_to(:show_camp_application, event)
         end
 
         it "is allowed to create/update course" do
           event = Fabricate(:pbs_course, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
+          is_expected.not_to be_able_to(:show_camp_application, event)
+        end
+
+        it "is allowed to create/update camp" do
+          event = Fabricate(:pbs_camp, groups: [group])
+          is_expected.to be_able_to(:create, event)
+          is_expected.to be_able_to(:update, event)
+          is_expected.to be_able_to(:index_revoked_participations, event)
+          is_expected.to be_able_to(:show_camp_application, event)
+          is_expected.not_to be_able_to(:create_camp_application, event)
         end
       end
     end
@@ -67,6 +78,16 @@ describe EventAbility do
           is_expected.not_to be_able_to(:index_participations, event)
           is_expected.not_to be_able_to(:application_market, event)
           is_expected.not_to be_able_to(:qualify, event)
+        end
+
+        it "is allowed to create/update camp" do
+          event = Fabricate(:pbs_camp, groups: [group])
+          is_expected.to be_able_to(:create, event)
+          is_expected.to be_able_to(:update, event)
+          is_expected.to be_able_to(:index_participations, event)
+          is_expected.to be_able_to(:index_revoked_participations, event)
+          is_expected.to be_able_to(:show_camp_application, event)
+          is_expected.not_to be_able_to(:create_camp_application, event)
         end
 
         it 'with regionalleitung role is allowed to create/update course' do
@@ -154,6 +175,58 @@ describe EventAbility do
 
     end
   end
+
+  context 'camp application' do
+
+    let(:group) { groups(:schekka) }
+    let(:role) { Fabricate(Group::Region::VerantwortungProgramm.name, group: groups(:bern)) }
+
+    context 'show' do
+      it 'is possible for leader' do
+        event = Fabricate(:pbs_camp, groups: [group])
+        Fabricate(Event::Camp::Role::Leader.name,
+                  participation: Fabricate(:event_participation, event: event, person: role.person))
+        is_expected.to be_able_to(:update, event)
+        is_expected.to be_able_to(:show_camp_application, event)
+      end
+
+      it 'is not possible for anyone' do
+        event = Fabricate(:pbs_camp, groups: [group])
+        Fabricate(Event::Camp::Role::Helper.name,
+                  participation: Fabricate(:event_participation, event: event, person: role.person))
+        is_expected.not_to be_able_to(:update, event)
+        is_expected.not_to be_able_to(:show_camp_application, event)
+      end
+    end
+
+    context 'create' do
+      it 'is possible for coach' do
+        event = Fabricate(:pbs_camp, groups: [group], coach_id: role.person_id)
+        is_expected.to be_able_to(:update, event)
+        is_expected.to be_able_to(:show_camp_application, event)
+        is_expected.to be_able_to(:create_camp_application, event)
+      end
+
+      it 'is not possible for leaders' do
+        event = Fabricate(:pbs_camp, groups: [group])
+        Fabricate(Event::Camp::Role::Helper.name,
+                  participation: Fabricate(:event_participation, event: event, person: role.person))
+        is_expected.not_to be_able_to(:create_camp_application, event)
+      end
+
+      context 'al' do
+        let(:role) { roles(:al_schekka) }
+
+        it 'is not possible for al' do
+          event = Fabricate(:pbs_camp, groups: [group], abteilungsleitung_id: role.person_id)
+          is_expected.to be_able_to(:update, event)
+          is_expected.to be_able_to(:show_camp_application, event)
+          is_expected.not_to be_able_to(:create_camp_application, event)
+        end
+      end
+    end
+  end
+
 
   context :modify_superior do
 

@@ -17,3 +17,15 @@ top_participant:
   person: al_schekka
   active: true
   state: assigned
+
+schekka_camp_leader:
+  event: schekka_camp
+  person: bulei
+  active: true
+  state: assigned
+
+schekka_camp_participant:
+  event: schekka_camp
+  person: al_schekka
+  active: true
+  state: assigned

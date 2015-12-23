@@ -40,8 +40,8 @@
 require 'spec_helper'
 
 describe Group do
-  include_examples 'group types'
 
+  include_examples 'group types'
 
   describe '#all_types' do
     subject { Group.all_types }
@@ -71,5 +71,21 @@ describe Group do
     end
   end
 
+  describe Group::Kantonalverband do
+    let(:group) { groups(:be) }
+
+    context 'cantons' do
+      it 'returns all assigned cantons in order' do
+        group.update!(cantons: %w(ge zh be))
+        expect(group.reload.cantons).to eq %w(be ge zh)
+      end
+
+      it 'removes cantons by assigning an empty list' do
+        expect { group.update!(cantons: %w(ge zh be)) }.to change { KantonalverbandCanton.count }.by(3)
+        expect { group.update!(cantons:[]) }.to change { KantonalverbandCanton.count }.by(-3)
+        expect(group.reload.cantons).to eq []
+      end
+    end
+  end
 
 end

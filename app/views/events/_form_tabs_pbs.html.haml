@@ -3,8 +3,5 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-- entry.used?(:express_fee) do
-  = labeled_attr(entry, :express_fee) if entry.express_fee.present?
-
-- entry.used?(:language_de) do
-  = labeled_attr(entry, :course_languages) if format_attr(entry, :course_languages).present?
+- if entry.is_a?(Event::Camp)
+  %li= link_to(t('events.show_left_1_advisors.advisors'), '#advisors', data: { toggle: 'tab' })

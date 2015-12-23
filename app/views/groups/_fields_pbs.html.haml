@@ -7,6 +7,13 @@
   - entry.modifiable_attributes(:pbs_shortname, :website, :bank_account).each do |attr|
     = f.labeled_input_field attr
 
+  - entry.used?(:cantons) do
+    .label-columns
+      = f.labeled(:cantons) do
+        = hidden_field_tag 'group[cantons][]', ''
+        - Cantons.labels.each do |key, label|
+          = f.inline_check_box :cantons, key.to_s, label
+
 = field_set_tag do
   - entry.modifiable_attributes(:pta, :vkp, :pbs_material_insurance).each do |attr|
     = f.labeled_input_field attr
@@ -14,3 +21,4 @@
 = field_set_tag do
   - entry.modifiable_attributes(:description).each do |attr|
     = f.labeled_input_field attr
+
