@@ -20,23 +20,23 @@ class Event::CampMailer < ApplicationMailer
 
   def camp_created(camp, recipients, user_id)
     @camp = camp
-    compose(CONTENT_CAMP_CREATED, Person.mailing_emails_for(recipients),
+    compose(recipients,
+            CONTENT_CAMP_CREATED,
             'actuator-name' => Person.find(user_id).to_s)
   end
 
   def advisor_assigned(camp, advisor, key, user_id)
     @camp = camp
-
-    recipients = Person.mailing_emails_for(advisor)
-
-    compose(fetch_advisor_content_key(key), recipients,
+    compose(advisor,
+            fetch_advisor_content_key(key),
             'actuator-name' => Person.find(user_id).to_s,
             'advisor-name' => advisor.to_s)
   end
 
   def remind(camp, recipient)
     @camp = camp
-    compose(CONTENT_SUBMIT_REMINDER, Person.mailing_emails_for(recipient),
+    compose(recipient,
+            CONTENT_SUBMIT_REMINDER,
             'recipient-name' => recipient.greeting_name)
   end
 
@@ -50,49 +50,43 @@ class Event::CampMailer < ApplicationMailer
               camp.abteilungsleitung,
               *camp.participations_for(Event::Camp::Role::Leader).collect(&:person)].compact
 
-    compose(CONTENT_SUBMIT, recipients,
+    compose(recipients,
+            CONTENT_SUBMIT,
             { 'coach-name' => camp.coach.to_s,
               'camp-application-url' => camp_application_url},
-            Person.mailing_emails_for(copies))
+            cc: Person.mailing_emails_for(copies))
   end
 
   def participant_applied_info(participation, recipients)
     @camp = participation.event
-    compose(CONTENT_PARTICIPANT_APPLIED, Person.mailing_emails_for(recipients),
+    compose(recipients,
+            CONTENT_PARTICIPANT_APPLIED,
             'participant-name' => participation.person.to_s)
   end
 
   def participant_canceled_info(participation, recipients)
     @camp = participation.event
-    compose(CONTENT_PARTICIPANT_CANCELED, Person.mailing_emails_for(recipients),
+    compose(recipients,
+            CONTENT_PARTICIPANT_CANCELED,
             'participant-name' => participation.person.to_s)
   end
 
   private
 
-  def compose(content_key, recipients, values, copies = nil)
-    content = CustomContent.get(content_key)
-
+  def compose(recipients, content_key, values, headers = {})
     values['camp-name'] = camp.name
     values['camp-url'] = camp_url
     values['camp-state'] = camp_state
 
-    envelope = { to: recipients, subject: content.subject }
-    envelope[:cc] = copies if copies.present?
-
-    mail(envelope) do |format|
-      format.html { render text: content.body_with_values(values) }
-    end
+    custom_content_mail(recipients, content_key, values, headers)
   end
 
   def camp_url
-    url = group_event_url(camp.groups.first, camp)
-    "<a href=\"#{url}\">#{url}</a>"
+    link_to(group_event_url(camp.groups.first, camp))
   end
 
   def camp_application_url
-    url = camp_application_group_event_url(camp.groups.first, camp)
-    "<a href=\"#{url}\">#{url}</a>"
+    link_to(camp_application_group_event_url(camp.groups.first, camp))
   end
 
   def camp_state
