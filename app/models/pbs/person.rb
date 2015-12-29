@@ -95,8 +95,8 @@ module Pbs::Person
     format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-')
   end
 
-  def full_name_with_title
-    "#{title} #{full_name_without_title}".strip
+  def full_name_with_title(format = :default)
+    "#{title} #{full_name_without_title(format)}".strip
   end
 
   def reset_kantonalverband!
