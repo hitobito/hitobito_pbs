@@ -9,6 +9,10 @@ require 'spec_helper'
 
 describe Event::ListsController do
 
+  before { Timecop.freeze(Time.local(2015, 07, 15)) }
+
+  after { Timecop.return }
+
   before { sign_in(user) }
 
   subject { assigns(:camps).values.flatten }
