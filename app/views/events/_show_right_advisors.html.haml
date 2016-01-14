@@ -6,6 +6,8 @@
 - if entry.is_a?(Event::Camp)
   = section(t('.advisors')) do
     %dl.dl-vertical
+      = labeled(captionize(:leader, entry.klass)) do
+        = format_attr(entry, :coach_id)
       = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
         = format_attr(entry, :abteilungsleitung_id)
         - if entry.abteilungsleitung_id

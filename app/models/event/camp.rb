@@ -107,7 +107,8 @@ class Event::Camp < Event
 
   CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
 
-  self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
+  self.used_attributes += [:state, :group_ids, :leader_id,
+                           :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
                            :advisor_water_security_id,
                            :expected_participants_wolf_f, :expected_participants_wolf_m,
@@ -126,14 +127,14 @@ class Event::Camp < Event
                            :local_scout_contact_present, :local_scout_contact,
                            :camp_submitted, :paper_application_required]
 
-  self.role_types = [Event::Camp::Role::Leader,
-                     Event::Camp::Role::AssistantLeader,
+  self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
                      Event::Camp::Role::LeaderMountainSecurity,
                      Event::Camp::Role::LeaderSnowSecurity,
                      Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
 
+  restricted_role :leader, Event::Camp::Role::Leader
   restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
   restricted_role :coach, Event::Camp::Role::Coach
   restricted_role :advisor_mountain_security, Event::Camp::Role::AdvisorMountainSecurity
