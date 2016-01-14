@@ -105,7 +105,7 @@ describe EventsController do
 
       it 'sends mail if all is present' do
         group = event.groups.first
-        event.update!(camp_days: 3, canton: 'be')
+        event.update!(canton: 'be')
 
         mail = double('mail', deliver_later: nil)
         expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)

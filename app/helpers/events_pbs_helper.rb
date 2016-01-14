@@ -25,12 +25,6 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
-  def format_camp_days(entry)
-    if entry.camp_days.present?
-      entry.camp_days.round(1)
-    end
-  end
-
   def format_event_j_s_kind(entry)
     if entry.j_s_kind.present?
       t("events.fields_pbs.j_s_kind_#{entry.j_s_kind}")
@@ -142,6 +136,11 @@ module EventsPbsHelper
       content << person_link(advisor)
     end
     content.join('<br/>'.html_safe).html_safe
+  end
+
+  def labeled_camp_days(event)
+    label = t("activerecord.attributes.event.camp_days")
+    labeled(label, event.camp_days)
   end
 
   private

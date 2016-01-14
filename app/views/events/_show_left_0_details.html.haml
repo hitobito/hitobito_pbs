@@ -15,7 +15,7 @@
     = render_attrs(entry, *entry.used_attributes(:local_scout_contact_present, :local_scout_contact))
 
   %dl.dl-horizontal
-    = labeled_attr(entry, :camp_days) if format_attr(entry, :camp_days).present?
+    = labeled_camp_days(entry)
     = labeled_attr(entry, :j_s_kind)
 
     = labeled(Event.human_attribute_name(:j_s_security)) do

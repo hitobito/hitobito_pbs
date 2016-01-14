@@ -145,8 +145,6 @@ de:
       flash:
         success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
         error: 'Das Lager konnte nicht eingereicht werden:'
-    date_fields_pbs:
-      camp_days_help_inline: Pro Lagertag sind mindestens zwei Einheiten J+S-Aktivitäten durchzuführen, je eine am Vormittag und/oder am Nachmittag und/oder am Abend. Pro Lagerhalbtag ist mindestens eine Stunde J+S-Aktivität durchzuführen. Insgesamt müssen die J+S-Aktivitäten mindestens vier Stunden dauern. An- und Abreisetag gelten zusammen als ein Lagertag, wenn an diesen beiden Tagen zusammen mindestens vier Stunden J+S-Aktivitäten durchgeführt werden.
     expected_participants_fields:
       expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
     fields_pbs:

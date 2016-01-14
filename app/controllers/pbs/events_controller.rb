@@ -24,7 +24,7 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    if !entry.camp_submitted? && validate_present?(:camp_days, :canton)
+    if !entry.camp_submitted? && validate_present?(:canton)
       Event::CampMailer.submit_camp(entry).deliver_later
       entry.update!(camp_submitted: true)
       set_success_notice

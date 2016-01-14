@@ -57,7 +57,6 @@
 #  expected_participants_rover_m     :integer
 #  expected_participants_leitung_f   :integer
 #  expected_participants_leitung_m   :integer
-#  camp_days                         :decimal(5, 1)
 #  canton                            :string(2)
 #  coordinates                       :string
 #  altitude                          :string
@@ -116,7 +115,6 @@ class Event::Camp < Event
                            :expected_participants_pio_f, :expected_participants_pio_m,
                            :expected_participants_rover_f, :expected_participants_rover_m,
                            :expected_participants_leitung_f, :expected_participants_leitung_m,
-                           :camp_days,
                            :canton, :coordinates, :altitude, :emergency_phone,
                            :landlord, :landlord_permission_obtained,
                            :j_s_kind,
@@ -156,7 +154,6 @@ class Event::Camp < Event
   validates :state, inclusion: possible_states
   validates *EXPECTED_PARTICIPANT_ATTRS,
             numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
-  validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
   validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
   validates :canton, inclusion: { in: CANTONS, allow_blank: true }
 
@@ -204,6 +201,14 @@ class Event::Camp < Event
     else
       'applied_electronically'
     end
+  end
+
+  def camp_days
+    count = 0
+    dates.each do |d|
+      count += event_date_day_count(d)
+    end
+    count
   end
 
   private
@@ -290,6 +295,13 @@ class Event::Camp < Event
       Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
       Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
     }
+  end
+
+  def event_date_day_count(date)
+    return 1 unless date.finish_at
+    start_at = date.start_at.to_date
+    finish_at = date.finish_at.to_date
+    (finish_at - start_at).to_i + 1
   end
 
 end

@@ -30,18 +30,6 @@ describe Event::Camp do
     end
   end
 
-  context 'camp days' do
-    it 'does not accept negative values' do
-      subject.camp_days = -44
-      is_expected.not_to be_valid
-    end
-
-    it 'accepts any positive integer' do
-      subject.camp_days = 4
-      is_expected.to be_valid
-    end
-  end
-
   context '#j_s_kind' do
     it 'accepts empty value' do
       subject.j_s_kind = nil
@@ -373,8 +361,35 @@ describe Event::Camp do
       subject.update!(coach_id: people(:bulei).id)
       subject.update!(coach_confirmed: true)
 
-      subject.update!(camp_days: 22)
+      subject.update!(altitude: 22)
       expect(subject.coach_confirmed).to eq true
+    end
+  end
+
+  context 'camp days' do
+    it 'counts dates without finish at as one day' do
+      subject.dates.first.update!(finish_at: nil)
+      expect(subject.camp_days).to eq 1
+    end
+
+    it 'counts number of dates given by event date' do
+      date = subject.dates.first
+      finish_at = date.start_at + 5.days
+      date.update!(finish_at: finish_at)
+      expect(subject.camp_days).to eq 6
+    end
+
+    it 'accumulates days of multiple event dates' do
+      date1 = subject.dates.first
+      finish_at = date1.start_at + 5.days
+      date1.update!(finish_at: finish_at)
+      Fabricate(:event_date,
+                event: subject,
+                start_at: Date.new(2019, 3, 1),
+                finish_at: Date.new(2019, 3, 3))
+      subject.reload
+
+      expect(subject.camp_days).to eq 9
     end
   end
 
