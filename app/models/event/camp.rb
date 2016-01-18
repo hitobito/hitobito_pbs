@@ -127,6 +127,8 @@ class Event::Camp < Event
                            :local_scout_contact_present, :local_scout_contact,
                            :camp_submitted, :paper_application_required]
 
+  self.used_attributes -= [:contact_id]
+
   self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
                      Event::Camp::Role::LeaderMountainSecurity,
