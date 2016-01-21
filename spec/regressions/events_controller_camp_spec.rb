@@ -183,4 +183,91 @@ describe EventsController, type: :controller do
 
   end
 
+  context 'show details' do
+
+    let(:child) { people(:child) }
+    let(:camp_leader) { people(:al_schekka) }
+    let (:detail_attrs) do
+      [:canton, :coordinates,
+       :altitude, :emergency_phone,
+       :advisor_mountain_security_id,
+       :landlord, :landlord_permission_obtained,
+       :j_s_kind
+      ]
+    end
+
+    before do
+      child_participation = Fabricate(:pbs_participation, event: camp, person: child)
+      Fabricate(Event::Camp::Role::Participant.name, participation: child_participation)
+      leader_participation = Fabricate(:pbs_participation, event: camp, person: camp_leader)
+      Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
+
+      update_camp_attrs
+    end
+
+    it 'does not show details to person with participant role' do
+      sign_in(child)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_no_attr(attr)
+      end
+
+      expect(dom).not_to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+
+    end
+
+    it 'shows details to person with event leader role' do
+      sign_in(camp_leader)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_attr(attr)
+      end
+
+      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+
+    end
+
+    it 'shows details to person with update permission' do
+      sign_in(bulei)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_attr(attr)
+      end
+
+      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+
+    end
+  end
+
+  def assert_attr(attr)
+    label = camp_attr_label(attr)
+    expect(dom).to have_selector('dt', text: label)
+  end
+
+  def assert_no_attr(attr)
+    label = camp_attr_label(attr)
+    expect(dom).not_to have_selector('dt', text: label)
+  end
+
+  def camp_attr_label(attr)
+    event_attr_label = I18n.t('activerecord.attributes.event.' + attr.to_s)
+    I18n.t('activerecord.attributes.event/camp.' + attr.to_s, default: event_attr_label)
+  end
+
+  def update_camp_attrs
+    camp.update_attribute(:expected_participants_wolf_f, 33)
+    camp.update_attribute(:canton, 'BE')
+    camp.update_attribute(:coordinates, '34')
+    camp.update_attribute(:altitude, '344')
+    camp.update_attribute(:emergency_phone, '344')
+    camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
+    camp.update_attribute(:landlord, 'foo')
+    camp.update_attribute(:j_s_kind, 'j_s_child')
+  end
 end

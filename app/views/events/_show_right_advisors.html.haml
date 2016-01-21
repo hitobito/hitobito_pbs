@@ -7,24 +7,25 @@
   = section(t('.advisors')) do
     %dl.dl-vertical
       = labeled(captionize(:leader, entry.klass)) do
-        = format_attr(entry, :coach_id)
-      = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
-        = format_attr(entry, :abteilungsleitung_id)
-        - if entry.abteilungsleitung_id
-          %br/
-          = t("event/camp.al_present_info.#{entry.al_present}")
-          %br/
-          = camp_visiting_info(entry.al_visiting, entry.al_visiting_date)
+        = format_attr(entry, :leader)
+      - if can?(:show_details, entry)
+        = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
+          = format_attr(entry, :abteilungsleitung_id)
+          - if entry.abteilungsleitung_id
+            %br/
+            = t("event/camp.al_present_info.#{entry.al_present}")
+            %br/
+            = camp_visiting_info(entry.al_visiting, entry.al_visiting_date)
 
-      = labeled(captionize(:coach_id, entry.klass)) do
-        = format_attr(entry, :coach_id)
-        - if entry.coach_id
-          %br/
-          = t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
-          %br/
-          = camp_visiting_info(entry.al_visiting, entry.coach_visiting_date)
+        = labeled(captionize(:coach_id, entry.klass)) do
+          = format_attr(entry, :coach_id)
+          - if entry.coach_id
+            %br/
+            = t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
+            %br/
+            = camp_visiting_info(entry.al_visiting, entry.coach_visiting_date)
 
-      - [:advisor_mountain_security_id,
-         :advisor_snow_security_id,
-         :advisor_water_security_id].each do |attr|
-        = labeled_attr(entry, attr)
+        - [:advisor_mountain_security_id,
+           :advisor_snow_security_id,
+           :advisor_water_security_id].each do |attr|
+          = labeled_attr(entry, attr)
