@@ -193,7 +193,8 @@ describe EventsController, type: :controller do
        :altitude, :emergency_phone,
        :advisor_mountain_security_id,
        :landlord, :landlord_permission_obtained,
-       :j_s_kind
+       :j_s_kind, :local_scout_contact_present,
+       :local_scout_contact, :location
       ]
     end
 
@@ -216,7 +217,7 @@ describe EventsController, type: :controller do
       end
 
       expect(dom).not_to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
-
+      expect(dom).not_to have_selector('dt', text: 'Durchgeführt von')
     end
 
     it 'shows details to person with event leader role' do
@@ -229,7 +230,7 @@ describe EventsController, type: :controller do
       end
 
       expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
-
+      expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
 
     it 'shows details to person with update permission' do
@@ -242,7 +243,7 @@ describe EventsController, type: :controller do
       end
 
       expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
-
+      expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
   end
 
@@ -263,12 +264,15 @@ describe EventsController, type: :controller do
 
   def update_camp_attrs
     camp.update_attribute(:expected_participants_wolf_f, 33)
-    camp.update_attribute(:canton, 'BE')
+    camp.update_attribute(:canton, 'zz')
     camp.update_attribute(:coordinates, '34')
     camp.update_attribute(:altitude, '344')
     camp.update_attribute(:emergency_phone, '344')
     camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
     camp.update_attribute(:landlord, 'foo')
     camp.update_attribute(:j_s_kind, 'j_s_child')
+    camp.update_attribute(:local_scout_contact_present, true)
+    camp.update_attribute(:local_scout_contact, 'foo guy')
+    camp.update_attribute(:location, 'foo place')
   end
 end
