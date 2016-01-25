@@ -20,7 +20,7 @@ module Event::Camp::Role
 
     self.permissions = [:event_full, :participations_full]
 
-    self.kind = :leader
+    self.kind = nil
 
   end
 end
