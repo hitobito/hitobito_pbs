@@ -34,6 +34,7 @@ describe EventsController, type: :controller do
       camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
 
       participation = Fabricate(:event_participation, event: camp)
+      Fabricate(Event::Camp::Role::Helper.name.to_sym, participation: participation)
       participant = participation.person
       sign_in(participant)
 
