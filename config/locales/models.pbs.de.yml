@@ -794,6 +794,7 @@ de:
         coach_id: Coach
         coach: Coach
         leader: Lagerleitung
+        leader_id: Lagerleitung
         coach_confirmed: Coach bestätigt
         advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
         advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
@@ -803,7 +804,9 @@ de:
         advisor_snow_security: Betreuung Sicherheitsaktivität Winter
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
-
+        lagerreglement_applied: Lagerregelement berücksichtigt/eingehalten
+        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
+        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB

@@ -127,6 +127,41 @@ describe EventsController do
         end.to raise_error(CanCan::AccessDenied)
       end
     end
-  end
 
+    context 'camp leader checkpoint attrs' do
+
+      let(:camp) { events(:schekka_camp) }
+      before { sign_in(people(:bulei)) }
+
+      it 'is not possible for non camp leader user to update checkpoint attrs' do
+        put :update, group_id: camp.groups.first.id, id: camp.id,
+                     event: checkpoint_values
+
+        Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+          expect(camp.send(attr)).to be false
+        end
+      end
+
+      it 'is possible for camp leader to update checkpoint attrs' do
+        camp.leader_id = people(:bulei).id
+        camp.save!
+
+        put :update, group_id: camp.groups.first.id, id: camp.id,
+                     event: checkpoint_values
+
+        camp.reload
+        Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+          expect(camp.send(attr)).to be true
+        end
+      end
+
+      def checkpoint_values
+        values = {}
+        Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+          values[attr.to_s] = '1'
+        end
+        values
+      end
+    end
+  end
 end

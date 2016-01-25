@@ -92,6 +92,10 @@ module Export::Pdf
           text_nobody
         end
       end
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        labeled_checkpoint_attr(attr)
+      end
+      move_down_line
     end
 
     def render_assistant_leaders
@@ -256,6 +260,12 @@ module Export::Pdf
       year = translate('assistant_leader_year')
       qualifications = translate('assistant_leader_qualifications')
       [name, year, qualifications]
+    end
+
+    def labeled_checkpoint_attr(attr)
+      label = data.t_camp_attr(attr.to_s)
+      value = data.camp_attr_value(attr)
+      text "#{label}: #{value}"
     end
 
   end

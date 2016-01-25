@@ -245,34 +245,69 @@ describe EventsController, type: :controller do
       expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
       expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
+
+    def assert_attr(attr)
+      label = camp_attr_label(attr)
+      expect(dom).to have_selector('dt', text: label)
+    end
+
+    def assert_no_attr(attr)
+      label = camp_attr_label(attr)
+      expect(dom).not_to have_selector('dt', text: label)
+    end
+
+    def camp_attr_label(attr)
+      event_attr_label = I18n.t('activerecord.attributes.event.' + attr.to_s)
+      I18n.t('activerecord.attributes.event/camp.' + attr.to_s, default: event_attr_label)
+    end
+
+    def update_camp_attrs
+      camp.update_attribute(:expected_participants_wolf_f, 33)
+      camp.update_attribute(:canton, 'zz')
+      camp.update_attribute(:coordinates, '34')
+      camp.update_attribute(:altitude, '344')
+      camp.update_attribute(:emergency_phone, '344')
+      camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
+      camp.update_attribute(:landlord, 'foo')
+      camp.update_attribute(:j_s_kind, 'j_s_child')
+      camp.update_attribute(:local_scout_contact_present, true)
+      camp.update_attribute(:local_scout_contact, 'foo guy')
+      camp.update_attribute(:location, 'foo place')
+    end
   end
 
-  def assert_attr(attr)
-    label = camp_attr_label(attr)
-    expect(dom).to have_selector('dt', text: label)
-  end
+  context 'camp leader checkpoint attrs' do
 
-  def assert_no_attr(attr)
-    label = camp_attr_label(attr)
-    expect(dom).not_to have_selector('dt', text: label)
-  end
+    before { sign_in(bulei) }
 
-  def camp_attr_label(attr)
-    event_attr_label = I18n.t('activerecord.attributes.event.' + attr.to_s)
-    I18n.t('activerecord.attributes.event/camp.' + attr.to_s, default: event_attr_label)
-  end
+    it 'checkpoint checkboxes are disabled for non camp leader user' do
+      get :edit, group_id: group.id, id: camp.id
 
-  def update_camp_attrs
-    camp.update_attribute(:expected_participants_wolf_f, 33)
-    camp.update_attribute(:canton, 'zz')
-    camp.update_attribute(:coordinates, '34')
-    camp.update_attribute(:altitude, '344')
-    camp.update_attribute(:emergency_phone, '344')
-    camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
-    camp.update_attribute(:landlord, 'foo')
-    camp.update_attribute(:j_s_kind, 'j_s_child')
-    camp.update_attribute(:local_scout_contact_present, true)
-    camp.update_attribute(:local_scout_contact, 'foo guy')
-    camp.update_attribute(:location, 'foo place')
+      expect(dom).to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_j_s_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_kantonalverband_rules_applied[disabled=disabled]')
+    end
+
+    it 'checkpoint checkboxes to camp leader user' do
+      camp.leader_id = people(:bulei).id
+      camp.save!
+
+      get :edit, group_id: group.id, id: camp.id
+
+      expect(dom).not_to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_lagerreglement_applied')
+      expect(dom).not_to have_selector('input#event_j_s_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_j_s_rules_applied')
+      expect(dom).not_to have_selector('input#event_kantonalverband_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_kantonalverband_rules_applied')
+    end
+
+    it 'shows checkpoint values' do
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('span', text: 'Lagerregelement berücksichtigt/eingehalten: nein')
+      expect(dom).to have_selector('span', text: 'Vorschriften Kantonalverband berücksichtigt/eingehalten: nein')
+      expect(dom).to have_selector('span', text: 'J+S-Lager Vorschriften berücksichtigt/eingehalten: nein')
+    end
   end
 end

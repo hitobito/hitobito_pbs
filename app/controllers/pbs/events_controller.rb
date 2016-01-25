@@ -10,6 +10,7 @@ module Pbs::EventsController
 
   included do
     before_action :remove_restricted, only: [:create, :update]
+    before_action :check_checkpoint_attrs, only: [:create, :update]
 
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
 
@@ -68,6 +69,14 @@ module Pbs::EventsController
 
   def remove_restricted
     model_params.delete(:coach)
+  end
+
+  def check_checkpoint_attrs
+    if entry.is_a?(Event::Camp) && entry.leader != current_user
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        model_params.delete(attr.to_s)
+      end
+    end
   end
 
   def validate_present?(*attrs)

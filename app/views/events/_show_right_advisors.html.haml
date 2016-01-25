@@ -6,8 +6,9 @@
 - if entry.is_a?(Event::Camp)
   = section(t('.advisors')) do
     %dl.dl-vertical
-      = labeled(captionize(:leader, entry.klass)) do
-        = format_attr(entry, :leader)
+      = labeled(captionize(:leader_id, entry.klass)) do
+        = format_attr(entry, :leader_id)
+        = labeled_checkpoint_attrs
       - if can?(:show_details, entry)
         = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
           = format_attr(entry, :abteilungsleitung_id)

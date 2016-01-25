@@ -393,4 +393,25 @@ describe Event::Camp do
     end
   end
 
+  context 'camp leader checkpoints' do
+    it 'resetts all checkpoints to false when camp leader is changed' do
+      subject.leader_id = people(:bulei).id
+      subject.save!
+
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |c|
+        subject.update_attribute(c, true)
+      end
+
+      subject.leader_id = people(:al_schekka).id
+      subject.save!
+
+      subject.reload
+
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |c|
+        expect(subject.send(c)).to be false
+      end
+
+    end
+  end
+
 end

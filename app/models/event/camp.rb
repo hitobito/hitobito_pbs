@@ -107,6 +107,10 @@ class Event::Camp < Event
 
   CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
 
+  LEADER_CHECKPOINT_ATTRS = [:lagerreglement_applied,
+                      :kantonalverband_rules_applied,
+                      :j_s_rules_applied]
+
   self.used_attributes += [:state, :group_ids, :leader_id,
                            :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
@@ -126,6 +130,8 @@ class Event::Camp < Event
                            :coach_visiting, :coach_visiting_date, :coach_confirmed,
                            :local_scout_contact_present, :local_scout_contact,
                            :camp_submitted, :paper_application_required]
+
+  self.used_attributes += LEADER_CHECKPOINT_ATTRS
 
   self.used_attributes -= [:contact_id]
 
@@ -168,6 +174,7 @@ class Event::Camp < Event
   after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
   after_save :reset_coach_confirmed_if_changed
+  after_save :reset_checkpoint_attrs_if_leader_changed
 
 
   ### INSTANCE METHODS
@@ -235,6 +242,14 @@ class Event::Camp < Event
       update_column(:coach_confirmed, false)
     end
     true
+  end
+
+  def reset_checkpoint_attrs_if_leader_changed
+    if restricted_role_changes[:leader]
+      LEADER_CHECKPOINT_ATTRS.each do |a|
+        update_column(a, false)
+      end
+    end
   end
 
   def send_assignment_infos
