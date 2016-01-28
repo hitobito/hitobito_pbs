@@ -134,6 +134,7 @@ de:
       cancel_button: Abmelden
       confirm_cancel: Willst Du Dich wirklich von diesem Lager abmelden?
       submit_camp: Einreichen
+      camp_submitted: Eingereicht
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
       participants_can_apply_caption: Teilnehmende können sich selbst anmelden

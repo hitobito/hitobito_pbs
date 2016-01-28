@@ -768,6 +768,7 @@ de:
         local_scout_contact_present: Lokaler Pfadi Kontakt
         local_scout_contact: Lokale Pfadi Kontaktinfos
         updated_at: Zuletzt aktualisiert
+        any_expected_participant_attr: Erwartete Teilnehmer/-innen
 
       event/approval:
         comment: Kommentar

@@ -414,4 +414,89 @@ describe Event::Camp do
     end
   end
 
+  context 'camp application' do
+
+    subject { events(:schekka_camp) }
+
+    it 'is not valid if camp_submitted and required value missing' do
+      update_attributes(subject)
+      required_attrs_for_camp_application.each do |a, v|
+        subject.reload
+        subject.camp_submitted = true
+        expect(subject).to be_valid
+        clear_attribute(subject, a)
+        expect(subject).not_to be_valid
+        expect(subject.errors.full_messages.first).to match /muss ausgefüllt werden/
+      end
+    end
+
+    it 'is valid if camp_submitted and all required values are present' do
+      update_attributes(subject)
+      subject.camp_submitted = true
+      expect(subject).to be_valid
+    end
+
+    it 'is valid if camp_submitted and all required values are present, without advisor security' do
+      update_attributes(subject, false)
+      subject.camp_submitted = true
+      expect(subject).to be_valid
+    end
+
+    def required_attrs_for_camp_application
+      advisor_attributes.merge(
+      { canton: 'be',
+        location: 'foo',
+        coordinates: '42',
+        altitude: '1001',
+        emergency_phone: '080011',
+        landlord: 'georg',
+        coach_confirmed: true,
+        lagerreglement_applied: true,
+        kantonalverband_rules_applied: true,
+        j_s_rules_applied: true,
+        expected_participants_pio_f: 3
+      })
+    end
+
+    def advisor_attributes
+      { coach_id: Fabricate(:person).id,
+        leader_id: Fabricate(:person).id,
+      }.merge(advisor_security_attributes)
+    end
+
+    def advisor_security_attributes
+      { advisor_snow_security_id: [:j_s_security_snow, Fabricate(:person).id],
+        advisor_mountain_security_id: [:j_s_security_mountain, Fabricate(:person).id],
+        advisor_water_security_id: [:j_s_security_water, Fabricate(:person).id]
+      }
+    end
+
+    def update_attributes(camp, with_advisor_security = true)
+      required_attrs_for_camp_application.each do |a, v|
+        unless !with_advisor_security && advisor_security_attributes.include?(a)
+          attrs = {}
+          if v.is_a?(Array)
+            attrs[v.first] = true
+            attrs[a] = v.second
+          else
+            attrs[a] = v
+          end
+          camp.update!(attrs)
+        end
+      end
+    end
+
+    def clear_attribute(camp, attr)
+      if advisor_attributes.include?(attr)
+        camp.coach_confirmed = false
+        person_id = camp.send(attr)
+        camp.participations.find_by(person_id: person_id).destroy!
+      else
+        value = camp.send(attr)
+        new_value = value.is_a?(TrueClass) ? false : nil
+        camp.send("#{attr}=", new_value)
+      end
+    end
+  end
+
 end

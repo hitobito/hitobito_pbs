@@ -135,7 +135,7 @@ describe EventsController, type: :controller do
 
       context 'security flags set' do
         before do
-          camp.update_attributes(j_s_security_mountain: true,
+          camp.update_attributes!(j_s_security_mountain: true,
                                  j_s_security_snow: true,
                                  j_s_security_water: true)
         end
@@ -289,8 +289,7 @@ describe EventsController, type: :controller do
     end
 
     it 'checkpoint checkboxes to camp leader user' do
-      camp.leader_id = people(:bulei).id
-      camp.save!
+      camp.update!(leader_id: people(:bulei).id)
 
       get :edit, group_id: group.id, id: camp.id
 
@@ -308,6 +307,57 @@ describe EventsController, type: :controller do
       expect(dom).to have_selector('span', text: 'Lagerregelement berücksichtigt/eingehalten: nein')
       expect(dom).to have_selector('span', text: 'Vorschriften Kantonalverband berücksichtigt/eingehalten: nein')
       expect(dom).to have_selector('span', text: 'J+S-Lager Vorschriften berücksichtigt/eingehalten: nein')
+    end
+  end
+
+  context 'submit camp button' do
+
+    before { sign_in(bulei) }
+
+    it 'not shown if not coach user' do
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).not_to have_selector('a', text: 'Einreichen')
+      expect(dom).not_to have_selector('a.disabled', text: 'Eigereicht')
+    end
+
+    it 'is shown to coach user if camp not submitted' do
+      camp.update!(coach_id: people(:bulei).id)
+
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('a', text: 'Einreichen')
+    end
+
+    it 'is disabled if coach user and camp submitted' do
+      camp.update!(coach_id: people(:bulei).id)
+      submit_camp(camp)
+
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('a.disabled', text: 'Eingereicht')
+    end
+
+    def submit_camp(camp)
+      camp.update!(leader_id: Fabricate(:person).id)
+      camp.update!(required_camp_attributes_for_submit)
+      expect(camp.reload).to be_valid
+    end
+
+    def required_camp_attributes_for_submit
+      { canton: 'be',
+        location: 'foo',
+        coordinates: '42',
+        altitude: '1001',
+        emergency_phone: '080011',
+        landlord: 'georg',
+        coach_confirmed: true,
+        lagerreglement_applied: true,
+        kantonalverband_rules_applied: true,
+        j_s_rules_applied: true,
+        expected_participants_pio_f: 3,
+        camp_submitted: true
+      }
     end
   end
 end

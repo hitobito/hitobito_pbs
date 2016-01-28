@@ -99,13 +99,14 @@ describe EventsController do
         group = event.groups.first
         put :create_camp_application, group_id: group.id, id: event.id
         expect(response).to redirect_to(group_event_path(group, event))
+        expect(flash[:alert]).to match /Das Lager konnte nicht eingereicht werden:/
         expect(flash[:alert]).to match /Kanton.* muss ausgefüllt werden/
         expect(event.reload).not_to be_camp_submitted
       end
 
       it 'sends mail if all is present' do
         group = event.groups.first
-        event.update!(canton: 'be')
+        event.update!(required_attrs_for_camp_submit)
 
         mail = double('mail', deliver_later: nil)
         expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)
@@ -114,6 +115,21 @@ describe EventsController do
         expect(response).to redirect_to(group_event_path(group, event))
         expect(flash[:notice]).to match /eingereicht/
         expect(event.reload).to be_camp_submitted
+      end
+
+      def required_attrs_for_camp_submit
+        { canton: 'be',
+          location: 'foo',
+          coordinates: '42',
+          altitude: '1001',
+          emergency_phone: '080011',
+          landlord: 'georg',
+          coach_confirmed: true,
+          lagerreglement_applied: true,
+          kantonalverband_rules_applied: true,
+          j_s_rules_applied: true,
+          expected_participants_pio_f: 3
+        }
       end
     end
 

@@ -24,22 +24,22 @@ describe Event::ListsController do
 
       before do
         now = Time.zone.now
-        @current = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'closed')
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'closed')
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
                           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @upcoming = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
+        @upcoming = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
         @upcoming.dates = [Fabricate(:event_date, start_at: now + 10.days, finish_at: nil),
                            Fabricate(:event_date, start_at: now + 12.days, finish_at: nil)]
-        @upcoming2 = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'created')
+        @upcoming2 = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'created')
         @upcoming2.dates = [Fabricate(:event_date, start_at: now + 18.days, finish_at: now + 30.days),
                             Fabricate(:event_date, start_at: now + 50.days, finish_at: now + 55.days)]
-        past = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
+        past = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
         past.dates = [Fabricate(:event_date, start_at: now - 5.days, finish_at: nil)]
-        canceled = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'canceled')
+        canceled = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'canceled')
         canceled.dates = [Fabricate(:event_date, start_at: now + 5.days, finish_at: nil)]
-        unsubmitted = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: false, state: 'confirmed')
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: false, state: 'confirmed')
         unsubmitted.dates = [Fabricate(:event_date, start_at: now + 5.days, finish_at: nil)]
-        future = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
+        future = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
         future.dates = [Fabricate(:event_date, start_at: now + 50.days, finish_at: nil)]
       end
 
@@ -73,22 +73,22 @@ describe Event::ListsController do
 
       before do
         now = Time.zone.now
-        @current = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'closed')
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'closed')
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
                           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @early = Fabricate(:pbs_camp, groups: [groups(:be)], camp_submitted: true, state: 'confirmed')
+        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted: true, state: 'confirmed')
         @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1), finish_at: Date.new(now.year, 3, 10))]
-        @late = Fabricate(:pbs_camp, groups: [groups(:bern)], camp_submitted: true, state: 'confirmed')
+        @late = fabricate_pbs_camp(groups: [groups(:bern)], camp_submitted: true, state: 'confirmed')
         @late.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 12, 1))]
-        created = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'created')
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'created')
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'canceled')
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'canceled')
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed')
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed')
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = Fabricate(:pbs_camp, groups: [groups(:be)], camp_submitted: true, state: 'confirmed')
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted: true, state: 'confirmed')
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -120,21 +120,21 @@ describe Event::ListsController do
         now = Time.zone.now
         groups(:be).update!(cantons: %w(be fr))
 
-        @current = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'closed', canton: 'be')
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'closed', canton: 'be')
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
                           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @upcoming = Fabricate(:pbs_camp, groups: [groups(:chaeib)], camp_submitted: true, state: 'confirmed', canton: 'be')
+        @upcoming = fabricate_pbs_camp(groups: [groups(:chaeib)], camp_submitted: true, state: 'confirmed', canton: 'be')
         @upcoming.dates = [Fabricate(:event_date, start_at: now + 18.days, finish_at: now + 30.days),
                            Fabricate(:event_date, start_at: now + 50.days, finish_at: now + 55.days)]
-        created = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'created', canton: 'be')
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'created', canton: 'be')
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'canceled', canton: 'be')
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'canceled', canton: 'be')
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed', canton: 'be')
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed', canton: 'be')
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = Fabricate(:pbs_camp, groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'be')
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'be')
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed', canton: 'zh')
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed', canton: 'zh')
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -156,22 +156,22 @@ describe Event::ListsController do
 
       before do
         now = Time.zone.now
-        @current = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'closed', canton: 'zz')
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'closed', canton: 'zz')
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
                           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @early = Fabricate(:pbs_camp, groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'zz')
+        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'zz')
         @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1), finish_at: Date.new(now.year, 3, 10))]
-        created = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'created', canton: 'zz')
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'created', canton: 'zz')
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: true, state: 'canceled', canton: 'zz')
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: true, state: 'canceled', canton: 'zz')
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = Fabricate(:pbs_camp, groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed', canton: 'zz')
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted: false, state: 'confirmed', canton: 'zz')
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = Fabricate(:pbs_camp, groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'zz')
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted: true, state: 'confirmed', canton: 'zz')
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed', canton: 'be')
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed', canton: 'be')
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        empty = Fabricate(:pbs_camp, groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
+        empty = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted: true, state: 'confirmed')
         empty.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -185,4 +185,30 @@ describe Event::ListsController do
       end
     end
   end
+
+  def fabricate_pbs_camp(overrides={})
+    if overrides[:camp_submitted]
+      overrides = required_attrs_for_camp_submit.
+        merge(overrides)
+    end
+    Fabricate(:pbs_camp, overrides)
+  end
+
+  def required_attrs_for_camp_submit
+    { canton: 'be',
+      location: 'foo',
+      coordinates: '42',
+      altitude: '1001',
+      emergency_phone: '080011',
+      landlord: 'georg',
+      coach_confirmed: true,
+      lagerreglement_applied: true,
+      kantonalverband_rules_applied: true,
+      j_s_rules_applied: true,
+      expected_participants_pio_f: 3,
+      coach_id: Fabricate(:person).id,
+      leader_id: Fabricate(:person).id
+    }
+  end
+
 end

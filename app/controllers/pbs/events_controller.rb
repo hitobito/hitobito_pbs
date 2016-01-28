@@ -25,10 +25,16 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    if !entry.camp_submitted? && validate_present?(:canton)
+    entry.camp_submitted = true
+    if entry.valid?
       Event::CampMailer.submit_camp(entry).deliver_later
-      entry.update!(camp_submitted: true)
+      entry.save!
       set_success_notice
+    else
+      alerts = I18n.t('events.create_camp_application.flash.error')
+      alerts += '<br/>'
+      alerts += entry.errors.full_messages.join('; ')
+      flash[:alert] = alerts
     end
     redirect_to path_args(entry)
   end
@@ -77,21 +83,6 @@ module Pbs::EventsController
         model_params.delete(attr.to_s)
       end
     end
-  end
-
-  def validate_present?(*attrs)
-    errors = attrs.select { |attr| entry.send(attr).blank? }.
-                   collect { |attr| blank_message(attr) }
-    if errors.present?
-      errors.unshift(I18n.t('events.create_camp_application.flash.error'))
-      flash[:alert] = errors.join("\n")
-    end
-    errors.blank?
-  end
-
-  def blank_message(attr)
-    Event::Camp.human_attribute_name(attr) + ' ' +
-      I18n.t('errors.messages.blank', attribute: attr) + '.'
   end
 
 end

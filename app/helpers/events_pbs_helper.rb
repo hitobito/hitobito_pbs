@@ -158,6 +158,20 @@ module EventsPbsHelper
     content.join.html_safe
   end
 
+
+  def camp_submit_button
+    options = {data: { method: :put }}
+    if entry.camp_submitted?
+      label = ti('.camp_submitted')
+      options[:class] = 'disabled'
+    else
+      label = ti('.submit_camp')
+    end
+    action_button(label,
+                  camp_application_group_event_path(@group, entry),
+                  :share, options)
+  end
+
   private
 
   def append_required_advisor(content, advisor)
