@@ -213,7 +213,7 @@ class Event::Camp < Event
     participants_can_cancel? && confirmed?
   end
 
-  def default_participation_state(participation)
+  def default_participation_state(participation, for_someone_else = false)
     if participation.roles.blank? ||
       participation.roles.any? { |role| role.kind != :participant } ||
       !paper_application_required?
