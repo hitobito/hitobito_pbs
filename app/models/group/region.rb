@@ -51,7 +51,7 @@ class Group::Region < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_and_below_full]
+    self.permissions = [:group_and_below_full]
   end
 
   class Beisitz < ::Role
