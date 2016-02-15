@@ -66,7 +66,7 @@ class Group::Bund < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:group_and_below_full]
+    self.permissions = [:layer_and_below_full]
   end
 
   class AssistenzAusbildung < ::Role
