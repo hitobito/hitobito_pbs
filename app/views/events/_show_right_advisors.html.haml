@@ -3,6 +3,12 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
+- if entry.is_a?(Event::Course) && entry.advisor_id.present?
+  = section(t('.advisors')) do
+    %dl.dl-vertical
+      = labeled(captionize(:advisor_id, entry.klass)) do
+        = format_attr(entry, :advisor_id)
+
 - if entry.is_a?(Event::Camp)
   = section(t('.advisors')) do
     %dl.dl-vertical

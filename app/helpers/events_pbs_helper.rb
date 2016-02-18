@@ -108,6 +108,10 @@ module EventsPbsHelper
     advisor_link(entry.leader)
   end
 
+  def format_event_advisor_id(entry)
+    person_link(entry.advisor)
+  end
+
   def format_event_advisor_mountain_security_id(entry)
     advisor_link(entry.advisor_mountain_security,
                  entry.j_s_security_mountain,
