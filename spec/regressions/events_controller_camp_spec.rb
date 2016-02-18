@@ -304,7 +304,7 @@ describe EventsController, type: :controller do
     it 'shows checkpoint values' do
       get :show, group_id: group.id, id: camp.id
 
-      expect(dom).to have_selector('span', text: 'Lagerregelement berücksichtigt/eingehalten: nein')
+      expect(dom).to have_selector('span', text: 'Lagerreglement berücksichtigt/eingehalten: nein')
       expect(dom).to have_selector('span', text: 'Vorschriften Kantonalverband berücksichtigt/eingehalten: nein')
       expect(dom).to have_selector('span', text: 'J+S-Lager Vorschriften berücksichtigt/eingehalten: nein')
     end
