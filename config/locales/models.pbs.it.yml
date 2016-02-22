@@ -121,13 +121,13 @@ it:
       group/bund/leitungskursbetreuung:
         one: Consigliere alla formazione
       group/bund/leitung_kernaufgabe_ausbildung:
-        one: Responsabile compito fondamentale formazione
+        one: Responsabile compito principale formazione
       group/bund/leitung_kernaufgabe_kommunikation:
-        one: Responsabile compito fondamentale comunicazione
+        one: Responsabile compito principale comunicazione
       group/bund/leitung_kernaufgabe_programm:
-        one: Responsabile compito fondamentale programma
+        one: Responsabile compito principale programma
       group/bund/leitung_kernaufgabe_support:
-        one: Responsabile compito fondamentale supporto
+        one: Responsabile compito principale supporto
       group/bund/verantwortung_biberstufe:
         one: Responsabile branca castori
       group/bund/verantwortung_wolfstufe:
@@ -445,6 +445,33 @@ it:
         one: Responsabile
       group/gremium/mitglied:
         one: Membro
+      event/camp:
+        one: Campo
+        other: Campi
+      event/camp/role/leader:
+        one: Direzione del campo
+      event/camp/role/assistant_leader:
+        one: Responsabile
+      event/camp/role/helper:
+        one: Cucina / aiutanti
+      event/camp/role/participant:
+        one: Partecipante
+      event/camp/role/leader_mountain_security:
+        one: Animatore ambito di sicurezza Montagna
+      event/camp/role/leader_snow_security:
+        one: Animatore ambito di sicurezza Inverno
+      event/camp/role/leader_water_security:
+        one: Animatore ambito di sicurezza Acqua
+      event/camp/role/abteilungsleitung:
+        one: Direzione della sezione
+      event/camp/role/coach:
+        one: Coach
+      event/camp/role/advisor_mountain_security:
+        one: Accompagnamento ambito di sicurezza Montagna
+      event/camp/role/advisor_schnee_security:
+        one: Accompagnamento ambito di sicurezza Inverno
+      event/camp/role/advisor_wasser_security:
+        one: Accompagnamento ambito di sicurezza Acqua
       event/course/role/leader:
         one: Direzione del corso
         other: Direzioni dei corsi
@@ -489,6 +516,8 @@ it:
               w: Gentile Signora %{title_last_name}
               other: Gentile Signora, Egregio Signore %{title_last_name}
     attributes:
+      cantons:
+        zz: Estero
       event:
         course_languages: Corso di lingue
         express_fee: Spese per un'elaborazione espresso
@@ -496,11 +525,84 @@ it:
         language_fr: Corso di francese
         language_it: Corso di italiano
         language_en: Corso di inglese
+        expected_participants: Partecipanti stimati
+        expected_participants_wolf: Lupetto
+        expected_participants_wolf_f: Numero di lupette
+        expected_participants_wolf_m: Numero di lupetti
+        expected_participants_pfadi: Esploratore
+        expected_participants_pfadi_f: Numero di esploratrici
+        expected_participants_pfadi_m: Numero di esploratori
+        expected_participants_pio: Pioniere
+        expected_participants_pio_f: Numero di pioniere
+        expected_participants_pio_m: Numero di pionieri
+        expected_participants_rover: Rover
+        expected_participants_rover_f: Numero di rover femmine
+        expected_participants_rover_m: Numero di rover maschi
+        expected_participants_leitung: Animatore
+        expected_participants_leitung_f: Numero di animatrici
+        expected_participants_leitung_m: Numero di animatori
+        camp_days: Numero di giorni di campo
+        camp_submitted: Inoltrato
+        j_s_kind: Ambiti G+S
+        j_s_security: Ambiti di sicurezza
+        j_s_security_snow: Inverno
+        j_s_security_mountain: Montagna
+        j_s_security_water: Acqua
+        canton: Cantone / Paese
+        coordinates: Coordinate
+        altitude: Metri sopra il livello del mare
+        emergency_phone: Numero d'emergenza
+        landlord: Proprietario / Locatore
+        landlord_permission_obtained: Consenso proprietario
+        paper_application_required: Iscrizione cartacea indispensabile
+        participants_can_apply: Iscrizione possibile
+        participants_can_cancel: Disiscrizione possibile
+        al_present: CSZ presente
+        al_visiting: Visita CSZ
+        al_visiting_date: Data visita CSZ
+        coach_visiting: Visita coach
+        coach_visiting_date: Data visita coach
+        local_scout_contact_present: Contatto scout locali
+        local_scout_contact: Info contatto scout locali
+        updated_at: Ultimo aggiornamento
+        any_expected_participant_attr: Partecipanti stimati
       event/approval:
         comment: Commento
         approvee: Partecipante
         approver: Operatore
         approved_at: Data
+      event/camp:
+        state: Stato del campo
+        state_translated: Stato
+        states:
+          created: Salvato
+          confirmed: Confermato
+          assignment_closed: Partecipanti registrati
+          canceled: Annullato
+          closed: Terminato
+        participation_states:
+          applied_electronically: Iscritta/o elettronicamente
+          assigned: Iscritta/o
+          canceled: Disiscritta/o
+          absent: Non comparsa/o
+        abteilungsleitung_id: Direzione della sezione
+        abteilungsleitung: Direzione della sezione
+        coach_id: Coach
+        coach: Coach
+        leader: Direzione del campo
+        leader_id: Direzione del campo
+        coach_confirmed: Coach confermato
+        advisor_mountain_security_id: Accompagnamento ambito di sicurezza Montagna
+        advisor_mountain_security: Accompagnamento ambito di sicurezza Montagna
+        advisor_water_security_id: Accompagnamento ambito di sicurezza Acqua
+        advisor_water_security: Accompagnamento ambito di sicurezza Acqua
+        advisor_snow_security_id: Accompagnamento ambito di sicurezza Inverno
+        advisor_snow_security: Accompagnamento ambito di sicurezza Inverno
+        advisor_unassigned: Nessuna assegnazione
+        leader_unassigned: Nessun animatore registrato
+        lagerreglement_applied: Regolamento del campo considerato/rispettato
+        kantonalverband_rules_applied: Prescrizioni associazione cantonale considerate/rispettate
+        j_s_rules_applied: Prescrizioni campi G+S considerate/rispettate
       event/course:
         requires_approval: Raccomandazione per l'iscrizione è necessaria attraverso
         advisor: CaF
@@ -529,6 +631,7 @@ it:
         pbs_shortname: Abbreviazione MSS
         bank_account: Coordinate bancarie/postali
         description: Descrizione
+        cantons: Cantoni
       people_relation:
         kinds:
           sibling: Fratelli

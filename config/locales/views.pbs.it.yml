@@ -29,8 +29,55 @@ it:
     sessions:
       new:
         usage_advise: I dati della banca dati degli attivi possono essere utilizzati unicamente in un contesto di attività scout, non possono ad esempio essere inoltrate a terzi o ad altre organizzazioni. L'elaborazione e l'utilizzo devono avvenire in buona fede e in modo proporzionato.
+  dropdown/event/camp_participant_status:
+    change_state: Modificare lo stato
+  export/pdf/camp_application:
+    title: Annuncio di campo %{camp}
+    group_header: Sezione e unità
+    leader_header: Capo campo
+    assistant_leaders_header: Direzione del campo
+    name: Cognome
+    address: Indirizzo
+    zip_town: NAP / luogo
+    birthday: Data di nascita
+    qualifications: Formazione
+    abteilung: Sezione
+    einheit: Unità
+    expected_participants: Numero di partecipanti stimato
+    camp: Campo
+    camp_dates: Date del campo
+    camp_location: Luogo del campo
+    j_s: Ambito G+S
+    state: Stato del campo
+    by: da parte di
+    abteilungsleitung: Direzione della sezione
+    coach: Coach
+    kantonalverband: Associazione cantonale
+    assistant_leader_name: Nome cognome / totem
+    assistant_leader_year: Anno di nascita
+    assistant_leader_qualifications: Formazioni valide
+    js_security: Ambito di sicurezza
   event:
+    lists:
+      nav_left_camps:
+        all_camps: Campi in tutta la Svizzera
+        kantonalverband_camps: Campo %{group}
+        camps_in_canton: Campo in %{canton}
+        camps_abroad: Campo all'estero
+      all_camps:
+        title: Futuri campi in tutta la Svizzera
+        explanation: 'Qui vengono indicati tutti i campi di tutto il MSS che sono in corso o che si svolgeranno entro le prossime tre settimane. Entrano in considerazione solo i campi annunciati e non annullati.'
+      kantonalverband_camps:
+        title: Tutti i campi dell'associazione cantonale %{group}
+        explanation: 'Qui vengono indicati tutti i campi organizzati all''interno della rispettiva associazione cantonale. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
+      camps_in_canton:
+        title: Tutti i campi nel cantone %{canton}
+        explanation: 'Qui vengono indicati tutti i campi che sono in corso o che si svolgeranno entro le prossime tre settimane nel cantone corrispondente. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
+      camps_abroad:
+        title: Tutti i campi all'estero
+        explanation: 'Qui vengono indicati tutti i campi che si svolgono all''estero. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
     participations:
+      canceled_own_notice: Sei stata/o disiscritta/o da questo evento.
       rejected_notice: "%{participant} è stato rifiutato. %{mailto}"
       rejected_email_link: Informare i partecipanti
       inform_about_email_sent_to_participant: Il partecipante viene informato sull'iscrizione per email.
@@ -46,23 +93,82 @@ it:
         approval_stored: La raccomandazione viene salvata elettronicamente e può venir ammessa dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone
       popover_cancel:
         cancel_info: La direzione del corso, l'organizzatore del corso e il capo sezione verrano informati riguardo all'iscrizione
+      print:
+        heading_event/camp: Annuncio di campo %{year}
+        read_and_agreed_for_event_camp: Adempio i presupposti per questo campo, ho letto la descrizione e la approvo.
   event/applications:
     rejected_inform_participant: Per favore informare %{participant} e il capo gruppo personalmente a riguardo
+  event/camp:
+    al_present_info:
+      'true': Presente al campo
+      'false': Non presente al campo
+    visiting_info:
+      at: Visita il campo il %{date}
+      'true': Visita il campo
+      'false': Non visita il campo
+    coach_confirmed_info:
+      'true': Confermato
+      'false': Non confermato
+    checkpoint_field_caption: Può essere confermato solo dalla direzione del campo
   events:
-    kind_pbs:
-      event_kind_general_information: Informazioni riguardo al tipo di corso
+    actions_show_pbs:
+      camp_application: Annuncio di campo MSS
+      cancel_button: Scollegarsi
+      confirm_cancel: Vuoi veramente disiscriverti dal campo?
+      submit_camp: Inoltrare
+      camp_submitted: Inoltrato
+    application_fields_pbs:
+      paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
+      participants_can_apply_caption: I partecipanti possono iscrivere sé stessi
+      participants_can_cancel_caption: I partecipanti possono disiscrivere sé stessi
+      requires_approval_abteilung: Sezione
+      requires_approval_region: Zona
+      requires_approval_kantonalverband: Associazione cantonale
+      requires_approval_bund: Livello federale
+    create_camp_application:
+      flash:
+        success: Il campo è stato inoltrato al MSS. Ricevi una copia dell'e-mail.
+        error: 'Il campo non può essere salvato:'
+    expected_participants_fields:
+      expected_participants_help_inline: Qui vengono registrati il numero di partecipanti e il numero di animatori. Se non si conoscono ancora questi dati, va indicato il numero stimato.
     fields_pbs:
       language_de: Tedesco
       language_fr: Francese
       language_it: Italiano
       language_en: Inglese
+      j_s_kind_none: Non G+S
+      j_s_kind_j_s_child: Sport per i bambini G+S
+      j_s_kind_j_s_youth: Sport per i giovani G+S
+      j_s_kind_j_s_mixed: Campi misti G+S
+      j_s_security_none: (nessuno)
+      phone_privat: Telefono privato
+      phone_mobil: Telefono mobile
+      email: E-mail
+    form_tab_pane_advisors:
+      al_present_caption: La direzione della sezione è presente al campo
+      al_visiting_caption: La direzione della sezione visita il campo
+      coach_visiting_caption: Il coach visita il campo
+    global:
+      link:
+        add_event/camp: Creare il campo
+    kind_pbs:
+      event_kind_general_information: Informazioni riguardo al tipo di corso
+    location_fields:
+      location_caption: Indirizzo del campo
+      location_placeholder: Indirizzo, luogo, nome del campo, ecc.
+      location_help: Descrivere il luogo del campo anche per campi all'estero, incl. paese
+      coordinates_help: CH1903+ / LV95 (esempio 2604'870, 1211'271)
+      landlord_permission_obtained_caption: Consenso del proprietario del terreno o bosco ottenuto
+      local_scout_contact_present_caption: Contatto scout locali disponibile
+      emergency_phone_field: Numero d'emergenza, contatto d'emergenza
     show:
       inform_by_email: Informare
-    application_fields_pbs:
-      requires_approval_abteilung: Sezione
-      requires_approval_region: Zona
-      requires_approval_kantonalverband: Associazione cantonale
-      requires_approval_bund: Livello federale
+    show_right_advisors:
+      advisors: Accompagnamento
+    form_actions_caption_pbs:
+      lagerreglement_applied_caption: il regolamento per la pianificazione e lo svolgimento di campi ("Regolamento del campo") e il Profilo dello scoutismo sono considerati e rispettati.
+      kantonalverband_rules_applied_caption: 'Durante la preparazione del campo vengono considerate  le prescrizioni o le raccomandazioni esistenti dell''associazione cantonale '
+      j_s_rules_applied_caption: "Per i campi G+S: le prescrizioni in vigore della disciplina sportiva Sport di campo/Trekking sono conosciute e rispettate."
   groups:
     pending_approvals:
       info: Le seguenti persone hanno firmato per un corso e devono essere approvati da voi.
@@ -76,6 +182,8 @@ it:
     deleted_data_for_year: Il numero dei membri per il %{year} è stato cancellato con successo.
     edit:
       title: Aggiornare il numero dei membri per il %{year}
+  navigation:
+    camps: Campi
   people:
     fields:
       no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
@@ -86,11 +194,11 @@ it:
     index:
       confirm_census_data: Confermare i censimenti
       current_census_data: Censimenti attuali
-      birthyears_overview: Annata
+      birthyears_overview: Panoramica anno di nascita
       count: Numero
       age: Età
-      year: Annata
-      no_birthday_given: Incognita
+      year: Anno di nascita
+      no_birthday_given: Sconosciuto
       no_census_data_requested: Al momento non c'è nessun censimento ancora in sospeso.
       please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare i censimenti della tua sezione con "Confermare i censimenti"'
       missing_gender_information: Per poter inviare i censimenti, a tutti i membri deve essere assegnato il sesso.
