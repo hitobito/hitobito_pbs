@@ -115,10 +115,10 @@ fr:
       camp_application: Annonce de camp du MSdS
       cancel_button: Désinscription
       confirm_cancel: Souhaites-tu vraiment te désinscrire de ce camp?
-      submit_camp: Remettre
+      submit_camp: Transmettre
       camp_submitted: démission
     application_fields_pbs:
-      paper_application_required_caption: Les participants doivent remettre une inscription papier
+      paper_application_required_caption: Les participants doivent envoyer une inscription papier
       participants_can_apply_caption: Les participants peuvent se désinscrire eux-mêmes
       participants_can_cancel_caption: Les participants peuvent se désinscrire eux-mêmes
       requires_approval_abteilung: Groupe
