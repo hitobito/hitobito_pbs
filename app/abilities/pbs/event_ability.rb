@@ -40,6 +40,12 @@ module Pbs::EventAbility
         may(:index_revoked_participations, :show_camp_application).in_same_layer
       permission(:layer_and_below_full).
         may(:index_revoked_participations, :show_camp_application).in_same_layer_or_below
+
+      permission(:group_full).may(:show_details).in_same_group
+      permission(:group_and_below_full).may(:show_details).in_same_group_or_below
+      permission(:layer_full).may(:show_details).in_same_layer
+      permission(:layer_and_below_full).may(:show_details).in_same_layer_or_below
+      permission(:any).may(:show_details).if_participating_as_leader_role
     end
   end
 
@@ -62,6 +68,22 @@ module Pbs::EventAbility
 
   def for_coached_events
     event.coach_id == user.id
+  end
+
+  def if_participating_as_leader_role
+    participating? && participating_as_leader_role?
+  end
+
+  def participating?
+    user_context.participations.collect(&:event_id).include?(event.id)
+  end
+
+  def participating_as_leader_role?
+    event.participations.
+      where(person: user).
+      joins(:roles).
+      where('event_roles.type != ?', "Event::Camp::Role::Participant").
+      present?
   end
 
 end

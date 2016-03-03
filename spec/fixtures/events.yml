@@ -55,7 +55,6 @@
 #  expected_participants_rover_m     :integer
 #  expected_participants_leitung_f   :integer
 #  expected_participants_leitung_m   :integer
-#  camp_days                         :decimal(5, 1)
 #  canton                            :string(2)
 #  coordinates                       :string
 #  altitude                          :string

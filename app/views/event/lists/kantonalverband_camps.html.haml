@@ -7,6 +7,8 @@
 
 %p= t('.explanation')
 
+= render 'csv_export_button'
+
 = render 'shared/page_per_year', paging_params: { group_id: @group.id }
 
 = render 'camp_list'

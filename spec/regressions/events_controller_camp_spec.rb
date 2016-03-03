@@ -34,6 +34,7 @@ describe EventsController, type: :controller do
       camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
 
       participation = Fabricate(:event_participation, event: camp)
+      Fabricate(Event::Camp::Role::Helper.name.to_sym, participation: participation)
       participant = participation.person
       sign_in(participant)
 
@@ -134,7 +135,7 @@ describe EventsController, type: :controller do
 
       context 'security flags set' do
         before do
-          camp.update_attributes(j_s_security_mountain: true,
+          camp.update_attributes!(j_s_security_mountain: true,
                                  j_s_security_snow: true,
                                  j_s_security_water: true)
         end
@@ -183,4 +184,180 @@ describe EventsController, type: :controller do
 
   end
 
+  context 'show details' do
+
+    let(:child) { people(:child) }
+    let(:camp_leader) { people(:al_schekka) }
+    let (:detail_attrs) do
+      [:canton, :coordinates,
+       :altitude, :emergency_phone,
+       :advisor_mountain_security_id,
+       :landlord, :landlord_permission_obtained,
+       :j_s_kind, :local_scout_contact_present,
+       :local_scout_contact, :location
+      ]
+    end
+
+    before do
+      child_participation = Fabricate(:pbs_participation, event: camp, person: child)
+      Fabricate(Event::Camp::Role::Participant.name, participation: child_participation)
+      leader_participation = Fabricate(:pbs_participation, event: camp, person: camp_leader)
+      Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
+
+      update_camp_attrs
+    end
+
+    it 'does not show details to person with participant role' do
+      sign_in(child)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_no_attr(attr)
+      end
+
+      expect(dom).not_to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).not_to have_selector('dt', text: 'Durchgeführt von')
+    end
+
+    it 'shows details to person with event leader role' do
+      sign_in(camp_leader)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_attr(attr)
+      end
+
+      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('dt', text: 'Durchgeführt von')
+    end
+
+    it 'shows details to person with update permission' do
+      sign_in(bulei)
+
+      get :show, group_id: group.id, id: camp.id
+
+      detail_attrs.each do |attr| 
+        assert_attr(attr)
+      end
+
+      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('dt', text: 'Durchgeführt von')
+    end
+
+    def assert_attr(attr)
+      label = camp_attr_label(attr)
+      expect(dom).to have_selector('dt', text: label)
+    end
+
+    def assert_no_attr(attr)
+      label = camp_attr_label(attr)
+      expect(dom).not_to have_selector('dt', text: label)
+    end
+
+    def camp_attr_label(attr)
+      event_attr_label = I18n.t('activerecord.attributes.event.' + attr.to_s)
+      I18n.t('activerecord.attributes.event/camp.' + attr.to_s, default: event_attr_label)
+    end
+
+    def update_camp_attrs
+      camp.update_attribute(:expected_participants_wolf_f, 33)
+      camp.update_attribute(:canton, 'zz')
+      camp.update_attribute(:coordinates, '34')
+      camp.update_attribute(:altitude, '344')
+      camp.update_attribute(:emergency_phone, '344')
+      camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
+      camp.update_attribute(:landlord, 'foo')
+      camp.update_attribute(:j_s_kind, 'j_s_child')
+      camp.update_attribute(:local_scout_contact_present, true)
+      camp.update_attribute(:local_scout_contact, 'foo guy')
+      camp.update_attribute(:location, 'foo place')
+    end
+  end
+
+  context 'camp leader checkpoint attrs' do
+
+    before { sign_in(bulei) }
+
+    it 'checkpoint checkboxes are disabled for non camp leader user' do
+      get :edit, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_j_s_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_kantonalverband_rules_applied[disabled=disabled]')
+    end
+
+    it 'checkpoint checkboxes to camp leader user' do
+      camp.update!(leader_id: people(:bulei).id)
+
+      get :edit, group_id: group.id, id: camp.id
+
+      expect(dom).not_to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_lagerreglement_applied')
+      expect(dom).not_to have_selector('input#event_j_s_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_j_s_rules_applied')
+      expect(dom).not_to have_selector('input#event_kantonalverband_rules_applied[disabled=disabled]')
+      expect(dom).to have_selector('input#event_kantonalverband_rules_applied')
+    end
+
+    it 'shows checkpoint values' do
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('span', text: 'Lagerreglement berücksichtigt/eingehalten: nein')
+      expect(dom).to have_selector('span', text: 'Vorschriften Kantonalverband berücksichtigt/eingehalten: nein')
+      expect(dom).to have_selector('span', text: 'J+S-Lager Vorschriften berücksichtigt/eingehalten: nein')
+    end
+  end
+
+  context 'submit camp button' do
+
+    before { sign_in(bulei) }
+
+    it 'not shown if not coach user' do
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).not_to have_selector('a', text: 'Einreichen')
+      expect(dom).not_to have_selector('a.disabled', text: 'Eigereicht')
+    end
+
+    it 'is shown to coach user if camp not submitted' do
+      camp.update!(coach_id: people(:bulei).id)
+
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('a', text: 'Einreichen')
+    end
+
+    it 'is disabled if coach user and camp submitted' do
+      camp.update!(coach_id: people(:bulei).id)
+      submit_camp(camp)
+
+      get :show, group_id: group.id, id: camp.id
+
+      expect(dom).to have_selector('a.disabled', text: 'Eingereicht')
+    end
+
+    def submit_camp(camp)
+      camp.update!(leader_id: Fabricate(:person).id)
+      camp.update!(required_camp_attributes_for_submit)
+      expect(camp.reload).to be_valid
+    end
+
+    def required_camp_attributes_for_submit
+      { canton: 'be',
+        location: 'foo',
+        coordinates: '42',
+        altitude: '1001',
+        emergency_phone: '080011',
+        landlord: 'georg',
+        coach_confirmed: true,
+        lagerreglement_applied: true,
+        kantonalverband_rules_applied: true,
+        j_s_rules_applied: true,
+        expected_participants_pio_f: 3,
+        camp_submitted: true
+      }
+    end
+  end
 end

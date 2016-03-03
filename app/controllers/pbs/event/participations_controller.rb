@@ -41,7 +41,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def inform_about_email_sent_to_participant
-    if new_record_for_someone_else?(entry) && !event.tentative_applications?
+    if new_record_for_someone_else? && !event.tentative_applications?
       flash.now[:notice] = t('event.participations.inform_about_email_sent_to_participant')
     end
   end

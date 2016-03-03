@@ -431,15 +431,42 @@ fr:
         one: Responsable
       group/gremium/mitglied:
         one: Membre
+      event/camp:
+        one: Camp
+        other: Camps
+      event/camp/role/leader:
+        one: Maîtrise de camp
+      event/camp/role/assistant_leader:
+        one: Responsable
+      event/camp/role/helper:
+        one: Cuisine / Aide
+      event/camp/role/participant:
+        one: Participant/-e
+      event/camp/role/leader_mountain_security:
+        one: Responsable activité de sécurité Montagne
+      event/camp/role/leader_snow_security:
+        one: Responsable activité de sécurité Hiver
+      event/camp/role/leader_water_security:
+        one: Responsable activité de sécurité Eau
+      event/camp/role/abteilungsleitung:
+        one: Maîtrise de groupe
+      event/camp/role/coach:
+        one: Coach
+      event/camp/role/advisor_mountain_security:
+        one: Encadrement activité de sécurité Montagne
+      event/camp/role/advisor_schnee_security:
+        one: Encadrement activité de sécurité Hiver
+      event/camp/role/advisor_wasser_security:
+        one: Encadrement activité de sécurité Eau
       event/course/role/leader:
-        one: Maîtrise de cours
-        other: Maîtrises de cours
+        one: Responsable de cours
+        other: Responsables de cours
       event/course/role/class_leader:
-        one: Enseignant
-        other: Enseignant
+        one: Formateur
+        other: Formateur
       event/course/role/helper:
-        one: Aide de cours
-        other: Aide de cours
+        one: Assistant de cours
+        other: Assistant de cours
       event/course/role/advisor:
         one: CAF
         other: CAFs
@@ -475,6 +502,8 @@ fr:
               w: Chère Madame %{title_last_name}
               other: Cher/Chère %{title_last_name}
     attributes:
+      cantons:
+        zz: International
       event:
         course_languages: Langues de cours
         express_fee: Finances express
@@ -482,11 +511,84 @@ fr:
         language_fr: Langue de cours français
         language_it: Langue de cours italien
         language_en: Langue de cours anglais
+        expected_participants: Participants/-es attendus/-ues
+        expected_participants_wolf: Louveteau
+        expected_participants_wolf_f: Nombre de louveteaux filles
+        expected_participants_wolf_m: Nombre de louveteaux garçons
+        expected_participants_pfadi: Eclaireur
+        expected_participants_pfadi_f: Nombre d'éclais filles
+        expected_participants_pfadi_m: Nombre d'éclais garçons
+        expected_participants_pio: Pico
+        expected_participants_pio_f: Nombre de Picos filles
+        expected_participants_pio_m: Nombre de Picos garçons
+        expected_participants_rover: Routier
+        expected_participants_rover_f: Nombre de routiers filles
+        expected_participants_rover_m: Nombre de routiers garçons
+        expected_participants_leitung: Responsable
+        expected_participants_leitung_f: Nombre de responsables fille
+        expected_participants_leitung_m: Nombre de responsables garçons
+        camp_days: Nombre de jours de camp
+        camp_submitted: Démission
+        j_s_kind: Cadre J+S
+        j_s_security: Domaines de sécurité
+        j_s_security_snow: Hiver
+        j_s_security_mountain: Montagne
+        j_s_security_water: Eau
+        canton: Canton / Pays
+        coordinates: Coordonnées
+        altitude: Altitude par rapport au niveau de la mer
+        emergency_phone: Numéro en cas d'urgence
+        landlord: Propriétaire / loueur/-euse
+        landlord_permission_obtained: Autorisation du / de la propriétaire
+        paper_application_required: Inscription papier obligatoire
+        participants_can_apply: Inscription obligatoire
+        participants_can_cancel: Possibilité de se désinscrire
+        al_present: RG présent
+        al_visiting: Visite du RG
+        al_visiting_date: Date de visite du RG
+        coach_visiting: Visite du Coach
+        coach_visiting_date: Date de visite du Coach
+        local_scout_contact_present: Contact scout local
+        local_scout_contact: Informations de contact des scouts locaux
+        updated_at: Actualisé pour la dernière fois
+        any_expected_participant_attr: Participants/-es attendus/-ues
       event/approval:
         comment: Commentaire
         approvee: Participant
         approver: Examinateur
         approved_at: Date
+      event/camp:
+        state: Statut de camp
+        state_translated: Statut
+        states:
+          created: Créé
+          confirmed: Confirmé
+          assignment_closed: Participants saisis
+          canceled: Désinscriptions
+          closed: Décidé
+        participation_states:
+          applied_electronically: Inscription électronique
+          assigned: Inscrit
+          canceled: Désinscrit
+          absent: Ne s'est pas présenté
+        abteilungsleitung_id: Maîtrise de groupe
+        abteilungsleitung: Maîtrise de groupe
+        coach_id: Coach
+        coach: Coach
+        leader: Maîtrise de camp
+        leader_id: Maîtrise de camp
+        coach_confirmed: Coach confirmé
+        advisor_mountain_security_id: Encadrement activité de sécurité Montagne
+        advisor_mountain_security: Encadrement activité de sécurité Montagne
+        advisor_water_security_id: Encadrement activité de sécurité Eau
+        advisor_water_security: Encadrement activité de sécurité Eau
+        advisor_snow_security_id: Encadrement activité de sécurité Hiver
+        advisor_snow_security: Encadrement activité de sécurité Hiver
+        advisor_unassigned: Attribué à personne
+        leader_unassigned: Pas de responsables saisis
+        lagerreglement_applied: Prise en compte / respect du règlement de camp
+        kantonalverband_rules_applied: Prise en compte / respect des recommandations de l'association cantonale
+        j_s_rules_applied: Prise en compte / respect des recommandations de camp J+S
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
         advisor: CAF
@@ -515,6 +617,7 @@ fr:
         pbs_shortname: Abréviation MSdS
         bank_account: Référence bancaire  / postale
         description: Description
+        cantons: Cantons
       people_relation:
         kinds:
           sibling: fratrie

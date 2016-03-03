@@ -1,0 +1,38 @@
+-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- if entry.is_a?(Event::Course) && entry.advisor_id.present?
+  = section(t('.advisors')) do
+    %dl.dl-vertical
+      = labeled(captionize(:advisor_id, entry.klass)) do
+        = format_attr(entry, :advisor_id)
+
+- if entry.is_a?(Event::Camp)
+  = section(t('.advisors')) do
+    %dl.dl-vertical
+      = labeled(captionize(:leader_id, entry.klass)) do
+        = format_attr(entry, :leader_id)
+        = labeled_checkpoint_attrs
+      - if can?(:show_details, entry)
+        = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
+          = format_attr(entry, :abteilungsleitung_id)
+          - if entry.abteilungsleitung_id
+            %br/
+            = t("event/camp.al_present_info.#{entry.al_present}")
+            %br/
+            = camp_visiting_info(entry.al_visiting, entry.al_visiting_date)
+
+        = labeled(captionize(:coach_id, entry.klass)) do
+          = format_attr(entry, :coach_id)
+          - if entry.coach_id
+            %br/
+            = t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
+            %br/
+            = camp_visiting_info(entry.al_visiting, entry.coach_visiting_date)
+
+        - [:advisor_mountain_security_id,
+           :advisor_snow_security_id,
+           :advisor_water_security_id].each do |attr|
+          = labeled_attr(entry, attr)

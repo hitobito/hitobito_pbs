@@ -1,0 +1,43 @@
+.brand {
+  display: block;
+  float: left;
+  width: 219px;
+  height: 76px;
+  padding: 0px 0;
+  margin-right: 40px;
+
+  // Hide text
+  text-indent: -9999px;
+  white-space: nowrap;
+  font-family: $headingFontFamily;
+  font-weight: bold;
+  font-size: 2.462em; // 32px
+  line-height: 1.250em; // 40px
+  @include single-text-shadow(white, 0, 1px, 0);
+
+  background: image-url("logo.png") transparent no-repeat 0px 0px;
+
+  // Retina version
+  @media
+    only screen and (-webkit-min-device-pixel-ratio : 2),
+    only screen and (min-device-pixel-ratio : 2) {
+      background: image-url("logo@2x.png") transparent no-repeat 0px 0px;
+      background-size: 219px 72px;
+  }
+
+}
+
+/* Content */
+#page {
+  padding: 5px 10px 90px;
+  margin: 0;
+  background: $pageBackground;
+
+  @include responsive(mediaTablet) {
+    margin: 0;
+    padding: 5px 10px 90px;
+  }
+
+  & > .sheet { margin: 0 20px; }
+}
+

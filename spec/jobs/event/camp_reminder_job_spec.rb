@@ -28,7 +28,7 @@ describe Event::CampReminderJob do
     abroad.dates = [Fabricate(:event_date, event: abroad, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.week)]
     after_span = Fabricate(:pbs_camp, canton: 'be', state: 'confirmed')
     after_span.dates = [Fabricate(:event_date, event: after_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
-    submitted = Fabricate(:pbs_camp, canton: 'be', state: 'confirmed', camp_submitted: true)
+    submitted = fabricate_pbs_camp(canton: 'be', state: 'confirmed', camp_submitted: true)
     submitted.dates = [Fabricate(:event_date, event: submitted, start_at: now + 1.week)]
     created = Fabricate(:pbs_camp, canton: 'be', state: 'created')
     created.dates = [Fabricate(:event_date, event: created, start_at: now + 1.week)]
@@ -91,6 +91,32 @@ describe Event::CampReminderJob do
     expect(at_span.reload.camp_reminder_sent).to be true
     expect(abroad.reload.camp_reminder_sent).to be true
     expect(after_span.reload.camp_reminder_sent).to be false
+  end
+
+  def fabricate_pbs_camp(overrides={})
+    if overrides[:camp_submitted]
+      overrides = required_attrs_for_camp_submit.
+        merge(overrides)
+    end
+    Fabricate(:pbs_camp, overrides)
+  end
+
+  def required_attrs_for_camp_submit
+    { canton: 'be',
+      location: 'foo',
+      coordinates: '42',
+      altitude: '1001',
+      emergency_phone: '080011',
+      landlord: 'georg',
+      j_s_kind: 'j_s_child',
+      coach_confirmed: true,
+      lagerreglement_applied: true,
+      kantonalverband_rules_applied: true,
+      j_s_rules_applied: true,
+      expected_participants_pio_f: 3,
+      coach_id: Fabricate(:person).id,
+      leader_id: Fabricate(:person).id
+    }
   end
 
 end

@@ -4,44 +4,45 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - entry.used?(:expected_participants_wolf_f) do
-  - if expected_participants_value_present?(entry)
-    = section(t('activerecord.attributes.event.expected_participants')) do
-      %table.table
-        %tr
-          %th
-          %th.right
-            = t('activerecord.attributes.event.expected_participants_wolf')
-          %th.right
-            = t('activerecord.attributes.event.expected_participants_pfadi')
-          %th.right
-            = t('activerecord.attributes.event.expected_participants_pio')
-          %th.right
-            = t('activerecord.attributes.event.expected_participants_rover')
-          %th.right
-            = t('activerecord.attributes.event.expected_participants_leitung')
+  - if can?(:show_details, entry)
+    - if expected_participants_value_present?(entry)
+      = section(t('activerecord.attributes.event.expected_participants')) do
+        %table.table
           %tr
-            %td
-              F
-            %td.right
-              = entry.expected_participants_wolf_f
-            %td.right
-              = entry.expected_participants_pfadi_f
-            %td.right
-              = entry.expected_participants_pio_f
-            %td.right
-              = entry.expected_participants_rover_f
-            %td.right
-              = entry.expected_participants_leitung_f
-          %tr
-            %td
-              M
-            %td.right
-              = entry.expected_participants_wolf_m
-            %td.right
-              = entry.expected_participants_pfadi_m
-            %td.right
-              = entry.expected_participants_pio_m
-            %td.right
-              = entry.expected_participants_rover_m
-            %td.right
-              = entry.expected_participants_leitung_m
+            %th
+            %th.right
+              = t('activerecord.attributes.event.expected_participants_wolf')
+            %th.right
+              = t('activerecord.attributes.event.expected_participants_pfadi')
+            %th.right
+              = t('activerecord.attributes.event.expected_participants_pio')
+            %th.right
+              = t('activerecord.attributes.event.expected_participants_rover')
+            %th.right
+              = t('activerecord.attributes.event.expected_participants_leitung')
+            %tr
+              %td
+                F
+              %td.right
+                = entry.expected_participants_wolf_f
+              %td.right
+                = entry.expected_participants_pfadi_f
+              %td.right
+                = entry.expected_participants_pio_f
+              %td.right
+                = entry.expected_participants_rover_f
+              %td.right
+                = entry.expected_participants_leitung_f
+            %tr
+              %td
+                M
+              %td.right
+                = entry.expected_participants_wolf_m
+              %td.right
+                = entry.expected_participants_pfadi_m
+              %td.right
+                = entry.expected_participants_pio_m
+              %td.right
+                = entry.expected_participants_rover_m
+              %td.right
+                = entry.expected_participants_leitung_m

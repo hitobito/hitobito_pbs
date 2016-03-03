@@ -194,6 +194,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           'Das Lager "{camp-name}" wurde von {actuator-name} erstellt:<br><br>' \
           '{camp-url}<br>' },
 
+  { custom_content_id: camp_created_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail camp créé'},
+
+  { custom_content_id: camp_created_id,
+    locale: 'en',
+    label: 'Camp: Email camp created'},
+
+  { custom_content_id: camp_created_id,
+    locale: 'it',
+    label: 'Campo: E-Mail campo creato'},
+
   { custom_content_id: camp_coach_assigned_id,
     locale: 'de',
     label: 'Lager: E-Mail Coach zugeordnet',
@@ -201,6 +213,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     body: 'Hallo<br><br>' \
           '{actuator-name} hat im Lager "{camp-name}" {advisor-name} als Coach definiert.<br><br>' \
           '{camp-url}<br>' },
+
+  { custom_content_id: camp_coach_assigned_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail Coach assigné'},
+
+  { custom_content_id: camp_coach_assigned_id,
+    locale: 'en',
+    label: 'Camp: Email Coach assigned'},
+
+  { custom_content_id: camp_coach_assigned_id,
+    locale: 'it',
+    label: 'Campo: E-Mail Coach assegnato'},
 
   { custom_content_id: camp_security_advisor_assigned_id,
     locale: 'de',
@@ -211,6 +235,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           'Betreuung definiert.<br><br>' \
           '{camp-url}<br>' },
 
+  { custom_content_id: camp_security_advisor_assigned_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail encadrement Domaine de la Sécurité assigné'},
+
+  { custom_content_id: camp_security_advisor_assigned_id,
+    locale: 'en',
+    label: 'Camp: Email security scope support assigned'},
+
+  { custom_content_id: camp_security_advisor_assigned_id,
+    locale: 'it',
+    label: 'Campo: E-Mail cura zona di sicurezza assegnato'},
+
   { custom_content_id: camp_al_assigned_id,
     locale: 'de',
     label: 'Lager: E-Mail Abteilungsleitung zugeordnet',
@@ -220,6 +256,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           'definiert.<br><br>' \
           '{camp-url}<br>' },
 
+  { custom_content_id: camp_al_assigned_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail responsable de groupe assigné'},
+
+  { custom_content_id: camp_al_assigned_id,
+    locale: 'en',
+    label: 'Camp: Email group officer assigned'},
+
+  { custom_content_id: camp_al_assigned_id,
+    locale: 'it',
+    label: 'Campo: E-Mail Capo sezione assegnato'},
+
   { custom_content_id: camp_submit_reminder_id,
     locale: 'de',
     label: 'Lager: E-Mail Lager einreichen Erinnerung',
@@ -227,6 +275,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     body: 'Hallo {recipient-name}<br><br>' \
           'Das Lager "{camp-name}" muss noch an PBS eingereicht werden:<br><br>' \
           '{camp-url}<br>' },
+
+  { custom_content_id: camp_submit_reminder_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail évoquer déposer de camp'},
+
+  { custom_content_id: camp_submit_reminder_id,
+    locale: 'en',
+    label: 'Camp: Email submit camp reminder'},
+
+  { custom_content_id: camp_submit_reminder_id,
+    locale: 'it',
+    label: 'Campo: E-Mail promemoria presentare campo'},
 
   { custom_content_id: camp_submit_id,
     locale: 'de',
@@ -237,6 +297,18 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           'PDF: {camp-application-url}<br>' \
           'Lager: {camp-url}<br>' },
 
+  { custom_content_id: camp_submit_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail déposer de camp'},
+
+  { custom_content_id: camp_submit_id,
+    locale: 'en',
+    label: 'Camp: Email camp submit'},
+
+  { custom_content_id: camp_submit_id,
+    locale: 'it',
+    label: 'Campo: E-Mail presentare campo'},
+
   { custom_content_id: camp_participant_applied_id,
     locale: 'de',
     label: 'Lager: E-Mail Teilnehmer-/in hat sich angemeldet',
@@ -245,11 +317,35 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           '{participant-name} hat sich für das Lager "{camp-name}" angemeldet:<br><br>' \
           '{camp-url}<br>' },
 
+  { custom_content_id: camp_participant_applied_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail Participant/-e a enregistré'},
+
+  { custom_content_id: camp_participant_applied_id,
+    locale: 'en',
+    label: 'Camp: E-Mail Participant has applied'},
+
+  { custom_content_id: camp_participant_applied_id,
+    locale: 'it',
+    label: 'Campo: E-Mail Participante ha registrato'},
+
   { custom_content_id: camp_participant_canceled_id,
     locale: 'de',
     label: 'Lager: E-Mail Teilnehmer-/in hat sich abgemeldet',
     subject: 'Lager: Teilnehmer-/in hat sich abgemeldet',
     body: 'Hallo<br><br>' \
           '{participant-name} hat sich vom Lager "{camp-name}" abgemeldet:<br><br>' \
-          '{camp-url}<br>' }
+          '{camp-url}<br>' },
+
+  { custom_content_id: camp_participant_canceled_id,
+    locale: 'fr',
+    label: 'Camp: E-Mail Participant/-e a disputer'},
+
+  { custom_content_id: camp_participant_canceled_id,
+    locale: 'en',
+    label: 'Camp: Email Participant has unsubscribed'},
+
+  { custom_content_id: camp_participant_canceled_id,
+    locale: 'it',
+    label: 'Campo: E-Mail Participante ha annullare'}
 )

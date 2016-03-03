@@ -10,6 +10,7 @@ module Pbs::EventsController
 
   included do
     before_action :remove_restricted, only: [:create, :update]
+    before_action :check_checkpoint_attrs, only: [:create, :update]
 
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
 
@@ -24,10 +25,16 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    if !entry.camp_submitted? && validate_present?(:camp_days, :canton)
+    entry.camp_submitted = true
+    if entry.valid?
       Event::CampMailer.submit_camp(entry).deliver_later
-      entry.update!(camp_submitted: true)
+      entry.save!
       set_success_notice
+    else
+      alerts = I18n.t('events.create_camp_application.flash.error')
+      alerts += '<br/>'
+      alerts += entry.errors.full_messages.join('; ')
+      flash[:alert] = alerts
     end
     redirect_to path_args(entry)
   end
@@ -70,19 +77,12 @@ module Pbs::EventsController
     model_params.delete(:coach)
   end
 
-  def validate_present?(*attrs)
-    errors = attrs.select { |attr| entry.send(attr).blank? }.
-                   collect { |attr| blank_message(attr) }
-    if errors.present?
-      errors.unshift(I18n.t('events.create_camp_application.flash.error'))
-      flash[:alert] = errors.join("\n")
+  def check_checkpoint_attrs
+    if entry.is_a?(Event::Camp) && entry.leader != current_user
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        model_params.delete(attr.to_s)
+      end
     end
-    errors.blank?
-  end
-
-  def blank_message(attr)
-    Event::Camp.human_attribute_name(attr) + ' ' +
-      I18n.t('errors.messages.blank', attribute: attr) + '.'
   end
 
 end

@@ -1,16 +1,13 @@
 -#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
--#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  hitobito_pbs ad licensed under the Affero General Public License version 3
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - if entry.is_a?(Event::Course) && entry.canceled? && can?(:update, entry)
   = action_button ti('.inform_by_email'), "mailto:#{@emails.join(', ')}", :envelope
 
-- if entry.is_a?(Event::Camp) && !entry.camp_submitted? && can?(:create_camp_application, entry)
-  = action_button ti('.submit_camp'),
-                  camp_application_group_event_path(@group, entry),
-                  :share,
-                  data: { method: :put }
+- if entry.is_a?(Event::Camp) && can?(:create_camp_application, entry)
+  = camp_submit_button
 
 - if entry.is_a?(Event::Camp) && can?(:show_camp_application, entry)
   = action_button ti('.camp_application'),

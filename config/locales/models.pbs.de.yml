@@ -768,6 +768,7 @@ de:
         local_scout_contact_present: Lokaler Pfadi Kontakt
         local_scout_contact: Lokale Pfadi Kontaktinfos
         updated_at: Zuletzt aktualisiert
+        any_expected_participant_attr: Erwartete Teilnehmer/-innen
 
       event/approval:
         comment: Kommentar
@@ -793,6 +794,8 @@ de:
         abteilungsleitung: Abteilungsleitung
         coach_id: Coach
         coach: Coach
+        leader: Lagerleitung
+        leader_id: Lagerleitung
         coach_confirmed: Coach bestätigt
         advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
         advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
@@ -802,7 +805,9 @@ de:
         advisor_snow_security: Betreuung Sicherheitsaktivität Winter
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
-
+        lagerreglement_applied: Lagerreglement berücksichtigt/eingehalten
+        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
+        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB

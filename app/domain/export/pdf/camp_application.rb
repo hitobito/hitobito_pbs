@@ -10,11 +10,13 @@ module Export::Pdf
 
     include Translatable
 
-    attr_reader :camp, :pdf, :data
+    attr_reader :camp, :pdf, :data, :label_helper
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
       to: :pdf
     delegate :t, :l, to: I18n
+    delegate :labeled_checkpoint_attr, :labeled_camp_attr, :with_label,
+      :labeled_email, :labeled_phone_number, :labeled_value, to: :label_helper
 
     def initialize(camp)
       @camp = camp
@@ -25,6 +27,8 @@ module Export::Pdf
       @pdf = Prawn::Document.new(page_size: 'A4',
                                  page_layout: :portrait,
                                  margin: 2.cm)
+      @label_helper = CampApplicationLabelHelper.new(pdf, data)
+
       pdf.font_size 10
 
       render_sections
@@ -92,6 +96,10 @@ module Export::Pdf
           text_nobody
         end
       end
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        labeled_checkpoint_attr(attr)
+      end
+      move_down_line
     end
 
     def render_assistant_leaders
@@ -202,41 +210,6 @@ module Export::Pdf
 
     def heading
       font_size(14) { yield }
-    end
-
-    def with_label(key, value)
-      label = translate(key)
-      labeled_value(label, value)
-    end
-
-    def labeled_camp_attr(attr, show_blank = false)
-      value = data.camp_attr_value(attr)
-      return unless value.present? || show_blank
-      label = data.t_camp_attr(attr.to_s)
-      value = show_blank unless value.present?
-      labeled_value(label, value)
-    end
-
-    def labeled_phone_number(person, phone_label)
-      value = data.phone_number(person, phone_label)
-      return unless value.present?
-      label = t("events.fields_pbs.phone_#{phone_label.downcase}")
-      labeled_value(label, value)
-    end
-
-    def labeled_email(person)
-      value = person.email
-      return unless value.present?
-      label = t("events.fields_pbs.email")
-      labeled_value(label, value)
-    end
-
-    def labeled_value(label, value)
-      cells = [[label, value.to_s]]
-      cell_style = { border_width: 0, padding: 0 }
-      table(cells, cell_style: cell_style, column_widths: [180, 300]) do
-        column(0).style font_style: :italic
-      end
     end
 
     def move_down_line(line = 12)

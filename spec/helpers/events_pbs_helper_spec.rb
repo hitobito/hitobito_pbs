@@ -118,4 +118,13 @@ describe EventsPbsHelper do
     end
 
   end
+
+  context '#labeled_camp_days' do
+    subject { events(:schekka_camp) }
+    it 'shows camp days like labeled attr' do
+      expect(labeled_camp_days(subject)).to have_css('dt', text: 'Anzahl Lagertage')
+      expect(labeled_camp_days(subject)).to have_css('dd', text: '8')
+    end
+  end
+
 end
