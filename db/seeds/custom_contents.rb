@@ -98,6 +98,10 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
           "A bientôt!"},
 
   { custom_content_id: group_membership_id,
+    locale: 'en',
+    label: 'Added to Group' },
+
+  { custom_content_id: group_membership_id,
     locale: 'it',
     label: 'Informazioni per la nuova appartenenza al gruppo' },
 
@@ -161,7 +165,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     locale: 'en',
     label: 'Event: Email participant assigned from waiting list' },
 
-  { custom_content_id: participation_removed_from_waiting_list_id,
+  { custom_content_id: participation_assigned_from_waiting_list_id,
     locale: 'it',
     label: "Evento: E-mail partecipante dalla lista d'attesa assegnato" },
 
