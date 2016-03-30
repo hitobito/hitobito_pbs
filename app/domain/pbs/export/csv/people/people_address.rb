@@ -28,7 +28,7 @@ module Pbs
 
           def person_attributes_with_title
             person_attributes_without_title +
-            [:title, :salutation, :correspondence_language, :kv]
+            [:title, :salutation, :correspondence_language, :kantonalverband_id]
           end
         end
       end
