@@ -16,7 +16,7 @@ module Pbs
             entry.salutation_value
           end
 
-          def kv
+          def kantonalverband_id
             entry.kantonalverband.try(:pbs_shortname)
           end
 
