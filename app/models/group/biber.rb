@@ -39,7 +39,7 @@
 
 class Group::Biber < Group
 
-  self.event_types = [Event::Camp]
+  self.event_types = [Event, Event::Camp]
 
   children Group::Biber,
            Group::AbteilungsGremium
