@@ -4,6 +4,9 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = field_set_tag do
+  - entry.used?(:advisor_id) do
+    = f.labeled_person_field :advisor
+
   - entry.used?(:language_de) do
     = f.labeled(:course_languages) do
       - Event::Course::LANGUAGES.each do |lang|

@@ -82,4 +82,24 @@ describe EventsController, type: :controller  do
     expect(link[:href]).to eq 'mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com'
   end
 
+  it "shows advisor (LKB) if present" do
+    sign_in(bulei)
+    lkb = people(:al_schekka)
+    course.update!(advisor_id: lkb.id)
+    get :show, group_id: group.id, id: course.id
+
+    expect(dom).to have_content('Betreuung')
+    expect(dom).to have_content('LKB')
+    expect(dom).to have_link lkb.to_s
+  end
+
+  it "advisor (LKB) not shown if none assigned" do
+    sign_in(bulei)
+
+    get :show, group_id: group.id, id: course.id
+
+    expect(dom).not_to have_content('Betreuung')
+    expect(dom).not_to have_content('LKB')
+  end
+
 end

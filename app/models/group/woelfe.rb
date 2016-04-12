@@ -39,7 +39,7 @@
 
 class Group::Woelfe < Group
 
-  self.event_types = [Event::Camp]
+  self.event_types = [Event, Event::Camp]
 
   children Group::Woelfe,
            Group::AbteilungsGremium

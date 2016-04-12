@@ -35,7 +35,7 @@ module Pbs::Event::ListsController
     authorize!(:list_all, Event::Camp)
 
     @nav_left = 'camps'
-    @camps = grouped(all_upcoming_camps)
+    render_camp_list(all_upcoming_camps)
   end
 
   # List camps organized by the given Kantonalverband.
@@ -44,7 +44,7 @@ module Pbs::Event::ListsController
 
     @nav_left = 'camps'
     @group = Group::Kantonalverband.find(params[:group_id])
-    @camps = grouped(all_kantonalverband_camps)
+    render_camp_list(all_kantonalverband_camps)
   end
 
   # List camps taking place in the given canton.
@@ -52,7 +52,7 @@ module Pbs::Event::ListsController
     authorize!(:list_cantonal, Event::Camp)
 
     @nav_left = 'camps'
-    @camps = grouped(all_camps_in_canton)
+    render_camp_list(all_camps_in_canton)
   end
 
   # List camps taking place abroad.
@@ -60,10 +60,21 @@ module Pbs::Event::ListsController
     authorize!(:list_abroad, Event::Camp)
 
     @nav_left = 'camps'
-    @camps = grouped(all_camps_abroad)
+    render_camp_list(all_camps_abroad)
   end
 
   private
+
+  def render_camp_list(camps)
+    respond_to do |format|
+      format.html  { @camps = grouped(camps) }
+      format.csv   { render_camp_csv(camps) }
+    end
+  end
+
+  def render_camp_csv(camps)
+    send_data Export::Csv::Events::List.export(camps), type: :csv
+  end
 
   def all_upcoming_camps
     in_next_three_weeks(base_camp_query('canceled').upcoming)

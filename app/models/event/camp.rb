@@ -57,7 +57,6 @@
 #  expected_participants_rover_m     :integer
 #  expected_participants_leitung_f   :integer
 #  expected_participants_leitung_m   :integer
-#  camp_days                         :decimal(5, 1)
 #  canton                            :string(2)
 #  coordinates                       :string
 #  altitude                          :string
@@ -96,27 +95,25 @@ class Event::Camp < Event
   class_attribute :possible_j_s_kinds
   class_attribute :possible_canton_values
 
-  EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
-                                :expected_participants_pfadi_f, :expected_participants_pfadi_m,
-                                :expected_participants_pio_f, :expected_participants_pio_m,
-                                :expected_participants_rover_f, :expected_participants_rover_m,
-                                :expected_participants_leitung_f, :expected_participants_leitung_m]
-
   ABROAD_CANTON = 'zz'
 
   J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed)
 
   CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
 
-  self.used_attributes += [:state, :group_ids, :abteilungsleitung_id, :coach_id,
+  EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
+                                :expected_participants_pfadi_f, :expected_participants_pfadi_m,
+                                :expected_participants_pio_f, :expected_participants_pio_m,
+                                :expected_participants_rover_f, :expected_participants_rover_m,
+                                :expected_participants_leitung_f, :expected_participants_leitung_m]
+  LEADER_CHECKPOINT_ATTRS = [:lagerreglement_applied,
+                      :kantonalverband_rules_applied,
+                      :j_s_rules_applied]
+
+  self.used_attributes += [:state, :group_ids, :leader_id,
+                           :abteilungsleitung_id, :coach_id,
                            :advisor_mountain_security_id, :advisor_snow_security_id,
                            :advisor_water_security_id,
-                           :expected_participants_wolf_f, :expected_participants_wolf_m,
-                           :expected_participants_pfadi_f, :expected_participants_pfadi_m,
-                           :expected_participants_pio_f, :expected_participants_pio_m,
-                           :expected_participants_rover_f, :expected_participants_rover_m,
-                           :expected_participants_leitung_f, :expected_participants_leitung_m,
-                           :camp_days,
                            :canton, :coordinates, :altitude, :emergency_phone,
                            :landlord, :landlord_permission_obtained,
                            :j_s_kind,
@@ -128,14 +125,19 @@ class Event::Camp < Event
                            :local_scout_contact_present, :local_scout_contact,
                            :camp_submitted, :paper_application_required]
 
-  self.role_types = [Event::Camp::Role::Leader,
-                     Event::Camp::Role::AssistantLeader,
+  self.used_attributes += EXPECTED_PARTICIPANT_ATTRS
+  self.used_attributes += LEADER_CHECKPOINT_ATTRS
+
+  self.used_attributes -= [:contact_id]
+
+  self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
                      Event::Camp::Role::LeaderMountainSecurity,
                      Event::Camp::Role::LeaderSnowSecurity,
                      Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
 
+  restricted_role :leader, Event::Camp::Role::Leader
   restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
   restricted_role :coach, Event::Camp::Role::Coach
   restricted_role :advisor_mountain_security, Event::Camp::Role::AdvisorMountainSecurity
@@ -156,10 +158,24 @@ class Event::Camp < Event
   validates :state, inclusion: possible_states
   validates *EXPECTED_PARTICIPANT_ATTRS,
             numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
-  validates :camp_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
   validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
   validates :canton, inclusion: { in: CANTONS, allow_blank: true }
 
+  with_options if: :camp_submitted?, presence: true do
+    validates :canton, :location, :altitude, :emergency_phone,
+      :landlord, :coach_id, :coach_confirmed,
+      :leader_id, :lagerreglement_applied, :kantonalverband_rules_applied,
+      :j_s_rules_applied, :coordinates,
+      # check if any of the expected attrs has an assigned value
+      :any_expected_participant_attr 
+  end
+
+  with_options presence: true do
+    # only check these attrs if security required for given topic
+    validates :advisor_snow_security_id, if: -> { camp_submitted? && j_s_security_snow }
+    validates :advisor_mountain_security_id, if: -> { camp_submitted? && j_s_security_mountain }
+    validates :advisor_water_security_id, if: -> { camp_submitted? && j_s_security_water }
+  end
 
   ### CALLBACKS
 
@@ -168,6 +184,7 @@ class Event::Camp < Event
   after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
   after_save :reset_coach_confirmed_if_changed
+  after_save :reset_checkpoint_attrs_if_leader_changed
 
 
   ### INSTANCE METHODS
@@ -196,7 +213,7 @@ class Event::Camp < Event
     participants_can_cancel? && confirmed?
   end
 
-  def default_participation_state(participation)
+  def default_participation_state(participation, for_someone_else = false)
     if participation.roles.blank? ||
       participation.roles.any? { |role| role.kind != :participant } ||
       !paper_application_required?
@@ -204,6 +221,14 @@ class Event::Camp < Event
     else
       'applied_electronically'
     end
+  end
+
+  def camp_days
+    count = 0
+    dates.each do |d|
+      count += event_date_day_count(d)
+    end
+    count
   end
 
   private
@@ -227,6 +252,14 @@ class Event::Camp < Event
       update_column(:coach_confirmed, false)
     end
     true
+  end
+
+  def reset_checkpoint_attrs_if_leader_changed
+    if restricted_role_changes[:leader]
+      LEADER_CHECKPOINT_ATTRS.each do |a|
+        update_column(a, false)
+      end
+    end
   end
 
   def send_assignment_infos
@@ -290,6 +323,19 @@ class Event::Camp < Event
       Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
       Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
     }
+  end
+
+  def event_date_day_count(date)
+    return 1 unless date.finish_at
+    start_at = date.start_at.to_date
+    finish_at = date.finish_at.to_date
+    (finish_at - start_at).to_i + 1
+  end
+
+  def any_expected_participant_attr
+    EXPECTED_PARTICIPANT_ATTRS.find do |a|
+      send(a).present?
+    end
   end
 
 end

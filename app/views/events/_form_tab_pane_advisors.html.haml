@@ -6,6 +6,7 @@
 - if entry.is_a?(Event::Camp)
   #advisors.tab-pane
     = field_set_tag do
+      = f.labeled_person_field :leader
       = f.labeled_person_field :abteilungsleitung
 
       = f.labeled_boolean_field(:al_present, caption: t('.al_present_caption'))

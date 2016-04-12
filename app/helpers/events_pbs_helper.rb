@@ -25,12 +25,6 @@ module EventsPbsHelper
     end.compact.join(', ')
   end
 
-  def format_camp_days(entry)
-    if entry.camp_days.present?
-      entry.camp_days.round(1)
-    end
-  end
-
   def format_event_j_s_kind(entry)
     if entry.j_s_kind.present?
       t("events.fields_pbs.j_s_kind_#{entry.j_s_kind}")
@@ -98,13 +92,8 @@ module EventsPbsHelper
     Cantons.full_name(entry.canton.to_sym)
   end
 
-  def save_camp_caption_text
-    items = t('events.edit.save_camp_caption').split(/\n/)
-    content_tag(:ul) do
-      items.collect do |i|
-        content_tag(:li, i)
-      end.join.html_safe
-    end
+  def event_camp_leader?
+    current_user == entry.leader
   end
 
   def format_event_abteilungsleitung_id(entry)
@@ -113,6 +102,14 @@ module EventsPbsHelper
 
   def format_event_coach_id(entry)
     advisor_link(entry.coach)
+  end
+
+  def format_event_leader_id(entry)
+    advisor_link(entry.leader)
+  end
+
+  def format_event_advisor_id(entry)
+    person_link(entry.advisor)
   end
 
   def format_event_advisor_mountain_security_id(entry)
@@ -144,6 +141,41 @@ module EventsPbsHelper
     content.join('<br/>'.html_safe).html_safe
   end
 
+  def labeled_camp_days(event)
+    label = t("activerecord.attributes.event.camp_days")
+    labeled(label, event.camp_days)
+  end
+
+  def labeled_checkpoint_attrs
+    content = []
+    Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+      content << labeled_checkpoint_attr(attr)
+    end
+    ('<br/>' + content.join('<br/>')).html_safe
+  end
+
+  def labeled_checkpoint_checkboxes(f)
+    content = []
+    Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+     content << labeled_checkpoint_checkbox(f,attr)
+    end
+    content.join.html_safe
+  end
+
+
+  def camp_submit_button
+    options = {data: { method: :put }}
+    if entry.camp_submitted?
+      label = ti('.camp_submitted')
+      options[:class] = 'disabled'
+    else
+      label = ti('.submit_camp')
+    end
+    action_button(label,
+                  camp_application_group_event_path(@group, entry),
+                  :share, options)
+  end
+
   private
 
   def append_required_advisor(content, advisor)
@@ -168,6 +200,23 @@ module EventsPbsHelper
 
   def camp_has_person_with_role(role)
     role.joins(:event).where(event_participations: { event_id: entry.id }).exists?
+  end
+
+  def labeled_checkpoint_attr(attr)
+    content_tag(:span) do
+      label = Event::Camp.human_attribute_name(attr)
+      value = format_attr(entry, attr)
+      "#{label}: #{value}"
+    end
+  end
+
+  def labeled_checkpoint_checkbox(f, attr)
+    html_options = { caption: t(".#{attr}_caption") }
+    unless event_camp_leader?
+      html_options[:disabled] = 'disabled'
+      html_options[:title] = t('event/camp.checkpoint_field_caption')
+    end
+    f.boolean_field(attr, html_options)
   end
 
 end

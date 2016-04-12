@@ -21,8 +21,8 @@
   @media
     only screen and (-webkit-min-device-pixel-ratio : 2),
     only screen and (min-device-pixel-ratio : 2) {
-      background: image-url("logo@2x.png") transparent no-repeat 0px 10px;
-      background-size: 219px 76px;
+      background: image-url("logo@2x.png") transparent no-repeat 0px 0px;
+      background-size: 219px 72px;
   }
 
 }

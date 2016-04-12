@@ -45,6 +45,16 @@ describe Event::ParticipationsController do
       expect(flash[:notice]).not_to include 'Für die definitive Anmeldung musst du diese Seite über <i>Drucken</i> ausdrucken, '
     end
 
+    it 'creates participation for camp' do
+      camp = Fabricate(:pbs_camp, paper_application_required: true)
+      post :create, group_id: group.id, event_id: camp.id, event_participation: {}
+
+      participation = assigns(:participation)
+      expect(participation).to be_valid
+      expect(participation).to be_active
+      expect(participation.state).to eq('applied_electronically')
+    end
+
   end
 
   context 'POST cancel' do
