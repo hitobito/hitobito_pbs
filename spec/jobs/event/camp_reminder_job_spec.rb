@@ -51,6 +51,11 @@ describe Event::CampReminderJob do
     c1 = Fabricate(:pbs_participation, event: abroad, roles: [Fabricate(Event::Camp::Role::Coach.name)])
     Fabricate(:pbs_participation, event: abroad, roles: [Fabricate(Event::Camp::Role::Participant.name)])
 
+    no_email = Fabricate(:pbs_camp, canton: 'be', state: 'confirmed')
+    no_email.dates = [Fabricate(:event_date, event: no_email, start_at: now + 1.week)]
+    l3 = Fabricate(:pbs_participation, event: no_email, roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    l3.person.update!(email: nil)
+
     no_roles = Fabricate(:pbs_camp, canton: 'be', state: 'confirmed')
     no_roles.dates = [Fabricate(:event_date, event: no_roles, start_at: now + 1.week)]
     Fabricate(:pbs_participation, event: no_roles, roles: [Fabricate(Event::Camp::Role::Participant.name)])
@@ -65,6 +70,7 @@ describe Event::CampReminderJob do
 
     expect(at_span.reload.camp_reminder_sent).to be true
     expect(abroad.reload.camp_reminder_sent).to be true
+    expect(no_email.reload.camp_reminder_sent).to be false
     expect(no_roles.reload.camp_reminder_sent).to be false
   end
 

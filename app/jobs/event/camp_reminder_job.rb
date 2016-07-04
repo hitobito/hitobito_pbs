@@ -17,12 +17,7 @@ class Event::CampReminderJob < RecurringJob
 
   def perform_internal
     with_notified_roles(camps_to_remind).find_each do |camp|
-      recipients = camp.participations.collect(&:person).uniq
-      recipients.each do |person|
-        I18n.locale = person.correspondence_language.presence || I18n.default_locale
-        Event::CampMailer.remind(camp, person).deliver_now
-      end
-      camp.update_column(:camp_reminder_sent, true)
+      send_reminder(camp)
     end
   end
 
@@ -33,6 +28,21 @@ class Event::CampReminderJob < RecurringJob
   end
 
   private
+
+  def send_reminder(camp)
+    recipients = fetch_recipients(camp)
+    recipients.each do |person|
+      I18n.locale = person.correspondence_language.presence || I18n.default_locale
+      Event::CampMailer.remind(camp, person).deliver_now
+    end
+    camp.update_column(:camp_reminder_sent, true) if recipients.present?
+  end
+
+  def fetch_recipients(camp)
+    camp.participations.collect(&:person).
+                        uniq.
+                        select { |person| Person.mailing_emails_for(person).present? }
+  end
 
   def starting_soon(camps)
     tonight = Time.zone.now.midnight
