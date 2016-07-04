@@ -43,6 +43,8 @@ class TarantulaTest < ActionDispatch::IntegrationTest
     t.allow_500_for(/groups\/\d+\/events\/\d+\/roles\/\d+$/)
     # roles with invalid created_at and deleted_at values may generate 500 :(
     t.allow_500_for(/groups\/\d+\/roles(\/\d+)?$/)
+    # non-manual qualifications may not be created
+    t.allow_500_for(/groups\/\d+\/people\/\d+\/qualifications$/)
   end
   alias_method_chain :configure_urls, :pbs
 
