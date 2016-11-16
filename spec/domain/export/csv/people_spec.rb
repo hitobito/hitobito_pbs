@@ -13,7 +13,7 @@ describe Export::Csv::People do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
     %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband)
+       Geschlecht Geburtstag Rollen Tags Titel Anrede Korrespondenzsprache Kantonalverband)
   end
 
   describe Export::Csv::People do
