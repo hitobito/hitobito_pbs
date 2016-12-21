@@ -20,6 +20,10 @@
 
 - if check_approveable?
   - if @people_data_complete
-    = action_button(t('.confirm_census_data'), group_member_counts_path(@group), nil, method: :post, data: { disable_with: t('.confirm_census_data') })
+    = action_button(t('.confirm_census_data'),
+                    group_member_counts_path(@group),
+                    nil,
+                    method: :post,
+                    data: { disable_with: t('.confirm_census_data') })
   - else
     %p.alert= t('.missing_gender_information')

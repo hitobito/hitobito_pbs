@@ -7,6 +7,10 @@
 
 class MakeMemberCountsUnique < ActiveRecord::Migration
   def change
-    add_index :member_counts, [:kantonalverband_id, :region_id, :abteilung_id, :year], unique: true, name: 'index_member_counts_unique_per_year'
+    remove_index :member_counts, [:abteilung_id, :year]
+    add_index :member_counts,
+              [:abteilung_id, :year],
+              unique: true,
+              name: 'index_member_counts_unique_per_year'
   end
 end
