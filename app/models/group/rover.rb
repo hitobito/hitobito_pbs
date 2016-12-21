@@ -50,7 +50,7 @@ class Group::Rover < Group
   end
 
   class Adressverwaltung < ::Role
-    self.permissions = [:group_full]
+    self.permissions = [:group_and_below_full]
   end
 
   class Rover < ::Role
