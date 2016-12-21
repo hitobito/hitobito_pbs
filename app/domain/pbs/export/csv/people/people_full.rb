@@ -17,7 +17,7 @@ module Pbs
           end
 
           def person_attributes_with_pbs
-            person_attributes_without_pbs + [:pbs_number]
+            person_attributes_without_pbs + [:id, :primary_group_id, :pbs_number] 
           end
         end
       end
