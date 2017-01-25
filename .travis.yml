@@ -1,0 +1,36 @@
+language: ruby
+cache: bundler
+branches:
+  only:
+    - master
+    - stable
+env:
+  global:
+    - HEADLESS=true
+    - RAILS_DB_ADAPTER=mysql2
+    - RAILS_DB_NAME=hitobito_test
+    - RAILS_ENV=development
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.7
+  - 2.2.3
+  - 2.3.1
+  - 2.4.0
+matrix:
+  allow_failures:
+    - rvm: 2.4.0
+install:
+  - unset BUNDLE_GEMFILE # we bundle in different directories
+  - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
+  - cd hitobito && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
+  - export HITOBITO_CORE_DIR=$PWD
+  - sed -i "s/^\(gem .mysql2.\),.*$/\1/" Gemfile
+  - cp -v Wagonfile.ci Wagonfile
+  - rvm use $TRAVIS_RUBY_VERSION --fuzzy
+  - gem install bundler --version 1.9.10
+  - bundle install --path vendor/bundle && bundle update mysql2
+  - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
+  - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
+script:
+  - bundle exec rake db:create ci:wagon --trace
