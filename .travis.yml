@@ -30,6 +30,8 @@ install:
   - rvm use $TRAVIS_RUBY_VERSION --fuzzy
   - gem install bundler --version 1.9.10
   - bundle install --path vendor/bundle && bundle update mysql2
+  - cd .. && git clone https://github.com/hitobito/hitobito_youth.git hitobito_youth
+  - cd hitobito_youth && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
