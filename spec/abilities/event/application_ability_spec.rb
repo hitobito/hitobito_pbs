@@ -78,6 +78,32 @@ describe Event::ApplicationAbility do
       is_expected.not_to be_able_to(:reject, application)
     end
 
+    it 'may not approve or reject in same layer outside of group' do
+      create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
+      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh), 'kantonalverband')
+
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
+    end
+
+    it 'may not approve or reject below in the hierarchy' do
+      create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
+      nested = Fabricate(Group::Region.name, parent: groups(:bern))
+      create_application(Group::Region::Mitarbeiter, nested, 'region')
+
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
+    end
+
+    it 'may not approve or reject higher in the hierarchy' do
+      create_approver(Group::Abteilung::Abteilungsleitung, groups(:schekka))
+      nested = Fabricate(Group::Region.name, parent: groups(:bern))
+      create_application(Group::Region::Mitarbeiter, nested, 'region')
+
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
+    end
+
   end
 
 
@@ -99,6 +125,12 @@ describe Event::ApplicationAbility do
       it 'Kantonsleitung in zh may not show approvals for participant of patria' do
         create_approver(Group::Kantonalverband::Kantonsleitung, groups(:zh))
         create_application(Group::Abteilung::Praeses, groups(:patria), 'bund')
+        is_expected.not_to be_able_to(:show_approval, application)
+      end
+
+      it 'Kantonsleitung in one kanton may now see approvals for other kantons' do
+        create_approver(Group::Kantonalverband::Kantonsleitung, groups(:zh))
+        create_application(Group::Kantonalverband::Mitarbeiter, groups(:be), 'kantonalverband')
         is_expected.not_to be_able_to(:show_approval, application)
       end
     end
