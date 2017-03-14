@@ -29,7 +29,7 @@ module Pbs::GroupAbility
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
 
-      permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_in_group
+      permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_of_group
 
       permission(:any).may(:'index_event/camps').all
       permission(:group_full).may(:'export_event/camps').in_same_group
@@ -47,12 +47,13 @@ module Pbs::GroupAbility
     role_type?(Group::Bund::MitarbeiterGs)
   end
 
-  def if_layer_and_approver_in_group
-    user_roles = user.roles.collect(&:class)
-    approving_group_roles = group.role_types.select do |type|
-      type.permissions.include?(:approve_applications)
+  def if_layer_and_approver_of_group
+    group_permissions = user.roles.select do |role|
+      role.group_id == group.id &&
+        role.permissions.include?(:approve_applications)
     end
-    if_layer_group && contains_any?(user_roles, approving_group_roles)
+
+    if_layer_group && group_permissions.any?
   end
 
 end
