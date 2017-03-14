@@ -14,3 +14,4 @@ AllCops:
     - bin/**/*
     - spec/**/*
     - test/**/*
+    - vendor/**/*
