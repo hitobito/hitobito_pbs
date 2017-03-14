@@ -10,12 +10,18 @@ module Pbs::Event::ApplicationAbility
 
   included do
     on(Event::Application) do
-      permission(:approve_applications).may(:approve, :reject).for_approvals_in_same_layer
+      permission(:approve_applications).
+        may(:approve, :reject).
+        for_approvals_in_same_layer
+
       permission(:approve_applications).
         may(:show_priorities, :show_approval).
         for_approvals_in_hierarchy
 
-      permission(:any).may(:show_approval).for_participations_full_events
+      permission(:any).
+        may(:show_approval).
+        for_participations_full_events
+
       permission(:layer_and_below_full).
         may(:show_approval).
         in_same_layer_or_below_or_different_prio
