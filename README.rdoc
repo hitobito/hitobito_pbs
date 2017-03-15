@@ -50,6 +50,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Ehrenmitglied: []
     * Passivmitglied: []
     * Kontaktperson: [:contact_data]
+  * Ausbildungskommission
+    * Mitglied: [:group_read, :contact_data]
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
@@ -144,7 +146,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Rover
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Rover: []
   * Gremium
     * Leitung: [:group_and_below_full]
@@ -154,7 +156,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Abteilungsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
     * Abteilungsleiter Stv: [:layer_and_below_full, :contact_data, :approve_applications]
     * Sekretariat: [:layer_and_below_full, :contact_data]
-    * Adressverwalter: [:layer_and_below_full]
+    * Adressverwalter: [:group_and_below_full]
     * Präsident: [:group_read, :contact_data]
     * Vize Präsident: [:group_read, :contact_data]
     * Präsident APV: [:group_read]
@@ -180,34 +182,34 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Biber
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Biber: []
   * Wölfe
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Leitwolf: []
     * Wolf: []
   * Pfadi
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Leitpfadi: [:group_read]
     * Pfadi: []
   * Pio
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Pio: []
   * Rover
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Rover: []
   * PTA
     * Einheitsleiter: [:layer_and_below_read]
     * Mitleiter: [:layer_and_below_read]
-    * Adressverwalter: [:group_full]
+    * Adressverwalter: [:group_and_below_full]
     * Mitglied: []
   * Elternrat
     * Präsident: [:group_full]

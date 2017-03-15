@@ -43,6 +43,7 @@ class Group::Bund < Group
   self.event_types = [Event, Event::Course, Event::Camp]
 
   children Group::Kantonalverband,
+           Group::Ausbildungskommission,
            Group::BundesGremium
 
   ### INSTANCE METHODS

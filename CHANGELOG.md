@@ -1,5 +1,9 @@
 # Hitobito Changelog
 
+## Version 1.X
+
+*   Neuer Gruppentyp Ausbildungskommission auf Ebene Bund.
+
 ## Version 1.11
 
 *   PBS Branding

@@ -25,6 +25,9 @@ de:
         one: Rover
         other: Rovers
         long: Rover Abteilung
+      group/ausbildungskommission:
+        one: Ausbildungskommission
+        other: Ausbildungskommissionen
       group/biber:
         one: Biber
         other: Biber
@@ -246,6 +249,10 @@ de:
       group/bund/kontaktperson:
         one: Kontaktperson
         other: Kontaktperson
+        description:
+      group/ausbildungskommission/mitglied:
+        one: Mitglied
+        other: Mitglieder
         description:
 
       group/kantonalverband/kantonsleitung:
