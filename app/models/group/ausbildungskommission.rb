@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -38,16 +38,12 @@
 #  description            :text
 #
 
-class Group::AbteilungsGremium < Group::Gremium
+class Group::Ausbildungskommission < Group
 
-  children Group::AbteilungsGremium
-
-  class Leitung < Group::Gremium::Leitung
+  class Mitglied < ::Role
+    self.permissions = [:group_read, :contact_data]
   end
 
-  class Mitglied < Group::Gremium::Mitglied
-  end
-
-  roles Leitung, Mitglied
+  roles Mitglied
 
 end

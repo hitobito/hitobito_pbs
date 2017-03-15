@@ -47,6 +47,8 @@ module Pbs::EventAbility
       permission(:layer_and_below_full).may(:show_details).in_same_layer_or_below
       permission(:any).may(:show_details).if_participating_as_leader_role
     end
+
+    alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
   end
 
   def if_education_responsible
@@ -84,6 +86,11 @@ module Pbs::EventAbility
       joins(:roles).
       where('event_roles.type != ?', "Event::Camp::Role::Participant").
       present?
+  end
+
+  def if_full_permission_in_course_layer_with_ausbildungskommission
+    if_full_permission_in_course_layer_without_ausbildungskommission ||
+      role_type?(Group::Ausbildungskommission::Mitglied)
   end
 
 end

@@ -1,5 +1,10 @@
 # Hitobito Changelog
 
+## Version 1.X
+
+*   Neuer Gruppentyp Ausbildungskommission auf Ebene Bund.
+
+
 ## Version 1.15
 
 *   Statistik und Bestandesmeldung mit Total pro Geschlecht
