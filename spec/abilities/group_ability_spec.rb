@@ -66,6 +66,13 @@ describe GroupAbility do
         is_expected.to_not be_able_to(:pending_approvals, groups(:zh))
       end
     end
+
+    context 'in lower layer' do
+      it 'may not see pending approvals' do
+        is_expected.to_not be_able_to(:pending_approvals, groups(:schekka))
+      end
+    end
+
   end
 
 end

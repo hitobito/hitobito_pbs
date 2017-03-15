@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -29,7 +29,7 @@ module Pbs::GroupAbility
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
 
-      permission(:approve_applications).may(:pending_approvals).if_layer_and_approver_of_group
+      permission(:approve_applications).may(:pending_approvals).if_layer_and_in_same_group
 
       permission(:any).may(:'index_event/camps').all
       permission(:group_full).may(:'export_event/camps').in_same_group
@@ -47,13 +47,8 @@ module Pbs::GroupAbility
     role_type?(Group::Bund::MitarbeiterGs)
   end
 
-  def if_layer_and_approver_of_group
-    group_permissions = user.roles.select do |role|
-      role.group_id == group.id &&
-        role.permissions.include?(:approve_applications)
-    end
-
-    if_layer_group && group_permissions.any?
+  def if_layer_and_in_same_group
+    if_layer_group && user.groups_with_permission(permission).map(&:id).include?(group.id)
   end
 
 end

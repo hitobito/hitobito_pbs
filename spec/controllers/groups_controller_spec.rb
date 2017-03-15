@@ -91,7 +91,7 @@ describe GroupsController do
       @other_approval = create_application_and_approval(other_participation)
     end
 
-    it "lists pending approvals for layers oldest at the top" do
+    it 'lists pending approvals for layers oldest at the top' do
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
       sign_in(people(:bulei))
       get :pending_approvals, id: groups(:be).id
@@ -99,7 +99,7 @@ describe GroupsController do
       expect(assigns(:approvals).first).to eq @other_approval
     end
 
-    it "denies access to listing if not authorized" do
+    it 'denies access to listing if not authorized' do
       sign_in(people(:bulei))
       expect { get :pending_approvals, id: groups(:be).id }.to raise_error CanCan::AccessDenied
     end
