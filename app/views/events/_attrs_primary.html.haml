@@ -31,6 +31,10 @@
 
   - unless entry.is_a?(Event::Camp) && !can?(:show_details, entry)
     = render_present_attrs(entry, :location)
+    - if entry.location.present?
+      %dl.dl-horizontal.dl-borderless
+        %dd
+          %iframe{ name: 'map', src: "https://map.geo.admin.ch/embed.html?swisssearch=#{entry.location.gsub(/\n/, ', ')} limit:1", width: '100%', height: '300' }
 
   = render_extensions :attrs_primary, folder: 'events'
 
