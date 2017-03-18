@@ -35,3 +35,8 @@
   = render_extensions :attrs_primary, folder: 'events'
 
   = render 'attachments'
+  
+  - unless entry.is_a?(Event::Camp) && !can?(:show_details, entry)
+    - if entry.location.present?
+      %iframe{:align => "center", :name => "map", :src => "https://map.geo.admin.ch/embed.html?swisssearch=#{(entry.location).gsub(/\n/, ', ')} limit:1", :height => "300px;", :width => "90%"}
+      
