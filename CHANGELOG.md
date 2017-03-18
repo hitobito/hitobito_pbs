@@ -1,5 +1,8 @@
 # Hitobito Changelog
 
+## Version 1.15
+*   Rolle Materialwart und Heimverwalter aktiviert
+
 ## Version 1.11
 
 *   PBS Branding
