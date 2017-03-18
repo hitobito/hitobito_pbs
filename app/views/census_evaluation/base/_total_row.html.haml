@@ -7,5 +7,7 @@
   %th.right= t('census_evaluation.total')
   - MemberCount::COUNT_COLUMNS.each do |col|
     %th.right= count_value(@total.send(col))
+  %th.right= count_value(@total.f)
+  %th.right= count_value(@total.m)
   %th.right= count_value(@total.total)
   %th
