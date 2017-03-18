@@ -1,5 +1,8 @@
 # Hitobito Changelog
 
+## Version 1.15
+*   Statistik und Bestandesmeldung mit Total pro Geschlecht
+
 ## Version 1.11
 
 *   PBS Branding
