@@ -28,7 +28,8 @@ puzzlers = ['Pascal Zumkehr',
             'Matthias Viehweger',
             'Bruno Santschi']
 
-devs = {'Olivier Brian' => 'olivier.brian@bfh.ch'}
+devs = {'First Person' => 'hitobito@example.com', 'Olivier Brian' => 'olivier.brian@bfh.ch'}
+
 puzzlers.each do |puz|
   devs[puz] = "#{puz.split.last.downcase}@puzzle.ch"
 end
