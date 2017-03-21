@@ -1,7 +1,7 @@
 # Hitobito Changelog
 
 ## Version 1.15
-*   Rolle Materialwart und Heimverwalter aktiviert
+*   Rolle Materialwart und Heimverwaltung aktiviert
 
 ## Version 1.11
 
