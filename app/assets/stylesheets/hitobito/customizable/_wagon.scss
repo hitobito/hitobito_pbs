@@ -14,14 +14,14 @@
   font-size: 2.462em; // 32px
   line-height: 1.250em; // 40px
   @include single-text-shadow(white, 0, 1px, 0);
+  color: #038;
 
-  background: image-url("logo.png") transparent no-repeat 0px 0px;
+  background: image-url("logo.svg") transparent no-repeat 0px 0px;
 
   // Retina version
   @media
     only screen and (-webkit-min-device-pixel-ratio : 2),
     only screen and (min-device-pixel-ratio : 2) {
-      background: image-url("logo@2x.png") transparent no-repeat 0px 0px;
       background-size: 219px 72px;
   }
 
