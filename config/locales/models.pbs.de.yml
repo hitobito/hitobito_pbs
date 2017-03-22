@@ -900,6 +900,12 @@ de:
       salutation:
         one: Anrede
         other: Anreden
+        default:
+          label: Hallo [Name]
+          value:
+            m: Hallo %{greeting_name}
+            W: Hallo %{greeting_name}
+            other: Hallo %{greeting_name}
         available:
           lieber_pfadiname:
             label: Liebe(r) [Pfadiname]

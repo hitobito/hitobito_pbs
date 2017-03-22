@@ -93,6 +93,9 @@ module HitobitoPbs
 
       ### mailers
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
+      Event::RegisterMailer.send :include, Pbs::Event::RegisterMailer
+      Person::AddRequestMailer.send :include, Pbs::Person::AddRequestMailer
+      Person::LoginMailer.send :include, Pbs::Person::LoginMailer
 
       # Main navigation
       i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }

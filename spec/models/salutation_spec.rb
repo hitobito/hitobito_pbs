@@ -53,7 +53,7 @@ describe Salutation do
 
     context 'without salutation' do
       before { person.salutation = nil }
-      it { expect(subject).to be_nil }
+      it { expect(subject).to eq('Hallo Bundes') }
     end
 
     context 'lieber pfadiname' do

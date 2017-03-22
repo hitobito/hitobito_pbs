@@ -25,7 +25,8 @@ module Pbs::Event::ParticipationMailer
     attachments[filename] = Export::Pdf::Participation.render(participation)
     compose(person,
             CONTENT_CONFIRMATION_OTHER,
-            'recipient-name' => person.greeting_name)
+            'recipient-name' => person.greeting_name,
+            'recipient-name-with-salutation' => person.salutation_value)
   end
 
   def canceled(participation, recipients)
@@ -58,6 +59,26 @@ module Pbs::Event::ParticipationMailer
             'event-name' => event.to_s,
             'leader-name' => current_user.to_s,
             'participant-name' => person.to_s)
+  end
+
+  private
+
+  define_method "#{Event::ParticipationMailer::CONTENT_CONFIRMATION}_values" do
+    super.merge({
+      'recipient-name-with-salutation' => person.salutation_value
+    })
+  end
+
+  define_method "#{Event::ParticipationMailer::CONTENT_APPROVAL}_values" do
+    super.merge({
+      'recipient-names-with-salutation' => @recipients.collect(&:salutation_value).join(', ')
+    })
+  end
+
+  define_method "#{Event::ParticipationMailer::CONTENT_CANCEL}_values" do
+    super.merge({
+      'recipient-name-with-salutation' => person.salutation_value
+    })
   end
 
 end

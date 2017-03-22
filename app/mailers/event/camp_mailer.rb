@@ -37,7 +37,8 @@ class Event::CampMailer < ApplicationMailer
     @camp = camp
     compose(recipient,
             CONTENT_SUBMIT_REMINDER,
-            'recipient-name' => recipient.greeting_name)
+            'recipient-name' => recipient.greeting_name,
+            'recipient-name-with-salutation' => recipient.salutation_value)
   end
 
   def submit_camp(camp)
