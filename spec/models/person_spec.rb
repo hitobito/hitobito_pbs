@@ -81,9 +81,9 @@ describe Person do
       expect(person.salutation_value).to eq('Sehr geehrter Herr Dr. Leiter')
     end
 
-    it 'is nil without salutation' do
+    it 'is a default without salutation' do
       person.salutation = nil
-      expect(person.salutation_value).to be_nil
+      expect(person.salutation_value).to eq('Hallo Bundes')
     end
   end
 
@@ -92,9 +92,9 @@ describe Person do
       expect(person.salutation_label).to eq('Sehr geehrte(r) Frau/Herr [Titel] [Nachname]')
     end
 
-    it 'is nil without salutation' do
+    it 'is a default without salutation' do
       person.salutation = nil
-      expect(person.salutation_label).to be_nil
+      expect(person.salutation_label).to eq('Hallo [Name]')
     end
   end
 

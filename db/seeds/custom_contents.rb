@@ -8,11 +8,11 @@
 CustomContent.seed_once(:key,
   { key: GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP,
     placeholders_required: 'actuator-name, group-link',
-    placeholders_optional: 'recipient-name' },
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name' },
 
   { key: Event::ParticipationMailer::CONTENT_CONFIRMATION_OTHER,
     placeholders_required: 'event-details, application-url',
-    placeholders_optional: 'recipient-name' },
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name' },
 
   { key: Event::ParticipationMailer::CONTENT_CANCELED_PARTICIPATION,
     placeholders_required: 'participant-name',
@@ -44,7 +44,7 @@ CustomContent.seed_once(:key,
 
   { key: Event::CampMailer::CONTENT_SUBMIT_REMINDER,
     placeholders_required: 'camp-url',
-    placeholders_optional: 'recipient-name, camp-name, camp-state' },
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, camp-name, camp-state' },
 
   { key: Event::CampMailer::CONTENT_SUBMIT,
     placeholders_required: 'camp-url',
@@ -57,6 +57,36 @@ CustomContent.seed_once(:key,
   { key: Event::CampMailer::CONTENT_PARTICIPANT_CANCELED,
     placeholders_required: 'participant-name, camp-url',
     placeholders_optional: 'camp-name, camp-state' }
+)
+
+# update these contents from hitobito-core, as fine-grained as possible
+CustomContent.seed(:key,
+  { key: Person::LoginMailer::CONTENT_LOGIN,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, sender-name'},
+
+  { key: Event::ParticipationMailer::CONTENT_CONFIRMATION,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name'},
+
+  { key: Event::ParticipationMailer::CONTENT_APPROVAL,
+    placeholders_optional: 'recipient-names-with-salutation, recipient-names'},
+
+  { key: Event::ParticipationMailer::CONTENT_CANCEL,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name'},
+
+  { key: Event::RegisterMailer::CONTENT_REGISTER_LOGIN,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, event-name'},
+
+  { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, requester-name, requester-roles' },
+
+  { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES,
+    placeholders_optional: 'recipient-names-with-salutation, recipient-names, requester-name, requester-roles' },
+
+  { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, approver-name, approver-roles' },
+
+  { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED,
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, rejecter-name, rejecter-roles' },
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -85,7 +115,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     locale: 'de',
     label: 'Information bei neuer Gruppenzugehörigkeit',
     subject: "Aufnahme in Gruppe",
-    body: "Hallo {recipient-name}<br/><br/>" \
+    body: "{recipient-name-with-salutation}<br/><br/>" \
           "{actuator-name} hat dich zur Gruppe {group-link} hinzugefügt.<br/><br/>" \
           "Bis bald!" },
 

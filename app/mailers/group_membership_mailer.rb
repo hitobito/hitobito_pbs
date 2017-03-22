@@ -11,9 +11,10 @@ class GroupMembershipMailer < ApplicationMailer
 
   def added_to_group(recipient, actuator, group)
     values = {
-      'recipient-name' => recipient.greeting_name,
-      'actuator-name'  => actuator.to_s,
-      'group-link'     => group_link_with_layer(group)
+      'recipient-name'                 => recipient.greeting_name,
+      'recipient-name-with-salutation' => recipient.salutation_value,
+      'actuator-name'                  => actuator.to_s,
+      'group-link'                     => group_link_with_layer(group)
     }
 
     # This email is only sent to the main email address.
