@@ -8,15 +8,15 @@
 module Pbs::Event::ParticipationMailer
   extend ActiveSupport::Concern
 
-  CONTENT_CONFIRMATION_OTHER = 'event_application_confirmation_other'
+  CONTENT_CONFIRMATION_OTHER = 'event_application_confirmation_other'.freeze
 
-  CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'
+  CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'.freeze
 
   CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST =
-    'event_participation_assigned_from_waiting_list'
+    'event_participation_assigned_from_waiting_list'.freeze
 
   CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST =
-    'event_participation_removed_from_waiting_list'
+    'event_participation_removed_from_waiting_list'.freeze
 
   def confirmation_other(participation)
     @participation = participation

@@ -7,7 +7,7 @@
 
 class GroupMembershipMailer < ApplicationMailer
 
-  CONTENT_GROUP_MEMBERSHIP = 'group_membership'
+  CONTENT_GROUP_MEMBERSHIP = 'group_membership'.freeze
 
   def added_to_group(recipient, actuator, group)
     values = {
