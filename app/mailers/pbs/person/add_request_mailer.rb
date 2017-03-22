@@ -1,3 +1,5 @@
+# vim:fileencoding=utf-8
+
 module Pbs::Person::AddRequestMailer
   extend ActiveSupport::Concern
 

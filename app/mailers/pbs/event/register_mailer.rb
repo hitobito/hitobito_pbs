@@ -1,3 +1,4 @@
+# vim:fileencoding=utf-8
 
 module Pbs::Event::RegisterMailer
   extend ActiveSupport::Concern
