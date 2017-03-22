@@ -14,7 +14,6 @@ describe UpdateKantonalverband do
 
   it 'updates kantonalverband for all people' do
     al.update!({kantonalverband: nil})
-    require 'pry'; binding.pry unless $pstop
 
     migration.up
 
