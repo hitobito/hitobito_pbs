@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -12,12 +12,10 @@ class Event::CanceledCourseParticipationJob < BaseJob
                      Group::Region::Regionalleitung,
                      Group::Region::VerantwortungAusbildung,
                      Group::Kantonalverband::Kantonsleitung,
-                     Group::Kantonalverband::VerantwortungAusbildung,
-                     Group::Bund::Geschaeftsleitung,
-                     Group::Bund::LeitungKernaufgabeAusbildung]
+                     Group::Kantonalverband::VerantwortungAusbildung].freeze
 
   ABTEILUNGSLEITUNGS_ROLES = [Group::Abteilung::Abteilungsleitung,
-                              Group::Abteilung::AbteilungsleitungStv]
+                              Group::Abteilung::AbteilungsleitungStv].freeze
 
   self.parameters = [:participation_id, :locale]
 
