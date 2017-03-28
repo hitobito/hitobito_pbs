@@ -11,8 +11,8 @@ module Pbs::Event::RegisterMailer
 
   private
 
-  define_method "#{Event::RegisterMailer::CONTENT_REGISTER_LOGIN}_values" do
-    super.merge({
+  define_method "#{Event::RegisterMailer::CONTENT_REGISTER_LOGIN}_values_with_salutation" do
+    send(:"#{Event::RegisterMailer::CONTENT_REGISTER_LOGIN}_values_without_salutation").merge({
       'recipient-name-with-salutation' => @recipient.salutation_value
     })
   end

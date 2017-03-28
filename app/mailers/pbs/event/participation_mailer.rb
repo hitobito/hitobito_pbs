@@ -63,20 +63,20 @@ module Pbs::Event::ParticipationMailer
 
   private
 
-  define_method "#{Event::ParticipationMailer::CONTENT_CONFIRMATION}_values" do
-    super.merge({
+  define_method "#{Event::ParticipationMailer::CONTENT_CONFIRMATION}_values_with_salutation" do
+    send(:"#{Event::ParticipationMailer::CONTENT_CONFIRMATION}_values_without_salutation").merge({
       'recipient-name-with-salutation' => person.salutation_value
     })
   end
 
-  define_method "#{Event::ParticipationMailer::CONTENT_APPROVAL}_values" do
-    super.merge({
+  define_method "#{Event::ParticipationMailer::CONTENT_APPROVAL}_values_with_salutation" do
+    send(:"#{Event::ParticipationMailer::CONTENT_APPROVAL}_values_without_salutation").merge({
       'recipient-names-with-salutation' => @recipients.collect(&:salutation_value).join(', ')
     })
   end
 
-  define_method "#{Event::ParticipationMailer::CONTENT_CANCEL}_values" do
-    super.merge({
+  define_method "#{Event::ParticipationMailer::CONTENT_CANCEL}_values_with_salutation" do
+    send(:"#{Event::ParticipationMailer::CONTENT_CANCEL}_values_without_salutation").merge({
       'recipient-name-with-salutation' => person.salutation_value
     })
   end

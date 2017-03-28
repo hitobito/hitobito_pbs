@@ -36,8 +36,52 @@ describe Event::ParticipationMailer do
       subject { mail.body }
 
       it 'renders placeholders' do
-        is_expected.to match(/AL Schekka wurde per 01.07.2015 vom Kurs Top Course abgemeldet./)
+        is_expected.to match(/AL Schekka \/ Torben wurde per 01.07.2015 vom Kurs Top Course abgemeldet./)
       end
     end
   end
+
+  context 'confirmation' do
+    let(:mail) { Event::ParticipationMailer.confirmation(participation) }
+
+    context 'body' do
+      subject { mail.parts.first.body }
+
+      it 'contains the name with a salutation' do
+        is_expected.to match(/Liebe\(r\) Torben/)
+      end
+
+    end
+  end
+
+  context 'approval' do
+    let(:approvers) do
+      [Fabricate(:person, email: 'approver0@example.com', first_name: 'firsty'),
+       Fabricate(:person, email: 'approver1@example.com', first_name: 'lasty')]
+    end
+    let(:mail) { Event::ParticipationMailer.approval(participation, approvers) }
+
+    context 'body' do
+      subject { mail.body }
+
+      it 'contains the names with a salutation' do
+        is_expected.to match(/Hallo firsty, Hallo lasty/)
+      end
+
+    end
+  end
+
+  context 'cancel' do
+    let(:mail) { Event::ParticipationMailer.cancel(participation.event, participation.person) }
+
+    context 'body' do
+      subject { mail.body }
+
+      it 'contains the name with a salutation' do
+        is_expected.to match(/Liebe\(r\) Torben/)
+      end
+
+    end
+  end
+
 end
