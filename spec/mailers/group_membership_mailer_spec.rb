@@ -31,7 +31,7 @@ describe GroupMembershipMailer do
 
     it 'renders placeholders' do
       is_expected.to match(/Hallo My/)
-      is_expected.to match(/AL Schekka hat dich zur Gruppe.*Schekka.*hinzugefügt/)
+      is_expected.to match(/AL Schekka \/ Torben hat dich zur Gruppe.*Schekka.*hinzugefügt/)
     end
   end
 

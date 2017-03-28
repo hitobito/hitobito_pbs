@@ -59,33 +59,42 @@ CustomContent.seed_once(:key,
     placeholders_optional: 'camp-name, camp-state' }
 )
 
-# update these contents from hitobito-core, as fine-grained as possible
+# update these contents from hitobito-core, always, to supersede (haha) the seeds from hitobito-core
 CustomContent.seed(:key,
   { key: Person::LoginMailer::CONTENT_LOGIN,
+    placeholders_required: 'login-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, sender-name'},
 
   { key: Event::ParticipationMailer::CONTENT_CONFIRMATION,
+    placeholders_required: 'event-details, application-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name'},
 
   { key: Event::ParticipationMailer::CONTENT_APPROVAL,
+    placeholders_required: 'participant-name, event-details, application-url',
     placeholders_optional: 'recipient-names-with-salutation, recipient-names'},
 
   { key: Event::ParticipationMailer::CONTENT_CANCEL,
+    placeholders_required: 'event-details',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name'},
 
   { key: Event::RegisterMailer::CONTENT_REGISTER_LOGIN,
+    placeholders_required: 'event-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, event-name'},
 
   { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON,
+    placeholders_required: 'request-body, answer-request-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, requester-name, requester-roles' },
 
   { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES,
+    placeholders_required: 'person-name, request-body, answer-request-url',
     placeholders_optional: 'recipient-names-with-salutation, recipient-names, requester-name, requester-roles' },
 
   { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED,
+    placeholders_required: 'person-name, request-body',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, approver-name, approver-roles' },
 
   { key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED,
+    placeholders_required: 'person-name, request-body',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, rejecter-name, rejecter-roles' },
 )
 
@@ -107,6 +116,15 @@ camp_participant_applied_id = CustomContent.get(Event::CampMailer::CONTENT_PARTI
 camp_participant_canceled_id = CustomContent.
   get(Event::CampMailer::CONTENT_PARTICIPANT_CANCELED).id
 
+send_login_id = CustomContent.get(Person::LoginMailer::CONTENT_LOGIN).id
+participation_confirmation_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CONFIRMATION).id
+participation_approval_id = CustomContent.get(Event::ParticipationMailer::CONTENT_APPROVAL).id
+cancel_application_id = CustomContent.get(Event::ParticipationMailer::CONTENT_CANCEL).id
+temp_login_id = CustomContent.get(Event::RegisterMailer::CONTENT_REGISTER_LOGIN).id
+add_request_person_id = CustomContent.get(Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON).id
+add_request_responsibles_id = CustomContent.get(Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES).id
+add_request_approved_id = CustomContent.get(Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED).id
+add_request_rejected_id = CustomContent.get(Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED).id
 
 _id = CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
 
@@ -139,7 +157,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     locale: 'de',
     label: 'Anlass: E-Mail Fremdanmeldebestätigung',
     subject: 'Du wurdest angemeldet',
-    body: "Hallo {recipient-name}<br/><br/>" \
+    body: "{recipient-name-with-salutation}<br/><br/>" \
           "Du wurdest für folgenden Anlass angemeldet:<br/><br/>" \
           "{event-details}<br/><br/>" \
           "Falls du ein Login hast, kannst du deine Anmeldung unter folgender Adresse einsehen " \
@@ -306,7 +324,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     locale: 'de',
     label: 'Lager: E-Mail Lager einreichen Erinnerung',
     subject: 'Lager: Lager einreichen Erinnerung',
-    body: 'Hallo {recipient-name}<br><br>' \
+    body: '{recipient-name-with-salutation}<br><br>' \
           'Das Lager "{camp-name}" muss noch an PBS eingereicht werden:<br><br>' \
           '{camp-url}<br>' },
 
@@ -382,4 +400,99 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: camp_participant_canceled_id,
     locale: 'it',
     label: 'Campo: E-Mail Participante ha annullare'}
+)
+
+# reseed always to have decent test-data
+CustomContent::Translation.seed(:custom_content_id, :locale,
+
+  {custom_content_id: send_login_id,
+   locale: 'de',
+   label: 'Login senden',
+   subject: "Willkommen bei #{Settings.application.name}",
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "Willkommen bei #{Settings.application.name}! Unter dem folgenden Link kannst du " \
+         "dein Login Passwort setzen:<br/><br/>{login-url}<br/><br/>" \
+         "Bis bald!<br/><br/>{sender-name}" },
+
+  {custom_content_id: participation_confirmation_id,
+   locale: 'de',
+   label: 'Anlass: E-Mail Anmeldebestätigung',
+   subject: 'Bestätigung der Anmeldung',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "Du hast dich für folgenden Anlass angemeldet:<br/><br/>" \
+         "{event-details}<br/><br/>" \
+         "Falls du ein Login hast, kannst du deine Anmeldung unter folgender Adresse einsehen " \
+         "und eine Bestätigung ausdrucken:<br/><br/>{application-url}" },
+
+  {custom_content_id: cancel_application_id,
+   locale: 'de',
+   label: 'Anlass: E-Mail Abmeldebestätigung',
+   subject: 'Bestätigung der Abmeldung',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "Du hast dich von folgendem Anlass abgemeldet:<br/><br/>" \
+         "{event-details}<br/><br/>"},
+
+  {custom_content_id: participation_approval_id,
+   locale: 'de',
+   label: 'Anlass: E-Mail Freigabe der Anmeldung',
+   subject: 'Freigabe einer Kursanmeldung',
+   body: "{recipient-names-with-salutation}<br/><br/>" \
+         "{participant-name} hat sich für den folgenden Kurs angemeldet:<br/><br/>" \
+         "{event-details}<br/><br/>" \
+         "Bitte bestätige oder verwerfe diese Anmeldung unter der folgenden Adresse:<br/><br/>" \
+        "{application-url}" },
+
+  {custom_content_id: temp_login_id,
+   locale: 'de',
+   label: 'Anlass: Temporäres Login senden',
+   subject: 'Anmeldelink für Anlass',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "Hier kannst du dich für den Anlass {event-name} anmelden:<br/><br/>" \
+         "{event-url}<br/><br/>" \
+         "Wir freuen uns, dich wieder mit dabei zu haben." },
+
+  {custom_content_id: add_request_person_id,
+   locale: 'de',
+   label: 'Anfrage Personendaten: E-Mail Freigabe durch Person',
+   subject: 'Freigabe deiner Personendaten',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "{requester-name} möchte dich hier hinzufügen: <br/><br/>" \
+         "{request-body}<br/><br/>" \
+         "{requester-name} hat folgende schreibberechtigten Rollen: <br/><br/>" \
+         "{requester-roles}<br/><br/>" \
+         "Bitte bestätige oder verwerfe diese Anfrage:<br/><br/>" \
+         "{answer-request-url}" },
+
+  {custom_content_id: add_request_responsibles_id,
+   locale: 'de',
+   label: 'Anfrage Personendaten: E-Mail Freigabe durch Verantwortliche',
+   subject: 'Freigabe Personendaten',
+   body: "{recipient-names-with-salutation}<br/><br/>" \
+         "{requester-name} möchte {person-name} hier hinzufügen: <br/><br/>" \
+         "{request-body}<br/><br/>" \
+         "{requester-name} hat folgende schreibberechtigten Rollen: <br/><br/>" \
+         "{requester-roles}<br/><br/>" \
+         "Bitte bestätige oder verwerfe diese Anfrage:<br/><br/>" \
+         "{answer-request-url}" },
+
+  {custom_content_id: add_request_approved_id,
+   locale: 'de',
+   label: 'Anfrage Personendaten: E-Mail Freigabe akzeptiert',
+   subject: 'Freigabe der Personendaten akzeptiert',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "{approver-name} hat deine Anfrage für {person-name} freigegeben.<br/><br/>" \
+         "{person-name} wurde zu {request-body} hinzugefügt.<br/><br/>" \
+         "{approver-name} hat folgende schreibberechtigten Rollen: <br/><br/>" \
+         "{approver-roles}<br/><br/>" },
+
+  {custom_content_id: add_request_rejected_id,
+   locale: 'de',
+   label: 'Anfrage Personendaten: E-Mail Freigabe abgelehnt',
+   subject: 'Freigabe der Personendaten abgelehnt',
+   body: "{recipient-name-with-salutation}<br/><br/>" \
+         "{rejecter-name} hat deine Anfrage für {person-name} abgelehnt.<br/><br/>" \
+         "{person-name} wird nicht zu {request-body} hinzugefügt.<br/><br/>" \
+         "{rejecter-name} hat folgende schreibberechtigten Rollen: <br/><br/>" \
+         "{rejecter-roles}<br/><br/>" },
+
 )

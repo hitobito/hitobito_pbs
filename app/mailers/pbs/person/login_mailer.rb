@@ -11,8 +11,8 @@ module Pbs::Person::LoginMailer
 
   private
 
-  define_method "#{Person::LoginMailer::CONTENT_LOGIN}_values" do
-    super.merge({
+  define_method "#{Person::LoginMailer::CONTENT_LOGIN}_values_with_salutation" do
+    send(:"#{Person::LoginMailer::CONTENT_LOGIN}_values_without_salutation").merge({
       'recipient-name-with-salutation' => @recipient.salutation_value
     })
   end

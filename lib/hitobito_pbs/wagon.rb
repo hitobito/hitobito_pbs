@@ -90,9 +90,18 @@ module HitobitoPbs
 
       ### mailers
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
+      Event::ParticipationMailer.send(:alias_method_chain, :"#{Event::ParticipationMailer::CONTENT_APPROVAL}_values", :salutation)
+      Event::ParticipationMailer.send(:alias_method_chain, :"#{Event::ParticipationMailer::CONTENT_CANCEL}_values", :salutation)
+      Event::ParticipationMailer.send(:alias_method_chain, :"#{Event::ParticipationMailer::CONTENT_CONFIRMATION}_values", :salutation)
       Event::RegisterMailer.send :include, Pbs::Event::RegisterMailer
+      Event::RegisterMailer.send(:alias_method_chain, :"#{Event::RegisterMailer::CONTENT_REGISTER_LOGIN}_values", :salutation)
       Person::AddRequestMailer.send :include, Pbs::Person::AddRequestMailer
+      Person::AddRequestMailer.send(:alias_method_chain, :"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON}_values", :salutation)
+      Person::AddRequestMailer.send(:alias_method_chain, :"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES}_values", :salutation)
+      Person::AddRequestMailer.send(:alias_method_chain, :"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED}_values", :salutation)
+      Person::AddRequestMailer.send(:alias_method_chain, :"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED}_values", :salutation)
       Person::LoginMailer.send :include, Pbs::Person::LoginMailer
+      Person::LoginMailer.send(:alias_method_chain, :"#{Person::LoginMailer::CONTENT_LOGIN}_values", :salutation)
 
       # Main navigation
       i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }
