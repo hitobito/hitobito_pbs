@@ -20,10 +20,11 @@ rvm:
   - 2.4.0
 install:
   - unset BUNDLE_GEMFILE # we bundle in different directories
+  - export HITOBITO_BRANCH=$([ $TRAVIS_BRANCH = 'stable' -o $TRAVIS_BRANCH = 'kurswesen' ] && echo ${TRAVIS_BRANCH} || echo 'master')
   - cd .. && git clone https://github.com/hitobito/hitobito_youth.git hitobito_youth
-  - cd hitobito_youth && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
+  - cd hitobito_youth && git checkout -f $HITOBITO_BRANCH
   - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
-  - cd hitobito && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
+  - cd hitobito && git checkout -f $HITOBITO_BRANCH
   - export HITOBITO_CORE_DIR=$PWD
   - sed -i "s/^\(gem .mysql2.\),.*$/\1/" Gemfile
   - cp -v Wagonfile.ci Wagonfile
