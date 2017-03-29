@@ -12,7 +12,7 @@ module Pbs
         module ParticipationRow
 
           def bsv_days
-            participation.bsv_days
+            participation.bsv_days || participation.event.bsv_days
           end
 
         end
