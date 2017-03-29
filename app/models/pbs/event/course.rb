@@ -1,21 +1,22 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 module Pbs::Event::Course
+
   extend ActiveSupport::Concern
 
-  LANGUAGES = %w(de fr it en)
+  LANGUAGES = %w(de fr it en).freeze
   APPROVALS = %w(requires_approval_abteilung requires_approval_region
-                 requires_approval_kantonalverband requires_approval_bund)
+                 requires_approval_kantonalverband requires_approval_bund).freeze
 
   included do
     include Event::RestrictedRole
 
-    self.used_attributes += [:advisor_id, :express_fee] +
+    self.used_attributes += [:advisor_id, :express_fee, :bsv_days] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval]
@@ -34,6 +35,8 @@ module Pbs::Event::Course
 
 
     validates :number, presence: true
+    validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+    validate :assert_bsv_days_precision
 
     ### CALLBACKS
     before_save :set_requires_approval
@@ -57,6 +60,13 @@ module Pbs::Event::Course
       requires_approval_bund?
 
     true
+  end
+
+  def assert_bsv_days_precision
+    if bsv_days && bsv_days % 0.5 != 0
+      msg = I18n.t('activerecord.errors.messages.must_be_multiple_of', multiple: 0.5)
+      errors.add(:bsv_days, msg)
+    end
   end
 
 end

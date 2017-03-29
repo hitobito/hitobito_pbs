@@ -41,3 +41,26 @@
   & > .sheet { margin: 0 20px; }
 }
 
+
+table.attendance {
+  tr th {
+    padding-top: 20px;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+
+  td:last-child {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  td input {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}

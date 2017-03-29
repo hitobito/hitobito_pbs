@@ -98,4 +98,27 @@ describe Event::Participation do
 
   end
 
+  context '#bsv_days' do
+    let(:participation) { Fabricate(:pbs_participation, event: event) }
+
+    it 'is valid when empty' do
+      expect(participation).to be_valid
+    end
+
+    it 'is valid when multiple of 0.5' do
+      participation.bsv_days = 3.5
+      expect(participation).to be_valid
+    end
+
+    it 'is not valid when negative' do
+      participation.bsv_days = -1
+      expect(participation).not_to be_valid
+    end
+
+    it 'is not valid when not multiple of 0.5' do
+      participation.bsv_days = 2.25
+      expect(participation).not_to be_valid
+    end
+  end
+
 end

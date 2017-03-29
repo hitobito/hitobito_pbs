@@ -19,8 +19,6 @@ module HitobitoPbs
                                  #{config.root}/app/serializers)
 
     config.to_prepare do
-      # rubocop:disable SingleSpaceBeforeFirstArg
-
       ### models
       Group.send        :include, Pbs::Group
       Person.send       :include, Pbs::Person
@@ -40,7 +38,8 @@ module HitobitoPbs
       Export::Csv::Events::List.send :include, Pbs::Export::Csv::Events::List
       Export::Csv::Events::Row.send :include, Pbs::Export::Csv::Events::Row
       Export::Csv::People::ParticipationNdbjsRow.send(
-        :include, Pbs::Export::Csv::People::ParticipationNdbjsRow)
+        :include, Pbs::Export::Csv::People::ParticipationNdbjsRow
+      )
       Export::Csv::Events::BsvList.send :include, Pbs::Export::Csv::Events::BsvList
       Export::Csv::Events::BsvRow.send :include, Pbs::Export::Csv::Events::BsvRow
 
@@ -80,9 +79,14 @@ module HitobitoPbs
       Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
       Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
       Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
+      Export::Csv::People::ParticipationRow.send :include,
+                                                 Pbs::Export::Csv::People::ParticipationRow
+      Export::Csv::People::ParticipationsFull.send :include,
+                                                   Pbs::Export::Csv::People::ParticipationsFull
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
+      Sheet::Event.send :include, Pbs::Sheet::Event
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob

@@ -896,7 +896,7 @@ de:
           label: Hallo [Name]
           value:
             m: Hallo %{greeting_name}
-            W: Hallo %{greeting_name}
+            w: Hallo %{greeting_name}
             other: Hallo %{greeting_name}
         available:
           lieber_pfadiname:
@@ -929,12 +929,11 @@ de:
         zz: Ausland
 
       event:
+        bsv_days: Anzahl BSV-Tage
+        camp_days: Anzahl Lagertage
+        camp_submitted: Eingereicht
         course_languages: Kurssprachen
         express_fee: Expressgebühr
-        language_de: Kurssprache Deutsch
-        language_fr: Kurssprache Französisch
-        language_it: Kurssprache Italienisch
-        language_en: Kurssprache Englisch
         expected_participants: Erwartete Teilnehmer/-innen
         expected_participants_wolf: Wolf
         expected_participants_wolf_f: Anzahl Wölfe weiblich
@@ -951,8 +950,10 @@ de:
         expected_participants_leitung: Leiter
         expected_participants_leitung_f: Anzahl Leiter weiblich
         expected_participants_leitung_m: Anzahl Leiter männlich
-        camp_days: Anzahl Lagertage
-        camp_submitted: Eingereicht
+        language_de: Kurssprache Deutsch
+        language_fr: Kurssprache Französisch
+        language_it: Kurssprache Italienisch
+        language_en: Kurssprache Englisch
         j_s_kind: J+S-Rahmen
         j_s_security: Sicherheitsbereiche
         j_s_security_snow: Winter
@@ -1023,6 +1024,9 @@ de:
       event/kind:
         documents_text: Zusatzformulare
 
+      event/participation:
+        bsv_days: BSV-Tage
+
       person:
         nickname: Pfadiname
         pbs_number: PBS Personennummer
@@ -1089,6 +1093,8 @@ de:
         manual: Manuell erfassbar
 
     errors:
+      messages:
+        must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
       models:
         role:
           attributes:

@@ -72,6 +72,13 @@ de:
     js_security: Sicherheitsbereich
 
   event:
+    attendances:
+      index:
+        info: Erfasse hier die Anzahl BSV-Tage für jede Person.
+        leaders: Leitung
+        cooks: Küche
+        participants: Teilnehmende
+
     lists:
       nav_left_camps:
         all_camps: Lager ganze Schweiz
@@ -111,6 +118,12 @@ de:
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
+
+
+  event/attendances:
+    update:
+      flash:
+        success: Die Anwesenheiten wurden erfolgreich aktualisiert.
 
   event/applications:
     rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
@@ -183,6 +196,8 @@ de:
       inform_by_email: Informieren
     show_right_advisors:
       advisors: Betreuung
+    tabs:
+      attendances: Anwesenheit
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Das Reglement zur Planung und Durchführung von Lagern ("Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt

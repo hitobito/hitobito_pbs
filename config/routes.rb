@@ -41,6 +41,8 @@ Rails.application.routes.draw do
         member do
           get 'camp_application' => 'events#show_camp_application'
           put 'camp_application' => 'events#create_camp_application'
+          get 'attendances' => 'event/attendances#index'
+          patch 'attendances' => 'event/attendances#update'
         end
 
         scope module: 'event' do

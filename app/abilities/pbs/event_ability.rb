@@ -9,10 +9,10 @@ module Pbs::EventAbility
   extend ActiveSupport::Concern
 
   CANTONAL_CAMP_LIST_ROLES = [Group::Kantonalverband::Kantonsleitung,
-                              Group::Kantonalverband::VerantwortungKrisenteam]
+                              Group::Kantonalverband::VerantwortungKrisenteam].freeze
 
   ABROAD_CAMP_LIST_ROLES = [Group::Bund::InternationalCommissionerIcWagggs,
-                            Group::Bund::InternationalCommissionerIcWosm]
+                            Group::Bund::InternationalCommissionerIcWosm].freeze
 
   included do
     on(Event) do
@@ -20,6 +20,16 @@ module Pbs::EventAbility
       permission(:layer_and_below_full).
         may(:create, :destroy, :application_market, :qualify).
         in_same_layer_or_course_in_below_abteilung
+    end
+
+    on(Event::Course) do
+      permission(:any).may(:manage_attendances).for_leaded_events
+
+      permission(:layer_full).may(:manage_attendances).in_same_layer
+
+      permission(:layer_and_below_full).may(:manage_attendances).in_same_layer
+
+      general(:manage_attendances).at_least_one_group_not_deleted
     end
 
     on(Event::Camp) do
@@ -84,7 +94,7 @@ module Pbs::EventAbility
     event.participations.
       where(person: user).
       joins(:roles).
-      where('event_roles.type != ?', "Event::Camp::Role::Participant").
+      where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name).
       present?
   end
 
