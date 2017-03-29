@@ -165,7 +165,7 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungAusbildung < ::Role
-    self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
+    self.permissions = [:layer_full, :layer_and_below_read, :contact_data, :approve_applications]
   end
 
   class VerantwortungBetreuung < ::Role
