@@ -5,6 +5,7 @@
 *   Neuer Gruppentyp Ausbildungskommission auf Ebene Bund.
 *   Pro Ebene einstellbar, welche Rollen Benachrichtigungen für Kursempfehlungen erhalten.
 *   Neuer Platzhalter für Mail-Texte um die gewählte Anrede zu verwenden.
+*   Erfassungsmöglichkeit der BSV Anwesenheitstage für Kurse.
 
 
 ## Version 1.15
