@@ -49,7 +49,7 @@ describe RolesController do
 
       it 'redirects' do
         expect { post :create, group_id: group.id, role: role_params }.to change { Role.with_deleted.count }.by(1)
-        expect(flash[:notice]).to eq 'Rolle <i>Mitarbeiter GS</i> für <i>AL Schekka</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
+        expect(flash[:notice]).to eq 'Rolle <i>Mitarbeiter GS</i> für <i>AL Schekka / Torben</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
         is_expected.to redirect_to(group_people_path(group.id))
       end
     end
