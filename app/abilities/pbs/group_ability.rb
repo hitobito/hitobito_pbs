@@ -29,7 +29,7 @@ module Pbs::GroupAbility
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
 
-      permission(:approve_applications).may(:pending_approvals).if_layer_and_in_same_group
+      permission(:approve_applications).may(:index_pending_approvals).if_layer_and_in_same_group
 
       permission(:any).may(:'index_event/camps').all
       permission(:group_full).may(:'export_event/camps').in_same_group

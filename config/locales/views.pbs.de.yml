@@ -188,9 +188,15 @@ de:
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt
       j_s_rules_applied_caption: "Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten"
 
-  groups:
+  group:
     pending_approvals:
-      info: Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden.
+      index:
+        info: Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden.
+      approvers:
+        title: Benachrichtigungen an
+        all: Alle
+
+  groups:
     tabs:
       population: Bestand
       statistic: Statistik

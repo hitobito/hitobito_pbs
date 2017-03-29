@@ -1,0 +1,31 @@
+-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+%p
+  &nbsp;
+
+%h3= t('.title')
+
+%ul.unstyled
+  - @approver_roles.each do |role|
+    %li
+      %label.radio
+        = radio_button_tag('approver_role',
+                           role.name,
+                           @group.application_approver_role == role.name,
+                           data: { remote: true,
+                                   url: pending_approvals_role_group_path(id: @group.id),
+                                   method: :patch  })
+        = role.model_name.human
+
+  %li
+    %label.radio
+      = radio_button_tag('approver_role',
+                         '',
+                         @group.application_approver_role.blank?,
+                         data: { remote: true,
+                                 url: pending_approvals_role_group_path(id: @group.id),
+                                 method: :patch  })
+      = t('.all')
