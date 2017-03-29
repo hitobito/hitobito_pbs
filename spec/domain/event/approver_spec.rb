@@ -70,7 +70,7 @@ describe Event::Approver do
         expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
-      it 'creates no Event::Approval and sends no emails if required layer is not in hiearchy' do
+      it 'creates no Event::Approval and sends no emails if required layer is not in hierarchy' do
         person.update!(primary_group_id: groups(:bund).id)
         create_application
 
@@ -202,6 +202,7 @@ describe Event::Approver do
   end
 
   describe '#reject' do
+
     it 'updates approval and rejects application' do
       course.update!(requires_approval_abteilung: true)
       application = create_application
@@ -216,6 +217,75 @@ describe Event::Approver do
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
       expect(Event::ParticipationMailer).to have_received(:approval).once
+    end
+
+  end
+
+  describe '#current_approvers' do
+
+    before do
+      @rl = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: groups(:bern)).person
+      @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
+      @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
+
+      course.update!(requires_approval_region: true)
+      create_application
+    end
+
+    it 'contains all roles if none is selected' do
+      expect(approver.current_approvers).to match_array([@rl, @va1, @va2])
+    end
+
+    it 'contains only selected roles' do
+      groups(:bern).update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+      person.reload
+
+      expect(approver.current_approvers).to match_array([@va1, @va2])
+    end
+
+    it 'contains all roles if no person with selected exists' do
+      groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+      @rl.destroy!
+      person.reload
+
+      expect(approver.current_approvers).to match_array([@va1, @va2])
+    end
+
+    context 'with multiple groups' do
+
+      let(:corps) { Fabricate(Group::Region.name.to_sym, parent: groups(:be)) }
+
+      before do
+        groups(:bern).update!(parent: corps)
+
+        @va_corps = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: corps).person
+        @rl_corps = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: corps).person
+      end
+
+      it 'contains roles as selected by each group' do
+        groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
+      end
+
+      it 'does not contain person with different role in actual group' do
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        Fabricate(Group::Region::Kassier.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va1, @va2, @va_corps])
+      end
+
+      it 'does not contain person with approver role in other group' do
+        groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
+      end
     end
 
   end

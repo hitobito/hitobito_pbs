@@ -3,6 +3,7 @@
 ## Version 1.X
 
 *   Neuer Gruppentyp Ausbildungskommission auf Ebene Bund.
+*   Pro Ebene einstellbar, welche Rollen Benachrichtigungen für Kursempfehlungen erhalten.
 
 
 ## Version 1.15

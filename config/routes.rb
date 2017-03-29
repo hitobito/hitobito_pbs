@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -16,7 +16,8 @@ Rails.application.routes.draw do
 
     resources :groups do
       member do
-        get 'pending_approvals' => 'groups#pending_approvals'
+        get 'pending_approvals' => 'group/pending_approvals#index'
+        patch 'pending_approvals_role' => 'group/pending_approvals#update_role'
 
         scope module: 'census_evaluation' do
           get 'census/bund' => 'bund#index'
