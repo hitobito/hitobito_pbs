@@ -18,6 +18,19 @@ describe Person::LoginMailer do
   let(:recipient) { people(:al_schekka) }
   let(:mail) { Person::LoginMailer.login(recipient, sender, 'abcdef') }
 
+
+  before :all do
+    template = CustomContent.find_or_create_by key: described_class::CONTENT_LOGIN
+    template.update!(
+      label: 'Login senden',
+      subject: "Willkommen bei #{Settings.application.name}",
+      body: "{recipient-name-with-salutation}<br/><br/>" \
+        "Willkommen bei #{Settings.application.name}! Unter dem folgenden Link kannst du " \
+        "dein Login Passwort setzen:<br/><br/>{login-url}<br/><br/>" \
+        "Bis bald!<br/><br/>{sender-name}"
+    )
+  end
+
   subject { mail }
 
   its(:to)       { should == [recipient.email] }

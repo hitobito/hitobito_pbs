@@ -45,6 +45,19 @@ describe Event::ParticipationMailer do
     let(:mail) { Event::ParticipationMailer.confirmation(participation) }
 
     context 'body' do
+      before :all do
+        template = CustomContent.find_or_create_by key: described_class::CONTENT_CONFIRMATION
+        template.update!(
+          label: 'Anlass: E-Mail Anmeldebestätigung',
+          subject: 'Bestätigung der Anmeldung',
+          body: "{recipient-name-with-salutation}<br/><br/>" \
+                "Du hast dich für folgenden Anlass angemeldet:<br/><br/>" \
+                "{event-details}<br/><br/>" \
+                "Falls du ein Login hast, kannst du deine Anmeldung unter folgender Adresse einsehen " \
+                "und eine Bestätigung ausdrucken:<br/><br/>{application-url}"
+        )
+      end
+
       subject { mail.parts.first.body }
 
       it 'contains the name with a salutation' do
@@ -63,6 +76,18 @@ describe Event::ParticipationMailer do
 
     context 'body' do
       subject { mail.body }
+      before :all do
+        template = CustomContent.find_or_create_by key: described_class::CONTENT_APPROVAL
+        template.update!(
+          label: 'Anlass: E-Mail Freigabe der Anmeldung',
+          subject: 'Freigabe einer Kursanmeldung',
+          body: "{recipient-names-with-salutation}<br/><br/>" \
+            "{participant-name} hat sich für den folgenden Kurs angemeldet:<br/><br/>" \
+            "{event-details}<br/><br/>" \
+            "Bitte bestätige oder verwerfe diese Anmeldung unter der folgenden Adresse:<br/><br/>" \
+            "{application-url}"
+        )
+      end
 
       it 'contains the names with a salutation' do
         is_expected.to match(/Hallo firsty, Hallo lasty/)
@@ -75,6 +100,17 @@ describe Event::ParticipationMailer do
     let(:mail) { Event::ParticipationMailer.cancel(participation.event, participation.person) }
 
     context 'body' do
+      before :all do
+        template = CustomContent.find_or_create_by key: described_class::CONTENT_CANCEL
+        template.update!(
+          label: 'Anlass: E-Mail Abmeldebestätigung',
+          subject: 'Bestätigung der Abmeldung',
+          body: "{recipient-name-with-salutation}<br/><br/>" \
+            "Du hast dich von folgendem Anlass abgemeldet:<br/><br/>" \
+            "{event-details}<br/><br/>"
+        )
+      end
+
       subject { mail.body }
 
       it 'contains the name with a salutation' do
