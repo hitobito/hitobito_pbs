@@ -27,6 +27,19 @@ describe Event::RegisterMailer do
   let(:mail) { Event::RegisterMailer.register_login(person, group, event, 'abcdef') }
 
   context 'body' do
+
+    before :all do
+      template = CustomContent.find_or_create_by key: described_class::CONTENT_REGISTER_LOGIN
+      template.update!(
+        label: 'Anlass: Temporäres Login senden',
+        subject: 'Anmeldelink für Anlass',
+        body: "{recipient-name-with-salutation}<br/><br/>" \
+          "Hier kannst du dich für den Anlass {event-name} anmelden:<br/><br/>" \
+          "{event-url}<br/><br/>" \
+          "Wir freuen uns, dich wieder mit dabei zu haben."
+      )
+    end
+
     subject { mail.body }
 
     it 'renders placeholders' do
