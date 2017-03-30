@@ -1083,6 +1083,9 @@ de:
       qualification_kind:
         manual: Manuell erfassbar
 
+      label_format:
+        nickname: Pfadiname auf Etikett
+
     errors:
       models:
         role:
