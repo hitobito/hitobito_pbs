@@ -11,9 +11,9 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
   render_views
 
-  let(:group) { groups(:top_layer) }
-  let(:course) { Fabricate(:course, groups: [group]) }
-  let(:person) { people(:top_leader) }
+  let(:group) { groups(:bund) }
+  let(:course) { Fabricate(:course, groups: [group], kind: event_kinds(:lpk)) }
+  let(:person) { people(:bulei) }
   let(:dom) { Capybara::Node::Simple.new(response.body) }
 
   before { sign_in(person) }
@@ -30,7 +30,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
       expect(dom).to have_selector('input#event_participation_contact_data_grade_of_school')
       expect(dom).to have_selector('input#event_participation_contact_data_title')
 
-      expect(dom).to have_no_selector('input#event_participation_contact_data_salutation')
+      expect(dom).to have_no_selector("select#event_participation_contact_data_salutation")
 
     end
 
@@ -39,13 +39,15 @@ describe Event::ParticipationContactDatasController, type: :controller do
       get :edit, group_id: course.groups.first.id, event_id: course.id,
             event_role: { type: 'Event::Course::Role::Participant' }
 
-      contact_attrs = [:salutation, :title, :grade_of_school,
-                       :entry_date, :leaving_date,
-                       :correspondence_language]
+      contact_attrs = [:title, :grade_of_school,
+                       :entry_date, :leaving_date]
 
       contact_attrs.each do |a|
         expect(dom).to have_selector("input#event_participation_contact_data_#{a}")
       end
+
+      expect(dom).to have_selector("select#event_participation_contact_data_salutation")
+      expect(dom).to have_selector("select#event_participation_contact_data_correspondence_language")
 
     end
 
@@ -74,7 +76,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
     it 'updates person attributes and redirects to event questions' do
 
       contact_data_params = { first_name: 'Hans', last_name: 'Gugger',
-                              email: 'dude@example.com', salutation: 'Dr.',
+                              email: 'dude@example.com', salutation: 'lieber_pfadiname',
                               address: 'Street 33' }
 
       post :update, group_id: group.id, event_id: course.id,
@@ -86,7 +88,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
                                                                     event_role: { type: 'Event::Course::Role::Participant' })
 
       person.reload
-      expect(person.salutation).to eq('Dr.')
+      expect(person.salutation).to eq('lieber_pfadiname')
 
     end
   end
