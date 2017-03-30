@@ -14,7 +14,7 @@ module Pbs
 
           included do
             alias_method_chain :initialize, :kv
-            alias_method_chain :person_attributes, :title
+            alias_method_chain :person_attributes, :pbs
           end
 
           def initialize_with_kv(list)
@@ -26,10 +26,10 @@ module Pbs
             end
           end
 
-          def person_attributes_with_title
-            person_attributes_without_title +
+          def person_attributes_with_pbs
+            person_attributes_without_pbs +
             [:title, :salutation, :correspondence_language, :kantonalverband_id,
-              :id, :primary_group_id, :pbs_number]
+             :primary_group_id, :pbs_number, :id]
           end
         end
       end

@@ -12,8 +12,9 @@ describe Export::Csv::People do
 
   let(:person) { people(:bulei) }
   let(:simple_headers) do
-    %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband)
+    %W(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
+       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband
+       #{"ID der Hauptgruppe"} #{"PBS Personennummer"} ID)
   end
 
   describe Export::Csv::People do
@@ -40,6 +41,8 @@ describe Export::Csv::People do
         its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
         its(['PBS Personennummber']) { should be_nil }
         its(['Kantonalverband']) { is_expected.to eq 'CH' }
+        its(['ID']) { is_expected.to eq person.id.to_s }
+        its(['ID der Hauptgruppe']) { should eq person.primary_group_id.to_s }
       end
     end
 
