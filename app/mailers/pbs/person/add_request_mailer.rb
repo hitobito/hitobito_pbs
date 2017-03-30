@@ -11,28 +11,12 @@ module Pbs::Person::AddRequestMailer
 
   private
 
-  define_method "#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON}_values_with_salutation" do
-    send(:"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON}_values_without_salutation").merge({
-      'recipient-name-with-salutation' => person.salutation_value
-    })
+  def placeholder_recipient_name_with_salutation
+    @recipient.salutation_value
   end
 
-  define_method "#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES}_values_with_salutation" do
-    send(:"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES}_values_without_salutation").merge({
-      'recipient-names-with-salutation' => @responsibles.collect(&:salutation_value).join(', ')
-    })
-  end
-
-  define_method "#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED}_values_with_salutation" do
-    send(:"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED}_values_without_salutation").merge({
-      'recipient-name-with-salutation' => @requester.salutation_value
-    })
-  end
-
-  define_method "#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED}_values_with_salutation" do
-    send(:"#{Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED}_values_without_salutation").merge({
-      'recipient-name-with-salutation' => @requester.salutation_value
-    })
+  def placeholder_recipient_names_with_salutation
+    @recipients.map(&:salutation_value).join(', ')
   end
 
 end
