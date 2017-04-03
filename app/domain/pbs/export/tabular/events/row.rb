@@ -5,19 +5,17 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
 
-module Pbs::Export::Csv::Events
-  module BsvList
+module Pbs::Export::Tabular::Events
+  module Row
     extend ActiveSupport::Concern
 
     included do
-      alias_method :to_csv, :to_csv_without_headers
+      dynamic_attributes[/^advisor_/] = :contactable_attribute
     end
 
-    def to_csv_without_headers(generator)
-      list.each do |entry|
-        generator << values(entry)
-      end
+    def advisor
+      # Only Event::Course provides restricted advisor role
+      entry.try(:advisor)
     end
-
   end
 end

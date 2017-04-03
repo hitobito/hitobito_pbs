@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-module Pbs::Export::Csv::Events::List
+module Pbs::Export::Tabular::Events::List
   extend ActiveSupport::Concern
 
   included do

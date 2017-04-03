@@ -7,12 +7,12 @@
 
 require 'spec_helper'
 
-describe Export::Csv::People::ParticipationNdbjsRow do
+describe Export::Tabular::People::ParticipationNdbjsRow do
 
   let(:person) { ndbjs_person }
   let(:participation) { Fabricate(:event_participation, person: person, event: events(:top_course)) }
 
-  let(:row) { Export::Csv::People::ParticipationNdbjsRow.new(participation) }
+  let(:row) { Export::Tabular::People::ParticipationNdbjsRow.new(participation) }
   subject { row }
 
   it { expect(row.fetch(:j_s_number)).to eq '1695579' }
@@ -38,33 +38,35 @@ describe Export::Csv::People::ParticipationNdbjsRow do
   it { expect(row.fetch(:activity)).to eq 1 }
   it { expect(row.fetch(:attachments)).to eq 1 }
 
-end
 
-private
-def ndbjs_person
-  Location.create!(zip_code: 4000, name: 'Basel', canton: 'bs')
-  person = Fabricate(:person,
-                     email: 'foo@example.com',
-                     first_name: 'Peter',
-                     last_name: 'Muster',
-                     birthday: '11.06.1980',
-                     gender: 'm',
-                     j_s_number: '1695579',
-                     ahv_number: '789.80.267.213',
-                     address: 'Hauptstrasse 33',
-                     zip_code: '4000',
-                     town: 'Basel',
-                     country: 'CH',
-                     nationality_j_s: 'FL',
-                     correspondence_language: 'it'
-                    )
-  create_contactables(person)
-  person
-end
+  private
 
-def create_contactables(person)
-  Fabricate(:phone_number, contactable: person, label: 'Privat', number: '11 12 13')
-  Fabricate(:phone_number, contactable: person, label: 'Arbeit', number: '42 42 42')
-  Fabricate(:phone_number, contactable: person, label: 'Mobil', number: '99 99 99')
-  Fabricate(:phone_number, contactable: person, label: 'Fax', number: '33 33 33')
+  def ndbjs_person
+    Location.create!(zip_code: 4000, name: 'Basel', canton: 'bs')
+    person = Fabricate(:person,
+                       email: 'foo@example.com',
+                       first_name: 'Peter',
+                       last_name: 'Muster',
+                       birthday: '11.06.1980',
+                       gender: 'm',
+                       j_s_number: '1695579',
+                       ahv_number: '789.80.267.213',
+                       address: 'Hauptstrasse 33',
+                       zip_code: '4000',
+                       town: 'Basel',
+                       country: 'CH',
+                       nationality_j_s: 'FL',
+                       correspondence_language: 'it'
+                      )
+    create_contactables(person)
+    person
+  end
+
+  def create_contactables(person)
+    Fabricate(:phone_number, contactable: person, label: 'Privat', number: '11 12 13')
+    Fabricate(:phone_number, contactable: person, label: 'Arbeit', number: '42 42 42')
+    Fabricate(:phone_number, contactable: person, label: 'Mobil', number: '99 99 99')
+    Fabricate(:phone_number, contactable: person, label: 'Fax', number: '33 33 33')
+  end
+
 end
