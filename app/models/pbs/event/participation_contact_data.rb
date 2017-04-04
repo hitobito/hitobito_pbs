@@ -9,10 +9,10 @@ module Pbs::Event::ParticipationContactData
   extend ActiveSupport::Concern
 
   included do
-    Event::ParticipationContactData::CONTACT_ATTRS << :title << :salutation <<
+    Event::ParticipationContactData.contact_attrs << :title << :salutation <<
      :correspondence_language << :grade_of_school << :entry_date << :leaving_date
 
-    delegate(*Event::ParticipationContactData::CONTACT_ATTRS, to: :person)
+     delegate(*Event::ParticipationContactData.contact_attrs, to: :person)
   end
 
 end
