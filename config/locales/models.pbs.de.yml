@@ -990,7 +990,7 @@ de:
         comment: Kommentar
         approvee: Teilnehmer
         approver: Bearbeiter
-        approved_at: Datum
+        approved_at: Freigabedatum
 
       event/camp:
         state: Lagerstatus
