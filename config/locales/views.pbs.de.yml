@@ -206,10 +206,16 @@ de:
   group:
     pending_approvals:
       index:
-        info: Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden.
-      approvers:
+        pending_title: Offene Freigaben
+        pending_info: 'Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden:'
+        no_pending_info: Zurzeit sind keine offenen Freigaben vorhanden.
+      notified_role_setting:
         title: Benachrichtigungen an
         all: Alle
+      approved_approvals:
+        title: Bereits getätigte Freigaben
+        course_kind: Kurstyp
+        course_kind_all: Alle
 
   groups:
     tabs:

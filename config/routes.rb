@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :groups do
       member do
         get 'pending_approvals' => 'group/pending_approvals#index'
+        get 'approved_approvals' => 'group/pending_approvals#approved'
         patch 'pending_approvals_role' => 'group/pending_approvals#update_role'
 
         scope module: 'census_evaluation' do

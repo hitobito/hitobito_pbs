@@ -22,4 +22,8 @@ module GroupsPbsHelper
     I18n.t('groups.tabs.approvals', count: entry.pending_approvals_count)
   end
 
+  def format_approved_at(obj)
+    f(obj.approved_at.try(:to_date))
+  end
+
 end
