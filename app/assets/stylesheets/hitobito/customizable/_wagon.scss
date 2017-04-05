@@ -63,3 +63,18 @@ table.attendance {
     padding-bottom: 2px;
   }
 }
+
+.separated {
+  border-top: 1px solid #E8EBF0;
+  margin: 6px 0;
+  padding: 6px 0;
+
+  &:last-child {
+    border-bottom: 1px solid #E8EBF0;
+    padding-bottom: 12px;
+  }
+}
+
+.separated-header {
+  padding: 6px 0;
+}

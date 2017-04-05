@@ -1,0 +1,28 @@
+-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+%p.muted= t('.approval_stored')
+
+- options = {}
+
+-# 'new' approval
+- if %(new create).include?(action_name)
+  - title(t(".title_#{params[:decision]}", participant: @participation.person))
+
+  - options[:url] = group_event_participation_approvals_path(@group, @event, @participation)
+  - options[:cancel_url] = group_event_participation_path(@group, @event, @participation)
+  - options[:submit_label] = t("event.participations.actions_approval.#{params[:decision]}_button")
+  - options[:method] = :post
+
+= entry_form(options) do |f|
+  = hidden_field_tag :decision, params[:decision]
+  = f.labeled_input_field :current_occupation, placeholder: t('.placeholder_current_occupation')
+  = f.labeled_input_field :current_level
+  = f.labeled_input_field :occupation_assessment, label: t('.occupation_assessment')
+  = f.labeled_input_field :strong_points, label: t('.strong_points')
+  = f.labeled_input_field :weak_points, label: t('.weak_points')
+  = f.labeled_input_field :comment, label: t('.comment')
+
+

@@ -16,9 +16,27 @@ describe Event::Participation do
     end
 
     it 'returns people that approved or rejected participation' do
-      participation = Fabricate(:pbs_participation, event: event, application: Event::Application.new(priority_1: event))
-      participation.application.approvals.create!(layer: 'abteilung', approved: true, approver: people(:al_schekka))
-      participation.application.approvals.create!(layer: 'region', rejected: true, approver: people(:bulei))
+      participation = Fabricate(:pbs_participation,
+                                event: event,
+                                application: Event::Application.new(priority_1: event))
+      participation.application.approvals.create!(layer: 'abteilung',
+                                                  approved: true,
+                                                  approver: people(:al_schekka),
+                                                  comment: 'yup',
+                                                  current_occupation: 'chief',
+                                                  current_level: 'junior',
+                                                  occupation_assessment: 'good',
+                                                  strong_points: 'strong',
+                                                  weak_points: 'weak')
+      participation.application.approvals.create!(layer: 'region',
+                                                  rejected: true,
+                                                  approver: people(:bulei),
+                                                  comment: 'yup',
+                                                  current_occupation: 'chief',
+                                                  current_level: 'junior',
+                                                  occupation_assessment: 'good',
+                                                  strong_points: 'strong',
+                                                  weak_points: 'weak')
       participation.application.approvals.create!(layer: 'kantonalverband')
 
       expect(participation.approvers).to have(2).items

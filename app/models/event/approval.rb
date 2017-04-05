@@ -40,6 +40,9 @@ class Event::Approval < ActiveRecord::Base
 
   validates_by_schema
   validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id }
+  validates :current_occupation, :current_level, :occupation_assessment,
+            :strong_points, :weak_points,
+            presence: { if: :approved? }
 
   def roles
     layer_class.roles.select { |role| role.permissions.include?(:approve_applications) }

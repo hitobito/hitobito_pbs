@@ -74,8 +74,21 @@ describe Event::DiscardedCourseParticipationJob do
                         requires_approval_bund: true)
           participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
                                 application: Event::Application.new(priority_1: event))
-          participation.application.approvals.first.update!(approved: true, approver: @region)
-          participation.application.approvals.create!(layer: 'kantonalverband', approved: true, approver: @kanton)
+          participation.application.approvals.first.update!(approved: true,
+                                                            approver: @region,
+                                                            current_occupation: 'chief',
+                                                            current_level: 'junior',
+                                                            occupation_assessment: 'good',
+                                                            strong_points: 'strong',
+                                                            weak_points: 'weak')
+          participation.application.approvals.create!(layer: 'kantonalverband',
+                                                      approved: true,
+                                                      approver: @kanton,
+                                                      current_occupation: 'chief',
+                                                      current_level: 'junior',
+                                                      occupation_assessment: 'good',
+                                                      strong_points: 'strong',
+                                                      weak_points: 'weak')
           participation.application.approvals.create!(layer: 'bund')
         end
 
@@ -121,8 +134,23 @@ describe Event::DiscardedCourseParticipationJob do
                       requires_approval_bund: true)
         participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
                               application: Event::Application.new(priority_1: event))
-        participation.application.approvals.first.update!(approved: true, approver: @region)
-        participation.application.approvals.create!(layer: 'kantonalverband', approved: true, approver: @kanton)
+        participation.application.approvals.first.update!(
+          approved: true,
+          approver: @region,
+          current_occupation: 'chief',
+          current_level: 'junior',
+          occupation_assessment: 'good',
+          strong_points: 'strong',
+          weak_points: 'weak')
+        participation.application.approvals.create!(
+          layer: 'kantonalverband',
+          approved: true,
+          approver: @kanton,
+          current_occupation: 'chief',
+          current_level: 'junior',
+          occupation_assessment: 'good',
+          strong_points: 'strong',
+          weak_points: 'weak')
         participation.application.approvals.create!(layer: 'bund')
       end
 

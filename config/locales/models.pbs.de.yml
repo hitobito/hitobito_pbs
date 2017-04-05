@@ -1005,6 +1005,11 @@ de:
         approvee: Teilnehmer
         approver: Bearbeiter
         approved_at: Freigabedatum
+        current_occupation: Momentane Tätigkeit
+        current_level: Stufe
+        occupation_assessment: Bewertung der Tätigkeit
+        strong_points: Stärken
+        weak_points: Schwächen
 
       event/camp:
         state: Lagerstatus

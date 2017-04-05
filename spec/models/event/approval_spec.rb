@@ -48,7 +48,15 @@ describe Event::Approval do
     person = Fabricate(role.name, group: groups(group_name)).person
     participation = Fabricate(:pbs_participation, event: course, person: person)
     application = participation.create_application!(priority_1: course)
-    application.approvals.create!(attrs.merge(layer: layer))
+
+    application.approvals.create!(attrs.merge(
+      layer: layer,
+      comment: 'yup',
+      current_occupation: 'chief',
+      current_level: 'junior',
+      occupation_assessment: 'good',
+      strong_points: 'strong',
+      weak_points: 'weak'))
   end
 
   it '.pending lists all pending approvals of layer in hiearchy' do

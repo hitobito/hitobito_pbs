@@ -19,6 +19,17 @@ describe Event::Approver do
   let(:approver) { Event::Approver.new(participation) }
   let(:mailer) { spy('mailer') }
   let(:approver_types) { Role.types_with_permission(:approve_applications).collect(&:sti_name) }
+  let(:attrs) do
+    {
+      comment: 'all good',
+      current_occupation: 'chief',
+      current_level: 'junior',
+      occupation_assessment: 'good',
+      strong_points: 'strong',
+      weak_points: 'weak'
+    }
+  end
+
 
   before do
     Delayed::Worker.delay_jobs = false
@@ -159,7 +170,7 @@ describe Event::Approver do
     it 'updates approval and approves application if no upper layers are found' do
       course.update!(requires_approval_abteilung: true)
       application = create_application
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
 
       expect(application.reload).to be_approved
       expect(application.approvals.size).to eq 1
@@ -178,7 +189,7 @@ describe Event::Approver do
 
       course.update!(requires_approval_abteilung: true, requires_approval_bund: true)
       application = create_application
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
 
       expect(application.reload).not_to be_approved
       expect(application.approvals.size).to eq 2
@@ -190,7 +201,7 @@ describe Event::Approver do
       expect(approval_bund).not_to be_approved
 
       approver = Event::Approver.new(participation.reload)
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
       expect(approval_bund.reload).to be_approved
 
       expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation,
@@ -206,13 +217,13 @@ describe Event::Approver do
     it 'updates approval and rejects application' do
       course.update!(requires_approval_abteilung: true)
       application = create_application
-      approver.reject('not so good', people(:bulei))
+      approver.reject(attrs, people(:bulei))
       expect(application.reload).to be_rejected
       expect(application.approvals.size).to eq 1
 
       approval_abteilung = application.approvals.find_by_layer('abteilung')
       expect(approval_abteilung).to be_rejected
-      expect(approval_abteilung.comment).to eq 'not so good'
+      expect(approval_abteilung.comment).to eq 'all good'
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 

@@ -23,22 +23,23 @@ class Event::Approver
     end
   end
 
-  def approve(comment, user)
+  def approve(attrs, user)
     return unless primary_group
 
-    update_approval(true, comment, user)
-
-    next_layer_name = next_approval_layer
-    if next_layer_name
-      request_approval(next_layer_name)
-    else
-      application.update!(approved: true)
+    if update_approval(true, attrs, user)
+      next_layer_name = next_approval_layer
+      if next_layer_name
+        request_approval(next_layer_name)
+      else
+        application.update!(approved: true)
+      end
+      true
     end
   end
 
-  def reject(comment, user)
-    update_approval(false, comment, user)
-    application.update!(rejected: true)
+  def reject(attrs, user)
+    update_approval(false, attrs, user) &&
+      application.update!(rejected: true)
   end
 
   def open_approval
@@ -79,12 +80,11 @@ class Event::Approver
     send_approval_request
   end
 
-  def update_approval(approved, comment, user)
+  def update_approval(approved, attrs, user)
     attr = approved ? :approved : :rejected
-    open_approval.update!(attr => true,
-                          comment: comment,
-                          approver: user,
-                          approved_at: Time.zone.now)
+    open_approval.update({ attr => true,
+                           approver: user,
+                           approved_at: Time.zone.now }.merge(attrs))
   end
 
   def approvers_for_layer(layer_name)

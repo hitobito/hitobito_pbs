@@ -60,17 +60,37 @@ describe Group::PendingApprovalsController do
   context 'approved approvals' do
     before do
       @approved_approval = create_application_and_approval(participation)
-      @approved_approval.update!(approved: true, approved_at: Time.zone.now,
-                                 approver: people(:bulei))
+      @approved_approval.update!(approved: true,
+                                 approved_at: Time.zone.now,
+                                 approver: people(:bulei),
+                                 comment: 'yup',
+                                 current_occupation: 'chief',
+                                 current_level: 'junior',
+                                 occupation_assessment: 'good',
+                                 strong_points: 'strong',
+                                 weak_points: 'weak')
       course2 = Fabricate(:course, groups: course.groups, kind: event_kinds(:bkws))
       other_participation.update!(event_id: course2.id)
       @other_approved_approval = create_application_and_approval(other_participation)
-      @other_approved_approval.update!(approved: true, approved_at: Time.zone.now,
-                                       approver: people(:bulei))
+      @other_approved_approval.update!(approved: true,
+                                       approved_at: Time.zone.now,
+                                       approver: people(:bulei),
+                                       comment: 'yup',
+                                       current_occupation: 'chief',
+                                       current_level: 'junior',
+                                       occupation_assessment: 'good',
+                                       strong_points: 'strong',
+                                       weak_points: 'weak')
 
       p = Fabricate(:event_participation, person: people(:al_schekka))
       @rejected_approval = create_application_and_approval(p)
-      @rejected_approval.update!(rejected: true)
+      @rejected_approval.update!(rejected: true,
+                                 comment: 'yup',
+                                 current_occupation: 'chief',
+                                 current_level: 'junior',
+                                 occupation_assessment: 'good',
+                                 strong_points: 'strong',
+                                 weak_points: 'weak')
     end
 
     it 'lists approved approvals for layer newest at the top' do

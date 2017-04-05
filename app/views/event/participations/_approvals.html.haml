@@ -4,9 +4,20 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
-- if show_application_approval?(entry)
-  = section_table(t('.title'), @approvals) do |a|
-    %td= format_attr(a, :status)
-    %td= format_attr(a, :approver)
-    %td= simple_format(a.comment)
-    %td= f(a.approved_at.try(:to_date))
+- if show_application_approval?(entry) && @approvals.present?
+  = section(t('.title')) do
+    - @approvals.each do |approval|
+      .separated
+        .separated-header
+          = format_attr(approval, :status)
+          - if approval.status
+            = safe_join([format_attr(approval, :approver), ','])
+            = f(approval.approved_at.try(:to_date))
+          - else
+            = format_attr(approval, :approver)
+        - if approval.status
+          - [:current_occupation, :current_level, :occupation_assessment,
+             :strong_points, :weak_points, :comment].each do |attr|
+            %div
+              %strong.muted= safe_join([Event::Approval.human_attribute_name(attr), ':'])
+              = approval.send(attr)

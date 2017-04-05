@@ -28,29 +28,29 @@ describe Event::ApplicationAbility do
 
   context 'approving and rejecting applications' do
 
-    it "may approve and reject in same layer" do
+    it 'may not approve and reject in same layer' do
       create_approver(Group::Bund::Geschaeftsleitung, groups(:bund))
       create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
 
-      is_expected.to be_able_to(:approve, application)
-      is_expected.to be_able_to(:reject, application)
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
     end
 
-    it 'may approve and reject in same layer in hierarchy' do
+    it 'may not approve and reject in same layer in hierarchy' do
       create_approver(Group::Bund::Geschaeftsleitung, groups(:bund))
       create_application(Group::Kantonalverband::Mitarbeiter, groups(:be), 'bund')
 
-      is_expected.to be_able_to(:approve, application)
-      is_expected.to be_able_to(:reject, application)
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
     end
 
-    it 'may approve and reject in same layer in hierarchy if above' do
+    it 'may not approve and reject in same layer in hierarchy if above' do
       nested = Fabricate(Group::Region.name, parent: groups(:bern))
       create_approver(Group::Region::Regionalleitung, groups(:bern))
       create_application(Group::Region::Mitarbeiter, nested, 'region')
 
-      is_expected.to be_able_to(:approve, application)
-      is_expected.to be_able_to(:reject, application)
+      is_expected.not_to be_able_to(:approve, application)
+      is_expected.not_to be_able_to(:reject, application)
     end
 
     it 'may not approve and reject in same layer in hierarchy if below' do
