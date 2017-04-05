@@ -977,6 +977,20 @@ de:
         local_scout_contact: Lokale Pfadi Kontaktinfos
         updated_at: Zuletzt aktualisiert
         any_expected_participant_attr: Erwartete Teilnehmer/-innen
+        abteilungsleitung_id: Abteilungsleitung
+        abteilungsleitung: Abteilungsleitung
+        leader: Lagerleitung
+        leader_id: Lagerleitung
+        coach_confirmed: Coach bestätigt
+        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
+        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
+        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
+        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
+        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
+        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        lagerreglement_applied: Lagerreglement berücksichtigt/eingehalten
+        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
+        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
 
       event/approval:
         comment: Kommentar
@@ -998,31 +1012,21 @@ de:
           assigned: Angemeldet
           canceled: Abgemeldet
           absent: Nicht erschienen
-        abteilungsleitung_id: Abteilungsleitung
-        abteilungsleitung: Abteilungsleitung
         coach_id: Coach
         coach: Coach
-        leader: Lagerleitung
-        leader_id: Lagerleitung
-        coach_confirmed: Coach bestätigt
-        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
-        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
-        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
-        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
-        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
-        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
-        lagerreglement_applied: Lagerreglement berücksichtigt/eingehalten
-        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
-        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
+
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB
         advisor_id: LKB
+        coach_id: LKB/Coach
+        coach: LKB/Coach
 
       event/kind:
         documents_text: Zusatzformulare
+        campy: Kurs als Lager anmelden
 
       event/participation:
         bsv_days: BSV-Tage

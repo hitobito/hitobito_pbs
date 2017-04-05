@@ -105,8 +105,34 @@ describe Export::Csv::Events::List do
 
       subject { csv.second.split(';') }
 
-      its([22]) { is_expected.to eq '' } # advisor name
-      its([23]) { is_expected.to eq '' } # advisor address
+      its([28]) { is_expected.to eq '' } # advisor name
+      its([29]) { is_expected.to eq '' } # advisor address
+    end
+
+    context 'uses coach for campy course' do
+      let(:course) do
+        Fabricate(:course,
+                  groups: [groups(:be)],
+                  kind: event_kinds(:fut),
+                  location: 'somewhere',
+                  state: 'completed',
+                  training_days: 7,
+                  express_fee: 'yada 500',
+                  language_de: true,
+                  language_fr: false,
+                  language_it: true).tap do |course|
+          course.update!(coach_id: people(:bulei).id)
+        end
+      end
+
+      subject { csv.second.split(';') }
+
+      its([28]) { is_expected.to eq 'Dr. Bundes Leiter / Scout' } # advisor name
+      its([29]) { is_expected.to eq '' } # advisor address
+
+      it 'has same headers' do
+        expect(csv.first).to match(/^Name;Organisatoren;Kursnummer;Kursart;.*;LKB Name;.*;Anzahl Abgelehnte$/)
+      end
     end
   end
 

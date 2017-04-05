@@ -39,6 +39,7 @@ module Pbs::Event::Course
     validate :assert_bsv_days_precision
 
     ### CALLBACKS
+    after_initialize :become_campy
     before_save :set_requires_approval
   end
 
@@ -66,6 +67,27 @@ module Pbs::Event::Course
     if bsv_days && bsv_days % 0.5 != 0
       msg = I18n.t('activerecord.errors.messages.must_be_multiple_of', multiple: 0.5)
       errors.add(:bsv_days, msg)
+    end
+  end
+
+  def become_campy
+    if kind && kind.campy?
+      eigenklass = class << self; self; end
+      eigenklass.restricted_roles = self.class.restricted_roles.except(:advisor)
+      eigenklass.role_types -= [Event::Course::Role::Advisor]
+      eigenklass.used_attributes -= [:advisor_id]
+
+      # Wheee, we are just about to extend a SINGLE INSTANCE with the Campy module.
+      # Only do this when no other possibilities exist!
+      extend Event::Campy
+
+      def self.advisor
+        coach
+      end
+
+      def self.advisor_id
+        coach_id
+      end
     end
   end
 

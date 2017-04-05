@@ -17,6 +17,24 @@ module Pbs::EventAbility
   included do
     on(Event) do
       permission(:any).may(:modify_superior).if_education_responsible
+
+      permission(:any).may(:show_camp_application).for_leaded_events
+      permission(:any).may(:create_camp_application).for_coached_events
+      permission(:any).may(:show_details).if_participating_as_leader_role
+
+      permission(:group_full).
+        may(:show_camp_application, :show_details).
+        in_same_group
+      permission(:group_and_below_full).
+        may(:show_camp_application, :show_details).
+        in_same_group_or_below
+      permission(:layer_full).
+        may(:show_camp_application, :show_details).
+        in_same_layer
+      permission(:layer_and_below_full).
+        may(:show_camp_application, :show_details).
+        in_same_layer_or_below
+
       permission(:layer_and_below_full).
         may(:create, :destroy, :application_market, :qualify).
         in_same_layer_or_course_in_below_abteilung
@@ -37,25 +55,12 @@ module Pbs::EventAbility
       class_side(:list_cantonal).if_kantonsleitung_or_krisenverantwortlich
       class_side(:list_abroad).if_international_commissioner
 
-      permission(:any).may(:show_camp_application).for_leaded_events
-      permission(:any).may(:create_camp_application).for_coached_events
-
       permission(:any).may(:index_revoked_participations).for_participations_full_events
 
-      permission(:group_full).
-        may(:index_revoked_participations, :show_camp_application).in_same_group
-      permission(:group_and_below_full).
-        may(:index_revoked_participations, :show_camp_application).in_same_group_or_below
-      permission(:layer_full).
-        may(:index_revoked_participations, :show_camp_application).in_same_layer
-      permission(:layer_and_below_full).
-        may(:index_revoked_participations, :show_camp_application).in_same_layer_or_below
-
-      permission(:group_full).may(:show_details).in_same_group
-      permission(:group_and_below_full).may(:show_details).in_same_group_or_below
-      permission(:layer_full).may(:show_details).in_same_layer
-      permission(:layer_and_below_full).may(:show_details).in_same_layer_or_below
-      permission(:any).may(:show_details).if_participating_as_leader_role
+      permission(:group_full).may(:index_revoked_participations).in_same_group
+      permission(:group_and_below_full).may(:index_revoked_participations,).in_same_group_or_below
+      permission(:layer_full).may(:index_revoked_participations).in_same_layer
+      permission(:layer_and_below_full).may(:index_revoked_participations).in_same_layer_or_below
     end
 
     alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
