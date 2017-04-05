@@ -16,6 +16,10 @@ describe Export::Csv::People do
        Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband)
   end
 
+  before do
+    person.send(:set_pbs_number!)
+  end
+
   describe Export::Csv::People do
 
     let(:list) { Person.where(id: person) }
