@@ -7,7 +7,7 @@
 - approved ||= false
 
 - if approvals.present? && approvals.length > 0
-  = table(approvals, class: 'table table-striped') do |t|
+  = table(approvals, class: 'table table-striped table-fixed') do |t|
     - t.col(Event::Person.model_name.human) { |a| link_to(a.approvee, [a.event.groups.first, a.event, a.participation]) }
     - t.col(Event::Course.model_name.human) { |a| link_to(a.event, [a.event.groups.first, a.event]) }
     - t.col(Event.human_attribute_name(:number)) { |a| a.event.number }
