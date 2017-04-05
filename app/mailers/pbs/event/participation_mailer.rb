@@ -12,6 +12,8 @@ module Pbs::Event::ParticipationMailer
 
   CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'.freeze
 
+  CONTENT_REJECTED_PARTICIPATION = 'event_participation_rejected'.freeze
+
   CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST =
     'event_participation_assigned_from_waiting_list'.freeze
 
@@ -35,6 +37,15 @@ module Pbs::Event::ParticipationMailer
     compose(recipients,
             CONTENT_CANCELED_PARTICIPATION,
             'canceled-at' => I18n.l(participation.canceled_at),
+            'event-name' => event.to_s,
+            'participant-name' => person.to_s)
+  end
+
+  def rejected(participation, recipients)
+    @participation = participation
+
+    compose(recipients,
+            CONTENT_REJECTED_PARTICIPATION,
             'event-name' => event.to_s,
             'participant-name' => person.to_s)
   end
