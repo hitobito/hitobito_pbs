@@ -5,10 +5,14 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddEventsBsvDays < ActiveRecord::Migration
+class AddPersonPbsNumber < ActiveRecord::Migration
   def change
-    add_column :events, :bsv_days, :decimal, scale: 2, precision: 6
+    add_column :people, :pbs_number, :string
 
-    add_column :event_participations, :bsv_days, :decimal, scale: 2, precision: 6
+    Person.reset_column_information
+
+    Person.find_each do |p|
+      p.send(:set_pbs_number!)
+    end
   end
 end

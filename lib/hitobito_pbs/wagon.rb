@@ -82,6 +82,7 @@ module HitobitoPbs
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       QualificationsController.send :include, Pbs::QualificationsController
+      Person::QueryController.search_columns << :pbs_number
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group

@@ -99,19 +99,15 @@ describe Person do
 
   context '#pbs_number' do
     it 'handles short numbers' do
-      person.id = 15
+      person = Fabricate(:person, id: 15)
       expect(person.pbs_number).to eq('000-000-015')
     end
 
     it 'handles long numbers' do
-      person.id = 123_456_789
+      person = Fabricate(:person, id: 123_456_789)
       expect(person.pbs_number).to eq('123-456-789')
     end
 
-    it 'handles very long numbers' do
-      person.id = 1_234_567_891_234
-      expect(person.pbs_number).to eq('1-234-567-891-234')
-    end
   end
 
   context '#kantonalverband' do
