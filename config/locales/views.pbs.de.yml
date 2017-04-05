@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -118,6 +118,16 @@ de:
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
+
+    approval:
+      form:
+        approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
+        current_occupation: Momentane Tätigkeit des Teilnehmers/der Teilnehmerin
+        current_level: Stufe
+        occupation_assessment: Wie bewährt er/sie sich dabei? z.B. Einsatz, Qualität des/der TN
+        strong_points: Wo liegen seine/ihre Stärken?
+        weak_points: Wo sollte man ihn/sie fördern?
+        comment: Wünsche, Anregungen oder Bemerkungen an die Kursleitung
 
 
   event/attendances:
