@@ -41,6 +41,30 @@ describe Event::ParticipationMailer do
     end
   end
 
+  context 'rejected' do
+    let(:recipients) { [people(:bulei)] }
+    let(:mail) { Event::ParticipationMailer.rejected(participation, recipients) }
+
+    before do
+      participation.update!(state: 'rejected')
+    end
+
+    context 'headers' do
+      subject { mail }
+      its(:subject) { should eq 'Kursablehnung' }
+      its(:to)      { should eq ['bulei@hitobito.example.com'] }
+      its(:from)    { should eq ['noreply@localhost'] }
+    end
+
+    context 'body' do
+      subject { mail.body }
+
+      it 'renders placeholders' do
+        is_expected.to match(/AL Schekka \/ Torben wurde für den Kurs Top Course abgelehnt./)
+      end
+    end
+  end
+
   context 'confirmation' do
     let(:mail) { Event::ParticipationMailer.confirmation(participation) }
 
