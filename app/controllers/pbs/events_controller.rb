@@ -50,7 +50,7 @@ module Pbs::EventsController
   end
 
   def permitted_attrs_with_superior_and_coach_check
-    attrs = entry.class.used_attributes.dup
+    attrs = entry.used_attributes.dup
     attrs += self.class.permitted_attrs
 
     attrs = check_superior_attrs(attrs)
@@ -61,13 +61,13 @@ module Pbs::EventsController
 
   def check_superior_attrs(attrs)
     if entry.superior_attributes.present? && !can?(:modify_superior, entry)
-      attrs -= entry.class.superior_attributes
+      attrs -= entry.superior_attributes
     end
     attrs
   end
 
   def check_coach_attrs(attrs)
-    if entry.is_a?(Event::Camp) && entry.coach != current_user
+    if entry.is_a?(Event::Campy) && entry.coach != current_user
       attrs.delete(:coach_confirmed)
     end
     attrs
@@ -78,7 +78,7 @@ module Pbs::EventsController
   end
 
   def check_checkpoint_attrs
-    if entry.is_a?(Event::Camp) && entry.leader != current_user
+    if entry.is_a?(Event::Campy) && entry.leader != current_user
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
         model_params.delete(attr.to_s)
       end

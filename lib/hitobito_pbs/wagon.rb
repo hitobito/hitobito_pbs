@@ -70,7 +70,7 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      Event::KindsController.permitted_attrs += [:documents_text]
+      Event::KindsController.permitted_attrs += [:documents_text, :campy]
       QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController

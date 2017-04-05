@@ -42,7 +42,7 @@ class Salutation
   end
 
   def salutation
-    if @person.salutation
+    if @person.salutation?
       "available.#{@person.salutation}"
     else
       "default"

@@ -37,14 +37,13 @@ describe EventAbility do
           event = Fabricate(:event, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
-          is_expected.not_to be_able_to(:show_camp_application, event)
         end
 
         it "is allowed to create/update course" do
           event = Fabricate(:pbs_course, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
-          is_expected.not_to be_able_to(:show_camp_application, event)
+          is_expected.to be_able_to(:show_camp_application, event)
         end
 
         it "is allowed to create/update camp" do
