@@ -11,8 +11,12 @@ class AddPersonPbsNumber < ActiveRecord::Migration
 
     Person.reset_column_information
 
-    Person.find_each do |p|
-      p.send(:set_pbs_number!)
+    if Person.connection.adapter_name.downcase =~ /mysql/
+      Person.update_all("pbs_number = INSERT(INSERT(LPAD(id, 9, 0), 7, 0, '-'), 4, 0, '-')")
+    else
+      Person.find_each do |p|
+        p.send(:set_pbs_number!)
+      end
     end
   end
 end
