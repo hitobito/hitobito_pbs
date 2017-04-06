@@ -6,6 +6,8 @@
 *   Pro Ebene einstellbar, welche Rollen Benachrichtigungen für Kursempfehlungen erhalten.
 *   Erfassungsmöglichkeit der BSV Anwesenheitstage für Kurse.
 *   Neuer Platzhalter für Mail-Texte um die gewählte Anrede zu verwenden.
+*   Bei Kursarten definierbar, ob ein Kurs ebenfalls als Lager angemeldet werden soll.
+*   Suche nach PBS Personennummer möglich.
 
 ## Version 1.11
 

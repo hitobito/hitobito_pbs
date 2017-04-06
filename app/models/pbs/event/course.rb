@@ -72,10 +72,9 @@ module Pbs::Event::Course
 
   def become_campy
     if kind && kind.campy?
-      eigenklass = class << self; self; end
-      eigenklass.restricted_roles = self.class.restricted_roles.except(:advisor)
-      eigenklass.role_types -= [Event::Course::Role::Advisor]
-      eigenklass.used_attributes -= [:advisor_id]
+      singleton_class.restricted_roles = self.class.restricted_roles.except(:advisor)
+      singleton_class.role_types -= [Event::Course::Role::Advisor]
+      singleton_class.used_attributes -= [:advisor_id]
 
       # Wheee, we are just about to extend a SINGLE INSTANCE with the Campy module.
       # Only do this when no other possibilities exist!

@@ -90,7 +90,9 @@ module Export::Pdf
     def camp_assistant_leaders
       camp.participations_for(Event::Camp::Role::AssistantLeader,
                               Event::Course::Role::Leader,
-                              Event::Course::Role::ClassLeader).
+                              Event::Course::Role::ClassLeader,
+                              Event::Role::Speaker,
+                              Event::Course::Role::Helper).
         collect(&:person) - [camp_leader]
     end
 
