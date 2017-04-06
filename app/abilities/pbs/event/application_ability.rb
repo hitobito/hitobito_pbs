@@ -22,6 +22,10 @@ module Pbs::Event::ApplicationAbility
         may(:show_approval).
         for_participations_full_events
 
+      permission(:any).
+        may(:show_approval).
+        for_advised_courses
+
       permission(:layer_and_below_full).
         may(:show_approval).
         in_same_layer_or_below_or_different_prio
@@ -51,6 +55,10 @@ module Pbs::Event::ApplicationAbility
 
   def layer_ids
     primary_group.layer_hierarchy.collect(&:id)
+  end
+
+  def for_advised_courses
+    participation.event.advisor_id == user.id
   end
 
 end

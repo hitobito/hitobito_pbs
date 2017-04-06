@@ -47,6 +47,8 @@ module Pbs::EventAbility
 
       permission(:layer_and_below_full).may(:manage_attendances).in_same_layer
 
+      permission(:any).may(:update, :qualifications_read).for_advised_courses
+
       general(:manage_attendances).at_least_one_group_not_deleted
     end
 
@@ -64,6 +66,10 @@ module Pbs::EventAbility
     end
 
     alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
+  end
+
+  def for_advised_courses
+    event.advisor_id == user.id
   end
 
   def if_education_responsible

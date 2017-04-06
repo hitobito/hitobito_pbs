@@ -172,6 +172,19 @@ describe EventAbility do
         end
       end
 
+      context 'as course\'s advisor' do
+
+        it "is allowed to update course" do
+          event = Fabricate(:pbs_course, groups: [group])
+          child = people(:child)
+          event.update!(advisor_id: child.id)
+          ability = Ability.new(child)
+
+          expect(ability).not_to be_able_to(:create, event)
+          expect(ability).to be_able_to(:update, event)
+        end
+      end
+
     end
   end
 
