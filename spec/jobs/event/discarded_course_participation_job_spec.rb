@@ -10,9 +10,9 @@ require 'spec_helper'
 describe Event::DiscardedCourseParticipationJob do
 
   let(:event) { participation.event }
-  let(:job) { Event::DiscardedCourseParticipationJob.new(participation) }
+  let(:previous_state) { 'assigned' }
+  let(:job) { Event::DiscardedCourseParticipationJob.new(participation, previous_state) }
   let(:participation) { event_participations(:top_participant) }
-  let(:recipients) { job.send(:recipients) }
 
   before do
     msg = double('Message', deliver_now: true)
@@ -39,6 +39,7 @@ describe Event::DiscardedCourseParticipationJob do
     end
 
     describe '#perform' do
+
       it 'contains abteilungsleitung and kursleitung' do
         expect(Event::ParticipationMailer).to receive(:canceled)
           .with(participation, match_array(people(:al_schekka, :bulei)))
@@ -83,7 +84,22 @@ describe Event::DiscardedCourseParticipationJob do
             .with(participation, match_array([people(:bulei), @kanton, @region]))
           job.perform
         end
+
+        context 'previously applied' do
+          let(:previous_state) { 'applied' }
+
+          before do
+            @organizer = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
+          end
+
+          it 'does not send mails to kursleitung' do
+            expect(Event::ParticipationMailer).to receive(:canceled)
+              .with(participation, match_array([@kanton, @region, @organizer]))
+            job.perform
+          end
+        end
       end
+
     end
 
   end
@@ -115,6 +131,7 @@ describe Event::DiscardedCourseParticipationJob do
           .with(participation, match_array([@kanton, @region]))
         job.perform
       end
+
     end
 
   end
