@@ -25,54 +25,50 @@ module Pbs::Event::ParticipationMailer
 
     filename = Export::Pdf::Participation.filename(participation)
     attachments[filename] = Export::Pdf::Participation.render(participation)
-    compose(person,
-            CONTENT_CONFIRMATION_OTHER,
-            'recipient-name' => person.greeting_name,
-            'recipient-name-with-salutation' => person.salutation_value)
+    compose(person, CONTENT_CONFIRMATION_OTHER)
   end
 
   def canceled(participation, recipients)
     @participation = participation
 
-    compose(recipients,
-            CONTENT_CANCELED_PARTICIPATION,
-            'canceled-at' => I18n.l(participation.canceled_at),
-            'event-name' => event.to_s,
-            'participant-name' => person.to_s)
+    compose(recipients, CONTENT_CANCELED_PARTICIPATION)
   end
 
   def rejected(participation, recipients)
     @participation = participation
 
-    compose(recipients,
-            CONTENT_REJECTED_PARTICIPATION,
-            'event-name' => event.to_s,
-            'participant-name' => person.to_s)
+    compose(recipients, CONTENT_REJECTED_PARTICIPATION)
   end
 
   def removed_from_waiting_list(participation, setter, current_user)
     @participation = participation
+    @setter = setter
+    @current_user = current_user
 
-    compose(setter,
-            CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST,
-            'waiting-list-setter' => setter.greeting_name,
-            'event-name' => event.to_s,
-            'leader-name' => current_user.to_s,
-            'participant-name' => person.to_s)
+    compose(setter, CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST)
   end
 
   def assigned_from_waiting_list(participation, setter, current_user)
     @participation = participation
+    @setter = setter
+    @current_user = current_user
 
-    compose(setter,
-            CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST,
-            'waiting-list-setter' => setter.greeting_name,
-            'event-name' => event.to_s,
-            'leader-name' => current_user.to_s,
-            'participant-name' => person.to_s)
+    compose(setter, CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST)
   end
 
   private
+
+  def placeholder_canceled_at
+    I18n.l(participation.canceled_at)
+  end
+
+  def placeholder_event_name
+    event.to_s
+  end
+
+  def placeholder_leader_name
+    @current_user.to_s
+  end
 
   def placeholder_recipient_name_with_salutation
     person.salutation_value
@@ -80,6 +76,10 @@ module Pbs::Event::ParticipationMailer
 
   def placeholder_recipient_names_with_salutation
     @recipients.map(&:salutation_value).join(', ')
+  end
+
+  def placeholder_waiting_list_setter
+    @setter.greeting_name
   end
 
 end

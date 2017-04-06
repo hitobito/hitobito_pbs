@@ -10,21 +10,32 @@ class GroupMembershipMailer < ApplicationMailer
   CONTENT_GROUP_MEMBERSHIP = 'group_membership'.freeze
 
   def added_to_group(recipient, actuator, group)
-    values = {
-      'recipient-name'                 => recipient.greeting_name,
-      'recipient-name-with-salutation' => recipient.salutation_value,
-      'actuator-name'                  => actuator.to_s,
-      'group-link'                     => group_link_with_layer(group)
-    }
+    @recipient = recipient
+    @actuator = actuator
+    @group = group
 
     # This email is only sent to the main email address.
-    custom_content_mail(recipient.email, CONTENT_GROUP_MEMBERSHIP, values)
+    custom_content_mail(recipient.email,
+                        CONTENT_GROUP_MEMBERSHIP,
+                        values_for_placeholders(CONTENT_GROUP_MEMBERSHIP))
   end
 
   private
 
-  def group_link_with_layer(group)
-    group_links = group.with_layer.map do |g|
+  def placeholder_recipient_name
+    @recipient.greeting_name
+  end
+
+  def placeholder_recipient_name_with_salutation
+    @recipient.salutation_value
+  end
+
+  def placeholder_actuator_name
+    @actuator.to_s
+  end
+
+  def placeholder_group_link
+    group_links = @group.with_layer.map do |g|
       link_to(g, group_url(g))
     end
     group_links.join(' / ')

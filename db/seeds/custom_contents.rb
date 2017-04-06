@@ -24,11 +24,11 @@ CustomContent.seed_once(:key,
 
   { key: Event::ParticipationMailer::CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST,
     placeholders_required: 'participant-name',
-    placeholders_optional: 'event-name, canceled-at, application-url, event-details, waiting-list-setter, leader-name' },
+    placeholders_optional: 'event-name, application-url, event-details, waiting-list-setter, leader-name' },
 
   { key: Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST,
     placeholders_required: 'participant-name',
-    placeholders_optional: 'event-name, canceled-at, application-url, event-details, waiting-list-setter, leader-name' },
+    placeholders_optional: 'event-name, application-url, event-details, waiting-list-setter, leader-name' },
 
   { key: Event::CampMailer::CONTENT_CAMP_CREATED,
     placeholders_required: 'actuator-name, camp-url',
