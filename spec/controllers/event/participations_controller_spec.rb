@@ -59,7 +59,7 @@ describe Event::ParticipationsController do
 
   context 'POST cancel' do
 
-    let(:participation) { Fabricate(:pbs_participation, event: course) }
+    let(:participation) { Fabricate(:pbs_participation, event: course, state: 'assigned') }
 
     it 'cancels participation' do
       expect do
@@ -74,6 +74,7 @@ describe Event::ParticipationsController do
       expect(participation.canceled_at).to eq Date.today
       expect(participation.state).to eq 'canceled'
       expect(participation.active).to eq false
+      expect(assigns(:previous_state)).to eq('assigned')
     end
 
   end
@@ -81,7 +82,7 @@ describe Event::ParticipationsController do
   context 'POST reject' do
     render_views
 
-    let(:participation) { Fabricate(:pbs_participation, event: course) }
+    let(:participation) { Fabricate(:pbs_participation, event: course, state: 'assigned') }
     let(:dom) { Capybara::Node::Simple.new(response.body) }
 
     it 'rejects participation with mailto link if email present' do
@@ -94,9 +95,10 @@ describe Event::ParticipationsController do
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
-      expect(flash[:notice]).to include "Teilnehmer informieren"
+      expect(assigns(:previous_state)).to eq('assigned')
+      expect(flash[:notice]).to include 'Teilnehmer informieren'
       expect(flash[:notice]).to include "mailto:#{participation.person.email}"
-      expect(flash[:notice]).to include "cc=bulei%40hitobito.example.com"
+      expect(flash[:notice]).to include 'cc=bulei%40hitobito.example.com'
     end
 
     it 'rejects participation without mailto link if email missing' do
@@ -106,7 +108,7 @@ describe Event::ParticipationsController do
            event_id: course.id,
            id: participation.id
       expect(flash[:notice]).to be_present
-      expect(flash[:notice]).not_to include "Teilnehmer informieren"
+      expect(flash[:notice]).not_to include 'Teilnehmer informieren'
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false

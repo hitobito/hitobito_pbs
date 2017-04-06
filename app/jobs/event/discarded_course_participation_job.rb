@@ -18,11 +18,12 @@ class Event::DiscardedCourseParticipationJob < BaseJob
   ABTEILUNGSLEITUNGS_ROLES = [Group::Abteilung::Abteilungsleitung,
                               Group::Abteilung::AbteilungsleitungStv].freeze
 
-  self.parameters = [:participation_id, :locale]
+  self.parameters = [:participation_id, :previous_state, :locale]
 
-  def initialize(participation)
+  def initialize(participation, previous_state)
     super()
     @participation_id = participation.id
+    @previous_state = previous_state
   end
 
   def perform
@@ -43,7 +44,10 @@ class Event::DiscardedCourseParticipationJob < BaseJob
 
   def recipients
     result = application_approvers
-    result += abteilungsleiter + kurs_leiter + kurs_organisatoren if canceled?
+    if canceled?
+      result += abteilungsleiter + kurs_organisatoren
+      result += kurs_leiter unless previously_applied?
+    end
     result.uniq
   end
 
@@ -91,6 +95,10 @@ class Event::DiscardedCourseParticipationJob < BaseJob
 
   def rejected?
     participation.state == 'rejected'
+  end
+
+  def previously_applied?
+    @previous_state == 'applied'
   end
 
 end
