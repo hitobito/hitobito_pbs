@@ -39,6 +39,10 @@ module Event::Campy
     self.used_attributes += EXPECTED_PARTICIPANT_ATTRS
     self.used_attributes += LEADER_CHECKPOINT_ATTRS
 
+    self.role_types += [Event::Camp::Role::LeaderMountainSecurity,
+                        Event::Camp::Role::LeaderSnowSecurity,
+                        Event::Camp::Role::LeaderWaterSecurity]
+
     restricted_role :leader, Event::Camp::Role::Leader
     restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
     restricted_role :coach, Event::Camp::Role::Coach

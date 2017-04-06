@@ -34,7 +34,7 @@ class Event::AttendancesController < ApplicationController
   private
 
   def load_entries
-    types = event.class.role_types
+    types = event.role_types
     @leaders = participations(*types.select(&:leader?), Event::Role::Speaker)
     @participants = participations(Event::Course::Role::Participant)
     @cooks = participations(Event::Role::Cook)

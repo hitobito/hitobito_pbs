@@ -12,6 +12,8 @@
 
 *   Statistik und Bestandesmeldung mit Total pro Geschlecht
 *   Rolle Materialwart und Heimverwaltung aktiviert
+*   Bei Kursarten definierbar, ob ein Kurs ebenfalls als Lager angemeldet werden soll.
+*   Suche nach PBS Personennummer möglich.
 
 ## Version 1.11
 

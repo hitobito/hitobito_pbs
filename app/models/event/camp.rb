@@ -99,9 +99,6 @@ class Event::Camp < Event
 
   self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
-                     Event::Camp::Role::LeaderMountainSecurity,
-                     Event::Camp::Role::LeaderSnowSecurity,
-                     Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
 
   # include only after main role types are defined

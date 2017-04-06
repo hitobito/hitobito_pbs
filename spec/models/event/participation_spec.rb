@@ -32,7 +32,7 @@ describe Event::Participation do
 
     def create_participant(state)
       participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Date.today)
-      participation.roles.create!(type: event.class.participant_types.first.name)
+      participation.roles.create!(type: event.participant_types.first.name)
     end
 
     context 'simple' do
