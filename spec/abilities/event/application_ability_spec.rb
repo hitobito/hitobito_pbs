@@ -192,6 +192,29 @@ describe Event::ApplicationAbility do
         is_expected.to be_able_to(:show_approval, application)
       end
     end
+
+    context 'course\'s advisor' do
+
+      let(:person) { people(:child) }
+
+      it 'can view approval' do
+        course.update!(advisor_id: person.id)
+        ability = Ability.new(person)
+
+        create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
+
+        expect(ability).to be_able_to(:show_approval, @application)
+      end
+
+      it 'can not view approval if not advisor' do
+        ability = Ability.new(person)
+
+        create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
+
+        expect(ability).not_to be_able_to(:show_approval, @application)
+      end
+    end
+
   end
 
 end
