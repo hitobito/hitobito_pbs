@@ -878,16 +878,16 @@ de:
         other: Betreuung Sicherheitsaktivität Wasser
 
       event/course/role/leader:
-        one: Kursleitung
-        other: Kursleitungen
+        one: Kursleiter/-in
+        other: Kursleiter/-innen
 
       event/course/role/class_leader:
-        one: Klassenlehrer
-        other: Klassenlehrer
+        one: Klassenlehrer/-in
+        other: Klassenlehrer/-innen
 
       event/course/role/helper:
-        one: Kurshelfer
-        other: Kurshelfer
+        one: Kurshelfer/-in
+        other: Kurshelfer/-innen
 
       event/course/role/advisor:
         one: LKB
