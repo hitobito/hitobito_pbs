@@ -1,3 +1,10 @@
+# encoding: utf-8
+
+#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 module Event::Campy
 
   extend ActiveSupport::Concern
@@ -87,6 +94,18 @@ module Event::Campy
   def camp_days
     dates.to_a.sum do |d|
       event_date_day_count(d)
+    end
+  end
+
+  def duplicate
+    super.tap do |event|
+      event.al_visiting = false
+      event.al_visiting_date = nil
+      event.coach_visiting = false
+      event.coach_visiting_date = nil
+      event.coach_confirmed = false
+      event.camp_submitted = false
+      event.camp_reminder_sent = false
     end
   end
 

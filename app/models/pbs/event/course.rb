@@ -79,14 +79,17 @@ module Pbs::Event::Course
       # Wheee, we are just about to extend a SINGLE INSTANCE with the Campy module.
       # Only do this when no other possibilities exist!
       extend Event::Campy
+      extend Campy
+    end
+  end
 
-      def self.advisor
-        coach
-      end
+  module Campy
+    def advisor
+      coach
+    end
 
-      def self.advisor_id
-        coach_id
-      end
+    def advisor_id
+      coach_id
     end
   end
 
