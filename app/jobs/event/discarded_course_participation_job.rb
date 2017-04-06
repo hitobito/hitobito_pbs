@@ -26,7 +26,7 @@ class Event::DiscardedCourseParticipationJob < BaseJob
   end
 
   def perform
-    return if participation.nil? || !canceled? && !rejected? # may have been deleted again
+    return if participation.nil? || (!canceled? && !rejected?) # may have been deleted again
 
     set_locale
     send_notification
@@ -42,10 +42,9 @@ class Event::DiscardedCourseParticipationJob < BaseJob
   end
 
   def recipients
-    result = []
-    result += [abteilungsleiter, kurs_leiter, kurs_organisatoren] if canceled?
-    result << application_approvers
-    result.reduce(&:+).uniq
+    result = application_approvers
+    result += abteilungsleiter + kurs_leiter + kurs_organisatoren if canceled?
+    result.uniq
   end
 
   def abteilungsleiter
@@ -74,8 +73,7 @@ class Event::DiscardedCourseParticipationJob < BaseJob
   def application_approvers
     Person
       .joins('INNER JOIN event_approvals appr ON appr.approver_id = people.id')
-      .joins('INNER JOIN event_applications app ON app.id = appr.application_id')
-      .joins('INNER JOIN event_participations p ON p.application_id = app.id')
+      .joins('INNER JOIN event_participations p ON p.application_id = appr.application_id')
       .where('p.id = ? AND appr.approved = ?', participation.id, true)
   end
 
