@@ -22,7 +22,7 @@
 class Event::Approval < ActiveRecord::Base
 
   # ordering matters
-  LAYERS = %w(abteilung region kantonalverband bund)
+  LAYERS = %w(abteilung region kantonalverband bund).freeze
 
   self.demodulized_route_keys = true
 
@@ -59,8 +59,8 @@ class Event::Approval < ActiveRecord::Base
     # List all pending approvals for a given layer group.
     def pending(layer)
       joins(approvee: :primary_group).
-      where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
-      where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
+        where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
+        where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
     end
 
     # List all complted approvals for a given course.

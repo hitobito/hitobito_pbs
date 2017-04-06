@@ -85,10 +85,12 @@ describe Event::ParticipationsController do
     let(:dom) { Capybara::Node::Simple.new(response.body) }
 
     it 'rejects participation with mailto link if email present' do
-      post :reject,
-        group_id: group.id,
-        event_id: course.id,
-        id: participation.id
+      expect do
+        post :reject,
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id
+      end.to change { Delayed::Job.count }.by(1)
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
@@ -100,9 +102,9 @@ describe Event::ParticipationsController do
     it 'rejects participation without mailto link if email missing' do
       participation.person.update(email: nil)
       post :reject,
-        group_id: group.id,
-        event_id: course.id,
-        id: participation.id
+           group_id: group.id,
+           event_id: course.id,
+           id: participation.id
       expect(flash[:notice]).to be_present
       expect(flash[:notice]).not_to include "Teilnehmer informieren"
       participation.reload

@@ -114,7 +114,7 @@ de:
       popover_approval:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator (Rolle), Kursleiter (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
       popover_cancel:
-        cancel_info: Die Kursleitung, der Kursorganisator und die Abteilungsleiter werden über die Abmeldung informiert.
+        cancel_info: Die Kursleitung, der Kursorganisator die Abteilungsleiter und die Empfehlungsinstanzen werden über die Abmeldung informiert.
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
