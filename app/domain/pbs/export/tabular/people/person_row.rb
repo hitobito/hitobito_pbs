@@ -7,18 +7,19 @@
 
 module Pbs
   module Export
-    module Csv
+    module Tabular
       module People
-        module PeopleFull
+        module PersonRow
           extend ActiveSupport::Concern
 
-          included do
-            alias_method_chain :person_attributes, :pbs
+          def salutation
+            entry.salutation_value
           end
 
-          def person_attributes_with_pbs
-            person_attributes_without_pbs + [:id, :primary_group_id, :pbs_number] 
+          def kantonalverband_id
+            entry.kantonalverband.try(:pbs_shortname)
           end
+
         end
       end
     end

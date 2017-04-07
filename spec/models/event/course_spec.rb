@@ -68,7 +68,7 @@ describe Event::Course do
       end
     end
 
-    context 'with opening ndate today' do
+    context 'with opening date today' do
       before { subject.application_opening_at = Date.today }
       it { is_expected.to be_application_possible }
     end
@@ -81,6 +81,11 @@ describe Event::Course do
     context 'with closing date in the past' do
       before { subject.application_closing_at = Date.today - 1 }
       it { is_expected.not_to be_application_possible }
+    end
+
+    context 'with closing date today' do
+      before { subject.application_closing_at = Date.today }
+      it { is_expected.to be_application_possible }
     end
 
     context 'in other state' do

@@ -44,7 +44,7 @@ module Pbs::Event::Course
   def application_possible?
     application_open? &&
     (!application_opening_at || application_opening_at <= ::Time.zone.today) &&
-    (!application_closing_at || application_closing_at > ::Time.zone.today)
+    (!application_closing_at || application_closing_at >= ::Time.zone.today)
   end
 
   private

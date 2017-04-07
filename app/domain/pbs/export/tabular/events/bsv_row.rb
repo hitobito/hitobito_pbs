@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
 
-module Pbs::Export::Csv::Events
+module Pbs::Export::Tabular::Events
   module BsvRow
     extend ActiveSupport::Concern
 
