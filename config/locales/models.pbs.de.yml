@@ -610,6 +610,14 @@ de:
         one: Beisitzer
         other: Beisitzer
         description:
+      group/abteilung/materialwart:
+        one: Materialwart
+        other: Materialwarte
+        description:
+      group/abteilung/heimverwaltung:
+        one: Heimverwalter
+        other: Heimverwalter
+        description:
       group/abteilung/stufenleitung_biber:
         one: Stufenleiter Biber
         other: Stufenleiter Biber

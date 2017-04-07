@@ -209,6 +209,8 @@ class Group::Abteilung < Group
         PraesidiumApv,
         Praeses,
         Beisitz,
+        Materialwart,
+        Heimverwaltung,
 
         StufenleitungBiber,
         StufenleitungWoelfe,
