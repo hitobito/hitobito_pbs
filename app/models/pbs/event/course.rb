@@ -71,7 +71,7 @@ module Pbs::Event::Course
   end
 
   def become_campy
-    if kind && kind.campy?
+    if campy?
       singleton_class.restricted_roles = self.class.restricted_roles.except(:advisor)
       singleton_class.role_types -= [Event::Course::Role::Advisor]
       singleton_class.used_attributes -= [:advisor_id]
@@ -80,6 +80,15 @@ module Pbs::Event::Course
       # Only do this when no other possibilities exist!
       extend Event::Campy
       extend Campy
+    end
+  end
+
+  def campy?
+    if association(:kind).loaded?
+      kind && kind.campy?
+    else
+      # use custom query to not interfere with eager loading kinds.
+      Event::Kind.where(id: kind_id, campy: true).exists?
     end
   end
 
