@@ -35,3 +35,9 @@ install:
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
   - bundle exec rake db:create ci:wagon --trace
+matrix:
+  allow_failures:
+  - rvm: 2.0.0
+  - rvm: 2.1.7
+  - rvm: 2.3.1
+  - rvm: 2.4.0
