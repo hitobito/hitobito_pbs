@@ -42,12 +42,11 @@ module Pbs::EventAbility
 
     on(Event::Course) do
       permission(:any).may(:manage_attendances).for_leaded_events
+      permission(:any).may(:update, :qualifications_read).for_advised_courses
 
       permission(:layer_full).may(:manage_attendances).in_same_layer
 
       permission(:layer_and_below_full).may(:manage_attendances).in_same_layer
-
-      permission(:any).may(:update, :qualifications_read).for_advised_courses
 
       general(:manage_attendances).at_least_one_group_not_deleted
     end
