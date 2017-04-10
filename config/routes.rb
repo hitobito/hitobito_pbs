@@ -51,6 +51,7 @@ Rails.application.routes.draw do
             member do
               put :cancel_own
             end
+            resources :approval, only: [:new, :create]
           end
         end
       end
@@ -65,5 +66,6 @@ Rails.application.routes.draw do
     get 'list_camps_abroad' => 'event/lists#camps_abroad', as: :list_camps_abroad
 
   end
+
 
 end

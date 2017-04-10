@@ -19,6 +19,13 @@
 #  approver_id    :integer
 #
 
+#   = f.labeled_input_field :current_occupation
+#   = f.labeled_input_field :current_level
+#   = f.labeled_input_field :occupation_assessment
+#   = f.labeled_input_field :strong_points
+#   = f.labeled_input_field :weak_points
+#   = f.labeled_input_field :comment
+
 class Event::Approval < ActiveRecord::Base
 
   # ordering matters

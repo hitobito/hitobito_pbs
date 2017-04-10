@@ -1,0 +1,26 @@
+-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+%p.muted= t('.approval_stored')
+
+- action = params[:decision] # FIXME: this should be prepared in the controller
+
+-# = entry_form(cancel_url: group_event_participation_path(id: @participation.id, returning: true)) do |f|
+-# submit_url: group_event_participation_approval_index_path
+-# cancel_url: group_event_participation_path
+
+= standard_form(@application.next_open_approval,
+                url: send("#{action}_group_event_application_path", @group.id, @event.id, @application.id),
+                method: action == :approve ? :put : :delete) do |f|
+
+  = f.labeled_input_field :current_occupation, label: t('.current_occupation')
+  = f.labeled_input_field :current_level
+  = f.labeled_input_field :occupation_assessment, label: t('.occupation_assessment')
+  = f.labeled_input_field :strong_points, label: t('.strong_points')
+  = f.labeled_input_field :weak_points, label: t('.weak_points')
+  = f.labeled_input_field :comment, label: t('.comment')
+  = save_form_buttons(f, nil, '#')
+
+

@@ -16,17 +16,23 @@ describe Event::AttendancesController do
     sign_in(people(:bulei))
 
     @p1 = Fabricate(Event::Course::Role::Leader.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
     @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
     @p3 = Fabricate(Event::Role::Speaker.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
     @p4 = Fabricate(Event::Role::Cook.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
     @p5 = Fabricate(Event::Course::Role::Participant.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
     @p6 = Fabricate(Event::Course::Role::Participant.name.to_sym,
-                    participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                    participation: Fabricate(:event_participation,
+                                             event: course, bsv_days: 5)).participation
   end
 
   context 'GET index' do
