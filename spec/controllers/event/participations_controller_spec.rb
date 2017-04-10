@@ -74,7 +74,8 @@ describe Event::ParticipationsController do
       expect(participation.canceled_at).to eq Date.today
       expect(participation.state).to eq 'canceled'
       expect(participation.active).to eq false
-      expect(assigns(:previous_state)).to eq('assigned')
+      expect(Delayed::Job.last.payload_object.instance_variable_get('@previous_state'))
+        .to eq('assigned')
     end
 
   end
@@ -95,7 +96,8 @@ describe Event::ParticipationsController do
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
-      expect(assigns(:previous_state)).to eq('assigned')
+      expect(Delayed::Job.last.payload_object.instance_variable_get('@previous_state'))
+        .to eq('assigned')
       expect(flash[:notice]).to include 'Teilnehmer informieren'
       expect(flash[:notice]).to include "mailto:#{participation.person.email}"
       expect(flash[:notice]).to include 'cc=bulei%40hitobito.example.com'

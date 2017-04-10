@@ -12,7 +12,6 @@ module Pbs::Event::ParticipationsController
     before_render_show :load_approvals
     before_render_form :inform_about_email_sent_to_participant
 
-    before_action :remember_previous_state, only: [:cancel, :reject]
     after_action :send_discarded_info, only: [:cancel, :reject]
     after_reject :notice_with_mailto
 
@@ -38,7 +37,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def send_discarded_info
-    Event::DiscardedCourseParticipationJob.new(entry, @previous_state).enqueue!
+    Event::DiscardedCourseParticipationJob.new(entry, entry.previous_changes[:state].first).enqueue!
   end
 
   def inform_about_email_sent_to_participant
@@ -67,10 +66,6 @@ module Pbs::Event::ParticipationsController
     attrs = permitted_attrs_without_state.dup
     attrs << :state if event.is_a?(Event::Camp)
     attrs
-  end
-
-  def remember_previous_state
-    @previous_state = entry.state
   end
 
 end
