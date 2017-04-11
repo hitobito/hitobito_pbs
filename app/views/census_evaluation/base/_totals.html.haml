@@ -4,12 +4,14 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = render layout: 'table_header',
-         locals: { before_columns: [''], after_columns: [t('census_evaluation.total'), '']} do
+         locals: { before_columns: [''], after_columns: ['']} do
   - @sub_groups.each do |g|
     %tr
       %td= link_to(g.to_s, census_evaluation_path(g, year: @year))
       - MemberCount::COUNT_COLUMNS.each do |col|
         %td.right= count_field(g, col)
+      %td.right= count_field(g, :f)
+      %td.right= count_field(g, :m)
       %td.right= count_field(g, :total)
       %td.right= render 'total_actions', group: g
   = render 'total_row'

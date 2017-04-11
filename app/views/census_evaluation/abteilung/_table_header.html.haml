@@ -14,19 +14,7 @@
       - before_columns.each do |c|
         %th
       - MemberCount::COUNT_CATEGORIES.each do |c|
-        %th.center{colspan: 2}= t("activerecord.attributes.member_count.#{c}")
-      %th.center{colspan: 3}= t('census_evaluation.total')
-      - after_columns.each do |c|
-        %th
-    %tr
-      - before_columns.each do |c|
-        %th= c
-      - 7.times do
-        %th.right= t('global.gender.female_short')
-        %th.right= t('global.gender.male_short')
-      %th.right= t('global.gender.female_short')
-      %th.right= t('global.gender.male_short')
-      %th.right= t('global.gender.female_short') + '+' + t('global.gender.male_short')
+        %th.right= t("activerecord.attributes.member_count.#{c}")
       - after_columns.each do |c|
         %th.right= c
 
