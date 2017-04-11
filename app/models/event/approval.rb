@@ -9,14 +9,19 @@
 #
 # Table name: event_approvals
 #
-#  id             :integer          not null, primary key
-#  application_id :integer          not null
-#  layer          :string(255)      not null
-#  approved       :boolean          default(FALSE), not null
-#  rejected       :boolean          default(FALSE), not null
-#  comment        :text
-#  approved_at    :datetime
-#  approver_id    :integer
+#  id                    :integer          not null, primary key
+#  application_id        :integer          not null
+#  layer                 :string           not null
+#  approved              :boolean          default(FALSE), not null
+#  rejected              :boolean          default(FALSE), not null
+#  comment               :text
+#  approved_at           :datetime
+#  approver_id           :integer
+#  current_occupation    :string
+#  current_level         :string
+#  occupation_assessment :text
+#  strong_points         :text
+#  weak_points           :text
 #
 
 class Event::Approval < ActiveRecord::Base
