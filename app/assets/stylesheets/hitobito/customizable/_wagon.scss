@@ -64,6 +64,10 @@ table.attendance {
   }
 }
 
+table tr.grouping td {
+  background-color: $grayLight !important;
+}
+
 .separated {
   border-top: 1px solid #E8EBF0;
   margin: 6px 0;

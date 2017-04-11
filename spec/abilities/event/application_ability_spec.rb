@@ -119,6 +119,11 @@ describe Event::ApplicationAbility do
             create_approver("#{group.type}::#{role}".constantize, group)
             create_application(Group::Abteilung::Praeses, groups(:patria), 'bund')
             is_expected.to be_able_to(:show_approval, application)
+            if name == 'be'
+              is_expected.to be_able_to(:index_approvals, course)
+            else
+              is_expected.not_to be_able_to(:index_approvals, course)
+            end
           end
         end
 
@@ -126,12 +131,14 @@ describe Event::ApplicationAbility do
         create_approver(Group::Kantonalverband::Kantonsleitung, groups(:zh))
         create_application(Group::Abteilung::Praeses, groups(:patria), 'bund')
         is_expected.not_to be_able_to(:show_approval, application)
+        is_expected.not_to be_able_to(:index_approvals, course)
       end
 
       it 'Kantonsleitung in one kanton may now see approvals for other kantons' do
         create_approver(Group::Kantonalverband::Kantonsleitung, groups(:zh))
         create_application(Group::Kantonalverband::Mitarbeiter, groups(:be), 'kantonalverband')
         is_expected.not_to be_able_to(:show_approval, application)
+        is_expected.not_to be_able_to(:index_approvals, course)
       end
     end
 
@@ -140,18 +147,21 @@ describe Event::ApplicationAbility do
         @approver = event_roles(:top_leader)
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.to be_able_to(:show_approval, application)
+        is_expected.to be_able_to(:index_approvals, course)
       end
 
       it 'course participant may not show_approval' do
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         @approver = application.participation
         is_expected.not_to be_able_to(:show_approval, application)
+        is_expected.not_to be_able_to(:index_approvals, course)
       end
 
       it 'other course participant may not show_approval' do
         @approver = event_roles(:top_tn)
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.not_to be_able_to(:show_approval, application)
+        is_expected.not_to be_able_to(:index_approvals, course)
       end
     end
 
@@ -160,6 +170,7 @@ describe Event::ApplicationAbility do
         create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.to be_able_to(:show_approval, application)
+        is_expected.to be_able_to(:index_approvals, course)
       end
 
       it ':layer_full of may show approvals of same layer' do
@@ -167,18 +178,21 @@ describe Event::ApplicationAbility do
         create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh))
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.to be_able_to(:show_approval, application)
+        is_expected.to be_able_to(:index_approvals, course)
       end
 
-      it ':layer_full of may not show approvals of layer below' do
+      it ':layer_full of bund may not show approvals of layer below' do
         create_approver(Group::Bund::AssistenzAusbildung, groups(:bund))
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.not_to be_able_to(:show_approval, application)
+        is_expected.not_to be_able_to(:index_approvals, course)
       end
 
       it ':layer_full_and_below may show approvals of layer below' do
         create_approver(Group::Bund::MitarbeiterGs, groups(:bund))
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
         is_expected.to be_able_to(:show_approval, application)
+        is_expected.to be_able_to(:index_approvals, course)
       end
 
       it ':layer_full_and_below may show approvals of different layer when application is on waiting list' do
@@ -204,6 +218,7 @@ describe Event::ApplicationAbility do
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
 
         expect(ability).to be_able_to(:show_approval, @application)
+        expect(ability).to be_able_to(:index_approvals, course)
       end
 
       it 'can not view approval if not advisor' do
@@ -212,6 +227,7 @@ describe Event::ApplicationAbility do
         create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
 
         expect(ability).not_to be_able_to(:show_approval, @application)
+        expect(ability).not_to be_able_to(:index_approvals, course)
       end
     end
 

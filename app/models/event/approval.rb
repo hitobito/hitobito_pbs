@@ -72,6 +72,16 @@ class Event::Approval < ActiveRecord::Base
         where(events: { id: course.id }).
         where('event_approvals.rejected = ? or event_approvals.approved = ?', true, true)
     end
+
+    def order_by_layer
+      statement = 'CASE layer '
+      LAYERS.each_with_index do |l, i|
+        statement << "WHEN '#{l}' THEN #{i} "
+      end
+      statement << 'END'
+      order(statement)
+    end
+
   end
 
 end

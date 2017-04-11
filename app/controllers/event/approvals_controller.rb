@@ -7,12 +7,14 @@
 
 class Event::ApprovalsController < CrudController
 
-  self.nesting = Group, Event, Event::Participation
-
   self.permitted_attrs = [:current_occupation, :current_level, :occupation_assessment,
                           :strong_points, :weak_points, :comment]
 
   decorates :group, :event, :participation
+
+  def index
+    @approvals = entries.group_by(&:participation)
+  end
 
   def create
     if approver.send(decision, permitted_params, current_user)
@@ -24,11 +26,11 @@ class Event::ApprovalsController < CrudController
     end
   end
 
-  private
-
   def self.model_class
     Event::Approval
   end
+
+  private
 
   def decision
     @decision ||= params[:decision].to_s.tap do |decision|
@@ -51,25 +53,34 @@ class Event::ApprovalsController < CrudController
      translate(:rejected_inform_participant, participant: participation.person)]
   end
 
-  def list_entries
-    event.approvals
-  end
-
   def build_entry
-    application.next_open_approval
+    participation.application.next_open_approval
   end
 
-  def application
-    participation.application
+  def list_entries
+    Event::Approval.
+      joins(participation: :person).
+      where(event_participations: { event_id: event.id, active: true }).
+      includes(approver: [:phone_numbers, :roles, :groups],
+               participation: [:event, :application, person: :primary_group]).
+      merge(Person.order_by_name).
+      order_by_layer
+  end
+
+  def group
+    @group ||= Group.find(params[:group_id])
+  end
+
+  def event
+    @event ||= group.events.find(params[:event_id])
   end
 
   def participation
-    parent
+    @participation ||= event.participations.find(params[:participation_id])
   end
 
-  def parent_entry(clazz)
-    id = params["#{clazz.name.demodulize.underscore}_id"]
-    model_ivar_set(clazz.find(id))
+  def authorize_class
+    authorize!(:index_approvals, event)
   end
 
 end

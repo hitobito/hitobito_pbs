@@ -52,7 +52,9 @@ Rails.application.routes.draw do
               put :cancel_own
             end
             resources :approvals, only: [:new, :create, :edit, :update]
+            get 'approvals' => 'approvals#new' # route required for language switch
           end
+          resources :approvals, only: [:index]
         end
       end
 

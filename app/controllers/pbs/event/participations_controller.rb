@@ -29,7 +29,10 @@ module Pbs::Event::ParticipationsController
   private
 
   def load_approvals
-    @approvals = Event::Approval.where(application_id: entry.application_id).includes(:approver)
+    @approvals = Event::Approval.
+      where(application_id: entry.application_id).
+      includes(:approver).
+      order_by_layer
   end
 
   def send_confirmation_email_with_current_user

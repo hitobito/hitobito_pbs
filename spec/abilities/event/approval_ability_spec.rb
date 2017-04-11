@@ -29,7 +29,7 @@ describe Event::ApprovalAbility do
 
   context 'approving and rejecting applications' do
 
-    it "may approve and reject in same layer" do
+    it 'may approve and reject in same layer' do
       create_approver(Group::Bund::Geschaeftsleitung, groups(:bund))
       create_application(Group::Bund::Mitarbeiter, groups(:bund), 'bund')
 

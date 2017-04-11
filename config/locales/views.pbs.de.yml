@@ -207,6 +207,7 @@ de:
     show_right_advisors:
       advisors: Betreuung
     tabs:
+      approvals: Empfehlungen
       attendances: Anwesenheit
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Das Reglement zur Planung und Durchführung von Lagern ("Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten

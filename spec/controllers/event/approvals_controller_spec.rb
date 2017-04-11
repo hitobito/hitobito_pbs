@@ -25,6 +25,86 @@ describe Event::ApprovalsController do
 
   before { participation.application.reload }
 
+
+  context 'GET index' do
+
+    let(:course) do
+      Fabricate(:course,
+                groups: [groups(:bund)],
+                kind: event_kinds(:lpk),
+                requires_approval_abteilung: true,
+                requires_approval_region: true,
+                requires_approval_kantonalverband: true)
+    end
+
+    before do
+      @p1 = Fabricate(:pbs_participation,
+                      event: course,
+                      active: true,
+                      state: 'assigned',
+                      application: Fabricate(:pbs_application, priority_1: course))
+      @p2 = Fabricate(:pbs_participation,
+                      event: course,
+                      active: true,
+                      state: 'assigned',
+                      application: Fabricate(:pbs_application, priority_1: course))
+      @p3 = Fabricate(:pbs_participation,
+                      event: course,
+                      active: true,
+                      state: 'assigned',
+                      application: Fabricate(:pbs_application, priority_1: course))
+      @p4 = Fabricate(:pbs_participation,
+                      event: course,
+                      application: Fabricate(:pbs_application, priority_1: course))
+      Fabricate(Event::Course::Role::Participant.name, participation: @p1)
+      Fabricate(Event::Course::Role::Participant.name, participation: @p2)
+      Fabricate(Event::Course::Role::Participant.name, participation: @p3)
+
+      @a11 = create_approval(@p1, 'abteilung', true)
+      @a12 = create_approval(@p1, 'region', true)
+      @a13 = create_approval(@p1, 'kantonalverband', true)
+
+      @a21 = create_approval(@p2, 'abteilung', true)
+      @a22 = create_approval(@p2, 'region', false)
+
+      @a31 = create_approval(@p3, 'abteilung', true)
+      @a32 = @p3.application.approvals.create!(layer: 'region')
+
+      @a41 = create_approval(@p4, 'abteilung', true)
+      @a42 = create_approval(@p4, 'region', true)
+      @a43 = @p4.application.approvals.create!(layer: 'kantonalverband')
+
+      sign_in(people(:bulei))
+    end
+
+    it 'lists grouped approvals' do
+      get :index, group_id: group.id, event_id: course.id
+
+      list = [@p1, @p2, @p3].sort_by { |p| p.person.last_name }
+
+      expect(assigns(:approvals).keys).to eq(list)
+
+      expect(assigns(:approvals)[@p1]).to eq([@a11, @a12, @a13])
+      expect(assigns(:approvals)[@p2]).to eq([@a21, @a22])
+      expect(assigns(:approvals)[@p3]).to eq([@a31, @a32])
+    end
+
+    def create_approval(participation, layer, approved)
+      participation.application.approvals.create!(
+        layer: layer,
+        approved: approved,
+        rejected: !approved,
+        approver: people(:al_schekka),
+        current_occupation: 'Venner',
+        current_level: 'Pfadi',
+        occupation_assessment: 'super',
+        strong_points: 'viele',
+        weak_points: 'keine',
+        comment: 'nein')
+    end
+
+  end
+
   context 'GET new' do
 
     context 'bulei' do

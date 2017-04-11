@@ -23,6 +23,10 @@ module Pbs::Event::ApplicationAbility
         may(:show_approval).
         for_advised_or_participations_full_events
 
+      permission(:layer_full).
+        may(:show_approval).
+        in_same_layer_or_different_prio
+
       permission(:layer_and_below_full).
         may(:show_approval).
         in_same_layer_or_below_or_different_prio

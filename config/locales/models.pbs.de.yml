@@ -1005,9 +1005,9 @@ de:
         approvee: Teilnehmer
         approver: Bearbeiter
         approved_at: Freigabedatum
-        current_occupation: Momentane Tätigkeit
+        current_occupation: Tätigkeit
         current_level: Stufe
-        occupation_assessment: Bewertung der Tätigkeit
+        occupation_assessment: Bewertung
         strong_points: Stärken
         weak_points: Schwächen
 

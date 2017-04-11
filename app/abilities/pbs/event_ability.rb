@@ -43,10 +43,14 @@ module Pbs::EventAbility
     on(Event::Course) do
       permission(:any).may(:manage_attendances).for_leaded_events
       permission(:any).may(:update, :qualifications_read).for_advised_courses
+      permission(:any).
+        may(:index_approvals).
+        for_advised_or_participations_full_events
 
-      permission(:layer_full).may(:manage_attendances).in_same_layer
+      permission(:layer_full).may(:manage_attendances, :index_approvals).in_same_layer
 
       permission(:layer_and_below_full).may(:manage_attendances).in_same_layer
+      permission(:layer_and_below_full).may(:index_approvals).in_same_layer_or_below
 
       general(:manage_attendances).at_least_one_group_not_deleted
     end
@@ -90,6 +94,10 @@ module Pbs::EventAbility
 
   def for_coached_events
     event.coach_id == user.id
+  end
+
+  def for_advised_or_participations_full_events
+    for_advised_courses || for_participations_full_events
   end
 
   def if_participating_as_leader_role
