@@ -1032,6 +1032,8 @@ de:
         brother_and_sisters: Geschwister
         relations_to_tails: Geschwister
         kv: Kantonalverband
+        primary_group_id: Hauptgruppen-ID
+        id: Personen-ID
 
       group:
         pta: PTA
