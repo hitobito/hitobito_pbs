@@ -1,0 +1,17 @@
+{
+  "app/domain/*.rb": {
+    "command": "domain",
+    "affinity": "model",
+    "alternate": ["unit/domain/{}_test.rb"],
+    "related": "app/models/{}.rb",
+    "template": "class {camelcase|capitalize|colons}\nend"
+  },
+
+  "app/abilities/*_ability.rb": {
+    "command": "ability",
+    "affinity": "controller",
+    "alternate": ["unit/abilities/{}_spec.rb"],
+    "related": "app/controller/{}.rb",
+    "template": "class {camelcase|capitalize|colons} < AbilityDsl::Base\nend"
+  }
+}
