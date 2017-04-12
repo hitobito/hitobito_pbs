@@ -128,7 +128,8 @@ de:
         comment: Wünsche, Anregungen oder Bemerkungen an die Kursleitung
         title_approve: Empfehlung für %{participant} freigeben
         title_reject: Empfehlung für %{participant} ablehen
-
+        title_update_approved: Freigabe für %{participant} aktualisieren
+        title_update_rejected: Ablehnung für %{participant} aktualisieren
 
   event/attendances:
     update:

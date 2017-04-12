@@ -6,15 +6,17 @@
 %p.muted= t('.approval_stored')
 
 - options = {}
+- options[:cancel_url] = group_event_participation_path(@group, @event, @participation)
 
--# 'new' approval
 - if %(new create).include?(action_name)
   - title(t(".title_#{params[:decision]}", participant: @participation.person))
-
   - options[:url] = group_event_participation_approvals_path(@group, @event, @participation)
-  - options[:cancel_url] = group_event_participation_path(@group, @event, @participation)
   - options[:submit_label] = t("event.participations.actions_approval.#{params[:decision]}_button")
   - options[:method] = :post
+
+- elsif %(edit update).include?(action_name)
+  - title(t(".title_update_#{entry.status}", participant: @participation.person))
+  - options[:url] = group_event_participation_approval_path(@group, @event, @participation, entry)
 
 = entry_form(options) do |f|
   = hidden_field_tag :decision, params[:decision]

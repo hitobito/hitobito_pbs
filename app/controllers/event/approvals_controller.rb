@@ -75,12 +75,28 @@ class Event::ApprovalsController < CrudController
     @event ||= group.events.find(params[:event_id])
   end
 
+  def model_scope
+    application.approvals
+  end
+
+  def application
+    participation.application
+  end
+
   def participation
     @participation ||= event.participations.find(params[:participation_id])
   end
 
   def authorize_class
     authorize!(:index_approvals, event)
+  end
+
+  def full_entry_label
+    models_label(false)
+  end
+
+  def return_path
+    group_event_participation_path(@group, @event, @participation)
   end
 
 end

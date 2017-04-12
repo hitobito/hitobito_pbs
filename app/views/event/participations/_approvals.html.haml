@@ -13,6 +13,9 @@
           - if approval.status
             = safe_join([format_attr(approval, :approver), ','])
             = f(approval.approved_at.try(:to_date))
+            - if can?(:edit, approval)
+              %span.pull-right
+                = link_action_edit(edit_group_event_participation_approval_path(@group, @event, @participation, approval))
           - else
             = format_attr(approval, :approver)
         - if approval.status

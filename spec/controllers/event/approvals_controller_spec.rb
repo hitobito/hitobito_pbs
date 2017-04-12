@@ -11,6 +11,7 @@ describe Event::ApprovalsController do
 
   let(:group) { course.groups.first }
   let(:al_schekka) { people(:al_schekka) }
+  let(:bulei) { people(:bulei) }
   let(:participant) { people(:child) }
   let(:course) do
     Fabricate(:course,
@@ -22,8 +23,14 @@ describe Event::ApprovalsController do
     Fabricate(:pbs_participation, event: course, person: participant, application: application)
   end
   let(:application) { Fabricate(:pbs_application, priority_1: course) }
+  let(:course_start_date) { Fabricate(:event_date, event: course, start_at: 10.days.from_now) }
 
-  before { participation.application.reload }
+  before do
+    participation.application.reload
+    course.dates.destroy_all
+    course_start_date
+    course.reload
+  end
 
 
   context 'GET index' do
@@ -109,7 +116,7 @@ describe Event::ApprovalsController do
 
     context 'bulei' do
       before do
-        sign_in(people(:bulei))
+        sign_in(bulei)
         application.approvals.create!(layer: 'abteilung')
         participant.update!(primary_group: groups(:pegasus))
       end
@@ -159,7 +166,7 @@ describe Event::ApprovalsController do
 
     context 'bulei' do
       before do
-        sign_in(people(:bulei))
+        sign_in(bulei)
         application.approvals.create!(layer: 'abteilung')
         participant.update!(primary_group: groups(:pegasus))
       end
@@ -273,6 +280,60 @@ describe Event::ApprovalsController do
              strong_points: 'strong',
              weak_points: 'weak'
            }
+    end
+
+  end
+
+  context 'GET edit' do
+
+    let(:approver) { al_schekka }
+    let(:approval) { @approval }
+
+    context 'bulei' do
+      before do
+        sign_in(bulei)
+        @approval = application.approvals.create!(layer: 'abteilung')
+        participant.update!(primary_group: groups(:pegasus))
+        approve_application!
+      end
+
+      it 'may not edit' do
+        expect { edit_approval }.to raise_error CanCan::AccessDenied
+      end
+    end
+
+    context 'al schekka' do
+      before do
+        sign_in(al_schekka)
+        @approval = application.approvals.create!(layer: 'abteilung')
+        participant.update!(primary_group: groups(:pegasus))
+        approve_application!
+      end
+
+      describe 'edit' do
+        before { edit_approval  }
+
+        it { is_expected.to render_template 'edit' }
+        it { expect(assigns(:approval)).to eq(application.reload.approvals.first) }
+      end
+
+    end
+
+    def edit_approval
+      get :edit, group_id: group.id, event_id: course.id, participation_id: participation.id, id: approval.id
+    end
+
+    def approve_application!
+      approval.update(
+        approved:               true,
+        approver:               approver,
+        current_occupation:     'Verantwortlicher PR',
+        current_level:          'Meister',
+        occupation_assessment:  'Zuverlässig',
+        strong_points:          'kann gut verkaufen',
+        weak_points:            'muss noch Zurückhaltung üben'
+      )
+      approval.reload
     end
 
   end
