@@ -76,11 +76,7 @@ class Event::ApprovalsController < CrudController
   end
 
   def model_scope
-    application.approvals
-  end
-
-  def application
-    participation.application
+    participation.application.approvals
   end
 
   def participation
