@@ -110,7 +110,7 @@ de:
         approvals: Empfehlungen
       actions_approval:
         approve_title: Teilnahme freigeben
-        reject_title: Teilname ablehnen
+        reject_title: Teilnahme ablehnen
       popover_cancel:
         cancel_info: Kursleiter/-in, Kursorganisator/-in, Abteilungsleiter/-in und Empfehlungsinstanzen werden über die Abmeldung informiert.
       print:
