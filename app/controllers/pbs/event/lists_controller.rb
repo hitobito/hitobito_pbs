@@ -73,7 +73,7 @@ module Pbs::Event::ListsController
   end
 
   def render_camp_csv(camps)
-    send_data Export::Csv::Events::List.export(camps), type: :csv
+    send_data Export::Tabular::Events::List.csv(camps), type: :csv
   end
 
   def all_upcoming_camps

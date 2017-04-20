@@ -70,7 +70,7 @@ class Event::CanceledCourseParticipationJob < BaseJob
   end
 
   def filter_role_types(query, types)
-    query.joins(:roles).where(roles: { type: types.collect(&:sti_name) })
+    query.includes(:roles).where(roles: { type: types.collect(&:sti_name) })
   end
 
   def participation

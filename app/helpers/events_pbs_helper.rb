@@ -48,7 +48,6 @@ module EventsPbsHelper
 
   def show_camp_cancel_own_button?
     if entry.is_a?(Event::Camp) && entry.cancel_possible?
-      @user_participation = entry.participations.where(person_id: current_user.id).first
       @user_participation && can?(:cancel_own, @user_participation)
     else
       false

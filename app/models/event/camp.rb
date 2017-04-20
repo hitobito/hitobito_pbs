@@ -128,7 +128,7 @@ class Event::Camp < Event
   self.used_attributes += EXPECTED_PARTICIPANT_ATTRS
   self.used_attributes += LEADER_CHECKPOINT_ATTRS
 
-  self.used_attributes -= [:contact_id]
+  self.used_attributes -= [:contact_id, :applications_cancelable]
 
   self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
@@ -167,7 +167,7 @@ class Event::Camp < Event
       :leader_id, :lagerreglement_applied, :kantonalverband_rules_applied,
       :j_s_rules_applied, :coordinates,
       # check if any of the expected attrs has an assigned value
-      :any_expected_participant_attr 
+      :any_expected_participant_attr
   end
 
   with_options presence: true do

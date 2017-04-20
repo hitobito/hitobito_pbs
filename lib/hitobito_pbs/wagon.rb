@@ -40,12 +40,17 @@ module HitobitoPbs
       Bsv::Info.leader_roles += [Event::Course::Role::Helper]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
-      Export::Csv::Events::List.send :include, Pbs::Export::Csv::Events::List
-      Export::Csv::Events::Row.send :include, Pbs::Export::Csv::Events::Row
-      Export::Csv::People::ParticipationNdbjsRow.send(
-        :include, Pbs::Export::Csv::People::ParticipationNdbjsRow)
-      Export::Csv::Events::BsvList.send :include, Pbs::Export::Csv::Events::BsvList
-      Export::Csv::Events::BsvRow.send :include, Pbs::Export::Csv::Events::BsvRow
+      Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
+      Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
+      Export::Tabular::People::ParticipationNdbjsRow.send(
+        :include, Pbs::Export::Tabular::People::ParticipationNdbjsRow)
+      Export::Tabular::People::PersonRow.send(
+        :include, Pbs::Export::Tabular::People::PersonRow)
+      Export::Tabular::People::PeopleAddress.send(
+        :include, Pbs::Export::Tabular::People::PeopleAddress)
+      Export::Tabular::People::PeopleFull.send(
+        :include, Pbs::Export::Tabular::People::PeopleFull)
+      Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
 
       ### abilities
       GroupAbility.send :include, Pbs::GroupAbility
@@ -78,11 +83,6 @@ module HitobitoPbs
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       QualificationsController.send :include, Pbs::QualificationsController
-
-      ### exports
-      Export::Csv::People::PersonRow.send     :include, Pbs::Export::Csv::People::PersonRow
-      Export::Csv::People::PeopleAddress.send :include, Pbs::Export::Csv::People::PeopleAddress
-      Export::Csv::People::PeopleFull.send    :include, Pbs::Export::Csv::People::PeopleFull
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group

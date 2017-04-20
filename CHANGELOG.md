@@ -1,5 +1,10 @@
 # Hitobito Changelog
 
+## Version 1.15
+
+*   Statistik und Bestandesmeldung mit Total pro Geschlecht
+*   Rolle Materialwart und Heimverwaltung aktiviert
+
 ## Version 1.11
 
 *   PBS Branding

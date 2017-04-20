@@ -93,15 +93,15 @@ de:
         description: Unterstützt bei Ausbildungen.
       group/bund/praesidium:
         one: Präsident
-        other: Präsident
+        other: Präsidenten
         description:
       group/bund/vize_praesidium:
         one: Vize Präsident
-        other: Vize Präsident
+        other: Vize Präsidenten
         description:
       group/bund/praesidium_apv:
         one: Präsident APV
-        other: Präsident APV
+        other: Präsidenten APV
         description:
       group/bund/geschaeftsleitung:
         one: Geschäftsleiter
@@ -121,15 +121,15 @@ de:
         description:
       group/bund/kassier:
         one: Kassier
-        other: Kassier
+        other: Kassiere
         description:
       group/bund/revisor:
         one: Revisor
-        other: Revisor
+        other: Revisoren
         description:
       group/bund/redaktor:
         one: Redaktor
-        other: Redaktor
+        other: Redaktoren
         description:
       group/bund/webmaster:
         one: Webmaster
@@ -145,15 +145,15 @@ de:
         description:
       group/bund/mitglied_krisenteam:
         one: Mitglied Krisenteam
-        other: Mitglied Krisenteam
+        other: Mitglieder Krisenteam
         description:
       group/bund/coach:
         one: Coach
-        other: Coach
+        other: Coaches
         description:
       group/bund/grossanlass_coach:
         one: Grossanlass Coach
-        other: Grossanlass Coach
+        other: Grossanlass Coaches
         description:
       group/bund/leitungskursbetreuung:
         one: Leiterkursbetreuer
@@ -177,51 +177,51 @@ de:
         description:
       group/bund/verantwortung_biberstufe:
         one: Verantwortlicher Biberstufe
-        other: Verantwortlicher Biberstufe
+        other: Verantwortliche Biberstufe
         description:
       group/bund/verantwortung_wolfstufe:
         one: Verantwortlicher Wolfstufe
-        other: Verantwortlicher Wolfstufe
+        other: Verantwortliche Wolfstufe
         description:
       group/bund/verantwortung_pfadistufe:
         one: Verantwortlicher Pfadistufe
-        other: Verantwortlicher Pfadistufe
+        other: Verantwortliche Pfadistufe
         description:
       group/bund/verantwortung_piostufe:
         one: Verantwortlicher Piostufe
-        other: Verantwortlicher Piostufe
+        other: Verantwortliche Piostufe
         description:
       group/bund/verantwortung_roverstufe:
         one: Verantwortlicher Roverstufe
-        other: Verantwortlicher Roverstufe
+        other: Verantwortliche Roverstufe
         description:
       group/bund/verantwortung_pfadi_trotz_allem:
         one: Verantwortlicher Pfadi Trotz Allem
-        other: Verantwortlicher Pfadi Trotz Allem
+        other: Verantwortliche Pfadi Trotz Allem
         description:
       group/bund/verantwortung_integration:
         one: Verantwortlicher Integration
-        other: Verantwortlicher Integration
+        other: Verantwortliche Integration
         description:
       group/bund/verantwortung_lagermeldung:
         one: Verantwortlicher Lagermeldung
-        other: Verantwortlicher Lagermeldung
+        other: Verantwortliche Lagermeldung
         description:
       group/bund/verantwortung_pr:
         one: Verantwortlicher PR
-        other: Verantwortlicher PR
+        other: Verantwortliche PR
         description:
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
         one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortlicher Prävention sexueller Ausbeutung
+        other: Verantwortliche Prävention sexueller Ausbeutung
         description:
       group/bund/international_commissioner_ic_wagggs:
         one: International Commissioner IC WAGGGS
-        other: International Commissioner IC WAGGGS
+        other: International Commissioners IC WAGGGS
         description:
       group/bund/international_commissioner_ic_wosm:
         one: International Commissioner IC WOSM
-        other: International Commissioner IC WOSM
+        other: International Commissioners IC WOSM
         description:
       group/bund/stv_ic_programme_wagggs:
         one: Stv IC Programme WAGGGS
@@ -233,19 +233,19 @@ de:
         description:
       group/bund/spezialfunktion:
         one: Spezialfunktion
-        other: Spezialfunktion
+        other: Spezialfunktionen
         description:
       group/bund/ehrenmitglied:
         one: Ehrenmitglied
-        other: Ehrenmitglied
+        other: Ehrenmitglieder
         description:
       group/bund/passivmitglied:
         one: Passivmitglied
-        other: Passivmitglied
+        other: Passivmitglieder
         description:
       group/bund/kontaktperson:
         one: Kontaktperson
-        other: Kontaktperson
+        other: Kontaktpersonen
         description:
 
       group/kantonalverband/kantonsleitung:
@@ -262,15 +262,15 @@ de:
         description:
       group/kantonalverband/praesidium:
         one: Präsident
-        other: Präsident
+        other: Präsidenten
         description:
       group/kantonalverband/vize_praesidium:
         one: Vize Präsident
-        other: Vize Präsident
+        other: Vize Präsidenten
         description:
       group/kantonalverband/praesidium_apv:
         one: Präsident APV
-        other: Präsident APV
+        other: Präsidenten APV
         description:
       group/kantonalverband/mitarbeiter:
         one: Mitarbeiter
@@ -282,15 +282,15 @@ de:
         description:
       group/kantonalverband/kassier:
         one: Kassier
-        other: Kassier
+        other: Kassiere
         description:
       group/kantonalverband/revisor:
         one: Revisor
-        other: Revisor
+        other: Revisoren
         description:
       group/kantonalverband/redaktor:
         one: Redaktor
-        other: Redaktor
+        other: Redaktoren
         description:
       group/kantonalverband/webmaster:
         one: Webmaster
@@ -306,11 +306,11 @@ de:
         description:
       group/kantonalverband/mitglied_krisenteam:
         one: Mitglied Krisenteam
-        other: Mitglied Krisenteam
+        other: Mitglieder Krisenteam
         description:
       group/kantonalverband/coach:
         one: Coach
-        other: Coach
+        other: Coaches
         description:
       group/kantonalverband/leitungskursbetreuung:
         one: Leiterkursbetreuer
@@ -318,87 +318,87 @@ de:
         description:
       group/kantonalverband/verantwortung_biberstufe:
         one: Verantwortlicher Biberstufe
-        other: Verantwortlicher Biberstufe
+        other: Verantwortliche Biberstufe
         description:
       group/kantonalverband/verantwortung_wolfstufe:
         one: Verantwortlicher Wolfstufe
-        other: Verantwortlicher Wolfstufe
+        other: Verantwortliche Wolfstufe
         description:
       group/kantonalverband/verantwortung_pfadistufe:
         one: Verantwortlicher Pfadistufe
-        other: Verantwortlicher Pfadistufe
+        other: Verantwortliche Pfadistufe
         description:
       group/kantonalverband/verantwortung_piostufe:
         one: Verantwortlicher Piostufe
-        other: Verantwortlicher Piostufe
+        other: Verantwortliche Piostufe
         description:
       group/kantonalverband/verantwortung_roverstufe:
         one: Verantwortlicher Roverstufe
-        other: Verantwortlicher Roverstufe
+        other: Verantwortliche Roverstufe
         description:
       group/kantonalverband/verantwortung_pfadi_trotz_allem:
         one: Verantwortlicher Pfadi Trotz Allem
-        other: Verantwortlicher Pfadi Trotz Allem
+        other: Verantwortliche Pfadi Trotz Allem
         description:
       group/kantonalverband/verantwortung_abteilungen:
         one: Verantwortlicher Abteilungen
-        other: Verantwortlicher Abteilungen
+        other: Verantwortliche Abteilungen
         description:
       group/kantonalverband/verantwortung_animation_spirituelle:
         one: Verantwortlicher Animation Spirituelle
-        other: Verantwortlicher Animation Spirituelle
+        other: Verantwortliche Animation Spirituelle
         description:
       group/kantonalverband/verantwortung_ausbildung:
         one: Verantwortlicher Ausbildung
-        other: Verantwortlicher Ausbildung
+        other: Verantwortliche Ausbildung
         description:
       group/kantonalverband/verantwortung_betreuung:
         one: Verantwortlicher Betreuung
-        other: Verantwortlicher Betreuung
+        other: Verantwortliche Betreuung
         description:
       group/kantonalverband/verantwortung_integration:
         one: Verantwortlicher Integration
-        other: Verantwortlicher Integration
+        other: Verantwortliche Integration
         description:
       group/kantonalverband/verantwortung_internationales:
         one: Verantwortlicher Internationales
-        other: Verantwortlicher Internationales
+        other: Verantwortliche Internationales
         description:
       group/kantonalverband/verantwortung_suchtpraeventionsprogramm:
         one: Verantwortlicher kantonales Suchtpräventionsprogramm
-        other: Verantwortlicher kantonales Suchtpräventionsprogramm
+        other: Verantwortliche kantonales Suchtpräventionsprogramm
         description:
       group/kantonalverband/verantwortung_kantonsarchiv:
         one: Verantwortlicher Kantonsarchiv
-        other: Verantwortlicher Kantonsarchiv
+        other: Verantwortliche Kantonsarchiv
         description:
       group/kantonalverband/verantwortung_krisenteam:
         one: Verantwortlicher Krisenteam
-        other: Verantwortlicher Krisenteam
+        other: Verantwortliche Krisenteam
         description:
       group/kantonalverband/verantwortung_lagermeldung:
         one: Verantwortlicher Lagermeldung
-        other: Verantwortlicher Lagermeldung
+        other: Verantwortliche Lagermeldung
         description:
       group/kantonalverband/verantwortung_lagerplaetze:
         one: Verantwortlicher Lagerplätze
-        other: Verantwortlicher Lagerplätze
+        other: Verantwortliche Lagerplätze
         description:
       group/kantonalverband/verantwortung_materialverkaufsstelle:
         one: Verantwortlicher Materialverkaufsstelle
-        other: Verantwortlicher Materialverkaufsstelle
+        other: Verantwortliche Materialverkaufsstelle
         description:
       group/kantonalverband/verantwortung_pr:
         one: Verantwortlicher PR
-        other: Verantwortlicher PR
+        other: Verantwortliche PR
         description:
       group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
         one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortlicher Prävention sexueller Ausbeutung
+        other: Verantwortliche Prävention sexueller Ausbeutung
         description:
       group/kantonalverband/verantwortung_programm:
         one: Verantwortlicher Programm
-        other: Verantwortlicher Programm
+        other: Verantwortliche Programm
         description:
       group/kantonalverband/spezialfunktion:
         one: Spezialfunktion
@@ -406,11 +406,11 @@ de:
         description:
       group/kantonalverband/ehrenmitglied:
         one: Ehrenmitglied
-        other: Ehrenmitglied
+        other: Ehrenmitglieder
         description:
       group/kantonalverband/passivmitglied:
         one: Passivmitglied
-        other: Passivmitglied
+        other: Passivmitglieder
         description:
 
       group/region/regionalleitung:
@@ -427,15 +427,15 @@ de:
         description:
       group/region/praesidium:
         one: Präsident
-        other: Präsident
+        other: Präsidenten
         description:
       group/region/vize_praesidium:
         one: Vize Präsident
-        other: Vize Präsident
+        other: Vize Präsidenten
         description:
       group/region/praesidium_apv:
         one: Präsident APV
-        other: Präsident APV
+        other: Präsidenten APV
         description:
       group/region/praeses:
         one: Präses
@@ -451,15 +451,15 @@ de:
         description:
       group/region/kassier:
         one: Kassier
-        other: Kassier
+        other: Kassiere
         description:
       group/region/revisor:
         one: Revisor
-        other: Revisor
+        other: Revisoren
         description:
       group/region/redaktor:
         one: Redaktor
-        other: Redaktor
+        other: Redaktoren
         description:
       group/region/webmaster:
         one: Webmaster
@@ -471,11 +471,11 @@ de:
         description:
       group/region/mitglied_krisenteam:
         one: Mitglied Krisenteam
-        other: Mitglied Krisenteam
+        other: Mitglieder Krisenteam
         description:
       group/region/coach:
         one: Coach
-        other: Coach
+        other: Coaches
         description:
       group/region/leitungskursbetreuung:
         one: Leiterkursbetreuer
@@ -483,83 +483,83 @@ de:
         description:
       group/region/verantwortung_biberstufe:
         one: Verantwortlicher Biberstufe
-        other: Verantwortlicher Biberstufe
+        other: Verantwortliche Biberstufe
         description:
       group/region/verantwortung_wolfstufe:
         one: Verantwortlicher Wolfstufe
-        other: Verantwortlicher Wolfstufe
+        other: Verantwortliche Wolfstufe
         description:
       group/region/verantwortung_pfadistufe:
         one: Verantwortlicher Pfadistufe
-        other: Verantwortlicher Pfadistufe
+        other: Verantwortliche Pfadistufe
         description:
       group/region/verantwortung_piostufe:
         one: Verantwortlicher Piostufe
-        other: Verantwortlicher Piostufe
+        other: Verantwortliche Piostufe
         description:
       group/region/verantwortung_roverstufe:
         one: Verantwortlicher Roverstufe
-        other: Verantwortlicher Roverstufe
+        other: Verantwortliche Roverstufe
         description:
       group/region/verantwortung_pfadi_trotz_allem:
         one: Verantwortlicher Pfadi Trotz Allem
-        other: Verantwortlicher Pfadi Trotz Allem
+        other: Verantwortliche Pfadi Trotz Allem
         description:
       group/region/verantwortung_abteilungen:
         one: Verantwortlicher Abteilungen
-        other: Verantwortlicher Abteilungen
+        other: Verantwortliche Abteilungen
         description:
       group/region/verantwortung_animation_spirituelle:
         one: Verantwortlicher Animation Spirituelle
-        other: Verantwortlicher Animation Spirituelle
+        other: Verantwortliche Animation Spirituelle
         description:
       group/region/verantwortung_ausbildung:
         one: Verantwortlicher Ausbildung
-        other: Verantwortlicher Ausbildung
+        other: Verantwortliche Ausbildung
         description:
       group/region/verantwortung_betreuung:
         one: Verantwortlicher Betreuung
-        other: Verantwortlicher Betreuung
+        other: Verantwortliche Betreuung
         description:
       group/region/verantwortung_integration:
         one: Verantwortlicher Integration
-        other: Verantwortlicher Integration
+        other: Verantwortliche Integration
         description:
       group/region/verantwortung_internationales:
         one: Verantwortlicher Internationales
-        other: Verantwortlicher Internationales
+        other: Verantwortliche Internationales
         description:
       group/region/verantwortung_suchtpraeventionsprogramm:
         one: Verantwortlicher kantonales Suchtpräventionsprogramm
-        other: Verantwortlicher kantonales Suchtpräventionsprogramm
+        other: Verantwortliche kantonales Suchtpräventionsprogramm
         description:
       group/region/verantwortung_krisenteam:
         one: Verantwortlicher Krisenteam
-        other: Verantwortlicher Krisenteam
+        other: Verantwortliche Krisenteam
         description:
       group/region/verantwortung_lagermeldung:
         one: Verantwortlicher Lagermeldung
-        other: Verantwortlicher Lagermeldung
+        other: Verantwortliche Lagermeldung
         description:
       group/region/verantwortung_lagerplaetze:
         one: Verantwortlicher Lagerplätze
-        other: Verantwortlicher Lagerplätze
+        other: Verantwortliche Lagerplätze
         description:
       group/region/verantwortung_materialverkaufsstelle:
         one: Verantwortlicher Materialverkaufsstelle
-        other: Verantwortlicher Materialverkaufsstelle
+        other: Verantwortliche Materialverkaufsstelle
         description:
       group/region/verantwortung_pr:
         one: Verantwortlicher PR
-        other: Verantwortlicher PR
+        other: Verantwortliche PR
         description:
       group/region/verantwortung_praevention_sexueller_ausbeutung:
         one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortlicher Prävention sexueller Ausbeutung
+        other: Verantwortliche Prävention sexueller Ausbeutung
         description:
       group/region/verantwortung_programm:
         one: Verantwortlicher Programm
-        other: Verantwortlicher Programm
+        other: Verantwortliche Programm
         description:
       group/region/spezialfunktion:
         one: Spezialfunktion
@@ -567,11 +567,11 @@ de:
         description:
       group/region/ehrenmitglied:
         one: Ehrenmitglied
-        other: Ehrenmitglied
+        other: Ehrenmitglieder
         description:
       group/region/passivmitglied:
         one: Passivmitglied
-        other: Passivmitglied
+        other: Passivmitglieder
         description:
 
       group/abteilung/abteilungsleitung:
@@ -592,15 +592,15 @@ de:
         description:
       group/abteilung/praesidium:
         one: Präsident
-        other: Präsident
+        other: Präsidenten
         description:
       group/abteilung/vize_praesidium:
         one: Vize Präsident
-        other: Vize Präsident
+        other: Vize Präsidenten
         description:
       group/abteilung/praesidium_apv:
         one: Präsident APV
-        other: Präsident APV
+        other: Präsidenten APV
         description:
       group/abteilung/praeses:
         one: Präses
@@ -609,6 +609,14 @@ de:
       group/abteilung/beisitz:
         one: Beisitzer
         other: Beisitzer
+        description:
+      group/abteilung/materialwart:
+        one: Materialwart
+        other: Materialwarte
+        description:
+      group/abteilung/heimverwaltung:
+        one: Heimverwalter
+        other: Heimverwalter
         description:
       group/abteilung/stufenleitung_biber:
         one: Stufenleiter Biber
@@ -636,15 +644,15 @@ de:
         description:
       group/abteilung/kassier:
         one: Kassier
-        other: Kassier
+        other: Kassiere
         description:
       group/abteilung/revisor:
         one: Revisor
-        other: Revisor
+        other: Revisoren
         description:
       group/abteilung/redaktor:
         one: Redaktor
-        other: Redaktor
+        other: Redaktoren
         description:
       group/abteilung/webmaster:
         one: Webmaster
@@ -652,19 +660,19 @@ de:
         description:
       group/abteilung/coach:
         one: Coach
-        other: Coach
+        other: Coaches
         description:
       group/abteilung/verantwortung_materialverkaufsstelle:
         one: Verantwortlicher Materialverkaufsstelle
-        other: Verantwortlicher Materialverkaufsstelle
+        other: Verantwortliche Materialverkaufsstelle
         description:
       group/abteilung/verantwortung_pfadi_trotz_allem:
         one: Verantwortlicher Pfadi Trotz Allem
-        other: Verantwortlicher Pfadi Trotz Allem
+        other: Verantwortliche Pfadi Trotz Allem
         description:
       group/abteilung/verantwortung_pr:
         one: Verantwortlicher PR
-        other: Verantwortlicher PR
+        other: Verantwortliche PR
         description:
       group/abteilung/spezialfunktion:
         one: Spezialfunktion
@@ -672,11 +680,11 @@ de:
         description:
       group/abteilung/ehrenmitglied:
         one: Ehrenmitglied
-        other: Ehrenmitglied
+        other: Ehrenmitglieder
         description:
       group/abteilung/passivmitglied:
         one: Passivmitglied
-        other: Passivmitglied
+        other: Passivmitglieder
         description:
 
       group/biber/einheitsleitung:
@@ -711,12 +719,12 @@ de:
         description:
       group/woelfe/leitwolf:
         one: Leitwolf
-        other: Leitwolf
+        other: Leitwölfe
         long: Leitwolf
         description:
       group/woelfe/wolf:
         one: Wolf
-        other: Wolf
+        other: Wölfe
         long: Wolf
         description:
 
@@ -734,11 +742,11 @@ de:
         description:
       group/pfadi/leitpfadi:
         one: Leitpfadi
-        other: Leitpfadi
+        other: Leitpfadis
         long: Leitpfadi
       group/pfadi/pfadi:
         one: Pfadi
-        other: Pfadi
+        other: Pfadis
         long: Pfadi
 
       group/pio/einheitsleitung:
@@ -755,7 +763,7 @@ de:
         description:
       group/pio/pio:
         one: Pio
-        other: Pio
+        other: Pios
         long: Pio
 
       group/rover/einheitsleitung:
@@ -772,7 +780,7 @@ de:
         description:
       group/rover/rover:
         one: Rover
-        other: Rover
+        other: Rovers
         long: Rover
 
       group/pta/einheitsleitung:
@@ -789,16 +797,16 @@ de:
         description:
       group/pta/mitglied:
         one: Mitglied
-        other: Mitglied
+        other: Mitglieder
         description:
 
       group/elternrat/praesidium:
         one: Präsident
-        other: Präsident
+        other: Präsidenten
         description:
       group/elternrat/mitglied:
         one: Mitglied
-        other: Mitglied
+        other: Mitglieder
         description:
 
       group/gremium/leitung:
@@ -807,7 +815,7 @@ de:
         description:
       group/gremium/mitglied:
         one: Mitglied
-        other: Mitglied
+        other: Mitglieder
         description:
 
       event/camp:
@@ -816,39 +824,39 @@ de:
 
       event/camp/role/leader:
         one: Lagerleitung
-        other: Lagerleitung
+        other: Lagerleitungen
 
       event/camp/role/assistant_leader:
         one: Leitung
-        other: Leitung
+        other: Leitungen
 
       event/camp/role/helper:
         one: Küche / Helfer/-in
-        other: Küche / Helfer/-in
+        other: Küche / Helfer/-innen
 
       event/camp/role/participant:
         one: Teilnehmer/-in
-        other: Teilnehmer/-in
+        other: Teilnehmer/-innen
 
       event/camp/role/leader_mountain_security:
         one: Leiter-/in Sicherheitsaktivität Berg
-        other: Leiter-/in Sicherheitsaktivität Berg
+        other: Leiter-/innen Sicherheitsaktivität Berg
 
       event/camp/role/leader_snow_security:
         one: Leiter-/in Sicherheitsaktivität Winter
-        other: Leiter-/in Sicherheitsaktivität Winter
+        other: Leiter-/innen Sicherheitsaktivität Winter
 
       event/camp/role/leader_water_security:
         one: Leiter-/in Sicherheitsaktivität Wasser
-        other: Leiter-/in Sicherheitsaktivität Wasser
+        other: Leiter-/innen Sicherheitsaktivität Wasser
 
       event/camp/role/abteilungsleitung:
         one: Abteilungsleitung
-        other: Abteilungsleitung
+        other: Abteilungsleitungen
 
       event/camp/role/coach:
         one: Coach
-        other: Coach
+        other: Coaches
 
       event/camp/role/advisor_mountain_security:
         one: Betreuung Sicherheitsaktivität Berg
@@ -1074,6 +1082,9 @@ de:
 
       qualification_kind:
         manual: Manuell erfassbar
+
+      label_format:
+        nickname: Pfadiname auf Etikett
 
     errors:
       models:
