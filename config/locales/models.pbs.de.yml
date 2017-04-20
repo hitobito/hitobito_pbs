@@ -1009,7 +1009,7 @@ de:
         current_level: Stufe
         occupation_assessment: Bewertung
         strong_points: Stärken
-        weak_points: Schwächen
+        weak_points: Förderpunkte
 
       event/camp:
         state: Lagerstatus
