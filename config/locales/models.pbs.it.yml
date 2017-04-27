@@ -610,6 +610,7 @@ it:
       event/kind:
         documents_text: Formulari aggiuntivi
       person:
+        layer_group_id: Id del livello
         nickname: Totem
         pbs_number: Numero personale MSS
         salutation: Appellativo

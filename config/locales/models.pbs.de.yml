@@ -1019,6 +1019,7 @@ de:
         documents_text: Zusatzformulare
 
       person:
+        layer_group_id: Id der Hauptebene
         nickname: Pfadiname
         pbs_number: PBS Personennummer
         salutation: Anrede

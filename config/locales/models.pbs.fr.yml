@@ -596,6 +596,7 @@ fr:
       event/kind:
         documents_text: Formulaire supplémentaire
       person:
+        layer_group_id: Id de niveau
         nickname: Totem
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse

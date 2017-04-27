@@ -20,6 +20,10 @@ module Pbs
             entry.kantonalverband.try(:pbs_shortname)
           end
 
+          def layer_group_id
+            entry.try(:primary_group).try(:layer_group).try(:id)
+          end
+
         end
       end
     end

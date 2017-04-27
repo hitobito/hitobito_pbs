@@ -77,6 +77,7 @@ module HitobitoPbs
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
+      PeopleController.send :include, Pbs::PeopleController
       EventsController.send :include, Pbs::EventsController
       Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
