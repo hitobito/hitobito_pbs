@@ -56,7 +56,7 @@ fr:
     assistant_leader_name: Prénom Nom / Totem
     assistant_leader_year: Année
     assistant_leader_qualifications: Formations valables
-    js_security: Domaine de la sécurité
+    js_security: Domaine de sécurité
   event:
     lists:
       nav_left_camps:
@@ -78,12 +78,12 @@ fr:
         explanation: 'Ici s''affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins à l''étranger. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n''ont pas été annulés sont pris en compte.'
     participations:
       canceled_own_notice: Tu as été désinscrit de cette activité
-      rejected_notice: "%{participant} est refusé. %{mailto}"
+      rejected_notice: "%{participant} a été refusé. %{mailto}"
       rejected_email_link: Informer les participants
       inform_about_email_sent_to_participant: Le participant sera averti de son inscription par email.
       approvals:
         title: Recommandations
-      missing_preconditions: Conditions préalables manquent
+      missing_preconditions: Conditions préalables manquantes
       tabs:
         approvals: Recommandations
       actions_approval:
@@ -95,31 +95,31 @@ fr:
         cancel_info: La responsable de cours, l'organisateur de cours et le responsable de groupe seront avisés de l'annulation.
       print:
         heading_event/camp: Annonce de camp %{year}
-        read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, ai lu la description du camp et l'accepte.
+        read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu sa description du camp et je l'accepte.
   event/applications:
     rejected_inform_participant: Veuillez svp en informer le %{participant} et le responsable de groupe personnellement.
   event/camp:
     al_present_info:
       'true': Présent au camp
-      'false': Pas présent au camp
+      'false': Absent au camp
     visiting_info:
-      at: Visite le camp le %{date}
-      'true': Visite le camp
-      'false': Ne visite pas le camp
+      at: Visitera le camp le %{date}
+      'true': Visitera le camp
+      'false': Ne visitera pas le camp
     coach_confirmed_info:
       'true': Confirmé
       'false': Pas confirmé
     checkpoint_field_caption: Ne peut être confirmé que par la maîtrise de camp
   events:
     actions_show_pbs:
-      camp_application: Annonce de camp du MSdS
+      camp_application: Annonce de camp MSdS
       cancel_button: Désinscription
       confirm_cancel: Souhaites-tu vraiment te désinscrire de ce camp?
       submit_camp: Transmettre
       camp_submitted: démission
     application_fields_pbs:
       paper_application_required_caption: Les participants doivent envoyer une inscription papier
-      participants_can_apply_caption: Les participants peuvent se désinscrire eux-mêmes
+      participants_can_apply_caption: Les participants peuvent s'inscrire eux-mêmes
       participants_can_cancel_caption: Les participants peuvent se désinscrire eux-mêmes
       requires_approval_abteilung: Groupe
       requires_approval_region: Région
@@ -127,36 +127,36 @@ fr:
       requires_approval_bund: Niveau fédéral
     create_camp_application:
       flash:
-        success: Le camp a été remis au MSdS. Tu recevras une copie de l'e-mail.
+        success: Le camp a été remis au MSdS. Tu recevras une copie par l'e-mail.
         error: 'Le camp n''a pas pu être remis:'
     expected_participants_fields:
-      expected_participants_help_inline: Ici, il faut rentrer le nombre de participants et le nombre de responsables. Si ces données ne sont pas encore connues, mettre le nombre de participants attendus.
+      expected_participants_help_inline: Saisir le nombre de participants et le nombre de responsables. Si ces données ne sont pas encore connues, mettre le nombre de participants attendus.
     fields_pbs:
       language_de: Allemand
       language_fr: Français
       language_it: Italien
       language_en: Anglais
       j_s_kind_none: Pas J+S
-      j_s_kind_j_s_child: Sport des enfants J+S
-      j_s_kind_j_s_youth: Sport des jeunes J+S
-      j_s_kind_j_s_mixed: Camp J+S mixte
+      j_s_kind_j_s_child: J+S Sport des enfants
+      j_s_kind_j_s_youth: J+S Sport des jeunes
+      j_s_kind_j_s_mixed: J+S Camp mixte
       j_s_security_none: (aucun)
       phone_privat: Téléphone privé
-      phone_mobil: Téléphone portable
+      phone_mobil: Téléphone mobile
       email: Adresse e-mail
     form_tab_pane_advisors:
-      al_present_caption: La maîtrise de groupe est présente au camp
-      al_visiting_caption: La maîtrise de groupe visite le camp
-      coach_visiting_caption: Le Coach visite le camp
+      al_present_caption: La maîtrise de groupe sera présente au camp
+      al_visiting_caption: La maîtrise de groupe visitera le camp
+      coach_visiting_caption: Le coach visitera le camp
     global:
       link:
         add_event/camp: Établir le camp
     kind_pbs:
       event_kind_general_information: Information sur la nature du cours
     location_fields:
-      location_caption: Adresse de camp
-      location_placeholder: Adresse, lieu, toponyme, etc.
-      location_help: Également décrire le lieu de camp dans el cas d'un camp à l'étranger, en incluant le pays
+      location_caption: Adresse du camp
+      location_placeholder: Adresse, lieu, lieu-dit, etc.
+      location_help: Décrire également le lieu du camp dans le cas d'un camp à l'étranger, en incluant le pays
       coordinates_help: CH1903+ / LV95 (Exemple 2604'870, 1211'271)
       landlord_permission_obtained_caption: Renseignements pris sur la compréhension du terrain ainsi que des forêts
       local_scout_contact_present_caption: Contact avec les scouts locaux disponible
@@ -166,9 +166,9 @@ fr:
     show_right_advisors:
       advisors: Encadrement
     form_actions_caption_pbs:
-      lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camp ("règlement de camp") ainsi que le profil scout sont pris en compte et respectés
-      kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prise en compte au mieux lors de la préparation du camp
-      j_s_rules_applied_caption: "Pour les camps J+S: je connais les recommandations actuelles du dossier Sport de camp/Trekking et j'en tiens compte"
+      lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camps ("règlement de camp") ainsi que le profil du scoutisme sont pris en compte et respectés
+      kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prises en compte lors de la préparation du camp
+      j_s_rules_applied_caption: "Pour les camps J+S: Les directives actuelles de Sport de camp/Trekking sont connues et respectées"
   groups:
     pending_approvals:
       info: Les personnes suivantes ont signé pour un cours et doivent être approuvés par vous.
@@ -208,4 +208,4 @@ fr:
   roles:
     fields_pbs:
       notification: notification
-      notification_hint: Les personnes existantes vont être informées par courriel, du moment que tu peux accéder à plus de données personnelles.
+      notification_hint: Les personnes existantes vont être informées par e-mail, du moment que tu peux accéder à plus de données personnelles.
