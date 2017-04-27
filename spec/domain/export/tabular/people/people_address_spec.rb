@@ -13,7 +13,7 @@ describe Export::Tabular::People::PeopleAddress do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
     %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband)
+       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband Id) << 'ID der Hauptebene'
   end
   let(:list) { Person.where(id: person) }
   let(:data) { Export::Tabular::People::PeopleAddress.csv(list) }
