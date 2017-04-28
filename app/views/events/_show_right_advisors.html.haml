@@ -10,7 +10,7 @@
         = format_attr(entry, :leader_id)
         = labeled_checkpoint_attrs
       - if can?(:show_details, entry)
-        = labeled(captionize(:abteilungsleitung_id, entry.klass)) do
+        = labeled(campy_al_caption(entry, !:short_version)) do
           = format_attr(entry, :abteilungsleitung_id)
           - if entry.abteilungsleitung_id
             %br/

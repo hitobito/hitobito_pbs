@@ -1036,6 +1036,8 @@ de:
         advisor_id: LKB
         coach_id: LKB/Coach
         coach: LKB/Coach
+        abteilungsleitung_or_ausbildungsverantwortlicher: Abteilungsleitung/Ausbildungsverantwortliche(r)
+        al_or_av: AL/AV
 
       event/kind:
         documents_text: Zusatzformulare

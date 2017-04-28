@@ -7,7 +7,7 @@
   #advisors.tab-pane
     = field_set_tag do
       = f.labeled_person_field :leader
-      = f.labeled_person_field :abteilungsleitung
+      = f.labeled_person_field :abteilungsleitung, label: campy_al_caption(entry, :short_version)
 
       = f.labeled_boolean_field(:al_present, caption: t('.al_present_caption'))
 
