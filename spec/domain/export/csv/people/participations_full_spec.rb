@@ -8,12 +8,12 @@
 require 'spec_helper'
 require 'csv'
 
-describe Export::Csv::People::ParticipationsFull do
+describe Export::Tabular::People::ParticipationsFull do
 
   let(:person) { people(:child) }
   let(:participation) { Fabricate(:event_participation, person: person, event: events(:top_course), bsv_days: 4.5) }
   let(:list) { [participation] }
-  let(:people_list) { Export::Csv::People::ParticipationsFull.new(list) }
+  let(:people_list) { Export::Tabular::People::ParticipationsFull.new(list) }
 
   subject { people_list.attribute_labels }
 
@@ -23,7 +23,7 @@ describe Export::Csv::People::ParticipationsFull do
 
   context 'integration' do
 
-    let(:data) { Export::Csv::People::ParticipationsFull.export(list) }
+    let(:data) { Export::Tabular::People::ParticipationsFull.export(list) }
     let(:csv) { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }
