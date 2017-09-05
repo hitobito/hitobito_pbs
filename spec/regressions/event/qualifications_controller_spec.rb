@@ -32,12 +32,7 @@ describe Event::QualificationsController, type: :controller do
 
         get :index, group_id: course.groups.first.id, event_id: course.id
 
-        expect(page).to have_css('td.issue i.disabled')
-        expect(page).to have_css('td.revoke i.disabled')
-
-        expect(page).not_to have_css('td.issue a i.disabled')
-        expect(page).not_to have_css('td.revoke a i.disabled')
-
+        expect(page).to have_selector('input[type=checkbox]')
       end
 
     end
