@@ -70,7 +70,7 @@ describe Export::Tabular::Events::List do
                 language_it: true,
                 advisor_id: people(:bulei).id)
     end
-    let(:csv) { Export::Csv::Generator.new(list).csv.split("\n")  }
+    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
 
     context 'headers' do
       subject { csv.first }
@@ -140,7 +140,7 @@ describe Export::Tabular::Events::List do
   context 'for simple events' do
     let(:courses) { Event.where(id: event) }
     let(:event) { Fabricate(:event, groups: [groups(:be)], location: 'somewhere') }
-    let(:csv) { Export::Csv::Generator.new(list).csv.split("\n")  }
+    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
 
     context 'headers' do
       subject { csv.first }
