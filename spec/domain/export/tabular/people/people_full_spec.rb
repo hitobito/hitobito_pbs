@@ -18,11 +18,12 @@ describe Export::Tabular::People::PeopleFull do
   let(:full_attributes) do
     [:first_name, :last_name, :company_name, :nickname,
      :company, :email, :address, :zip_code, :town, :country,
-     :gender, :birthday, :additional_information, :nationality_j_s,
-     :ahv_number, :j_s_number, :salutation, :title, :grade_of_school,
+     :gender, :birthday, :additional_information, :nationality,
+     :ahv_number, :j_s_number, :nationality_j_s, :salutation, :title, :grade_of_school,
      :entry_date, :leaving_date, :correspondence_language,
      :brother_and_sisters, :kantonalverband_id,
-     :roles, :id, :layer_group_id, :pbs_number]
+     :pbs_number, :layer_group,
+     :roles, :id, :layer_group_id]
   end
 
   its(:attributes) { should eq full_attributes }
