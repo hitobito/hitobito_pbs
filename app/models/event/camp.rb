@@ -4,7 +4,6 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 # == Schema Information
 #
 # Table name: events
@@ -17,11 +16,11 @@
 #  cost                              :string(255)
 #  maximum_participants              :integer
 #  contact_id                        :integer
-#  description                       :text
-#  location                          :text
+#  description                       :text(65535)
+#  location                          :text(65535)
 #  application_opening_at            :date
 #  application_closing_at            :date
-#  application_conditions            :text
+#  application_conditions            :text(65535)
 #  kind_id                           :integer
 #  state                             :string(60)
 #  priorization                      :boolean          default(FALSE), not null
@@ -36,17 +35,20 @@
 #  signature                         :boolean
 #  signature_confirmation            :boolean
 #  signature_confirmation_text       :string(255)
+#  creator_id                        :integer
+#  updater_id                        :integer
+#  applications_cancelable           :boolean          default(FALSE), not null
 #  training_days                     :decimal(12, 1)
+#  tentative_applications            :boolean          default(FALSE), not null
 #  language_de                       :boolean          default(FALSE), not null
 #  language_fr                       :boolean          default(FALSE), not null
 #  language_it                       :boolean          default(FALSE), not null
 #  language_en                       :boolean          default(FALSE), not null
-#  express_fee                       :string(255)
+#  express_fee                       :string
 #  requires_approval_abteilung       :boolean          default(FALSE), not null
 #  requires_approval_region          :boolean          default(FALSE), not null
 #  requires_approval_kantonalverband :boolean          default(FALSE), not null
 #  requires_approval_bund            :boolean          default(FALSE), not null
-#  tentative_applications            :boolean          default(FALSE), not null
 #  expected_participants_wolf_f      :integer
 #  expected_participants_wolf_m      :integer
 #  expected_participants_pfadi_f     :integer
@@ -63,7 +65,7 @@
 #  emergency_phone                   :string
 #  landlord                          :text
 #  landlord_permission_obtained      :boolean          default(FALSE), not null
-#  j_s_kind                          :integer
+#  j_s_kind                          :string
 #  j_s_security_snow                 :boolean          default(FALSE), not null
 #  j_s_security_mountain             :boolean          default(FALSE), not null
 #  j_s_security_water                :boolean          default(FALSE), not null
@@ -80,8 +82,13 @@
 #  camp_submitted                    :boolean          default(FALSE), not null
 #  camp_reminder_sent                :boolean          default(FALSE), not null
 #  paper_application_required        :boolean          default(FALSE), not null
-#  creator_id                        :integer
-#  updater_id                        :integer
+#  lagerreglement_applied            :boolean          default(FALSE), not null
+#  kantonalverband_rules_applied     :boolean          default(FALSE), not null
+#  j_s_rules_applied                 :boolean          default(FALSE), not null
+#  required_contact_attrs            :text
+#  hidden_contact_attrs              :text
+#  display_booking_info              :boolean          default(TRUE), not null
+#  bsv_days                          :decimal(6, 2)
 #
 
 class Event::Camp < Event
@@ -92,57 +99,17 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
-  class_attribute :possible_j_s_kinds
-  class_attribute :possible_canton_values
-
-  ABROAD_CANTON = 'zz'
-
-  J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed)
-
-  CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
-
-  EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
-                                :expected_participants_pfadi_f, :expected_participants_pfadi_m,
-                                :expected_participants_pio_f, :expected_participants_pio_m,
-                                :expected_participants_rover_f, :expected_participants_rover_m,
-                                :expected_participants_leitung_f, :expected_participants_leitung_m]
-  LEADER_CHECKPOINT_ATTRS = [:lagerreglement_applied,
-                      :kantonalverband_rules_applied,
-                      :j_s_rules_applied]
-
-  self.used_attributes += [:state, :group_ids, :leader_id,
-                           :abteilungsleitung_id, :coach_id,
-                           :advisor_mountain_security_id, :advisor_snow_security_id,
-                           :advisor_water_security_id,
-                           :canton, :coordinates, :altitude, :emergency_phone,
-                           :landlord, :landlord_permission_obtained,
-                           :j_s_kind,
-                           :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
-                           :paper_application_required,
-                           :participants_can_apply, :participants_can_cancel,
-                           :al_present, :al_visiting, :al_visiting_date,
-                           :coach_visiting, :coach_visiting_date, :coach_confirmed,
-                           :local_scout_contact_present, :local_scout_contact,
-                           :camp_submitted, :paper_application_required]
-
-  self.used_attributes += EXPECTED_PARTICIPANT_ATTRS
-  self.used_attributes += LEADER_CHECKPOINT_ATTRS
+  self.used_attributes += [:state, :group_ids,
+                           :participants_can_apply, :participants_can_cancel]
 
   self.used_attributes -= [:contact_id, :applications_cancelable]
 
   self.role_types = [Event::Camp::Role::AssistantLeader,
                      Event::Camp::Role::Helper,
-                     Event::Camp::Role::LeaderMountainSecurity,
-                     Event::Camp::Role::LeaderSnowSecurity,
-                     Event::Camp::Role::LeaderWaterSecurity,
                      Event::Camp::Role::Participant]
 
-  restricted_role :leader, Event::Camp::Role::Leader
-  restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
-  restricted_role :coach, Event::Camp::Role::Coach
-  restricted_role :advisor_mountain_security, Event::Camp::Role::AdvisorMountainSecurity
-  restricted_role :advisor_snow_security, Event::Camp::Role::AdvisorSnowSecurity
-  restricted_role :advisor_water_security, Event::Camp::Role::AdvisorWaterSecurity
+  # include only after main role types are defined
+  include Event::Campy
 
   # states are used for workflow
   # translations in config/locales
@@ -156,26 +123,6 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validates *EXPECTED_PARTICIPANT_ATTRS,
-            numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
-  validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
-  validates :canton, inclusion: { in: CANTONS, allow_blank: true }
-
-  with_options if: :camp_submitted?, presence: true do
-    validates :canton, :location, :altitude, :emergency_phone,
-      :landlord, :coach_id, :coach_confirmed,
-      :leader_id, :lagerreglement_applied, :kantonalverband_rules_applied,
-      :j_s_rules_applied, :coordinates,
-      # check if any of the expected attrs has an assigned value
-      :any_expected_participant_attr
-  end
-
-  with_options presence: true do
-    # only check these attrs if security required for given topic
-    validates :advisor_snow_security_id, if: -> { camp_submitted? && j_s_security_snow }
-    validates :advisor_mountain_security_id, if: -> { camp_submitted? && j_s_security_mountain }
-    validates :advisor_water_security_id, if: -> { camp_submitted? && j_s_security_water }
-  end
 
   ### CALLBACKS
 
@@ -183,8 +130,6 @@ class Event::Camp < Event
   after_save :send_assignment_infos
   after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
-  after_save :reset_coach_confirmed_if_changed
-  after_save :reset_checkpoint_attrs_if_leader_changed
 
 
   ### INSTANCE METHODS
@@ -201,10 +146,6 @@ class Event::Camp < Event
     super || possible_states.first
   end
 
-  def abroad?
-    canton == ABROAD_CANTON
-  end
-
   def application_possible?
     super && participants_can_apply?
   end
@@ -213,7 +154,7 @@ class Event::Camp < Event
     participants_can_cancel? && confirmed?
   end
 
-  def default_participation_state(participation, for_someone_else = false)
+  def default_participation_state(participation, _for_someone_else = false)
     if participation.roles.blank? ||
       participation.roles.any? { |role| role.kind != :participant } ||
       !paper_application_required?
@@ -221,14 +162,6 @@ class Event::Camp < Event
     else
       'applied_electronically'
     end
-  end
-
-  def camp_days
-    count = 0
-    dates.each do |d|
-      count += event_date_day_count(d)
-    end
-    count
   end
 
   private
@@ -245,21 +178,6 @@ class Event::Camp < Event
 
   def abteilungsleitung_roles
     Group::Abteilung::Abteilungsleitung.where(group: abteilung)
-  end
-
-  def reset_coach_confirmed_if_changed
-    if coach_confirmed? && restricted_role_changes[:coach]
-      update_column(:coach_confirmed, false)
-    end
-    true
-  end
-
-  def reset_checkpoint_attrs_if_leader_changed
-    if restricted_role_changes[:leader]
-      LEADER_CHECKPOINT_ATTRS.each do |a|
-        update_column(a, false)
-      end
-    end
   end
 
   def send_assignment_infos
@@ -323,19 +241,6 @@ class Event::Camp < Event
       Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
       Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
     }
-  end
-
-  def event_date_day_count(date)
-    return 1 unless date.finish_at
-    start_at = date.start_at.to_date
-    finish_at = date.finish_at.to_date
-    (finish_at - start_at).to_i + 1
-  end
-
-  def any_expected_participant_attr
-    EXPECTED_PARTICIPANT_ATTRS.find do |a|
-      send(a).present?
-    end
   end
 
 end

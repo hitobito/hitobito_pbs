@@ -218,4 +218,13 @@ module EventsPbsHelper
     f.boolean_field(attr, html_options)
   end
 
+  def campy_al_caption(entry, short_version = false)
+    if entry.is_a?(Event::Course) && entry.is_a?(Event::Campy)
+      key = short_version ? :al_or_av : :abteilungsleitung_or_ausbildungsverantwortlicher
+      captionize(key, entry.klass)
+    else
+      captionize(:abteilungsleitung_id, entry.klass)
+    end
+  end
+
 end

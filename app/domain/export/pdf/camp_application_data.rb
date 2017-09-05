@@ -79,16 +79,21 @@ module Export::Pdf
     end
 
     def t_camp_attr(key)
-      t('activerecord.attributes.event/camp.' + key, 
-        default: t('activerecord.attributes.event.' + key))
+      t("activerecord.attributes.event/camp.#{key}",
+        default: :"activerecord.attributes.event.#{key}")
     end
 
     def camp_leader
-      camp.participations_for(Event::Camp::Role::Leader).first.try(:person)
+      @camp_leader ||= camp.participations_for(Event::Camp::Role::Leader).first.try(:person)
     end
 
     def camp_assistant_leaders
-      camp.participations_for(Event::Camp::Role::AssistantLeader).collect(&:person)
+      camp.participations_for(Event::Camp::Role::AssistantLeader,
+                              Event::Course::Role::Leader,
+                              Event::Course::Role::ClassLeader,
+                              Event::Role::Speaker,
+                              Event::Course::Role::Helper).
+        collect(&:person) - [camp_leader]
     end
 
     def phone_number(person, label)
@@ -117,7 +122,8 @@ module Export::Pdf
     end
 
     def format_state(value)
-      t("activerecord.attributes.event/camp.states.#{value}")
+      t("activerecord.attributes.event/camp.states.#{value}",
+        default: :"activerecord.attributes.event/course.states.#{value}")
     end
 
     def format_updated_at(value)
@@ -138,7 +144,7 @@ module Export::Pdf
 
     def format_visiting(value, visiting_date)
       formatted_value = format_boolean(value)
-      if value && visiting_date.present? 
+      if value && visiting_date.present?
         formatted_value += ", #{format_date(visiting_date)}"
       end
       formatted_value

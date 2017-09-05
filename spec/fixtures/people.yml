@@ -73,6 +73,8 @@ al_schekka:
   contact_data_visible: true
   primary_group: schekka
   kantonalverband: be
+  salutation: lieber_pfadiname
+  nickname: Torben
 
 al_berchtold:
   first_name: AL

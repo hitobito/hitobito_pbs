@@ -1,0 +1,25 @@
+-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+%thead
+  %tr
+    %th{ colspan: 3 }
+      %h2= caption
+    %th
+      = entries.sum { |p| p.bsv_days || @event.bsv_days || 0 }
+%tbody
+  - entries.each do |p|
+    %tr{id: dom_id(p)}
+      %td
+        %strong= link_to(p.to_s(:list), group_event_participation_path(@group, @event, p))
+      %td= p.roles_short
+      %td= p.town
+      %td
+        = number_field_tag("bsv_days[#{p.id}]",
+                           p.bsv_days || @event.bsv_days,
+                           min: 0,
+                           step: 0.5,
+                           size: 10,
+                           class: 'span2')

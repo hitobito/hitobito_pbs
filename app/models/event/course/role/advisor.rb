@@ -18,7 +18,7 @@
 # Leitungskursbetreuer
 class Event::Course::Role::Advisor < Event::Role
 
-  self.permissions = [:participations_read]
+  self.permissions = [:participations_read, :qualifications_read]
 
   self.kind = nil
 

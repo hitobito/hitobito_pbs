@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -37,7 +37,8 @@ class Event::CampMailer < ApplicationMailer
     @camp = camp
     compose(recipient,
             CONTENT_SUBMIT_REMINDER,
-            'recipient-name' => recipient.greeting_name)
+            'recipient-name' => recipient.greeting_name,
+            'recipient-name-with-salutation' => recipient.salutation_value)
   end
 
   def submit_camp(camp)

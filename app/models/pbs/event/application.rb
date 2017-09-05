@@ -11,7 +11,7 @@ module Pbs::Event::Application
   included do
     belongs_to :waiting_list_setter, class_name: 'Person'
 
-    has_many :approvals
+    has_many :approvals, dependent: :destroy
 
     after_create :initialize_approval
   end

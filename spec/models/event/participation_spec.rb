@@ -16,9 +16,27 @@ describe Event::Participation do
     end
 
     it 'returns people that approved or rejected participation' do
-      participation = Fabricate(:pbs_participation, event: event, application: Event::Application.new(priority_1: event))
-      participation.application.approvals.create!(layer: 'abteilung', approved: true, approver: people(:al_schekka))
-      participation.application.approvals.create!(layer: 'region', rejected: true, approver: people(:bulei))
+      participation = Fabricate(:pbs_participation,
+                                event: event,
+                                application: Event::Application.new(priority_1: event))
+      participation.application.approvals.create!(layer: 'abteilung',
+                                                  approved: true,
+                                                  approver: people(:al_schekka),
+                                                  comment: 'yup',
+                                                  current_occupation: 'chief',
+                                                  current_level: 'junior',
+                                                  occupation_assessment: 'good',
+                                                  strong_points: 'strong',
+                                                  weak_points: 'weak')
+      participation.application.approvals.create!(layer: 'region',
+                                                  rejected: true,
+                                                  approver: people(:bulei),
+                                                  comment: 'yup',
+                                                  current_occupation: 'chief',
+                                                  current_level: 'junior',
+                                                  occupation_assessment: 'good',
+                                                  strong_points: 'strong',
+                                                  weak_points: 'weak')
       participation.application.approvals.create!(layer: 'kantonalverband')
 
       expect(participation.approvers).to have(2).items
@@ -32,7 +50,7 @@ describe Event::Participation do
 
     def create_participant(state)
       participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Date.today)
-      participation.roles.create!(type: event.class.participant_types.first.name)
+      participation.roles.create!(type: event.participant_types.first.name)
     end
 
     context 'simple' do
@@ -96,6 +114,29 @@ describe Event::Participation do
       end
     end
 
+  end
+
+  context '#bsv_days' do
+    let(:participation) { Fabricate(:pbs_participation, event: event) }
+
+    it 'is valid when empty' do
+      expect(participation).to be_valid
+    end
+
+    it 'is valid when multiple of 0.5' do
+      participation.bsv_days = 3.5
+      expect(participation).to be_valid
+    end
+
+    it 'is not valid when negative' do
+      participation.bsv_days = -1
+      expect(participation).not_to be_valid
+    end
+
+    it 'is not valid when not multiple of 0.5' do
+      participation.bsv_days = 2.25
+      expect(participation).not_to be_valid
+    end
   end
 
 end

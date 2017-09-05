@@ -23,7 +23,7 @@ module Pbs::Sheet::Group
 
       Sheet::Tab.new(:pending_approvals_tab,
                      :pending_approvals_group_path,
-                     if: :pending_approvals),
+                     if: :index_pending_approvals),
 
       Sheet::Tab.new(:tab_population_label,
                      :population_group_path,

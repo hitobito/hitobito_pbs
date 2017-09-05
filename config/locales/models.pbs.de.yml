@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -25,6 +25,9 @@ de:
         one: Rover
         other: Rovers
         long: Rover Abteilung
+      group/ausbildungskommission:
+        one: Ausbildungskommission
+        other: Ausbildungskommissionen
       group/biber:
         one: Biber
         other: Biber
@@ -246,6 +249,10 @@ de:
       group/bund/kontaktperson:
         one: Kontaktperson
         other: Kontaktpersonen
+        description:
+      group/ausbildungskommission/mitglied:
+        one: Mitglied
+        other: Mitglieder
         description:
 
       group/kantonalverband/kantonsleitung:
@@ -871,16 +878,16 @@ de:
         other: Betreuung Sicherheitsaktivität Wasser
 
       event/course/role/leader:
-        one: Kursleitung
-        other: Kursleitungen
+        one: Kursleiter/-in
+        other: Kursleiter/-innen
 
       event/course/role/class_leader:
-        one: Klassenlehrer
-        other: Klassenlehrer
+        one: Klassenlehrer/-in
+        other: Klassenlehrer/-innen
 
       event/course/role/helper:
-        one: Kurshelfer
-        other: Kurshelfer
+        one: Kurshelfer/-in
+        other: Kurshelfer/-innen
 
       event/course/role/advisor:
         one: LKB
@@ -893,6 +900,12 @@ de:
       salutation:
         one: Anrede
         other: Anreden
+        default:
+          label: Hallo [Name]
+          value:
+            m: Hallo %{greeting_name}
+            w: Hallo %{greeting_name}
+            other: Hallo %{greeting_name}
         available:
           lieber_pfadiname:
             label: Liebe(r) [Pfadiname]
@@ -924,12 +937,11 @@ de:
         zz: Ausland
 
       event:
+        bsv_days: Anzahl BSV-Tage
+        camp_days: Anzahl Lagertage
+        camp_submitted: Eingereicht
         course_languages: Kurssprachen
         express_fee: Expressgebühr
-        language_de: Kurssprache Deutsch
-        language_fr: Kurssprache Französisch
-        language_it: Kurssprache Italienisch
-        language_en: Kurssprache Englisch
         expected_participants: Erwartete Teilnehmer/-innen
         expected_participants_wolf: Wolf
         expected_participants_wolf_f: Anzahl Wölfe weiblich
@@ -946,8 +958,10 @@ de:
         expected_participants_leitung: Leiter
         expected_participants_leitung_f: Anzahl Leiter weiblich
         expected_participants_leitung_m: Anzahl Leiter männlich
-        camp_days: Anzahl Lagertage
-        camp_submitted: Eingereicht
+        language_de: Kurssprache Deutsch
+        language_fr: Kurssprache Französisch
+        language_it: Kurssprache Italienisch
+        language_en: Kurssprache Englisch
         j_s_kind: J+S-Rahmen
         j_s_security: Sicherheitsbereiche
         j_s_security_snow: Winter
@@ -971,12 +985,31 @@ de:
         local_scout_contact: Lokale Pfadi Kontaktinfos
         updated_at: Zuletzt aktualisiert
         any_expected_participant_attr: Erwartete Teilnehmer/-innen
+        abteilungsleitung_id: Abteilungsleitung
+        abteilungsleitung: Abteilungsleitung
+        leader: Lagerleitung
+        leader_id: Lagerleitung
+        coach_confirmed: Coach bestätigt
+        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
+        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
+        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
+        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
+        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
+        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
+        lagerreglement_applied: Lagerreglement berücksichtigt/eingehalten
+        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
+        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
 
       event/approval:
         comment: Kommentar
         approvee: Teilnehmer
         approver: Bearbeiter
-        approved_at: Datum
+        approved_at: Freigabedatum
+        current_occupation: Tätigkeit
+        current_level: Stufe
+        occupation_assessment: Bewertung
+        strong_points: Stärken
+        weak_points: Förderpunkte
 
       event/camp:
         state: Lagerstatus
@@ -992,31 +1025,26 @@ de:
           assigned: Angemeldet
           canceled: Abgemeldet
           absent: Nicht erschienen
-        abteilungsleitung_id: Abteilungsleitung
-        abteilungsleitung: Abteilungsleitung
         coach_id: Coach
         coach: Coach
-        leader: Lagerleitung
-        leader_id: Lagerleitung
-        coach_confirmed: Coach bestätigt
-        advisor_mountain_security_id: Betreuung Sicherheitsaktivität Berg
-        advisor_mountain_security: Betreuung Sicherheitsaktivität Berg
-        advisor_water_security_id: Betreuung Sicherheitsaktivität Wasser
-        advisor_water_security: Betreuung Sicherheitsaktivität Wasser
-        advisor_snow_security_id: Betreuung Sicherheitsaktivität Winter
-        advisor_snow_security: Betreuung Sicherheitsaktivität Winter
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
-        lagerreglement_applied: Lagerreglement berücksichtigt/eingehalten
-        kantonalverband_rules_applied: Vorschriften Kantonalverband berücksichtigt/eingehalten
-        j_s_rules_applied: J+S-Lager Vorschriften berücksichtigt/eingehalten
+
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB
         advisor_id: LKB
+        coach_id: LKB/Coach
+        coach: LKB/Coach
+        abteilungsleitung_or_ausbildungsverantwortlicher: Abteilungsleitung/Ausbildungsverantwortliche(r)
+        al_or_av: AL/AV
 
       event/kind:
         documents_text: Zusatzformulare
+        campy: Kurs als Lager anmelden
+
+      event/participation:
+        bsv_days: BSV-Tage
 
       person:
         layer_group_id: Id der Hauptebene
@@ -1088,6 +1116,8 @@ de:
         nickname: Pfadiname auf Etikett
 
     errors:
+      messages:
+        must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
       models:
         role:
           attributes:

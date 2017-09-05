@@ -55,6 +55,28 @@ describe Event::RolesController do
         expect(role).to be_persisted
         expect(role.participation.state).to eq 'assigned'
       end
+
+    end
+
+    context 'campy course' do
+      let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
+
+      it 'creates camp role' do
+        expect do
+          post :create,
+               group_id: group.id,
+               event_id: event.id,
+               event_role: {
+                 type: Event::Camp::Role::LeaderSnowSecurity.sti_name,
+                 person_id: people(:al_berchtold).id
+               }
+        end.to change { Event::Participation.count }.by(1)
+
+        role = assigns(:role)
+        expect(role).to be_persisted
+        expect(role).to be_kind_of(Event::Camp::Role::LeaderSnowSecurity)
+        expect(role.participation.state).to eq 'assigned'
+      end
     end
 
     context 'camp' do

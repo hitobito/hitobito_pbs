@@ -4,6 +4,7 @@ branches:
   only:
     - master
     - stable
+    - kurswesen
 env:
   global:
     - HEADLESS=true
@@ -17,15 +18,13 @@ rvm:
   - 2.2.3
   - 2.3.1
   - 2.4.0
-matrix:
-  allow_failures:
-    - rvm: 2.4.0
 install:
   - unset BUNDLE_GEMFILE # we bundle in different directories
+  - export HITOBITO_BRANCH=$([ $TRAVIS_BRANCH = 'stable' -o $TRAVIS_BRANCH = 'kurswesen' ] && echo ${TRAVIS_BRANCH} || echo 'master')
   - cd .. && git clone https://github.com/hitobito/hitobito_youth.git hitobito_youth
-  - cd hitobito_youth && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
+  - cd hitobito_youth && git checkout -f $HITOBITO_BRANCH
   - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
-  - cd hitobito && git checkout -f $([[ $TRAVIS_BRANCH = 'stable' ]] && echo 'stable' || echo 'master')
+  - cd hitobito && git checkout -f $HITOBITO_BRANCH
   - export HITOBITO_CORE_DIR=$PWD
   - sed -i "s/^\(gem .mysql2.\),.*$/\1/" Gemfile
   - cp -v Wagonfile.ci Wagonfile
@@ -36,3 +35,9 @@ install:
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
   - bundle exec rake db:create ci:wagon --trace
+matrix:
+  allow_failures:
+  - rvm: 2.0.0
+  - rvm: 2.1.7
+  - rvm: 2.3.1
+  - rvm: 2.4.0

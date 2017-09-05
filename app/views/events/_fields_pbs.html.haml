@@ -19,6 +19,9 @@
     - entry.used?(:training_days) do
       = f.labeled_input_field(:training_days, maxlength: 10)
 
+  - entry.used?(:bsv_days) do
+    = f.labeled_input_field :bsv_days
+
   - entry.used?(:j_s_kind) do
     = f.labeled(:j_s_kind) do
       = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)

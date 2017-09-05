@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
     resources :groups do
       member do
-        get 'pending_approvals' => 'groups#pending_approvals'
+        get 'pending_approvals' => 'group/pending_approvals#index'
+        get 'approved_approvals' => 'group/pending_approvals#approved'
+        patch 'pending_approvals_role' => 'group/pending_approvals#update_role'
 
         scope module: 'census_evaluation' do
           get 'census/bund' => 'bund#index'
@@ -40,6 +42,8 @@ Rails.application.routes.draw do
         member do
           get 'camp_application' => 'events#show_camp_application'
           put 'camp_application' => 'events#create_camp_application'
+          get 'attendances' => 'event/attendances#index'
+          patch 'attendances' => 'event/attendances#update'
         end
 
         scope module: 'event' do
@@ -47,7 +51,10 @@ Rails.application.routes.draw do
             member do
               put :cancel_own
             end
+            resources :approvals, only: [:new, :create, :edit, :update]
+            get 'approvals' => 'approvals#new' # route required for language switch
           end
+          resources :approvals, only: [:index]
         end
       end
 
@@ -61,5 +68,6 @@ Rails.application.routes.draw do
     get 'list_camps_abroad' => 'event/lists#camps_abroad', as: :list_camps_abroad
 
   end
+
 
 end

@@ -40,3 +40,45 @@
   & > .sheet { margin: 0 20px; }
 }
 
+
+table.attendance {
+  tr th {
+    padding-top: 20px;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+
+  td:last-child {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  td input {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+table tr.grouping td {
+  background-color: $grayLight !important;
+}
+
+.separated {
+  border-top: 1px solid #E8EBF0;
+  margin: 6px 0;
+  padding: 6px 0;
+
+  &:last-child {
+    border-bottom: 1px solid #E8EBF0;
+    padding-bottom: 12px;
+  }
+}
+
+.separated-header {
+  padding: 6px 0;
+}

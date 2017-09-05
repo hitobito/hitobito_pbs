@@ -1,33 +1,33 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class Event::CanceledCourseParticipationJob < BaseJob
+# Job that sends mails for canceled or rejected course participations
+class Event::DiscardedCourseParticipationJob < BaseJob
 
   ORGANIZER_ROLES = [Group::Abteilung::Abteilungsleitung,
                      Group::Abteilung::AbteilungsleitungStv,
                      Group::Region::Regionalleitung,
                      Group::Region::VerantwortungAusbildung,
                      Group::Kantonalverband::Kantonsleitung,
-                     Group::Kantonalverband::VerantwortungAusbildung,
-                     Group::Bund::Geschaeftsleitung,
-                     Group::Bund::LeitungKernaufgabeAusbildung]
+                     Group::Kantonalverband::VerantwortungAusbildung].freeze
 
   ABTEILUNGSLEITUNGS_ROLES = [Group::Abteilung::Abteilungsleitung,
-                              Group::Abteilung::AbteilungsleitungStv]
+                              Group::Abteilung::AbteilungsleitungStv].freeze
 
-  self.parameters = [:participation_id, :locale]
+  self.parameters = [:participation_id, :previous_state, :locale]
 
-  def initialize(participation)
+  def initialize(participation, previous_state)
     super()
     @participation_id = participation.id
+    @previous_state = previous_state
   end
 
   def perform
-    return if participation.nil? || participation.state != 'canceled' # may have been deleted again
+    return if participation.nil? || (!canceled? && !rejected?) # may have been deleted again
 
     set_locale
     send_notification
@@ -38,12 +38,17 @@ class Event::CanceledCourseParticipationJob < BaseJob
   def send_notification
     list = recipients
     if list.present?
-      Event::ParticipationMailer.canceled(participation, list).deliver_now
+      Event::ParticipationMailer.send(participation.state, participation, list).deliver_now
     end
   end
 
   def recipients
-    abteilungsleiter + kurs_leiter + kurs_organisatoren
+    result = application_approvers
+    if canceled?
+      result += abteilungsleiter + kurs_organisatoren
+      result += kurs_leiter unless previously_applied?
+    end
+    result.uniq
   end
 
   def abteilungsleiter
@@ -59,8 +64,8 @@ class Event::CanceledCourseParticipationJob < BaseJob
   end
 
   def kurs_leiter
-    Person.joins(event_participations: :roles).
-           where(event_participations: { event_id: participation.event_id },
+    Person.joins(event_participations: :roles)
+          .where(event_participations: { event_id: participation.event_id },
                  event_roles: { type: Event::Course::Role::Leader.sti_name })
   end
 
@@ -69,12 +74,31 @@ class Event::CanceledCourseParticipationJob < BaseJob
     filter_role_types(query, ORGANIZER_ROLES)
   end
 
+  def application_approvers
+    Person
+      .joins('INNER JOIN event_approvals appr ON appr.approver_id = people.id')
+      .joins('INNER JOIN event_participations p ON p.application_id = appr.application_id')
+      .where('p.id = ? AND appr.approved = ?', participation.id, true)
+  end
+
   def filter_role_types(query, types)
     query.includes(:roles).where(roles: { type: types.collect(&:sti_name) })
   end
 
   def participation
     @participation ||= Event::Participation.where(id: @participation_id).first
+  end
+
+  def canceled?
+    participation.state == 'canceled'
+  end
+
+  def rejected?
+    participation.state == 'rejected'
+  end
+
+  def previously_applied?
+    @previous_state == 'applied'
   end
 
 end

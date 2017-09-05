@@ -29,8 +29,7 @@ class Event::ApprovalRequestJob < BaseJob
   end
 
   def approvers
-    approver = Event::Approver.new(participation)
-    approver.current_approvers.only_public_data.to_a
+    Event::Approver.new(participation).current_approvers
   end
 
   def participation

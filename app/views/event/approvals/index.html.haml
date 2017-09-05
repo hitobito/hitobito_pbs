@@ -1,0 +1,42 @@
+
+%table.table.table-hover
+  %tbody
+    - entries.each do |p, approvals|
+      - p = p.decorate
+      %tr.grouping
+        %td
+          .profil
+            = image_tag(p.person.picture.thumb.url, size: '32x32')
+        %td{ colspan: 3 }
+          %strong
+            -# Any person listed can be shown
+            = link_to(p.to_s(:list), group_event_participation_path(@group, @event, p))
+        %td
+          = consolidated_approval_occupations(approvals)
+        %td
+          = p.layer_group_label
+
+      - approvals.each do |approval|
+        %tr
+          %td
+          %td= badge(*p.application.approval_fields(approval.approved?, approval.rejected?))
+          %td
+            %p.nowrap= format_attr(approval, :layer)
+            - if approval.status
+              %p= f(approval.approved_at.try(:to_date))
+
+          %td
+            - if approval.status
+              - approver = approval.approver.decorate
+              %p.nowrap
+                = link_to_if(can?(:show, approver), approver, approver)
+              = approver.all_phone_numbers
+              = approver.primary_email
+
+          %td{ colspan: 2 }
+            - if approval.status
+              - [:occupation_assessment, :strong_points, :weak_points, :comment].each do |attr|
+                %div
+                  %strong.muted= safe_join([Event::Approval.human_attribute_name(attr), ':'])
+                  = approval.send(attr)
+

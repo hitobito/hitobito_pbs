@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -11,9 +11,6 @@ module HitobitoPbs
 
     # Set the required application version.
     app_requirement '>= 0'
-
-    # Add a load path for this specific wagon
-    # config.autoload_paths += %W( #{config.root}/lib )
 
     # Add a load path for this specific wagon
     config.autoload_paths += %W( #{config.root}/app/abilities
@@ -32,6 +29,7 @@ module HitobitoPbs
       Event::Kind.send  :include, Pbs::Event::Kind
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
+      Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
       Event::Application.send :include, Pbs::Event::Application
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
@@ -53,6 +51,7 @@ module HitobitoPbs
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
 
       ### abilities
+      Ability.store.register Event::ApprovalAbility
       GroupAbility.send :include, Pbs::GroupAbility
       EventAbility.send :include, Pbs::EventAbility
       EventAbility.send :include, Pbs::Event::Constraints
@@ -72,27 +71,31 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      Event::KindsController.permitted_attrs += [:documents_text]
+      Event::KindsController.permitted_attrs += [:documents_text, :campy]
       QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
       PeopleController.send :include, Pbs::PeopleController
       EventsController.send :include, Pbs::EventsController
-      Event::ApplicationsController.send :include, Pbs::Event::ApplicationsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
       QualificationsController.send :include, Pbs::QualificationsController
+      Person::QueryController.search_columns << :pbs_number
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
+      Sheet::Event.send :include, Pbs::Sheet::Event
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
 
       ### mailers
       Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
+      Event::RegisterMailer.send :include, Pbs::Event::RegisterMailer
+      Person::AddRequestMailer.send :include, Pbs::Person::AddRequestMailer
+      Person::LoginMailer.send :include, Pbs::Person::LoginMailer
 
       # Main navigation
       i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }
