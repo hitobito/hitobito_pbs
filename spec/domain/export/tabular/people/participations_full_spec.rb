@@ -22,8 +22,7 @@ describe Export::Tabular::People::ParticipationsFull do
   end
 
   context 'integration' do
-
-    let(:data) { Export::Tabular::People::ParticipationsFull.export(list) }
+    let(:data) { Export::Tabular::People::ParticipationsFull.export(:csv, list) }
     let(:csv) { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }

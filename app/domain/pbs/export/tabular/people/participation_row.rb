@@ -7,7 +7,7 @@
 
 module Pbs
   module Export
-    module Csv
+    module Tabular
       module People
         module ParticipationRow
 
