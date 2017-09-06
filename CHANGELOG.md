@@ -6,6 +6,10 @@
 *   Pro Ebene einstellbar, welche Rollen Benachrichtigungen für Kursempfehlungen erhalten.
 *   Neuer Platzhalter für Mail-Texte um die gewählte Anrede zu verwenden.
 *   Erfassungsmöglichkeit der BSV Anwesenheitstage für Kurse.
+*   Neue Übersicht über alle Empfehlungsdaten für Kursleiter
+*   Bereits freigebene Kursteilnehmer werden auf der Anzeige der Kursfreigaben weiterhin angezeigt.
+*   Zugehörigkeit zur Schar wird auf den Teilnehmerlisten angezeigt
+*   Reihenfolge der Kursliste korrigiert
 
 
 ## Version 1.15
