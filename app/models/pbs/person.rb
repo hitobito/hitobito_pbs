@@ -79,7 +79,7 @@ module Pbs::Person
     validates :entry_date, :leaving_date,
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
-    after_create :set_pbs_number!
+    after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_changed?
   end
 
@@ -120,6 +120,11 @@ module Pbs::Person
 
   def set_pbs_number!
     update_column(:pbs_number, format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-'))
+  end
+
+  # Missing when core person is seeded and wagon migrations have not be run
+  def pbs_number_column_available?
+    self.class.column_names.include?('pbs_number')
   end
 
 end
