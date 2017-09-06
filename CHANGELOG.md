@@ -8,8 +8,11 @@
 *   Erfassungsmöglichkeit der BSV Anwesenheitstage für Kurse.
 *   Neue Übersicht über alle Empfehlungsdaten für Kursleiter
 *   Bereits freigebene Kursteilnehmer werden auf der Anzeige der Kursfreigaben weiterhin angezeigt.
-*   Zugehörigkeit zur Schar wird auf den Teilnehmerlisten angezeigt
+*   Zugehörigkeit zur Abteilung wird auf den Teilnehmerlisten angezeigt
 *   Reihenfolge der Kursliste korrigiert
+*   Zugriffsberechtigungen von LKB angepasst
+*   Neu strukturierte Empfehlungen für Kurse
+*   Empfehlungsinstanz kann gewählt werden
 
 
 ## Version 1.15
