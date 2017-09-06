@@ -58,6 +58,12 @@ it:
     assistant_leader_qualifications: Formazioni valide
     js_security: Ambito di sicurezza
   event:
+    attendances:
+      index:
+        info: Indica qui il numero di giorni UFAS per ogni persona.
+        leaders: Direzione
+        cooks: Cucina
+        participants: Partecipanti
     lists:
       nav_left_camps:
         all_camps: Campi in tutta la Svizzera
@@ -89,14 +95,29 @@ it:
       actions_approval:
         approve_title: Sbloccare la partecipazione
         reject_title: Rifiutare la partecipazione
-      popover_approval:
-        approval_stored: La raccomandazione viene salvata elettronicamente e può venir ammessa dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone
       popover_cancel:
-        cancel_info: La direzione del corso, l'organizzatore del corso e il capo sezione verrano informati riguardo all'iscrizione
+        cancel_info: Il capo corso, l'organizzatore del corso, il capo sezione e le altre persone che raccomandano saranno informati riguardo all'iscrizione.
       print:
         heading_event/camp: Annuncio di campo %{year}
         read_and_agreed_for_event_camp: Adempio i presupposti per questo campo, ho letto la descrizione e la approvo.
-  event/applications:
+    approvals:
+      form:
+        approval_stored: La raccomandazione viene salvata elettronicamente e può essere visionata dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone che raccomandano.
+        placeholder_current_occupation: Attività attuale del partecipante
+        current_level: Branca
+        occupation_assessment: Dove si è dimostrato valido? p.es. impegno, qualità del partecipante
+        strong_points: Quali sono le sue qualità?
+        weak_points: Dove va sostenuto?
+        comment: Desideri, spunti o osservazioni per la direzione del corso
+        title_approve: 'Autorizzare la raccomandazione per %{participant} '
+        title_reject: 'Rifiutare la raccomandazione per %{participant} '
+        title_update_approved: 'Aggiornare l''autorizzazione per %{participant} '
+        title_update_rejected: 'Aggiornare il rifiuto per %{participant} '
+  event/attendances:
+    update:
+      flash:
+        success: Le presenze sono state aggiornate con successo.
+  event/approvals:
     rejected_inform_participant: Per favore informare %{participant} e il capo gruppo personalmente a riguardo
   event/camp:
     al_present_info:
@@ -165,13 +186,27 @@ it:
       inform_by_email: Informare
     show_right_advisors:
       advisors: Accompagnamento
+    tabs:
+      approvals: Raccomandazioni
+      attendances: Presenza
     form_actions_caption_pbs:
       lagerreglement_applied_caption: il regolamento per la pianificazione e lo svolgimento di campi ("Regolamento del campo") e il Profilo dello scoutismo sono considerati e rispettati.
       kantonalverband_rules_applied_caption: 'Durante la preparazione del campo vengono considerate  le prescrizioni o le raccomandazioni esistenti dell''associazione cantonale '
       j_s_rules_applied_caption: "Per i campi G+S: le prescrizioni in vigore della disciplina sportiva Sport di campo/Trekking sono conosciute e rispettate."
-  groups:
+  group:
     pending_approvals:
-      info: Le seguenti persone hanno firmato per un corso e devono essere approvati da voi.
+      index:
+        pending_title: Autorizzazioni aperte
+        pending_info: 'Le seguenti persone si sono iscritte a un corso e devono essere approvate da te:'
+        no_pending_info: Al momento non ci sono autorizzazioni aperte.
+      notified_role_setting:
+        title: Notifica a
+        all: Tutti
+      approved_approvals:
+        title: Autorizzazioni già effettuate
+        course_kind: Tipo di corso
+        course_kind_all: Tutti
+  groups:
     tabs:
       population: Censimento dei membri
       statistic: Statistica

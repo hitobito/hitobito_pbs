@@ -15,6 +15,9 @@ it:
         one: Rover
         other: Rover
         long: Clan Rover
+      group/ausbildungskommission:
+        one: Commissione della formazione
+        other: Commissioni della formazione
       group/biber:
         one: castoro
         other: Castori
@@ -114,8 +117,8 @@ it:
         one: Delegato
         other: Delegato
       group/bund/kassier:
-        one: Cassiere
-        other: Cassieri
+        one: Cassieri
+        other: Cassiere
       group/bund/revisor:
         one: Revisore
         other: Revisori
@@ -171,7 +174,7 @@ it:
         one: Responsabile branca rover
         other: Responsabili branca rover
       group/bund/verantwortung_pfadi_trotz_allem:
-        one: Responsabile SOC
+        one: responsabile SOC
         other: Responsabili SOC
       group/bund/verantwortung_integration:
         one: Responsabile integrazione
@@ -201,14 +204,17 @@ it:
         one: Funzione speciale
         other: Funzioni speciale
       group/bund/ehrenmitglied:
-        one: Membro onorario
-        other: Membri onorario
+        one: Membri onorario
+        other: Membro onorario
       group/bund/passivmitglied:
         one: Membro passivo
         other: Membri passivo
       group/bund/kontaktperson:
         one: Persona di contatto
         other: Persone di contatto
+      group/ausbildungskommission/mitglied:
+        one: Membro
+        other: Membri
       group/kantonalverband/kantonsleitung:
         one: Responsabile cantonale
         other: Responsabili cantonale
@@ -300,8 +306,8 @@ it:
         one: Responsabile cantonale del programma di prevenzione dalle dipendenze
         other: Responsabili cantonale del programma di prevenzione dalle dipendenze
       group/kantonalverband/verantwortung_kantonsarchiv:
-        one: Responsabile della cellula di crisi
-        other: Responsabile dell'archivio cantonale
+        one: Responsabile dell'archivio cantonale
+        other: Responsabili dell'archivio cantonale
       group/kantonalverband/verantwortung_krisenteam:
         one: Responsabile della cellula di crisi
         other: Responsabili della cellula di crisi
@@ -399,7 +405,7 @@ it:
         one: Responsabile branca rover
         other: Responsabili branca rover
       group/region/verantwortung_pfadi_trotz_allem:
-        one: Responsabili SOC
+        one: Responsabile SOC
         other: Responsabili SOC
       group/region/verantwortung_abteilungen:
         one: Responsabile delle sezioni
@@ -411,10 +417,10 @@ it:
         one: Responsabile della formazione
         other: Responsabili della formazione
       group/region/verantwortung_betreuung:
-        one: Responsabili dell'accompagnamento
+        one: Responsabile dell'accompagnamento
         other: Responsabili dell'accompagnamento
       group/region/verantwortung_integration:
-        one: Responsabili integrazione
+        one: Responsabile integrazione
         other: Responsabili integrazione
       group/region/verantwortung_internationales:
         one: Responsabile internizionale
@@ -471,7 +477,7 @@ it:
         one: Vicepresidente
         other: Vicepresidenti
       group/abteilung/praesidium_apv:
-        one: Presidente scout anziani
+        one: Presidenti degli scout anziani
         other: Presidenti scout anziani
       group/abteilung/praeses:
         one: Assistente spirituale
@@ -560,7 +566,7 @@ it:
         other: Amministratori bancadati
       group/woelfe/leitwolf:
         one: Capo sestena
-        other: Capo sestena
+        other: Capi sestena
         long: Capo sestena
       group/woelfe/wolf:
         one: Lupetto
@@ -638,7 +644,7 @@ it:
         other: Campi
       event/camp/role/leader:
         one: Direzione del campo
-        other: Direzione del campo
+        other: Direzioni del campo
       event/camp/role/assistant_leader:
         one: Responsabile
         other: Responsabili
@@ -679,7 +685,7 @@ it:
         one: Docente di classe
         other: Docenti di classe
       event/course/role/helper:
-        one: Aiuti ai corsi
+        one: Aiute ai corsi
         other: Aiuti ai corsi
       event/course/role/advisor:
         one: CaF
@@ -690,6 +696,12 @@ it:
       salutation:
         one: Appellativo
         other: Appellativi
+        default:
+          label: Ciao [Name]
+          value:
+            m: Ciao %{greeting_name}
+            w: Ciao %{greeting_name}
+            other: Ciao %{greeting_name}
         available:
           lieber_pfadiname:
             label: Caro/a [totem]
@@ -719,12 +731,11 @@ it:
       cantons:
         zz: Estero
       event:
+        bsv_days: Numero di giorni UFAS
+        camp_days: Numero di giorni di campo
+        camp_submitted: Inoltrato
         course_languages: Corso di lingue
         express_fee: Spese per un'elaborazione espresso
-        language_de: Corso di tedesco
-        language_fr: Corso di francese
-        language_it: Corso di italiano
-        language_en: Corso di inglese
         expected_participants: Partecipanti stimati
         expected_participants_wolf: Lupetto
         expected_participants_wolf_f: Numero di lupette
@@ -741,8 +752,10 @@ it:
         expected_participants_leitung: Animatore
         expected_participants_leitung_f: Numero di animatrici
         expected_participants_leitung_m: Numero di animatori
-        camp_days: Numero di giorni di campo
-        camp_submitted: Inoltrato
+        language_de: Corso di tedesco
+        language_fr: Corso di francese
+        language_it: Corso di italiano
+        language_en: Corso di inglese
         j_s_kind: Ambiti G+S
         j_s_security: Ambiti di sicurezza
         j_s_security_snow: Inverno
@@ -766,11 +779,30 @@ it:
         local_scout_contact: Info contatto scout locali
         updated_at: Ultimo aggiornamento
         any_expected_participant_attr: Partecipanti stimati
+        abteilungsleitung_id: Direzione della sezione
+        abteilungsleitung: Direzione della sezione
+        leader: Direzione del campo
+        leader_id: Direzione del campo
+        coach_confirmed: Coach confermato
+        advisor_mountain_security_id: Accompagnamento ambito di sicurezza Montagna
+        advisor_mountain_security: Accompagnamento ambito di sicurezza Montagna
+        advisor_water_security_id: Accompagnamento ambito di sicurezza Acqua
+        advisor_water_security: Accompagnamento ambito di sicurezza Acqua
+        advisor_snow_security_id: Accompagnamento ambito di sicurezza Inverno
+        advisor_snow_security: Accompagnamento ambito di sicurezza Inverno
+        lagerreglement_applied: Regolamento del campo considerato/rispettato
+        kantonalverband_rules_applied: Prescrizioni associazione cantonale considerate/rispettate
+        j_s_rules_applied: Prescrizioni campi G+S considerate/rispettate
       event/approval:
         comment: Commento
         approvee: Partecipante
         approver: Operatore
         approved_at: Data
+        current_occupation: Attività
+        current_level: Branca
+        occupation_assessment: Valutazione
+        strong_points: Qualità
+        weak_points: Punti da incentivare
       event/camp:
         state: Stato del campo
         state_translated: Stato
@@ -785,31 +817,25 @@ it:
           assigned: Iscritta/o
           canceled: Disiscritta/o
           absent: Non comparsa/o
-        abteilungsleitung_id: Direzione della sezione
-        abteilungsleitung: Direzione della sezione
         coach_id: Coach
         coach: Coach
-        leader: Direzione del campo
-        leader_id: Direzione del campo
-        coach_confirmed: Coach confermato
-        advisor_mountain_security_id: Accompagnamento ambito di sicurezza Montagna
-        advisor_mountain_security: Accompagnamento ambito di sicurezza Montagna
-        advisor_water_security_id: Accompagnamento ambito di sicurezza Acqua
-        advisor_water_security: Accompagnamento ambito di sicurezza Acqua
-        advisor_snow_security_id: Accompagnamento ambito di sicurezza Inverno
-        advisor_snow_security: Accompagnamento ambito di sicurezza Inverno
         advisor_unassigned: Nessuna assegnazione
         leader_unassigned: Nessun animatore registrato
-        lagerreglement_applied: Regolamento del campo considerato/rispettato
-        kantonalverband_rules_applied: Prescrizioni associazione cantonale considerate/rispettate
-        j_s_rules_applied: Prescrizioni campi G+S considerate/rispettate
       event/course:
         requires_approval: Raccomandazione per l'iscrizione è necessaria attraverso
         advisor: CaF
         advisor_id: CaF
+        coach_id: CAF/coach
+        coach: CAF/coach
+        abteilungsleitung_or_ausbildungsverantwortlicher: Direzione della sezione/responsabile della formazione
+        al_or_av: CSZ/RespForm
       event/kind:
         documents_text: Formulari aggiuntivi
+        campy: Annunciare il corso come campo
+      event/participation:
+        bsv_days: Numero di giorni UFAS
       person:
+        layer_group_id: Id del livello principale
         nickname: Totem
         pbs_number: Numero personale MSS
         salutation: Appellativo
@@ -870,6 +896,8 @@ it:
       label_format:
         nickname: Nome scout sull'etichetta
     errors:
+      messages:
+        must_be_multiple_of: dev'essere un multiplo di %{multiple} .
       models:
         role:
           attributes:
