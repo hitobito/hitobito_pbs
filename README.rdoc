@@ -162,6 +162,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Präsident APV: [:group_read]
     * Präses: [:group_read]
     * Beisitzer: [:group_read]
+    * Materialwart: [:group_read]
+    * Heimverwalter: [:group_read, :contact_data]
     * Stufenleiter Biber: [:layer_and_below_read]
     * Stufenleiter Wölfe: [:layer_and_below_read]
     * Stufenleiter Pfadi: [:layer_and_below_read]
