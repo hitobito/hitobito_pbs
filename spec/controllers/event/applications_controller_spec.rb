@@ -25,21 +25,6 @@ describe Event::ApplicationsController do
 
   before { participation.application.reload }
 
-  context 'bulei' do
-    before do
-      sign_in(people(:bulei))
-      application.approvals.create!(layer: 'abteilung')
-      participant.update!(primary_group: groups(:pegasus))
-    end
-
-    it 'may not approve' do
-      expect { approve }.to raise_error CanCan::AccessDenied
-    end
-
-    it 'may not reject' do
-      expect { reject }.to raise_error CanCan::AccessDenied
-    end
-  end
 
   context 'al schekka' do
     before do
@@ -49,52 +34,26 @@ describe Event::ApplicationsController do
     end
 
     describe 'PUT approve' do
-      before { approve  }
-
-      it { is_expected.to redirect_to(group_event_participation_path(group, course, participation)) }
-
-      it 'sets flash' do
-        expect(flash[:notice]).to match(/freigegeben/)
+      it 'does not approves application' do
+        expect { approve }.to raise_error(CanCan::AccessDenied)
       end
 
-      it 'approves application' do
-        expect(application.reload).to be_approved
-        expect(application.reload).not_to be_rejected
-      end
-
-      it 'approves approval' do
-        expect(application.reload.approvals.first).to be_approved
-        expect(application.reload.approvals.first.comment).to eq 'test'
-      end
     end
 
     describe 'DELETE reject' do
-      before { reject }
-
-      it { is_expected.to redirect_to(group_event_participation_path(group, course, participation)) }
-
-      it 'sets flash' do
-        expect(flash[:notice].first).to match(/abgelehnt/)
-        expect(flash[:notice].second).to match(/Bitte informiere .* persönlich/)
+      it 'does not rejects application' do
+        expect { reject }.to raise_error(CanCan::AccessDenied)
       end
 
-      it 'rejects application' do
-        expect(application.reload).to be_rejected
-        expect(application.reload).not_to be_approved
-      end
-
-      it 'rejects approval' do
-        expect(application.reload.approvals.first).to be_rejected
-        expect(application.reload.approvals.first.comment).to eq 'test'
-      end
     end
   end
 
   def approve
-    put :approve, group_id: group.id, event_id: course.id, id: application.id, event_approval: { comment: 'test' }
+    put :approve, group_id: group.id, event_id: course.id, id: application.id
   end
 
   def reject
-    delete :reject, group_id: group.id, event_id: course.id, id: application.id, event_approval: { comment: 'test' }
+    delete :reject, group_id: group.id, event_id: course.id, id: application.id
   end
+
 end

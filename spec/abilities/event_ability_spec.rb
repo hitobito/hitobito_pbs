@@ -37,14 +37,13 @@ describe EventAbility do
           event = Fabricate(:event, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
-          is_expected.not_to be_able_to(:show_camp_application, event)
         end
 
         it "is allowed to create/update course" do
           event = Fabricate(:pbs_course, groups: [group])
           is_expected.to be_able_to(:create, event)
           is_expected.to be_able_to(:update, event)
-          is_expected.not_to be_able_to(:show_camp_application, event)
+          is_expected.to be_able_to(:show_camp_application, event)
         end
 
         it "is allowed to create/update camp" do
@@ -173,6 +172,19 @@ describe EventAbility do
         end
       end
 
+      context 'as course\'s advisor' do
+
+        it "is allowed to update course" do
+          event = Fabricate(:pbs_course, groups: [group])
+          child = people(:child)
+          event.update!(advisor_id: child.id)
+          ability = Ability.new(child)
+
+          expect(ability).not_to be_able_to(:create, event)
+          expect(ability).to be_able_to(:update, event)
+        end
+      end
+
     end
   end
 
@@ -279,6 +291,36 @@ describe EventAbility do
     end
   end
 
+  context :list_all do
+    context Group::Kantonalverband::Sekretariat do
+      let(:role) { Fabricate(Group::Kantonalverband::Sekretariat.name.to_sym, group: groups(:be)) }
 
+      it 'may list all courses' do
+        is_expected.to be_able_to(:list_all, Event::Course)
+      end
+    end
+
+    context Group::Ausbildungskommission::Mitglied  do
+      let(:role) do
+        Fabricate(Group::Ausbildungskommission::Mitglied.name.to_sym,
+                  group: Fabricate(Group::Ausbildungskommission.name.to_sym, parent: groups(:bund)))
+      end
+
+      it 'may list all courses' do
+        is_expected.to be_able_to(:list_all, Event::Course)
+      end
+    end
+
+    context Group::BundesGremium::Leitung  do
+      let(:role) do
+        Fabricate(Group::BundesGremium::Leitung.name.to_sym,
+                  group: Fabricate(Group::BundesGremium.name.to_sym, parent: groups(:bund)))
+      end
+
+      it 'may not list all courses' do
+        is_expected.not_to be_able_to(:list_all, Event::Course)
+      end
+    end
+  end
 
 end

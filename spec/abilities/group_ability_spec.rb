@@ -52,4 +52,27 @@ describe GroupAbility do
     end
   end
 
+  context 'ausbildungsveranwortlicher' do
+    let(:role) { Fabricate(Group::Kantonalverband::VerantwortungAusbildung.name.to_sym, group: groups(:be)) }
+
+    context 'in own kanton' do
+      it 'may see pending approvals' do
+        is_expected.to be_able_to(:index_pending_approvals, groups(:be))
+      end
+    end
+
+    context 'in other kanton' do
+      it 'may not see pending approvals' do
+        is_expected.to_not be_able_to(:index_pending_approvals, groups(:zh))
+      end
+    end
+
+    context 'in lower layer' do
+      it 'may not see pending approvals' do
+        is_expected.to_not be_able_to(:index_pending_approvals, groups(:schekka))
+      end
+    end
+
+  end
+
 end

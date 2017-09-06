@@ -12,7 +12,7 @@ module Pbs::Event::ParticipationsController
     before_render_show :load_approvals
     before_render_form :inform_about_email_sent_to_participant
 
-    after_cancel :send_canceled_info
+    after_action :send_discarded_info, only: [:cancel, :reject]
     after_reject :notice_with_mailto
 
     alias_method_chain :send_confirmation_email, :current_user
@@ -29,15 +29,18 @@ module Pbs::Event::ParticipationsController
   private
 
   def load_approvals
-    @approvals = Event::Approval.where(application_id: entry.application_id).includes(:approver)
+    @approvals = Event::Approval.
+      where(application_id: entry.application_id).
+      includes(:approver).
+      order_by_layer
   end
 
   def send_confirmation_email_with_current_user
     Event::ParticipationConfirmationJob.new(entry, current_user).enqueue!
   end
 
-  def send_canceled_info
-    Event::CanceledCourseParticipationJob.new(entry).enqueue!
+  def send_discarded_info
+    Event::DiscardedCourseParticipationJob.new(entry, entry.previous_changes[:state].first).enqueue!
   end
 
   def inform_about_email_sent_to_participant

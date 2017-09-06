@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -79,7 +79,7 @@ module Pbs::Person
     validates :entry_date, :leaving_date,
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
-
+    after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_changed?
   end
 
@@ -89,10 +89,6 @@ module Pbs::Person
 
   def salutation_value
     Salutation.new(self).value
-  end
-
-  def pbs_number
-    format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-')
   end
 
   def full_name_with_title(format = :default)
@@ -121,4 +117,14 @@ module Pbs::Person
     group.hierarchy.select(:id).find_by(type: ::Group::Kantonalverband.sti_name) ||
     Group.select(:id).root
   end
+
+  def set_pbs_number!
+    update_column(:pbs_number, format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-'))
+  end
+
+  # Missing when core person is seeded and wagon migrations have not be run
+  def pbs_number_column_available?
+    self.class.column_names.include?('pbs_number')
+  end
+
 end

@@ -9,20 +9,25 @@
 #
 # Table name: event_approvals
 #
-#  id             :integer          not null, primary key
-#  application_id :integer          not null
-#  layer          :string(255)      not null
-#  approved       :boolean          default(FALSE), not null
-#  rejected       :boolean          default(FALSE), not null
-#  comment        :text
-#  approved_at    :datetime
-#  approver_id    :integer
+#  id                    :integer          not null, primary key
+#  application_id        :integer          not null
+#  layer                 :string           not null
+#  approved              :boolean          default(FALSE), not null
+#  rejected              :boolean          default(FALSE), not null
+#  comment               :text
+#  approved_at           :datetime
+#  approver_id           :integer
+#  current_occupation    :string
+#  current_level         :string
+#  occupation_assessment :text
+#  strong_points         :text
+#  weak_points           :text
 #
 
 class Event::Approval < ActiveRecord::Base
 
   # ordering matters
-  LAYERS = %w(abteilung region kantonalverband bund)
+  LAYERS = %w(abteilung region kantonalverband bund).freeze
 
   self.demodulized_route_keys = true
 
@@ -40,6 +45,9 @@ class Event::Approval < ActiveRecord::Base
 
   validates_by_schema
   validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id }
+  validates :current_occupation, :current_level, :occupation_assessment,
+            :strong_points, :weak_points,
+            presence: { if: :approved? }
 
   def roles
     layer_class.roles.select { |role| role.permissions.include?(:approve_applications) }
@@ -59,8 +67,8 @@ class Event::Approval < ActiveRecord::Base
     # List all pending approvals for a given layer group.
     def pending(layer)
       joins(approvee: :primary_group).
-      where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
-      where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
+        where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: layer.lft, rgt: layer.rgt).
+        where(layer: layer.class.name.demodulize.downcase, approved: false, rejected: false)
     end
 
     # List all complted approvals for a given course.
@@ -69,6 +77,16 @@ class Event::Approval < ActiveRecord::Base
         where(events: { id: course.id }).
         where('event_approvals.rejected = ? or event_approvals.approved = ?', true, true)
     end
+
+    def order_by_layer
+      statement = 'CASE layer '
+      LAYERS.each_with_index do |l, i|
+        statement << "WHEN '#{l}' THEN #{i} "
+      end
+      statement << 'END'
+      order(statement)
+    end
+
   end
 
 end

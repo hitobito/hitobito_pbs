@@ -15,6 +15,9 @@ fr:
         one: Routier
         other: Routiers
         long: Routier groupe
+      group/ausbildungskommission:
+        one: Commission formation
+        other: Commissions formation
       group/biber:
         one: Castor
         other: Castors
@@ -195,6 +198,9 @@ fr:
       group/bund/kontaktperson:
         one: Personne de contact
         other: Personnes de contact
+      group/ausbildungskommission/mitglied:
+        one: Membre
+        other: Membres
       group/kantonalverband/kantonsleitung:
         one: Responsable cantonal
         other: Responsables cantonal
@@ -676,6 +682,12 @@ fr:
       salutation:
         one: Formule de politesse
         other: Formules de politesse
+        default:
+          label: Bonjour [nom]
+          value:
+            m: Bonjour %{greeting_name}
+            w: Bonjour %{greeting_name}
+            other: Bonjour %{greeting_name}
         available:
           lieber_pfadiname:
             label: Cher/Chère [totem]
@@ -705,12 +717,11 @@ fr:
       cantons:
         zz: International
       event:
+        bsv_days: nombre de jours OFAS
+        camp_days: Nombre de jours de camp
+        camp_submitted: Démission
         course_languages: Langues de cours
         express_fee: Finances express
-        language_de: Langue de cours allemand
-        language_fr: Langue de cours français
-        language_it: Langue de cours italien
-        language_en: Langue de cours anglais
         expected_participants: Participants/-es attendus/-ues
         expected_participants_wolf: Louveteau
         expected_participants_wolf_f: Nombre de louveteaux filles
@@ -727,8 +738,10 @@ fr:
         expected_participants_leitung: Responsable
         expected_participants_leitung_f: Nombre de responsables fille
         expected_participants_leitung_m: Nombre de responsables garçons
-        camp_days: Nombre de jours de camp
-        camp_submitted: Démission
+        language_de: Langue de cours allemand
+        language_fr: Langue de cours français
+        language_it: Langue de cours italien
+        language_en: Langue de cours anglais
         j_s_kind: Cadre J+S
         j_s_security: Domaines de sécurité
         j_s_security_snow: Hiver
@@ -752,11 +765,30 @@ fr:
         local_scout_contact: Informations de contact des scouts locaux
         updated_at: Actualisé pour la dernière fois
         any_expected_participant_attr: Participants/-es attendus/-ues
+        abteilungsleitung_id: maîtrise de groupe
+        abteilungsleitung: maîtrise de groupe
+        leader: maîtrise de camp
+        leader_id: maîtrise de camp
+        coach_confirmed: coach confirmé
+        advisor_mountain_security_id: Encadrement activité de sécurité Montagne
+        advisor_mountain_security: Encadrement activité de sécurité Montagne
+        advisor_water_security_id: Encadrement activité de sécurité Eau
+        advisor_water_security: Encadrement activité de sécurité Eau
+        advisor_snow_security_id: Encadrement activité de sécurité Hiver
+        advisor_snow_security: Encadrement activité de sécurité Hiver
+        lagerreglement_applied: Prise en compte / respect du règlement de camp
+        kantonalverband_rules_applied: Prise en compte / respect des recommandations de l'association cantonale
+        j_s_rules_applied: Prise en compte / respect des recommandations de camp J+S
       event/approval:
         comment: Commentaire
         approvee: Participant
         approver: Examinateur
         approved_at: Date
+        current_occupation: Activité
+        current_level: Branche
+        occupation_assessment: Évaluation
+        strong_points: Forces
+        weak_points: Points à encourager
       event/camp:
         state: Statut de camp
         state_translated: Statut
@@ -771,31 +803,25 @@ fr:
           assigned: Inscrit
           canceled: Désinscrit
           absent: Ne s'est pas présenté
-        abteilungsleitung_id: Maîtrise de groupe
-        abteilungsleitung: Maîtrise de groupe
         coach_id: Coach
         coach: Coach
-        leader: Maîtrise de camp
-        leader_id: Maîtrise de camp
-        coach_confirmed: Coach confirmé
-        advisor_mountain_security_id: Encadrement activité de sécurité Montagne
-        advisor_mountain_security: Encadrement activité de sécurité Montagne
-        advisor_water_security_id: Encadrement activité de sécurité Eau
-        advisor_water_security: Encadrement activité de sécurité Eau
-        advisor_snow_security_id: Encadrement activité de sécurité Hiver
-        advisor_snow_security: Encadrement activité de sécurité Hiver
         advisor_unassigned: Attribué à personne
         leader_unassigned: Pas de responsables saisis
-        lagerreglement_applied: Prise en compte / respect du règlement de camp
-        kantonalverband_rules_applied: Prise en compte / respect des recommandations de l'association cantonale
-        j_s_rules_applied: Prise en compte / respect des recommandations de camp J+S
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
         advisor: CAF
         advisor_id: CAF
+        coach_id: CàF/Coach
+        coach: CàF/Coach
+        abteilungsleitung_or_ausbildungsverantwortlicher: Responsable de groupe/responsable formation
+        al_or_av: RG/RF
       event/kind:
         documents_text: Formulaire supplémentaire
+        campy: Inscrire un cours en tant que camp
+      event/participation:
+        bsv_days: Jours OFAS
       person:
+        layer_group_id: Id du niveau principal
         nickname: Totem
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse
@@ -856,6 +882,8 @@ fr:
       label_format:
         nickname: Nom scout sur l'étiquette
     errors:
+      messages:
+        must_be_multiple_of: doit être un multiple de %{multiple}
       models:
         role:
           attributes:

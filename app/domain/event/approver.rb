@@ -23,22 +23,23 @@ class Event::Approver
     end
   end
 
-  def approve(comment, user)
+  def approve(attrs, user)
     return unless primary_group
 
-    update_approval(true, comment, user)
-
-    next_layer_name = next_approval_layer
-    if next_layer_name
-      request_approval(next_layer_name)
-    else
-      application.update!(approved: true)
+    if update_approval(true, attrs, user)
+      next_layer_name = next_approval_layer
+      if next_layer_name
+        request_approval(next_layer_name)
+      else
+        application.update!(approved: true)
+      end
+      true
     end
   end
 
-  def reject(comment, user)
-    update_approval(false, comment, user)
-    application.update!(rejected: true)
+  def reject(attrs, user)
+    update_approval(false, attrs, user) &&
+      application.update!(rejected: true)
   end
 
   def open_approval
@@ -46,11 +47,14 @@ class Event::Approver
   end
 
   def current_approvers
+    people = []
     if open_approval && primary_group
-      approvers_for_layer(open_approval.layer)
-    else
-      Person.none
+      groups = groups_of_layer(open_approval.layer)
+      if groups.present?
+        people = approvers_for_groups_with_role(groups)
+      end
     end
+    people
   end
 
   private
@@ -76,29 +80,62 @@ class Event::Approver
     send_approval_request
   end
 
-  def update_approval(approved, comment, user)
+  def update_approval(approved, attrs, user)
     attr = approved ? :approved : :rejected
-    open_approval.update!(attr => true,
-                          comment: comment,
-                          approver: user,
-                          approved_at: Time.zone.now)
+    open_approval.update({ attr => true,
+                           approver: user,
+                           approved_at: Time.zone.now }.merge(attrs))
   end
 
   def approvers_for_layer(layer_name)
-    groups = hierarchy.select { |g| g.class.name.demodulize.downcase == layer_name }
-    return Person.none if groups.blank?
+    groups = groups_of_layer(layer_name)
+    if groups.present?
+      approvers_for_groups(groups)
+    else
+      Person.none
+    end
+  end
 
+  def groups_of_layer(layer_name)
+    hierarchy.select { |g| g.class.name.demodulize.downcase == layer_name }
+  end
+
+  def approvers_for_groups(groups)
     role_types = approver_role_types_of(groups.first.class)
     Person.joins(:roles).
-           where(roles: { group_id: groups.collect(&:id),
-                          type: role_types.collect(&:sti_name),
-                          deleted_at: nil }).
-           uniq
+      where(roles: { group_id: groups.collect(&:id),
+                     type: role_types.collect(&:sti_name),
+                     deleted_at: nil }).
+      uniq
   end
 
   def approver_role_types_of(layer_type)
     layer_type.role_types.select do |role_type|
       role_type.permissions.include?(:approve_applications)
+    end
+  end
+
+  def approvers_for_groups_with_role(groups)
+    approvers = approvers_for_groups(groups).only_public_data.includes(:roles).to_a
+    groups.collect do |group|
+      group_role_approvers(group, approvers).presence ||
+        group_all_approvers(group, approvers)
+    end.flatten.uniq
+  end
+
+  def group_role_approvers(group, people)
+    people.select do |person|
+      person.roles.any? do |role|
+        role.group_id == group.id && role.class.name == group.application_approver_role
+      end
+    end
+  end
+
+  def group_all_approvers(group, people)
+    people.select do |person|
+      person.roles.any? do |role|
+        role.group_id == group.id && role.permissions.include?(:approve_applications)
+      end
     end
   end
 

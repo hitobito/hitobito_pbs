@@ -1,0 +1,23 @@
+-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+= field_set_tag do
+  - if entry.show_attr?(:title)
+    = f.labeled_input_field :title
+  - if entry.show_attr?(:salutation)
+    = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: true }, class: 'span6'
+  - if entry.show_attr?(:correspondence_language)
+    = f.labeled_collection_select(:correspondence_language,
+                                  Settings.application.languages.to_hash,
+                                  :first,
+                                  :last,
+                                  { prompt: true },
+                                  class: 'span6')
+  - if entry.show_attr?(:grade_of_school)
+    = f.labeled_input_field :grade_of_school, help_inline: t('people.fields_pbs.non_automatic_field')
+
+= field_set_tag do
+  - [:entry_date, :leaving_date].each do |a|
+    = f.labeled_input_field(a) if entry.show_attr?(a)

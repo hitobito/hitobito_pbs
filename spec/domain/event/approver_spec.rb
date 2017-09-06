@@ -19,6 +19,17 @@ describe Event::Approver do
   let(:approver) { Event::Approver.new(participation) }
   let(:mailer) { spy('mailer') }
   let(:approver_types) { Role.types_with_permission(:approve_applications).collect(&:sti_name) }
+  let(:attrs) do
+    {
+      comment: 'all good',
+      current_occupation: 'chief',
+      current_level: 'junior',
+      occupation_assessment: 'good',
+      strong_points: 'strong',
+      weak_points: 'weak'
+    }
+  end
+
 
   before do
     Delayed::Worker.delay_jobs = false
@@ -70,7 +81,7 @@ describe Event::Approver do
         expect(Event::ParticipationMailer).to_not have_received(:approval)
       end
 
-      it 'creates no Event::Approval and sends no emails if required layer is not in hiearchy' do
+      it 'creates no Event::Approval and sends no emails if required layer is not in hierarchy' do
         person.update!(primary_group_id: groups(:bund).id)
         create_application
 
@@ -159,7 +170,7 @@ describe Event::Approver do
     it 'updates approval and approves application if no upper layers are found' do
       course.update!(requires_approval_abteilung: true)
       application = create_application
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
 
       expect(application.reload).to be_approved
       expect(application.approvals.size).to eq 1
@@ -178,7 +189,7 @@ describe Event::Approver do
 
       course.update!(requires_approval_abteilung: true, requires_approval_bund: true)
       application = create_application
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
 
       expect(application.reload).not_to be_approved
       expect(application.approvals.size).to eq 2
@@ -190,7 +201,7 @@ describe Event::Approver do
       expect(approval_bund).not_to be_approved
 
       approver = Event::Approver.new(participation.reload)
-      approver.approve('all good', people(:bulei))
+      approver.approve(attrs, people(:bulei))
       expect(approval_bund.reload).to be_approved
 
       expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation,
@@ -202,20 +213,90 @@ describe Event::Approver do
   end
 
   describe '#reject' do
+
     it 'updates approval and rejects application' do
       course.update!(requires_approval_abteilung: true)
       application = create_application
-      approver.reject('not so good', people(:bulei))
+      approver.reject(attrs, people(:bulei))
       expect(application.reload).to be_rejected
       expect(application.approvals.size).to eq 1
 
       approval_abteilung = application.approvals.find_by_layer('abteilung')
       expect(approval_abteilung).to be_rejected
-      expect(approval_abteilung.comment).to eq 'not so good'
+      expect(approval_abteilung.comment).to eq 'all good'
       expect(approval_abteilung.approver).to eq people(:bulei)
       expect(approval_abteilung.approved_at).to be_within(10).of(Time.zone.now)
 
       expect(Event::ParticipationMailer).to have_received(:approval).once
+    end
+
+  end
+
+  describe '#current_approvers' do
+
+    before do
+      @rl = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: groups(:bern)).person
+      @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
+      @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
+
+      course.update!(requires_approval_region: true)
+      create_application
+    end
+
+    it 'contains all roles if none is selected' do
+      expect(approver.current_approvers).to match_array([@rl, @va1, @va2])
+    end
+
+    it 'contains only selected roles' do
+      groups(:bern).update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+      person.reload
+
+      expect(approver.current_approvers).to match_array([@va1, @va2])
+    end
+
+    it 'contains all roles if no person with selected exists' do
+      groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+      @rl.destroy!
+      person.reload
+
+      expect(approver.current_approvers).to match_array([@va1, @va2])
+    end
+
+    context 'with multiple groups' do
+
+      let(:corps) { Fabricate(Group::Region.name.to_sym, parent: groups(:be)) }
+
+      before do
+        groups(:bern).update!(parent: corps)
+
+        @va_corps = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: corps).person
+        @rl_corps = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: corps).person
+      end
+
+      it 'contains roles as selected by each group' do
+        groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
+      end
+
+      it 'does not contain person with different role in actual group' do
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        Fabricate(Group::Region::Kassier.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va1, @va2, @va_corps])
+      end
+
+      it 'does not contain person with approver role in other group' do
+        groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
+        corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
+        Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
+        person.reload
+
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
+      end
     end
 
   end

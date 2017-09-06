@@ -1,10 +1,9 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 
 # == Schema Information
 #
@@ -81,9 +80,9 @@ describe Person do
       expect(person.salutation_value).to eq('Sehr geehrter Herr Dr. Leiter')
     end
 
-    it 'is nil without salutation' do
+    it 'is a default without salutation' do
       person.salutation = nil
-      expect(person.salutation_value).to be_nil
+      expect(person.salutation_value).to eq('Hallo Bundes')
     end
   end
 
@@ -92,27 +91,23 @@ describe Person do
       expect(person.salutation_label).to eq('Sehr geehrte(r) Frau/Herr [Titel] [Nachname]')
     end
 
-    it 'is nil without salutation' do
+    it 'is a default without salutation' do
       person.salutation = nil
-      expect(person.salutation_label).to be_nil
+      expect(person.salutation_label).to eq('Hallo [Name]')
     end
   end
 
   context '#pbs_number' do
     it 'handles short numbers' do
-      person.id = 15
+      person = Fabricate(:person, id: 15)
       expect(person.pbs_number).to eq('000-000-015')
     end
 
     it 'handles long numbers' do
-      person.id = 123_456_789
+      person = Fabricate(:person, id: 123_456_789)
       expect(person.pbs_number).to eq('123-456-789')
     end
 
-    it 'handles very long numbers' do
-      person.id = 1_234_567_891_234
-      expect(person.pbs_number).to eq('1-234-567-891-234')
-    end
   end
 
   context '#kantonalverband' do

@@ -55,6 +55,11 @@ describe Event::ParticipationsController, type: :controller  do
       it 'sees Empfehlungen aside' do
         participation.application.approvals.create!(layer: 'abteilung',
                                                     comment: 'all good',
+                                                    current_occupation: 'chief',
+                                                    current_level: 'junior',
+                                                    occupation_assessment: 'good',
+                                                    strong_points: 'strong',
+                                                    weak_points: 'weak',
                                                     approved: true,
                                                     approver: al_schekka)
 

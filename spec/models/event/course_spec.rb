@@ -202,4 +202,25 @@ describe Event::Course do
     end
   end
 
+  context '#bsv_days' do
+    it 'is valid when empty' do
+      expect(event).to be_valid
+    end
+
+    it 'is valid when multiple of 0.5' do
+      event.bsv_days = 3.5
+      expect(event).to be_valid
+    end
+
+    it 'is not valid when negative' do
+      event.bsv_days = -1
+      expect(event).not_to be_valid
+    end
+
+    it 'is not valid when not multiple of 0.5' do
+      event.bsv_days = 2.25
+      expect(event).not_to be_valid
+    end
+  end
+
 end

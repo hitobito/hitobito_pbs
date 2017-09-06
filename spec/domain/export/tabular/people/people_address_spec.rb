@@ -13,7 +13,7 @@ describe Export::Tabular::People::PeopleAddress do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
     %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Rollen Titel Anrede Korrespondenzsprache Kantonalverband Id) << 'Id der Hauptebene'
+       Geschlecht Geburtstag Hauptebene Rollen Titel Anrede Korrespondenzsprache Kantonalverband Id) << 'Id der Hauptebene'
   end
   let(:list) { Person.where(id: person) }
   let(:data) { Export::Tabular::People::PeopleAddress.csv(list) }
@@ -35,7 +35,6 @@ describe Export::Tabular::People::PeopleAddress do
       its(['Rollen']) { should eq 'Mitarbeiter GS Pfadibewegung Schweiz' }
       its(['Titel']) { should eq 'Dr.' }
       its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
-      its(['PBS Personennummber']) { should be_nil }
       its(['Kantonalverband']) { is_expected.to eq 'CH' }
     end
   end
@@ -43,6 +42,10 @@ describe Export::Tabular::People::PeopleAddress do
   context 'export_full' do
     its(:headers) { should include('Titel') }
     let(:data) { Export::Tabular::People::PeopleFull.csv(list) }
+
+    before do
+      person.update(pbs_number: '337-180-612')
+    end
 
     context 'first row' do
       subject { csv[0] }

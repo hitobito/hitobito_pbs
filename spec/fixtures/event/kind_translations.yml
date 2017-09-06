@@ -18,3 +18,11 @@ bkws_de:
   short_name: BKWS
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
+
+fut_de:
+  event_kind_id: <%= ActiveRecord::FixtureSet.identify(:fut) %>
+  locale: de
+  label: Futurakurs
+  short_name: FUT
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

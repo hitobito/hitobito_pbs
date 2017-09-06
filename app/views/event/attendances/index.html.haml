@@ -1,0 +1,21 @@
+-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- title event.to_s
+
+= t('.info')
+
+= form_tag(attendances_group_event_path(@group, @event), method: :patch) do
+
+  %table.table.table-striped.table-hover.attendance
+    = render 'list', entries: @leaders, caption: t('.leaders')
+
+    = render 'list', entries: @cooks, caption: t('.cooks')
+
+    = render 'list', entries: @participants, caption: t('.participants')
+
+  .btn-toolbar
+    .btn-group
+      = button_tag(t('global.button.save'), class: 'btn btn-primary')

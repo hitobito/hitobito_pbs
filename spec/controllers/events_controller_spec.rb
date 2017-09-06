@@ -62,6 +62,28 @@ describe EventsController do
       expect(assigns(:event)).to be_valid
       expect(assigns(:event).coach_confirmed).to be_falsey
     end
+
+    context 'campy course' do
+      let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
+
+      it 'allows coaches to edit coach_confirmed for campy courses' do
+        event.update!(coach_id: people(:al_schekka).id)
+
+        put :update, group_id: event.groups.first.id,
+            id: event.id,
+            event: { coach_confirmed: true }
+        expect(assigns(:event)).to be_valid
+        expect(assigns(:event).coach_confirmed).to be_truthy
+      end
+
+      it 'prevents non-coaches from editing coach_confirmed' do
+        put :update, group_id: event.groups.first.id,
+            id: event.id,
+            event: { coach_confirmed: true }
+        expect(assigns(:event)).to be_valid
+        expect(assigns(:event).coach_confirmed).to be_falsey
+      end
+    end
   end
 
   context 'GET show_camp_application' do
@@ -74,6 +96,13 @@ describe EventsController do
         get :show_camp_application, group_id: event.groups.first.id, id: event.id
         expect(response).to be_ok
       end
+
+      it 'renders pdf for campy course' do
+        event = Fabricate(:course, kind: event_kinds(:fut))
+        get :show_camp_application, group_id: event.groups.first.id, id: event.id
+        expect(response).to be_ok
+      end
+
     end
 
     context 'when unauthorized' do
@@ -117,6 +146,35 @@ describe EventsController do
         expect(event.reload).to be_camp_submitted
       end
 
+      context 'for campy course' do
+        let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
+
+        before { event.update!(leader_id: people(:bulei).id) }
+
+        it 'fails if no canton given' do
+          group = event.groups.first
+          put :create_camp_application, group_id: group.id, id: event.id
+          expect(response).to redirect_to(group_event_path(group, event))
+          expect(flash[:alert]).to match /Das Lager konnte nicht eingereicht werden:/
+          expect(flash[:alert]).to match /Kanton.* muss ausgefüllt werden/
+          expect(event.reload).not_to be_camp_submitted
+        end
+
+        it 'sends mail if all is present' do
+          group = event.groups.first
+          event.update!(required_attrs_for_camp_submit)
+
+          mail = double('mail', deliver_later: nil)
+          expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)
+
+          put :create_camp_application, group_id: group.id, id: event.id
+          expect(response).to redirect_to(group_event_path(group, event))
+          expect(flash[:alert]).to be_nil
+          expect(flash[:notice]).to match /eingereicht/
+          expect(event.reload).to be_camp_submitted
+        end
+      end
+
       def required_attrs_for_camp_submit
         { canton: 'be',
           location: 'foo',
@@ -144,40 +202,67 @@ describe EventsController do
       end
     end
 
-    context 'camp leader checkpoint attrs' do
+  end
 
-      let(:camp) { events(:schekka_camp) }
-      before { sign_in(people(:bulei)) }
+  context 'camp leader checkpoint attrs' do
+
+    let(:camp) { events(:schekka_camp) }
+    before { sign_in(people(:bulei)) }
+
+    it 'is not possible for non camp leader user to update checkpoint attrs' do
+      put :update, group_id: camp.groups.first.id, id: camp.id,
+                   event: checkpoint_values
+
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        expect(camp.send(attr)).to be false
+      end
+    end
+
+    it 'is possible for camp leader to update checkpoint attrs' do
+      camp.leader_id = people(:bulei).id
+      camp.save!
+
+      put :update, group_id: camp.groups.first.id, id: camp.id,
+                   event: checkpoint_values
+
+      camp.reload
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        expect(camp.send(attr)).to be true
+      end
+    end
+
+    context 'campy course' do
+      let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
 
       it 'is not possible for non camp leader user to update checkpoint attrs' do
-        put :update, group_id: camp.groups.first.id, id: camp.id,
-                     event: checkpoint_values
+        put :update, group_id: event.groups.first.id, id: event.id,
+            event: checkpoint_values
 
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
-          expect(camp.send(attr)).to be false
+          expect(event.send(attr)).to be false
         end
       end
 
       it 'is possible for camp leader to update checkpoint attrs' do
-        camp.leader_id = people(:bulei).id
-        camp.save!
+        event.leader_id = people(:bulei).id
+        event.save!
 
-        put :update, group_id: camp.groups.first.id, id: camp.id,
-                     event: checkpoint_values
+        put :update, group_id: event.groups.first.id, id: event.id,
+            event: checkpoint_values
 
-        camp.reload
+        event.reload
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
-          expect(camp.send(attr)).to be true
+          expect(event.send(attr)).to be true
         end
       end
+    end
 
-      def checkpoint_values
-        values = {}
-        Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
-          values[attr.to_s] = '1'
-        end
-        values
+    def checkpoint_values
+      values = {}
+      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+        values[attr.to_s] = '1'
       end
+      values
     end
   end
 end

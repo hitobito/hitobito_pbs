@@ -58,6 +58,12 @@ fr:
     assistant_leader_qualifications: Formations valables
     js_security: Domaine de sécurité
   event:
+    attendances:
+      index:
+        info: Saisis le nombre de journées OFAS pour chaque personne.
+        leaders: Maîtrise
+        cooks: Cuisine
+        participants: Participants
     lists:
       nav_left_camps:
         all_camps: Camp dans toute la Suisse
@@ -89,15 +95,30 @@ fr:
       actions_approval:
         approve_title: Accepter la participation
         reject_title: Refuser la participation
-      popover_approval:
-        approval_stored: La recommandation a été enregistrée par l'organisateur du cours (rôle), responsable de cours (personne) et peut être transmise à d'autres instances de recommandation.
       popover_cancel:
-        cancel_info: La responsable de cours, l'organisateur de cours et le responsable de groupe seront avisés de l'annulation.
+        cancel_info: La maîtrise de cours, l'organisateur/l'organisatrice du cours, le/la responsable de groupe et les instances de recommandation vont être informés de la désinscription.
       print:
         heading_event/camp: Annonce de camp %{year}
         read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu sa description du camp et je l'accepte.
-  event/applications:
-    rejected_inform_participant: Veuillez svp en informer le %{participant} et le responsable de groupe personnellement.
+    approvals:
+      form:
+        approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur du cours (rôle), le/la responsable de cours (personne) et d'autres instances de recommandation.
+        placeholder_current_occupation: Activité actuelle du participant/de la participante
+        current_level: Branche
+        occupation_assessment: Dans quelle mesure fait-il/elle ses preuves? p.ex. enthousiasme, qualité du participant/de la participante
+        strong_points: Quelles sont ses forces?
+        weak_points: Dans quel(s) domaine(s) faut-il l'encourager?
+        comment: Suggestions ou commentaires à la maîtrise de cours
+        title_approve: Confirmer la recommandation pour %{participant}
+        title_reject: Refuser la recommandation pour %{participant}
+        title_update_approved: Mettre à jour la confirmation pour %{participant}
+        title_update_rejected: Mettre à jour le refus pour %{participant}
+  event/attendances:
+    update:
+      flash:
+        success: Les présences ont été mises à jour.
+  event/approvals:
+    rejected_inform_participant: Prière d'informer %{participant} et les responsables de groupe personnellement.
   event/camp:
     al_present_info:
       'true': Présent au camp
@@ -165,13 +186,27 @@ fr:
       inform_by_email: Informer
     show_right_advisors:
       advisors: Encadrement
+    tabs:
+      approvals: Recommandations
+      attendances: Présence
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camps ("règlement de camp") ainsi que le profil du scoutisme sont pris en compte et respectés
       kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prises en compte lors de la préparation du camp
       j_s_rules_applied_caption: "Pour les camps J+S: Les directives actuelles de Sport de camp/Trekking sont connues et respectées"
-  groups:
+  group:
     pending_approvals:
-      info: Les personnes suivantes ont signé pour un cours et doivent être approuvés par vous.
+      index:
+        pending_title: Confirmations en attente
+        pending_info: 'Les personnes suivantes se sont inscrites à un cours et doivent être confirmées:'
+        no_pending_info: Il n'y pas de confirmations en attente en ce moment.
+      notified_role_setting:
+        title: Notification à
+        all: Tous
+      approved_approvals:
+        title: Confirmations effectuées
+        course_kind: Type de cours
+        course_kind_all: Tous
+  groups:
     tabs:
       population: Effectifs
       statistic: Statistiques

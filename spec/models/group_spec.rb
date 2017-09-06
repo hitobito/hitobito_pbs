@@ -67,6 +67,7 @@ describe Group do
          Group::Elternrat,
          Group::AbteilungsGremium,
          Group::KantonalesGremium,
+         Group::Ausbildungskommission,
          Group::BundesGremium].collect(&:name))
     end
   end
