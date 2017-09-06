@@ -1,6 +1,6 @@
 # Hitobito Changelog
 
-## Version 1.X
+## Version 1.16
 
 *   Neuer Gruppentyp Ausbildungskommission auf Ebene Bund.
 *   Pro Ebene einstellbar, welche Rollen Benachrichtigungen für Kursempfehlungen erhalten.
