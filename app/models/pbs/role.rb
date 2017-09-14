@@ -41,6 +41,9 @@ module Pbs::Role
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
     after_save :update_primary_group
+
+    alias_method_chain :set_first_primary_group, :kantonalverband
+    alias_method_chain :reset_primary_group, :kantonalverband
   end
 
   def created_at=(value)
@@ -90,5 +93,15 @@ module Pbs::Role
 
   def soft_deleted_change?
     changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
+  end
+
+  def set_first_primary_group_with_kantonalverband
+    set_first_primary_group_without_kantonalverband
+    person.reload.reset_kantonalverband!
+  end
+
+  def reset_primary_group_with_kantonalverband
+    reset_primary_group_without_kantonalverband
+    person.reload.reset_kantonalverband!
   end
 end
