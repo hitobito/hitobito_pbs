@@ -33,7 +33,7 @@ class Event::ApprovalRequestJob < BaseJob
   end
 
   def participation
-    @participation ||= Event::Participation.find(@participation_id)
+    @participation ||= Event::Participation.find_by(id: @participation_id)
   end
 
 end

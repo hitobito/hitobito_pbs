@@ -734,7 +734,7 @@ it:
         bsv_days: Numero di giorni UFAS
         camp_days: Numero di giorni di campo
         camp_submitted: Inoltrato
-        course_languages: Corso di lingue
+        course_languages: Lingua del corso
         express_fee: Spese per un'elaborazione espresso
         expected_participants: Partecipanti stimati
         expected_participants_wolf: Lupetto
@@ -822,7 +822,7 @@ it:
         advisor_unassigned: Nessuna assegnazione
         leader_unassigned: Nessun animatore registrato
       event/course:
-        requires_approval: Raccomandazione per l'iscrizione è necessaria attraverso
+        requires_approval: Raccomandazione necessaria
         advisor: CaF
         advisor_id: CaF
         coach_id: CAF/coach

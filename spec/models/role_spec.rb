@@ -113,7 +113,7 @@ describe Role do
     end
 
     it 'is not sent on role update (not possible to gain access via update)' do
-      child_group = groups(:sunnewirbu)
+      groups(:sunnewirbu)
       role = Fabricate(Group::Abteilung::Revisor.name.to_sym, group: home_group, person: person)
 
       role.type = Group::Woelfe::Wolf.sti_name

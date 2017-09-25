@@ -1,4 +1,9 @@
-# Hitobito Changelog
+# Hitobito PBS Changelog
+
+## Version 1.17
+
+*   Bugfix: Kantonalverband wird wieder gesetzt
+
 
 ## Version 1.16
 
@@ -22,6 +27,7 @@
 *   Bei Kursarten definierbar, ob ein Kurs ebenfalls als Lager angemeldet werden soll.
 *   Suche nach PBS Personennummer möglich.
 
+
 ## Version 1.11
 
 *   PBS Branding
@@ -32,6 +38,7 @@
 *   Zusätzliche Validierungen beim Lager einreichen
 *   Sichtbarkeit von Lagerfelder für Teilnehmer
 *   CSV Export für Lager
+
 
 ## Version 1.10
 
