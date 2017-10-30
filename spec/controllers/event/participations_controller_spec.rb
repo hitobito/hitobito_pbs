@@ -14,13 +14,6 @@ describe Event::ParticipationsController do
 
   before { sign_in(people(:bulei)) }
 
-  context 'GET#index.csv' do
-    it 'contains kantonalverband' do
-      get :index, group_id: group.id, event_id: course.id, format: :csv
-      expect(response.body.lines.first).to match(/Kantonalverband/)
-    end
-  end
-
   context 'GET#new' do
     it 'informs about email sent to participant' do
       get :new,
