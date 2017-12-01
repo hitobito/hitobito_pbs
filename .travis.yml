@@ -12,8 +12,6 @@ env:
     - RAILS_DB_NAME=hitobito_test
     - RAILS_ENV=development
 rvm:
-  - 1.9.3
-  - 2.0.0
   - 2.1.7
   - 2.2.3
   - 2.3.1
@@ -37,7 +35,4 @@ script:
   - bundle exec rake db:create ci:wagon --trace
 matrix:
   allow_failures:
-  - rvm: 2.0.0
-  - rvm: 2.1.7
-  - rvm: 2.3.1
   - rvm: 2.4.0
