@@ -8,13 +8,14 @@
 require 'spec_helper'
 
 describe Event::ListsController do
+  include ActiveSupport::Testing::TimeHelpers
 
-  before { Timecop.freeze(Time.local(2015, 07, 15)) }
+  before do
+    travel_to(Time.local(2015, 07, 15))
+    sign_in(user)
+  end
 
-  after { Timecop.return }
-
-  before { sign_in(user) }
-
+  after   { travel_back }
   subject { assigns(:camps).values.flatten }
 
   describe 'GET all_camps' do
