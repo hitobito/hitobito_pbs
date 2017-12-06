@@ -171,9 +171,9 @@ fr:
       group/bund/verantwortung_pr:
         one: Responsable relations publiques
         other: Responsables relations publiques
-      group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsable prévention des abus sexuels
-        other: Responsables prévention des abus sexuels
+      group/bund/verantwortung_praevention:
+        one: Responsable prévention
+        other: Responsables prévention
       group/bund/international_commissioner_ic_wagggs:
         one: Commissaire internationale AMGE
         other: Commissaires internationale AMGE
@@ -309,9 +309,9 @@ fr:
       group/kantonalverband/verantwortung_pr:
         one: Responsable relations publiques
         other: Responsables relations publiques
-      group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsable prévention des abus sexuels
-        other: Responsables prévention des abus sexuels
+      group/kantonalverband/verantwortung_praevention:
+        one: Responsable prévention
+        other: Responsables prévention
       group/kantonalverband/verantwortung_programm:
         one: Responsable du programme
         other: Responsables du programme
@@ -429,9 +429,9 @@ fr:
       group/region/verantwortung_pr:
         one: Responsable relations publiques
         other: Responsables relations publiques
-      group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsable prévention des abus sexuels
-        other: Responsables prévention des abus sexuels
+      group/region/verantwortung_praevention:
+        one: Responsable prévention
+        other: Responsables prévention
       group/region/verantwortung_programm:
         one: Responsable du programme
         other: Responsables du programme

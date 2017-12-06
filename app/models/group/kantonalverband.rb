@@ -226,7 +226,7 @@ class Group::Kantonalverband < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortungPraeventionSexuellerAusbeutung < ::Role
+  class VerantwortungPraevention < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -289,7 +289,7 @@ class Group::Kantonalverband < Group
         VerantwortungLagerplaetze,
         VerantwortungMaterialverkaufsstelle,
         VerantwortungPr,
-        VerantwortungPraeventionSexuellerAusbeutung,
+        VerantwortungPraevention,
         VerantwortungProgramm,
 
         Spezialfunktion,

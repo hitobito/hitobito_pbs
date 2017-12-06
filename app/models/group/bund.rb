@@ -219,7 +219,7 @@ class Group::Bund < Group
     self.permissions = [:group_read, :contact_data]
   end
 
-  class VerantwortungPraeventionSexuellerAusbeutung < ::Role
+  class VerantwortungPraevention < ::Role
     self.permissions = [:group_read, :contact_data]
   end
 
@@ -281,7 +281,7 @@ class Group::Bund < Group
         VerantwortungIntegration,
         VerantwortungLagermeldung,
         VerantwortungPr,
-        VerantwortungPraeventionSexuellerAusbeutung,
+        VerantwortungPraevention,
 
         InternationalCommissionerIcWagggs,
         InternationalCommissionerIcWosm,

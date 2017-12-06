@@ -185,9 +185,9 @@ it:
       group/bund/verantwortung_pr:
         one: Responsabile PR
         other: Responsabili PR
-      group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsabile della prevenzione degli abusi sessuali
-        other: Responsabili della prevenzione degli abusi sessuali
+      group/bund/verantwortung_praevention:
+        one: Responsabile della prevenzione
+        other: Responsabili della prevenzione
       group/bund/international_commissioner_ic_wagggs:
         one: Commissario internazionale WAGGGS
         other: Commissarii internazionale WAGGGS
@@ -323,9 +323,9 @@ it:
       group/kantonalverband/verantwortung_pr:
         one: Responsabile PR
         other: Responsabili PR
-      group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsabile della prevenzione degli abusi sessuali
-        other: Responsabili della prevenzione degli abusi sessuali
+      group/kantonalverband/verantwortung_praevention:
+        one: Responsabile della prevenzione
+        other: Responsabili della prevenzione
       group/kantonalverband/verantwortung_programm:
         one: Responsabile del programma
         other: Responsabili del programma
@@ -443,9 +443,9 @@ it:
       group/region/verantwortung_pr:
         one: Responsabile PR
         other: Responsabili PR
-      group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsabile della prevenzione degli abusi sessuali
-        other: Responsabili della prevenzione degli abusi sessuali
+      group/region/verantwortung_praevention:
+        one: Responsabile della prevenzione
+        other: Responsabili della prevenzione
       group/region/verantwortung_programm:
         one: Responsabile del programma
         other: Responsabili del programma
