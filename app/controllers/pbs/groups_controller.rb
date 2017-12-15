@@ -14,8 +14,8 @@ module Pbs::GroupsController
 
   def pending_approvals
     @approvals = Event::Approval.pending(entry).
-      includes(:participation, :approvee, event: [:dates, :groups]).
-      order('event_participations.created_at ASC')
+                 includes(:participation, :approvee, event: [:dates, :groups]).
+                 order('event_participations.created_at ASC')
   end
 
   private

@@ -13,10 +13,10 @@ module Export::Pdf
     attr_reader :camp, :pdf, :data, :label_helper
 
     delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
-      to: :pdf
+             to: :pdf
     delegate :t, :l, to: I18n
     delegate :labeled_checkpoint_attr, :labeled_camp_attr, :with_label,
-      :labeled_email, :labeled_phone_number, :labeled_value, to: :label_helper
+             :labeled_email, :labeled_phone_number, :labeled_value, to: :label_helper
 
     def initialize(camp)
       @camp = camp
@@ -83,7 +83,7 @@ module Export::Pdf
       cells << data.expected_participant_table_header
       cells << data.expected_participant_table_row(:f)
       cells << data.expected_participant_table_row(:m)
-      table(cells, cell_style: { align: :center, border_width: 0.25, width: 50})
+      table(cells, cell_style: { align: :center, border_width: 0.25, width: 50 })
     end
 
     def render_leader
@@ -111,8 +111,8 @@ module Export::Pdf
           header_row = assistant_leaders_header_row
           cells = cells.unshift(header_row)
           table(cells, width: 500,
-                cell_style: { border_width: 0.25 },
-                column_widths: [210, 55, 235])
+                       cell_style: { border_width: 0.25 },
+                       column_widths: [210, 55, 235])
         else
           text_nobody
         end

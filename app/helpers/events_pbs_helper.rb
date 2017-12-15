@@ -141,7 +141,7 @@ module EventsPbsHelper
   end
 
   def labeled_camp_days(event)
-    label = t("activerecord.attributes.event.camp_days")
+    label = t('activerecord.attributes.event.camp_days')
     labeled(label, event.camp_days)
   end
 
@@ -156,14 +156,14 @@ module EventsPbsHelper
   def labeled_checkpoint_checkboxes(f)
     content = []
     Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
-     content << labeled_checkpoint_checkbox(f,attr)
+      content << labeled_checkpoint_checkbox(f, attr)
     end
     content.join.html_safe
   end
 
 
   def camp_submit_button
-    options = {data: { method: :put }}
+    options = { data: { method: :put } }
     if entry.camp_submitted?
       label = ti('.camp_submitted')
       options[:class] = 'disabled'
@@ -178,11 +178,11 @@ module EventsPbsHelper
   private
 
   def append_required_advisor(content, advisor)
-    if advisor
-      content << person_link(advisor)
-    else
-      content << advisor_warning(:advisor_unassigned)
-    end
+    content << if advisor
+                 person_link(advisor)
+               else
+                 advisor_warning(:advisor_unassigned)
+               end
   end
 
   def append_leader_warning(content, required_leader = nil)
@@ -193,7 +193,7 @@ module EventsPbsHelper
 
   def advisor_warning(key)
     content_tag(:span, class: 'label label-warning') do
-      t("activerecord.attributes.event/camp.#{key.to_s}")
+      t("activerecord.attributes.event/camp.#{key}")
     end
   end
 

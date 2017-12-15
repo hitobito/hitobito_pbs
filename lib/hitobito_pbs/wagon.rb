@@ -19,7 +19,6 @@ module HitobitoPbs
                                  #{config.root}/app/serializers)
 
     config.to_prepare do
-      # rubocop:disable SingleSpaceBeforeFirstArg
 
       ### models
       Group.send        :include, Pbs::Group
@@ -41,17 +40,23 @@ module HitobitoPbs
       Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.send(
-        :include, Pbs::Export::Tabular::People::ParticipationsFull)
+        :include, Pbs::Export::Tabular::People::ParticipationsFull
+      )
       Export::Tabular::People::ParticipationRow.send(
-        :include, Pbs::Export::Tabular::People::ParticipationRow)
+        :include, Pbs::Export::Tabular::People::ParticipationRow
+      )
       Export::Tabular::People::ParticipationNdbjsRow.send(
-        :include, Pbs::Export::Tabular::People::ParticipationNdbjsRow)
+        :include, Pbs::Export::Tabular::People::ParticipationNdbjsRow
+      )
       Export::Tabular::People::PersonRow.send(
-        :include, Pbs::Export::Tabular::People::PersonRow)
+        :include, Pbs::Export::Tabular::People::PersonRow
+      )
       Export::Tabular::People::PeopleAddress.send(
-        :include, Pbs::Export::Tabular::People::PeopleAddress)
+        :include, Pbs::Export::Tabular::People::PeopleAddress
+      )
       Export::Tabular::People::PeopleFull.send(
-        :include, Pbs::Export::Tabular::People::PeopleFull)
+        :include, Pbs::Export::Tabular::People::PeopleFull
+      )
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
 
       ### abilities

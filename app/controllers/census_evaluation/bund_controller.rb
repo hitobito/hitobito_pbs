@@ -30,8 +30,8 @@ class CensusEvaluation::BundController < CensusEvaluation::BaseController
 
   def number_of_confirmations(kantonalverband)
     MemberCount.where(kantonalverband_id: kantonalverband.id, year: year).
-                distinct.
-                count(:abteilung_id)
+      distinct.
+      count(:abteilung_id)
   end
 
   def number_of_abteilungen(kantonalverband)

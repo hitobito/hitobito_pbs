@@ -31,7 +31,7 @@
 #
 class MemberCount < ActiveRecord::Base
 
-  COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta]
+  COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta].freeze
   COUNT_COLUMNS = COUNT_CATEGORIES.collect { |c| [:"#{c}_f", :"#{c}_m"] }.flatten
 
   belongs_to :abteilung, class_name: 'Group::Abteilung'

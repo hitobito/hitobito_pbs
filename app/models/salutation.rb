@@ -7,7 +7,7 @@
 
 class Salutation
 
-  I18N_KEY_PREFIX = 'activerecord.models.salutation'
+  I18N_KEY_PREFIX = 'activerecord.models.salutation'.freeze
 
   attr_reader :person
 
@@ -45,7 +45,7 @@ class Salutation
     if @person.salutation?
       "available.#{@person.salutation}"
     else
-      "default"
+      'default'
     end
   end
 

@@ -18,9 +18,7 @@ describe Event::AttendancesController do
     @p1 = Fabricate(Event::Course::Role::Leader.name.to_sym,
                     participation: Fabricate(:event_participation,
                                              event: course, bsv_days: 5)).participation
-    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym,
-                    participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym, participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
     @p3 = Fabricate(Event::Role::Speaker.name.to_sym,
                     participation: Fabricate(:event_participation,
                                              event: course, bsv_days: 5)).participation

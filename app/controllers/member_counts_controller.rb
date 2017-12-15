@@ -58,7 +58,7 @@ class MemberCountsController < ApplicationController
 
   def year
     @year ||= Census.current.try(:year) ||
-              fail(ActiveRecord::RecordNotFound, 'No current census found')
+              raise(ActiveRecord::RecordNotFound, 'No current census found')
   end
 
   def permitted_params

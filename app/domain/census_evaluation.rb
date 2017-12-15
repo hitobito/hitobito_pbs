@@ -90,8 +90,8 @@ class CensusEvaluation
   def sub_group_ids_with_other_group_count(sub_group_ids)
     MemberCount.where(sub_group_id_col => sub_group_ids,
                       :year => year).
-                where("#{group_id_col} <> ?", group.id).
-                pluck(sub_group_id_col)
+      where("#{group_id_col} <> ?", group.id).
+      pluck(sub_group_id_col)
   end
 
   def sub_group_id_col

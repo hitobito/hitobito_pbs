@@ -47,10 +47,10 @@ class PopulationController < ApplicationController
 
   def load_people(group)
     @member_counter.members.
-                    where(roles: { group_id: group }).
-                    preload_groups.
-                    order_by_role.
-                    order_by_name
+      where(roles: { group_id: group }).
+      preload_groups.
+      order_by_role.
+      order_by_name
   end
 
   def authorize

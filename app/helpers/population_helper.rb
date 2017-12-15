@@ -19,7 +19,7 @@ module PopulationHelper
 
   def tab_population_label(group)
     label = t('groups.tabs.population')
-    label << " <span style=\"color: red;\">!</span>" if check_approveable?(group)
+    label << ' <span style="color: red;">!</span>' if check_approveable?(group)
     label.html_safe
   end
 
