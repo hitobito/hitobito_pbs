@@ -48,7 +48,7 @@ describe MemberCount do
 
   describe '.total_by_abteilungen' do
 
-    subject { MemberCount.total_by_abteilungen(2012, be).to_a }
+    subject { MemberCount.total_by_regionen(2012, be).to_a }
 
     it 'counts totals' do
       is_expected.to have(2).items

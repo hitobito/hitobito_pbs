@@ -64,7 +64,7 @@ class Group::Kantonalverband < Group
   end
 
   def census_groups(year)
-    MemberCount.total_by_abteilungen(year, self)
+    MemberCount.total_by_regionen(year, self)
   end
 
   def census_details(year)

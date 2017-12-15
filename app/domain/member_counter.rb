@@ -107,7 +107,7 @@ class MemberCounter
   end
 
   def region
-    @region ||= abteilung.region
+    @region ||= abteilung.parent if abteilung.parent.is_a?(Group::Region)
   end
 
   def members
