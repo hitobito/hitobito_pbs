@@ -70,7 +70,7 @@ describe Event::AttendancesController do
             id: course.id,
             bsv_days: {
               @p1.id.to_s => -1.5,
-              @p2.id.to_s => 'jada',
+              @p2.id.to_s => RUBY_VERSION >= '2.4.0' ? -23.42 : 'jada', # ruby 2.4's big decimal does not handle strings
               @p3.id.to_s => 6,
               @p4.id.to_s => 2.25
             }
