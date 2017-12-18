@@ -82,6 +82,10 @@ class Group::Kantonalverband < Group
       list.select(&:present?).collect { |c| { canton: c, kantonalverband: self } }
   end
 
+  def kantonalverband
+    self
+  end
+
   ### ROLES
 
   class Adressverwaltung < ::Role

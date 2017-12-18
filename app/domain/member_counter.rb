@@ -103,7 +103,9 @@ class MemberCounter
   end
 
   def kantonalverband
-    @kantonalverband ||= abteilung.kantonalverband
+    @kantonalverband ||= if abteilung.respond_to?(:kantonalverband)
+                           abteilung.kantonalverband
+                         end
   end
 
   def region
@@ -146,7 +148,7 @@ class MemberCounter
 
   def new_member_count
     count = MemberCount.new
-    count.abteilung = abteilung
+    count.abteilung = abteilung if abteilung.is_a?(Group::Abteilung)
     count.kantonalverband = kantonalverband
     count.region = region
     count.year = year

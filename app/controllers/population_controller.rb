@@ -14,22 +14,26 @@ class PopulationController < ApplicationController
 
 
   def index
-    @member_counter = MemberCounter.new(Time.zone.now.year, abteilung)
     @groups = load_groups
-    @people_by_group = load_people_by_group
-    @people_data_complete = people_data_complete?
+
+    @member_counter = MemberCounter.new(Time.zone.now.year, group)
     @total = @member_counter.count
     @members_per_birthyear = @member_counter.members_per_birthyear
+
+    if group.is_a?(Group::Abteilung)
+      @people_by_group = load_people_by_group
+      @people_data_complete = people_data_complete?
+    end
   end
 
   private
 
-  def abteilung
-    @group ||= Group::Abteilung.find(params[:id])
+  def group
+    @group ||= Group.find(params[:id])
   end
 
   def load_groups
-    abteilung.self_and_descendants.without_deleted.order_by_type(abteilung)
+    group.self_and_descendants.without_deleted.order_by_type(group)
   end
 
   def load_people_by_group
@@ -48,13 +52,14 @@ class PopulationController < ApplicationController
   def load_people(group)
     @member_counter.members.
       where(roles: { group_id: group }).
+      includes(:groups).
       preload_groups.
       order_by_role.
       order_by_name
   end
 
   def authorize
-    authorize!(:show_population, abteilung)
+    authorize!(:show_population, group)
   end
 
 end
