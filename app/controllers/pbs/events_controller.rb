@@ -31,10 +31,8 @@ module Pbs::EventsController
       entry.save!
       set_success_notice
     else
-      alerts = I18n.t('events.create_camp_application.flash.error')
-      alerts += '<br/>'
-      alerts += entry.errors.full_messages.join('; ')
-      flash[:alert] = alerts
+      flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
+                      "<br />#{entry.errors.full_messages.join('; ')}"
     end
     redirect_to path_args(entry)
   end

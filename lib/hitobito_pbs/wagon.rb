@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
