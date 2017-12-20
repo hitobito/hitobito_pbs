@@ -88,7 +88,7 @@ module EventsPbsHelper
   end
 
   def format_event_canton(entry)
-    Cantons.full_name(entry.canton.to_sym)
+    Cantons.full_name(entry.canton.to_sym) if entry.canton
   end
 
   def event_camp_leader?
