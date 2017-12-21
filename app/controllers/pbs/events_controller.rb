@@ -17,6 +17,7 @@ module Pbs::EventsController
     before_render_show :load_participation_emails, if: :canceled?
 
     alias_method_chain :permitted_attrs, :superior_and_coach_check
+    alias_method_chain :list_entries, :canton
   end
 
   def show_camp_application
@@ -38,6 +39,16 @@ module Pbs::EventsController
   end
 
   private
+
+  def list_entries_with_canton
+    if params[:filter].to_s == 'canton'
+      model_scope_without_nesting.
+        where(type: params[:type], canton: group.kantonalverband.cantons).
+        in_year(year).order_by_date.preload_all_dates.uniq
+    else
+      list_entries_without_canton
+    end
+  end
 
   def canceled?
     entry.is_a?(Event::Course) && entry.canceled?
