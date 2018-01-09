@@ -40,6 +40,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def send_discarded_info
+    return unless entry.previous_changes[:state].present?
     Event::DiscardedCourseParticipationJob.new(entry, entry.previous_changes[:state].first).enqueue!
   end
 
