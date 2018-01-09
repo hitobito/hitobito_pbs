@@ -4,7 +4,7 @@
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
-- if @event.requires_approval? && can?(:create, @application.next_open_approval)
+- if @event.requires_approval? && @application.next_open_approval && can?(:create, @application.next_open_approval)
 
   = action_button("<strong>&#x2713;</strong>&nbsp; #{t('.approve_button')}".html_safe,
                   new_group_event_participation_approval_path(participation_id: entry.id, decision: :approve),
