@@ -98,6 +98,9 @@ module HitobitoPbs
       Sheet::Group.send :include, Pbs::Sheet::Group
       Sheet::Event.send :include, Pbs::Sheet::Event
 
+      ### helpers
+      FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
+
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
 

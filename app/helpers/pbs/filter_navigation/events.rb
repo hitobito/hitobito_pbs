@@ -7,11 +7,19 @@
 
 module Pbs
   module FilterNavigation
-    class Events < ::FilterNavigation::Events
+    module Events
+      extend ActiveSupport::Concern
 
-      def init_items
-        super
-        filter_item('canton')
+      included do
+        alias_method_chain :init_items, :canton
+      end
+
+      def init_items_with_canton
+        init_items_without_canton
+
+        if @group.is_a?(::Group::Kantonalverband)
+          filter_item('canton')
+        end
       end
 
     end
