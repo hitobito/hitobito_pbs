@@ -48,7 +48,8 @@ class Group::Kantonalverband < Group
 
   children Group::Region,
            Group::Abteilung,
-           Group::KantonalesGremium
+           Group::KantonalesGremium,
+           Group::KantonaleKommission
 
 
   has_many :member_counts

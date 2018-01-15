@@ -47,7 +47,8 @@ class Group::Region < Group
   children Group::Region,
            Group::Abteilung,
            Group::RegionaleRover,
-           Group::RegionalesGremium
+           Group::RegionalesGremium,
+           Group::RegionaleKommission
 
   has_many :member_counts
 

@@ -44,6 +44,9 @@ de:
       group/gremium:
         one: Gremium
         other: Gremien
+      group/kommission:
+        one: Kommission
+        other: Kommission
       group/kantonalverband:
         one: Kantonalverband
         other: Kantonalverbände
@@ -824,6 +827,16 @@ de:
         one: Mitglied
         other: Mitglieder
         description:
+
+      group/kommission/leitung:
+        one: Leitung
+        other: Leitung
+        description:
+      group/kommission/mitglied:
+        one: Mitglied
+        other: Mitglieder
+        description:
+
 
       event/camp:
         one: Lager

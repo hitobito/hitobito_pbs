@@ -46,7 +46,8 @@ class Group::Bund < Group
 
   children Group::Kantonalverband,
            Group::Ausbildungskommission,
-           Group::BundesGremium
+           Group::BundesGremium,
+           Group::BundesKommission
 
   ### INSTANCE METHODS
 
