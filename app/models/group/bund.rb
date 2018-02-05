@@ -70,7 +70,7 @@ class Group::Bund < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_and_below_full]
+    self.permissions = [:layer_and_below_full, :impersonation]
   end
 
   class AssistenzAusbildung < ::Role
