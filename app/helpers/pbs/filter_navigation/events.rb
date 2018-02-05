@@ -17,9 +17,17 @@ module Pbs
       def init_items_with_canton
         init_items_without_canton
 
-        if @group.is_a?(::Group::Kantonalverband)
+        if canton? && camps?
           filter_item('canton')
         end
+      end
+
+      def canton?
+        @group.is_a?(::Group::Kantonalverband)
+      end
+
+      def camps?
+        @template.params[:type] == ::Event::Camp.sti_name
       end
 
     end
