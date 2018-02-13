@@ -50,8 +50,9 @@ module Pbs::Event::ParticipationConfirmationJob
     Person.
       includes(:additional_emails).
       joins(event_participations: :roles).
-      where(event_participations: { event_id: participation.event_id }).
+      where(event_participations: { event_id: participation.event_id, active: true }).
       where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
       uniq
   end
+
 end
