@@ -68,6 +68,19 @@ describe Event::ParticipationConfirmationJob do
         Event::ParticipationConfirmationJob.new(participation, participation.person).perform
       end
 
+      it 'sends only to active participations' do
+        @l1.participation.update_columns(active: false)
+
+        expect(Event::ParticipationMailer).to receive(:confirmation).and_return(mailer)
+        expect(Event::CampMailer).to receive(:participant_applied_info).with(
+                                       participation,
+                                       [people(:bulei),
+                                        @l2.participation.person]).
+                                       and_return(mailer)
+        expect(Event::ParticipationMailer).to_not receive(:approval)
+        Event::ParticipationConfirmationJob.new(participation, participation.person).perform
+      end
+
       it 'sends only confirmation other email, if user is not participation user' do
         expect(Event::ParticipationMailer).to receive(:confirmation_other).and_return(mailer)
         expect(Event::ParticipationMailer).to_not receive(:approval)
