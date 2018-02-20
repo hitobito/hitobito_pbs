@@ -18,6 +18,27 @@ module Pbs::EventsController
 
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :list_entries, :canton
+    alias_method_chain :sort_expression, :canton
+  end
+
+  def sort_expression_with_canton
+    return sort_expression_without_canton unless params[:sort] == 'canton'
+    sorted_keys = canton_labels_with_abroad.invert.sort.collect(&:second)
+    expressions = sorted_keys.each_with_index.collect do |key, index|
+      "WHEN events.canton = '#{key}' then #{index + 1}"
+    end
+
+    <<-SQL
+      CASE
+        WHEN events.canton = '' OR events.canton IS NULL THEN 0
+        #{expressions.join("\n")}
+      END #{sort_dir}
+    SQL
+  end
+
+  def canton_labels_with_abroad
+    Cantons.labels.merge(Event::Camp::ABROAD_CANTON =>
+                         Cantons.full_name(Event::Camp::ABROAD_CANTON))
   end
 
   def show_camp_application
