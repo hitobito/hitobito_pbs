@@ -111,7 +111,7 @@ class Group::Kantonalverband < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data, :finance]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Leitungskursbetreuung < ::Role

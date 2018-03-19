@@ -70,7 +70,7 @@ class Group::Bund < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_and_below_full, :impersonation]
+    self.permissions = [:layer_and_below_full]
   end
 
   class AssistenzAusbildung < ::Role
@@ -107,7 +107,7 @@ class Group::Bund < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data, :finance]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Kontaktperson < ::Role
@@ -144,7 +144,7 @@ class Group::Bund < Group
   end
 
   class MitarbeiterGs < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :admin]
+    self.permissions = [:layer_and_below_full, :contact_data, :admin, :impersonation, :finance]
   end
 
   class MitgliedKrisenteam < ::Role
