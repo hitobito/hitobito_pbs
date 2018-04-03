@@ -24,11 +24,10 @@ install:
   - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
   - cd hitobito && git checkout -f $HITOBITO_BRANCH
   - export HITOBITO_CORE_DIR=$PWD
-  - sed -i "s/^\(gem .mysql2.\),.*$/\1/" Gemfile
   - cp -v Wagonfile.ci Wagonfile
   - rvm use $TRAVIS_RUBY_VERSION --fuzzy
   - gem install bundler --version 1.9.10
-  - bundle install --path vendor/bundle && bundle update mysql2
+  - bundle install --path vendor/bundle
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
