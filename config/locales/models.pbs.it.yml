@@ -524,6 +524,9 @@ it:
       group/abteilung/coach:
         one: Coach
         other: Coaches
+      group/abteilung/verantwortung_ausbildung:
+        one: Responsabile della formazione
+        other: Responsabili della formazione
       group/abteilung/verantwortung_materialverkaufsstelle:
         one: Responsabile economato
         other: Responsabili economato

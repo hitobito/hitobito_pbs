@@ -182,6 +182,10 @@ class Group::Abteilung < Group
     self.permissions = [:layer_and_below_read]
   end
 
+  class VerantwortungAusbildung < ::Role
+    self.permissions = [:group_and_below_full, :contact_data, :approve_applications]
+  end
+
   class VerantwortungMaterialverkaufsstelle < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -227,6 +231,7 @@ class Group::Abteilung < Group
         Webmaster,
         Coach,
 
+        VerantwortungAusbildung,
         VerantwortungMaterialverkaufsstelle,
         VerantwortungPfadiTrotzAllem,
         VerantwortungPr,

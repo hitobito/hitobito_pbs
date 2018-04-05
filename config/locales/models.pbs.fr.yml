@@ -510,6 +510,9 @@ fr:
       group/abteilung/coach:
         one: Coach
         other: Coaches
+      group/abteilung/verantwortung_ausbildung:
+        one: Responsable formation
+        other: Responsables formation
       group/abteilung/verantwortung_materialverkaufsstelle:
         one: Responsable économat scout
         other: Responsables économat scout

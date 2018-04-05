@@ -672,6 +672,10 @@ de:
         one: Coach
         other: Coaches
         description:
+      group/abteilung/verantwortung_ausbildung:
+        one: Verantwortlicher Ausbildung
+        other: Verantwortliche Ausbildung
+        description:
       group/abteilung/verantwortung_materialverkaufsstelle:
         one: Verantwortlicher Materialverkaufsstelle
         other: Verantwortliche Materialverkaufsstelle
