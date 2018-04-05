@@ -24,7 +24,7 @@ describe Event::Approval do
   [ [ 'bund', Group::Bund::Geschaeftsleitung, Group::Bund::LeitungKernaufgabeAusbildung ],
     [ 'kantonalverband', Group::Kantonalverband::Kantonsleitung, Group::Kantonalverband::VerantwortungAusbildung ],
     [ 'region', Group::Region::Regionalleitung, Group::Region::VerantwortungAusbildung ],
-    [ 'abteilung', Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv ] ].each do |layer, *roles|
+    [ 'abteilung', Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv, Group::Abteilung::VerantwortungAusbildung ] ].each do |layer, *roles|
 
       it "#roles in #{layer} equal #{roles}" do
         expect(Event::Approval.new(layer: layer).roles).to eq Array(roles)
