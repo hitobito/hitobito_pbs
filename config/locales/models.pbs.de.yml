@@ -85,6 +85,10 @@ de:
         one: Mitarbeiter GS
         other: Mitarbeiter GS
         description:
+      group/bund/it_support:
+        one: IT Support
+        other: IT Support
+        description:
       group/bund/sekretariat:
         one: Sekretariat
         other: Sekretariat

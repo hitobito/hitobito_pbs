@@ -144,8 +144,13 @@ class Group::Bund < Group
   end
 
   class MitarbeiterGs < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :admin, :impersonation]
+    self.permissions = [:layer_and_below_full, :contact_data, :admin]
   end
+
+  class ItSupport < ::Role
+    self.permissions = [:layer_and_below_full, :contact_data, :admin, :impersonation, :finance]
+  end
+
 
   class MitgliedKrisenteam < ::Role
     self.permissions = [:group_read, :contact_data]
@@ -245,6 +250,7 @@ class Group::Bund < Group
   end
 
   roles MitarbeiterGs,
+        ItSupport,
         Sekretariat,
         Adressverwaltung,
         AssistenzAusbildung,

@@ -84,6 +84,9 @@ it:
       group/bund/mitarbeiter_gs:
         one: Collaboratore del segretariato generale
         other: Collaboratori del segretariato generale
+      group/bund/it_support:
+        one: IT Support
+        other: IT Support
       group/bund/sekretariat:
         one: Segretariato
         other: Segretariato
