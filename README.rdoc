@@ -175,6 +175,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
     * Redaktor: [:layer_and_below_read, :contact_data]
     * Webmaster: [:group_read, :contact_data]
     * Coach: [:layer_and_below_read, :contact_data]
+    * Verantwortlicher Ausbildung: [:group_and_below_full, :contact_data, :approve_applications]
     * Verantwortlicher Materialverkaufsstelle: [:group_read, :contact_data]
     * Verantwortlicher Pfadi Trotz Allem: [:group_read, :contact_data]
     * Verantwortlicher PR: [:group_read, :contact_data]

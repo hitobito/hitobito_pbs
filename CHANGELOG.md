@@ -1,5 +1,10 @@
 # Hitobito PBS Changelog
 
+## Version 1.X
+
+*   Neue Rolle Ausbildungsverantwortlicher auf Ebene Abteilung
+
+
 ## Version 1.17
 
 *   Bugfix: Kantonalverband wird wieder gesetzt
