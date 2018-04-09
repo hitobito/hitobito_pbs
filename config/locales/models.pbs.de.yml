@@ -222,8 +222,8 @@ de:
         other: Verantwortliche PR
         description:
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortliche Prävention sexueller Ausbeutung
+        one: Verantwortlicher Prävention
+        other: Verantwortliche Prävention
         description:
       group/bund/international_commissioner_ic_wagggs:
         one: International Commissioner IC WAGGGS
@@ -407,8 +407,8 @@ de:
         other: Verantwortliche PR
         description:
       group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
-        one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortliche Prävention sexueller Ausbeutung
+        one: Verantwortlicher Prävention
+        other: Verantwortliche Prävention
         description:
       group/kantonalverband/verantwortung_programm:
         one: Verantwortlicher Programm
@@ -568,8 +568,8 @@ de:
         other: Verantwortliche PR
         description:
       group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: Verantwortlicher Prävention sexueller Ausbeutung
-        other: Verantwortliche Prävention sexueller Ausbeutung
+        one: Verantwortlicher Prävention
+        other: Verantwortliche Prävention
         description:
       group/region/verantwortung_programm:
         one: Verantwortlicher Programm
