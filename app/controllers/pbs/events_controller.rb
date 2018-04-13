@@ -17,6 +17,28 @@ module Pbs::EventsController
     before_render_show :load_participation_emails, if: :canceled?
 
     alias_method_chain :permitted_attrs, :superior_and_coach_check
+    alias_method_chain :list_entries, :canton
+    alias_method_chain :sort_expression, :canton
+  end
+
+  def sort_expression_with_canton
+    return sort_expression_without_canton unless params[:sort] == 'canton'
+    sorted_keys = canton_labels_with_abroad.invert.sort.collect(&:second)
+    expressions = sorted_keys.each_with_index.collect do |key, index|
+      "WHEN events.canton = '#{key}' then #{index + 1}"
+    end
+
+    <<-SQL
+      CASE
+        WHEN events.canton = '' OR events.canton IS NULL THEN 0
+        #{expressions.join("\n")}
+      END #{sort_dir}
+    SQL
+  end
+
+  def canton_labels_with_abroad
+    Cantons.labels.merge(Event::Camp::ABROAD_CANTON =>
+                         Cantons.full_name(Event::Camp::ABROAD_CANTON))
   end
 
   def show_camp_application
@@ -31,15 +53,32 @@ module Pbs::EventsController
       entry.save!
       set_success_notice
     else
-      alerts = I18n.t('events.create_camp_application.flash.error')
-      alerts += '<br/>'
-      alerts += entry.errors.full_messages.join('; ')
-      flash[:alert] = alerts
+      flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
+                      "<br />#{entry.errors.full_messages.join('; ')}"
     end
     redirect_to path_args(entry)
   end
 
   private
+
+  def list_entries_with_canton
+    if params[:filter].to_s == 'canton'
+      scope = model_scope_without_nesting.
+        where(type: params[:type], canton: cantons).
+        includes(:groups).
+        in_year(year).order_by_date.preload_all_dates.uniq
+      
+      sorting? ? scope.reorder(sort_expression) : scope
+    else
+      list_entries_without_canton
+    end
+  end
+
+  def cantons
+    if group.respond_to?(:kantonalverband)
+      group.kantonalverband.cantons
+    end.to_a
+  end
 
   def canceled?
     entry.is_a?(Event::Course) && entry.canceled?

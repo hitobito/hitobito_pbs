@@ -71,6 +71,17 @@ describe Event::ParticipationsController do
         .to eq('assigned')
     end
 
+    it 'does nothing if participation is already canceled' do
+      participation.update!(state: 'canceled', canceled_at: Date.today)
+      expect do
+        post :cancel,
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id,
+             event_participation: { canceled_at: Date.today }
+      end.to change { Delayed::Job.count }.by(0)
+    end
+
   end
 
   context 'POST reject' do
@@ -107,6 +118,16 @@ describe Event::ParticipationsController do
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
+    end
+
+    it 'does nothing if participation is already rejected' do
+      participation.update!(state: 'rejected')
+      expect do
+        post :reject,
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id
+      end.to change { Delayed::Job.count }.by(0)
     end
   end
 

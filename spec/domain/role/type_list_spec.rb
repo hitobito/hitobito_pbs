@@ -16,9 +16,9 @@ describe Role::TypeList do
     end
 
     expect(all_groups).to eq([
-      ['Bund', ['Bund', 'Ausbildungskommission', 'Gremium']],
-      ['Kantonalverband', ['Kantonalverband', 'Gremium']],
-      ['Region', ['Region', 'Rover', 'Gremium']],
+      ['Bund', ['Bund', 'Ausbildungskommission', 'Gremium', 'Kommission']],
+      ['Kantonalverband', ['Kantonalverband', 'Gremium', 'Kommission']],
+      ['Region', ['Region', 'Rover', 'Gremium', 'Kommission']],
       ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio',
                      'Rover', 'PTA', 'Elternrat', 'Gremium']],
     ])

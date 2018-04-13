@@ -26,7 +26,7 @@ module Pbs::Event::ListsController
       end
       redirect_to list_kantonalverband_camps_path(group_id: role.group_id)
     else
-      fail(CanCan::AccessDenied)
+      raise(CanCan::AccessDenied)
     end
   end
 

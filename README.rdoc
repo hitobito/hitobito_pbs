@@ -8,6 +8,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 * Bund
   * Bund
     * Mitarbeiter GS: [:layer_and_below_full, :contact_data, :admin]
+    * IT Support: [:layer_and_below_full, :contact_data, :admin, :impersonation, :finance]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
     * Assistenz Ausbildung: [:layer_full]
@@ -55,6 +56,9 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
+  * Kommission
+    * Leitung: [:group_and_below_full, :layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
 * Kantonalverband
   * Kantonalverband
     * Kantonsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
@@ -101,6 +105,9 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
+  * Kommission
+    * Leitung: [:group_and_below_full, :layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
 * Region
   * Region
     * Regionsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
@@ -151,6 +158,9 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
+  * Kommission
+    * Leitung: [:group_and_below_full, :layer_and_below_read]
+    * Mitglied: [:layer_and_below_read]
 * Abteilung
   * Abteilung
     * Abteilungsleiter: [:layer_and_below_full, :contact_data, :approve_applications]
@@ -219,5 +229,6 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
+
 
 (Output of rake app:hitobito:roles)

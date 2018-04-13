@@ -42,7 +42,7 @@ module Export::Pdf
     def labeled_email(person)
       value = person.email
       return unless value.present?
-      label = t("events.fields_pbs.email")
+      label = t('events.fields_pbs.email')
       labeled_value(label, value)
     end
 

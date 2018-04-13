@@ -30,12 +30,6 @@
 #  pta_m              :integer
 #
 
-
-#  Copyright (c) 2012-2013, Jungwacht Blauring Schweiz. This file is part of
-#  hitobito_jubla and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_jubla.
-
 require 'spec_helper'
 
 describe MemberCount do
@@ -48,7 +42,7 @@ describe MemberCount do
 
   describe '.total_by_abteilungen' do
 
-    subject { MemberCount.total_by_abteilungen(2012, be).to_a }
+    subject { MemberCount.total_by_regionen(2012, be).to_a }
 
     it 'counts totals' do
       is_expected.to have(2).items

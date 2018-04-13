@@ -137,6 +137,12 @@ describe Event::ApprovalsController do
         participant.update!(primary_group: groups(:pegasus))
       end
 
+      it 'redirects to participation if no approval exists' do
+        application.approvals.destroy_all
+        get :new, group_id: group.id, event_id: course.id, participation_id: participation.id
+        expect(response).to redirect_to [group, course, participation]
+      end
+
       describe 'approve' do
         before { new_approve  }
 
@@ -150,6 +156,7 @@ describe Event::ApprovalsController do
         it { is_expected.to render_template 'new' }
         it { expect(assigns(:approval)).to eq(application.reload.approvals.first) }
       end
+
     end
 
     def new_approve

@@ -215,6 +215,9 @@ de:
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt
       j_s_rules_applied_caption: "Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten"
 
+  filter_navigation/events:
+    canton: 'durchgeführt im Kanton'
+
   group:
     pending_approvals:
       index:

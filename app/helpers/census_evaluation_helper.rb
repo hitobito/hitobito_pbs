@@ -7,7 +7,7 @@
 
 module CensusEvaluationHelper
 
-  EMPTY_COUNT_VALUE = '-'
+  EMPTY_COUNT_VALUE = '-'.freeze
 
   def census_evaluation_path(group, options = {})
     klass = group.respond_to?(:klass) ? group.klass : group.class

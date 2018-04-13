@@ -48,7 +48,8 @@ class Group::Kantonalverband < Group
 
   children Group::Region,
            Group::Abteilung,
-           Group::KantonalesGremium
+           Group::KantonalesGremium,
+           Group::KantonaleKommission
 
 
   has_many :member_counts
@@ -64,7 +65,7 @@ class Group::Kantonalverband < Group
   end
 
   def census_groups(year)
-    MemberCount.total_by_abteilungen(year, self)
+    MemberCount.total_by_regionen(year, self)
   end
 
   def census_details(year)
@@ -80,6 +81,10 @@ class Group::Kantonalverband < Group
     self.kantonalverband_cantons_attributes =
       kantonalverband_cantons.collect { |c| { id: c.id, _destroy: true } } +
       list.select(&:present?).collect { |c| { canton: c, kantonalverband: self } }
+  end
+
+  def kantonalverband
+    self
   end
 
   ### ROLES
@@ -106,7 +111,7 @@ class Group::Kantonalverband < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data, :finance]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Leitungskursbetreuung < ::Role

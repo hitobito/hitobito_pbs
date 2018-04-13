@@ -18,9 +18,7 @@ describe Event::AttendancesController do
     @p1 = Fabricate(Event::Course::Role::Leader.name.to_sym,
                     participation: Fabricate(:event_participation,
                                              event: course, bsv_days: 5)).participation
-    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym,
-                    participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym, participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
     @p3 = Fabricate(Event::Role::Speaker.name.to_sym,
                     participation: Fabricate(:event_participation,
                                              event: course, bsv_days: 5)).participation
@@ -72,7 +70,7 @@ describe Event::AttendancesController do
             id: course.id,
             bsv_days: {
               @p1.id.to_s => -1.5,
-              @p2.id.to_s => 'jada',
+              @p2.id.to_s => RUBY_VERSION >= '2.4.0' ? -23.42 : 'jada', # ruby 2.4's big decimal does not handle strings
               @p3.id.to_s => 6,
               @p4.id.to_s => 2.25
             }

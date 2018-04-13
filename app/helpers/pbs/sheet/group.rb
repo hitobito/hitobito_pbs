@@ -28,7 +28,13 @@ module Pbs::Sheet::Group
       Sheet::Tab.new(:tab_population_label,
                      :population_group_path,
                      if: lambda do |view, group|
-                       group.is_a?(Group::Abteilung) && view.can?(:show_population, group)
+                       [
+                         Group::Bund,
+                         Group::Kantonalverband,
+                         Group::Region,
+                         Group::Abteilung
+                       ].any? { |klass| group.is_a?(klass) } &&
+                       view.can?(:show_population, group)
                      end),
 
       Sheet::Tab.new('groups.tabs.statistic',

@@ -31,7 +31,7 @@
 #
 class MemberCount < ActiveRecord::Base
 
-  COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta]
+  COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta].freeze
   COUNT_COLUMNS = COUNT_CATEGORIES.collect { |c| [:"#{c}_f", :"#{c}_m"] }.flatten
 
   belongs_to :abteilung, class_name: 'Group::Abteilung'
@@ -76,8 +76,14 @@ class MemberCount < ActiveRecord::Base
       totals_by(year, :kantonalverband_id)
     end
 
-    def total_by_abteilungen(year, state)
-      totals_by(year, :abteilung_id, kantonalverband_id: state.id)
+    def total_by_abteilungen(year, region)
+      totals_by(year, :abteilung_id,
+                region_id: region.id,
+                kantonalverband_id: region.kantonalverband.id)
+    end
+
+    def total_by_regionen(year, state)
+      totals_by(year, :region_id, kantonalverband_id: state.id)
     end
 
     def total_for_bund(year)

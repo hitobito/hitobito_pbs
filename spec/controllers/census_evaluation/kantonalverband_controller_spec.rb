@@ -11,9 +11,9 @@ describe CensusEvaluation::KantonalverbandController do
 
   let(:ch)   { groups(:bund) }
   let(:be)   { groups(:be) }
-  let(:schekka)   { groups(:schekka) }
-  let(:berchtold) { groups(:berchtold) }
-  let(:patria)    { groups(:patria) }
+  let(:oberland) { groups(:oberland) }
+  let(:bern)     { groups(:bern) }
+  let(:thun)     { groups(:kyburg) }
 
   before { sign_in(people(:bulei)) }
 
@@ -22,9 +22,9 @@ describe CensusEvaluation::KantonalverbandController do
 
     it 'assigns counts' do
       counts = assigns(:group_counts)
-      expect(counts.keys).to match_array([schekka.id, berchtold.id])
-      expect(counts[schekka.id].total).to eq(12)
-      expect(counts[berchtold.id].total).to eq(7)
+      expect(counts.keys).to match_array([bern.id, thun.id])
+      expect(counts[bern.id].total).to eq(12)
+      expect(counts[thun.id].total).to eq(7)
     end
 
     it 'assigns total' do
@@ -32,7 +32,9 @@ describe CensusEvaluation::KantonalverbandController do
     end
 
     it 'assigns sub groups' do
-      expect(assigns(:sub_groups)).to eq([berchtold, patria, schekka, groups(:schweizerstern)])
+      expect(assigns(:sub_groups)).to include(bern)
+      expect(assigns(:sub_groups)).to include(thun)
+      expect(assigns(:sub_groups)).to include(oberland)
     end
   end
 

@@ -30,9 +30,9 @@ module Pbs::Event::ParticipationsController
 
   def load_approvals
     @approvals = Event::Approval.
-      where(application_id: entry.application_id).
-      includes(:approver).
-      order_by_layer
+                 where(application_id: entry.application_id).
+                 includes(:approver).
+                 order_by_layer
   end
 
   def send_confirmation_email_with_current_user
@@ -40,6 +40,7 @@ module Pbs::Event::ParticipationsController
   end
 
   def send_discarded_info
+    return unless entry.previous_changes[:state].present?
     Event::DiscardedCourseParticipationJob.new(entry, entry.previous_changes[:state].first).enqueue!
   end
 

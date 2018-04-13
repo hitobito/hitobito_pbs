@@ -12,6 +12,10 @@ class Event::ApprovalsController < CrudController
 
   decorates :group, :event, :participation
 
+  def new
+    redirect_to participation_path unless entry
+  end
+
   def index
     @approvals = entries.group_by(&:participation)
   end
@@ -19,7 +23,7 @@ class Event::ApprovalsController < CrudController
   def create
     if approver.send(decision, permitted_params, current_user)
       flash[:notice] = send("notice_#{decision}")
-      redirect_to group_event_participation_path(@group, participation.event_id, participation)
+      redirect_to participation_path
     else
       @approval = approver.open_approval
       render 'new'
@@ -31,6 +35,15 @@ class Event::ApprovalsController < CrudController
   end
 
   private
+
+  def participation_path
+    group_event_participation_path(@group, participation.event_id, participation)
+  end
+
+  # Override to handle possible nil return from build_entry
+  def model_ivar_set(entry)
+    @approval = entry
+  end
 
   def decision
     @decision ||= params[:decision].to_s.tap do |decision|

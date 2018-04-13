@@ -7,14 +7,14 @@
 
 class Event::CampMailer < ApplicationMailer
 
-  CONTENT_CAMP_CREATED = 'camp_created'
-  CONTENT_COACH_ASSIGNED = 'camp_coach_assigned'
-  CONTENT_SECURITY_ADVISOR_ASSIGNED = 'camp_security_advisor_assigned'
-  CONTENT_AL_ASSIGNED = 'camp_al_assigned'
-  CONTENT_SUBMIT_REMINDER = 'camp_submit_reminder'
-  CONTENT_SUBMIT = 'camp_submit'
-  CONTENT_PARTICIPANT_APPLIED = 'camp_participant_applied'
-  CONTENT_PARTICIPANT_CANCELED = 'camp_participant_canceled'
+  CONTENT_CAMP_CREATED = 'camp_created'.freeze
+  CONTENT_COACH_ASSIGNED = 'camp_coach_assigned'.freeze
+  CONTENT_SECURITY_ADVISOR_ASSIGNED = 'camp_security_advisor_assigned'.freeze
+  CONTENT_AL_ASSIGNED = 'camp_al_assigned'.freeze
+  CONTENT_SUBMIT_REMINDER = 'camp_submit_reminder'.freeze
+  CONTENT_SUBMIT = 'camp_submit'.freeze
+  CONTENT_PARTICIPANT_APPLIED = 'camp_participant_applied'.freeze
+  CONTENT_PARTICIPANT_CANCELED = 'camp_participant_canceled'.freeze
 
   attr_reader :camp
 
@@ -53,8 +53,7 @@ class Event::CampMailer < ApplicationMailer
 
     compose(recipients,
             CONTENT_SUBMIT,
-            { 'coach-name' => camp.coach.to_s,
-              'camp-application-url' => camp_application_url},
+            { 'coach-name' => camp.coach.to_s, 'camp-application-url' => camp_application_url },
             cc: Person.mailing_emails_for(copies))
   end
 

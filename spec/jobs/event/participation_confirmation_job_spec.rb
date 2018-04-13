@@ -68,11 +68,40 @@ describe Event::ParticipationConfirmationJob do
         Event::ParticipationConfirmationJob.new(participation, participation.person).perform
       end
 
+      it 'sends only to active participations' do
+        @l1.participation.update_columns(active: false)
+
+        expect(Event::ParticipationMailer).to receive(:confirmation).and_return(mailer)
+        expect(Event::CampMailer).to receive(:participant_applied_info).with(
+                                       participation,
+                                       [people(:bulei),
+                                        @l2.participation.person]).
+                                       and_return(mailer)
+        expect(Event::ParticipationMailer).to_not receive(:approval)
+        Event::ParticipationConfirmationJob.new(participation, participation.person).perform
+      end
+
       it 'sends only confirmation other email, if user is not participation user' do
         expect(Event::ParticipationMailer).to receive(:confirmation_other).and_return(mailer)
         expect(Event::ParticipationMailer).to_not receive(:approval)
         expect(Event::CampMailer).to_not receive(:participant_applied_info)
         Event::ParticipationConfirmationJob.new(participation, people(:bulei)).perform
+      end
+
+      it 'does not get confused when participation is leader in another camp' do
+        other = Fabricate(:pbs_camp, groups: [groups(:schekka)])
+        l3 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: other))
+        Fabricate(Event::Camp::Role::Participant.name, participation: Fabricate(:pbs_participation, event: event, person: l3.person))
+
+        expect(Event::ParticipationMailer).to receive(:confirmation).and_return(mailer)
+        expect(Event::CampMailer).to receive(:participant_applied_info).with(
+                                       participation,
+                                       [people(:bulei),
+                                        @l1.participation.person,
+                                        @l2.participation.person]).
+                                       and_return(mailer)
+        expect(Event::ParticipationMailer).to_not receive(:approval)
+        Event::ParticipationConfirmationJob.new(participation, participation.person).perform
       end
 
     end

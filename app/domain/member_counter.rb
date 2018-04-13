@@ -42,7 +42,7 @@ class MemberCounter
                Group::Pfadi::Pfadi],
       woelfe: [Group::Woelfe::Leitwolf,
                Group::Woelfe::Wolf],
-      biber:  [Group::Biber::Biber] }
+      biber:  [Group::Biber::Biber] }.freeze
 
   attr_reader :year, :abteilung
 
@@ -103,19 +103,21 @@ class MemberCounter
   end
 
   def kantonalverband
-    @kantonalverband ||= abteilung.kantonalverband
+    @kantonalverband ||= if abteilung.respond_to?(:kantonalverband)
+                           abteilung.kantonalverband
+                         end
   end
 
   def region
-    @region ||= abteilung.region
+    @region ||= abteilung.parent if abteilung.parent.is_a?(Group::Region)
   end
 
   def members
     Person.joins(:roles).
-           where(roles: { group_id: abteilung.self_and_descendants,
-                          type: self.class.counted_roles.collect(&:sti_name),
-                          deleted_at: nil }).
-           uniq
+      where(roles: { group_id: abteilung.self_and_descendants,
+                     type: self.class.counted_roles.collect(&:sti_name),
+                     deleted_at: nil }).
+      uniq
   end
 
   private
@@ -126,7 +128,7 @@ class MemberCounter
     return [] if year_counts.empty?
     oldest, latest = year_counts.keys.select { |y| !y.nil? }.minmax
     return nil_year_if_necessary(year_counts) if oldest.nil?
-    (latest).downto(oldest).map do |year|
+    latest.downto(oldest).map do |year|
       OpenStruct.new(year: year, count: year_counts[year])
     end + nil_year_if_necessary(year_counts)
   end
@@ -146,7 +148,7 @@ class MemberCounter
 
   def new_member_count
     count = MemberCount.new
-    count.abteilung = abteilung
+    count.abteilung = abteilung if abteilung.is_a?(Group::Abteilung)
     count.kantonalverband = kantonalverband
     count.region = region
     count.year = year

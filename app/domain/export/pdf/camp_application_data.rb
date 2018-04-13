@@ -12,7 +12,7 @@ module Export::Pdf
 
     delegate :t, :l, to: I18n
 
-    EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung)
+    EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung).freeze
 
     def initialize(camp)
       @camp = camp
@@ -30,7 +30,7 @@ module Export::Pdf
     def expected_participant_table_row(gender)
       row = [gender.to_s.upcase]
       row += EXPECTED_PARTICIPANT_KEYS.collect do |a|
-        attr = "expected_participants_#{a}_#{gender.to_s}"
+        attr = "expected_participants_#{a}_#{gender}"
         @camp.send(attr.to_sym)
       end
     end
@@ -41,7 +41,7 @@ module Export::Pdf
 
     def camp_abteilung
       @camp_abteilung ||=
-        camp_group.layer_hierarchy.detect {|g| g.is_a?(Group::Abteilung) }
+        camp_group.layer_hierarchy.detect { |g| g.is_a?(Group::Abteilung) }
     end
 
     def einheit_name
@@ -52,12 +52,12 @@ module Export::Pdf
 
     def kantonalverband
       camp_group.layer_hierarchy.
-        detect {|g| g.is_a?(Group::Kantonalverband) }
+        detect { |g| g.is_a?(Group::Kantonalverband) }
     end
 
     def camp_attr_value(attr)
       value = @camp.send(attr)
-      format_method = "format_#{attr.to_s}".to_sym
+      format_method = "format_#{attr}".to_sym
       if respond_to?(format_method, include_private: true)
         value = send(format_method, value)
       elsif boolean?(value)
@@ -69,12 +69,12 @@ module Export::Pdf
 
     def active_qualifications(person)
       qualis = QualificationKind.joins(:qualifications).
-        where(qualifications: { person_id: person.id }).
-        merge(Qualification.active).
-        uniq.
-        list.
-        collect(&:to_s).
-        join("\n")
+               where(qualifications: { person_id: person.id }).
+               merge(Qualification.active).
+               uniq.
+               list.
+               collect(&:to_s).
+               join("\n")
       qualis.present? ? qualis : text_no_entry
     end
 

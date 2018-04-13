@@ -13,7 +13,7 @@ module Pbs::GroupAbility
                            Group::Kantonalverband::Kantonsleitung,
                            Group::Kantonalverband::Sekretariat,
                            Group::Region::Regionalleitung,
-                           Group::Region::Sekretariat]
+                           Group::Region::Sekretariat].freeze
 
   included do
     on(Group) do

@@ -9,21 +9,23 @@ module Event::Campy
 
   extend ActiveSupport::Concern
 
-  ABROAD_CANTON = 'zz'
+  ABROAD_CANTON = 'zz'.freeze
 
-  J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed)
+  J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed).freeze
 
   CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
 
-  EXPECTED_PARTICIPANT_ATTRS = [:expected_participants_wolf_f, :expected_participants_wolf_m,
-                                :expected_participants_pfadi_f, :expected_participants_pfadi_m,
-                                :expected_participants_pio_f, :expected_participants_pio_m,
-                                :expected_participants_rover_f, :expected_participants_rover_m,
-                                :expected_participants_leitung_f, :expected_participants_leitung_m]
+  EXPECTED_PARTICIPANT_ATTRS = [
+    :expected_participants_wolf_f, :expected_participants_wolf_m,
+    :expected_participants_pfadi_f, :expected_participants_pfadi_m,
+    :expected_participants_pio_f, :expected_participants_pio_m,
+    :expected_participants_rover_f, :expected_participants_rover_m,
+    :expected_participants_leitung_f, :expected_participants_leitung_m
+  ].freeze
 
   LEADER_CHECKPOINT_ATTRS = [:lagerreglement_applied,
                              :kantonalverband_rules_applied,
-                             :j_s_rules_applied]
+                             :j_s_rules_applied].freeze
 
   def self.extended(base)
     base.class_eval(&@_included_block)
@@ -59,8 +61,8 @@ module Event::Campy
 
     ### VALIDATIONS
 
-    validates *EXPECTED_PARTICIPANT_ATTRS,
-              numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true }
+    validates(*EXPECTED_PARTICIPANT_ATTRS,
+              numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true })
     validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
     validates :canton, inclusion: { in: CANTONS, allow_blank: true }
 

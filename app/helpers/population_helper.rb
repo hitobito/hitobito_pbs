@@ -19,12 +19,14 @@ module PopulationHelper
 
   def tab_population_label(group)
     label = t('groups.tabs.population')
-    label << " <span style=\"color: red;\">!</span>" if check_approveable?(group)
+    label << ' <span style="color: red;">!</span>' if check_approveable?(group)
     label.html_safe
   end
 
   def check_approveable?(group = @group)
-    group.population_approveable? && can?(:create_member_counts, group)
+    group.is_a?(Group::Abteilung) &&
+      group.population_approveable? &&
+      can?(:create_member_counts, group)
   end
 
   def age(year)

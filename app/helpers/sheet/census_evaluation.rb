@@ -15,6 +15,9 @@ module Sheet
     class Kantonalverband < Sheet::CensusEvaluation
     end
 
+    class Region < Sheet::CensusEvaluation
+    end
+
     class Abteilung < Sheet::CensusEvaluation
     end
   end
