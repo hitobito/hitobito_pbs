@@ -14,6 +14,9 @@ application:
   footer:
     links:
       "Informationen und Hilfe": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung
+      "Aide et assistance": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisateur?set_language=fr
+      "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
+
 
 # The person with this email has root access to everything
 # This person should only be used by the operators of the application, not the customers.
