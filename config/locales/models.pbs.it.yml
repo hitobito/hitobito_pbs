@@ -34,6 +34,9 @@ it:
       group/gremium:
         one: comissione
         other: Commissioni
+      group/kommission:
+        one: Commissione
+        other: Commissioni
       group/kantonalverband:
         one: associazione cantonale
         other: Associazioni cantonali
@@ -85,8 +88,8 @@ it:
         one: Collaboratore del segretariato generale
         other: Collaboratori del segretariato generale
       group/bund/it_support:
-        one: IT Support
-        other: IT Support
+        one: Supporto IT
+        other: Supporto IT
       group/bund/sekretariat:
         one: Segretariato
         other: Segretariato
@@ -641,6 +644,12 @@ it:
         other: Formatore
       group/gremium/mitglied:
         one: Membro
+        other: Membri
+      group/kommission/leitung:
+        one: Responsabile
+        other: Responsabili
+      group/kommission/mitglied:
+        one: Collaboratore
         other: Membri
       event/camp:
         one: Campo

@@ -34,6 +34,9 @@ fr:
       group/gremium:
         one: Commission
         other: Commissions
+      group/kommission:
+        one: Commission
+        other: Commissions
       group/kantonalverband:
         one: Association cantonale
         other: Associations cantonales
@@ -71,8 +74,8 @@ fr:
         one: Collaborateur du SG
         other: Collaborateur du SG
       group/bund/it_support:
-        one: IT Support
-        other: IT Support
+        one: Support informatique
+        other: Support informatique
       group/bund/sekretariat:
         one: secrétariat
         other: secrétariat
@@ -313,7 +316,7 @@ fr:
         one: Responsable relations publiques
         other: Responsables relations publiques
       group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsable prévention
+        one: Responsables prévention
         other: Responsables prévention
       group/kantonalverband/verantwortung_programm:
         one: Responsable du programme
@@ -433,7 +436,7 @@ fr:
         one: Responsable relations publiques
         other: Responsables relations publiques
       group/region/verantwortung_praevention_sexueller_ausbeutung:
-        one: Responsable prévention
+        one: Responsables prévention
         other: Responsables prévention
       group/region/verantwortung_programm:
         one: Responsable du programme
@@ -628,6 +631,12 @@ fr:
       group/gremium/mitglied:
         one: Membres
         other: Membres
+      group/kommission/leitung:
+        one: Responsable
+        other: Responsables
+      group/kommission/mitglied:
+        one: Membre
+        other: Membres
       event/camp:
         one: Camp
         other: Camps
@@ -668,11 +677,11 @@ fr:
         one: Encadrement activité de sécurité Eau
         other: Encadrement activité de sécurité Eau
       event/course/role/leader:
-        one: Responsable de cours
-        other: Responsables de cours
+        one: Chef de cours
+        other: Chefs de cours
       event/course/role/class_leader:
         one: Formateur
-        other: Formateurs
+        other: Chef de classe
       event/course/role/helper:
         one: Assistant de cours
         other: Assistants de cours

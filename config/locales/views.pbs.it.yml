@@ -193,6 +193,8 @@ it:
       lagerreglement_applied_caption: il regolamento per la pianificazione e lo svolgimento di campi ("Regolamento del campo") e il Profilo dello scoutismo sono considerati e rispettati.
       kantonalverband_rules_applied_caption: 'Durante la preparazione del campo vengono considerate  le prescrizioni o le raccomandazioni esistenti dell''associazione cantonale '
       j_s_rules_applied_caption: "Per i campi G+S: le prescrizioni in vigore della disciplina sportiva Sport di campo/Trekking sono conosciute e rispettate."
+  filter_navigation/events:
+    canton: 'eseguito nel cantone di'
   group:
     pending_approvals:
       index:

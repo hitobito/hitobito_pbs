@@ -96,13 +96,13 @@ fr:
         approve_title: Accepter la participation
         reject_title: Refuser la participation
       popover_cancel:
-        cancel_info: La maîtrise de cours, l'organisateur/l'organisatrice du cours, le/la responsable de groupe et les instances de recommandation vont être informés de la désinscription.
+        cancel_info: Le/la chef de cours, l'organisateur/l'organisatrice du cours, le/la responsable de groupe et les instances de recommandation vont être informés de la désinscription.
       print:
         heading_event/camp: Annonce de camp %{year}
         read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu sa description du camp et je l'accepte.
     approvals:
       form:
-        approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur du cours (rôle), le/la responsable de cours (personne) et d'autres instances de recommandation.
+        approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur du cours (rôle), le/la chef de cours (personne) et d'autres instances de recommandation.
         placeholder_current_occupation: Activité actuelle du participant/de la participante
         current_level: Branche
         occupation_assessment: Dans quelle mesure fait-il/elle ses preuves? p.ex. enthousiasme, qualité du participant/de la participante
@@ -193,6 +193,8 @@ fr:
       lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camps ("règlement de camp") ainsi que le profil du scoutisme sont pris en compte et respectés
       kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prises en compte lors de la préparation du camp
       j_s_rules_applied_caption: "Pour les camps J+S: Les directives actuelles de Sport de camp/Trekking sont connues et respectées"
+  filter_navigation/events:
+    canton: 'Réalisé dans le canton de'
   group:
     pending_approvals:
       index:
