@@ -1,7 +1,7 @@
 # rubocop:disable all
 namespace :people  do
   desc 'Print Information about Last years people data'
-  task :yearly_report do
+  task :yearly_report => [:environment] do
     year = Date.today.year - 1
     year_start = Date.new(year)
     year_end = year_start.end_of_year
@@ -27,7 +27,7 @@ namespace :people  do
   end
 
   desc 'Returns a csv with people in certain roles at Kantonalverband that had that role in the past year'
-  task :deleted_kanton_roles do
+  task :deleted_kanton_roles => [:environment] do
     person_attrs = %w(
       first_name last_name nickname email
       phone_numbers address zip_code town
