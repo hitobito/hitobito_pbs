@@ -1,5 +1,5 @@
 # rubocop:disable all
-namespace :people do
+namespace :people  do
   desc 'Print Information about Last years people data'
   task :yearly_report do
     year = Date.today.year - 1
@@ -26,12 +26,12 @@ namespace :people do
       "Wieviele Abteilungen haben Freigabeverfahren (zum Hinzufügen von Personen) aktiviert?: #{require_add_requests}/#{layers}\n"
   end
 
-  desc 'Deleted Kantonnalverband roles'
+  desc 'Returns a csv with people in certain roles at Kantonalverband that had that role in the past year'
   task :deleted_kanton_roles do
     person_attrs = %w(
       first_name last_name nickname email
       phone_numbers address zip_code town
-      gender birthday
+      gender birthday kantonalverband_id
     )
 
     role_attrs = %w(Rolle deleted_at label)
@@ -69,11 +69,13 @@ namespace :people do
       roles.each do |role|
 
         person_values = values(person_attrs, role.person) do |model, attr|
+            
           value = model.send(attr)
           case attr
           when 'birthday' then value ? value.strftime('%Y-%m-%d') : nil
           when 'phone_numbers' then value.where(public: true).join(' ')
           when 'gender' then model.gender_label
+          when 'kantonalverband_id' then model.kantonalverband.name if model.kantonalverband
           else value.presence
           end
         end
