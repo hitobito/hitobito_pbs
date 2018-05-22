@@ -98,7 +98,7 @@ describe Group::PendingApprovalsController do
       sign_in(people(:bulei))
       get :index, id: groups(:be).id
       expect(assigns(:approved_approvals)).to have(2).item
-      expect(assigns(:approved_approvals).first).to eq @other_approved_approval
+      expect(assigns(:approved_approvals)).to include(@other_approved_approval)
       expect(assigns(:approved_course_kinds)).to eq([event_kinds(:lpk), event_kinds(:bkws)])
     end
 
