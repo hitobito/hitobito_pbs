@@ -67,6 +67,7 @@ module Pbs::EventAbility
 
       permission(:any).may(:index_revoked_participations).for_participations_full_events
       permission(:any).may(:show_details).if_part_of_krisenteam
+      permission(:any).may(:show_crisis_contacts).if_part_of_krisenteam
 
       permission(:group_full).may(:index_revoked_participations).in_same_group
       permission(:group_and_below_full).may(:index_revoked_participations).in_same_group_or_below

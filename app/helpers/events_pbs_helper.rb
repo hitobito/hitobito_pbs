@@ -150,7 +150,7 @@ module EventsPbsHelper
     Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
       content << labeled_checkpoint_attr(attr)
     end
-    ('<br/>' + content.join('<br/>')).html_safe
+    (content.join('<br/>')).html_safe
   end
 
   def labeled_checkpoint_checkboxes(f)

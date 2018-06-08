@@ -7,24 +7,29 @@
   = section(t('.advisors')) do
     %dl.dl-vertical
       = labeled(captionize(:leader_id, entry.klass)) do
-        = format_attr(entry, :leader_id)
+        %strong= format_attr(entry, :leader_id)
+        - if can?(:show_crisis_contacts, entry)
+          .well.well-small.no-margin
+            = mail_to(entry.leader.primary_email)
+            = entry.leader.all_phone_numbers(false)
         = labeled_checkpoint_attrs
+      
       - if can?(:show_details, entry)
         = labeled(campy_al_caption(entry, !:short_version)) do
-          = format_attr(entry, :abteilungsleitung_id)
+          %strong= format_attr(entry, :abteilungsleitung_id)
           - if entry.abteilungsleitung_id
-            %br/
-            = t("event/camp.al_present_info.#{entry.al_present}")
-            %br/
-            = camp_visiting_info(entry.al_visiting, entry.al_visiting_date)
+            %div= t("event/camp.al_present_info.#{entry.al_present}")
+            %div= camp_visiting_info(entry.al_visiting, entry.al_visiting_date)
 
         = labeled(captionize(:coach_id, entry.klass)) do
-          = format_attr(entry, :coach_id)
+          %strong= format_attr(entry, :coach_id)
+          - if can?(:show_crisis_contacts, entry)
+            .well.well-small.no-margin
+              = mail_to(entry.leader.primary_email)
+              = entry.leader.all_phone_numbers(false)
           - if entry.coach_id
-            %br/
-            = t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
-            %br/
-            = camp_visiting_info(entry.coach_visiting, entry.coach_visiting_date)
+            %div= t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
+            %div= camp_visiting_info(entry.coach_visiting, entry.coach_visiting_date)
 
         - [:advisor_mountain_security_id,
            :advisor_snow_security_id,

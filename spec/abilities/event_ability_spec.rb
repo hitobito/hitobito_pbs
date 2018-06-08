@@ -253,22 +253,26 @@ describe EventAbility do
         it 'is allowed to show_details on camp organized by be' do
           camp = Fabricate(:pbs_camp, groups: [group])
           is_expected.to be_able_to(:show_details, camp)
+          is_expected.to be_able_to(:show_crisis_contacts, camp)
         end
 
         it 'is allowed to show_details on camp organized by patria' do
           camp = Fabricate(:pbs_camp, groups: [groups(:patria)])
           is_expected.to be_able_to(:show_details, camp)
+        is_expected.to be_able_to(:show_crisis_contacts, camp)
         end
 
         it 'is not allowed to show_details on camp organized by zh' do
           camp = Fabricate(:pbs_camp, groups: [groups(:zh)])
           is_expected.not_to be_able_to(:show_details, camp)
+          is_expected.not_to be_able_to(:show_crisis_contacts, camp)
         end
 
         it 'is allowed to show_details on camp organized by zh held in be' do
           KantonalverbandCanton.create!(canton: 'be', kantonalverband: group)
           camp = Fabricate(:pbs_camp, groups: [groups(:zh)], canton: 'be')
           is_expected.to be_able_to(:show_details, camp)
+          is_expected.to be_able_to(:show_crisis_contacts, camp)
         end
       end
     end

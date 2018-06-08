@@ -74,6 +74,10 @@ module HitobitoPbs
       QualificationAbility.send :include, Pbs::QualificationAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
+
+      ### decorators
+      EventDecorator.send :include, Pbs::EventDecorator
+
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
