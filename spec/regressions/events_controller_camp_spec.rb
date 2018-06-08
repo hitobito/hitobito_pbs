@@ -78,8 +78,8 @@ describe EventsController, type: :controller do
             camp.update_attribute("#{key}_id", bulei.id)
 
             text = bulei.to_s
-            text += "\n\nNicht bestätigt\n\nBesucht das Lager nicht\n" if key == 'coach'
-            text += "\n\nNicht im Lager anwesend\n\nBesucht das Lager nicht\n" if key == 'abteilungsleitung'
+            text += "\nNicht bestätigt\nBesucht das Lager nicht\n" if key == 'coach'
+            text += "\nNicht im Lager anwesend\nBesucht das Lager nicht\n" if key == 'abteilungsleitung'
             assert_advisor(key, text, false)
           end
         end
