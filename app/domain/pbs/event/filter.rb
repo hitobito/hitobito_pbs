@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-module Pbs::EventFilter
+module Pbs::Event::Filter
   extend ActiveSupport::Concern
 
   included do
