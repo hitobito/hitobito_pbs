@@ -12,7 +12,7 @@
           .well.well-small.no-margin
             = mail_to(entry.leader.primary_email)
             = entry.leader.all_phone_numbers(false)
-        = labeled_checkpoint_attrs
+        %p= labeled_checkpoint_attrs
       
       - if can?(:show_details, entry)
         = labeled(campy_al_caption(entry, !:short_version)) do
