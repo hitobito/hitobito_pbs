@@ -14,6 +14,11 @@ module Pbs::EventAbility
   ABROAD_CAMP_LIST_ROLES = [Group::Bund::InternationalCommissionerIcWagggs,
                             Group::Bund::InternationalCommissionerIcWosm].freeze
 
+  CAMP_KRISENTEAM_ROLES = [Group::Kantonalverband::Kantonsleitung,
+                           Group::Kantonalverband::Sekretariat,
+                           Group::Kantonalverband::VerantwortungKrisenteam,
+                           Group::Kantonalverband::MitgliedKrisenteam].freeze
+
   included do
     on(Event) do
       permission(:any).may(:modify_superior).if_education_responsible
@@ -61,6 +66,7 @@ module Pbs::EventAbility
       class_side(:list_abroad).if_international_commissioner
 
       permission(:any).may(:index_revoked_participations).for_participations_full_events
+      permission(:any).may(:show_details).if_part_of_krisenteam
 
       permission(:group_full).may(:index_revoked_participations).in_same_group
       permission(:group_and_below_full).may(:index_revoked_participations).in_same_group_or_below
@@ -102,6 +108,16 @@ module Pbs::EventAbility
 
   def if_participating_as_leader_role
     participating? && participating_as_leader_role?
+  end
+
+  def if_part_of_krisenteam
+    user.roles.where(type: CAMP_KRISENTEAM_ROLES, group: kantonalverbaende).exists?
+  end
+
+  def kantonalverbaende
+    event.groups.collect(&:layer_hierarchy).flatten.select do |group|
+      group.is_a?(Group::Kantonalverband)
+    end + KantonalverbandCanton.where(canton: event.canton).collect(&:kantonalverband)
   end
 
   def participating?

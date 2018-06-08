@@ -239,6 +239,41 @@ describe EventAbility do
     end
   end
 
+  context 'camp details' do
+    allowed_roles = [[:be, 'Kantonsleitung'],
+                     [:be, 'Sekretariat'],
+                     [:be, 'VerantwortungKrisenteam'],
+                     [:be, 'MitgliedKrisenteam']]
+
+    allowed_roles.each do |r|
+      context "#{r.second} in group #{r.first.to_s}" do
+        let(:group) { groups(r.first) }
+        let(:role) { Fabricate(group.class.name + '::' + r.second, group: group) }
+
+        it 'is allowed to show_details on camp organized by be' do
+          camp = Fabricate(:pbs_camp, groups: [group])
+          is_expected.to be_able_to(:show_details, camp)
+        end
+
+        it 'is allowed to show_details on camp organized by patria' do
+          camp = Fabricate(:pbs_camp, groups: [groups(:patria)])
+          is_expected.to be_able_to(:show_details, camp)
+        end
+
+        it 'is not allowed to show_details on camp organized by zh' do
+          camp = Fabricate(:pbs_camp, groups: [groups(:zh)])
+          is_expected.not_to be_able_to(:show_details, camp)
+        end
+
+        it 'is allowed to show_details on camp organized by zh held in be' do
+          KantonalverbandCanton.create!(canton: 'be', kantonalverband: group)
+          camp = Fabricate(:pbs_camp, groups: [groups(:zh)], canton: 'be')
+          is_expected.to be_able_to(:show_details, camp)
+        end
+      end
+    end
+  end
+
 
   context :modify_superior do
 
