@@ -8,10 +8,8 @@
     %dl.dl-vertical
       = labeled(captionize(:leader_id, entry.klass)) do
         %strong= format_attr(entry, :leader_id)
-        - if can?(:show_crisis_contacts, entry)
-          .well.well-small.no-margin
-            = mail_to(entry.leader.primary_email)
-            = entry.leader.all_phone_numbers(false)
+        - if can?(:show_crisis_contacts, entry) && entry.leader_id
+          = entry.leader.compact_contact_info(false)
         %p= labeled_checkpoint_attrs
       
       - if can?(:show_details, entry)
@@ -23,11 +21,9 @@
 
         = labeled(captionize(:coach_id, entry.klass)) do
           %strong= format_attr(entry, :coach_id)
-          - if can?(:show_crisis_contacts, entry)
-            .well.well-small.no-margin
-              = mail_to(entry.leader.primary_email)
-              = entry.leader.all_phone_numbers(false)
           - if entry.coach_id
+            - if can?(:show_crisis_contacts, entry)
+              = entry.coach.compact_contact_info(false)
             %div= t("event/camp.coach_confirmed_info.#{entry.coach_confirmed}")
             %div= camp_visiting_info(entry.coach_visiting, entry.coach_visiting_date)
 

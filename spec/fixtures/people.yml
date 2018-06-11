@@ -91,6 +91,13 @@ child:
   primary_group: pegasus
   kantonalverband: be
 
+be_crisis_member:
+  first_name: Alan
+  last_name: Helpful
+  email: crisismaster@hitobito.example.com
+  primary_group: be
+  kantonalverband: be
+
 root:
   company_name: 'Puzzle ITC'
   company: true

@@ -276,6 +276,57 @@ describe EventsController, type: :controller do
     end
   end
 
+  context 'crisis_team_members' do
+
+    let(:camp_leader) { people(:al_schekka) }
+    let(:camp) { Fabricate(:pbs_camp, groups: [groups(:bern)]) }
+    let(:outside_camp) { Fabricate(:pbs_camp, groups: [groups(:zuerich)]) }
+    let(:canton) {groups(:be)}
+
+    before do
+      sign_in(people(:be_crisis_member))
+    end
+
+    context 'for camps from own canton' do
+      before do
+        leader_participation = Fabricate(:pbs_participation, event: camp, person: camp_leader)
+        Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
+      end
+
+      it 'show contact details of camp leader' do
+        get :show, group_id: group.id, id: camp.id
+        expect(dom).to have_selector('a', text: camp_leader.email)
+      end
+
+      it 'shows nothing if no leader is assigned' do
+        camp.participations.destroy_all
+        get :show, group_id: group.id, id: camp.id
+        expect(dom).not_to have_selector('a', text: camp_leader.email)
+      end
+    end
+
+    context 'for camp of other cantons' do
+      before do
+        leader_participation = Fabricate(:pbs_participation, event: outside_camp, person: camp_leader)
+        Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
+      end
+
+      it 'does not show contact details of camp leaders' do
+        get :show, group_id: outside_camp.group_ids.first, id: outside_camp.id
+        expect(dom).not_to have_selector('a', text: camp_leader.email)
+      end
+
+      it 'show contact details if camp is located in own canton' do
+        outside_camp.update!(canton: 'be')
+        canton.update!(cantons: ['be'])
+
+        get :show, group_id: outside_camp.group_ids.first, id: outside_camp.id
+        expect(dom).to have_selector('a', text: camp_leader.email)
+      end
+    end
+
+  end
+
   context 'camp leader checkpoint attrs' do
 
     before { sign_in(bulei) }

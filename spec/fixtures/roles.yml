@@ -27,6 +27,11 @@ bulei:
   group: bund
   type: Group::Bund::MitarbeiterGs
 
+crisis_member:
+  person: be_crisis_member
+  group: be
+  type: Group::Kantonalverband::MitgliedKrisenteam
+
 al_schekka:
   person: al_schekka
   group: schekka
