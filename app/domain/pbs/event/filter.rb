@@ -18,8 +18,8 @@ module Pbs::Event::Filter
         where(type: type, canton: cantons).
         includes(:groups).
         in_year(year).order_by_date.preload_all_dates.uniq
-      
-      sorting ? scope.reorder(sort_expression) : scope
+
+      sort_expression ? scope.reorder(sort_expression) : scope
     else
       list_entries_without_canton
     end
