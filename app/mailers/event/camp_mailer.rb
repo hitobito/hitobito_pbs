@@ -90,7 +90,11 @@ class Event::CampMailer < ApplicationMailer
   end
 
   def camp_state
-    I18n.t("activerecord.attributes.event/camp.states.#{camp.state}")
+    if camp.instance_of?(Event::Course)
+      I18n.t("activerecord.attributes.event/course.states.#{camp.state}")
+    else
+      I18n.t("activerecord.attributes.event/camp.states.#{camp.state}")
+    end
   end
 
   def fetch_advisor_content_key(advisor_key)
