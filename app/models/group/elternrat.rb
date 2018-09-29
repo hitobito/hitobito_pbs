@@ -53,5 +53,5 @@ class Group::Elternrat < Group
 
   roles Praesidium,
         Mitglied
-
+  self.default_role = Mitglied
 end

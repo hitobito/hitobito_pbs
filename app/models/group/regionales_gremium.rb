@@ -51,4 +51,6 @@ class Group::RegionalesGremium < Group::Gremium
 
   roles Leitung, Mitglied
 
+  self.default_role = Mitglied
+
 end
