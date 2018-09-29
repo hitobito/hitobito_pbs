@@ -12,7 +12,8 @@ module Export::Pdf
 
     attr_reader :camp, :pdf, :data, :label_helper
 
-    delegate :text, :font_size, :move_down, :text_box, :cursor, :table, :image, :bounds, to: :pdf
+    delegate :text, :font_size, :move_down, :text_box, :cursor, :table, :image, :bounds,
+             :start_new_page, to: :pdf
     delegate :t, :l, to: I18n
     delegate :labeled_checkpoint_attr, :labeled_camp_attr, :with_label, :in_columns,
              :labeled_email, :labeled_phone_number, :labeled_value, to: :label_helper
@@ -60,10 +61,13 @@ module Export::Pdf
         -> { render_j_s },
         -> { render_state }
       ]
+
+      start_new_page if cursor < 200
+
       in_columns [
         -> { render_abteilungsleitung },
         -> { render_coach }
-      ]
+      ], 200
     end
 
     def render_logos

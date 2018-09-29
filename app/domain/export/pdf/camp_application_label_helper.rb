@@ -64,9 +64,9 @@ module Export::Pdf
       end
     end
 
-    def in_columns(columns = [], initial_cursor: cursor, gap: 20, width: 500)
+    def in_columns(columns = [], height = nil, initial_cursor: cursor, gap: 20, width: 500)
       column_width = width / columns.count - (gap / 2)
-      bounding_box [0, initial_cursor], width: width do
+      bounding_box [0, initial_cursor], width: width, height: height do
         cursors = columns.each_with_index.map do |column, index|
           bounding_box [index * (column_width + gap), bounds.top], width: column_width do
             column.call
