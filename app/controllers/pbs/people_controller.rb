@@ -10,6 +10,7 @@ module Pbs::PeopleController
 
   included do
     alias_method_chain :prepare_tabular_entries, :layer_group
+    alias_method_chain :render_tabular_in_background, :detail
   end
 
   private
@@ -17,6 +18,13 @@ module Pbs::PeopleController
   def prepare_tabular_entries_with_layer_group(entries, full)
     entries = prepare_tabular_entries_without_layer_group(entries, full)
     entries.includes(:primary_group)
+  end
+
+  def render_tabular_in_background_with_detail(format, full, filename)
+    Export::PeopleExportJob.new(
+      format, current_person.id, person_filter,
+      params.slice(:household, :household_details).merge(full: full, filename: filename)
+    ).enqueue!
   end
 
 end

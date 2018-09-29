@@ -6,13 +6,13 @@
 
 require 'spec_helper'
 
-describe Export::Tabular::People::Households do
+describe Pbs::Export::Tabular::People::HouseholdsFull do
 
   let(:leader) { people(:top_leader) }
   let(:member) { people(:bottom_member) }
 
   def households(list = [])
-    Export::Tabular::People::Households.new(list)
+    Pbs::Export::Tabular::People::HouseholdsFull.new(list)
   end
 
   context 'header' do

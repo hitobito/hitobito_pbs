@@ -44,6 +44,9 @@ de:
   dropdown/event/camp_participant_status:
     change_state: Status ändern
 
+  dropdown/people_export:
+    household_details: 'Haushaltsliste mit Details'
+
   export/pdf/camp_application:
     title: Lageranmeldung %{camp}
     group_header: Abteilung und Einheit
