@@ -102,4 +102,11 @@ describe EventsController, type: :controller  do
     expect(dom).not_to have_content('LKB')
   end
 
+  it "new events get default required and hidden attributes" do
+    sign_in(bulei)
+    get :new, group_id: group.id
+    expect(dom.find("#event_contact_attrs\\[title\\]_hidden")).to be_checked
+    expect(dom.find("#event_contact_attrs\\[nationality_j_s\\]_required")).to be_checked
+  end
+
 end

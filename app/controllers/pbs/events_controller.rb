@@ -18,6 +18,13 @@ module Pbs::EventsController
 
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :sort_expression, :canton
+    alias_method_chain :new, :default_settings
+  end
+
+  def new_with_default_settings
+    entry.required_contact_attrs += entry.default_contact_attrs[:required].map(&:to_s)
+    entry.hidden_contact_attrs += entry.default_contact_attrs[:hidden].map(&:to_s)
+    new_without_default_settings
   end
 
   def sort_expression_with_canton
