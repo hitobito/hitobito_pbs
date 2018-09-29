@@ -12,7 +12,7 @@ module Export::Pdf
 
     attr_reader :camp, :pdf, :data, :label_helper
 
-    delegate :text, :font_size, :move_down, :text_box, :cursor, :table,
+    delegate :text, :font_size, :move_down, :text_box, :cursor, :table, :image, :bounds, :bounding_box, :stroke_bounds, :move_cursor_to,
              to: :pdf
     delegate :t, :l, to: I18n
     delegate :labeled_checkpoint_attr, :labeled_camp_attr, :with_label,
@@ -21,6 +21,7 @@ module Export::Pdf
     def initialize(camp)
       @camp = camp
       @data = CampApplicationData.new(camp)
+      @cursor
     end
 
     def render
@@ -44,26 +45,56 @@ module Export::Pdf
       title + '.pdf'
     end
 
+    def in_columns(columns = [])
+      row_cursor = cursor
+      x = columns.each_with_index.map do |column, index|
+        bounding_box [index * 250, row_cursor], width: 230 do
+          column.call
+        end
+        cursor
+      end
+      move_cursor_to x.min
+    end
+
+
     private
 
     def render_sections
       @section_count = 0
+      render_logos
       render_title
-      render_group
-      render_leader
+      in_columns [
+        -> { render_group },
+        -> { render_leader }
+      ]
       render_assistant_leaders
       render_camp
-      render_j_s
-      render_state
-      render_abteilungsleitung
-      render_coach
+      in_columns [
+        -> { render_j_s },
+        -> { render_state }
+      ]
+      in_columns [
+        -> { render_abteilungsleitung },
+        -> { render_coach }
+      ]
+    end
+
+    def render_logos
+      image Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images', 'logo_pbs.png'),
+        at: [0, bounds.top_left[1] + 40], # TODO:
+        fit: [200, 55]
+
+      image Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images', 'logo_js.png'),
+        at: [bounds.top_right[0] - 40, bounds.top_left[1] + 40], # TODO:
+        fit: [200, 55]
     end
 
     def render_title
+      move_down 30
       font_size(20) do
         text title, style: :bold
       end
-      move_down_line
+      move_down 16
     end
 
     def render_group
@@ -76,14 +107,16 @@ module Export::Pdf
     end
 
     def render_expected_participant_table
-      move_down_line
       text translate('expected_participants')
       move_down_line
       cells = []
       cells << data.expected_participant_table_header
       cells << data.expected_participant_table_row(:f)
       cells << data.expected_participant_table_row(:m)
-      table(cells, cell_style: { align: :center, border_width: 0.25, width: 50 })
+      table(cells,
+        cell_style: { align: :center, border_width: 0.25, font_size: 10 },
+        column_widths: [20, 42, 42, 42, 42, 42]
+        )
     end
 
     def render_leader
@@ -96,8 +129,10 @@ module Export::Pdf
           text_nobody
         end
       end
-      Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
-        labeled_checkpoint_attr(attr)
+      font_size 8 do
+        Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
+          labeled_checkpoint_attr(attr)
+        end
       end
       move_down_line
     end
@@ -121,20 +156,26 @@ module Export::Pdf
 
     def render_camp
       section('camp') do
-        sub_section('camp_dates') do
-          render_dates
-          move_down_line
-          labeled_camp_attr(:camp_days)
-        end
-        sub_section('camp_location') do
-          render_location
-        end
+        in_columns [
+          (lambda {
+            sub_section('camp_dates') do
+              render_dates
+              move_down_line
+              labeled_camp_attr(:camp_days)
+            end
+          }),
+          (lambda {
+            sub_section('camp_location') do
+              render_location
+            end
+          })
+        ]
       end
     end
 
     def render_dates
       camp.dates.each do |d|
-        labeled_value(d.duration.to_s, d.label)
+        labeled_value(d.duration.to_s, d.label, { column_widths: [115, 115]} )
       end
     end
 
@@ -145,7 +186,10 @@ module Export::Pdf
       labeled_camp_attr(:altitude)
       labeled_camp_attr(:emergency_phone)
       labeled_camp_attr(:landlord)
-      labeled_camp_attr(:landlord_permission_obtained)
+      move_down_line
+      font_size 8 do
+        labeled_checkpoint_attr(:landlord_permission_obtained)
+      end
     end
 
     def render_j_s
@@ -153,9 +197,13 @@ module Export::Pdf
         blank_text = "(#{t('global.nobody')})"
         labeled_camp_attr(:j_s_kind)
         labeled_value(translate('js_security'), data.js_security_value)
-        labeled_camp_attr(:advisor_mountain_security, blank_text)
-        labeled_camp_attr(:advisor_water_security, blank_text)
-        labeled_camp_attr(:advisor_snow_security, blank_text)
+        move_down 6
+        font_size 8 do
+          labeled_camp_attr(:advisor_mountain_security, blank_text)
+          move_down 6
+          labeled_camp_attr(:advisor_water_security, blank_text)
+          labeled_camp_attr(:advisor_snow_security, blank_text)
+        end
       end
     end
 
@@ -170,8 +218,11 @@ module Export::Pdf
       section('abteilungsleitung') do
         abteilungsleitung = camp.abteilungsleitung
         render_person(abteilungsleitung, false) if abteilungsleitung
-        labeled_camp_attr(:al_present)
-        labeled_camp_attr(:al_visiting)
+        move_down 10
+        font_size 8 do
+          labeled_checkpoint_attr(:al_present)
+          labeled_checkpoint_attr(:al_visiting)
+        end
       end
     end
 
@@ -179,7 +230,10 @@ module Export::Pdf
       section('coach') do
         coach = camp.coach
         render_person(coach, false) if coach
-        labeled_camp_attr(:coach_visiting)
+        move_down 10
+        font_size 8 do
+          labeled_checkpoint_attr(:coach_visiting)
+        end
       end
     end
 
@@ -187,14 +241,15 @@ module Export::Pdf
       with_label('name', person)
       with_label('address', person.address)
       with_label('zip_town', [person.zip_code, person.town].compact.join(' '))
-      labeled_email(person)
-      labeled_phone_number(person, 'Privat')
-      labeled_phone_number(person, 'Mobil')
+      labeled_email(person, { column_widths: [92, 138] })
+      labeled_phone_number(person, 'Privat', { column_widths: [92, 138] })
+      labeled_phone_number(person, 'Mobil', { column_widths: [92, 138] })
       with_label('birthday', person.birthday.presence && l(person.birthday)) if details
     end
 
     def section(header)
       @section_count += 1
+      move_down 6
       heading { text "#{@section_count}. #{translate(header)}", style: :bold }
       move_down_line
       yield
@@ -209,10 +264,10 @@ module Export::Pdf
     end
 
     def heading
-      font_size(14) { yield }
+      font_size(12) { yield }
     end
 
-    def move_down_line(line = 12)
+    def move_down_line(line = 6)
       move_down(line)
     end
 

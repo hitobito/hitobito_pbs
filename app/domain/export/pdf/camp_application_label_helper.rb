@@ -10,7 +10,7 @@ module Export::Pdf
 
     attr_reader :pdf, :data
 
-    delegate :text, :table, to: :pdf
+    delegate :text, :formatted_text, :table, to: :pdf
     delegate :t, to: I18n
 
     def initialize(pdf, data)
@@ -26,37 +26,39 @@ module Export::Pdf
       labeled_value(label, value)
     end
 
-    def with_label(key, value)
+    def with_label(key, value, options = {})
       label = t('export/pdf/camp_application.' + key)
-      labeled_value(label, value)
+      labeled_value(label, value, options)
     end
 
-    def labeled_value(label, value)
-      cells = [[label, value.to_s]]
+    def labeled_value(label, value, options = {})
       cell_style = { border_width: 0, padding: 0 }
-      table(cells, cell_style: cell_style, column_widths: [180, 300]) do
+      options = { cell_style: cell_style, column_widths: [92, 138] }.merge(options)
+      cells = [[label, value.to_s]]
+      table(cells, options) do
         column(0).style font_style: :italic
       end
     end
 
-    def labeled_email(person)
+    def labeled_email(person, options = {})
       value = person.email
       return unless value.present?
       label = t('events.fields_pbs.email')
-      labeled_value(label, value)
+      labeled_value(label, value, options)
     end
 
-    def labeled_phone_number(person, phone_label)
+    def labeled_phone_number(person, phone_label, options = {})
       value = data.phone_number(person, phone_label)
       return unless value.present?
       label = t("events.fields_pbs.phone_#{phone_label.downcase}")
-      labeled_value(label, value)
+      labeled_value(label, value, options)
     end
 
     def labeled_checkpoint_attr(attr)
       label = data.t_camp_attr(attr.to_s)
       value = data.camp_attr_value(attr)
-      text "#{label}: #{value}"
+      # formatted_text [{text: "#{label}: "}, { text: value, size: 20 }]
+      text "#{label}: <b>#{value}</b>", inline_format: true
     end
 
   end
