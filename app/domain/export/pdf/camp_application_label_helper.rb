@@ -11,7 +11,7 @@ module Export::Pdf
     attr_reader :pdf, :data
 
     delegate :text, :formatted_text, :table, :font_size, :cursor, :move_cursor_to, :bounding_box,
-      to: :pdf
+      :bounds, :stroke_bounds, :new_page, to: :pdf
     delegate :t, to: I18n
 
     def initialize(pdf, data)
@@ -34,7 +34,7 @@ module Export::Pdf
 
     def labeled_value(label, value, options = {})
       cell_style = { border_width: 0, padding: 1 }.merge(options.delete(:cell_style) || {})
-      options = { cell_style: cell_style, column_widths: [92, 138] }.merge(options)
+      options = { cell_style: cell_style, column_widths: [97, 143] }.merge(options)
       cells = [[label, value.to_s]]
       table(cells, options) do
         column(0).style font_style: :italic
@@ -59,20 +59,22 @@ module Export::Pdf
     def labeled_checkpoint_attr(attr)
       label = data.t_camp_attr(attr.to_s)
       value = data.camp_attr_value(attr)
-      # formatted_text [{text: "#{label}: "}, { text: value, size: 20 }]
       font_size 8 do
         text "#{label}: <b>#{value}</b>", inline_format: true
       end
     end
 
-    def in_columns(columns = [], initial_cursor = cursor)
-      cursors = columns.each_with_index.map do |column, index|
-        bounding_box [index * 250, initial_cursor], width: 230 do
-          column.call
+    def in_columns(columns = [], initial_cursor: cursor, gap: 20, width: 500)
+      column_width = width / columns.count - (gap / 2)
+      bounding_box [0, initial_cursor], width: width do
+        cursors = columns.each_with_index.map do |column, index|
+          bounding_box [index * (column_width + gap), bounds.top], width: column_width do
+            column.call
+          end
+          cursor
         end
-        cursor
+        move_cursor_to cursors.min
       end
-      move_cursor_to cursors.min
     end
   end
 end

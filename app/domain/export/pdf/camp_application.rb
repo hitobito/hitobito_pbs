@@ -101,7 +101,7 @@ module Export::Pdf
       cells << data.expected_participant_table_row(:m)
       table(cells,
         cell_style: { align: :center, border_width: 0.25, font_size: 10 },
-        column_widths: [20, 42, 42, 42, 42, 42]
+        column_widths: [20, 44, 44, 44, 44, 44]
         )
     end
 
@@ -156,7 +156,7 @@ module Export::Pdf
     end
 
     def render_dates
-      camp.dates.each { |d| labeled_value(d.duration.to_s, d.label, { column_widths: [115, 115]} ) }
+      camp.dates.each { |d| labeled_value(d.duration.to_s, d.label, { column_widths: [120, 120]} ) }
     end
 
     def render_location
