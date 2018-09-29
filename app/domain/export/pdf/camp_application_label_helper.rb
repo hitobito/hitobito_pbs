@@ -10,7 +10,8 @@ module Export::Pdf
 
     attr_reader :pdf, :data
 
-    delegate :text, :formatted_text, :table, to: :pdf
+    delegate :text, :formatted_text, :table, :font_size, :cursor, :move_cursor_to, :bounding_box,
+      to: :pdf
     delegate :t, to: I18n
 
     def initialize(pdf, data)
@@ -32,11 +33,12 @@ module Export::Pdf
     end
 
     def labeled_value(label, value, options = {})
-      cell_style = { border_width: 0, padding: 0 }
+      cell_style = { border_width: 0, padding: 1 }.merge(options.delete(:cell_style) || {})
       options = { cell_style: cell_style, column_widths: [92, 138] }.merge(options)
       cells = [[label, value.to_s]]
       table(cells, options) do
         column(0).style font_style: :italic
+        column(1).style overflow: :shrink_to_fit, min_font_size: 6
       end
     end
 
@@ -44,7 +46,7 @@ module Export::Pdf
       value = person.email
       return unless value.present?
       label = t('events.fields_pbs.email')
-      labeled_value(label, value, options)
+      labeled_value(label, value, { cell_style: { height: 12 } }.merge(options))
     end
 
     def labeled_phone_number(person, phone_label, options = {})
@@ -58,8 +60,19 @@ module Export::Pdf
       label = data.t_camp_attr(attr.to_s)
       value = data.camp_attr_value(attr)
       # formatted_text [{text: "#{label}: "}, { text: value, size: 20 }]
-      text "#{label}: <b>#{value}</b>", inline_format: true
+      font_size 8 do
+        text "#{label}: <b>#{value}</b>", inline_format: true
+      end
     end
 
+    def in_columns(columns = [], initial_cursor = cursor)
+      cursors = columns.each_with_index.map do |column, index|
+        bounding_box [index * 250, initial_cursor], width: 230 do
+          column.call
+        end
+        cursor
+      end
+      move_cursor_to cursors.min
+    end
   end
 end
