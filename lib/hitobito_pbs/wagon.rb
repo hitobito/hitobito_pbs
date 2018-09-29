@@ -59,6 +59,12 @@ module HitobitoPbs
       Export::Tabular::People::PeopleFull.send(
         :include, Pbs::Export::Tabular::People::PeopleFull
       )
+      Export::Tabular::People::Households.send(
+        :include, Pbs::Export::Tabular::People::Households
+      )
+      Export::Tabular::People::HouseholdRow.send(
+        :include, Pbs::Export::Tabular::People::HouseholdRow
+      )
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
 
       ### abilities
