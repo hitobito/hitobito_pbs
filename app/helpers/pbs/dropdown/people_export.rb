@@ -17,10 +17,12 @@ module Pbs
       def tabular_links_with_detail(format)
         tabular_links_without_detail(format)
 
-        path = params.merge(format: format)
-        item = @items.find { |i| i.label == translate(format) }
-        item.sub_items << ::Dropdown::Item.new(translate(:household_details),
-          path.merge(household_details: true))
+        if params[:controller] != 'event/participations' then
+          path = params.merge(format: format)
+          item = @items.find { |i| i.label == translate(format) }
+          item.sub_items << ::Dropdown::Item.new(translate(:household_details),
+            path.merge(household_details: true))
+        end
       end
 
     end
