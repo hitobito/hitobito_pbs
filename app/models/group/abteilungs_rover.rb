@@ -61,4 +61,5 @@ class Group::AbteilungsRover < Group::Rover
         Adressverwaltung,
         Rover
 
+  self.default_role = Rover
 end

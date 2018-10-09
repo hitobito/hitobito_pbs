@@ -74,4 +74,6 @@ class Group::Woelfe < Group
         Leitwolf,
         Wolf
 
+  self.default_role = Wolf
+
 end

@@ -68,4 +68,6 @@ class Group::Biber < Group
         Adressverwaltung,
         Biber
 
+  self.default_role = Biber
+
 end

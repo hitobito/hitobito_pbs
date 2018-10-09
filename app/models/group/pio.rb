@@ -68,4 +68,6 @@ class Group::Pio < Group
         Adressverwaltung,
         Pio
 
+  self.default_role = Pio
+
 end

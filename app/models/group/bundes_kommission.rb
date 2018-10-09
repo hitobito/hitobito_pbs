@@ -44,5 +44,5 @@ class Group::BundesKommission < Group::Kommission
   children Group::BundesKommission
 
   roles Leitung, Mitglied
-
+  self.default_role = Mitglied
 end

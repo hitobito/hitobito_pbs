@@ -50,5 +50,6 @@ class Group::KantonaleKommission < Group::Kommission
   end
 
   roles Leitung, Mitglied
+  self.default_role = Mitglied
 
 end

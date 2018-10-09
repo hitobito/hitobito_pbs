@@ -50,5 +50,6 @@ class Group::KantonalesGremium < Group::Gremium
   end
 
   roles Leitung, Mitglied
+  self.default_role = Mitglied
 
 end

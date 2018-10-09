@@ -51,4 +51,6 @@ class Group::RegionaleKommission < Group::Kommission
 
   roles Leitung, Mitglied
 
+  self.default_role = Mitglied
+
 end

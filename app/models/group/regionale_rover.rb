@@ -61,4 +61,6 @@ class Group::RegionaleRover < Group::Rover
         Adressverwaltung,
         Rover
 
+  self.default_role = Rover
+
 end

@@ -51,4 +51,6 @@ class Group::AbteilungsGremium < Group::Gremium
 
   roles Leitung, Mitglied
 
+  self.default_role = Mitglied
+
 end

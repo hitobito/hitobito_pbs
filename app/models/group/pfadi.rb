@@ -74,4 +74,6 @@ class Group::Pfadi < Group
         Leitpfadi,
         Pfadi
 
+  self.default_role = Pfadi
+
 end
