@@ -1,8 +1,8 @@
 # rubocop:disable all
 namespace :people  do
-  desc 'Print Information about Last years people data'
-  task :yearly_report => [:environment] do
-    year = Date.today.year - 1
+  desc 'Print statistical Information about current or given year.'
+  task :yearly_report, [:year] => [:environment] do |task, args|
+    year = args[:year] ?  args[:year].to_i : Date.today.year
     year_start = Date.new(year)
     year_end = year_start.end_of_year
 
