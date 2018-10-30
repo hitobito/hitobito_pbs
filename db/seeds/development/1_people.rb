@@ -26,7 +26,8 @@ puzzlers = ['Pascal Zumkehr',
             'Mathis Hofer',
             'Pascal Simon',
             'Matthias Viehweger',
-            'Bruno Santschi']
+            'Bruno Santschi',
+            'Janiss Binder']
 
 devs = {'Olivier Brian' => 'olivier.brian@bfh.ch'}
 puzzlers.each do |puz|
