@@ -9,9 +9,13 @@ module Pbs::Event::ListsController
   extend ActiveSupport::Concern
 
   included do
+    # required to allow api calls
+    protect_from_forgery with: :null_session, only: [:bsv_export]
+
     skip_authorization_check only: :camps
     skip_authorize_resource only: [:camps, :all_camps, :kantonalverband_camps,
                                    :camps_in_canton, :camps_abroad]
+    alias_method_chain :render_bsv_export, :advanced
   end
 
   # simple redirect action acting as a generic entry point from the main navigation
@@ -64,6 +68,15 @@ module Pbs::Event::ListsController
   end
 
   private
+
+  def render_bsv_export_with_advanced(courses_for_bsv_export)
+    if params[:advanced]
+      send_data(Export::Tabular::Events::AdvancedBsvList.csv(courses_for_bsv_export),
+                type: :csv, filename: 'advanced_bsv_export.csv')
+    else
+      render_bsv_export_without_advanced(courses_for_bsv_export)
+    end
+  end
 
   def render_camp_list(camps)
     respond_to do |format|

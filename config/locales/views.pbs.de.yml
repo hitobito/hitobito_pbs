@@ -97,6 +97,7 @@ de:
       camps_abroad:
         title: Alle Lager im Ausland
         explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+      advanced_bsv_export_button: Erweiterter BSV/LKB Export
 
     participations:
       canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
