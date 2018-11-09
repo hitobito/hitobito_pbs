@@ -107,11 +107,11 @@ class Group::Kantonalverband < Group
   end
 
   class Kantonsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications, :finance]
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data, :finance]
   end
 
   class Leitungskursbetreuung < ::Role
@@ -152,7 +152,7 @@ class Group::Kantonalverband < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :finance]
   end
 
   class Spezialfunktion < ::Role

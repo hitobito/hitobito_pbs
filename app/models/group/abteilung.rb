@@ -89,7 +89,7 @@ class Group::Abteilung < Group
   ### ROLES
 
   class Abteilungsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications, :finance]
   end
 
   class AbteilungsleitungStv < ::Role
@@ -118,7 +118,7 @@ class Group::Abteilung < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data, :finance]
   end
 
   class Materialwart < ::Role
@@ -151,7 +151,7 @@ class Group::Abteilung < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :finance]
   end
 
   class Spezialfunktion < ::Role
