@@ -1,5 +1,10 @@
 # Hitobito PBS Changelog
 
+## Version 1.19
+
+*   Erweiterterter BSV / LKB Export
+
+
 ## Version 1.17
 
 *   Bugfix: Kantonalverband wird wieder gesetzt
