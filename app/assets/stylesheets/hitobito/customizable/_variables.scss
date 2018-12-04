@@ -1,0 +1,109 @@
+//  Copyright (c) 2012-2018, hitobito AG. This file is part of
+//  hitobito_generic and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/hitobito/hitobito_generic.
+
+/* Bootstrap variable definition here */
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+// Logo
+//--------------------------
+
+
+$logoUrl:               "logo.svg"; // put under app/assets/images
+$logoWidth:             220px;      // has to bet set as the logo is a background image
+$logoHeight:            80px;       // will also set the minimal width of the navigation
+                                    // must be set in pixel
+
+// optional backgroundcolor, creates a box around the logo, if changed from 'none'
+$logoBackgroundColor:   none;
+
+// Grays
+// -------------------------
+$black:                 #474E5D !default;
+$grayDarker:            #797E89 !default;
+$grayDark:              #8b8b8b !default;
+$gray:                  #979CA6 !default;
+$grayLight:             #E8EBF0 !default;
+$grayLighter:           #F8F9FA !default;
+$white:                 #fff !default;
+
+// Colors
+// ----------------------------
+$blue:                  #329897 !default;
+$blueDark:              darken($blue, 10%) !default;
+$green:                 #8DB850 !default;
+$greenDark:             darken($green, 10%) !default;
+
+$orange:                #DC795B;
+$orangeDark:            #C75B3B;
+$purple:                #925D97;
+$purpleDark:            #6A396F;
+
+$red:                   $orange !default;
+
+$textColor:             $black !default;
+$borderColor:           $grayLight !default;
+
+$pageBackground:        lighten($green, 5%);
+$contentBackground:     $grayLight;
+$footerBackground:      $blue;
+$bodyBackground:        $blue;
+
+$focusColor:            $purple;
+$shadowColor:           darken($pageBackground, 10%);
+$linkColor:             $blue !default;
+$linkColorHover:        $purpleDark !default;
+
+$footerColor:           $white;
+$footerColorHover:      $white;
+
+$tableColorHover:       lighten($purple, 50%);
+
+// Typography
+// -------------------------
+
+$sansFontFamily:        'Noto Sans', sans-serif;
+$headingFontFamily:     'Noto Sans', sans-serif; //'Quicksand', $sansFontFamily !default;
+$baseFontFamily:        'Noto Sans', sans-serif; //'Varela Round', $sansFontFamily !default;
+$headingsFontWeight:    normal !default; // instead of browser default, bold
+
+// Decoration
+// -------------------------
+$borderRadius:           6px;
+
+// Rhythm
+// -------------------------
+$vSpace:                24px;
+
+
+// FLUID GRID
+// --------------------------------------------------
+
+// Default
+// -------------------------
+$fluidGridColumnWidth:         6.382978723% !default;
+$fluidGridGutterWidth:         2.127659574% !default;
+
+// Portrait tablet to default desktop
+// -------------------------
+$fluidGridColumnWidthTablet:   5.801104972% !default;
+$fluidGridGutterWidthTablet:   2.762430939% !default;
+
+// Large desktop and up
+// -------------------------
+$fluidGridColumnWidthLarge:    5.982905983% !default;
+$fluidGridGutterWidthLarge:    2.564102564% !default;
+
+
+// RESPONSIVE DESIGN
+// --------------------------------------------------
+
+// Media widths
+// -------------------------
+$mediaPhone:              480px !default;
+$mediaTablet:             768px !default;
+$mediaDesktop:            980px !default;
+$mediaLarge:              1200px !default; // and upper
