@@ -187,6 +187,88 @@ describe Event::ListsController do
     end
   end
 
+  describe 'GET #bsv_export' do
+    let(:rows) { response.body.split("\r\n") }
+    let(:user) { people(:bulei) }
+    let(:kind) { event_kinds(:fut) }
+    let(:person) do
+      Fabricate(:person, address: 'test_address',
+                         zip_code: '3128',
+                         town: 'Foodorf',
+                         country: 'CH')
+    end
+
+    before do
+      create_course('124', '11.11.2015', '12.11.2015')
+      create_course('124', '11.11.2015')
+    end
+
+    context 'advanced' do
+      it 'includes advanced attribute labels' do
+        get :bsv_export, bsv_export: { event_kinds: [kind.id], date_from: '09.09.2015' },
+          year: 2016, advanced: true
+
+        labels = rows.first.split(';')
+        expect(labels).to eq(["Vereinbarung-ID-FiVer",
+                              "Kurs-ID-FiVer",
+                              "Kursart",
+                              "Kantonalverband",
+                              "Regionalverband",
+                              "Kursnummer",
+                              "Start Datum",
+                              "End Datum",
+                              "Kursort",
+                              "Personen-ID",
+                              "Vorname",
+                              "Nachname",
+                              "Pfadiname",
+                              "Adresse",
+                              "PLZ",
+                              "Ort",
+                              "Land",
+                              "Email",
+                              "Anrede"])
+      end
+
+      it 'inserts values correctly' do
+        get :bsv_export, bsv_export: { date_from: '09.09.2015' },
+          year: 2016, advanced: true
+
+        values = rows.second.split(';')
+        expect(values).to eq(["", "", "LPK (Leitpfadikurs)", "Zürich, Bern",
+                              '""', "124", "11.11.2015", "12.11.2015", "",
+                              person.id.to_s, person.first_name, person.last_name,
+                              person.nickname, "test_address", "3128", "Foodorf", "CH",
+                              person.email, person.salutation_value])
+      end
+
+      it 'sets date_to to date from if nothing is given' do
+        get :bsv_export, bsv_export: { date_from: '09.09.2015' },
+          year: 2016, advanced: true
+
+        values = rows.third.split(';')
+        expect(values[6]).to eq('11.11.2015')
+        expect(values[7]).to eq('11.11.2015')
+      end
+    end
+
+    context 'access via api' do
+      before do
+        sign_out(user)
+      end
+
+      it 'responses csv' do
+        user.generate_authentication_token!
+
+        get :bsv_export, bsv_export: { date_from: '09.09.2015' }, year: 2016,
+          advanced: true, user_token: user.authentication_token, user_email: user.email
+
+        expect(rows.length).to eq(3)
+      end
+    end
+  end
+
+
   def fabricate_pbs_camp(overrides={})
     if overrides[:camp_submitted]
       overrides = required_attrs_for_camp_submit.
@@ -210,6 +292,14 @@ describe Event::ListsController do
       coach_id: Fabricate(:person).id,
       leader_id: Fabricate(:person).id
     }
+  end
+
+  def create_course(number, date_from, date_to = nil)
+    course = Fabricate(:pbs_course, groups: [groups(:be), groups(:zh)], number: number, state: 'closed', advisor_id: person.id)
+    course.dates.destroy_all
+    date_from = Date.parse(date_from)
+    date_to = Date.parse(date_to) if date_to
+    course.dates.create!(start_at: date_from, finish_at: date_to)
   end
 
 end

@@ -91,7 +91,7 @@ class Group::Bund < Group
   end
 
   class Geschaeftsleitung < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data, :approve_applications]
+    self.permissions = [:layer_and_below_read, :contact_data, :approve_applications, :finance]
   end
 
   class GrossanlassCoach < ::Role
@@ -107,7 +107,7 @@ class Group::Bund < Group
   end
 
   class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data, :finance]
   end
 
   class Kontaktperson < ::Role
@@ -178,7 +178,7 @@ class Group::Bund < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :finance]
   end
 
   class Spezialfunktion < ::Role

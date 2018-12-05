@@ -46,5 +46,5 @@ class Group::Ausbildungskommission < Group
   end
 
   roles Mitglied
-
+  self.default_role = Mitglied
 end
