@@ -31,6 +31,10 @@ it:
         usage_advise: I dati della banca dati degli attivi possono essere utilizzati unicamente in un contesto di attività scout, non possono ad esempio essere inoltrate a terzi o ad altre organizzazioni. L'elaborazione e l'utilizzo devono avvenire in buona fede e in modo proporzionato.
   dropdown/event/camp_participant_status:
     change_state: Modificare lo stato
+
+  dropdown/people_export:
+    household_details: 'Elenco delle famiglie (completo)'
+
   export/pdf/camp_application:
     title: Annuncio di campo %{camp}
     group_header: Sezione e unità

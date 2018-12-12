@@ -59,6 +59,15 @@ module HitobitoPbs
       Export::Tabular::People::PeopleFull.send(
         :include, Pbs::Export::Tabular::People::PeopleFull
       )
+      Export::PeopleExportJob.send(
+        :include, Pbs::Export::PeopleExportJob
+      )
+      Export::EventParticipationsExportJob.send(
+        :include, Pbs::Export::EventParticipationsExportJob
+      )
+      Export::SubscriptionsJob.send(
+        :include, Pbs::Export::SubscriptionsJob
+      )
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
 
       ### abilities
@@ -94,6 +103,7 @@ module HitobitoPbs
       GroupsController.send :include, Pbs::GroupsController
       PeopleController.send :include, Pbs::PeopleController
       EventsController.send :include, Pbs::EventsController
+      SubscriptionsController.send :include, Pbs::SubscriptionsController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
@@ -106,7 +116,8 @@ module HitobitoPbs
 
       ### helpers
       FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
-
+      Dropdown::PeopleExport.send :include, Pbs::Dropdown::PeopleExport
+      
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
 

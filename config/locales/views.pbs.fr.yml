@@ -31,6 +31,10 @@ fr:
         usage_advise: Les données de la base de données de membres ne peuvent être utilisées qu'en lien avec des activités scoutes. Par exemple, il est interdit de les transmettre à des tiers ou à d'autres organisations. Le traitement et l'utilisation des données sont soumises aux règles de la bonne foi et doivent être proportionnés.
   dropdown/event/camp_participant_status:
     change_state: Changer le statut
+
+  dropdown/people_export:
+    household_details: 'Liste des foyers complète'
+
   export/pdf/camp_application:
     title: Annonce de camp %{camp}
     group_header: Groupe et unité
