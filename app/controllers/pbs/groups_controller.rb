@@ -10,6 +10,12 @@ module Pbs::GroupsController
 
   included do
     alias_method_chain :permitted_attrs, :cantons
+    alias_method_chain :show, :crisis
+  end
+
+  def show_with_crisis
+    @crisis = @group.active_crisis
+    show_without_crisis
   end
 
   def pending_approvals

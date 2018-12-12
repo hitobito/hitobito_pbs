@@ -9,14 +9,22 @@ module Pbs::ServiceTokenAbility
   extend ActiveSupport::Concern
 
   included do
-    on(ServiceToken) do
-      permission(:layer_and_below_full).
-        may(:create, :show, :edit, :update, :destroy).
-        none
-
-      permission(:layer_full).
-        may(:create, :show, :edit, :update, :destroy).
-        none
-    end
+    alias_method_chain :in_same_layer_or_below, :crisis
+    alias_method_chain :in_same_layer, :crisis
   end
+
+  private
+
+  def in_same_layer_or_below_with_crisis
+    in_same_layer_or_below_without_crisis && !crisis_ability?
+  end
+
+  def in_same_layer_with_crisis
+    in_same_layer_without_crisis && !crisis_ability?
+  end
+
+  def crisis_ability?
+    !is_a?(CrisisAbility)
+  end
+
 end

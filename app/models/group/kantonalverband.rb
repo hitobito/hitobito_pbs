@@ -132,6 +132,10 @@ class Group::Kantonalverband < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class Krisenverantworlicher < ::Role
+    self.permissions = []
+  end
+
   class Passivmitglied < ::Role
     self.permissions = []
     self.kind = :passive

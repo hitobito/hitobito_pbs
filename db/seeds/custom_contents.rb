@@ -64,7 +64,19 @@ CustomContent.seed_once(:key,
 
   { key: BlackListMailer::CONTENT_BLACK_LIST_HIT,
     placeholders_required: 'black-list-person, joined-target',
-    placeholders_optional: '' }
+    placeholders_optional: '' },
+
+  { key: CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED,
+    placeholders_required: 'creator, group, acknowledger',
+    placeholders_optional: 'date' },
+
+  { key: CrisisMailer::CONTENT_CRISIS_COMPLETED,
+    placeholders_required: 'group',
+    placeholders_optional: 'date' },
+
+  { key: CrisisMailer::CONTENT_CRISIS_TRIGGERED,
+    placeholders_required: 'creator, group',
+    placeholders_optional: 'date' }
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -92,6 +104,9 @@ camp_participant_canceled_id = CustomContent.
   get(Event::CampMailer::CONTENT_PARTICIPANT_CANCELED).id
 
 black_list_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_HIT).id
+crisis_acknowledged_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED).id
+crisis_completed_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_COMPLETED).id
+crisis_triggered_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_TRIGGERED).id
 
 _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
@@ -409,5 +424,63 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
 
   { custom_content_id: black_list_hit_id,
     locale: 'it',
-    label: 'lista nera: E-Mail hit su lista nera' }
+    label: 'lista nera: E-Mail hit su lista nera' },
+
+  { custom_content_id: crisis_acknowledged_id,
+    locale: 'de',
+    label: 'Krise: E-Mail Verantwortliche über Quittierung informieren',
+    subject: 'Krise wurde quittiert',
+    body: '<b>Hinweis:</b><br>' \
+          'Die von {creator} eröffnete Krise in der Gruppe {group} ' \
+          'wurde {date} von {acknowledger} quittiert.'},
+
+  { custom_content_id: crisis_acknowledged_id,
+    locale: 'fr',
+    label: 'Crise: E-Mail Informer la personne responsable de la reconnaissance' },
+
+  { custom_content_id: crisis_acknowledged_id,
+    locale: 'en',
+    label: 'Crisis: E-Mail Inform the responsibles about acknowledgement' },
+
+  { custom_content_id: crisis_acknowledged_id,
+    locale: 'it',
+    label: 'Crisi: E-Mail Informare la persona responsabile riguardo al riconoscimento' },
+
+  { custom_content_id: crisis_completed_id,
+    locale: 'de',
+    label: 'Kanton über abgeschlossene Krise informieren',
+    subject: 'Krise wurde ausgelöst',
+    body: 'Auf der Abteilung {group} wurde eine Krise durch '\
+          'das Krisenteam der Bundesebene ausgelöst' },
+
+  { custom_content_id: crisis_completed_id,
+    locale: 'fr',
+    label: 'Informer les responsables de la crise inachevée' },
+
+  { custom_content_id: crisis_completed_id,
+    locale: 'en',
+    label: 'Inform responsibles about incompleted crisis' },
+
+  { custom_content_id: crisis_completed_id,
+    locale: 'it',
+    label: 'Informare i responsabili della crisi incompleta' },
+
+  { custom_content_id: crisis_triggered_id,
+    locale: 'de',
+    label: 'Verantwortliche über Einleitung einer Krise informieren',
+    subject: 'Krise wurde eingeleitet',
+    body: '<b>Hinweis:</b><br>' \
+          '{creator} hat am {date} eine Krise in der Gruppe {group} eingeleitet.' },
+
+  { custom_content_id: crisis_triggered_id,
+    locale: 'fr',
+    label: 'Informer les responsables de la crise déclenchée' },
+
+  { custom_content_id: crisis_triggered_id,
+    locale: 'en',
+    label: 'Inform responsibles about triggered crisis' },
+
+  { custom_content_id: crisis_triggered_id,
+    locale: 'it',
+    label: 'Informare i responsabili della crisi innescata' },
 )

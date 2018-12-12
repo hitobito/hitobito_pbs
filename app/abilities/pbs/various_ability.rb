@@ -14,6 +14,10 @@ module Pbs::VariousAbility
     on(BlackList) do
       class_side(:manage).if_black_list_role
     end
+
+    on(Crisis) do
+      permission(:crisis_trigger).may(:manage).all
+    end
   end
 
   def if_mitarbeiter_gs

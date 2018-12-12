@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bulei_bund:
+  creator: bulei
+  group: bund
+  acknowledged: false
+
+al_schekka_be:
+  creator: al_schekka
+  group: be
+  acknowledged: false
+
+acknowledged:
+  creator: al_berchtold
+  group: pegasus
+  acknowledged: true

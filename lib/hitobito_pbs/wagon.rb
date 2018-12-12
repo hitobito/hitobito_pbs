@@ -91,15 +91,16 @@ module HitobitoPbs
       Event::KindsController.permitted_attrs += [:documents_text, :campy]
       QualificationKindsController.permitted_attrs += [:manual]
 
-      RolesController.send :include, Pbs::RolesController
-      GroupsController.send :include, Pbs::GroupsController
-      PeopleController.send :include, Pbs::PeopleController
-      EventsController.send :include, Pbs::EventsController
+      ApplicationController.send :include, Pbs::ApplicationController
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
-      QualificationsController.send :include, Pbs::QualificationsController
+      EventsController.send :include, Pbs::EventsController
+      GroupsController.send :include, Pbs::GroupsController
+      PeopleController.send :include, Pbs::PeopleController
       Person::QueryController.search_columns << :pbs_number
+      QualificationsController.send :include, Pbs::QualificationsController
+      RolesController.send :include, Pbs::RolesController
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
