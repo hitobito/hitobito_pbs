@@ -62,6 +62,9 @@ module HitobitoPbs
       Export::PeopleExportJob.send(
         :include, Pbs::Export::PeopleExportJob
       )
+      Export::EventParticipationsExportJob.send(
+        :include, Pbs::Export::EventParticipationsExportJob
+      )
       Export::SubscriptionsJob.send(
         :include, Pbs::Export::SubscriptionsJob
       )
@@ -114,7 +117,7 @@ module HitobitoPbs
       ### helpers
       FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
       Dropdown::PeopleExport.send :include, Pbs::Dropdown::PeopleExport
-
+      
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
 
