@@ -13,7 +13,9 @@ module Pbs::Export::EventParticipationsExportJob
   end
 
   def exporter_with_detail
-    return Pbs::Export::Tabular::People::ParticipationsHouseholdsFull if  @options[:household_details]
+    if @options[:household_details]
+      return Pbs::Export::Tabular::People::ParticipationsHouseholdsFull
+    end
     exporter_without_detail
   end
 
