@@ -1,0 +1,7 @@
+.pagination-bar
+  = paginate entries
+
+= crud_table(:first_name, :last_name, :pbs_number, :email,
+  :phone_number, :reference_name, :reference_phone_number)
+
+= paginate entries

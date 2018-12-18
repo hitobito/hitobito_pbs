@@ -77,6 +77,40 @@ describe Role do
     end
   end
 
+  context 'notification if person is on black list' do
+    let(:group)       { groups(:schekka) }
+    let(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+    let(:last_email)  { ActionMailer::Base.deliveries.last }
+
+    before do
+      SeedFu.quiet = true
+      SeedFu.seed [Rails.root.join('db', 'seeds')]
+      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return('test@test.com')
+    end
+
+    it 'is sent on role creation with black list person' do
+      Fabricate(:black_list, first_name: 'foo', last_name: 'bar')
+
+      expect do
+        Role.create(group: group,
+                    person: person,
+                    type: Group::Abteilung::Sekretariat.sti_name)
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+
+      expect(last_email.body).to include(person.full_name)
+      expect(last_email.body).to include(group.name)
+    end
+
+    it 'is not sent on role creation if person is not blacklisted' do
+      expect do
+        Role.create(group: group,
+                    person: person,
+                    type: Group::Abteilung::Sekretariat.sti_name)
+      end.not_to change { ActionMailer::Base.deliveries.count }
+    end
+
+  end
+
   context 'notification when gaining access to more person data' do
     let(:actuator)      { people(:al_schekka) }
     let(:home_group)    { groups(:schekka) }

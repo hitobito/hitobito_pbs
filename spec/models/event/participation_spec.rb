@@ -139,4 +139,33 @@ describe Event::Participation do
     end
   end
 
+  context 'notification if person is on black list' do
+    let(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+    let(:last_email)  { ActionMailer::Base.deliveries.last }
+
+    before do
+      SeedFu.quiet = true
+      SeedFu.seed [Rails.root.join('db', 'seeds')]
+      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return('test@test.com')
+    end
+
+    it 'is sent on participation creation with black list person' do
+      Fabricate(:black_list, first_name: 'foo', last_name: 'bar')
+
+      expect do
+        Event::Participation.create(event: event, person: person)
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+
+      expect(last_email.body).to include(person.full_name)
+      expect(last_email.body).to include(event.name)
+    end
+
+    it 'is not sent on participation creation if person is not blacklisted' do
+      expect do
+        Event::Participation.create(event: event, person: person)
+      end.not_to change { ActionMailer::Base.deliveries.count }
+    end
+
+  end
+
 end

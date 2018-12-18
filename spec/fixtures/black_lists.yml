@@ -1,0 +1,36 @@
+#  Copyright (c) 2018, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+# == Schema Information
+#
+# Table name: black_lists
+#
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  pbs_number             :string
+#  email                  :string
+#  phone_number           :string
+#  reference_name         :string
+#  reference_phone_number :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+
+child_black_list:
+  first_name: My
+  last_name: Child
+  pbs_number: 000-321
+  email: child1@hitobito.example.com
+  reference_name: Bundes Leiter
+  reference_phone_number: 031 123 12 12
+
+al_berchtold_black_list:
+  first_name: AL
+  last_name: Berchtold
+  pbs_number: 000-123
+  email: al.berchtold@hitobito.example.com
+  reference_name: Franz Maurer
+  reference_phone_number: 076 123 12 12

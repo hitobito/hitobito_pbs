@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -60,7 +60,11 @@ CustomContent.seed_once(:key,
 
   { key: Event::CampMailer::CONTENT_PARTICIPANT_CANCELED,
     placeholders_required: 'participant-name, camp-url',
-    placeholders_optional: 'camp-name, camp-state' }
+    placeholders_optional: 'camp-name, camp-state' },
+
+  { key: BlackListMailer::CONTENT_BLACK_LIST_HIT,
+    placeholders_required: 'black-list-person, joined-target',
+    placeholders_optional: '' }
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -86,6 +90,8 @@ camp_submit_id = CustomContent.get(Event::CampMailer::CONTENT_SUBMIT).id
 camp_participant_applied_id = CustomContent.get(Event::CampMailer::CONTENT_PARTICIPANT_APPLIED).id
 camp_participant_canceled_id = CustomContent.
   get(Event::CampMailer::CONTENT_PARTICIPANT_CANCELED).id
+
+black_list_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_HIT).id
 
 _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
@@ -382,5 +388,26 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
 
   { custom_content_id: camp_participant_canceled_id,
     locale: 'it',
-    label: 'Campo: E-Mail Participante ha annullare' }
+    label: 'Campo: E-Mail Participante ha annullare' },
+
+  { custom_content_id: black_list_hit_id,
+    locale: 'de',
+    label: 'Schwarze Liste: E-Mail Treffer',
+    subject: 'Treffer auf Schwarzer Liste',
+    body: 'Die Person {black-list-person} wurde bei {joined-target} hinzugefügt.' \
+          '<br><br>Möglicherweise befindet sich diese Person auf der schwarzen Liste. ' \
+          'Bitte prüfen und gegebenenfalls auf die Gruppe oder einen Referenzkontakt zugehen.' \
+          '<br><br>Diese Nachricht wurde automatisch aus der MiData verschickt.'},
+
+  { custom_content_id: black_list_hit_id,
+    locale: 'fr',
+    label: 'liste noire: E-Mail hit sur la liste noire' },
+
+  { custom_content_id: black_list_hit_id,
+    locale: 'en',
+    label: 'black list: E-Mail hit on black list'},
+
+  { custom_content_id: black_list_hit_id,
+    locale: 'it',
+    label: 'lista nera: E-Mail hit su lista nera' }
 )
