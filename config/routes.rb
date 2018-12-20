@@ -68,6 +68,8 @@ Rails.application.routes.draw do
     get 'list_camps_in_canton' => 'event/lists#camps_in_canton', as: :list_camps_in_canton
     get 'list_camps_abroad' => 'event/lists#camps_abroad', as: :list_camps_abroad
 
+    resources :black_lists
+
   end
 
 

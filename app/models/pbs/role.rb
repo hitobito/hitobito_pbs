@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -40,6 +40,9 @@ module Pbs::Role
 
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
+    after_create :send_black_list_mail,
+      if: Proc.new { |role| role.person.black_listed? }
+
     after_save :update_primary_group
 
     alias_method_chain :set_first_primary_group, :kantonalverband
@@ -83,6 +86,10 @@ module Pbs::Role
     end
 
     true
+  end
+
+  def send_black_list_mail
+    BlackListMailer.group_hit(person, group).deliver_now
   end
 
   def update_primary_group

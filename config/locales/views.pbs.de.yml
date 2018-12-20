@@ -277,3 +277,12 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
+  black_lists:
+    global:
+      link:
+        add: Person hinzufügen
+    new:
+      title: Person hinzufügen
+    edit:
+      title: Eintrag editieren

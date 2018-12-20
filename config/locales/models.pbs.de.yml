@@ -910,6 +910,10 @@ de:
         one: LKB
         other: LKBs
 
+      black_list:
+        one: Schwarze Liste
+        other: Schwarze Liste
+
       census:
         one: Bestandesmeldungsperiode
         other: Bestandesmeldungsperioden
@@ -1092,6 +1096,15 @@ de:
       people_relation:
         kinds:
           sibling: Geschwister
+
+      black_list:
+        first_name: Vorname
+        last_name: Nachname
+        pbs_number: PBS-ID
+        email: E-Mail Adresse
+        phone_number: Telefonnummer
+        reference_name: Referenzname
+        reference_phone_number: Referenz Tel.
 
       census:
         year: Jahr
