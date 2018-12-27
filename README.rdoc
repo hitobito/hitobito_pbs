@@ -8,7 +8,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 * Bund
   * Bund
     * Mitarbeiter GS: [:layer_and_below_full, :contact_data, :admin]
-    * IT Support: [:layer_and_below_full, :contact_data, :admin, :impersonation, :finance]
+    * IT Support: [:layer_and_below_full, :contact_data, :admin, :impersonation]
     * Sekretariat: [:layer_and_below_full, :contact_data]
     * Adressverwalter: [:layer_and_below_full]
     * Assistenz Ausbildung: [:layer_full]
@@ -229,6 +229,5 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
   * Gremium
     * Leitung: [:group_and_below_full]
     * Mitglied: [:group_read]
-
 
 (Output of rake app:hitobito:roles)
