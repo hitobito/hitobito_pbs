@@ -103,8 +103,6 @@ class MemberCount < ActiveRecord::Base
       select(columns).where(year: year)
     end
 
-    private
-
     def totals_by(year, group_by, conditions = {})
       totals(year).where(conditions).group(group_by)
     end

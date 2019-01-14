@@ -65,7 +65,7 @@ class Group::Kantonalverband < Group
   end
 
   def census_groups(year)
-    MemberCount.total_by_regionen(year, self)
+    MemberCount.totals_by(year, :abteilung_id, kantonalverband_id: id)
   end
 
   def census_details(year)

@@ -7,6 +7,7 @@
 
 class CensusEvaluation::KantonalverbandController < CensusEvaluation::BaseController
 
-  self.sub_group_type = Group::Region
+  # self.sub_group_type = Group::Region
+  self.sub_group_type = Group::Abteilung
 
 end
