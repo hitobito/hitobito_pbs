@@ -218,28 +218,45 @@ describe Event::ListsController do
                               "Start Datum",
                               "End Datum",
                               "Kursort",
-                              "Personen-ID",
-                              "Vorname",
-                              "Nachname",
-                              "Pfadiname",
-                              "Adresse",
-                              "PLZ",
-                              "Ort",
-                              "Land",
-                              "Email",
-                              "Anrede"])
+                              "Ausbildungstage",
+                              "BSV Tage",
+                              "Teilnehmende (17-30)",
+                              "Teilnehmende (17-30) x Tage",
+                              "Kursleitende",
+                              "Teilnehmende Total (inkl. Kursleitende)",
+                              "Teilnehmende Total x Tage",
+                              "Wohnkantone der TN",
+                              "Sprachen",
+                              "LKB Personen-ID",
+                              "LKB Vorname",
+                              "LKB Nachname",
+                              "LKB Pfadiname",
+                              "LKB Adresse",
+                              "LKB PLZ",
+                              "LKB Ort",
+                              "LKB Land",
+                              "LKB Email",
+                              "LKB Anrede"])
       end
 
       it 'inserts values correctly' do
         get :bsv_export, bsv_export: { date_from: '09.09.2015' },
           year: 2016, advanced: true
-
         values = rows.second.split(';')
-        expect(values).to eq(["", "", "LPK (Leitpfadikurs)", "Zürich, Bern",
-                              '""', "124", "11.11.2015", "12.11.2015", "",
-                              person.id.to_s, person.first_name, person.last_name,
-                              person.nickname, "test_address", "3128", "Foodorf", "CH",
-                              person.email, person.salutation_value])
+        #main labels
+        expect(values[0..8]).to eq(["", "", "LPK (Leitpfadikurs)", "Zürich, Bern",
+                              '""', "124", "11.11.2015", "12.11.2015", ""])
+        #counts -> participant_, canton_ & language_count are incorrectly 0 here
+        #          as person.canton is not easily setable in test here.
+
+        expect(values[9..17]).to eq(["5.0", "3.0", "0", "1x3", "3", "6", "6x3", "0", "0"])
+
+        #advisor labels
+        expect(values[18..27]).to eq([person.id.to_s, person.first_name, person.last_name,
+                                      person.nickname, "test_address", "3128", "Foodorf", "CH",
+                                      person.email, person.salutation_value])
+
+        expect(values.length).to eq(28)                              
       end
 
       it 'sets date_to to date from if nothing is given' do
@@ -295,11 +312,31 @@ describe Event::ListsController do
   end
 
   def create_course(number, date_from, date_to = nil)
-    course = Fabricate(:pbs_course, groups: [groups(:be), groups(:zh)], number: number, state: 'closed', advisor_id: person.id)
+    course = Fabricate(:pbs_course, groups: [groups(:be), groups(:zh)], 
+                                    number: number, 
+                                    state: 'closed', 
+                                    advisor_id: person.id,
+                                    training_days: 5,
+                                    bsv_days: 3
+                                    )
     course.dates.destroy_all
     date_from = Date.parse(date_from)
     date_to = Date.parse(date_to) if date_to
     course.dates.create!(start_at: date_from, finish_at: date_to)
+    create_participations(course)
   end
+
+  def create_participations(course)
+    Event::Course.role_types.each do |role|
+      create_participation(course, role.name)
+    end
+  end
+
+  def create_participation(course, role)
+    person = Fabricate(:person, birthday: Date.new(1995,1,1), zip_code: 3012)
+    participation = Fabricate(:event_participation, event: course, person: person, bsv_days: 3)
+    Fabricate(role.to_sym, participation: participation)
+  end
+
 
 end
