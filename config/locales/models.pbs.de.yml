@@ -1090,7 +1090,6 @@ de:
         website: Webseite
         pbs_shortname: PBS Kürzel
         bank_account: Bank-/Postverbindung
-        description: Beschreibung
         cantons: Kantone
 
       people_relation:

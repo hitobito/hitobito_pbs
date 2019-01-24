@@ -854,7 +854,6 @@ fr:
         website: Site internet
         pbs_shortname: Abréviation MSdS
         bank_account: Référence bancaire  / postale
-        description: Description
         cantons: Cantons
       people_relation:
         kinds:

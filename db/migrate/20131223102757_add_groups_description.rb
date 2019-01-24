@@ -7,6 +7,8 @@
 
 class AddGroupsDescription < ActiveRecord::Migration
   def change
-    add_column :groups, :description, :text
+    unless column_exists?(:groups, :description)
+      add_column(:groups, :description, :text)
+    end
   end
 end
