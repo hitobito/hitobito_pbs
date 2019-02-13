@@ -7,6 +7,10 @@
 
 module PeoplePbsHelper
 
+  def format_person_salutation(person)
+    person.salutation_value
+  end
+
   def format_correspondence_language(person)
     lang = person.correspondence_language
     if lang
