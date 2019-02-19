@@ -41,6 +41,18 @@ describe Export::Tabular::Events::BsvRow do
     expect(row.fetch(:bsv_days)).to be_blank
   end
 
+  it 'participant_count is zero' do
+    expect(row.fetch(:participant_count)).to eq 0
+  end
+
+  it 'participant_count counts only ch residents aged 17 to 30' do
+    bern = Location.create!(name: 'Bern Stadt', canton: :be, zip_code: 3000)
+    participant = course.people.joins(event_participations: :roles)
+     .find_by(event_roles: { type: Event::Course::Role::Participant.sti_name  })
+    participant.update(birthday: '01.01.1990', location: bern)
+    expect(row.fetch(:participant_count)).to eq 1
+  end
+
   private
 
   def fabricate_course
