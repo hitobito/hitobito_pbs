@@ -11,18 +11,28 @@ module Pbs::Export::Tabular::Events
 
     included do
       alias_method :language_count, :language_count_pbs
-    
+
       class_attribute :all_participant_roles
       self.all_participant_roles = Event::Course.role_types.flatten - [Event::Course::Role::Advisor]
 
       delegate :id, :first_name, :last_name, :nickname,
                :address, :zip_code, :town, :country, :email, :salutation_value, to: :advisor
+
+      remove_method :training_days
     end
 
     def last_event_date
       event_date = entry.dates.reorder(:finish_at).last
       end_date = event_date.finish_at || event_date.start_at
       end_date.strftime('%d.%m.%Y')
+    end
+
+    def training_days
+      Kernel.format('%g', entry.training_days) if entry.training_days
+    end
+
+    def bsv_days
+      Kernel.format('%g', entry.bsv_days) if entry.bsv_days
     end
 
     def kurs_kind

@@ -249,14 +249,14 @@ describe Event::ListsController do
         #counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.
 
-        expect(values[9..17]).to eq(["5.0", "3.0", "0", "1x3", "3", "6", "6x3", "0", "0"])
+        expect(values[9..17]).to eq(["5", "3", "0", "1x3", "3", "6", "6x3", "0", "0"])
 
         #advisor labels
         expect(values[18..27]).to eq([person.id.to_s, person.first_name, person.last_name,
                                       person.nickname, "test_address", "3128", "Foodorf", "CH",
                                       person.email, person.salutation_value])
 
-        expect(values.length).to eq(28)                              
+        expect(values.length).to eq(28)
       end
 
       it 'sets date_to to date from if nothing is given' do
