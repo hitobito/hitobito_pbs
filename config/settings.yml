@@ -13,9 +13,15 @@ application:
     it: Italiano
   footer:
     links:
-      "Informationen und Hilfe": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung
-      "Aide et assistance": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisateur?set_language=fr
-      "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
+      de:
+        "Informationen und Hilfe": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung
+        "Datenschutz": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung/datennutzung/at_download/file
+      fr:
+        "Aide et assistance": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisateur?set_language=fr
+        "Datenschutz": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisation_des_donnees_midata_msds_fr/at_download/file
+      it:
+        "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
+        "Datenschutz": https://www.scout.ch/it/scout-online/midata/utente/datennutzung_midata_pbs_it/at_download/file
 
 
 # The person with this email has root access to everything
