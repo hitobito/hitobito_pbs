@@ -24,5 +24,11 @@ module Export::Tabular::People
       qualification_kind_labels
     end
 
+    def attribute_label(attr)
+      {
+        kantonalverband_id: 'Id des Kantonalverband',
+        kantonalverband_name: 'Name des Kantonalverband'
+      }.fetch(attr) { super(attr) }
+    end
   end
 end

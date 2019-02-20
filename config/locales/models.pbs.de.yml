@@ -1082,8 +1082,6 @@ de:
         brother_and_sisters: Geschwister
         relations_to_tails: Geschwister
         kv: Kantonalverband
-        kantonalverband_id: Id des Kantonalverband
-        kantonalverband_name: Name des Kantonalverband
 
       group:
         pta: PTA
