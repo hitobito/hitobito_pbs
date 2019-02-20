@@ -11,6 +11,7 @@ module Export::Tabular::Events
     def attribute_labels
       {}.tap do |labels|
         add_main_labels(labels)
+        add_counts(labels)
         add_advisor_labels(labels)
       end
     end
@@ -29,23 +30,27 @@ module Export::Tabular::Events
 
     def add_counts(labels)
       labels[:training_days] = 'Ausbildungstage'
+      labels[:bsv_days] = 'BSV Tage'
       labels[:participant_count] = 'Teilnehmende (17-30)'
+      labels[:attendance_summary] = 'Teilnehmende (17-30) x Tage'
       labels[:leader_count] = 'Kursleitende'
+      labels[:all_participants_count] = 'Teilnehmende Total (inkl. Kursleitende)'
+      labels[:all_participants_attendance_summary] = 'Teilnehmende Total x Tage'
       labels[:canton_count] = 'Wohnkantone der TN'
       labels[:language_count] = 'Sprachen'
     end
 
     def add_advisor_labels(labels)
-      labels[:id] = 'Personen-ID'
-      labels[:first_name] = 'Vorname'
-      labels[:last_name] = 'Nachname'
-      labels[:nickname] = 'Pfadiname'
-      labels[:address] = 'Adresse'
-      labels[:zip_code] = 'PLZ'
-      labels[:town] = 'Ort'
-      labels[:country] = 'Land'
-      labels[:email] = 'Email'
-      labels[:salutation_value] = 'Anrede'
+      labels[:id] = 'LKB Personen-ID'
+      labels[:first_name] = 'LKB Vorname'
+      labels[:last_name] = 'LKB Nachname'
+      labels[:nickname] = 'LKB Pfadiname'
+      labels[:address] = 'LKB Adresse'
+      labels[:zip_code] = 'LKB PLZ'
+      labels[:town] = 'LKB Ort'
+      labels[:country] = 'LKB Land'
+      labels[:email] = 'LKB Email'
+      labels[:salutation_value] = 'LKB Anrede'
     end
 
   end

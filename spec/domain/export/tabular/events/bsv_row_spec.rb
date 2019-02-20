@@ -10,7 +10,6 @@ require 'csv'
 
 describe Export::Tabular::Events::BsvRow do
 
-  let(:person) { ndbjs_person }
   let(:course) { fabricate_course }
 
   let(:row) { Export::Tabular::Events::BsvRow.new(course) }
@@ -22,6 +21,36 @@ describe Export::Tabular::Events::BsvRow do
   it 'does render headers' do
     csv = Export::Tabular::Events::BsvList.csv([course])
     expect(CSV.parse(csv)).to have(2).row
+  end
+
+  it 'formats training_days' do
+    course.training_days = 1
+    expect(row.fetch(:training_days)).to eq '1'
+    course.training_days = 1.5
+    expect(row.fetch(:training_days)).to eq '1.5'
+    course.training_days = nil
+    expect(row.fetch(:training_days)).to be_blank
+  end
+
+  it 'formats bsv_days' do
+    course.bsv_days = 1
+    expect(row.fetch(:bsv_days)).to eq '1'
+    course.bsv_days = 1.5
+    expect(row.fetch(:bsv_days)).to eq '1.5'
+    course.bsv_days = nil
+    expect(row.fetch(:bsv_days)).to be_blank
+  end
+
+  it 'participant_count is zero' do
+    expect(row.fetch(:participant_count)).to eq 0
+  end
+
+  it 'participant_count counts only ch residents aged 17 to 30' do
+    bern = Location.create!(name: 'Bern Stadt', canton: :be, zip_code: 3000)
+    participant = course.people.joins(event_participations: :roles)
+     .find_by(event_roles: { type: Event::Course::Role::Participant.sti_name  })
+    participant.update(birthday: '01.01.1990', location: bern)
+    expect(row.fetch(:participant_count)).to eq 1
   end
 
   private
