@@ -21,3 +21,4 @@ spec/coverage
 spec/reports
 brakeman-output.tabs
 rubocop-results.xml
+.tool-versions
