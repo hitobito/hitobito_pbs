@@ -242,6 +242,11 @@ de:
       population: Bestand
       statistic: Statistik
       approvals: Kursfreigaben (%{count})
+    actions_show_pbs:
+      crisis: Krise
+      crisis_done: Krise quittieren
+    info_pbs:
+      ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.

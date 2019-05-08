@@ -51,8 +51,12 @@ module Pbs::Group
     root_types Group::Bund
   end
 
+  def active_crisis_acknowledgeable?(person)
+    active_crisis && !active_crisis.acknowledged && active_crisis.creator != person
+  end
+
   def active_crisis
-    crises.active.first
+    @active_crisis ||= crises.active.first
   end
 
   def pending_approvals?

@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     get 'censuses' => 'censuses#new' # route required for language switch
 
     resources :groups do
+      resources :crises, only: [:create] do
+        patch 'acknowledge'
+      end
+
       member do
         get 'pending_approvals' => 'group/pending_approvals#index'
         get 'approved_approvals' => 'group/pending_approvals#approved'
