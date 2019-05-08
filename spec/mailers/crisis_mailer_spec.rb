@@ -23,6 +23,7 @@ describe CrisisMailer do
   before do
     @leiter = Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: bund).person
     @verantwortlich = Fabricate(Group::Bund::VerantwortungKrisenteam.name.to_sym, group: bund).person
+    @kanton_verantwortlich = Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name.to_sym, group: groups(:be)).person
   end
 
   context 'triggered' do
@@ -55,6 +56,11 @@ describe CrisisMailer do
       its(:subject) { should eq 'Krise wurde quittiert' }
       its(:to)      { should match_array [@leiter.email, @verantwortlich.email] }
       its(:from)    { should eq ['noreply@localhost'] }
+
+      context 'within kanton' do
+        let(:crisis)  { crises(:acknowledged) }
+        its(:to)      { should match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email] }
+      end
     end
 
     context 'body' do

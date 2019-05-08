@@ -16,23 +16,33 @@ class CrisisMailer < ApplicationMailer
   def triggered(crisis)
     @crisis = crisis
 
-    compose(recipients, CONTENT_CRISIS_TRIGGERED)
+    compose(bund_recipients, CONTENT_CRISIS_TRIGGERED)
   end
 
   def acknowledged(crisis, acknowledger)
     @crisis = crisis
     @acknowledger = acknowledger
 
-    compose(recipients, CONTENT_CRISIS_ACKNOWLEDGED)
+    compose(bund_recipients + kanton_recipients, CONTENT_CRISIS_ACKNOWLEDGED)
   end
 
   private
 
-  def recipients
+  def bund_recipients
     Person.
       joins(:roles).
       where('roles.type IN (?)', RECIPIENTS).
       pluck(:email)
+  end
+
+  def kanton_recipients
+    kantonalverband = crisis.group.layer_hierarchy.find { |g| g.is_a?(Group::Kantonalverband) }
+
+    Person
+      .joins(:roles)
+      .where('roles.type = ?', Group::Kantonalverband::VerantwortungKrisenteam.sti_name)
+      .where('roles.group_id = ?', kantonalverband.try(:id))
+      .pluck(:email)
   end
 
   def placeholder_group
