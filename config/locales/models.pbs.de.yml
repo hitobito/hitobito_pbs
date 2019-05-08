@@ -213,6 +213,10 @@ de:
         one: Verantwortlicher Integration
         other: Verantwortliche Integration
         description:
+      group/bund/verantwortung_krisenteam:
+        one: Verantwortlicher Krisenteam
+        other: Verantwortliche Krisenteam
+        description:
       group/bund/verantwortung_lagermeldung:
         one: Verantwortlicher Lagermeldung
         other: Verantwortliche Lagermeldung
@@ -1137,6 +1141,11 @@ de:
         dates: Daten
         created_at: Von
         deleted_at: Bis
+
+        class:
+          permission:
+            description:
+              crisis_trigger: Auslösen und quittieren von Krisen.
 
       qualification_kind:
         manual: Manuell erfassbar
