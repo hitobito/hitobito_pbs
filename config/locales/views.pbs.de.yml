@@ -37,8 +37,8 @@ de:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
 
   crises:
-    acknowledge:
-      to_old:  Die Krise ist zu alt um zu quittieren
+    update:
+      too_old:  Die Krise ist zu alt um zu quittieren
 
   devise:
     sessions:

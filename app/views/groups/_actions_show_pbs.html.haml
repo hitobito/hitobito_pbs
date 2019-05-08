@@ -5,7 +5,7 @@
 
 - if can?(:create, @group.crises.build)
   - if @group.active_crisis_acknowledgeable?(current_user)
-    = action_button(t('.crisis_done'), group_crisis_acknowledge_path(@group, @group.active_crisis), :check, method: :patch)
+    = action_button(t('.crisis_done'), group_crisis_path(@group, @group.active_crisis), :check, method: :patch)
 
   - unless @group.active_crisis
     = action_button(t('.crisis'), group_crises_path(@group), :medkit, method: :post, class: 'btn-danger')
