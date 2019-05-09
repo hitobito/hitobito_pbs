@@ -31,7 +31,8 @@ module Pbs::VariousAbility
 
   def if_krisenteam
     layer_ids = subject.group.layer_hierarchy.collect(&:id)
-    subject.group.try(:layer) && permission_in_layers?(layer_ids) && (krisenteam_bund || krisenteam_kanton)
+    subject.group.try(:layer) && permission_in_layers?(layer_ids) &&
+      (krisenteam_bund || krisenteam_kanton)
   end
 
   def krisenteam_bund
