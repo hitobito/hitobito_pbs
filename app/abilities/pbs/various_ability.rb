@@ -14,6 +14,10 @@ module Pbs::VariousAbility
     on(BlackList) do
       class_side(:manage).if_black_list_role
     end
+
+    on(Crisis) do
+      permission(:crisis_trigger).may(:create, :update).if_krisenteam
+    end
   end
 
   def if_mitarbeiter_gs
@@ -23,6 +27,19 @@ module Pbs::VariousAbility
   def if_black_list_role
     role_type?(Group::Bund::Geschaeftsleitung) ||
       role_type?(Group::Bund::LeitungKernaufgabeKommunikation)
+  end
+
+  def if_krisenteam
+    layer_ids = subject.group.layer_hierarchy.collect(&:id)
+    subject.group.try(:layer) && permission_in_layers?(layer_ids) && (krisenteam_bund || krisenteam_kanton)
+  end
+
+  def krisenteam_bund
+    permission_in_layers?([Group::Bund.first.id])
+  end
+
+  def krisenteam_kanton
+    !subject.group.is_a?(Group::Kantonalverband)
   end
 
 end

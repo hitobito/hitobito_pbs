@@ -124,7 +124,7 @@ class Group::Bund < Group
   end
 
   class LeitungKernaufgabeKommunikation < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:crisis_trigger]
   end
 
   class LeitungKernaufgabeProgramm < ::Role
@@ -153,7 +153,7 @@ class Group::Bund < Group
 
 
   class MitgliedKrisenteam < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :crisis_trigger]
   end
 
   class Passivmitglied < ::Role
@@ -203,6 +203,10 @@ class Group::Bund < Group
 
   class VerantwortungIntegration < ::Role
     self.permissions = [:group_read, :contact_data]
+  end
+
+  class VerantwortungKrisenteam < ::Role
+    self.permissions = [:group_read, :contact_data, :crisis_trigger]
   end
 
   class VerantwortungLagermeldung < ::Role
@@ -289,6 +293,7 @@ class Group::Bund < Group
         VerantwortungLagermeldung,
         VerantwortungPr,
         VerantwortungPraeventionSexuellerAusbeutung,
+        VerantwortungKrisenteam,
 
         InternationalCommissionerIcWagggs,
         InternationalCommissionerIcWosm,

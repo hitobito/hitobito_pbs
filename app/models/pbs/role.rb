@@ -25,6 +25,8 @@ module Pbs::Role
   included do
     self.used_attributes += [:created_at, :deleted_at]
 
+    Role::Types::Permissions << :crisis_trigger
+
     validates :created_at, presence: true, on: :update
 
     validates :created_at,

@@ -10,6 +10,7 @@ module Pbs::GroupsController
 
   included do
     alias_method_chain :permitted_attrs, :cantons
+    before_render_show :set_crisis_flash
   end
 
   def pending_approvals
@@ -24,6 +25,12 @@ module Pbs::GroupsController
     attrs = permitted_attrs_without_cantons
     attrs << { cantons: [] } if entry.class.used_attributes.include?(:cantons)
     attrs
+  end
+
+  def set_crisis_flash
+    if entry.active_crisis
+      flash.now[:alert] = I18n.t('groups.ongoing_crisis', creator: entry.active_crisis.creator)
+    end
   end
 
 end

@@ -72,7 +72,26 @@ describe GroupAbility do
         is_expected.to_not be_able_to(:index_pending_approvals, groups(:schekka))
       end
     end
+  end
 
+  context 'creator of crisis' do
+    let(:group)          { groups(:be) }
+    let(:ability)        { Ability.new(crisis_creator) }
+    let(:crisis_creator) { Fabricate(:person) }
+
+    it 'may not index_people on be' do
+      is_expected.not_to be_able_to(:index_people, group)
+    end
+
+    it 'may index_people if crisis_creator triggered a crisis there' do
+      crises(:al_schekka_be).update(creator: crisis_creator)
+      is_expected.to be_able_to(:index_people, group)
+    end
+
+    it 'may index_people if crisis_creator triggered a crisis in upper layer' do
+      crises(:bulei_bund).update(creator: crisis_creator)
+      is_expected.to be_able_to(:index_people, group)
+    end
   end
 
 end

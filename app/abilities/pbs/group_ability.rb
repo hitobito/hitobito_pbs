@@ -36,6 +36,7 @@ module Pbs::GroupAbility
       permission(:group_and_below_full).may(:'export_event/camps').in_same_group_or_below
       permission(:layer_read).may(:'export_event/camps').in_same_layer
       permission(:layer_and_below_read).may(:'export_event/camps').in_same_layer_or_below
+      permission(:any).may(:index_people).if_crisis_manager
     end
   end
 
@@ -49,6 +50,11 @@ module Pbs::GroupAbility
 
   def if_layer_and_in_same_group
     if_layer_group && user.groups_with_permission(permission).map(&:id).include?(group.id)
+  end
+
+  def if_crisis_manager
+    contains_any?(user.crises.active.collect { |c| c.group.layer_group_id },
+                  subject.layer_hierarchy.collect(&:id))
   end
 
 end

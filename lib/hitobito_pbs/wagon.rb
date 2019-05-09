@@ -63,7 +63,11 @@ module HitobitoPbs
 
       ### abilities
       Ability.store.register Event::ApprovalAbility
+      AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
+      AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
       GroupAbility.send :include, Pbs::GroupAbility
+      PersonReadables.send :include, Pbs::PersonReadables
+      PersonAbility.send :include, Pbs::PersonAbility
       EventAbility.send :include, Pbs::EventAbility
       EventAbility.send :include, Pbs::Event::Constraints
       Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility

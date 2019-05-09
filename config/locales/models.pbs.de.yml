@@ -213,6 +213,10 @@ de:
         one: Verantwortlicher Integration
         other: Verantwortliche Integration
         description:
+      group/bund/verantwortung_krisenteam:
+        one: Verantwortlicher Krisenteam
+        other: Verantwortliche Krisenteam
+        description:
       group/bund/verantwortung_lagermeldung:
         one: Verantwortlicher Lagermeldung
         other: Verantwortliche Lagermeldung
@@ -1138,6 +1142,11 @@ de:
         created_at: Von
         deleted_at: Bis
 
+        class:
+          permission:
+            description:
+              crisis_trigger: Auslösen und quittieren von Krisen.
+
       qualification_kind:
         manual: Manuell erfassbar
 
@@ -1154,3 +1163,5 @@ de:
               on_or_before: muss in der Vergangenheit liegen.
             deleted_at:
               after: muss nach "Von" liegen.
+        crisis:
+          another_active: Eine andere Krise ist bereits aktiv auf dieser Gruppe

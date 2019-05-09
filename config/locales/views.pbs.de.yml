@@ -36,6 +36,10 @@ de:
   census_evaluation/kantonalverband:
     email_sent: Erinnerungsemail an %{abteilung} geschickt
 
+  crises:
+    update:
+      too_old:  Die Krise ist zu alt um zu quittieren
+
   devise:
     sessions:
       new:
@@ -234,10 +238,14 @@ de:
         course_kind_all: Alle
 
   groups:
+    ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
     tabs:
       population: Bestand
       statistic: Statistik
       approvals: Kursfreigaben (%{count})
+    actions_show_pbs:
+      crisis: Krise
+      crisis_done: Krise quittieren
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.

@@ -127,7 +127,11 @@ class Group::Kantonalverband < Group
   end
 
   class MitgliedKrisenteam < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :crisis_trigger]
+  end
+
+  class Krisenverantworlicher < ::Role
+    self.permissions = [:crisis_trigger]
   end
 
   class Passivmitglied < ::Role
@@ -200,7 +204,7 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungKrisenteam < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:group_read, :contact_data, :crisis_trigger]
   end
 
   class VerantwortungLagermeldung < ::Role

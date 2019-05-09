@@ -64,6 +64,7 @@ module Pbs::Person
 
 
     belongs_to :kantonalverband, class_name: 'Group' # might also be Group::Bund
+    has_many :crises, foreign_key: :creator_id
 
 
     validates :salutation,

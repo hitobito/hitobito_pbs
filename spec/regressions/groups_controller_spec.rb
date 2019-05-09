@@ -37,4 +37,28 @@ describe GroupsController, type: :controller do
     expect(dom).not_to have_link 'Kursfreigaben'
   end
 
+  context 'crisis' do
+    let(:group)  { groups(:bund) }
+    let(:person) { Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: group).person }
+    before       { sign_in(person) }
+
+    it 'renders crisis done acknowledged button if acknowledgedable active crisis exists' do
+      get :show, id: group.id
+      expect(dom).to have_link 'Krise quittieren'
+    end
+
+    it 'hides crisis done acknowledged button if active crisis may not be acknoledged by user' do
+      group.active_crisis.update(creator: person)
+      get :show, id: group.id
+      expect(dom).not_to have_link 'Krise quittieren'
+      expect(dom).to have_content "#{person.full_name} hat auf dieser Gruppe eine Krise ausgelöst"
+    end
+
+    it 'it renders crisis trigger button if no active crisis exists' do
+      group.active_crisis.destroy
+      get :show, id: group.id
+      expect(dom).to have_link 'Krise'
+    end
+  end
+
 end
