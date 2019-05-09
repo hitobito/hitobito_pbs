@@ -29,7 +29,7 @@ module Pbs::GroupsController
 
   def set_crisis_flash
     if entry.active_crisis
-      flash.now[:alert] = I18n.t('groups.ongoing_crisis', creator: entry.active_crisis.creator)
+      flash.now[:alert] = I18n.t('groups.ongoing_crisis', creator: entry.active_crisis.creator.full_name)
     end
   end
 
