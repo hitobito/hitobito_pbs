@@ -131,7 +131,7 @@ class Group::Kantonalverband < Group
   end
 
   class Krisenverantworlicher < ::Role
-    self.permissions = [:crisis_trigger]
+    self.permissions = [:group_read, :crisis_trigger]
   end
 
   class Passivmitglied < ::Role

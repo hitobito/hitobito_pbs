@@ -124,7 +124,7 @@ class Group::Bund < Group
   end
 
   class LeitungKernaufgabeKommunikation < ::Role
-    self.permissions = [:crisis_trigger]
+    self.permissions = [:group_read, :crisis_trigger]
   end
 
   class LeitungKernaufgabeProgramm < ::Role
