@@ -8,18 +8,6 @@
 // GLOBAL VALUES
 // --------------------------------------------------
 
-// Logo
-//--------------------------
-
-
-$logoUrl:               "logo.svg"; // put under app/assets/images
-$logoWidth:             220px;      // has to bet set as the logo is a background image
-$logoHeight:            80px;       // will also set the minimal width of the navigation
-                                    // must be set in pixel
-
-// optional backgroundcolor, creates a box around the logo, if changed from 'none'
-$logoBackgroundColor:   none;
-
 // Grays
 // -------------------------
 $black:                 #474E5D !default;

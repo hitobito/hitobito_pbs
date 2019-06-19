@@ -7,6 +7,10 @@
 # Overrides settings from the main application
 application:
   name: MiData PBS/MSdS/MSS
+  logo:
+    image: logo.svg
+    width: 220
+    height: 80
   languages:
     de: Deutsch
     fr: Français
