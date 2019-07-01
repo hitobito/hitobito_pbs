@@ -71,8 +71,9 @@ module Pbs::Event::ListsController
 
   def render_bsv_export_with_advanced(courses_for_bsv_export)
     if params[:advanced]
-      send_data(Export::Tabular::Events::AdvancedBsvList.csv(courses_for_bsv_export),
-                type: :csv, filename: 'advanced_bsv_export.csv')
+      render text: Export::Tabular::Events::AdvancedBsvList.csv(courses_for_bsv_export)
+      # send_data(Export::Tabular::Events::AdvancedBsvList.csv(courses_for_bsv_export),
+      #           type: :csv, filename: 'advanced_bsv_export.csv')
     else
       render_bsv_export_without_advanced(courses_for_bsv_export)
     end

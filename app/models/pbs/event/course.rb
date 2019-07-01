@@ -36,6 +36,7 @@ module Pbs::Event::Course
 
     validates :number, presence: true
     validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+    validate :assert_bsv_days_set
     validate :assert_bsv_days_precision
 
     ### CALLBACKS
@@ -67,6 +68,14 @@ module Pbs::Event::Course
     if bsv_days && bsv_days % 0.5 != 0
       msg = I18n.t('activerecord.errors.messages.must_be_multiple_of', multiple: 0.5)
       errors.add(:bsv_days, msg)
+    end
+  end
+
+  def assert_bsv_days_set
+    return unless bsv_days.present? && %w[closed].include?(state)
+    if participations.any? { |participation| participation.bsv_days.nil? }
+      msg = I18n.t('activerecord.errors.messages.must_exist')
+      errors.add(:attendances, msg)
     end
   end
 
