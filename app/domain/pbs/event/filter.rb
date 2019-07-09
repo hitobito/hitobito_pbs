@@ -9,23 +9,28 @@ module Pbs::Event::Filter
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :list_entries, :canton
-  end
-
-  def list_entries_with_canton
-    if filter == 'canton'
-      scope = Event.
-        where(type: type, canton: cantons).
-        includes(:groups).
-        in_year(year).order_by_date.preload_all_dates.uniq
-
-      sort_expression ? scope.reorder(sort_expression) : scope
-    else
-      list_entries_without_canton
-    end
+    alias_method_chain :relevant_group_ids, :canton
+    alias_method_chain :scope, :canton
   end
 
   private
+
+  def scope_with_canton
+    return scope_without_canton unless filter == 'canton'
+
+    scope_without_canton.where(canton: cantons)
+  end
+
+  def relevant_group_ids_with_canton
+    return relevant_group_ids_without_canton unless filter == 'canton'
+
+    Group.pluck(:id)
+  end
+
+  def kantonalverbaende
+    Group::Kantonalverband
+      .where(id: KantonalverbandCanton.where(canton: cantons).select('kantonalverband_id'))
+  end
 
   def cantons
     if group.respond_to?(:kantonalverband)
