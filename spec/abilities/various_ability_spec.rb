@@ -15,16 +15,16 @@ describe Ability do
     context 'Bund' do
       let(:crisis) { groups(:bund).crises.build }
       it 'may create and update crisis' do
-        expect(subject).to be_able_to(:create, crisis)
-        expect(subject).to be_able_to(:update, crisis)
+        expect(subject).not_to be_able_to(:create, crisis)
+        expect(subject).not_to be_able_to(:update, crisis)
       end
     end
 
     context 'Kanton' do
       let(:crisis) { groups(:be).crises.build }
       it 'may create and update crisis' do
-        expect(subject).to be_able_to(:create, crisis)
-        expect(subject).to be_able_to(:update, crisis)
+        expect(subject).not_to be_able_to(:create, crisis)
+        expect(subject).not_to be_able_to(:update, crisis)
       end
     end
 
