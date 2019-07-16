@@ -77,8 +77,6 @@ module HitobitoPbs
       Event::RoleAbility.send :include, Pbs::Event::Constraints
       QualificationAbility.send :include, Pbs::QualificationAbility
       VariousAbility.send :include, Pbs::VariousAbility
-      TokenAbility.layers_with_restricted_descendants = [Group::Bund, Group::Kantonalverband]
-
 
       ### decorators
       EventDecorator.send :include, Pbs::EventDecorator
