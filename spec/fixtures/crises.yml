@@ -1,11 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 schekka:
-  creator: al_schekka
+  creator: be_crisis_member
   group: schekka
   acknowledged: false
-
-acknowledged:
-  creator: al_berchtold
-  group: pegasus
-  acknowledged: true
