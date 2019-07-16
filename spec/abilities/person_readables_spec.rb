@@ -10,27 +10,27 @@ require 'spec_helper'
 describe PersonReadables do
 
   let(:ability)        { PersonReadables.new(crisis_creator) }
+  let(:al_schekka)     { people(:al_schekka) }
+  let(:child)          { people(:child) }
   let(:crisis_creator) { Fabricate(:person) }
-  let(:member)         { roles(:al_schekka).person }
 
   subject { Person.accessible_by(ability) }
 
-  it 'member is not accessible' do
-    expect(subject).not_to include(member)
+  it 'people are not accessible' do
+    expect(subject).not_to include(al_schekka)
+    expect(subject).not_to include(child)
   end
 
-  it 'member is acessible if person created crisis on group' do
-    crises(:al_schekka_be).update(creator: crisis_creator)
-    expect(subject).to include(member)
+  it 'people are not accessible if person is creator of crisis on a different Abteilung' do
+    crisis_creator.crises.create!(group: groups(:chaeib))
+    expect(subject).not_to include(al_schekka)
+    expect(subject).not_to include(al_schekka)
   end
 
-  it 'member is acessible if person created crisis above layer' do
-    crises(:bulei_bund).update(creator: crisis_creator)
-    expect(subject).to include(member)
+  it 'people are not accessible if person is creator of crisis on this Abteilung' do
+    crises(:schekka).update(creator: crisis_creator)
+    expect(subject).to include(al_schekka)
+    expect(subject).to include(child)
   end
 
-  it 'member is not acessible if person created crisis in sibling' do
-    crisis_creator.crises.create!(group: groups(:schweizerstern))
-    expect(subject).not_to include(member)
-  end
 end

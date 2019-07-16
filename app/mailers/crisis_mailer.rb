@@ -16,7 +16,10 @@ class CrisisMailer < ApplicationMailer
   def triggered(crisis)
     @crisis = crisis
 
-    compose(bund_recipients, CONTENT_CRISIS_TRIGGERED)
+    recipients = bund_recipients
+    recipients += kanton_recipients if bund?(crisis.creator)
+
+    compose(recipients, CONTENT_CRISIS_TRIGGERED)
   end
 
   def acknowledged(crisis, acknowledger)
@@ -27,6 +30,10 @@ class CrisisMailer < ApplicationMailer
   end
 
   private
+
+  def bund?(person)
+    person.roles.where(type: RECIPIENTS).exists?
+  end
 
   def bund_recipients
     Person.
