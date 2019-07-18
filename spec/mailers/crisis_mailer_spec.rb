@@ -32,17 +32,24 @@ describe CrisisMailer do
       subject { mail }
       its(:subject) { should eq 'Krise wurde eingeleitet' }
       its(:from)    { should eq ['noreply@localhost'] }
+    end
 
-      context 'creator from kanton' do
-        before   { crisis.update(creator: @kanton_verantwortlich) }
-        its(:to) { should match_array [@leiter.email, @verantwortlich.email] }
+    context 'recipients' do
+      subject { mail.to }
+
+      it 'notifies bund when created by kanton' do
+        crisis.update(creator: @kanton_verantwortlich)
+        expect(subject).to match_array [@leiter.email, @verantwortlich.email]
       end
 
-      context 'creator from bund' do
-        before   { crisis.update(creator: @leiter) }
-        its(:to) { should match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email] }
-      end
+      it 'notifies bund and kanton when created by bund' do
+        mitglied = Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person
 
+        [mitglied, @leiter, @verantwortlich].each do |creator|
+          crisis.update(creator: creator)
+          expect(subject).to match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email]
+        end
+      end
     end
 
     context 'body' do
