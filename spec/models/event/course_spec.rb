@@ -222,13 +222,4 @@ describe Event::Course do
       expect(event).not_to be_valid
     end
   end
-
-  describe '#assert_bsv_days_set' do
-    context 'when bsv_days is set on course but participations have nil set' do
-      it 'is not valid' do
-        binding.pry
-      end
-    end
-  end
-
 end

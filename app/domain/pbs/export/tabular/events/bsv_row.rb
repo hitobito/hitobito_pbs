@@ -18,6 +18,7 @@ module Pbs::Export::Tabular::Events
       delegate :id, :first_name, :last_name, :nickname,
                :address, :zip_code, :town, :country, :email, :salutation_value, to: :advisor
 
+
       remove_method :training_days
     end
 
@@ -58,40 +59,43 @@ module Pbs::Export::Tabular::Events
       @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes : {})
     end
 
-    def eligible_attendance_summary
-      format_attendances(bsv_eligible_participants(all_participants))
-    end
-
-    def eligible_count
-      bsv_eligible_participants(all_participants).count
+    def bsv_eligible_participations_count
+      bsv_eligible_participations.count
     end
 
     def all_participants_count
       all_participants.count
     end
 
-    def all_participants_attendance_summary
-      format_attendances(all_participants)
+    def all_participants_attendances
+      active_participations.map(&:bsv_days).compact.sum
     end
 
-    def all_eligible_attendance_summary
-      format_attendances(bsv_eligible_participants(all_participants))
+    def bsv_eligible_attendances
+      bsv_eligible_participations.map(&:bsv_days).compact.sum
+    end
+
+    def all_participants_attendance_summary
+      format_attendances(attendance_groups_by_bsv_days_for(active_participations))
+    end
+
+    def bsv_eligible_attendance_summary
+      format_attendances(attendance_groups_by_bsv_days_for(bsv_eligible_participations))
     end
 
     private
 
     def participations_for(role_types)
-      @info.send(:participations_for, role_types)
+      info.send(:participations_for, role_types)
     end
 
-    def bsv_eligible_participants(participations)
-      participations.
-        collect(&:person).
-        select do |person|
-          person.birthday? &&
-          @info.send(:aged_17_to_30?, person) &&
-          @info.send(:ch_resident?, person)
-        end
+    def bsv_eligible_participations
+      @bsv_eligible_participations ||= active_participations.select do |participation|
+                                         person = participation.person
+                                         person.birthday? &&
+                                         info.send(:aged_17_to_30?, person) &&
+                                         info.send(:ch_resident?, person)
+                                       end
     end
 
     def all_participants
@@ -102,18 +106,19 @@ module Pbs::Export::Tabular::Events
       @active_participations ||= entry.participations.where(active: true)
     end
 
-    def attendances_grouped_by_bsv_days_for(participants)
-      active_participations.
-        select { |participation| participants.include?(participation.person) }.
-        group_by { |participation| participation.bsv_days }.
-        transform_values { |participations| participations.count }.
-        sort_by { |days, count| days.to_f }.to_h
+    def attendance_groups_by_bsv_days_for(participations)
+      Hash[
+        participations.
+          group_by { |participation| participation.bsv_days || 0 }.
+          transform_values { |participation_group| participation_group.count }.
+          sort_by { |days, count| days.to_f }
+      ]
     end
 
-    def format_attendances(participants)
-      attendances_grouped_by_bsv_days_for(participants).collect do |counts|
-        "#{counts[1]}x#{sprintf('%g',counts[0])}"
-      end.join(', ').to_s
+    def format_attendances(attendance_groups)
+      return nil if attendance_groups.none?
+
+      attendance_groups.collect { |days, count| "#{count}x#{sprintf('%g', days)}" }.join(', ')
     end
   end
 end

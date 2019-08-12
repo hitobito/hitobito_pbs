@@ -137,6 +137,13 @@ describe Event::Participation do
       participation.bsv_days = 2.25
       expect(participation).not_to be_valid
     end
+
+    it 'is not valid when course has bsv_days set' do
+      participation.event.bsv_days = 3
+      participation.bsv_days = nil
+      participation.state = :attended
+      expect(participation).not_to be_valid
+    end
   end
 
   context 'notification if person is on black list' do

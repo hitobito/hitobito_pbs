@@ -220,11 +220,13 @@ describe Event::ListsController do
                               "Kursort",
                               "Ausbildungstage",
                               "BSV Tage",
-                              "Teilnehmende (17-30)",
-                              "Teilnehmende (17-30) x Tage",
+                              "Berechtigte Teilnehmende (17-30)",
+                              "Berechtigte Teilnehmende (17-30) x Tage",
+                              "Berechtigte Tage",
                               "Kursleitende",
                               "Teilnehmende Total (inkl. Kursleitende)",
                               "Teilnehmende Total x Tage",
+                              "Total Tage",
                               "Wohnkantone der TN",
                               "Sprachen",
                               "LKB Personen-ID",
@@ -242,6 +244,7 @@ describe Event::ListsController do
       it 'inserts values correctly' do
         get :bsv_export, bsv_export: { date_from: '09.09.2015' },
           year: 2016, advanced: true
+        headers = rows.first.split(';')
         values = rows.second.split(';')
         #main labels
         expect(values[0..8]).to eq(["", "", "LPK (Leitpfadikurs)", "Zürich, Bern",
@@ -249,14 +252,14 @@ describe Event::ListsController do
         #counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.
 
-        expect(values[9..17]).to eq(["5", "3", "0", "1x3", "3", "6", "6x3", "0", "0"])
+        expect(values[9..19]).to eq(["5", "3", "0", "", "0", "3", "6", "1x0, 7x3", "21.0", "0", "0"])
 
         #advisor labels
-        expect(values[18..27]).to eq([person.id.to_s, person.first_name, person.last_name,
+        expect(values[20..29]).to eq([person.id.to_s, person.first_name, person.last_name,
                                       person.nickname, "test_address", "3128", "Foodorf", "CH",
                                       person.email, person.salutation_value])
 
-        expect(values.length).to eq(28)
+        expect(values.length).to eq(30)
       end
 
       it 'sets date_to to date from if nothing is given' do
@@ -312,9 +315,9 @@ describe Event::ListsController do
   end
 
   def create_course(number, date_from, date_to = nil)
-    course = Fabricate(:pbs_course, groups: [groups(:be), groups(:zh)], 
-                                    number: number, 
-                                    state: 'closed', 
+    course = Fabricate(:pbs_course, groups: [groups(:be), groups(:zh)],
+                                    number: number,
+                                    state: 'closed',
                                     advisor_id: person.id,
                                     training_days: 5,
                                     bsv_days: 3

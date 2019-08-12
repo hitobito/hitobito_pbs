@@ -42,25 +42,31 @@ describe Export::Tabular::Events::BsvRow do
     expect(row.fetch(:bsv_days)).to be_blank
   end
 
-  it 'eligible_count is zero' do
-    expect(row.fetch(:eligible_count)).to eq 0
+  it 'bsv_eligible_participants_count is zero' do
+    expect(row.fetch(:bsv_eligible_participations_count)).to eq 0
   end
 
-  it 'eligible_count counts only ch residents aged 17 to 30' do
+  it 'bsv_eligible_participants_count counts only ch residents aged 17 to 30' do
     participant = course.people.joins(event_participations: :roles)
      .find_by(event_roles: { type: Event::Course::Role::Participant.sti_name  })
     participant.update(birthday: '01.01.1990', location: bern)
-    expect(row.fetch(:eligible_count)).to eq 1
+    expect(row.fetch(:bsv_eligible_participations_count)).to eq 1
   end
 
   describe 'advanced_bsv_export' do
     before do
       course.bsv_days = 7
       create_eligible_participation(course, location: bern, age: 20)
+      create_eligible_participation(course, location: bern, age: 12)
     end
 
-    it 'all_eligible_attendance_summary' do
-      expect(row.fetch(:all_eligible_attendance_summary)).to eq('1x7')
+    it 'bsv_eligible_attendance_summary' do
+      expect(row.fetch(:all_participants_count)).to eq(8)
+      expect(row.fetch(:all_participants_attendance_summary)).to eq('7x0, 2x7')
+      expect(row.fetch(:all_participants_attendances)).to eq(14)
+      expect(row.fetch(:bsv_eligible_attendance_summary)).to eq('1x7')
+      expect(row.fetch(:bsv_eligible_participations_count)).to eq(1)
+      expect(row.fetch(:bsv_eligible_attendances)).to eq(7)
     end
   end
 
@@ -75,11 +81,11 @@ describe Export::Tabular::Events::BsvRow do
   end
 
   def create_eligible_participation(course, age: 20, location: nil, bsv_days: course.bsv_days)
-    binding.pry
-    # birthday = course.event_dates.first.
-    person = Fabricate(:person, birthday: birthday)
-    participation = Fabricate(:event_participation, event: course, person: person, bsv_days: bsv_days)
-    Fabricate(role.to_sym, participation: participation)
+    birthday = (course.dates.first.start_at - age.years).to_date
+    person = Fabricate(:person, birthday: birthday, location: location)
+    participation = Fabricate(:event_participation, event: course, person: person,
+                              bsv_days: bsv_days, state: :attended)
+    Fabricate(Event::Course::Role::Participant.name, participation: participation)
   end
 
   def create_leader_participations(course)
