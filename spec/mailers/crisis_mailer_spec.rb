@@ -15,14 +15,13 @@ describe CrisisMailer do
     SeedFu.seed [Rails.root.join('db', 'seeds')]
   end
 
-  let(:crisis) { crises(:bulei_bund) }
-  let(:bund)   { groups(:bund) }
+  let(:crisis) { crises(:schekka) }
   let(:date)   { '2019-05-08 09:57:00' }
-  let(:link)   { %{<a href="http://test.host/groups/#{bund.id}">Pfadibewegung Schweiz</a>} }
+  let(:link)   { %{<a href="http://test.host/groups/#{crisis.group.id}">#{crisis.group}</a>} }
 
   before do
-    @leiter = Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: bund).person
-    @verantwortlich = Fabricate(Group::Bund::VerantwortungKrisenteam.name.to_sym, group: bund).person
+    @leiter = Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: groups(:bund)).person
+    @verantwortlich = Fabricate(Group::Bund::VerantwortungKrisenteam.name.to_sym, group: groups(:bund)).person
     @kanton_verantwortlich = Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name.to_sym, group: groups(:be)).person
   end
 
@@ -33,14 +32,31 @@ describe CrisisMailer do
       subject { mail }
       its(:subject) { should eq 'Krise wurde eingeleitet' }
       its(:from)    { should eq ['noreply@localhost'] }
-      its(:to)      { should match_array [@leiter.email, @verantwortlich.email] }
+    end
+
+    context 'recipients' do
+      subject { mail.to }
+
+      it 'notifies bund when created by kanton' do
+        crisis.update(creator: @kanton_verantwortlich)
+        expect(subject).to match_array [@leiter.email, @verantwortlich.email]
+      end
+
+      it 'notifies bund and kanton when created by bund' do
+        mitglied = Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person
+
+        [mitglied, @leiter, @verantwortlich].each do |creator|
+          crisis.update(creator: creator)
+          expect(subject).to match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email]
+        end
+      end
     end
 
     context 'body' do
       subject { mail.body }
       it 'renders placeholders' do
         travel_to date do
-          is_expected.to match(/Dr. Bundes Leiter hat am 08.05.2019 09:57/)
+          is_expected.to match(/Alan Helpful hat am 08.05.2019 09:57/)
           is_expected.to match(/eine Krise in der Gruppe #{link} eingeleitet/)
         end
       end
@@ -50,17 +66,13 @@ describe CrisisMailer do
   context 'acknowledged' do
     let(:person) { people(:bulei) }
     let(:mail)   { CrisisMailer.acknowledged(crisis, person) }
+    before       { crisis.update(acknowledged: true) }
 
     context 'headers' do
       subject { mail }
       its(:subject) { should eq 'Krise wurde quittiert' }
-      its(:to)      { should match_array [@leiter.email, @verantwortlich.email] }
+      its(:to)      { should match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email] }
       its(:from)    { should eq ['noreply@localhost'] }
-
-      context 'within kanton' do
-        let(:crisis)  { crises(:acknowledged) }
-        its(:to)      { should match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email] }
-      end
     end
 
     context 'body' do
@@ -68,7 +80,7 @@ describe CrisisMailer do
 
       it 'renders placeholders' do
         travel_to date do
-          is_expected.to match(/Die von Dr. Bundes Leiter am 08.05.2019 09:57/)
+          is_expected.to match(/Die von Alan Helpful am 08.05.2019 09:57/)
           is_expected.to match(/in der Gruppe #{link} eingeleitet Krise/)
           is_expected.to match(/wurde von Dr. Bundes Leiter quittiert/)
         end

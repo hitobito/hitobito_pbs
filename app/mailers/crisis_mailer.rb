@@ -8,13 +8,18 @@ class CrisisMailer < ApplicationMailer
   CONTENT_CRISIS_ACKNOWLEDGED = 'content_crisis_acknowledged'.freeze
   CONTENT_CRISIS_TRIGGERED = 'content_crisis_triggered'.freeze
 
-  RECIPIENTS = [Group::Bund::VerantwortungKrisenteam,
-                Group::Bund::LeitungKernaufgabeKommunikation]
+  BUND_RECIPIENTS = [Group::Bund::VerantwortungKrisenteam,
+                     Group::Bund::LeitungKernaufgabeKommunikation]
+
+  BUND_CREATORS   = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam]
 
   attr_reader :crisis
 
   def triggered(crisis)
     @crisis = crisis
+
+    bund_recipients = bund_bund_recipients
+    bund_recipients += kanton_bund_recipients if bund?(crisis.creator)
 
     compose(bund_recipients, CONTENT_CRISIS_TRIGGERED)
   end
@@ -23,19 +28,23 @@ class CrisisMailer < ApplicationMailer
     @crisis = crisis
     @acknowledger = acknowledger
 
-    compose(bund_recipients + kanton_recipients, CONTENT_CRISIS_ACKNOWLEDGED)
+    compose(bund_bund_recipients + kanton_bund_recipients, CONTENT_CRISIS_ACKNOWLEDGED)
   end
 
   private
 
-  def bund_recipients
+  def bund?(person)
+    person.roles.where(type: BUND_CREATORS).exists?
+  end
+
+  def bund_bund_recipients
     Person.
       joins(:roles).
-      where('roles.type IN (?)', RECIPIENTS).
+      where('roles.type IN (?)', BUND_RECIPIENTS).
       pluck(:email)
   end
 
-  def kanton_recipients
+  def kanton_bund_recipients
     kantonalverband = crisis.group.layer_hierarchy.find { |g| g.is_a?(Group::Kantonalverband) }
 
     Person

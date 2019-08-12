@@ -12,6 +12,7 @@ zeus.json
 .generators
 .idea
 .rakeTasks
+.pry_history
 
 # ignore Gemfile.lock for wagons
 Gemfile.lock

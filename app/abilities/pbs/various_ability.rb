@@ -16,7 +16,7 @@ module Pbs::VariousAbility
     end
 
     on(Crisis) do
-      permission(:crisis_trigger).may(:create, :update).if_krisenteam
+      permission(:crisis_trigger).may(:create, :update).on_abteilung_if_krisenteam
     end
   end
 
@@ -27,6 +27,10 @@ module Pbs::VariousAbility
   def if_black_list_role
     role_type?(Group::Bund::Geschaeftsleitung) ||
       role_type?(Group::Bund::LeitungKernaufgabeKommunikation)
+  end
+
+  def on_abteilung_if_krisenteam
+    subject.group.is_a?(Group::Abteilung) && if_krisenteam
   end
 
   def if_krisenteam

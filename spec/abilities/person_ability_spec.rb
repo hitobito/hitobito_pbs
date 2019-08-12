@@ -9,7 +9,6 @@ require 'spec_helper'
 
 describe PersonAbility do
 
-  let(:group)          { groups(:be) }
   let(:ability)        { Ability.new(crisis_creator) }
   let(:crisis_creator) { Fabricate(:person) }
   let(:member)         { roles(:al_schekka).person }
@@ -21,14 +20,7 @@ describe PersonAbility do
   end
 
   it 'may show member if crisis_creator of crisis on group' do
-    crises(:al_schekka_be).update(creator: crisis_creator)
-    actions.each do |action|
-      is_expected.to be_able_to(action, member)
-    end
-  end
-
-  it 'may show member if crisis_creator of crisis on parent group' do
-    crises(:bulei_bund).update(creator: crisis_creator)
+    crises(:schekka).update(creator: crisis_creator)
     actions.each do |action|
       is_expected.to be_able_to(action, member)
     end

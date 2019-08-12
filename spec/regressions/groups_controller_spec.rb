@@ -38,9 +38,9 @@ describe GroupsController, type: :controller do
   end
 
   context 'crisis' do
-    let(:group)  { groups(:bund) }
-    let(:person) { Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: group).person }
-    before       { sign_in(person); crises(:bulei_bund).update(created_at: 1.day.ago) }
+    let(:group)  { groups(:schekka) }
+    let(:person) { Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person }
+    before       { sign_in(person); crises(:schekka).update(created_at: 1.day.ago) }
 
     it 'renders crisis done acknowledged button if acknowledgedable active crisis exists' do
       get :show, id: group.id

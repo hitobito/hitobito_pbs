@@ -8,14 +8,13 @@ require 'spec_helper'
 describe CrisesController do
 
   let(:user)  { Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person }
-  let(:group) { groups(:be) }
+  let(:group) { groups(:chaeib) }
 
   describe 'authorized' do
     before { sign_in(user) }
 
     context 'POST#create' do
       it 'creates crisis send mail and set crisis session' do
-        Crisis.destroy_all
         expect do
           post :create, group_id: group.id
         end.to change { Delayed::Job.count }.by 1
@@ -25,8 +24,9 @@ describe CrisesController do
       end
 
       it 'shows error if another crisis is active' do
+        group.crises.create!(creator: user)
         expect do
-          post :create, group_id: groups(:be)
+          post :create, group_id: group.id
         end.not_to change { Delayed::Job.count }
 
         expect(session[:crisis]).to be nil
@@ -35,6 +35,9 @@ describe CrisesController do
     end
 
     context 'PUT#update' do
+      before do
+        group.crises.create!(creator: user)
+      end
       it 'acknowledges crisis if not older then 3 days' do
         expect do
           put :update, group_id: group.id, id: group.active_crisis.id
@@ -46,7 +49,7 @@ describe CrisesController do
       it 'does not acknowledge if crisis older then 3 days' do
         group.active_crisis.update(created_at: 4.days.ago)
         expect do
-          put :update, group_id: groups(:be), id: group.active_crisis.id
+          put :update, group_id: group.id, id: group.active_crisis.id
 
         end.not_to change { Delayed::Job.count }
 
