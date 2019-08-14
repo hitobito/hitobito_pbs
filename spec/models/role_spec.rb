@@ -127,7 +127,9 @@ describe Role do
                       person_id: person.id,
                       type: Group::Abteilung::Sekretariat.sti_name)
       expect { role.save! }.to change { Delayed::Job.count }.by(1)
-      expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
+
+      job = GroupMembershipJob.new(person, actuator, home_group)
+      expect(Delayed::Job.where(handler: job.to_yaml).count).to eq 1
     end
 
     it 'is not sent on role creation with equal access' do

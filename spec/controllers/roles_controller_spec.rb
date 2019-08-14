@@ -102,7 +102,8 @@ describe RolesController do
                         type: Group::Abteilung::Sekretariat.sti_name }
         expect { post :create, group_id: home_group.id, role: role_params }.
           to change { Delayed::Job.count }.by(1)
-        expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
+        job = GroupMembershipJob.new(person, actuator, home_group)
+        expect(Delayed::Job.where(handler: job.to_yaml).count).to eq 1
       end
 
       it 'is not sent on role creation with equal access' do
