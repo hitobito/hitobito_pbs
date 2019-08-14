@@ -79,7 +79,7 @@ describe Role do
 
   context 'notification if person is on black list' do
     let(:group)       { groups(:schekka) }
-    let(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+    let!(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
     let(:last_email)  { ActionMailer::Base.deliveries.last }
 
     before do
@@ -98,7 +98,7 @@ describe Role do
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
       expect(last_email.body).to include(person.full_name)
-      expect(last_email.body).to include(group.name)
+
     end
 
     it 'is not sent on role creation if person is not blacklisted' do

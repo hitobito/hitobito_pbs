@@ -22,7 +22,7 @@
 child_black_list:
   first_name: My
   last_name: Child
-  pbs_number: 000-321
+  pbs_number: 000-321-123
   email: child1@hitobito.example.com
   reference_name: Bundes Leiter
   reference_phone_number: 031 123 12 12
@@ -30,7 +30,7 @@ child_black_list:
 al_berchtold_black_list:
   first_name: AL
   last_name: Berchtold
-  pbs_number: 000-123
+  pbs_number: 000-123-123
   email: al.berchtold@hitobito.example.com
   reference_name: Franz Maurer
   reference_phone_number: 076 123 12 12

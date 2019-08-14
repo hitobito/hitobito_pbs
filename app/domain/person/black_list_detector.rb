@@ -6,8 +6,9 @@
 class Person::BlackListDetector
   attr_reader :person
 
-  def initialize(person)
+  def initialize(person, changes = nil)
     @person = person
+    @person = Person.new(changes) if changes.present?
   end
 
   def occures?

@@ -111,7 +111,6 @@ describe Person do
   end
 
   context '#kantonalverband' do
-
     context 'unique' do
       before { person.reset_kantonalverband! }
 
@@ -212,7 +211,42 @@ describe Person do
         end
 
       end
-
     end
   end
+
+  context 'notifies if relevant attribute changes' do
+    let(:last_email)  { ActionMailer::Base.deliveries.last }
+
+    before do
+      SeedFu.quiet = true
+      SeedFu.seed [Rails.root.join('db', 'seeds')]
+      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return('test@test.com')
+      Fabricate(:black_list, first_name: 'dummy', last_name: 'example', phone_number: '079 123 45 60')
+    end
+
+    it 'triggers blacklist when changing name attributes' do
+      expect do
+        person.update(first_name: 'dummy', last_name: 'example')
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+
+      expect(last_email.body).to include(person.full_name)
+    end
+
+    it 'triggers blacklist when phone_number' do
+      expect do
+        person.update(phone_numbers_attributes: { '0' => { number: '079 123 45 60', label: 'privat' } })
+        expect(person.phone_numbers).to have(1).item
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+
+      expect(last_email.body).to include(person.full_name)
+    end
+
+    it 'is not triggered on subsequent attribute changes' do
+      person.update(first_name: 'dummy', last_name: 'example')
+      expect do
+        person.update(gender: 'w')
+      end.not_to change { ActionMailer::Base.deliveries.count }
+    end
+  end
+
 end

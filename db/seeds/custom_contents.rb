@@ -66,6 +66,10 @@ CustomContent.seed_once(:key,
     placeholders_required: 'black-list-person, joined-target',
     placeholders_optional: '' },
 
+  { key: BlackListMailer::CONTENT_BLACK_LIST_ATTR_HIT,
+    placeholders_required: 'black-list-person',
+    placeholders_optional: '' },
+
   { key: CrisisMailer::CONTENT_CRISIS_TRIGGERED,
     placeholders_required: 'creator, group',
     placeholders_optional: 'date' },
@@ -100,6 +104,7 @@ camp_participant_canceled_id = CustomContent.
   get(Event::CampMailer::CONTENT_PARTICIPANT_CANCELED).id
 
 black_list_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_HIT).id
+black_list_attr_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_ATTR_HIT).id
 crisis_triggered_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_TRIGGERED).id
 crisis_acknowledged_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED).id
 
@@ -418,6 +423,27 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     label: 'black list: E-Mail hit on black list'},
 
   { custom_content_id: black_list_hit_id,
+    locale: 'it',
+    label: 'lista nera: E-Mail hit su lista nera' },
+
+  { custom_content_id: black_list_attr_hit_id,
+    locale: 'de',
+    label: 'Schwarze Liste: E-Mail Treffer',
+    subject: 'Treffer auf Schwarzer Liste',
+    body: 'Die Person {black-list-person} wurde aktualisiert.' \
+          '<br><br>Möglicherweise befindet sich diese Person auf der schwarzen Liste. ' \
+          'Bitte prüfen und gegebenenfalls auf die Gruppe oder einen Referenzkontakt zugehen.' \
+          '<br><br>Diese Nachricht wurde automatisch aus der MiData verschickt.'},
+
+  { custom_content_id: black_list_attr_hit_id,
+    locale: 'fr',
+    label: 'liste noire: E-Mail hit sur la liste noire' },
+
+  { custom_content_id: black_list_attr_hit_id,
+    locale: 'en',
+    label: 'black list: E-Mail hit on black list'},
+
+  { custom_content_id: black_list_attr_hit_id,
     locale: 'it',
     label: 'lista nera: E-Mail hit su lista nera' },
 

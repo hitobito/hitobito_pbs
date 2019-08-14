@@ -23,7 +23,7 @@ Fabricator(:black_list) do
   first_name             { Faker::Name.first_name }
   last_name              { Faker::Name.last_name }
   email                  { Faker::Internet.email }
-  pbs_number             { Faker::Number.number(6) }
+  pbs_number             { Faker::Number.number(9).scan(/\d{3}/).join('-') }
   phone_number           { Faker::PhoneNumber.phone_number }
   reference_name         { Faker::Name.name }
   reference_phone_number { Faker::PhoneNumber.phone_number }

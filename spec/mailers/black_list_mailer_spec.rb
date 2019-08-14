@@ -14,51 +14,59 @@ describe BlackListMailer do
     SeedFu.seed [Rails.root.join('db', 'seeds')]
   end
 
-  let(:person)     { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+  let(:person)     { people(:al_schekka) }
+  let(:person_url) { "http://test.host/people/#{person.id}" }
+
   let(:group)      { groups(:schekka) }
   let(:event)      { events(:top_course) }
+
 
   let!(:gl_role)   { Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)) }
   let!(:lkk_role)  { Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym,
                                group: groups(:bund)) }
 
-  let(:group_mail) { BlackListMailer.group_hit(person, group) }
-  let(:event_mail) { BlackListMailer.event_hit(person, event) }
+  %w(group event).each do |target|
+    context 'headers' do
+      subject { BlackListMailer.hit(person, send(target)) }
 
-  context 'group mail headers' do
-    subject { group_mail }
-    its(:subject) { should eq 'Treffer auf Schwarzer Liste' }
-    its(:to)      { should include gl_role.person.email }
-    its(:to)      { should include lkk_role.person.email }
-    its(:from)    { should eq ['noreply@localhost'] }
-  end
+      its(:subject) { should eq 'Treffer auf Schwarzer Liste' }
+      its(:to)      { should include gl_role.person.email }
+      its(:to)      { should include lkk_role.person.email }
+      its(:from)    { should eq ['noreply@localhost'] }
+    end
 
-  context 'event mail headers' do
-    subject { event_mail }
-    its(:subject) { should eq 'Treffer auf Schwarzer Liste' }
-    its(:to)      { should include gl_role.person.email }
-    its(:to)      { should include lkk_role.person.email }
-    its(:from)    { should eq ['noreply@localhost'] }
-  end
+    context 'body' do
+      subject { BlackListMailer.hit(person, send(target)).body }
 
-  context 'group body' do
-    subject { group_mail.body }
+      it 'renders placeholders' do
+        expect(subject).to match(%r{Die Person <a href="#{person_url}">AL Schekka</a>})
+        expect(subject).to match(%r{wurde bei <a href="#{url(send(target))}">#{send(target)}</a> hinzugefügt})
+      end
+    end
 
-    it 'renders placeholders' do
-      is_expected.to match(/Die Person <a href="/)
-      is_expected.to match(/foo bar<\/a>/)
-      is_expected.to match(/Schekka<\/a>/)
+    def url(target)
+      "http://test.host/#{target.model_name.route_key}/#{target.id}"
     end
   end
 
-  context 'event body' do
-    subject { event_mail.body }
+  context 'person' do
+    let(:person_mail) { BlackListMailer.hit(person) }
 
-    it 'renders placeholders' do
-      is_expected.to match(/Die Person <a href="/)
-      is_expected.to match(/foo bar<\/a>/)
-      is_expected.to match(/Top Course<\/a>/)
+    context 'headers' do
+      subject { person_mail }
+
+      its(:subject) { should eq 'Treffer auf Schwarzer Liste' }
+      its(:to)      { should include gl_role.person.email }
+      its(:to)      { should include lkk_role.person.email }
+      its(:from)    { should eq ['noreply@localhost'] }
+    end
+
+    context 'body' do
+      subject { BlackListMailer.hit(person).body }
+
+      it 'renders placeholders' do
+        expect(subject).to match(%r{Die Person <a href="#{person_url}">AL Schekka</a> wurde aktualisiert})
+      end
     end
   end
-
 end

@@ -33,6 +33,7 @@ module HitobitoPbs
       Event::Application.send :include, Pbs::Event::Application
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
+      PhoneNumber.send :include, Pbs::PhoneNumber
 
       ## domain
       Bsv::Info.leader_roles += [Event::Course::Role::Helper]

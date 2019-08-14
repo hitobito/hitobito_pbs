@@ -29,4 +29,11 @@ describe BlackList do
     it { is_expected.to eq('Schwarze Liste') }
   end
 
+  it 'validates pbs_number' do
+    subject.pbs_number = '123'
+    expect(subject).to have(1).error_on(:pbs_number)
+    subject.pbs_number = '123-123-123'
+    expect(subject).not_to have(1).error_on(:pbs_number)
+  end
+
 end

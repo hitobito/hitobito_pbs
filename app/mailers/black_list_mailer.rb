@@ -6,29 +6,21 @@
 class BlackListMailer < ApplicationMailer
 
   CONTENT_BLACK_LIST_HIT = 'black_list_hit'.freeze
+  CONTENT_BLACK_LIST_ATTR_HIT = 'black_list_attr_hit'.freeze
   BLACK_LIST_ROLES = [ Group::Bund::Geschaeftsleitung,
                        Group::Bund::LeitungKernaufgabeKommunikation ].freeze
 
-  def group_hit(person, group)
-    @group = group
-    hit(person)
-  end
-
-  def event_hit(person, event)
-    @event = event
-    hit(person)
-  end
-
-  private
-
-  def hit(person)
+  def hit(person, target = nil)
     return if recipients.blank?
 
     @person = person
-    custom_content_mail(recipients,
-                        CONTENT_BLACK_LIST_HIT,
-                        values_for_placeholders(CONTENT_BLACK_LIST_HIT))
+    @target = target
+
+    key = target ? CONTENT_BLACK_LIST_HIT : CONTENT_BLACK_LIST_ATTR_HIT
+    custom_content_mail(recipients, key, values_for_placeholders(key))
   end
+
+  private
 
   def recipients
     @recipients ||= Person.
@@ -43,10 +35,6 @@ class BlackListMailer < ApplicationMailer
   end
 
   def placeholder_joined_target
-    if @group
-      link_to(@group, group_url(@group))
-    else
-      link_to(@event, event_url(@event))
-    end
+    link_to(@target, polymorphic_url(@target)) if @target
   end
 end
