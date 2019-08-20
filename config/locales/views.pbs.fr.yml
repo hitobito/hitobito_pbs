@@ -138,6 +138,7 @@ fr:
       confirm_cancel: Souhaites-tu vraiment te désinscrire de ce camp?
       submit_camp: Transmettre
       camp_submitted: démission
+      camp_submitted_at: déposée le
     application_fields_pbs:
       paper_application_required_caption: Les participants doivent envoyer une inscription papier
       participants_can_apply_caption: Les participants peuvent s'inscrire eux-mêmes

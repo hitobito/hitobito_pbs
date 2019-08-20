@@ -965,6 +965,7 @@ de:
         bsv_days: Anzahl BSV-Tage
         camp_days: Anzahl Lagertage
         camp_submitted: Eingereicht
+        camp_submitted_at: Eingereicht am
         course_languages: Kurssprachen
         express_fee: Expressgebühr
         expected_participants: Erwartete Teilnehmer/-innen
