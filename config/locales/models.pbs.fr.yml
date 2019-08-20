@@ -732,6 +732,7 @@ fr:
         bsv_days: nombre de jours OFAS
         camp_days: Nombre de jours de camp
         camp_submitted: Démission
+        camp_submitted_at: Déposée le
         course_languages: Langues de cours
         express_fee: Finances express
         expected_participants: Participants/-es attendus/-ues

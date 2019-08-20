@@ -138,6 +138,7 @@ it:
       confirm_cancel: Vuoi veramente disiscriverti dal campo?
       submit_camp: Inoltrare
       camp_submitted: Inoltrato
+      camp_submitted_at: Inoltrato il
     application_fields_pbs:
       paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
       participants_can_apply_caption: I partecipanti possono iscrivere sé stessi

@@ -142,6 +142,7 @@ describe EventsController do
 
         put :create_camp_application, group_id: group.id, id: event.id
         expect(response).to redirect_to(group_event_path(group, event))
+        expect(event.reload.camp_submitted_at).to eq Date.today
         expect(flash[:notice]).to match /eingereicht/
         expect(event.reload).to be_camp_submitted
       end
