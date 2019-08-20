@@ -99,8 +99,9 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
-  self.used_attributes += [:state, :group_ids,
-                           :participants_can_apply, :participants_can_cancel]
+  self.used_attributes += [:state, :group_ids, :participants_can_apply, :participants_can_cancel,
+                           :j_s_kind, :canton, :camp_submitted, :camp_submitted_at,
+                           :total_expected_leading_participants, :total_expected_participants]
 
   self.used_attributes -= [:contact_id, :applications_cancelable]
 
@@ -162,6 +163,18 @@ class Event::Camp < Event
     else
       'applied_electronically'
     end
+  end
+
+  def total_expected_participants
+    %w(wolf pfadi pio rover).product(%w(f m)).map do |level, gender|
+      send("expected_participants_#{level}_#{gender}") || 0
+    end.inject(&:+)
+  end
+
+  def total_expected_leading_participants
+    %w(leitung).product(%w(f m)).map do |level, gender|
+      send("expected_participants_#{level}_#{gender}") || 0
+    end.inject(&:+)
   end
 
   private

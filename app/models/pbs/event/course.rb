@@ -19,7 +19,9 @@ module Pbs::Event::Course
     self.used_attributes += [:advisor_id, :express_fee, :bsv_days] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
-    self.used_attributes -= [:requires_approval]
+    self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,
+                             :camp_submitted_at, :total_expected_leading_participants,
+                             :total_expected_participants]
 
     self.superior_attributes = [:express_fee, :training_days]
 

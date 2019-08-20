@@ -966,9 +966,11 @@ de:
         camp_days: Anzahl Lagertage
         camp_submitted: Eingereicht
         camp_submitted_at: Eingereicht am
+        total_expected_leading_participants: Leitungsteam erwartet
+        total_expected_participants: Teilnehmende erwartet
         course_languages: Kurssprachen
         express_fee: Expressgebühr
-        expected_participants: Erwartete Teilnehmer/-innen
+        expected_participants: Erwartete Anzahl Teilnehmende
         expected_participants_wolf: Wolf
         expected_participants_wolf_f: Anzahl Wölfe weiblich
         expected_participants_wolf_m: Anzahl Wölfe männlich
@@ -981,7 +983,7 @@ de:
         expected_participants_rover: Rover
         expected_participants_rover_f: Anzahl Rover weiblich
         expected_participants_rover_m: Anzahl Rover männlich
-        expected_participants_leitung: Leiter
+        expected_participants_leitung: Leitende
         expected_participants_leitung_f: Anzahl Leiter weiblich
         expected_participants_leitung_m: Anzahl Leiter männlich
         language_de: Kurssprache Deutsch
