@@ -15,6 +15,7 @@ module Pbs::EventsController
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
 
     before_render_show :load_participation_emails, if: :canceled?
+    before_render_form :load_canton_specific_help_texts
 
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :sort_expression, :canton
@@ -66,6 +67,16 @@ module Pbs::EventsController
 
   def load_participation_emails
     @emails = Person.mailing_emails_for(entry.people)
+  end
+
+  def load_canton_specific_help_texts
+    @canton_specific_help_texts = Event::Camp::CANTONS.map do |canton_short_name|
+      {
+        id: canton_short_name,
+        url: I18n.t("events.canton_specific_help_text.#{canton_short_name}_url", default: ''),
+        title: I18n.t("events.canton_specific_help_text.#{canton_short_name}_title", default: '')
+      }
+    end
   end
 
   def permitted_attrs_with_superior_and_coach_check
