@@ -106,7 +106,7 @@ module Event::Campy
       event.coach_visiting = false
       event.coach_visiting_date = nil
       event.coach_confirmed = false
-      event.camp_submitted = false
+      event.camp_submitted_at = nil
       event.camp_reminder_sent = false
     end
   end

@@ -22,9 +22,10 @@
     = labeled(Event.human_attribute_name(:j_s_security)) do
       = format_event_js_security_attrs(entry)
 
-    = labeled_attr(entry, :camp_submitted)
     - if entry.camp_submitted?
       = labeled_attr(entry, :camp_submitted_at)
+    - else
+      = labeled_attr(entry, :camp_submitted)
 
 - if entry.is_a?(Event::Course)
   %dl.dl-horizontal

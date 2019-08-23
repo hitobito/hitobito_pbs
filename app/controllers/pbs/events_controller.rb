@@ -46,8 +46,7 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    entry.camp_submitted = true
-    entry.camp_submitted_at = Date.today
+    entry.camp_submitted_at = Time.zone.now.to_date
     if entry.save
       Event::CampMailer.submit_camp(entry).deliver_later
       set_success_notice
