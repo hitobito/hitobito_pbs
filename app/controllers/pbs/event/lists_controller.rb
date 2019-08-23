@@ -113,11 +113,10 @@ module Pbs::Event::ListsController
   end
 
   def base_camp_query(excluded_states = %w(created canceled))
-    Event::Camp.
-      where(camp_submitted: true).
-      where.not(state: excluded_states).
-      includes(:groups).
-      list
+    Event::Camp.where('camp_submitted_at NOT NULL')
+               .where.not(state: excluded_states)
+               .includes(:groups)
+               .list
   end
 
   def in_next_three_weeks(scope)

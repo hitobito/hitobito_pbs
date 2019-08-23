@@ -12,4 +12,9 @@ module Pbs::Event
     class_attribute :superior_attributes
     self.superior_attributes = []
   end
+
+  def camp_submitted?
+    !camp_submitted_at.nil?
+  end
+  alias :camp_submitted :camp_submitted?
 end

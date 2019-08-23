@@ -154,7 +154,7 @@ describe Event::Course do
       update_attributes(subject)
       required_attrs_for_camp_application.each do |a, v|
         subject.reload
-        subject.camp_submitted = true
+        subject.camp_submitted_at = Time.zone.now.to_date - 1.day
         expect(subject).to be_valid
         clear_attribute(subject, a)
         expect(subject).not_to be_valid
@@ -164,13 +164,13 @@ describe Event::Course do
 
     it 'is valid if camp_submitted and all required values are present' do
       update_attributes(subject)
-      subject.camp_submitted = true
+      subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
 
     it 'is valid if camp_submitted and all required values are present, without advisor security' do
       update_attributes(subject, false)
-      subject.camp_submitted = true
+      subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
 

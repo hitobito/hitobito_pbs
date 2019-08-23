@@ -22,7 +22,7 @@ class Event::CampReminderJob < RecurringJob
   end
 
   def camps_to_remind
-    camps = Event::Camp.where(camp_submitted: false, camp_reminder_sent: false).
+    camps = Event::Camp.where(camp_submitted_at: nil, camp_reminder_sent: false).
             where.not(state: 'created')
     starting_soon(camps)
   end
