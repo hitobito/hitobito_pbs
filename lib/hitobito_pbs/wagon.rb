@@ -138,6 +138,13 @@ module HitobitoPbs
             can?(:list_cantonal, Event::Camp)
         end
       )
+      index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
+      NavigationHelper::MAIN.insert(
+        index_admin,
+        label: :help,
+        icon_name: :'info-circle',
+        url: :help_path
+      )
 
       # rubocop:enable SingleSpaceBeforeFirstArg
 

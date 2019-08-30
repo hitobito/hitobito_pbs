@@ -1,0 +1,20 @@
+-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- title t('.title')
+
+%p= t('.description_html')
+
+%h2= t('.guides.title')
+%p= t('.guides.description')
+
+%table.table.table-striped
+  %tbody
+    - %w(hering coaches ticket anker pilot).each do |help_key|
+      %tr
+        %td
+          %strong= link_to t(".guides.#{help_key}.title"), t(".guides.#{help_key}.url"), target: '_blank'
+        %td
+          = t(".guides.#{help_key}.description")
