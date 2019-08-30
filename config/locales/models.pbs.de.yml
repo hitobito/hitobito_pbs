@@ -97,6 +97,10 @@ de:
         one: Adressverwalter
         other: Adressverwalter
         description: Verwaltet die Adressen.
+      group/bund/power_user:
+        one: PowerUser
+        other: PowerUser
+        description:
       group/bund/assistenz_ausbildung:
         one: Assistenz Ausbildung
         other: Assistenz Ausbildung
@@ -278,6 +282,10 @@ de:
         one: Adressverwalter
         other: Adressverwalter
         description:
+      group/kantonalverband/power_user:
+        one: PowerUser
+        other: PowerUser
+        description:
       group/kantonalverband/praesidium:
         one: Präsident
         other: Präsidenten
@@ -443,6 +451,10 @@ de:
         one: Adressverwalter
         other: Adressverwalter
         description:
+      group/region/power_user:
+        one: PowerUser
+        other: PowerUser
+        description:
       group/region/praesidium:
         one: Präsident
         other: Präsidenten
@@ -607,6 +619,10 @@ de:
       group/abteilung/adressverwaltung:
         one: Adressverwalter
         other: Adressverwalter
+        description:
+      group/abteilung/power_user:
+        one: PowerUser
+        other: PowerUser
         description:
       group/abteilung/praesidium:
         one: Präsident

@@ -72,6 +72,7 @@ class Group::Bund < Group
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
   end
+  class PowerUser < Adressverwaltung; end
 
   class AssistenzAusbildung < ::Role
     self.permissions = [:layer_full]
@@ -257,6 +258,7 @@ class Group::Bund < Group
         ItSupport,
         Sekretariat,
         Adressverwaltung,
+        PowerUser,
         AssistenzAusbildung,
         Praesidium,
         VizePraesidium,
