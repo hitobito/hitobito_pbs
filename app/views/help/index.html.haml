@@ -4,8 +4,23 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 - title t('.title')
-
 %p= t('.description_html')
+
+%h2= t('.power_users.title')
+%p= t('.power_users.description')
+
+%table.table.table-striped
+  %tbody
+    - @groups.each do |group, power_users|
+      %tr
+        %td
+          %strong= link_to group.name, group
+        %td
+          - if power_users.count > 0
+            - power_users.each do |power_user|
+              %p= link_to power_user.full_name, power_user
+          - else
+            = t('.power_users.none_found')
 
 %h2= t('.guides.title')
 %p= t('.guides.description')
