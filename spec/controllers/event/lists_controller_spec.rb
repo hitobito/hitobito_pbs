@@ -18,9 +18,7 @@ describe Event::ListsController do
   after   { travel_back }
   subject { assigns(:camps).values.flatten }
 
-  let(:yesterday) { Time.zone.now.to_date - 1.day }
-  # let(:yesterday) { Time.local(2005, 07, 15) }
-  # let(:yesterday) { nil }
+  let(:yesterday) { Time.zone.now.to_date.yesterday }
 
   describe 'GET all_camps' do
 
