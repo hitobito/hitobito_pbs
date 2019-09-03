@@ -79,7 +79,7 @@ describe Role do
 
   context 'notification if person is on black list' do
     let(:group)       { groups(:schekka) }
-    let(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+    let!(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
     let(:last_email)  { ActionMailer::Base.deliveries.last }
 
     before do
@@ -98,7 +98,7 @@ describe Role do
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
       expect(last_email.body).to include(person.full_name)
-      expect(last_email.body).to include(group.name)
+
     end
 
     it 'is not sent on role creation if person is not blacklisted' do
@@ -127,7 +127,9 @@ describe Role do
                       person_id: person.id,
                       type: Group::Abteilung::Sekretariat.sti_name)
       expect { role.save! }.to change { Delayed::Job.count }.by(1)
-      expect(Delayed::Job.first.handler).to include('GroupMembershipJob')
+
+      job = GroupMembershipJob.new(person, actuator, home_group)
+      expect(Delayed::Job.where(handler: job.to_yaml).count).to eq 1
     end
 
     it 'is not sent on role creation with equal access' do

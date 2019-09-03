@@ -147,7 +147,7 @@ describe Event::Participation do
   end
 
   context 'notification if person is on black list' do
-    let(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
+    let!(:person)      { Fabricate(:person, first_name: 'foo', last_name: 'bar') }
     let(:last_email)  { ActionMailer::Base.deliveries.last }
 
     before do

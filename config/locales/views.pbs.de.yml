@@ -287,6 +287,9 @@ de:
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
 
   black_lists:
+    form:
+      pbs_number_format: Beispiel 123-123-123
+
     global:
       link:
         add: Person hinzufügen

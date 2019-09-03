@@ -82,6 +82,11 @@ module Pbs::Person
 
     after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_changed?
+    after_save :send_black_list_mail, if: :blacklisted_attribute_changed?
+  end
+
+  def send_black_list_mail
+    BlackListMailer.hit(self).deliver_now
   end
 
   def salutation_label
@@ -104,7 +109,7 @@ module Pbs::Person
   end
 
   def black_listed?
-    Person::BlackListDetector.new(self).occures?
+    Person::BlackListDetector.new(self, attributes.slice(*changed)).occures?
   end
 
   private
@@ -130,6 +135,10 @@ module Pbs::Person
   # Missing when core person is seeded and wagon migrations have not be run
   def pbs_number_column_available?
     self.class.column_names.include?('pbs_number')
+  end
+
+  def blacklisted_attribute_changed?
+    %w(first_name last_name email).any? { |k| changes.key?(k) } && black_listed?
   end
 
 end

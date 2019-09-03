@@ -5,7 +5,7 @@
 
 require 'spec_helper'
 
-describe MemberCounter do
+describe Person::BlackListDetector do
 
   let(:detector) { Person::BlackListDetector.new(person) }
   let(:person) { Person.create(first_name: 'foo',
@@ -39,8 +39,8 @@ describe MemberCounter do
   end
 
   it 'occures if same pbs_number' do
-    person.update(pbs_number: 'foo-bar')
-    Fabricate(:black_list, pbs_number: 'foo-bar')
+    person.update(pbs_number: '000-111-222')
+    Fabricate(:black_list, pbs_number: '000-111-222')
     is_expected.to be true
   end
 

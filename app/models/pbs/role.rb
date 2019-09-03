@@ -42,8 +42,7 @@ module Pbs::Role
 
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
-    after_create :send_black_list_mail,
-      if: Proc.new { |role| role.person.black_listed? }
+    after_create :send_black_list_mail, if: :person_blacklisted?
 
     after_save :update_primary_group
 
@@ -91,7 +90,7 @@ module Pbs::Role
   end
 
   def send_black_list_mail
-    BlackListMailer.group_hit(person, group).deliver_now
+    BlackListMailer.hit(person, group).deliver_now
   end
 
   def update_primary_group
@@ -112,5 +111,11 @@ module Pbs::Role
   def reset_primary_group_with_kantonalverband
     reset_primary_group_without_kantonalverband
     person.reload.reset_kantonalverband!
+  end
+
+  private
+
+  def person_blacklisted?
+    person.black_listed?
   end
 end
