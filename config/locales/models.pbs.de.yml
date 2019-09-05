@@ -1105,6 +1105,15 @@ de:
         bank_account: Bank-/Postverbindung
         cantons: Kantone
 
+      group/abteilung:
+        gender: Geschlecht
+        genders:
+          _nil: Gemischt
+          m: Männer
+          w: Frauen
+        try_out_day_at: Schnuppertag
+        coordinates: Treffpunkt
+
       people_relation:
         kinds:
           sibling: Geschwister

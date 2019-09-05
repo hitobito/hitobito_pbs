@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -37,14 +37,18 @@
 #  bank_account                :string
 #  description                 :text
 #  application_approver_role   :string
+#  gender                      :string(1)
+#  try_out_day_at              :date
 #
 
 class Group::Abteilung < Group
 
+  GENDERS = %w(m w).freeze
+
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance]
+  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,
@@ -57,6 +61,12 @@ class Group::Abteilung < Group
            Group::AbteilungsGremium
 
   has_many :member_counts
+  has_many :coordinates
+
+  include I18nEnums
+  i18n_enum :gender, GENDERS
+  include I18nSettable
+  i18n_setter :gender, (GENDERS + [nil])
 
   ### INSTANCE METHODS
 
