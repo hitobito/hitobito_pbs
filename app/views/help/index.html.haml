@@ -18,7 +18,7 @@
         %td
           - if power_users.count > 0
             - power_users.each do |power_user|
-              %p= link_to power_user.full_name, power_user
+              %p= link_to power_user.to_s(:list), "mailto:#{power_user.email}"
           - else
             = t('.power_users.none_found')
 
