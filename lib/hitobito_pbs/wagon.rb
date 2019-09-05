@@ -127,6 +127,7 @@ module HitobitoPbs
       NavigationHelper::MAIN.insert(
         i + 1,
         label: :camps,
+        icon_name: :hotel,
         url: :list_camps_path,
         active_for: %w(list_all_camps
                        list_camps_abroad
