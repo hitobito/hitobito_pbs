@@ -45,7 +45,9 @@ class Group::Abteilung < Group
 
   GENDERS = %w(m w).freeze
 
-  COORDINATE_COUNT_LIMIT = 4
+  COORDINATE_COUNT_LIMIT = 4.freeze
+
+  CONTENT_GROUPFINDER_FIELDS_INFO = 'groupfinder_fields_info'.freeze
 
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]

@@ -4,6 +4,13 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = field_set_tag do
+
+  - info = groupfinder_fields_info_text
+  - if info.gsub('&nbsp;', '').present?
+    .control-group
+      .controls
+        .help-inline{ :style => "padding-left: 0; margin-left: 0" }= info.html_safe
+
   - entry.modifiable?(:website) do
     = f.labeled_input_field :website
 
