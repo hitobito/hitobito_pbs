@@ -5,11 +5,11 @@
 
 # == Schema Information
 #
-# Table name: coordinates
+# Table name: group_coordinates
 #
 #  id                     :integer          not null, primary key
 #  lat                    :string
-#  lng                    :string
+#  long                   :string
 #  group_id               :integer          not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -17,21 +17,14 @@
 
 class Coordinate < ActiveRecord::Base
 
-  COUNT_LIMIT = 4
+  self.table_name = :group_coordinates
+
+  belongs_to :group
 
   validates_by_schema
 
-  validate :assert_count_limit, on: :create
-
-  def assert_count_limit
-    return unless self.group
-    if self.group.coordinates(:reload).count >= COUNT_LIMIT
-      errors.add(:base, :too_many_coordinates)
-    end
-  end
-
   def to_s
-    self.class.model_name.human
+    "(#{lat}, #{long})"
   end
 
 end

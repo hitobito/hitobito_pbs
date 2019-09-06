@@ -45,10 +45,12 @@ class Group::Abteilung < Group
 
   GENDERS = %w(m w).freeze
 
+  COORDINATE_COUNT_LIMIT = 4
+
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at]
+  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at, :coordinates]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,
@@ -61,7 +63,11 @@ class Group::Abteilung < Group
            Group::AbteilungsGremium
 
   has_many :member_counts
-  has_many :coordinates
+  has_many :coordinates, foreign_key: :group_id, class_name: Coordinate.name, dependent: :destroy, inverse_of: :group
+  accepts_nested_attributes_for :coordinates, allow_destroy: true, reject_if: proc { |c| c[:lat].blank? && c[:long].blank? }
+  # Can't use the limit parameter on  accepts_nested_attributes_for because it still counts in the rejected records
+  # Can't use validates :coordinates, length: { ... } because it counts in the nested records that are #marked_for_destruction?
+  validate :assert_coordinate_count
 
   include I18nEnums
   i18n_enum :gender, GENDERS
@@ -93,6 +99,14 @@ class Group::Abteilung < Group
   def population_approveable?
     current_census = Census.current
     current_census && !MemberCounter.new(current_census.year, self).exists?
+  end
+
+  private
+
+  def assert_coordinate_count
+    if coordinates.reject(&:marked_for_destruction?).size > COORDINATE_COUNT_LIMIT
+      errors.add(:coordinates, I18n.t('.activerecord.errors.models.group/abteilung.too_many_coordinates', max: COORDINATE_COUNT_LIMIT))
+    end
   end
 
 

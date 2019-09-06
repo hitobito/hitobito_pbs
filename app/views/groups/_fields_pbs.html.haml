@@ -1,19 +1,22 @@
--#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 -#  hitobito_pbs and licensed under the Affero General Public License version 3
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = field_set_tag do
-  - entry.modifiable_attributes(:website).each do |_|
+  - entry.modifiable?(:website) do
     = f.labeled_input_field :website
 
-  - entry.modifiable_attributes(:gender).each do |_|
+  - entry.modifiable?(:gender) do
     = f.labeled(:gender) do
       - ([''] + Group::Abteilung::GENDERS).each do |key|
         = f.inline_radio_button(:gender, key, entry.gender_label(key))
 
-  - entry.modifiable_attributes(:try_out_day_at).each do |_|
+  - entry.modifiable?(:try_out_day_at) do
     = f.labeled_input_field :try_out_day_at
+
+  - entry.modifiable?(:coordinates) do
+    = f.labeled_inline_fields_for :coordinates, 'group/abteilung/coordinates/coordinate_fields'
 
 = field_set_tag do
   - entry.modifiable_attributes(:pbs_shortname, :bank_account).each do |attr|

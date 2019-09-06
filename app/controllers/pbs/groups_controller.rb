@@ -9,7 +9,7 @@ module Pbs::GroupsController
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :permitted_attrs, :cantons
+    alias_method_chain :permitted_attrs, :pbs_fields
     before_render_show :set_crisis_flash
   end
 
@@ -21,9 +21,10 @@ module Pbs::GroupsController
 
   private
 
-  def permitted_attrs_with_cantons
-    attrs = permitted_attrs_without_cantons
+  def permitted_attrs_with_pbs_fields
+    attrs = permitted_attrs_without_pbs_fields
     attrs << { cantons: [] } if entry.class.used_attributes.include?(:cantons)
+    attrs << { coordinates_attributes: [:id, :lat, :long, :_destroy] } if entry.class.used_attributes.include?(:coordinates)
     attrs
   end
 
