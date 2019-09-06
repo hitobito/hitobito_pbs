@@ -1112,7 +1112,7 @@ de:
           m: Männer
           w: Frauen
         try_out_day_at: Schnuppertag
-        coordinates: Treffpunkte
+        geolocations: Treffpunkte
 
       people_relation:
         kinds:
@@ -1189,4 +1189,4 @@ de:
         crisis:
           another_active: Eine andere Krise ist bereits aktiv auf dieser Gruppe
         group/abteilung:
-          too_many_coordinates: dürfen nicht mehr als %{max} sein
+          too_many_geolocations: dürfen nicht mehr als %{max} sein

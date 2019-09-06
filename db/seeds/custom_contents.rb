@@ -84,7 +84,7 @@ CustomContent.seed_once(:key,
 
   { key: Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO,
     placeholders_required: '',
-    placeholders_optional: 'max-number-of-coordinates' },
+    placeholders_optional: 'max-number-of-geolocations' },
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -521,7 +521,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
    label: 'Pfadi-Finder: Infotext für Felder auf Abteilung',
    body: 'In den folgenden Feldern könnt ihr die öffentlichen Angaben eurer Abteilung eintragen. ' \
          'Diese Angaben werden jeweils nächtlich in den Pfadi-Finder unter https://pfadi.swiss übernommen. ' \
-         'Es können bis zu {max-number-of-coordinates} Treffpunkte pro Abteilung definiert werden.'},
+         'Es können bis zu {max-number-of-geolocations} Treffpunkte pro Abteilung definiert werden.'},
 
   { custom_content_id: groupfinder_fields_info_id,
    locale: 'fr',

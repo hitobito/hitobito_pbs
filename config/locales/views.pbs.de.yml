@@ -261,8 +261,8 @@ de:
         course_kind: Kurstyp
         course_kind_all: Alle
     abteilung:
-      coordinates:
-        coordinate_fields:
+      geolocations:
+        geolocation_fields:
           lat: Lat
           long: Long
 

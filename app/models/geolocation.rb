@@ -5,7 +5,7 @@
 
 # == Schema Information
 #
-# Table name: group_coordinates
+# Table name: geolocations
 #
 #  id                     :integer          not null, primary key
 #  lat                    :string
@@ -15,11 +15,9 @@
 #  updated_at             :datetime         not null
 #
 
-class Coordinate < ActiveRecord::Base
+class Geolocation < ActiveRecord::Base
 
-  self.table_name = :group_coordinates
-
-  belongs_to :group
+  belongs_to :geolocatable, polymorphic: true
 
   validates_by_schema
 
