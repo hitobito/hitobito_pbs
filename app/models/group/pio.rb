@@ -21,8 +21,8 @@
 #  town                        :string(255)
 #  country                     :string(255)
 #  contact_id                  :integer
-#  created_at                  :datetime
-#  updated_at                  :datetime
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
 #  deleted_at                  :datetime
 #  layer_group_id              :integer
 #  creator_id                  :integer
@@ -32,9 +32,9 @@
 #  pta                         :boolean          default(FALSE), not null
 #  vkp                         :boolean          default(FALSE), not null
 #  pbs_material_insurance      :boolean          default(FALSE), not null
-#  website                     :string
+#  website                     :string(255)
 #  pbs_shortname               :string(15)
-#  bank_account                :string
+#  bank_account                :string(255)
 #  description                 :text
 #  application_approver_role   :string
 #  gender                      :string(1)
