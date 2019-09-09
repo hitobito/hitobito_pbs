@@ -96,4 +96,20 @@ describe Group do
     end
   end
 
+  describe Group::Abteilung do
+    let(:group) { groups(:patria) }
+
+    context 'group finder fields' do
+      it 'returns assigned geolocations' do
+        g = Fabricate(Geolocation.name.downcase.to_sym, geolocatable: group)
+        expect(group.reload.geolocations).to eq [g]
+      end
+      it 'can have group finder fields' do
+        group.update!(gender: 'm', try_out_day_at: '2019-03-23')
+        expect(group.reload.gender).to eq 'm'
+        expect(group.reload.try_out_day_at).to eq Date.parse('2019-03-23')
+      end
+    end
+  end
+
 end
