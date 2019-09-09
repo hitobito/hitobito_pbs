@@ -11,7 +11,9 @@ module Pbs::GroupSerializer
   included do
     extension(:attrs) do |_|
       map_properties(*item.used_attributes(:pbs_shortname, :website, :bank_account, :pta, :vkp,
-                                           :pbs_material_insurance, :description))
+                                           :pbs_material_insurance, :description,
+                                           :gender, :try_out_day_at))
+      entities :geolocations, item.geolocations, GeolocationSerializer
     end
   end
 
