@@ -7,7 +7,7 @@ class AddGroupFinderFields < ActiveRecord::Migration
       t.string :lat
       t.string :long
       t.references :geolocatable, polymorphic: true
-      t.timestamps
+      t.timestamps null: false
     end
   end
 
