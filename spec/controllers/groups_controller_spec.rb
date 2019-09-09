@@ -72,4 +72,66 @@ describe GroupsController do
     end
   end
 
+  context 'PUT change geolocations of Abteilung' do
+    describe_action :put, :update, id: true do
+
+      let(:user) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:patria)).person }
+
+      let(:test_entry) { groups(:patria) }
+
+      context 'adding geolocations' do
+        let(:params) { {group: {geolocations_attributes: [
+          {lat: 'lat1', long: 'long1', _destroy: 'false'},
+          {lat: '2 123 123', long: '1 123 123', _destroy: 'false'},
+        ]}} }
+
+        it 'adds geolocations' do
+          expect { perform_request }.to change { test_entry.reload.geolocations.count }.by(2)
+        end
+
+        it 'refuses to add too many geolocations' do
+          (Group::Abteilung::GEOLOCATION_COUNT_LIMIT - 1).times do
+            Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry)
+          end
+          expect { perform_request }.not_to change { test_entry.reload.geolocations.count }
+          expect(assigns(:group).errors.size).to eq(1)
+        end
+      end
+
+      context 'adding and simultaneously removing geolocations' do
+        before do
+          (Group::Abteilung::GEOLOCATION_COUNT_LIMIT - 1).times do
+            Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry)
+          end
+        end
+
+        let(:params) { {group: {geolocations_attributes: [
+          {id: Geolocation.last.id, lat: 'lat1', long: 'long1', _destroy: 1},
+          {lat: 'lat1', long: 'long1', _destroy: 'false'},
+          {lat: '2 123 123', long: '1 123 123', _destroy: 'false'},
+        ]}} }
+
+        it 'allows to add more geolocations than allowed if removing others' do
+          expect { perform_request }.to change { test_entry.reload.geolocations.count }.by(1)
+        end
+      end
+
+      context 'removing geolocations' do
+        let!(:geolocation1) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
+        let!(:geolocation2) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
+        let!(:geolocation3) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
+        let(:params) { {group: {geolocations_attributes: [
+          {id: geolocation1.id.to_s, lat: 'lat1', long: 'long1', _destroy: 1},
+          {id: geolocation2.id.to_s, lat: '2 123 123', long: '1 123 123', _destroy: 1},
+        ]}} }
+
+        it 'removes geolocations' do
+          expect(test_entry.reload.geolocations.count).to eq(3)
+          expect { perform_request }.to change { test_entry.reload.geolocations.count }.by(-2)
+        end
+      end
+
+    end
+  end
+
 end
