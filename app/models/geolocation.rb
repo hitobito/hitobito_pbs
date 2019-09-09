@@ -10,7 +10,8 @@
 #  id                     :integer          not null, primary key
 #  lat                    :string
 #  long                   :string
-#  group_id               :integer          not null
+#  geolocatable_id        :integer          not null
+#  geolocatable_type      :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
