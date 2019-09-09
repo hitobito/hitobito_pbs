@@ -24,7 +24,9 @@ module Pbs::GroupsController
   def permitted_attrs_with_pbs_fields
     attrs = permitted_attrs_without_pbs_fields
     attrs << { cantons: [] } if entry.class.used_attributes.include?(:cantons)
-    attrs << { geolocations_attributes: [:id, :lat, :long, :_destroy] } if entry.class.used_attributes.include?(:geolocations)
+    if entry.class.used_attributes.include?(:geolocations)
+      attrs << { geolocations_attributes: [:id, :lat, :long, :_destroy] }
+    end
     attrs
   end
 

@@ -52,7 +52,8 @@ class Group::Abteilung < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at, :geolocations]
+  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at,
+                           :geolocations]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,
@@ -66,9 +67,13 @@ class Group::Abteilung < Group
 
   has_many :member_counts
   has_many :geolocations, as: :geolocatable, dependent: :destroy
-  accepts_nested_attributes_for :geolocations, allow_destroy: true, reject_if: proc { |c| c[:lat].blank? && c[:long].blank? }
-  # Can't use the limit parameter on  accepts_nested_attributes_for because it still counts in the rejected records
-  # Can't use validates :geolocations, length: { ... } because it counts in the nested records that are #marked_for_destruction?
+  accepts_nested_attributes_for :geolocations,
+                                allow_destroy: true,
+                                reject_if: proc { |c| c[:lat].blank? && c[:long].blank? }
+  # Can't use the limit parameter on  accepts_nested_attributes_for because it
+  # still counts in the rejected records
+  # Can't use validates :geolocations, length: { ... } because it counts in the
+  # nested records that are #marked_for_destruction?
   validate :assert_geolocation_count
 
   include I18nEnums
@@ -107,7 +112,9 @@ class Group::Abteilung < Group
 
   def assert_geolocation_count
     if geolocations.reject(&:marked_for_destruction?).size > GEOLOCATION_COUNT_LIMIT
-      errors.add(:geolocations, I18n.t('.activerecord.errors.models.group/abteilung.too_many_geolocations', max: GEOLOCATION_COUNT_LIMIT))
+      errors.add(:geolocations,
+                 I18n.t('.activerecord.errors.models.group/abteilung.too_many_geolocations',
+                        max: GEOLOCATION_COUNT_LIMIT))
     end
   end
 
