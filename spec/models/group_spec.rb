@@ -104,6 +104,13 @@ describe Group do
         g = Fabricate(Geolocation.name.downcase.to_sym, geolocatable: group)
         expect(group.reload.geolocations).to eq [g]
       end
+
+      it 'cannot have more geolocations than the fixed limit' do
+        limit = Group::Abteilung::GEOLOCATION_COUNT_LIMIT
+        (limit + 1).times { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: group) }
+        expect(group.reload).to have(1).error_on(:geolocations)
+      end
+
       it 'can have group finder fields' do
         group.update!(gender: 'm', try_out_day_at: '2019-03-23')
         expect(group.reload.gender).to eq 'm'
