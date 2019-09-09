@@ -82,7 +82,8 @@ de:
         leaders: Leitung
         cooks: Küche
         participants: Teilnehmende
-
+      list:
+        not_persisted: Noch nicht gespeichert
     lists:
       nav_left_camps:
         all_camps: Lager ganze Schweiz
