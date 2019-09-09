@@ -20,7 +20,7 @@ describe Export::Tabular::People::ParticipationNdbjsRow do
   it { expect(row.fetch(:first_name)).to eq 'Peter' }
   it { expect(row.fetch(:last_name)).to eq 'Muster' }
   it { expect(row.fetch(:birthday)).to eq '11.06.1980' }
-  it { expect(row.fetch(:ahv_number)).to eq '789.80.267.213' }
+  it { expect(row.fetch(:ahv_number)).to eq '756.1234.5678.97' }
   it { expect(row.fetch(:address)).to eq 'Hauptstrasse 33' }
   it { expect(row.fetch(:zip_code)).to eq '4000' }
   it { expect(row.fetch(:town)).to eq 'Basel' }
@@ -50,7 +50,7 @@ describe Export::Tabular::People::ParticipationNdbjsRow do
                        birthday: '11.06.1980',
                        gender: 'm',
                        j_s_number: '1695579',
-                       ahv_number: '789.80.267.213',
+                       ahv_number: '756.1234.5678.97',
                        address: 'Hauptstrasse 33',
                        zip_code: '4000',
                        town: 'Basel',

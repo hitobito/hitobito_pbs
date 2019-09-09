@@ -6,7 +6,6 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-
 de:
   activerecord:
     models:
@@ -845,7 +844,6 @@ de:
         other: Mitglieder
         description:
 
-
       event/camp:
         one: Lager
         other: Lager
@@ -1157,6 +1155,7 @@ de:
     errors:
       messages:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
+        must_be_valid_social_security_number: muss eine gültige AHV-Nummer (756.1234.5678.97) sein
       models:
         role:
           attributes:
