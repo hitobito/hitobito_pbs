@@ -80,6 +80,11 @@ module Pbs::Person
     validates :entry_date, :leaving_date,
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
+    validates :ahv_number,
+              format: { with: /\A\d{3}\.\d{4}\.\d{4}\.\d{2}\z/,
+                        message: :must_be_valid_social_security_number,
+                        allow_blank: true }
+
     after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_changed?
     after_save :send_black_list_mail, if: :blacklisted_attribute_changed?
