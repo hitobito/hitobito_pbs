@@ -13,7 +13,9 @@ module Pbs::GroupSerializer
       map_properties(*item.used_attributes(:pbs_shortname, :website, :bank_account, :pta, :vkp,
                                            :pbs_material_insurance, :description,
                                            :gender, :try_out_day_at))
-      entities :geolocations, item.geolocations, GeolocationSerializer
+      item.used?(:geolocations) do
+        entities :geolocations, item.geolocations, GeolocationSerializer
+      end
     end
   end
 
