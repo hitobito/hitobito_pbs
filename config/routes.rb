@@ -72,6 +72,8 @@ Rails.application.routes.draw do
 
     resources :black_lists
 
+    get 'help' => 'help#index'
+
   end
 
 
