@@ -12,6 +12,7 @@ module Pbs::Event::Participation
   included do
     validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
     validate :assert_bsv_days_precision
+    validate :assert_bsv_days_set
     after_create :send_black_list_mail, if: :person_blacklisted?
   end
 
@@ -32,8 +33,14 @@ module Pbs::Event::Participation
     end
   end
 
+  def assert_bsv_days_set
+    if event.try(:bsv_days).present? && %w[attended].include?(state) && bsv_days.blank?
+      msg = I18n.t('activerecord.errors.messages.must_exist')
+      errors.add(:bsv_days, msg)
+    end 
+  end
+  
   def person_blacklisted?
     person.black_listed?
   end
-
 end

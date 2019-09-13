@@ -23,3 +23,5 @@
                            step: 0.5,
                            size: 10,
                            class: 'span2')
+        - if p.bsv_days.nil?
+          %span.muted{ style: 'float:xleft;' }= t('.not_persisted')

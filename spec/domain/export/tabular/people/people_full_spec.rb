@@ -23,7 +23,7 @@ describe Export::Tabular::People::PeopleFull do
      :entry_date, :leaving_date, :correspondence_language,
      :brother_and_sisters, :kantonalverband_id,
      :pbs_number, :layer_group,
-     :roles, :id, :layer_group_id]
+     :roles, :tags, :id, :layer_group_id]
   end
 
   its(:attributes) { should eq full_attributes }

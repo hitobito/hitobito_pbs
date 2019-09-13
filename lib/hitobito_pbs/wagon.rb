@@ -112,6 +112,7 @@ module HitobitoPbs
       FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'black_lists'
+      ContactAttrs::ControlBuilder.send :include, Pbs::ContactAttrs::ControlBuilder
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
