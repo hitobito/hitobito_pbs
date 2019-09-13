@@ -23,6 +23,6 @@ updateCantonSpecificHelpTextVisibility = (event) ->
 $(document).on('change', 'select#event_canton', updateCantonSpecificHelpTextVisibility)
 
 # On document load, run all visibility updates once
-$ ->
+$(document).on 'turbolinks:load', ->
   updateLocalScoutContactFieldsVisibility()
   updateCantonSpecificHelpTextVisibility()
