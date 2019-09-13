@@ -11,21 +11,15 @@ class HelpController < ApplicationController
   skip_authorization_check only: [:index]
 
   def index
-    @groups = groups_of_current_user.map do |group|
+    @groups_and_power_users = current_user.groups.uniq.map do |group|
       [group, power_users_for_group_or_above(group)]
     end
   end
 
   private
 
-  def groups_of_current_user
-    current_user.roles.map do |role|
-      groups.find { |group| group.id == role.group_id }
-    end.uniq
-  end
-
   def groups
-    @groups ||= Group.where(id: current_user.groups_hierarchy_ids).includes(:roles).all
+    @groups ||= Group.where(id: current_user.groups_hierarchy_ids).all
   end
 
   def power_users_for_group_or_above(group)
@@ -42,9 +36,7 @@ class HelpController < ApplicationController
   end
 
   def power_user_ids_for_group(group)
-    group.roles.select do |role|
-      POWER_USER_ROLE_TYPES.include? role.type
-    end.map(&:person_id)
+    group.roles.where(type: POWER_USER_ROLE_TYPES).pluck(:person_id)
   end
 
 end

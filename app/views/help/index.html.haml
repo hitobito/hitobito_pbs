@@ -11,7 +11,7 @@
 
 %table.table.table-striped
   %tbody
-    - @groups.each do |group, power_users|
+    - @groups_and_power_users.each do |group, power_users|
       %tr
         %td
           %strong= link_to group.name, group
