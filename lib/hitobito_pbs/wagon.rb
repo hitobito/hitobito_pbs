@@ -1,7 +1,7 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -91,7 +91,7 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      Event::KindsController.permitted_attrs += [:documents_text, :campy]
+      Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations]
       QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController

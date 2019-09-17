@@ -1066,6 +1066,7 @@ de:
       event/kind:
         documents_text: Zusatzformulare
         campy: Kurs als Lager anmelden
+        can_have_confirmations: Kursbestätigungen möglich
 
       event/participation:
         bsv_days: BSV-Tage
