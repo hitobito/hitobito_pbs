@@ -159,7 +159,7 @@ de:
     checkpoint_field_caption: Kann nur von der Lagerleitung bestätigt werden
 
   event/course:
-    has_confirmations: PDF-Kursbestätigungen erstellen
+    has_confirmations: PDF-Kursbestätigungen für Teilnehmende erstellen
 
   events:
     actions_show_pbs:
