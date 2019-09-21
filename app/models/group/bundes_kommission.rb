@@ -43,6 +43,14 @@ class Group::BundesKommission < Group::Kommission
 
   children Group::BundesKommission
 
+  class Leitung < Group::Kommission::Leitung
+    self.permissions = [:layer_read, :group_and_below_full]
+  end
+
+  class Mitglied < Group::Kommission::Mitglied
+    self.permissions = [:layer_read]
+  end
+
   roles Leitung, Mitglied
   self.default_role = Mitglied
 end
