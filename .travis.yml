@@ -48,7 +48,7 @@ script:
   - bundle exec rake db:create ci:wagon --trace
   - bundle exec rake db:create db:reseed
   - bundle exec rails server -e test -p 5002&
-  - cd ../hitobito_pbs && yarn run cypress:run
+  - cd ../hitobito_pbs && yarn run cypress:run --record
 matrix:
   allow_failures:
   - rvm: 2.3.1
