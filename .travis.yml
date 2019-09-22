@@ -42,7 +42,7 @@ install:
   - gem install bundler --version 1.9.10
   - bundle install --path vendor/bundle
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
-  - cd ../hitobito_pbs && yarn install --frozen-lockfile --non-interactive
+  - cd ../hitobito_pbs/spec && yarn install --frozen-lockfile --non-interactive
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
   - bundle exec rake db:create ci:wagon --trace
