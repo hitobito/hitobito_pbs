@@ -48,6 +48,25 @@ Cypress.Commands.add("login", (email, password) => {
     })
   })
 })
+
+Cypress.Commands.add("logout", () => {
+  Cypress.log({
+    displayName: "Logging out"
+  })
+  cy.get("meta[name=csrf-token]").then(tag => {
+    let token = tag.prop("content")
+    cy.request({
+      url: "/users/sign_out",
+      method: "POST",
+      form: true,
+      body: {
+        "_method": "delete",
+        "authenticity_token": token
+      },
+      log: false,
+    })
+  })
+})
 //
 //
 // -- This is a child command --

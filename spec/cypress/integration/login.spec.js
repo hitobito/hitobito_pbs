@@ -20,4 +20,11 @@ describe('The login page', () => {
     testLogin()
     cy.url().should('match', /groups\/\d+\/people\/\d+\.html$/)
   })
+  it("correctly redirects after logout", () => {
+    testLogin()
+    cy.url().should('match', /groups\/\d+\/people\/\d+\.html$/)
+    cy.logout()
+    cy.visit("/")
+    cy.url().should('not.match', /groups\/\d+\/people\/\d+\.html$/)
+  })
 })
