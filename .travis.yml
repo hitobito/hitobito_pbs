@@ -51,7 +51,7 @@ script:
   - bundle exec rake db:create ci:wagon --trace
   - bundle exec rake db:drop db:create db:migrate wagon:migrate db:seed wagon:seed
   - bundle exec rails server -e test -p 5002 &
-  - cd ../hitobito_pbs/spec && yarn run cypress:run --record
+  - cd ../hitobito_pbs/spec && yarn ci:wait && yarn run cypress:run --record
 matrix:
   allow_failures:
   - rvm: 2.3.1
