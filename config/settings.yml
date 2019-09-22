@@ -11,6 +11,9 @@ application:
     image: logo.svg
     width: 220
     height: 80
+  page_background:
+    test: '#7a498a'
+    development: '#d0768b'
   languages:
     de: Deutsch
     fr: Français
