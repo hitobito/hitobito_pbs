@@ -46,9 +46,9 @@ install:
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
   - bundle exec rake db:create ci:wagon --trace
-  - bundle exec rake db:create db:reseed
-  - bundle exec rails server -e test -p 5002&
-  - cd ../hitobito_pbs && yarn run cypress:run --record
+  - bundle exec rake db:create db:reset:all
+  - bundle exec rails server -e test -p 5002 &
+  - cd ../hitobito_pbs/spec && yarn run cypress:run --record
 matrix:
   allow_failures:
   - rvm: 2.3.1
