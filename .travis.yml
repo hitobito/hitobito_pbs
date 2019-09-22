@@ -11,6 +11,7 @@ branches:
   only:
     - master
     - stable
+    - cypress
 env:
   global:
     - HEADLESS=true
