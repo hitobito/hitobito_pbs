@@ -14,7 +14,7 @@ describe('The user', function () {
     cy.contains("Rolle Webmaster für Muhammed Stang / Beatae in Pfadibewegung Schweiz wurde erfolgreich erstellt.")
 	})
   it('can add a new person', function () {
-    cy.visit('de/groups/1/roles/new')
+    cy.visit('/de/groups/1/roles/new')
 
     cy.get('a:contains("Neue Person erfassen")').click()
 
