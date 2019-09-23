@@ -31,5 +31,7 @@ describe('The user', function () {
     cy.get('div.chosen-search input').type("Gesch{enter}")
 
     cy.get('form#new_role button[type="submit"]:first').click()
+
+    cy.contains("Rolle Geschäftsleiter für Marlies Sauerkraut / Brexit in Pfadibewegung Schweiz wurde erfolgreich erstellt.")
   })
 })
