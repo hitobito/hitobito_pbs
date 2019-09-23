@@ -12,39 +12,23 @@
 // -- This is a parent command --
 Cypress.Commands.add("login", (email, password) => {
   Cypress.log({
-    message: "login page",
-    displayName: "Fetching"
+    displayName: "Logging in",
+    message: "as " + email
   })
-  cy.request({url: "/users/sign_in", log: false}).its("body").then(body => {
-    Cypress.log({
-      message: "a token",
-      displayName: "has"
-    })
-    let form = Cypress.$(body).find("form#new_person")[0]
-    let data = new FormData(form)
-
-    data.set("person[email]", email)
-    data.set("person[password]", password)
-
-    let object = {};
-    for (let pair of data.entries()) {
-      object[pair[0]] = pair[1]
-    }
-
-    Cypress.log({
-      message: "as " + email,
-      displayName: "Logging in",
-    })
+  cy.getCSRFToken().then(token => {
+    console.log("Token: ", token)
     cy.request({
       url: "/users/sign_in",
       method: "POST",
       form: true,
-      body: object,
+      body: {
+        "person[email]": email,
+        "person[password]": password,
+        "authenticity_token": token,
+        "person[remember_me]": "0",
+        "utf8": "✓",
+      },
       log: false,
-    })
-    Cypress.log({
-      message: "successful!",
-      displayName: "Login",
     })
   })
 })
@@ -53,8 +37,7 @@ Cypress.Commands.add("logout", () => {
   Cypress.log({
     displayName: "Logging out"
   })
-  cy.get("meta[name=csrf-token]").then(tag => {
-    let token = tag.prop("content")
+  cy.getCSRFToken().then(token => {
     cy.request({
       url: "/users/sign_out",
       method: "POST",
@@ -67,6 +50,21 @@ Cypress.Commands.add("logout", () => {
     })
   })
 })
+
+Cypress.Commands.add("getCSRFToken", () => {
+  return cy.get("head", { log: false }).then($head => {
+    let $metaTag = $head.get("meta[name=csrf-token]")
+    if ($metaTag && $metaTag.hasOwnProperty("length" && $metaTag.length)) {
+      return $metaTag.first().prop("content")
+    } else {
+      return cy.request({ url: "/", log: false }).then(response => {
+        const $html = Cypress.$(response.body)
+        return Cypress.$($html[11]).prop('content') // TODO: Fix hardcoded
+      })
+    }
+  })
+})
+
 //
 //
 // -- This is a child command --
