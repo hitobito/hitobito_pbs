@@ -49,7 +49,7 @@ install:
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
 script:
   - bundle exec rake db:create ci:wagon --trace
-  - bundle exec rake db:drop db:create db:migrate wagon:migrate db:seed wagon:seed
+  - bundle exec rake db:drop db:setup:all
   - bundle exec rails server -e test -p 5002 &
   - cd ../hitobito_pbs/spec && yarn ci:wait && yarn run cypress:run --record
 matrix:
