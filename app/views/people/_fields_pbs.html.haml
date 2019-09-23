@@ -6,16 +6,11 @@
 = field_set_tag do
   = f.labeled_input_field :title
   = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: true }, class: 'span6'
-  = f.labeled_collection_select(:correspondence_language,
-                                Settings.application.languages.to_hash,
-                                :first,
-                                :last,
-                                { prompt: true },
-                                class: 'span6')
-  = f.labeled_input_field :grade_of_school, help_inline: t('.non_automatic_field')
+  
+
 
 = field_set_tag do
   = f.labeled_input_fields(:entry_date, :leaving_date)
 
 = field_set_tag do
-  = f.labeled_input_field(:brother_and_sisters, caption: t('.in_abteilung'))
+  = f.labeled_input_field(:brother_and_sisters)

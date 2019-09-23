@@ -112,7 +112,6 @@ module HitobitoPbs
       FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'black_lists'
-      ContactAttrs::ControlBuilder.send :include, Pbs::ContactAttrs::ControlBuilder
 
       ### jobs
       Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
@@ -138,13 +137,6 @@ module HitobitoPbs
             can?(:list_abroad, Event::Camp) ||
             can?(:list_cantonal, Event::Camp)
         end
-      )
-      index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
-      NavigationHelper::MAIN.insert(
-        index_admin,
-        label: :help,
-        icon_name: :'info-circle',
-        url: :help_path
       )
 
       # rubocop:enable SingleSpaceBeforeFirstArg

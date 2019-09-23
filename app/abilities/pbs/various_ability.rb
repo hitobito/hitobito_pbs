@@ -21,12 +21,11 @@ module Pbs::VariousAbility
   end
 
   def if_mitarbeiter_gs
-    role_type?(Group::Bund::MitarbeiterGs)
+    role_type?(Group::Büro)
   end
 
   def if_black_list_role
-    role_type?(Group::Bund::Geschaeftsleitung) ||
-      role_type?(Group::Bund::LeitungKernaufgabeKommunikation)
+    role_type?(Group::Büro::Verwaltungsleitung) 
   end
 
   def on_abteilung_if_krisenteam

@@ -2,7 +2,7 @@
 #page {
   padding: 5px 10px 90px;
   margin: 0;
-  background: $pageBackground;
+  background: #D0E5E4;
 
   @include responsive(mediaTablet) {
     margin: 0;
@@ -12,7 +12,9 @@
   & > .sheet { margin: 0 20px; }
 }
 
-
+#content {
+	box-shadow: 0 2px 8px #717174;
+}
 table.attendance {
   tr th {
     padding-top: 20px;

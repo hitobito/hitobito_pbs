@@ -6,26 +6,18 @@
 # Settings relevant for the jubla wagon
 # Overrides settings from the main application
 application:
-  name: MiData PBS/MSdS/MSS
+  name: Zentrale Mitgliederverwaltung der KLJB im Erzbistum Paderborn
   logo:
     image: logo.svg
     width: 220
     height: 80
   languages:
     de: Deutsch
-    fr: Français
-    it: Italiano
   footer:
     links:
       de:
         "Informationen und Hilfe": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung
         "Datenschutz": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung/datennutzung/at_download/file
-      fr:
-        "Aide et assistance": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisateur?set_language=fr
-        "Datenschutz": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisation_des_donnees_midata_msds_fr/at_download/file
-      it:
-        "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
-        "Datenschutz": https://www.scout.ch/it/scout-online/midata/utente/datennutzung_midata_pbs_it/at_download/file
 
 
 # The person with this email has root access to everything
@@ -39,7 +31,7 @@ root_email: hitobito-pbs@puzzle.ch
 
 email:
   # Sender for all emails sent by the application
-  sender: <%= "MiData PBS/MSdS/MSS <noreply@#{mail_domain}>" %>
+  sender: <%= "ZMV KLJB <noreply@#{mail_domain}>" %>
 
   camp:
     submit_recipient: lager@pbs.ch

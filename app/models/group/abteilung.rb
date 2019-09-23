@@ -44,17 +44,9 @@ class Group::Abteilung < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance]
-  self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
-  children Group::Biber,
-           Group::Woelfe,
-           Group::Pfadi,
-           Group::Pio,
-           Group::AbteilungsRover,
-           Group::Pta,
-           Group::Elternrat,
-           Group::AbteilungsGremium
+  children Group::Vorstand,
+		   Group::AG
 
   has_many :member_counts
 
@@ -64,9 +56,7 @@ class Group::Abteilung < Group
     ancestors.find_by(type: Group::Kantonalverband.sti_name)
   end
 
-  def region
-    ancestors.where(type: Group::Region.sti_name).order('lft DESC').first
-  end
+
 
   def census_groups(_year)
     []
@@ -88,151 +78,19 @@ class Group::Abteilung < Group
 
   ### ROLES
 
-  class Abteilungsleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
-  end
 
-  class AbteilungsleitungStv < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
-  end
-
-  class Adressverwaltung < ::Role
-    self.permissions = [:group_and_below_full]
-  end
-
-  class Beisitz < ::Role
-    self.permissions = [:group_read]
-  end
-
-  class Coach < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
-  end
-
-  class Ehrenmitglied < ::Role
+  class Mitglied < ::Role
     self.permissions = []
-    self.kind = :passive
-  end
-
-  class Heimverwaltung < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class Kassier < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
-  end
-
-  class Materialwart < ::Role
-    self.permissions = [:group_read]
+  
   end
 
   class Passivmitglied < ::Role
     self.permissions = []
     self.kind = :passive
+	self.visible_from_above = false
   end
 
-  class Praeses < ::Role
-    self.permissions = [:group_read]
-  end
 
-  class Praesidium < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class PraesidiumApv < ::Role
-    self.permissions = [:group_read]
-  end
-
-  class Redaktor < ::Role
-    self.permissions = [:layer_and_below_read, :contact_data]
-  end
-
-  class Revisor < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class Sekretariat < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
-  end
-
-  class Spezialfunktion < ::Role
-    self.permissions = [:group_read]
-  end
-
-  class StufenleitungBiber < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class StufenleitungWoelfe < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class StufenleitungPfadi < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class StufenleitungPio < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class StufenleitungRover < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class StufenleitungPta < ::Role
-    self.permissions = [:layer_and_below_read]
-  end
-
-  class VerantwortungMaterialverkaufsstelle < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class VerantwortungPfadiTrotzAllem < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class VerantwortungPr < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class VizePraesidium < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  class Webmaster < ::Role
-    self.permissions = [:group_read, :contact_data]
-  end
-
-  roles Abteilungsleitung,
-        AbteilungsleitungStv,
-        Sekretariat,
-        Adressverwaltung,
-        Praesidium,
-        VizePraesidium,
-        PraesidiumApv,
-        Praeses,
-        Beisitz,
-        Materialwart,
-        Heimverwaltung,
-
-        StufenleitungBiber,
-        StufenleitungWoelfe,
-        StufenleitungPfadi,
-        StufenleitungPio,
-        StufenleitungRover,
-        StufenleitungPta,
-
-        Kassier,
-        Revisor,
-        Redaktor,
-        Webmaster,
-        Coach,
-
-        VerantwortungMaterialverkaufsstelle,
-        VerantwortungPfadiTrotzAllem,
-        VerantwortungPr,
-
-        Spezialfunktion,
-
-        Ehrenmitglied,
+  roles Mitglied,
         Passivmitglied
 end

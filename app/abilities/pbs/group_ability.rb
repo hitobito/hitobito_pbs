@@ -8,12 +8,9 @@
 module Pbs::GroupAbility
   extend ActiveSupport::Concern
 
-  MEMBER_COUNT_MANAGERS = [Group::Bund::MitarbeiterGs,
-                           Group::Bund::Sekretariat,
-                           Group::Kantonalverband::Kantonsleitung,
-                           Group::Kantonalverband::Sekretariat,
-                           Group::Region::Regionalleitung,
-                           Group::Region::Sekretariat].freeze
+  MEMBER_COUNT_MANAGERS = [Group::Büro::Verwaltungsleitung,
+                           Group::Büro::Sekretariat,
+                           Group::Vorstand].freeze
 
   included do
     on(Group) do
@@ -45,7 +42,7 @@ module Pbs::GroupAbility
   end
 
   def if_mitarbeiter_gs
-    role_type?(Group::Bund::MitarbeiterGs)
+    role_type?(Group::Büro)
   end
 
   def if_layer_and_in_same_group

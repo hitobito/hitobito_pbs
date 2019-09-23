@@ -10,7 +10,6 @@ require 'spec_helper'
 describe Event::CampReminderJob do
 
   let(:job) { Event::CampReminderJob.new }
-  let(:yesterday) { Time.zone.now.to_date - 1.day }
 
   it 'is scheduled at 3 am' do
     job.schedule
@@ -29,7 +28,7 @@ describe Event::CampReminderJob do
     abroad.dates = [Fabricate(:event_date, event: abroad, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.week)]
     after_span = Fabricate(:pbs_camp, canton: 'be', state: 'confirmed')
     after_span.dates = [Fabricate(:event_date, event: after_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
-    submitted = fabricate_pbs_camp(canton: 'be', state: 'confirmed', camp_submitted_at: yesterday)
+    submitted = fabricate_pbs_camp(canton: 'be', state: 'confirmed', camp_submitted: true)
     submitted.dates = [Fabricate(:event_date, event: submitted, start_at: now + 1.week)]
     created = Fabricate(:pbs_camp, canton: 'be', state: 'created')
     created.dates = [Fabricate(:event_date, event: created, start_at: now + 1.week)]
@@ -101,7 +100,7 @@ describe Event::CampReminderJob do
   end
 
   def fabricate_pbs_camp(overrides={})
-    if overrides[:camp_submitted_at]
+    if overrides[:camp_submitted]
       overrides = required_attrs_for_camp_submit.
         merge(overrides)
     end

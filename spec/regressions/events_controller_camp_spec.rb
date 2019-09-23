@@ -212,7 +212,7 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr|
+      detail_attrs.each do |attr| 
         assert_no_attr(attr)
       end
 
@@ -225,7 +225,7 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr|
+      detail_attrs.each do |attr| 
         assert_attr(attr)
       end
 
@@ -238,7 +238,7 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr|
+      detail_attrs.each do |attr| 
         assert_attr(attr)
       end
 
@@ -407,7 +407,7 @@ describe EventsController, type: :controller do
         kantonalverband_rules_applied: true,
         j_s_rules_applied: true,
         expected_participants_pio_f: 3,
-        camp_submitted_at: Time.zone.now.to_date - 1.day
+        camp_submitted: true
       }
     end
   end

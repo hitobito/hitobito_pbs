@@ -39,16 +39,20 @@
 #  application_approver_role   :string
 #
 
-class Group::BundesGremium < Group::Gremium
+class Group::Diözesanvorstand < Group
 
-  children Group::BundesGremium
-
-  class Leitung < Group::Gremium::Leitung
+  class DVorstand < ::Role
+    self.permissions = [:layer_full, :contact_data]
   end
 
-  class Mitglied < Group::Gremium::Mitglied
+  class DSeelsorger < ::Role
+    self.permissions = [:layer_full, :contact_data]
   end
-
-  roles Leitung, Mitglied
-  self.default_role = Mitglied
+	
+  class DVorstandBeratend < ::Role
+	  self.permissions = [:layer_full, :contact_data]
+  end
+	
+  roles DVorstand, DSeelsorger, DVorstandBeratend
+  self.default_role = DVorstand
 end

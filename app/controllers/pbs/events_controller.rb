@@ -46,9 +46,10 @@ module Pbs::EventsController
   end
 
   def create_camp_application
-    entry.camp_submitted_at = Time.zone.now.to_date
-    if entry.save
+    entry.camp_submitted = true
+    if entry.valid?
       Event::CampMailer.submit_camp(entry).deliver_later
+      entry.save!
       set_success_notice
     else
       flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \

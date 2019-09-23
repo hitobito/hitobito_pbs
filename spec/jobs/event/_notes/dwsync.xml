@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="approval_request_job_spec.rb" server="85.214.75.157" local="132134157937687523" remote="132125326800000000" Dst="2" />
+<file name="assigned_from_waiting_list_job_spec.rb" server="85.214.75.157" local="132134157937896967" remote="132125326800000000" Dst="2" />
+<file name="camp_reminder_job_spec.rb" server="85.214.75.157" local="132134157938615295" remote="132125326800000000" Dst="2" />
+<file name="discarded_course_participation_job_spec.rb" server="85.214.75.157" local="132134157939692490" remote="132125326800000000" Dst="2" />
+<file name="canceled_camp_participation_job_spec.rb" server="85.214.75.157" local="132134157939702516" remote="132125326800000000" Dst="2" />
+<file name="participation_confirmation_job_spec.rb" server="85.214.75.157" local="132134157940781601" remote="132125326800000000" Dst="2" />
+<file name="removed_from_waiting_list_job_spec.rb" server="85.214.75.157" local="132134157941529604" remote="132125326800000000" Dst="2" />
+</dwsync>

@@ -8,16 +8,11 @@
 module Pbs::EventAbility
   extend ActiveSupport::Concern
 
-  CANTONAL_CAMP_LIST_ROLES = [Group::Kantonalverband::Kantonsleitung,
-                              Group::Kantonalverband::VerantwortungKrisenteam].freeze
+  CANTONAL_CAMP_LIST_ROLES = [Group::Büro].freeze
 
-  ABROAD_CAMP_LIST_ROLES = [Group::Bund::InternationalCommissionerIcWagggs,
-                            Group::Bund::InternationalCommissionerIcWosm].freeze
+  ABROAD_CAMP_LIST_ROLES = [Group::Büro].freeze
 
-  CAMP_KRISENTEAM_ROLES = [Group::Kantonalverband::Kantonsleitung,
-                           Group::Kantonalverband::Sekretariat,
-                           Group::Kantonalverband::VerantwortungKrisenteam,
-                           Group::Kantonalverband::MitgliedKrisenteam].freeze
+  CAMP_KRISENTEAM_ROLES = [Group::Büro].freeze
 
   included do
     on(Event) do
@@ -83,12 +78,11 @@ module Pbs::EventAbility
   end
 
   def if_education_responsible
-    role_type?(Group::Bund::AssistenzAusbildung,
-               Group::Bund::MitarbeiterGs)
+    role_type?(Group::Büro)
   end
 
   def if_mitarbeiter_gs
-    role_type?(Group::Bund::MitarbeiterGs)
+    role_type?(Group::Büro)
   end
 
   def if_kantonsleitung_or_krisenverantwortlich

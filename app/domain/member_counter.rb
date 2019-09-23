@@ -15,34 +15,11 @@ class MemberCounter
   #
   # Roles not appearing here are not counted at all.
   ROLE_MAPPING =
-    { leiter: [Group::Abteilung::Abteilungsleitung,
-               Group::Abteilung::AbteilungsleitungStv,
-               Group::Abteilung::StufenleitungBiber,
-               Group::Abteilung::StufenleitungWoelfe,
-               Group::Abteilung::StufenleitungPfadi,
-               Group::Abteilung::StufenleitungPio,
-               Group::Abteilung::StufenleitungRover,
-               Group::Abteilung::StufenleitungPta,
-               Group::Biber::Einheitsleitung,
-               Group::Biber::Mitleitung,
-               Group::Woelfe::Einheitsleitung,
-               Group::Woelfe::Mitleitung,
-               Group::Pfadi::Einheitsleitung,
-               Group::Pfadi::Mitleitung,
-               Group::Pio::Einheitsleitung,
-               Group::Pio::Mitleitung,
-               Group::AbteilungsRover::Einheitsleitung,
-               Group::AbteilungsRover::Mitleitung,
-               Group::Pta::Einheitsleitung,
-               Group::Pta::Mitleitung],
-      pta:    [Group::Pta::Mitglied],
-      rover:  [Group::AbteilungsRover::Rover],
-      pios:   [Group::Pio::Pio],
-      pfadis: [Group::Pfadi::Leitpfadi,
-               Group::Pfadi::Pfadi],
-      woelfe: [Group::Woelfe::Leitwolf,
-               Group::Woelfe::Wolf],
-      biber:  [Group::Biber::Biber] }.freeze
+    { leiter: [Group::Vorstand::Mitglied,
+               Group::Vorstand::Vorsitz,
+               Group::Vorstand::Geist],
+      mitglied:[Group::Abteilung::Mitglied],
+      passiv:  [Group::Abteilung::Passivmitglied] }.freeze
 
   attr_reader :year, :abteilung
 

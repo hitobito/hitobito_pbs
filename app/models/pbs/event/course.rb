@@ -9,7 +9,7 @@ module Pbs::Event::Course
 
   extend ActiveSupport::Concern
 
-  LANGUAGES = %w(de fr it en).freeze
+  LANGUAGES = %w(de).freeze
   APPROVALS = %w(requires_approval_abteilung requires_approval_region
                  requires_approval_kantonalverband requires_approval_bund).freeze
 

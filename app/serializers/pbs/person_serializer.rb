@@ -10,8 +10,7 @@ module Pbs::PersonSerializer
 
   included do
     extension(:details) do |_|
-      map_properties :pbs_number, :salutation_value, :correspondence_language,
-                     :grade_of_school, :brother_and_sisters, :entry_date, :leaving_date
+      map_properties :pbs_number, :brother_and_sisters, :entry_date, :leaving_date
     end
   end
 

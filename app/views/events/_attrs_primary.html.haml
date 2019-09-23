@@ -6,8 +6,6 @@
 .well
   %dl.dl-horizontal
     = labeled_attr(entry, :dates_full)
-    - entry.used?(:motto) do
-      = labeled_attr(entry, :motto)
     - entry.used?(:cost) do
       = labeled_attr(entry, :cost)
 

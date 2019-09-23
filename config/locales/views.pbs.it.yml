@@ -138,7 +138,6 @@ it:
       confirm_cancel: Vuoi veramente disiscriverti dal campo?
       submit_camp: Inoltrare
       camp_submitted: Inoltrato
-      camp_submitted_at: Inoltrato il
     application_fields_pbs:
       paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
       participants_can_apply_caption: I partecipanti possono iscrivere sé stessi
@@ -214,21 +213,6 @@ it:
       population: Censimento dei membri
       statistic: Statistica
       approvals: Attivazione del corso (%{count})
-  help:
-    index:
-      title: Aiuto
-      guides:
-        title: Guide
-        hering:
-          url: http://heringit.scouts.ch
-        coaches:
-          url: http://coachesfr.scouts.ch
-        anker:
-          url: http://ankerit.scouts.ch
-        pilot:
-          url: http://pilotit.scouts.ch
-        ticket:
-          url: http://ticketit.scouts.ch
   member_counts:
     created_data_for_year: I censimenti per %{total} attivi nell'anno %{year} sono stati generati con successo.
     updated_data_for_year: Il numero dei membri per il %{year} è stato registrato con successo.
@@ -237,7 +221,6 @@ it:
       title: Aggiornare il numero dei membri per il %{year}
   navigation:
     camps: Campi
-    help: Aiuto
   people:
     fields:
       no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
