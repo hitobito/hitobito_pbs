@@ -4,6 +4,33 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 
 [![Build
 Status](https://travis-ci.org/hitobito/hitobito_pbs.svg)](https://travis-ci.org/hitobito/hitobito_pbs)
+[![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/hd1whh/runs)
+
+# Cypress testing
+
+Generally check the docs:
+- [CypressOnRails](https://github.com/shakacode/cypress-on-rails#cypressonrails)
+- [Cypress](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell)
+
+## Quickstart
+
+Prerequisites: you now how to start hitobito with all development seed data.
+
+1. Install [yarn](https://yarnpkg.com/en/docs/install)
+2. Start hitobito on port 5002.
+    ```shell
+    rails server -e test -p 5002
+    ```
+3. Go to `hitobito_pbs/spec` in your shell.
+4. Install the testing dependencies (might take a while): `yarn install --frozen-lockfile`
+5. `yarn run ci:wait && yarn run cypress:open`
+6. Start adding tests, they get rerun automatically when open!
+
+## Options
+
+### Different port/base url
+
+If you don't want to run the test server on port 5002 or on another host you can either edit the baseURL in `spec/cypress.json` or set an env var before starting: `export CYPRESS_BASE_URL=http://localhost:8080`
 
 # Pfadi Organization Hierarchy
 
