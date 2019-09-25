@@ -122,6 +122,14 @@ de:
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
+    qualifications:
+      send_confirmation_notifications:
+        sent_to_qualified_participants: Die qualifizierten Teilnehmenden wurden benachrichtigt.
+      index:
+        send_confirmation_notifications:
+          one: Benachrichtigung an eine Person versenden
+          other: Benachrichtigungen an %{count} Personen versenden
+        button_explanation: Versendet eine E-Mail an alle qualifizierten Teilnehmenden. Darin enthalten ist ein Link zum Kurs, wo sie ihre PDF-Kursbestätigung abrufen können.
 
     approvals:
       form:

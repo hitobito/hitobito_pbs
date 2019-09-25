@@ -21,8 +21,8 @@ module Pbs::Event::ParticipationDecorator
     }
   end
 
-  def show_confirmation?
-    can?(:show_details, self) && event.has_confirmations? && participant? && active? && qualified?
+  def has_confirmation?
+    event.course_kind? && event.has_confirmations? && participant? && active? && qualified?
   end
 
   private

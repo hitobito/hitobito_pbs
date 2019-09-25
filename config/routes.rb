@@ -58,6 +58,8 @@ Rails.application.routes.draw do
             get 'approvals' => 'approvals#new' # route required for language switch
           end
           resources :approvals, only: [:index]
+          post 'send_confirmation_notifications', controller: 'qualifications',
+              action: 'send_confirmation_notifications'
         end
       end
 

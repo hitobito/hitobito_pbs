@@ -12,6 +12,13 @@ module Pbs::Event::QualificationsController
     alias_method_chain :update, :course_confirmation_flag
   end
 
+  def send_confirmation_notifications
+    entries.map(&:decorate).select(&:has_confirmation?).each do |participation|
+      Event::Course::ConfirmationMailer.notify(participation.object).deliver_later
+    end
+    redirect_to action: :index, notice: t('.sent_to_qualified_participants')
+  end
+
   def has_confirmations
     params[:has_confirmations] == '1'
   end

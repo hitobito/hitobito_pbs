@@ -175,6 +175,10 @@ module EventsPbsHelper
                   :share, options)
   end
 
+  def qualified_participants_count
+    event.participations.includes(:roles).decorate.select(&:has_confirmation?).count
+  end
+
   private
 
   def append_required_advisor(content, advisor)

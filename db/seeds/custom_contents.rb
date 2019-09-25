@@ -77,6 +77,10 @@ CustomContent.seed_once(:key,
   { key: CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED,
     placeholders_required: 'creator, group, acknowledger',
     placeholders_optional: 'date' },
+
+  { key: Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION,
+    placeholders_required: 'participation-url',
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, course-name' },
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -107,6 +111,8 @@ black_list_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_HIT).i
 black_list_attr_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_ATTR_HIT).id
 crisis_triggered_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_TRIGGERED).id
 crisis_acknowledged_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED).id
+
+course_confirmation_id = CustomContent.get(Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION).id
 
 _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
@@ -483,5 +489,25 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: crisis_acknowledged_id,
     locale: 'it',
     label: 'Crisi: E-Mail Informare la persona responsabile riguardo al riconoscimento' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'de',
+    label: 'Kursbestätigung: Qualifizierte/n Teilnehmer/in informieren',
+    subject: 'Kursbestätigung verfügbar',
+    body: '{recipient-name-with-salutation}<br><br>'\
+          'Für den bestandenen Kurs "{course-name}" '\
+          'kann jetzt hier eine Bestätigung ausgedruckt werden:<br><br>{participation-url}<br>'},
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'fr',
+    label: 'Confirmation de cours: Informer participant/e' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'en',
+    label: 'Course confirmation: Inform participant' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'it',
+    label: 'Confirmazione del corso: Informare participante' },
 
 )

@@ -7,7 +7,7 @@
 - if show_camp_participation_status_dropdown?
   = Dropdown::Event::CampParticipantStatus.new(self, @group, @event, entry).to_s
 
-- if entry.show_confirmation?
+- if entry.has_confirmation?
   .btn-group
     = form_tag(t('event/course.participations.actions_show_pbs.course_confirmation_url',
                  course_kind_confirmation_name: entry.event.kind.confirmation_name),
