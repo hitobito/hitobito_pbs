@@ -82,6 +82,7 @@ module HitobitoPbs
       ### decorators
       EventDecorator.send :include, Pbs::EventDecorator
       ContactableDecorator.send :include, Pbs::ContactableDecorator
+      Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
@@ -91,7 +92,8 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations]
+      Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
+                                                 :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController
@@ -101,6 +103,7 @@ module HitobitoPbs
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
+      Event::QualificationsController.send :include, Pbs::Event::QualificationsController
       QualificationsController.send :include, Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
 

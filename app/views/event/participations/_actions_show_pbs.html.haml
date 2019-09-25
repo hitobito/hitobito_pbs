@@ -1,8 +1,20 @@
 - # encoding: utf-8
-- #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+- #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 - #  hitobito_pbs and licensed under the Affero General Public License version 3
 - #  or later. See the COPYING file at the top-level directory or at
 - #  https://github.com/hitobito/hitobito_pbs.
 
 - if show_camp_participation_status_dropdown?
   = Dropdown::Event::CampParticipantStatus.new(self, @group, @event, entry).to_s
+
+- if entry.show_confirmation?
+  .btn-group
+    = form_tag(t('event/course.participations.actions_show_pbs.course_confirmation_url',
+                 course_kind_confirmation_name: entry.event.kind.confirmation_name),
+               method: :post, style: 'display: inline', authenticity_token: false,
+               enforce_utf8: false, target: '_blank') do
+      - entry.course_confirmation_params.entries.each do |key, value|
+        = hidden_field_tag key, preserve(value)
+      = button_tag(type: 'submit', class: 'btn') do
+        = icon(:print)
+        = t('event/course.participations.actions_show_pbs.course_confirmation')
