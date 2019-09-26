@@ -12,7 +12,7 @@ module Pbs::Event::ParticipationDecorator
     {
       name: person.last_name,
       vorname: person.first_name,
-      anrede: person.salutation,
+      anrede: person.title,
       wohnort: person.town,
       geburtstag: person.birthday.strftime(I18n.t('date.formats.default')),
       kursOrt: event.location,
