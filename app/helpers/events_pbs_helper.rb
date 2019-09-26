@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -173,10 +173,6 @@ module EventsPbsHelper
     action_button(label,
                   camp_application_group_event_path(@group, entry),
                   :share, options)
-  end
-
-  def qualified_participants_count
-    event.participations.includes(:roles).decorate.select(&:has_confirmation?).count
   end
 
   private

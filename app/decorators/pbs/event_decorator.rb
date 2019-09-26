@@ -21,4 +21,9 @@ module Pbs::EventDecorator
   def can_have_confirmations?
     course_kind? && kind.can_have_confirmations?
   end
+
+  def qualified_participants_count
+    @qualified_participants_count ||= participations.includes(:roles).decorate
+                                        .select(&:has_confirmation?).count
+  end
 end
