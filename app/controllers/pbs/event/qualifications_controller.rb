@@ -14,7 +14,7 @@ module Pbs::Event::QualificationsController
 
   def send_confirmation_notifications
     entries.map(&:decorate).select(&:has_confirmation?).each do |participation|
-      Event::Course::ConfirmationMailer.notify(participation.object).deliver_later
+      Event::Course::ConfirmationMailer.notify(Draper.undecorate(participation)).deliver_later
     end
     redirect_to action: :index, notice: t('.sent_to_qualified_participants')
   end
