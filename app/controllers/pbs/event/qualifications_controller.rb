@@ -16,7 +16,8 @@ module Pbs::Event::QualificationsController
     entries.map(&:decorate).select(&:has_confirmation?).each do |participation|
       Event::Course::ConfirmationMailer.notify(Draper.undecorate(participation)).deliver_later
     end
-    redirect_to action: :index, notice: t('.sent_to_qualified_participants')
+    flash.now.notice = t('.sent_to_qualified_participants')
+    render 'shared/update_flash'
   end
 
   def has_confirmations
