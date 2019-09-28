@@ -25,7 +25,7 @@ module Pbs::Event::QualificationsController
   end
 
   def update_with_course_confirmation_flag
-    if current_ability.can?(:update, event)
+    if current_ability.can?(:update, event) && event.decorate.can_have_confirmations?
       event.update_attributes(has_confirmations: has_confirmations)
     end
     update_without_course_confirmation_flag

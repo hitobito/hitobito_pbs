@@ -64,13 +64,13 @@ describe Event::QualificationsController do
     it 'sends email to all qualified participants' do
       expect(Event::Course::ConfirmationMailer).to receive(:notify).exactly(2).times
                                                      .and_call_original
-      post :send_confirmation_notifications, group_id: group.id, event_id: course.id, format: :js
+      xhr :post, :send_confirmation_notifications, group_id: group.id, event_id: course.id
     end
 
     it 'checks permission' do
       sign_in(people(:al_schekka))
       expect {
-        post :send_confirmation_notifications, group_id: group.id, event_id: course.id, format: :js
+        xhr :post, :send_confirmation_notifications, group_id: group.id, event_id: course.id
       }.to raise_error(CanCan::AccessDenied)
     end
 

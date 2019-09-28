@@ -10,9 +10,9 @@ require 'spec_helper'
 
 describe 'event/qualifications/index.html.haml' do
 
-  let(:participant) { people(:bulei) }
   let(:participation) { event_participations(:top_participant) }
-  let(:event) { events(:top_course).decorate }
+  let(:participant) { participation.person }
+  let(:event) { participation.event.decorate }
   let(:dom) { Capybara::Node::Simple.new(rendered) }
 
   before do

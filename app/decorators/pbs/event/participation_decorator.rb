@@ -14,15 +14,15 @@ module Pbs::Event::ParticipationDecorator
       vorname: person.first_name,
       anrede: person.title,
       wohnort: person.town,
-      geburtstag: person.birthday.strftime(I18n.t('date.formats.default')),
+      geburtstag: person.birthday ? person.birthday.strftime(I18n.t('date.formats.default')) : nil,
       kursOrt: event.location,
-      dauer: event.dates.map {|d| d.duration.to_s(:short)}.join(', '),
+      dauer: event.dates ? event.dates.map {|d| d.duration.to_s(:short)}.join(', ') : '',
       organisator: event.group_names,
     }
   end
 
   def has_confirmation?
-    event.course_kind? && event.has_confirmations? && participant? && active? && qualified?
+    event.can_have_confirmations? && event.has_confirmations? && participant? && active? && qualified?
   end
 
   private
