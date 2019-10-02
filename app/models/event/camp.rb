@@ -122,6 +122,15 @@ class Event::Camp < Event
   self.revoked_participation_states = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
+  ### RELATIONS
+
+  belongs_to :super_camp, class_name: name, foreign_key: :parent_id
+  has_many :sub_camps,
+           class_name: name,
+           foreign_key: :parent_id,
+           inverse_of: :super_camp,
+           dependent: :restrict_with_error
+
 
   ### VALIDATIONS
 
