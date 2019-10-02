@@ -135,6 +135,8 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
+  validate :may_become_sub_camp, if: :parent_id_changed?
+  validate :must_allow_sub_camps, if: 'sub_camps.any?'
 
   ### CALLBACKS
 
@@ -252,6 +254,18 @@ class Event::Camp < Event
       Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
       Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
     }
+  end
+
+  def may_become_sub_camp
+    unless super_camp.allow_sub_camps
+      errors.add(:parent_id, :invalid)
+    end
+  end
+
+  def must_allow_sub_camps
+    unless allow_sub_camps
+      errors.add(:allow_sub_camps, :invalid)
+    end
   end
 
 end

@@ -640,10 +640,13 @@ describe Event::Camp do
       before { subject.update_attribute(:allow_sub_camps, false) }
 
       it 'is invalid if sub_camps are added' do
+        sub_camp = events(:schekka_camp)
         expect do
-          subject.sub_camps << events(:schekka_camp)
+          subject.sub_camps << sub_camp
+
           is_expected.to_not be_valid
-        end.to_not change { subject.sub_camps.size }
+          expect(sub_camp).to_not be_valid
+        end.to_not change { subject.reload.sub_camps.size }
       end
 
       it 'does not have sub_camps' do
