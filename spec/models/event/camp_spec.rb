@@ -592,4 +592,83 @@ describe Event::Camp do
     end
   end
 
+  context 'hierarchies, a camp' do
+    subject { events(:bund_camp) }
+
+    it 'may belong to a super_camp' do
+      is_expected.to respond_to :super_camp
+    end
+
+    it 'may have sub_camps' do
+      is_expected.to respond_to :sub_camps
+    end
+
+    it 'can be marked as having sub_camps' do
+      is_expected.to respond_to :allow_sub_camps
+      is_expected.to respond_to :allow_sub_camps=
+    end
+
+    it 'may only be attached to a super-camp that allows it' do
+      super_camp = events(:bund_camp)
+      sub_camp = events(:schekka_camp)
+
+      super_camp.update_attribute(:allow_sub_camps, false)
+      sub_camp.parent_id = super_camp.id
+
+      expect(sub_camp).to_not be_valid
+    end
+
+    context 'allowed to have sub_camps' do
+      before { subject.update_attribute(:allow_sub_camps, true) }
+
+      it 'can have sub_camps' do
+        expect do
+          subject.sub_camps << events(:schekka_camp)
+        end.to change { subject.sub_camps.size }.by 1
+      end
+
+      it 'cannot be deleted if sub_camps are attached' do
+        subject.sub_camps << events(:schekka_camp)
+        expect do
+          subject.destroy
+          is_expected.to_not be_valid
+        end.to_not raise_error
+      end
+    end
+
+    context 'not allowed to have sub_camps' do
+      before { subject.update_attribute(:allow_sub_camps, false) }
+
+      it 'is invalid if sub_camps are added' do
+        expect do
+          subject.sub_camps << events(:schekka_camp)
+          is_expected.to_not be_valid
+        end.to_not change { subject.sub_camps.size }
+      end
+
+      it 'does not have sub_camps' do
+        expect(subject.sub_camps).to be_none
+      end
+
+      it 'can be deleted' do
+        expect do
+          subject.destroy
+        end.to change { described_class.count }.by(-1)
+      end
+    end
+
+    context 'having sub_camps' do
+      before do
+        subject.update_attribute(:allow_sub_camps, true)
+        subject.sub_camps << events(:schekka_camp)
+      end
+
+      it 'may not loose the allow_sub_camps-flag' do
+        subject.allow_sub_camps = false
+
+        is_expected.to_not be_valid
+      end
+    end
+  end
+
 end
