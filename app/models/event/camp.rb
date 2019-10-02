@@ -1,9 +1,10 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
+
 # == Schema Information
 #
 # Table name: events
@@ -206,7 +207,7 @@ class Event::Camp < Event
   end
 
   def advisor_changed_except_in_created?(advisor_key)
-    restricted_role_changes[advisor_key] && state != 'created' && !state.blank?
+    restricted_role_changes[advisor_key] && state != 'created' && state.present?
   end
 
   def send_abteilungsleitung_assignment_info

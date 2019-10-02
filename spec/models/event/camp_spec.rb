@@ -1,4 +1,8 @@
-# encoding: utf-8
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 # == Schema Information
 #
 # Table name: events
@@ -86,11 +90,6 @@
 #  bsv_days                          :decimal(6, 2)
 #
 
-
-#  Copyright (c) 2012-2016, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
 
@@ -520,7 +519,7 @@ describe Event::Camp do
         expect(subject).to be_valid
         clear_attribute(subject, a)
         expect(subject).not_to be_valid
-        expect(subject.errors.full_messages.first).to match /muss ausgefüllt werden/
+        expect(subject.errors.full_messages.first).to match(/muss ausgefüllt werden/)
       end
     end
 
