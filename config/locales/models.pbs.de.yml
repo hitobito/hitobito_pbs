@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -1053,6 +1053,7 @@ de:
         coach: Coach
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
+        allow_sub_camps: untergeordnete Lager zulassen
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
