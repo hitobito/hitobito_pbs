@@ -99,8 +99,10 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
-  self.used_attributes += [:state, :group_ids,
-                           :participants_can_apply, :participants_can_cancel]
+  self.used_attributes += [
+    :state, :group_ids, :participants_can_apply, :participants_can_cancel,
+    :parent_id, :allow_sub_camps
+  ]
 
   self.used_attributes -= [:contact_id, :applications_cancelable]
 

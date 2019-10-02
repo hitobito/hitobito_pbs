@@ -38,3 +38,8 @@
 
   = render 'expected_participants_fields', f: f
 
+  - entry.used?(:parent_id) do
+    = field_set_tag t('event.hierarchy') do
+      -# = f.labeled_button :attach_to_super_camp
+      = f.labeled_check_box :allow_sub_camps, readonly: entry.sub_camps.any?
+
