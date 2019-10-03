@@ -136,7 +136,7 @@ class Event::Camp < Event
 
   validates :state, inclusion: possible_states
   validate :may_become_sub_camp, if: :parent_id_changed?
-  validate :must_allow_sub_camps, if: 'sub_camps.any?'
+  validates :allow_sub_camps, acceptance: true, if: 'sub_camps.any?'
 
   ### CALLBACKS
 
@@ -259,12 +259,6 @@ class Event::Camp < Event
   def may_become_sub_camp
     unless super_camp.allow_sub_camps
       errors.add(:parent_id, :invalid)
-    end
-  end
-
-  def must_allow_sub_camps
-    unless allow_sub_camps
-      errors.add(:allow_sub_camps, :invalid)
     end
   end
 
