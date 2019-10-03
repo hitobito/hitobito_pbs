@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -103,6 +103,7 @@ de:
         title: Alle Lager im Ausland
         explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
       advanced_bsv_export_button: Erweiterter BSV/LKB Export
+    hierarchy: Lagerhierarchie
 
     participations:
       canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.

@@ -1,9 +1,10 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
+
 # == Schema Information
 #
 # Table name: events
@@ -99,8 +100,10 @@ class Event::Camp < Event
 
   include Event::RestrictedRole
 
-  self.used_attributes += [:state, :group_ids,
-                           :participants_can_apply, :participants_can_cancel]
+  self.used_attributes += [
+    :state, :group_ids, :participants_can_apply, :participants_can_cancel,
+    :parent_id, :allow_sub_camps
+  ]
 
   self.used_attributes -= [:contact_id, :applications_cancelable]
 
@@ -119,10 +122,21 @@ class Event::Camp < Event
   self.revoked_participation_states = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
+  ### RELATIONS
+
+  belongs_to :super_camp, class_name: name, foreign_key: :parent_id
+  has_many :sub_camps,
+           class_name: name,
+           foreign_key: :parent_id,
+           inverse_of: :super_camp,
+           dependent: :restrict_with_error
+
 
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
+  validate :may_become_sub_camp, if: :parent_id_changed?
+  validates :allow_sub_camps, acceptance: true, if: 'sub_camps.any?'
 
   ### CALLBACKS
 
@@ -204,7 +218,7 @@ class Event::Camp < Event
   end
 
   def advisor_changed_except_in_created?(advisor_key)
-    restricted_role_changes[advisor_key] && state != 'created' && !state.blank?
+    restricted_role_changes[advisor_key] && state != 'created' && state.present?
   end
 
   def send_abteilungsleitung_assignment_info
@@ -240,6 +254,12 @@ class Event::Camp < Event
       Group::Region.sti_name => Group::Region::Regionalleitung.sti_name,
       Group::Abteilung.sti_name => Group::Abteilung::Abteilungsleitung.sti_name
     }
+  end
+
+  def may_become_sub_camp
+    unless super_camp.allow_sub_camps
+      errors.add(:parent_id, :invalid)
+    end
   end
 
 end

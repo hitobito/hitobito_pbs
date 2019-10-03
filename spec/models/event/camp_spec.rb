@@ -1,4 +1,8 @@
-# encoding: utf-8
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 # == Schema Information
 #
 # Table name: events
@@ -86,11 +90,6 @@
 #  bsv_days                          :decimal(6, 2)
 #
 
-
-#  Copyright (c) 2012-2016, Pfadibewegung Schweiz. This file is part of
-#  hitobito_pbs and licensed under the Affero General Public License version 3
-#  or later. See the COPYING file at the top-level directory or at
-#  https://github.com/hitobito/hitobito_pbs.
 
 require 'spec_helper'
 
@@ -520,7 +519,7 @@ describe Event::Camp do
         expect(subject).to be_valid
         clear_attribute(subject, a)
         expect(subject).not_to be_valid
-        expect(subject.errors.full_messages.first).to match /muss ausgefüllt werden/
+        expect(subject.errors.full_messages.first).to match(/muss ausgefüllt werden/)
       end
     end
 
@@ -589,6 +588,88 @@ describe Event::Camp do
         value = camp.send(attr)
         new_value = value.is_a?(TrueClass) ? false : nil
         camp.send("#{attr}=", new_value)
+      end
+    end
+  end
+
+  context 'hierarchies, a camp' do
+    subject { events(:bund_camp) }
+
+    it 'may belong to a super_camp' do
+      is_expected.to respond_to :super_camp
+    end
+
+    it 'may have sub_camps' do
+      is_expected.to respond_to :sub_camps
+    end
+
+    it 'can be marked as having sub_camps' do
+      is_expected.to respond_to :allow_sub_camps
+      is_expected.to respond_to :allow_sub_camps=
+    end
+
+    it 'may only be attached to a super-camp that allows it' do
+      super_camp = events(:bund_camp)
+      sub_camp = events(:schekka_camp)
+
+      super_camp.update_attribute(:allow_sub_camps, false)
+      sub_camp.parent_id = super_camp.id
+
+      expect(sub_camp).to_not be_valid
+    end
+
+    context 'allowed to have sub_camps' do
+      before { subject.update_attribute(:allow_sub_camps, true) }
+
+      it 'can have sub_camps' do
+        expect do
+          subject.sub_camps << events(:schekka_camp)
+        end.to change { subject.sub_camps.size }.by 1
+      end
+
+      it 'cannot be deleted if sub_camps are attached' do
+        subject.sub_camps << events(:schekka_camp)
+        expect do
+          subject.destroy
+          is_expected.to_not be_valid
+        end.to_not raise_error
+      end
+    end
+
+    context 'not allowed to have sub_camps' do
+      before { subject.update_attribute(:allow_sub_camps, false) }
+
+      it 'is invalid if sub_camps are added' do
+        sub_camp = events(:schekka_camp)
+        expect do
+          subject.sub_camps << sub_camp
+
+          is_expected.to_not be_valid
+          expect(sub_camp).to_not be_valid
+        end.to_not change { subject.reload.sub_camps.size }
+      end
+
+      it 'does not have sub_camps' do
+        expect(subject.sub_camps).to be_none
+      end
+
+      it 'can be deleted' do
+        expect do
+          subject.destroy
+        end.to change { described_class.count }.by(-1)
+      end
+    end
+
+    context 'having sub_camps' do
+      before do
+        subject.update_attribute(:allow_sub_camps, true)
+        subject.sub_camps << events(:schekka_camp)
+      end
+
+      it 'may not loose the allow_sub_camps-flag' do
+        subject.allow_sub_camps = false
+
+        is_expected.to_not be_valid
       end
     end
   end
