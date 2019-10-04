@@ -40,7 +40,14 @@
 
   - entry.used?(:parent_id) do
     = field_set_tag t('event.hierarchy') do
-      -# = f.labeled_button :attach_to_super_camp
+
+      = f.labeled(:attach_to_supercamp, '&nbsp;'.html_safe) do
+        = action_button(t('.attach_to_supercamp'),
+          group_supercamps_path(entry.groups.first, camp_id: entry.id),
+          nil,
+          data: { method: :get },
+          remote: true)
+
       = f.labeled(:allow_sub_camps, '&nbsp;'.html_safe) do
         = f.boolean_field :allow_sub_camps,
                           caption: Event::Camp.human_attribute_name(:allow_sub_camps),

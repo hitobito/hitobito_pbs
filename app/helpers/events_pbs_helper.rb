@@ -87,6 +87,11 @@ module EventsPbsHelper
     end
   end
 
+  def format_camp_name_with_groups(camp)
+    groups = camp.groups.collect(&:name).join(', ')
+    content_tag(:strong, camp.name) + ' ' + muted(groups)
+  end
+
   def format_event_canton(entry)
     Cantons.full_name(entry.canton.to_sym) if entry.canton
   end

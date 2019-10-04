@@ -82,6 +82,7 @@ module HitobitoPbs
       ### decorators
       EventDecorator.send :include, Pbs::EventDecorator
       ContactableDecorator.send :include, Pbs::ContactableDecorator
+      GroupDecorator.send :include, Pbs::GroupDecorator
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer

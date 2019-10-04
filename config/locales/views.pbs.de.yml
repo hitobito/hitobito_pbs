@@ -194,6 +194,7 @@ de:
       phone_privat: Telefon Privat
       phone_mobil: Telefon Mobil
       email: E-Mail
+      attach_to_supercamp: An übergeordnetes Lager anschliessen
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
@@ -318,6 +319,12 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
+  supercamps:
+    available:
+      select_supercamp: Übergeordnetes Lager auswählen
+      from_group_and_above: Auf dieser Gruppe und darüber
+      submit: Bestätigen
 
   black_lists:
     form:
