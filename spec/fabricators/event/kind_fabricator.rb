@@ -19,4 +19,10 @@ Fabricator(:pbs_course_kind, class_name: 'Event::Course::Kind') do
   general_information { Faker::Lorem.sentence }
   confirmation_name 'basiskurs'
   can_have_confirmations true
+  event_kind_qualification_kinds {
+    [Event::KindQualificationKind.new(qualification_kind: Fabricate(:qualification_kind),
+                                      category: :qualification,
+                                      role: :participant
+    )]
+  }
 end

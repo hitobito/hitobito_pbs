@@ -10,7 +10,8 @@ require 'spec_helper'
 describe Event::QualificationsController do
 
   let(:group) { course.groups.first }
-  let(:course) { Fabricate(:pbs_course, groups: [groups(:bund)]) }
+  let(:kind) { Fabricate(:pbs_course_kind) }
+  let(:course) { Fabricate(:pbs_course, groups: [groups(:bund)], kind: kind) }
 
   before { sign_in(people(:bulei)) }
 
@@ -36,10 +37,12 @@ describe Event::QualificationsController do
     it 'checks permission when updating course confirmation setting' do
       sign_in(people(:al_schekka))
 
-      expect { put :update,
-                   group_id: group.id,
-                   event_id: course.id,
-                   has_confirmations: 1 }.to raise_exception
+      expect do
+        put :update,
+            group_id: group.id,
+            event_id: course.id,
+            has_confirmations: 1
+      end.to raise_exception
       expect(course.reload.has_confirmations).to be_falsey
     end
 
