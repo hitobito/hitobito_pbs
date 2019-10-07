@@ -13,12 +13,17 @@ class SupercampsController < ApplicationController
 
   def available
     group
+    supercamps_on_group_and_above
   end
 
   private
 
   def group
     @group ||= Group.find(params[:group_id])
+  end
+
+  def supercamps_on_group_and_above
+    @supercamps_on_group_and_above = group.decorate.supercamps_on_group_and_above(existing_camp_id)
   end
 
   def existing_camp_id
