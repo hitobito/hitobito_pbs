@@ -10,6 +10,7 @@ class SupercampsController < ApplicationController
   helper_method :group, :camp_id
   decorates :group
 
+  rescue_from CanCan::AccessDenied, with: :handle_access_denied
   respond_to :js
 
   EXCLUDED_SUPERCAMP_ATTRS = %w(
@@ -72,6 +73,13 @@ class SupercampsController < ApplicationController
 
   def authorize
     authorize!(:show, supercamp)
+    unless supercamp.state == 'created'
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'), :connect, supercamp)
+    end
+  end
+
+  def handle_access_denied(e)
+    redirect_to :back, alert: e.message
   end
 
 end

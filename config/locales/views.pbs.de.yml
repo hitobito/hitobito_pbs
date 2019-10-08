@@ -326,6 +326,7 @@ de:
       select_supercamp: Übergeordnetes Lager auswählen
       from_group_and_above: Auf dieser Gruppe und darüber
       submit: Bestätigen
+    not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
 
   black_lists:
     form:
