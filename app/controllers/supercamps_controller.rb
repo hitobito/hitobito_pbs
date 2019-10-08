@@ -6,7 +6,7 @@
 class SupercampsController < ApplicationController
   skip_authorization_check
 
-  helper_method :group, :existing_camp_id
+  helper_method :group, :camp_id
   decorates :group
 
   respond_to :js
@@ -16,6 +16,11 @@ class SupercampsController < ApplicationController
     supercamps_on_group_and_above
   end
 
+  def connect
+    flash[:event_with_merged_supercamp] = event_with_merged_supercamp
+    redirect_to request.referer
+  end
+
   private
 
   def group
@@ -23,11 +28,15 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = group.decorate.supercamps_on_group_and_above(existing_camp_id)
+    @supercamps_on_group_and_above = group.decorate.supercamps_on_group_and_above(camp_id)
   end
 
-  def existing_camp_id
-    @existing_camp_id ||= params[:camp_id]
+  def camp_id
+    @camp_id ||= params[:camp_id]
+  end
+
+  def event_with_merged_supercamp
+    params[:event].merge({'parent_id' => params[:supercamp_id]})
   end
 
 end

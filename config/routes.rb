@@ -62,6 +62,8 @@ Rails.application.routes.draw do
       end
 
       get 'supercamps' => 'supercamps#available'
+      post 'connect_supercamp' => 'supercamps#connect'
+      patch 'connect_supercamp' => 'supercamps#connect'
 
     end
 

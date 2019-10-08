@@ -13,6 +13,7 @@ module Pbs::EventsController
     before_action :check_checkpoint_attrs, only: [:create, :update]
 
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
+    before_action :merge_supercamp_data, only: [:new, :edit]
 
     before_render_show :load_participation_emails, if: :canceled?
 
@@ -101,6 +102,14 @@ module Pbs::EventsController
         model_params.delete(attr.to_s)
       end
     end
+  end
+
+  def merge_supercamp_data
+    return unless entry.is_a?(Event::Camp)
+    return unless flash[:event_with_merged_supercamp]
+    params[:event] ||= {}
+    params[:event].merge!(flash[:event_with_merged_supercamp])
+    assign_attributes
   end
 
 end

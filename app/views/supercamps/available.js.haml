@@ -2,11 +2,14 @@ $('#modal-placeholder').html("#{escape_javascript(render(partial: 'supercamps/av
 
 :plain
   $('#supercamps-available-submit').click(function() {
-    var selectedSupercampId = $('input:radio[name=supercamp_id]:checked').val()
-    if (selectedSupercampId !== undefined) {
-      $('#event_parent_id').val(selectedSupercampId)
+    var selectedSupercamp = $('input:radio[name=supercamp]:checked').val()
+    if (selectedSupercamp === undefined) {
+      $('#supercamps-available').modal('hide')
+      return
     }
-    $('#supercamps-available').modal('hide')
+    var $form = $('form[id^=edit_event_], form#new_event')
+    $form.attr('action', selectedSupercamp)
+    $form.submit()
   })
 
 $('#supercamps-available').modal('show')
