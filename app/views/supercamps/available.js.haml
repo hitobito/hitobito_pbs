@@ -1,2 +1,12 @@
 $('#modal-placeholder').html("#{escape_javascript(render(partial: 'supercamps/available'))}")
+
+:plain
+  $('#supercamps-available-submit').click(function() {
+    var selectedSupercampId = $('input:radio[name=supercamp_id]:checked').val()
+    if (selectedSupercampId !== undefined) {
+      $('#event_parent_id').val(selectedSupercampId)
+    }
+    $('#supercamps-available').modal('hide')
+  })
+
 $('#supercamps-available').modal('show')

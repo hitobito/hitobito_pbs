@@ -15,7 +15,7 @@
 
       .modal-footer
         .btn-group
-          = button_tag t('.submit'), class: 'btn btn-primary'
+          = button_tag t('.submit'), id: 'supercamps-available-submit', class: 'btn btn-primary'
         = link_to(ti('button.cancel'), '#',
           class: 'link cancel',
           onclick: "event.preventDefault(); $('#supercamps-available').modal('hide')")
