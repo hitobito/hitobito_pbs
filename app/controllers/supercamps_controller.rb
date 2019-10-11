@@ -14,7 +14,7 @@ class SupercampsController < ApplicationController
   respond_to :js
 
   EXCLUDED_SUPERCAMP_ATTRS = %w(
-    id type name state description
+    id type name state
     expected_participants_wolf_f expected_participants_wolf_m
     expected_participants_pfadi_f expected_participants_pfadi_m
     expected_participants_pio_f expected_participants_pio_m
@@ -67,8 +67,20 @@ class SupercampsController < ApplicationController
                            .merge({ dates_attributes: dates_attributes })
   end
 
+  def generated_name
+    supercamp.name + ': ' + group.display_name
+  end
+
+  def appended_description
+    [params[:event][:description].strip, supercamp.description.strip].join("\n\n")
+  end
+
   def event_with_merged_supercamp
-    params[:event].merge(supercamp_attrs).merge({'parent_id' => params[:supercamp_id]})
+    params[:event]
+      .merge(supercamp_attrs)
+      .merge(parent_id: params[:supercamp_id],
+             name: generated_name,
+             description: appended_description)
   end
 
   def authorize
