@@ -11,7 +11,7 @@ class SupercampsController < ApplicationController
   decorates :group
 
   rescue_from CanCan::AccessDenied, with: :handle_access_denied
-  respond_to :js
+  respond_to :js, only: [:available, :query]
 
   EXCLUDED_SUPERCAMP_ATTRS = %w(
     id type name state
@@ -35,6 +35,13 @@ class SupercampsController < ApplicationController
     supercamps_on_group_and_above
   end
 
+  def query
+    @found_supercamps = []
+    if params.key?(:q) && params[:q].size >= 3
+      @found_supercamps = matching_supercamps.limit(10)
+    end
+  end
+
   def connect
     flash[:event_with_merged_supercamp] = event_with_merged_supercamp
     redirect_to request.referer
@@ -48,6 +55,11 @@ class SupercampsController < ApplicationController
 
   def supercamps_on_group_and_above
     @supercamps_on_group_and_above = group.decorate.supercamps_on_group_and_above(camp_id)
+  end
+
+  def matching_supercamps
+    Event::Camp.where('name LIKE ?', "%#{params[:q]}%")
+      .where(allow_sub_camps: true, state: 'created')
   end
 
   def camp_id
@@ -72,7 +84,7 @@ class SupercampsController < ApplicationController
   end
 
   def appended_description
-    [params[:event][:description].strip, supercamp.description.strip].join("\n\n")
+    [params[:event][:description].strip, supercamp.description.strip].join("\n\n").strip
   end
 
   def event_with_merged_supercamp
@@ -86,7 +98,8 @@ class SupercampsController < ApplicationController
   def authorize
     authorize!(:show, supercamp)
     unless supercamp.state == 'created'
-      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'), :connect, supercamp)
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
+                                     :connect, supercamp)
     end
   end
 

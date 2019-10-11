@@ -325,7 +325,11 @@ de:
     available:
       select_supercamp: Übergeordnetes Lager auswählen
       from_group_and_above: Auf dieser Gruppe und darüber
+      search_for_supercamp: Anderes übergeordnetes Lager suchen
+      search: Suchen
       submit: Bestätigen
+    selectable_supercamps:
+      none: Keine Ergebnisse gefunden
     not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
 
   black_lists:
