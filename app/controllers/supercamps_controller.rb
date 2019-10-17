@@ -44,7 +44,7 @@ class SupercampsController < ApplicationController
 
   def connect
     flash[:event_with_merged_supercamp] = event_with_merged_supercamp
-    redirect_to request.referer
+    redirect_to :back
   end
 
   private
@@ -84,7 +84,10 @@ class SupercampsController < ApplicationController
   end
 
   def appended_description
-    [params[:event][:description].strip, supercamp.description.strip].join("\n\n").strip
+    [
+      params[:event][:description].to_s.strip,
+      supercamp.description.to_s.strip
+    ].join("\n\n").strip
   end
 
   def event_with_merged_supercamp
