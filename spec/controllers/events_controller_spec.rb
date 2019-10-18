@@ -147,6 +147,18 @@ describe EventsController do
         expect(event.reload).to be_camp_submitted
       end
 
+      it 'can still submit camp when adding a supercamp' do
+        group = event.groups.first
+        event.update!(required_attrs_for_camp_submit)
+        event.update_attributes(parent_id: events(:bund_supercamp).id)
+
+        put :create_camp_application, group_id: group.id, id: event.id
+        expect(response).to redirect_to(group_event_path(group, event))
+        expect(event.reload.camp_submitted_at).to eq Date.today
+        expect(flash[:notice]).to match /eingereicht/
+        expect(event.reload).to be_camp_submitted
+      end
+
       context 'for campy course' do
         let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
 
