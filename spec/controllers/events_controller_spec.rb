@@ -266,4 +266,38 @@ describe EventsController do
       values
     end
   end
+
+  context 'merging data from selected supercamp' do
+
+    let(:camp) { events(:schekka_camp) }
+    let(:course) { events(:top_course) }
+    let(:campy_course) { Fabricate(:course, kind: event_kinds(:fut)) }
+    let(:event) { events(:top_event) }
+    let(:entry) { controller.send(:entry) }
+    before do
+      sign_in(people(:bulei))
+      allow(controller).to receive(:flash).and_return(event_with_merged_supercamp: {
+        name: 'Hierarchisches Lager: Schekka',
+        dates_attributes: [{ location: 'Linth-Ebene' }]
+      })
+    end
+
+    it 'merges data from flash for camp' do
+      get :edit, group_id: camp.groups.first.id, id: camp.id
+      expect(entry.name).to eq('Hierarchisches Lager: Schekka')
+      expect(entry.dates.map(&:location)).to include('Linth-Ebene')
+    end
+
+    [:course, :campy_course, :event].each do |event_type|
+
+      it 'does not merge for ' + event_type.to_s do
+        e = send(event_type)
+        get :edit, group_id: e.groups.first.id, id: e.id
+        expect(entry.name).not_to eq('Hierarchisches Lager: Schekka')
+        expect(entry.dates.map(&:location)).not_to include('Linth-Ebene')
+      end
+
+    end
+
+  end
 end
