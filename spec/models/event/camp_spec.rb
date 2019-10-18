@@ -608,14 +608,33 @@ describe Event::Camp do
       is_expected.to respond_to :allow_sub_camps=
     end
 
-    it 'may only be attached to a super-camp that allows it' do
-      super_camp = events(:bund_camp)
-      sub_camp = events(:schekka_camp)
+    context 'attaching and detaching' do
 
-      super_camp.update_attribute(:allow_sub_camps, false)
-      sub_camp.parent_id = super_camp.id
+      let(:super_camp) { events(:bund_supercamp) }
+      let(:sub_camp) { events(:schekka_camp) }
 
-      expect(sub_camp).to_not be_valid
+      it 'may only be attached to a super-camp that allows it' do
+        super_camp.update_attribute(:allow_sub_camps, false)
+        sub_camp.parent_id = super_camp.id
+
+        expect(sub_camp).to_not be_valid
+      end
+
+      it 'may only be attached to a super-camp in created state' do
+        super_camp.update_attribute(:state, 'confirmed')
+        sub_camp.parent_id = super_camp.id
+
+        expect(sub_camp).to_not be_valid
+      end
+
+      it 'may be detached from a super-camp at any time' do
+        sub_camp.update_attribute(:parent_id, super_camp.id)
+        super_camp.update_attributes(state: 'confirmed', allow_sub_camps: false)
+        sub_camp.parent_id = nil
+
+        expect(sub_camp).to be_valid
+      end
+
     end
 
     context 'allowed to have sub_camps' do
