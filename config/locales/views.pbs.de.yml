@@ -330,6 +330,7 @@ de:
       submit: Bestätigen
     selectable_supercamps:
       none: Keine Ergebnisse gefunden
+    does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
     not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
 
   black_lists:

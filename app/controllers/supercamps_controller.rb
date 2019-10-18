@@ -31,14 +31,13 @@ class SupercampsController < ApplicationController
   EXCLUDED_DATES_ATTRS = %w(id event_id).freeze
 
   def available
-    group
     supercamps_on_group_and_above
   end
 
   def query
     @found_supercamps = []
     if params.key?(:q) && params[:q].size >= 3
-      @found_supercamps = matching_supercamps.limit(10)
+      @found_supercamps = without_self(matching_supercamps.limit(10))
     end
   end
 
@@ -49,12 +48,16 @@ class SupercampsController < ApplicationController
 
   private
 
+  def without_self(supercamps)
+    supercamps.reject { |supercamp| supercamp.id == camp_id }
+  end
+
   def group
     @group ||= Group.find(params[:group_id])
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = group.decorate.supercamps_on_group_and_above(camp_id)
+    @supercamps_on_group_and_above = without_self(group.decorate.supercamps_on_group_and_above)
   end
 
   def matching_supercamps
@@ -100,6 +103,10 @@ class SupercampsController < ApplicationController
 
   def authorize
     authorize!(:show, supercamp)
+    unless supercamp.allow_sub_camps
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.does_not_allow_sub_camps'),
+                                     :connect, supercamp)
+    end
     unless supercamp.state == 'created'
       raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
                                      :connect, supercamp)
