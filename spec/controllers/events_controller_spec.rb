@@ -147,6 +147,18 @@ describe EventsController do
         expect(event.reload).to be_camp_submitted
       end
 
+      it 'can still submit camp when adding a supercamp' do
+        group = event.groups.first
+        event.update!(required_attrs_for_camp_submit)
+        event.update_attributes(parent_id: events(:bund_supercamp).id)
+
+        put :create_camp_application, group_id: group.id, id: event.id
+        expect(response).to redirect_to(group_event_path(group, event))
+        expect(event.reload.camp_submitted_at).to eq Date.today
+        expect(flash[:notice]).to match /eingereicht/
+        expect(event.reload).to be_camp_submitted
+      end
+
       context 'for campy course' do
         let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
 
@@ -265,5 +277,39 @@ describe EventsController do
       end
       values
     end
+  end
+
+  context 'merging data from selected supercamp' do
+
+    let(:camp) { events(:schekka_camp) }
+    let(:course) { events(:top_course) }
+    let(:campy_course) { Fabricate(:course, kind: event_kinds(:fut)) }
+    let(:event) { events(:top_event) }
+    let(:entry) { controller.send(:entry) }
+    before do
+      sign_in(people(:bulei))
+      allow(controller).to receive(:flash).and_return(event_with_merged_supercamp: {
+        name: 'Hierarchisches Lager: Schekka',
+        dates_attributes: [{ location: 'Linth-Ebene' }]
+      })
+    end
+
+    it 'merges data from flash for camp' do
+      get :edit, group_id: camp.groups.first.id, id: camp.id
+      expect(entry.name).to eq('Hierarchisches Lager: Schekka')
+      expect(entry.dates.map(&:location)).to include('Linth-Ebene')
+    end
+
+    [:course, :campy_course, :event].each do |event_type|
+
+      it 'does not merge for ' + event_type.to_s do
+        e = send(event_type)
+        get :edit, group_id: e.groups.first.id, id: e.id
+        expect(entry.name).not_to eq('Hierarchisches Lager: Schekka')
+        expect(entry.dates.map(&:location)).not_to include('Linth-Ebene')
+      end
+
+    end
+
   end
 end

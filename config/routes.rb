@@ -61,6 +61,11 @@ Rails.application.routes.draw do
         end
       end
 
+      get 'supercamps' => 'supercamps#available'
+      get 'query_supercamps' => 'supercamps#query'
+      post 'connect_supercamp' => 'supercamps#connect'
+      patch 'connect_supercamp' => 'supercamps#connect'
+
     end
 
     get 'list_camps' => 'event/lists#camps', as: :list_camps

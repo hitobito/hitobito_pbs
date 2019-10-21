@@ -194,6 +194,8 @@ de:
       phone_privat: Telefon Privat
       phone_mobil: Telefon Mobil
       email: E-Mail
+      attach_to_supercamp: An übergeordnetes Lager anschliessen
+      supercamp: Übergeordnetes Lager
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
@@ -318,6 +320,18 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
+  supercamps:
+    available:
+      select_supercamp: Übergeordnetes Lager auswählen
+      from_group_and_above: Auf dieser Gruppe und darüber
+      search_for_supercamp: Anderes übergeordnetes Lager suchen
+      search: Suchen
+      submit: Bestätigen
+    selectable_supercamps:
+      none: Keine Ergebnisse gefunden
+    does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
+    not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
 
   black_lists:
     form:

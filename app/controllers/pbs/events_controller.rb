@@ -11,13 +11,20 @@ module Pbs::EventsController
   included do
     before_action :remove_restricted, only: [:create, :update]
     before_action :check_checkpoint_attrs, only: [:create, :update]
+    before_action :merge_supercamp_data, only: [:new, :edit]
 
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
 
     before_render_show :load_participation_emails, if: :canceled?
 
+    alias_method_chain :edit, :assign_attributes
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :sort_expression, :canton
+  end
+
+  def edit_with_assign_attributes
+    assign_attributes if model_params
+    edit_without_assign_attributes
   end
 
   def sort_expression_with_canton
@@ -101,6 +108,13 @@ module Pbs::EventsController
         model_params.delete(attr.to_s)
       end
     end
+  end
+
+  def merge_supercamp_data
+    return unless entry.is_a?(Event::Camp)
+    return unless flash[:event_with_merged_supercamp]
+    params[:event] ||= {}
+    params[:event].merge!(flash[:event_with_merged_supercamp])
   end
 
 end
