@@ -124,6 +124,9 @@ class Event::Camp < Event
 
   ### RELATIONS
 
+  # this is defined in lib/hitobito_pbs/wagon.rb due to loading issues:
+  # acts_as_nested_set dependent: :nullify
+
   belongs_to :super_camp, class_name: name, foreign_key: :parent_id
   has_many :sub_camps,
            class_name: name,
