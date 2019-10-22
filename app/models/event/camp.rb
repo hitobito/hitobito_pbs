@@ -117,9 +117,9 @@ class Event::Camp < Event
   # states are used for workflow
   # translations in config/locales
   self.possible_states = %w(created confirmed assignment_closed canceled closed)
-  self.possible_participation_states = %w(applied_electronically assigned canceled absent)
-  self.active_participation_states = %w(applied_electronically assigned)
-  self.revoked_participation_states = %w(canceled absent)
+  self.possible_participation_states  = %w(applied_electronically assigned canceled absent)
+  self.active_participation_states    = %w(applied_electronically assigned)
+  self.revoked_participation_states   = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
   ### RELATIONS
@@ -131,11 +131,10 @@ class Event::Camp < Event
            inverse_of: :super_camp,
            dependent: :restrict_with_error
 
-
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validate :may_become_sub_camp, if: :parent_id_changed?
+  validate  :may_become_sub_camp, if: :parent_id_changed?
   validates :allow_sub_camps, acceptance: { accept: true }, if: 'sub_camps.any?'
 
   ### CALLBACKS
