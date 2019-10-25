@@ -312,4 +312,23 @@ describe EventsController do
     end
 
   end
+
+  context 'update the pass_on_to_supercamp flag on questions' do
+    let(:event) { events(:schekka_camp) }
+    let(:group) { event.groups.first }
+    let!(:q1) { Fabricate(:question, id: 1, event: event, pass_on_to_supercamp: false) }
+    let!(:q2) { Fabricate(:question, id: 2, event: event, admin: true, pass_on_to_supercamp: false) }
+    before do
+      sign_in(people(:al_schekka))
+    end
+
+    {application_questions: 1, admin_questions: 2}.each do |attr, qid|
+      it attr do
+        put :update, group_id: group.id, id: event.id, event: {
+          (attr.to_s + '_attributes') => [ { id: qid, pass_on_to_supercamp: true } ]
+        }
+        expect(event.reload.send(attr)[0].pass_on_to_supercamp).to be_truthy
+      end
+    end
+  end
 end
