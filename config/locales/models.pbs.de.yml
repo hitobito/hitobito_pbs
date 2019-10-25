@@ -1071,6 +1071,9 @@ de:
       event/participation:
         bsv_days: BSV-Tage
 
+      event/question:
+        pass_on_to_supercamp: An übergeordnetes Lager weitergeben
+
       person:
         layer_group_id: Id der Hauptebene
         nickname: Pfadiname

@@ -20,6 +20,17 @@ module Pbs::EventsController
     alias_method_chain :edit, :assign_attributes
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :sort_expression, :canton
+
+    # Merge all hashes in permitted_attrs and move them to the end of the list, so we can more
+    # easily inject new nested attrs
+    self.permitted_attrs = self.permitted_attrs.reduce([[], {}]) do |result, attr|
+      result[0] << attr unless attr.is_a? Hash
+      result[1].merge! attr if attr.is_a? Hash
+      result
+    end.reduce(:<<)
+
+    self.permitted_attrs.last[:application_questions_attributes] << :pass_on_to_supercamp
+    self.permitted_attrs.last[:admin_questions_attributes] << :pass_on_to_supercamp
   end
 
   def edit_with_assign_attributes
