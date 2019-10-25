@@ -8,6 +8,8 @@ require 'spec_helper'
 describe SupercampsController do
 
   let!(:supercamp_dates) { event_dates(:sixth, :sixth_two) }
+  let!(:supercamp_application_questions) { Fabricate(:question, event: supercamp) }
+  let!(:supercamp_admin_questions) { Fabricate(:question, admin: true, event: supercamp) }
   let!(:supercamp) { events(:bund_supercamp) }
 
   before do
@@ -139,6 +141,26 @@ describe SupercampsController do
             attrs = %w(label location start_at finish_at)
             expect(result[:dates_attributes].map { |d| d.slice(attrs) })
               .to eq(supercamp.dates.map { |d| d.attributes.slice(attrs) })
+          end
+
+          it 'application questions from supercamp' do
+            attrs = %w(question choices multiple_choices required)
+            expect(result[:application_questions_attributes].map { |q| q.slice(attrs) })
+              .to eq(supercamp.application_questions.map { |q| q.attributes.slice(attrs) })
+          end
+
+          it 'application questions have flag set' do
+            expect(result[:application_questions_attributes][0][:pass_on_to_supercamp]).to be_truthy
+          end
+
+          it 'admin questions from supercamp' do
+            attrs = %w(question choices multiple_choices required)
+            expect(result[:admin_questions_attributes].map { |q| q.slice(attrs) })
+              .to eq(supercamp.admin_questions.map { |q| q.attributes.slice(attrs) })
+          end
+
+          it 'admin questions have flag set' do
+            expect(result[:admin_questions_attributes][0][:pass_on_to_supercamp]).to be_truthy
           end
 
           [
