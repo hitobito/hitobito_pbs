@@ -28,17 +28,17 @@
       = labeled_attr(entry, :state_translated)
 
   - if entry.is_a?(Event::Camp)
-    - if entry.sub_camps.any?
+    - if entry.super_camp.present?
+      %dl.dl-horizontal.multiline
+        = labeled(t(:'events.fields_pbs.supercamp')) do
+          = link_to(entry.super_camp, entry.super_camp)
+    - elsif entry.sub_camps.any?
       %dl.dl-horizontal.multiline
         = labeled(t(:'events.fields_pbs.direct_subcamps')) do
           %ul
             - entry.sub_camps.each do |camp|
               %li
                 = link_to(camp, camp)
-    - if entry.super_camp.present?
-      %dl.dl-horizontal.multiline
-        = labeled(t(:'events.fields_pbs.supercamp')) do
-          = link_to(entry.super_camp, entry.super_camp)
 
   = render_present_attrs(entry, :description)
 
