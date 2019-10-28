@@ -24,6 +24,14 @@
     - unless entry.is_a?(Event::Camp) && !can?(:show_details, entry)
       = labeled(t('event.run_by'), entry.group_names)
 
+    - if entry.is_a?(Event::Camp) && entry.sub_camps.any?
+      %dl.dl-horizontal.dl-borderless.multiline
+        = labeled(t(:'events.fields_pbs.direct_subcamps')) do
+          %ul
+            - entry.sub_camps.each do |camp|
+              %li
+                = link_to(camp, camp)
+
     - entry.used?(:state) do
       = labeled_attr(entry, :state_translated)
 

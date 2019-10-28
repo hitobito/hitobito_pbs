@@ -65,3 +65,7 @@ table tr.grouping td {
 [data-remove-supercamp] {
   @extend .remove_nested_fields
 }
+
+dl.dl-horizontal.multiline dt {
+  white-space: normal;
+}
