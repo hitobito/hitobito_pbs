@@ -4,9 +4,9 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class SubcampsController < ListController
-  helper_method :event
-
   self.nesting = Group
+
+  decorates :group, :events
 
   def self.model_class
     Event
@@ -14,8 +14,9 @@ class SubcampsController < ListController
 
   private
 
-  def event
-    @event ||= @group.events.find(params[:event_id])
+  def list_entries
+    supercamp = parent.events.find(params[:event_id])
+    supercamp.descendants
   end
 
   def authorize_class
