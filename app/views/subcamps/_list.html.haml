@@ -4,18 +4,4 @@
   or later. See the COPYING file at the top-level directory or at
   https://github.com/hitobito/hitobito_pbs.
 
-%h2 Gruppe
-%p
-  = parent.class
-  = parent
-
-%h2 Event
-%p
-  = event.class
-  = event
-
-%h2 SubCamps
-%ul
-  - event.descendants.each do |camp|
-    %li
-      = camp
+= list_table :name, :description, :applicant_count, :state, :groups
