@@ -6,7 +6,9 @@
 class SubcampsController < ListController
   self.nesting = Group
 
-  decorates :group, :events
+  helper_method :event
+
+  decorates :group, :event, :events
 
   def self.model_class
     Event
@@ -14,9 +16,12 @@ class SubcampsController < ListController
 
   private
 
+  def event
+    @event ||= parent.events.find(params[:event_id])
+  end
+
   def list_entries
-    supercamp = parent.events.find(params[:event_id])
-    supercamp.descendants
+    event.descendants
   end
 
   def authorize_class
