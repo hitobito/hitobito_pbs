@@ -6,8 +6,16 @@
 
 %h2 Gruppe
 %p
-  = group
+  = parent.class
+  = parent
 
 %h2 Event
 %p
+  = event.class
   = event
+
+%h2 SubCamps
+%ul
+  - event.descendants.each do |camp|
+    %li
+      = camp
