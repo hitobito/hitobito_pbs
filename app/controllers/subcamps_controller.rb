@@ -24,7 +24,7 @@ class SubcampsController < ListController
     case params[:filter]
     when 'direct' then event.sub_camps
     else               event.descendants # handles 'all' also
-    end
+    end.includes(:groups)
   end
 
   def authorize_class
