@@ -6,4 +6,7 @@
 
 - title event
 
+- content_for :filter do
+  = FilterNavigation::Camps.new(self).to_s
+
 = list_table :name, :description, :applicant_count, :state, :groups
