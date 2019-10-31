@@ -9,4 +9,10 @@
 - content_for :filter do
   = FilterNavigation::Camps.new(self).to_s
 
-= list_table :name, :description, :applicant_count, :state, :groups
+= list_table do |t|
+  - t.col(t.sort_header(:name)) do |e|
+    %strong= link_to e.name, group_event_path(e.groups.first, e)
+  - t.attr(:description_short, t.attr_header(:description))
+  - t.attr(:booking_info)
+  - t.sortable_attr(:state)
+  - t.sortable_attr(:group_ids)
