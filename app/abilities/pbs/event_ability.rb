@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -19,13 +17,14 @@ module Pbs::EventAbility
                            Group::Kantonalverband::VerantwortungKrisenteam,
                            Group::Kantonalverband::MitgliedKrisenteam].freeze
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     on(Event) do
       permission(:any).may(:modify_superior).if_education_responsible
 
       permission(:any).may(:show_camp_application).for_leaded_events
       permission(:any).may(:create_camp_application).for_coached_events
       permission(:any).may(:show_details).if_participating_as_leader_role
+      permission(:any).may(:show_details).if_participating_as_leader_role_of_supercamp
 
       permission(:group_full).
         may(:show_camp_application, :show_details).
@@ -109,6 +108,21 @@ module Pbs::EventAbility
 
   def if_participating_as_leader_role
     participating? && participating_as_leader_role?
+  end
+
+  def if_participating_as_leader_role_of_supercamp
+    relevant_event_ids = event.self_and_ancestors.pluck(:id)
+    participating_event_ids = user_context.participations.collect(&:event_id)
+
+    relevant_participating_event_ids = (participating_event_ids & relevant_event_ids)
+
+    return unless relevant_participating_event_ids.any?
+
+    Event.where(id: relevant_participating_event_ids)
+         .joins(participations: [:roles])
+         .where('event_participations.person_id = ?', user.id)
+         .where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name)
+         .present?
   end
 
   def if_part_of_krisenteam

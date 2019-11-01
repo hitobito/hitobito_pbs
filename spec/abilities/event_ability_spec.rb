@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -200,6 +198,18 @@ describe EventAbility do
                   participation: Fabricate(:event_participation, event: event, person: role.person))
         is_expected.to be_able_to(:update, event)
         is_expected.to be_able_to(:show_camp_application, event)
+      end
+
+      it 'is possible for leader of supercamp' do
+        event = Fabricate(:pbs_camp, groups: [group])
+        subcamp = Fabricate(:pbs_camp, groups: [group])
+        subcamp.move_to_child_of(event)
+
+        Fabricate(Event::Camp::Role::Leader.name,
+                  participation: Fabricate(:event_participation, event: event, person: role.person))
+        is_expected.to be_able_to(:show_details, subcamp)
+        is_expected.not_to be_able_to(:update, subcamp)
+        is_expected.not_to be_able_to(:show_camp_application, subcamp)
       end
 
       it 'is not possible for anyone' do
