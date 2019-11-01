@@ -1054,6 +1054,7 @@ de:
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
         allow_sub_camps: untergeordnete Lager zulassen
+        super_camp: Übergeordnetes Lager
 
       event/contact_attrs:
         pass_on_to_supercamp: An übergeordnetes Lager weitergeben

@@ -64,7 +64,7 @@ class SupercampsController < ApplicationController
 
   def matching_supercamps
     Event::Camp.where('name LIKE ?', "%#{params[:q]}%")
-      .where(allow_sub_camps: true, state: 'created')
+               .where(allow_sub_camps: true, state: 'created')
   end
 
   def camp_id
@@ -112,7 +112,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                             .merge(supercamp_attributes_to_merge)
+                                  .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name

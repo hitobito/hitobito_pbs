@@ -651,7 +651,7 @@ describe Event::Camp do
         expect do
           subject.destroy
           is_expected.to_not be_valid
-        end.to_not raise_error
+        end.to_not raise_exception
       end
     end
 

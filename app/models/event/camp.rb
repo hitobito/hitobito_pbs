@@ -118,12 +118,15 @@ class Event::Camp < Event
   # states are used for workflow
   # translations in config/locales
   self.possible_states = %w(created confirmed assignment_closed canceled closed)
-  self.possible_participation_states = %w(applied_electronically assigned canceled absent)
-  self.active_participation_states = %w(applied_electronically assigned)
-  self.revoked_participation_states = %w(canceled absent)
+  self.possible_participation_states  = %w(applied_electronically assigned canceled absent)
+  self.active_participation_states    = %w(applied_electronically assigned)
+  self.revoked_participation_states   = %w(canceled absent)
   self.countable_participation_states = %w(applied_electronically assigned absent)
 
   ### RELATIONS
+
+  # this is defined in lib/hitobito_pbs/wagon.rb due to loading issues:
+  # acts_as_nested_set dependent: :nullify
 
   belongs_to :super_camp, class_name: name, foreign_key: :parent_id
   has_many :sub_camps,
@@ -132,11 +135,10 @@ class Event::Camp < Event
            inverse_of: :super_camp,
            dependent: :restrict_with_error
 
-
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validate :may_become_sub_camp, if: :parent_id_changed?
+  validate  :may_become_sub_camp, if: :parent_id_changed?
   validates :allow_sub_camps, acceptance: { accept: true }, if: 'sub_camps.any?'
   validate :assert_contact_attrs_passed_on_to_supercamp_valid, if: :parent_id
 
