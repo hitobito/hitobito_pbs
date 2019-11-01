@@ -92,11 +92,27 @@ class SupercampsController < ApplicationController
     end
   end
 
+  def required_contact_attrs
+    all_required_attrs = supercamp.required_contact_attrs +
+      Event::ParticipationContactData.mandatory_contact_attrs
+    all_required_attrs.map do |attr|
+      [attr, :required]
+    end.to_h
+  end
+
+  def supercamp_attributes_to_merge
+    {
+      dates_attributes: dates_attributes,
+      application_questions_attributes: application_questions_attrs,
+      admin_questions_attributes: admin_questions_attrs,
+      contact_attrs: required_contact_attrs,
+      contact_attrs_passed_on_to_supercamp: required_contact_attrs
+    }
+  end
+
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                           .merge(dates_attributes: dates_attributes,
-                                  application_questions_attributes: application_questions_attrs,
-                                  admin_questions_attributes: admin_questions_attrs)
+                                             .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
