@@ -135,6 +135,9 @@ class Event::Camp < Event
            inverse_of: :super_camp,
            dependent: :restrict_with_error
 
+  ### SERIALIZED ATTRIBUTES
+  serialize :contact_attrs_passed_on_to_supercamp, Array
+
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
@@ -148,9 +151,6 @@ class Event::Camp < Event
   after_save :send_assignment_infos
   after_save :send_abteilungsleitung_assignment_info
   after_save :send_created_infos
-
-  ### SERIALIZED ATTRIBUTES
-  serialize :contact_attrs_passed_on_to_supercamp, Array
 
   ### INSTANCE METHODS
 
