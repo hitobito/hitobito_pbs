@@ -150,7 +150,7 @@ describe EventsController do
       it 'can still submit camp when adding a supercamp' do
         group = event.groups.first
         event.update!(required_attrs_for_camp_submit)
-        event.update_attributes(parent_id: events(:bund_supercamp).id)
+        event.move_to_child_of(events(:bund_supercamp))
 
         put :create_camp_application, group_id: group.id, id: event.id
         expect(response).to redirect_to(group_event_path(group, event))
@@ -318,9 +318,7 @@ describe EventsController do
     let(:group) { event.groups.first }
     let!(:q1) { Fabricate(:question, id: 1, event: event, pass_on_to_supercamp: false) }
     let!(:q2) { Fabricate(:question, id: 2, event: event, admin: true, pass_on_to_supercamp: false) }
-    before do
-      sign_in(people(:al_schekka))
-    end
+    before { sign_in(people(:al_schekka)) }
 
     {application_questions: 1, admin_questions: 2}.each do |attr, qid|
       it attr do
