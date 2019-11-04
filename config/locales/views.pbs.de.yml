@@ -171,7 +171,6 @@ de:
     participations:
       actions_show_pbs:
         course_confirmation: Kursbestätigung
-        course_confirmation_url: "http://pbs01.smartness.ch/kurs/renderer/pdf/%{course_kind_confirmation_name}/de"
 
   events:
     actions_show_pbs:

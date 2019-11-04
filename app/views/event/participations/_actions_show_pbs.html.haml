@@ -9,8 +9,7 @@
 
 - if entry.has_confirmation?
   .btn-group
-    = form_tag(t('event/course.participations.actions_show_pbs.course_confirmation_url',
-                 course_kind_confirmation_name: entry.event.kind.confirmation_name),
+    = form_tag(@course_confirmation_url,
                method: :post, style: 'display: inline', authenticity_token: false,
                enforce_utf8: false, target: '_blank') do
       - entry.course_confirmation_params.entries.each do |key, value|
