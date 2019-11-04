@@ -6,6 +6,10 @@
 class AddContactAttrsPassedOnToSupercampToEvents < ActiveRecord::Migration
   def up
     add_column :events, :contact_attrs_passed_on_to_supercamp, :text, limit: 65535
+
+    Event.reset_column_information
+    Event::Course.reset_column_information
+    Event::Camp.reset_column_information
   end
 
   def down
