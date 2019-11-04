@@ -20,47 +20,48 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
   let(:participation) { Fabricate(:event_participation, state: state, person: person, event: event,
                                   roles: participation_roles, qualified: qualified) }
   let(:decorator) { Event::ParticipationDecorator.new(participation) }
+  subject { decorator }
 
   describe '#has_confirmation?' do
 
     context 'returns true when all conditions met' do
-      it { expect(decorator.has_confirmation?).to be_truthy }
+      it { is_expected.to have_confirmation }
     end
 
     context 'returns true when participant also has helper role' do
       let(:participation_roles) { [ Event::Course::Role::Participant.new,
                                     Event::Course::Role::Helper.new ] }
-      it { expect(decorator.has_confirmation?).to be_truthy }
+      it { is_expected.to have_confirmation }
     end
 
     context 'returns false when event is not course' do
       let(:event) { Fabricate(:pbs_camp) }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
     context 'returns false when course kind does not allow confirmations' do
       let(:kind) { Fabricate(:pbs_course_kind, can_have_confirmations: false) }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
     context 'returns false when course does not allow confirmations' do
       let(:event) { Fabricate(:course, kind: kind, has_confirmations: false) }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
     context 'returns false when participation is not a participant' do
       let(:participation_roles) { [ Event::Course::Role::Helper.new ] }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
     context 'returns false when participation is not active' do
       let(:state) { 'applied' }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
     context 'returns false when participant is not qualified' do
       let(:qualified) { false }
-      it { expect(decorator.has_confirmation?).to be_falsey }
+      it { is_expected.not_to have_confirmation }
     end
 
   end

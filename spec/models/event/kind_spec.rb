@@ -8,12 +8,18 @@ require 'spec_helper'
 
 describe Event::Kind do
 
-  it 'validates confirmation_name not empty when confirmations allowed' do
+  before do
     subject.can_have_confirmations = true
+  end
+
+  it 'validates confirmation_name not empty when confirmations allowed' do
     subject.confirmation_name = nil
-    expect(subject).to have(1).error_on(:confirmation_name)
+    is_expected.to have(1).error_on(:confirmation_name)
+  end
+
+  it 'validation passes' do
     subject.confirmation_name = 'basiskurs'
-    expect(subject).to have(0).errors_on(:pbs_number)
+    is_expected.to have(0).errors_on(:confirmation_name)
   end
 
 end

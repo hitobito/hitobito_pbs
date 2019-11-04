@@ -68,12 +68,8 @@ describe EventDecorator do
 
   context 'number of qualified course participants' do
 
-    let(:role) { Fabricate(Event::Role::Participant.name, participation: participation) }
+    let!(:role) { Fabricate(Event::Role::Participant.name, participation: participation) }
     let(:participation) { Fabricate(:event_participation, event: event, qualified: true) }
-
-    before do
-      role
-    end
 
     context 'regular event' do
       let(:event) { Fabricate(:event) }
