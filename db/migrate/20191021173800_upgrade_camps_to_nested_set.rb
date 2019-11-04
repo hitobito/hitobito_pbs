@@ -16,7 +16,7 @@ class UpgradeCampsToNestedSet < ActiveRecord::Migration
         if nested_set_class.respond_to?(:rebuild!)
           say_with_time %Q[Building the "nested set"-tree/-forest for #{nested_set_class.name}] do
             nested_set_class.reset_column_information
-            nested_set_class.rebuild!
+            nested_set_class.rebuild!(false)
           end
         else
           say %Q[#{nested_set_class.name} is not defined as "nested set" in ruby]
