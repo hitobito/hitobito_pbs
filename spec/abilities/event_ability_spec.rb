@@ -208,6 +208,8 @@ describe EventAbility do
         Fabricate(Event::Camp::Role::Leader.name,
                   participation: Fabricate(:event_participation, event: event, person: role.person))
         is_expected.to be_able_to(:show_details, subcamp)
+        is_expected.to be_able_to(:index_participations, subcamp)
+
         is_expected.not_to be_able_to(:update, subcamp)
         is_expected.not_to be_able_to(:show_camp_application, subcamp)
       end

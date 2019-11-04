@@ -68,6 +68,8 @@ module Pbs::EventAbility
       permission(:any).may(:show_details).if_part_of_krisenteam
       permission(:any).may(:show_crisis_contacts).if_part_of_krisenteam
 
+      permission(:any).may(:index_participations).like_in_core_or_as_leader_of_supercamp
+
       permission(:group_full).may(:index_revoked_participations).in_same_group
       permission(:group_and_below_full).may(:index_revoked_participations).in_same_group_or_below
       permission(:layer_full).may(:index_revoked_participations).in_same_layer
@@ -111,16 +113,13 @@ module Pbs::EventAbility
   #   participating? && participating_as_leader_role?
   # end
 
+  def like_in_core_or_as_leader_of_supercamp
+    for_participations_read_events_and_course_participants ||
+      if_participating_as_leader_role_of_supercamp
+  end
+
   def if_participating_as_leader_role_of_supercamp
-    relevant_event_ids = participating_event_ids
-
-    return false unless relevant_event_ids.any?
-
-    Event.where(id: relevant_event_ids)
-         .joins(participations: [:roles])
-         .where('event_participations.person_id = ?', user.id)
-         .where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name)
-         .present?
+    participating? && participating_as_leader_role?
   end
 
   def if_part_of_krisenteam
@@ -133,24 +132,26 @@ module Pbs::EventAbility
     end + KantonalverbandCanton.where(canton: event.canton).collect(&:kantonalverband)
   end
 
-  def participating_event_ids
-    relevant_event_ids = event.self_and_ancestors.pluck(:id)
-    participating_event_ids = user_context.participations.collect(&:event_id)
+  def relevant_participating_event_ids
+    @relevant_participating_event_ids ||= begin
+      relevant_event_ids = event.self_and_ancestors.pluck(:id)
+      participating_event_ids = user_context.participations.collect(&:event_id)
 
-    (participating_event_ids & relevant_event_ids)
+      (participating_event_ids & relevant_event_ids)
+    end
   end
 
-  # def participating?
-  #   user_context.participations.collect(&:event_id).include?(event.id)
-  # end
+  def participating?
+    relevant_participating_event_ids.any?
+  end
 
-  # def participating_as_leader_role?
-  #   event.participations.
-  #     where(person: user).
-  #     joins(:roles).
-  #     where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name).
-  #     present?
-  # end
+  def participating_as_leader_role?
+    Event.where(id: relevant_participating_event_ids)
+         .joins(participations: [:roles])
+         .where('event_participations.person_id = ?', user.id)
+         .where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name)
+         .present?
+  end
 
   def if_full_permission_in_course_layer_with_ausbildungskommission
     if_full_permission_in_course_layer_without_ausbildungskommission ||
