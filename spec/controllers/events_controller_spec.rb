@@ -329,4 +329,40 @@ describe EventsController do
       end
     end
   end
+
+  context 'mark contact attributes to be passed on to supercamp' do
+
+    let(:event) { events(:schekka_camp) }
+    let(:group) { event.groups.first }
+
+    before { sign_in(people(:al_schekka)) }
+
+    it 'assigns contact_attributes_passed_on_to_supercamp' do
+
+      put :update, group_id: group.id, id: event.id,
+          event: { contact_attrs_passed_on_to_supercamp: {
+            first_name: '1', nickname: '1', address: '1', social_accounts: '1' } }
+
+      expect(event.reload.contact_attrs_passed_on_to_supercamp).to include('first_name')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('address')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('social_accounts')
+
+    end
+
+    it 'removes contact_attributes_passed_on_to_supercamp' do
+
+      event.update!({ contact_attrs_passed_on_to_supercamp:
+                        ['first_name', 'social_accounts', 'address', 'nickname']})
+
+      put :update, group_id: group.id, id: event.id,
+          event: { contact_attrs_passed_on_to_supercamp: { nickname: '1' } }
+
+      expect(event.reload.contact_attrs_passed_on_to_supercamp).not_to include('first_name')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')
+      expect(event.contact_attrs_passed_on_to_supercamp).not_to include('address')
+      expect(event.contact_attrs_passed_on_to_supercamp).not_to include('social_accounts')
+
+    end
+  end
 end
