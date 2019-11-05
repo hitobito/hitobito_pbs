@@ -23,7 +23,6 @@ module Pbs::EventAbility
 
       permission(:any).may(:show_camp_application).for_leaded_events
       permission(:any).may(:create_camp_application).for_coached_events
-      # permission(:any).may(:show_details).if_participating_as_leader_role
       permission(:any).may(:show_details).if_participating_as_leader_role_of_supercamp
 
       permission(:group_full).
@@ -107,11 +106,6 @@ module Pbs::EventAbility
   def for_advised_or_participations_full_events
     for_advised_courses || for_participations_full_events
   end
-
-  # obsolete?
-  # def if_participating_as_leader_role
-  #   participating? && participating_as_leader_role?
-  # end
 
   def like_in_core_or_as_leader_of_supercamp
     for_participations_read_events_and_course_participants ||
