@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -150,7 +148,7 @@ describe EventsController do
       it 'can still submit camp when adding a supercamp' do
         group = event.groups.first
         event.update!(required_attrs_for_camp_submit)
-        event.update_attributes(parent_id: events(:bund_supercamp).id)
+        event.move_to_child_of(events(:bund_supercamp))
 
         put :create_camp_application, group_id: group.id, id: event.id
         expect(response).to redirect_to(group_event_path(group, event))
