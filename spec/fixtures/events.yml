@@ -93,49 +93,49 @@
 top_event:
   name: Top Event
   groups: bund
-  lft: 1
-  rgt: 2
+  lft: 11
+  rgt: 12
 
 top_course:
   name: Top Course
   groups: be
-  lft: 3
-  rgt: 4
   type: Event::Course
   kind: lpk
   number: 445
   priorization: true
   requires_approval: true
   external_applications: true
+  lft: 1
+  rgt: 2
 
 bund_course:
   name: Bund Kurs
   groups: bund
-  lft: 5
-  rgt: 6
   kind: lpk
   type: Event::Course
   number: 876
+  lft: 3
+  rgt: 4
 
 schekka_camp:
   name: Sommerlager
   groups: schekka
-  lft: 7
-  rgt: 8
   type: Event::Camp
+  lft: 9
+  rgt: 10
 
 bund_camp:
   name: Sammellager
   groups: bund
-  lft: 9
-  rgt: 10
   type: Event::Camp
+  lft: 7
+  rgt: 8
 
 bund_supercamp:
   name: Hauptlager
   groups: bund
-  lft: 11
-  rgt: 12
   type: Event::Camp
   allow_sub_camps: true
   state: created
+  lft: 5
+  rgt: 6
