@@ -243,6 +243,10 @@ de:
   filter_navigation/events:
     canton: 'durchgeführt im Kanton'
 
+  filter_navigation/camps:
+    all: Alle untergeordneten Lager
+    direct: nur direkt untergeordnete Lager
+
   group:
     pending_approvals:
       index:

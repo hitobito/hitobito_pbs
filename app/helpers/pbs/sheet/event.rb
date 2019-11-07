@@ -22,7 +22,7 @@ module Pbs::Sheet::Event
                        event.course_kind? && view.can?(:manage_attendances, event)
                      end)),
       Sheet::Tab.new('events.tabs.sub_camps',
-                     :group_event_path, # :group_event_subcamps_path,
+                     :group_event_subcamps_path,
                      if: (lambda do |_view, _group, event|
                        event.allow_sub_camps
                      end))

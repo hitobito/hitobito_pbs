@@ -8,6 +8,8 @@ require 'spec_helper'
 describe SupercampsController do
 
   let!(:supercamp_dates) { event_dates(:sixth, :sixth_two) }
+  let!(:supercamp_application_questions) { Fabricate(:question, event: supercamp) }
+  let!(:supercamp_admin_questions) { Fabricate(:question, admin: true, event: supercamp) }
   let!(:supercamp) { events(:bund_supercamp) }
 
   before do
@@ -79,17 +81,22 @@ describe SupercampsController do
         let(:supercamp_allows_sub_camps) { true }
         let(:supercamp_state) { 'created' }
         let(:event_form_data) { camp.attributes }
+        let(:expected_required_contact_attrs) { {'email' => :required,
+                                                 'first_name' => :required,
+                                                 'last_name' => :required,
+                                                 'town' => :required } }
         let(:result) { flash[:event_with_merged_supercamp] }
 
         before do
-          camp.update(al_visiting: true,
-                      kantonalverband_rules_applied: true,
-                      lagerreglement_applied: true,
-                      coach_visiting: true,
-                      j_s_rules_applied: true,
-                      al_present: true)
-          supercamp.update(allow_sub_camps: supercamp_allows_sub_camps,
-                           state: supercamp_state)
+          camp.update!(al_visiting: true,
+                       kantonalverband_rules_applied: true,
+                       lagerreglement_applied: true,
+                       coach_visiting: true,
+                       j_s_rules_applied: true,
+                       al_present: true)
+          supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
+                            state: supercamp_state,
+                            required_contact_attrs: [:town])
 
           request.env['HTTP_REFERER'] = '/' + form.to_s
           if form == :create
@@ -139,6 +146,34 @@ describe SupercampsController do
             attrs = %w(label location start_at finish_at)
             expect(result[:dates_attributes].map { |d| d.slice(attrs) })
               .to eq(supercamp.dates.map { |d| d.attributes.slice(attrs) })
+          end
+
+          it 'application questions from supercamp' do
+            attrs = %w(question choices multiple_choices required)
+            expect(result[:application_questions_attributes].map { |q| q.slice(attrs) })
+              .to eq(supercamp.application_questions.map { |q| q.attributes.slice(attrs) })
+          end
+
+          it 'application questions have flag set' do
+            expect(result[:application_questions_attributes][0][:pass_on_to_supercamp]).to be_truthy
+          end
+
+          it 'admin questions from supercamp' do
+            attrs = %w(question choices multiple_choices required)
+            expect(result[:admin_questions_attributes].map { |q| q.slice(attrs) })
+              .to eq(supercamp.admin_questions.map { |q| q.attributes.slice(attrs) })
+          end
+
+          it 'admin questions have flag set' do
+            expect(result[:admin_questions_attributes][0][:pass_on_to_supercamp]).to be_truthy
+          end
+
+          it 'required_contact_attrs from supercamp' do
+            expect(result[:contact_attrs]).to eq(expected_required_contact_attrs)
+          end
+
+          it 'contact_attrs_passed_on_to_supercamp from supercamp\'s required_contact attrs' do
+            expect(result[:contact_attrs_passed_on_to_supercamp]).to eq(expected_required_contact_attrs)
           end
 
           [

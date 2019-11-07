@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -150,7 +148,7 @@ describe EventsController do
       it 'can still submit camp when adding a supercamp' do
         group = event.groups.first
         event.update!(required_attrs_for_camp_submit)
-        event.update_attributes(parent_id: events(:bund_supercamp).id)
+        event.move_to_child_of(events(:bund_supercamp))
 
         put :create_camp_application, group_id: group.id, id: event.id
         expect(response).to redirect_to(group_event_path(group, event))
@@ -311,5 +309,58 @@ describe EventsController do
 
     end
 
+  end
+
+  context 'update the pass_on_to_supercamp flag on questions' do
+    let(:event) { events(:schekka_camp) }
+    let(:group) { event.groups.first }
+    let!(:q1) { Fabricate(:question, id: 1, event: event, pass_on_to_supercamp: false) }
+    let!(:q2) { Fabricate(:question, id: 2, event: event, admin: true, pass_on_to_supercamp: false) }
+    before { sign_in(people(:al_schekka)) }
+
+    {application_questions: 1, admin_questions: 2}.each do |attr, qid|
+      it attr do
+        put :update, group_id: group.id, id: event.id, event: {
+          (attr.to_s + '_attributes') => [ { id: qid, pass_on_to_supercamp: true } ]
+        }
+        expect(event.reload.send(attr)[0].pass_on_to_supercamp).to be_truthy
+      end
+    end
+  end
+
+  context 'mark contact attributes to be passed on to supercamp' do
+
+    let(:event) { events(:schekka_camp) }
+    let(:group) { event.groups.first }
+
+    before { sign_in(people(:al_schekka)) }
+
+    it 'assigns contact_attributes_passed_on_to_supercamp' do
+
+      put :update, group_id: group.id, id: event.id,
+          event: { contact_attrs_passed_on_to_supercamp: {
+            first_name: '1', nickname: '1', address: '1', social_accounts: '1' } }
+
+      expect(event.reload.contact_attrs_passed_on_to_supercamp).to include('first_name')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('address')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('social_accounts')
+
+    end
+
+    it 'removes contact_attributes_passed_on_to_supercamp' do
+
+      event.update!({ contact_attrs_passed_on_to_supercamp:
+                        ['first_name', 'social_accounts', 'address', 'nickname']})
+
+      put :update, group_id: group.id, id: event.id,
+          event: { contact_attrs_passed_on_to_supercamp: { nickname: '1' } }
+
+      expect(event.reload.contact_attrs_passed_on_to_supercamp).not_to include('first_name')
+      expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')
+      expect(event.contact_attrs_passed_on_to_supercamp).not_to include('address')
+      expect(event.contact_attrs_passed_on_to_supercamp).not_to include('social_accounts')
+
+    end
   end
 end

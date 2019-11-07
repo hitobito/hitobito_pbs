@@ -30,6 +30,8 @@ class SupercampsController < ApplicationController
 
   EXCLUDED_DATES_ATTRS = %w(id event_id).freeze
 
+  EXCLUDED_QUESTIONS_ATTRS = %w(id event_id).freeze
+
   def available
     supercamps_on_group_and_above
   end
@@ -70,16 +72,47 @@ class SupercampsController < ApplicationController
   end
 
   def supercamp
-    @supercamp ||= Event.includes(:dates).find(params[:supercamp_id])
+    @supercamp ||= Event.includes(:dates, :application_questions, :admin_questions)
+                     .find(params[:supercamp_id])
   end
 
   def dates_attributes
     supercamp.dates.map { |date| date.attributes.except(*EXCLUDED_DATES_ATTRS) }
   end
 
+  def application_questions_attrs
+    supercamp.application_questions.map do |question|
+      question.attributes.except(*EXCLUDED_QUESTIONS_ATTRS).merge(pass_on_to_supercamp: true)
+    end
+  end
+
+  def admin_questions_attrs
+    supercamp.admin_questions.map do |question|
+      question.attributes.except(*EXCLUDED_QUESTIONS_ATTRS).merge(pass_on_to_supercamp: true)
+    end
+  end
+
+  def required_contact_attrs
+    all_required_attrs = supercamp.required_contact_attrs +
+      Event::ParticipationContactData.mandatory_contact_attrs
+    all_required_attrs.map do |attr|
+      [attr, :required]
+    end.to_h
+  end
+
+  def supercamp_attributes_to_merge
+    {
+      dates_attributes: dates_attributes,
+      application_questions_attributes: application_questions_attrs,
+      admin_questions_attributes: admin_questions_attrs,
+      contact_attrs: required_contact_attrs,
+      contact_attrs_passed_on_to_supercamp: required_contact_attrs
+    }
+  end
+
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                  .merge(dates_attributes: dates_attributes)
+                                  .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name

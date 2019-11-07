@@ -61,6 +61,8 @@ Rails.application.routes.draw do
           post 'send_confirmation_notifications', controller: 'qualifications',
               action: 'send_confirmation_notifications'
         end
+
+        resources :subcamps, only: [:index]
       end
 
       get 'supercamps' => 'supercamps#available'

@@ -1056,6 +1056,9 @@ de:
         allow_sub_camps: untergeordnete Lager zulassen
         super_camp: Übergeordnetes Lager
 
+      event/contact_attrs:
+        pass_on_to_supercamp: An übergeordnetes Lager weitergeben
+
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
         advisor: LKB
@@ -1073,6 +1076,9 @@ de:
 
       event/participation:
         bsv_days: BSV-Tage
+
+      event/question:
+        pass_on_to_supercamp: An übergeordnetes Lager weitergeben
 
       person:
         layer_group_id: Id der Hauptebene
@@ -1161,6 +1167,10 @@ de:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
         must_be_valid_social_security_number: muss eine gültige AHV-Nummer (756.1234.5678.97) sein
       models:
+        event:
+          attributes:
+            base:
+              contact_attr_passed_on_to_supercamp_hidden: "'%{attribute}' muss entweder angezeigt oder nicht ans übergeordnete Lager weitergegeben werden"
         role:
           attributes:
             created_at:
