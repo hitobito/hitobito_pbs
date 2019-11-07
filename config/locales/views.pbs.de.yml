@@ -103,6 +103,7 @@ de:
         title: Alle Lager im Ausland
         explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
       advanced_bsv_export_button: Erweiterter BSV/LKB Export
+    hierarchy: Lagerhierarchie
 
     participations:
       canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
@@ -207,6 +208,8 @@ de:
       phone_privat: Telefon Privat
       phone_mobil: Telefon Mobil
       email: E-Mail
+      attach_to_supercamp: An übergeordnetes Lager anschliessen
+      direct_subcamps: direkt untergeordnete Lager
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
@@ -231,6 +234,7 @@ de:
     tabs:
       approvals: Empfehlungen
       attendances: Anwesenheit
+      sub_camps: Untergeordnete Lager
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Das Reglement zur Planung und Durchführung von Lagern ("Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt
@@ -331,6 +335,18 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
+  supercamps:
+    available:
+      select_supercamp: Übergeordnetes Lager auswählen
+      from_group_and_above: Auf dieser Gruppe und darüber
+      search_for_supercamp: Anderes übergeordnetes Lager suchen
+      search: Suchen
+      submit: Bestätigen
+    selectable_supercamps:
+      none: Keine Ergebnisse gefunden
+    does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
+    not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
 
   black_lists:
     form:

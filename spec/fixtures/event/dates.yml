@@ -30,3 +30,21 @@ fourth:
   event: bund_course
   start_at: <%= Time.zone.parse("2012-6-01") %>
   finish_at: <%= Time.zone.parse("2012-6-08") %>
+
+fifth:
+  label: Lager
+  event: bund_camp
+  start_at: <%= Time.zone.parse("2012-6-01") %>
+  finish_at: <%= Time.zone.parse("2012-6-08") %>
+
+sixth:
+  label: Vorweekend
+  event: bund_supercamp
+  start_at: <%= Time.zone.parse("2012-6-01") %>
+  finish_at: <%= Time.zone.parse("2012-6-02") %>
+
+sixth_two:
+  label: Hauptlager
+  event: bund_supercamp
+  start_at: <%= Time.zone.parse("2012-7-01") %>
+  finish_at: <%= Time.zone.parse("2012-7-08") %>

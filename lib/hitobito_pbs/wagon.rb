@@ -32,6 +32,8 @@ module HitobitoPbs
       Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
       Event::Application.send :include, Pbs::Event::Application
 
+      Event.acts_as_nested_set(dependent: :nullify)
+
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
       PhoneNumber.send :include, Pbs::PhoneNumber
 
@@ -83,6 +85,7 @@ module HitobitoPbs
       EventDecorator.send :include, Pbs::EventDecorator
       ContactableDecorator.send :include, Pbs::ContactableDecorator
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
+      GroupDecorator.send :include, Pbs::GroupDecorator
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer

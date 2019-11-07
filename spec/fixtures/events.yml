@@ -115,3 +115,15 @@ schekka_camp:
   name: Sommerlager
   groups: schekka
   type: Event::Camp
+
+bund_camp:
+  name: Sammellager
+  groups: bund
+  type: Event::Camp
+
+bund_supercamp:
+  name: Hauptlager
+  groups: bund
+  type: Event::Camp
+  allow_sub_camps: true
+  state: created
