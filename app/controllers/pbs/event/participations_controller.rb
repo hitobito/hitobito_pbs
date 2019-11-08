@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -10,7 +10,7 @@ module Pbs::Event::ParticipationsController
 
   included do
     before_render_show :load_approvals
-    before_render_show :course_confirmation_url
+    before_render_show :course_confirmation_url, if: -> { entry.event.course_kind? }
     before_render_form :inform_about_email_sent_to_participant
 
     after_action :send_discarded_info, only: [:cancel, :reject]
