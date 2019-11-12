@@ -63,7 +63,7 @@ class Group::Abteilung < Group
            Group::Elternrat,
            Group::AbteilungsGremium
 
-  has_many :member_counts
+  has_many :member_counts # rubocop:disable Rails/HasManyOrHasOneDependent since groups are only soft-deleted
   has_many :geolocations, as: :geolocatable, dependent: :destroy
   accepts_nested_attributes_for :geolocations,
                                 allow_destroy: true,
