@@ -260,6 +260,11 @@ de:
         title: Bereits getätigte Freigaben
         course_kind: Kurstyp
         course_kind_all: Alle
+    abteilung:
+      geolocations:
+        geolocation_fields:
+          lat: Lat
+          long: Long
 
   groups:
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"

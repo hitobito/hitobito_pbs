@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -24,6 +22,15 @@ module GroupsPbsHelper
 
   def format_approved_at(obj)
     f(obj.approved_at.try(:to_date))
+  end
+
+  def groupfinder_fields_info_text
+    content = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO)
+    placeholders = {
+      'max-number-of-geolocations' => Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
+    }
+
+    content.body_with_values(placeholders).to_s
   end
 
 end
