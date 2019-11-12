@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -13,6 +13,23 @@ describe Event::ParticipationsController do
   let(:course) { Fabricate(:pbs_course, groups: [groups(:bund)]) }
 
   before { sign_in(people(:bulei)) }
+
+  context 'GET#show' do
+    let(:event) { events(:top_event) }
+    let(:camp) { events(:bund_camp) }
+    let!(:participant) { Fabricate(:person, events: [event, camp, course]) }
+
+    [ :event, :camp, :course ].each do |kind|
+      it "works for #{kind}" do
+        instance = send(kind)
+        get :show,
+            group_id: group.id,
+            event_id: instance.id,
+            id: instance.participations.first.id
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 
   context 'GET#new' do
     it 'informs about email sent to participant' do
