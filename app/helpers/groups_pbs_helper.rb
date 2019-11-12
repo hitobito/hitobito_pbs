@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -27,11 +25,11 @@ module GroupsPbsHelper
   end
 
   def groupfinder_fields_info_text
-     content = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO)
-     placeholders = content.placeholders_list.each_with_object({}) do |token, hash|
-       hash[token] = Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
-     end
-     content.body_with_values(placeholders).to_s
+    content = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO)
+    placeholders = content.placeholders_list.each_with_object({}) do |token, hash|
+      hash[token] = Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
+    end
+    content.body_with_values(placeholders).to_s
   end
 
 end
