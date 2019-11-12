@@ -109,6 +109,7 @@ describe Group do
         limit = Group::Abteilung::GEOLOCATION_COUNT_LIMIT
         (limit + 1).times { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: group) }
         expect(group.reload).to have(1).error_on(:geolocations)
+        expect(group.errors.full_messages.to_sentence).to match(/Treffpunkte dürfen nicht mehr als #{limit} sein/)
       end
 
       it 'can have group finder fields' do

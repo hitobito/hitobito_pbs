@@ -110,9 +110,7 @@ class Group::Abteilung < Group
 
   def assert_geolocation_count
     if geolocations.reject(&:marked_for_destruction?).size > GEOLOCATION_COUNT_LIMIT
-      errors.add(:geolocations,
-                 I18n.t('.activerecord.errors.models.group/abteilung.too_many_geolocations',
-                        max: GEOLOCATION_COUNT_LIMIT))
+      errors.add(:geolocations, :too_many_geolocations, max: GEOLOCATION_COUNT_LIMIT)
     end
   end
 
