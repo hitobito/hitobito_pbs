@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe Geolocation do
 
-  it 'to_s' do
+  it 'has a string representation' do
     subject = Fabricate(:geolocation)
     expect(subject.to_s).to eq("(#{subject.lat}, #{subject.long})")
   end
