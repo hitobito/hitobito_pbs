@@ -26,9 +26,10 @@ module GroupsPbsHelper
 
   def groupfinder_fields_info_text
     content = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO)
-    placeholders = content.placeholders_list.each_with_object({}) do |token, hash|
-      hash[token] = Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
-    end
+    placeholders = {
+      'max-number-of-geolocations' => Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
+    }
+
     content.body_with_values(placeholders).to_s
   end
 
