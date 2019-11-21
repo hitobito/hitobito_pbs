@@ -280,7 +280,7 @@ de:
   help:
     index:
       title: Hilfe
-      description_html: Informationen zu den neusten Releases findest Du <a href="https://www.scout.ch/de/pfadi-online/midata/release/" target="_blank">hier</a>.
+      description_html: Informationen zu den neusten Updates findest du in den <a href="http://releasenotes.scouts.ch" target="_blank">Release-Notes</a>.
       guides:
         title: Leitfäden
         description: "Diese Leitfäden helfen dir bei der Administration von Kursen und Lagern:"
