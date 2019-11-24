@@ -81,6 +81,10 @@ CustomContent.seed_once(:key,
   { key: Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION,
     placeholders_required: 'participation-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, course-name' },
+
+  { key: Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO,
+    placeholders_required: '',
+    placeholders_optional: 'max-number-of-geolocations' },
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -113,6 +117,8 @@ crisis_triggered_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_TRIGGERED).
 crisis_acknowledged_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED).id
 
 course_confirmation_id = CustomContent.get(Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION).id
+
+groupfinder_fields_info_id = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO).id
 
 _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
@@ -509,5 +515,24 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: course_confirmation_id,
     locale: 'it',
     label: 'Confirmazione del corso: Informare participante' },
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'de',
+   label: 'Pfadi-Finder: Infotext für Felder auf Abteilung',
+   body: 'In den folgenden Feldern könnt ihr die öffentlichen Angaben eurer Abteilung eintragen. ' \
+         'Diese Angaben werden jeweils nächtlich in den Pfadi-Finder unter https://pfadi.swiss übernommen. ' \
+         'Es können bis zu {max-number-of-geolocations} Treffpunkte pro Abteilung definiert werden.'},
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'fr',
+   label: 'Trouveur des groupes de scout: Texte d\'informations sur donnees de groupe' },
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'en',
+   label: 'Scout group finder: Informational text for the fields on group'},
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'it',
+   label: 'Trovatore delle sezioni scout: Testo d\'informazioni su dati della sezione' },
 
 )

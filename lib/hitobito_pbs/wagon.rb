@@ -90,6 +90,7 @@ module HitobitoPbs
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
+      EventSerializer.send :include, Pbs::EventSerializer
 
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
