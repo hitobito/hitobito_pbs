@@ -31,6 +31,8 @@ module Pbs::EventSerializer
                                            :j_s_security_water,
                                            :required_contact_attrs,
                                            :hidden_contact_attrs))
+      entity :abteilungsleitung, item.abteilungsleitung, ContactSerializer
+      entity :coach, item.coach, ContactSerializer
     end
   end
 end
