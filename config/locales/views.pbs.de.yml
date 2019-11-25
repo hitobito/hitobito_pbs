@@ -322,6 +322,8 @@ de:
     fields_pbs:
       non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
       in_abteilung: (in der Abteilung)
+    qualification_buttons_pbs:
+      print_course_confirmation: Kursbestätigung drucken
 
   population:
     index:

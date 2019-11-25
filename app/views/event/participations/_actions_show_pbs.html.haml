@@ -9,11 +9,7 @@
 
 - if entry.has_confirmation?
   .btn-group
-    = form_tag(@course_confirmation_url,
-               method: :post, style: 'display: inline', authenticity_token: false,
-               enforce_utf8: false, target: '_blank') do
-      - entry.course_confirmation_params.entries.each do |key, value|
-        = hidden_field_tag key, preserve(value)
+    = course_confirmation_link(entry) do
       = button_tag(type: 'submit', class: 'btn') do
         = icon(:print)
         = t('event/course.participations.actions_show_pbs.course_confirmation')
