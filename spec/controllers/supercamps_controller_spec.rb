@@ -30,18 +30,21 @@ describe SupercampsController do
 
     before do
       camp.update(allow_sub_camps: true, state: 'created')
+      assert_true(camp.reload.allow_sub_camps)
+      assert_true(supercamp_schekka.reload.allow_sub_camps)
+      assert_true(supercamp_tsueri.reload.allow_sub_camps)
     end
 
     context 'available' do
       let(:subject) { assigns(:supercamps_on_group_and_above).map(&:name) }
 
-      it 'available finds supercamps on group and above' do
+      it 'finds supercamps on group and above' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.to include('Hauptlager', 'Schekka Super')
         is_expected.not_to include('Tsueri Super')
       end
 
-      it 'available excludes itself' do
+      it 'excludes itself' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.not_to include('Sommerlager')
       end
@@ -85,7 +88,7 @@ describe SupercampsController do
                                                  'first_name' => :required,
                                                  'last_name' => :required,
                                                  'town' => :required } }
-        let(:result) { flash[:event_with_merged_supercamp] }
+        let(:result) { controller.flash[:event_with_merged_supercamp] }
 
         before do
           camp.update!(al_visiting: true,
@@ -111,6 +114,8 @@ describe SupercampsController do
           context 'checks that supercamp allows subcamps' do
             let(:supercamp_allows_sub_camps) { false }
             it do
+              expect(supercamp.allow_sub_camps).to be_falsey
+              expect(supercamp.state).to be('created')
               expect(flash[:alert]).to eq('Das gewählte Lager erlaubt keine untergeordneten Lager')
             end
           end
@@ -118,6 +123,8 @@ describe SupercampsController do
           context 'checks that supercamp is in the correct state' do
             let(:supercamp_state) { 'confirmed' }
             it do
+              expect(supercamp.reload.allow_sub_camps).to be_truthy
+              expect(supercamp.reload.state).to be('confirmed')
               expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"')
             end
           end
@@ -131,6 +138,9 @@ describe SupercampsController do
         context 'merge supercamp data' do
 
           it 'name is calculated' do
+            expect(supercamp.reload.allow_sub_camps).to be_truthy
+            expect(response.status).to eq(302)
+            expect(result).not_to be_nil
             expect(result[:name]).to eq(supercamp.name + ': ' + group.display_name)
           end
 
@@ -183,6 +193,9 @@ describe SupercampsController do
             :advisor_water_security
           ].each do |attr|
             it attr.to_s + ' from subcamp' do
+              expect(supercamp.reload.allow_sub_camps).to be_truthy
+              expect(response.status).to eq(302)
+              expect(result).not_to be_nil
               expect(result[attr]).to eq(camp.attributes[attr.to_s])
             end
           end
