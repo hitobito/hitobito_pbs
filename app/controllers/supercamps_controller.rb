@@ -136,7 +136,7 @@ class SupercampsController < ApplicationController
 
   def authorize
     authorize!(:show, supercamp)
-    unless supercamp.allow_sub_camps
+    unless supercamp.allow_sub_camps?
       raise CanCan::AccessDenied.new(I18n.t('supercamps.does_not_allow_sub_camps'),
                                      :connect, supercamp)
     end

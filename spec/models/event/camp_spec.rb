@@ -614,7 +614,7 @@ describe Event::Camp do
       let(:sub_camp) { events(:schekka_camp) }
 
       it 'may only be attached to a super-camp that allows it' do
-        super_camp.update_attribute(:allow_sub_camps, false)
+        super_camp.update_attributes!(allow_sub_camps: false)
         sub_camp.parent_id = super_camp.id
 
         expect(sub_camp).to_not be_valid

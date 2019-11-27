@@ -24,7 +24,7 @@ module Pbs::Sheet::Event
       Sheet::Tab.new('events.tabs.sub_camps',
                      :group_event_subcamps_path,
                      if: (lambda do |_view, _group, event|
-                       event.allow_sub_camps
+                       event.allow_sub_camps?
                      end))
     )
   end
