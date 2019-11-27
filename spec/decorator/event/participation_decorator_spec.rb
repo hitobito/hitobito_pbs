@@ -68,7 +68,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
 
   describe '#course_confirmation_params' do
     it 'returns the correct parameters' do
-      expect(decorator.course_confirmation_params)
+      expect(decorator.send :course_confirmation_params)
         .to eq({ name: 'Doe',
                  vorname: 'John',
                  anrede: 'Herr',
@@ -83,7 +83,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
       decorator.person.update(first_name: nil, last_name: nil, title: nil, town: nil, birthday: nil)
       decorator.event.update(location: nil)
       decorator.event.dates.delete_all
-      expect(decorator.course_confirmation_params)
+      expect(decorator.send :course_confirmation_params)
         .to eq({ name: nil,
                  vorname: nil,
                  anrede: nil,
@@ -93,6 +93,25 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
                  dauer: '',
                  organisator: 'Pfadibewegung Schweiz' })
     end
+  end
+
+  context '#course_confirmation_form' do
+
+    include Haml::Helpers
+
+    subject { decorator.course_confirmation_form { 'submit button' } }
+
+    before do
+      event.update(location: "Line 1\nLine 2")
+      kind.update(can_have_confirmations: true)
+      participation.update(qualified: true)
+    end
+
+    it 'multiline values in hidden fields are escaped and not indented' do
+      expect(decorator.h).to receive(:preserve).at_least(:once) {|value| preserve(value)}
+      is_expected.to match(/value="Line 1&#x000A;Line 2"/)
+    end
+
   end
 
 end
