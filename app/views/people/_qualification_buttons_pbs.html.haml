@@ -1,0 +1,14 @@
+-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- if item.event_participation && item.event_participation.event.course_kind?
+  %td
+    = item.event_participation.decorate.course_confirmation_form do
+      = link_to(icon(:print),
+                nil,
+                onclick: '$(this).closest("form").submit(); event.preventDefault()',
+                title: t('.print_course_confirmation'))
+- else
+  %td

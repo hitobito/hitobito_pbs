@@ -10,15 +10,16 @@
   = render 'people'
 
   - if event.can_have_confirmations?
-    = label_tag :has_confirmations, {} do
-      = check_box_tag(:has_confirmations, 1, event.has_confirmations?)
-      = t('event/course.has_confirmations')
+    .control-group
+      = label_tag :has_confirmations, {} do
+        = check_box_tag(:has_confirmations, 1, event.has_confirmations?)
+        = t('event/course.has_confirmations')
 
-      - if event.has_confirmations? && event.qualified_participants_count > 0
-        = action_button(t('.send_confirmation_notifications', count: event.qualified_participants_count),
-                        group_event_send_confirmation_notifications_path, :envelope,
-                        in_button_group: true, method: :post, remote: true,
-                        rel: :tooltip, title: t('.button_explanation'))
+        - if event.has_confirmations? && event.qualified_participants_count > 0
+          = action_button(t('.send_confirmation_notifications', count: event.qualified_participants_count),
+                          group_event_send_confirmation_notifications_path, :envelope,
+                          in_button_group: true, method: :post, remote: true,
+                          rel: :tooltip, title: t('.button_explanation'))
 
   .btn-group
     = button_tag(t('event.qualifications.index.save'),
