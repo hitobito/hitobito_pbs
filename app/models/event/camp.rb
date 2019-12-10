@@ -211,7 +211,7 @@ class Event::Camp < Event
 
   def send_advisor_assignment_info(advisor_key)
     person = send(advisor_key)
-    if person &&
+    if person && person.email &&
        person != Person.stamper &&
        (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
       Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper).
