@@ -35,7 +35,7 @@ module Pbs::EventSerializer
       entity :leader, item.leader, ContactSerializer
       entity :coach, item.coach, ContactSerializer
 
-      entities :sub_camps, item.sub_camps, EventLinkSerializer
+      entities :sub_camps, item.sub_camps, Pbs::EventLinkSerializer
     end
   end
 end
