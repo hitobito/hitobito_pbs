@@ -32,7 +32,7 @@ module Pbs::EventSerializer
                                            :required_contact_attrs,
                                            :hidden_contact_attrs))
 
-        entities :sub_camps, item.sub_camps, EventLinkSerializer
+        entities :sub_camps, item.sub_camps, Pbs::EventLinkSerializer
     end
   end
 end

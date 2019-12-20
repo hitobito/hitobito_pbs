@@ -5,7 +5,7 @@
 
 require 'spec_helper'
 
-describe Pbs::EventSerializer do
+describe EventSerializer do
   let(:camp) { Fabricate(:pbs_camp) }
   let(:serializer) { EventSerializer.new(camp)}
   subject(:serialized) { serializer.to_hash }
