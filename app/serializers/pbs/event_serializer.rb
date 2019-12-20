@@ -31,6 +31,8 @@ module Pbs::EventSerializer
                                            :j_s_security_water,
                                            :required_contact_attrs,
                                            :hidden_contact_attrs))
+
+        entities :sub_camps, item.sub_camps, EventLinkSerializer
     end
   end
 end
