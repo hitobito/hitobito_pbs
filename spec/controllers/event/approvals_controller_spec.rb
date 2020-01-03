@@ -91,9 +91,9 @@ describe Event::ApprovalsController do
 
       expect(assigns(:approvals).keys).to eq(list)
 
-      expect(assigns(:approvals)[@p1]).to eq([@a11, @a12, @a13])
-      expect(assigns(:approvals)[@p2]).to eq([@a21, @a22])
-      expect(assigns(:approvals)[@p3]).to eq([@a31, @a32])
+      expect(assigns(:approvals)[@p1]).to match_array([@a11, @a12, @a13])
+      expect(assigns(:approvals)[@p2]).to match_array([@a21, @a22])
+      expect(assigns(:approvals)[@p3]).to match_array([@a31, @a32])
     end
 
     def create_approval(participation, layer, approved)
