@@ -22,11 +22,12 @@ module HitobitoPbs
     config.to_prepare do # rubocop:disable Metrics/BlockLength
 
       ### models
-      Group.send        :include, Pbs::Group
-      Person.send       :include, Pbs::Person
-      Role.send         :include, Pbs::Role
-      Event.send        :include, Pbs::Event
-      Event::Kind.send  :include, Pbs::Event::Kind
+      Group.send         :include, Pbs::Group
+      Person.send        :include, Pbs::Person
+      Role.send          :include, Pbs::Role
+      Qualification.send :include, Pbs::Qualification
+      Event.send         :include, Pbs::Event
+      Event::Kind.send   :include, Pbs::Event::Kind
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
@@ -42,6 +43,7 @@ module HitobitoPbs
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
       Event::Filter.send :include, Pbs::Event::Filter
+      Event::Qualifier.send :include, Pbs::Event::Qualifier
       Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.send(

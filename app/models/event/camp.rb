@@ -142,10 +142,10 @@ class Event::Camp < Event
 
   validates :state, inclusion: possible_states
   validate  :may_become_sub_camp, if: :parent_id_changed?
-  validates :allow_sub_camps, acceptance: { accept: true }, if: 'sub_camps.any?'
   validate :assert_contact_attrs_passed_on_to_supercamp_valid, if: :parent_id
 
   ### CALLBACKS
+  before_validation :assert_allow_sub_camps, unless: :allow_sub_camps
 
   before_create :assign_abteilungsleitung
   after_save :send_assignment_infos
@@ -211,7 +211,7 @@ class Event::Camp < Event
 
   def send_advisor_assignment_info(advisor_key)
     person = send(advisor_key)
-    if person &&
+    if person && person.email &&
        person != Person.stamper &&
        (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
       Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper).
@@ -277,6 +277,10 @@ class Event::Camp < Event
         errors.add(:base, :contact_attr_passed_on_to_supercamp_hidden, attribute: a)
       end
     end
+  end
+
+  def assert_allow_sub_camps
+    errors.add(:allow_sub_camps, :accepted) if sub_camps.any?
   end
 
 end

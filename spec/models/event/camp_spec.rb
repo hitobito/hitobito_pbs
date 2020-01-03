@@ -280,6 +280,14 @@ describe Event::Camp do
                       advisor_snow_security_id: nil)
     end
 
+    it 'is not sent if freshly assigned does not have email set' do
+      people(:al_schekka).update(email: nil)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
+      subject.update!(location: 'Bern',
+                      coach_id: people(:al_schekka).id,
+                      advisor_snow_security_id: nil)
+    end
+
     %w(coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
       context "mail for #{key}" do
         it 'is sent' do

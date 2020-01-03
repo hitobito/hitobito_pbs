@@ -26,6 +26,6 @@ describe Export::Tabular::People::PeopleFull do
      :roles, :tags, :id, :layer_group_id]
   end
 
-  its(:attributes) { should eq full_attributes }
+  its(:attributes) { should match_array full_attributes }
 
 end
