@@ -161,7 +161,7 @@ Name;Organisatoren;Beschreibung;Lagerstatus;Ort / Adresse;Datum 1 Bezeichnung;Da
 
     context 'body' do
       let(:regular_camp_row) { csv.second.split(';') }
-      let(:test_camp_row) { csv.third.split(';') }
+      let(:test_camp_row) { csv.last.split(';') }
 
       it 'shows camp j+s kind and canton' do
         expect(regular_camp_row[-9]).to eq ''
