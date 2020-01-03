@@ -29,8 +29,8 @@ fr:
         other: Commissions
         long: Commission fédérale
       group/elternrat:
-        one: Comité des parents
-        other: Comités des parents
+        one: Conseil des parents
+        other: Conseils des parents
       group/gremium:
         one: Commission
         other: Commissions

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -58,8 +58,17 @@ Rails.application.routes.draw do
             get 'approvals' => 'approvals#new' # route required for language switch
           end
           resources :approvals, only: [:index]
+          post 'send_confirmation_notifications', controller: 'qualifications',
+              action: 'send_confirmation_notifications'
         end
+
+        resources :subcamps, only: [:index]
       end
+
+      get 'supercamps' => 'supercamps#available'
+      get 'query_supercamps' => 'supercamps#query'
+      post 'connect_supercamp' => 'supercamps#connect'
+      patch 'connect_supercamp' => 'supercamps#connect'
 
     end
 
@@ -71,6 +80,8 @@ Rails.application.routes.draw do
     get 'list_camps_abroad' => 'event/lists#camps_abroad', as: :list_camps_abroad
 
     resources :black_lists
+
+    get 'help' => 'help#index'
 
   end
 

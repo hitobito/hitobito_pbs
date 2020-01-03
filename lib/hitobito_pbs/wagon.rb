@@ -1,7 +1,7 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -22,15 +22,18 @@ module HitobitoPbs
     config.to_prepare do # rubocop:disable Metrics/BlockLength
 
       ### models
-      Group.send        :include, Pbs::Group
-      Person.send       :include, Pbs::Person
-      Role.send         :include, Pbs::Role
-      Event.send        :include, Pbs::Event
-      Event::Kind.send  :include, Pbs::Event::Kind
+      Group.send         :include, Pbs::Group
+      Person.send        :include, Pbs::Person
+      Role.send          :include, Pbs::Role
+      Qualification.send :include, Pbs::Qualification
+      Event.send         :include, Pbs::Event
+      Event::Kind.send   :include, Pbs::Event::Kind
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
       Event::Application.send :include, Pbs::Event::Application
+
+      Event.acts_as_nested_set(dependent: :nullify)
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
       PhoneNumber.send :include, Pbs::PhoneNumber
@@ -40,6 +43,7 @@ module HitobitoPbs
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
       Event::Filter.send :include, Pbs::Event::Filter
+      Event::Qualifier.send :include, Pbs::Event::Qualifier
       Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.send(
@@ -82,16 +86,20 @@ module HitobitoPbs
       ### decorators
       EventDecorator.send :include, Pbs::EventDecorator
       ContactableDecorator.send :include, Pbs::ContactableDecorator
+      Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
+      GroupDecorator.send :include, Pbs::GroupDecorator
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
+      EventSerializer.send :include, Pbs::EventSerializer
 
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :brother_and_sisters]
-      Event::KindsController.permitted_attrs += [:documents_text, :campy]
+      Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
+                                                 :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
 
       RolesController.send :include, Pbs::RolesController
@@ -101,6 +109,7 @@ module HitobitoPbs
       Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
       Event::ListsController.send :include, Pbs::Event::ListsController
       Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
+      Event::QualificationsController.send :include, Pbs::Event::QualificationsController
       QualificationsController.send :include, Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
 
@@ -138,6 +147,13 @@ module HitobitoPbs
             can?(:list_abroad, Event::Camp) ||
             can?(:list_cantonal, Event::Camp)
         end
+      )
+      index_admin = NavigationHelper::MAIN.index { |opts| opts[:label] == :admin }
+      NavigationHelper::MAIN.insert(
+        index_admin,
+        label: :help,
+        icon_name: :'info-circle',
+        url: :help_path
       )
 
       # rubocop:enable SingleSpaceBeforeFirstArg

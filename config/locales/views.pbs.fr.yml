@@ -214,6 +214,21 @@ fr:
       population: Effectifs
       statistic: Statistiques
       approvals: Validation du cours (%{count})
+  help:
+    index:
+      title: Aide
+      guides:
+        title: Guides
+        hering:
+          url: http://heringfr.scouts.ch
+        coaches:
+          url: http://coachesfr.scouts.ch
+        anker:
+          url: http://ankerfr.scouts.ch
+        pilot:
+          url: http://pilotfr.scouts.ch
+        ticket:
+          url: http://ticketfr.scouts.ch
   member_counts:
     created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
     updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.
@@ -222,6 +237,7 @@ fr:
       title: Editer les effectifs %{year}
   navigation:
     camps: Camp
+    help: Aide
   people:
     fields:
       no_sensitive_information: Ne pas saisir de données personnelles sensibles dans ce champ.

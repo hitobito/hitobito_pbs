@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -16,7 +16,7 @@ module Pbs::Event::Course
   included do
     include Event::RestrictedRole
 
-    self.used_attributes += [:advisor_id, :express_fee, :bsv_days] +
+    self.used_attributes += [:advisor_id, :express_fee, :bsv_days, :has_confirmations] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,

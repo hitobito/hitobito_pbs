@@ -17,3 +17,12 @@ $(document).on('change', 'select#event_canton', updateLocalScoutContactFieldsVis
 
 $ ->
   updateLocalScoutContactFieldsVisibility()
+
+removeSupercamp = ->
+  $('#event_parent_id').val(null)
+  console.log($(this), $(this).closest('.control-group'))
+  $(this).closest('.control-group').hide()
+
+$(document).on('turbolinks:load', ->
+  $('[data-remove-supercamp]').click(removeSupercamp)
+)

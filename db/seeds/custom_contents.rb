@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -77,6 +77,14 @@ CustomContent.seed_once(:key,
   { key: CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED,
     placeholders_required: 'creator, group, acknowledger',
     placeholders_optional: 'date' },
+
+  { key: Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION,
+    placeholders_required: 'participation-url',
+    placeholders_optional: 'recipient-name-with-salutation, recipient-name, course-name' },
+
+  { key: Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO,
+    placeholders_required: '',
+    placeholders_optional: 'max-number-of-geolocations' },
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
@@ -107,6 +115,10 @@ black_list_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_HIT).i
 black_list_attr_hit_id = CustomContent.get(BlackListMailer::CONTENT_BLACK_LIST_ATTR_HIT).id
 crisis_triggered_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_TRIGGERED).id
 crisis_acknowledged_id = CustomContent.get(CrisisMailer::CONTENT_CRISIS_ACKNOWLEDGED).id
+
+course_confirmation_id = CustomContent.get(Event::Course::ConfirmationMailer::CONTENT_COURSE_CONFIRMATION).id
+
+groupfinder_fields_info_id = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO).id
 
 _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
@@ -483,5 +495,44 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   { custom_content_id: crisis_acknowledged_id,
     locale: 'it',
     label: 'Crisi: E-Mail Informare la persona responsabile riguardo al riconoscimento' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'de',
+    label: 'Kursbestätigung: Qualifizierte/n Teilnehmer/in informieren',
+    subject: 'Kursbestätigung verfügbar',
+    body: '{recipient-name-with-salutation}<br><br>'\
+          'Für den bestandenen Kurs "{course-name}" '\
+          'kann jetzt hier eine Bestätigung ausgedruckt werden:<br><br>{participation-url}<br>'},
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'fr',
+    label: 'Confirmation de cours: Informer participant/e' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'en',
+    label: 'Course confirmation: Inform participant' },
+
+  { custom_content_id: course_confirmation_id,
+    locale: 'it',
+    label: 'Confirmazione del corso: Informare participante' },
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'de',
+   label: 'Pfadi-Finder: Infotext für Felder auf Abteilung',
+   body: 'In den folgenden Feldern könnt ihr die öffentlichen Angaben eurer Abteilung eintragen. ' \
+         'Diese Angaben werden jeweils nächtlich in den Pfadi-Finder unter https://pfadi.swiss übernommen. ' \
+         'Es können bis zu {max-number-of-geolocations} Treffpunkte pro Abteilung definiert werden.'},
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'fr',
+   label: 'Trouveur des groupes de scout: Texte d\'informations sur donnees de groupe' },
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'en',
+   label: 'Scout group finder: Informational text for the fields on group'},
+
+  { custom_content_id: groupfinder_fields_info_id,
+   locale: 'it',
+   label: 'Trovatore delle sezioni scout: Testo d\'informazioni su dati della sezione' },
 
 )
