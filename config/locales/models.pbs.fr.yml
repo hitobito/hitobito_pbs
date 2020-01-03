@@ -29,8 +29,8 @@ fr:
         other: Commissions
         long: Commission fédérale
       group/elternrat:
-        one: Comité des parents
-        other: Comités des parents
+        one: Conseil des parents
+        other: Conseils des parents
       group/gremium:
         one: Commission
         other: Commissions
@@ -733,6 +733,8 @@ fr:
         camp_days: Nombre de jours de camp
         camp_submitted: Démission
         camp_submitted_at: Déposée le
+        total_expected_leading_participants: Responsables attendus/-ues
+        total_expected_participants: Participants/-es attendus/-ues
         course_languages: Langues de cours
         express_fee: Finances express
         expected_participants: Participants/-es attendus/-ues

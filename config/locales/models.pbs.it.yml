@@ -747,6 +747,8 @@ it:
         camp_days: Numero di giorni di campo
         camp_submitted: Inoltrato
         camp_submitted_at: Inoltrato il
+        total_expected_leading_participants: Partecipanti stimati
+        total_expected_participants: Animatori stimati
         course_languages: Lingua del corso
         express_fee: Spese per un'elaborazione espresso
         expected_participants: Partecipanti stimati
