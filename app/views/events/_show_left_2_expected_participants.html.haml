@@ -7,6 +7,9 @@
   - if can?(:show_details, entry)
     - if expected_participants_value_present?(entry)
       = section(t('activerecord.attributes.event.expected_participants')) do
+        %dl.dl-horizontal
+          = labeled_attr(entry, :total_expected_leading_participants)
+          = labeled_attr(entry, :total_expected_participants)
         %table.table
           %tr
             %th
