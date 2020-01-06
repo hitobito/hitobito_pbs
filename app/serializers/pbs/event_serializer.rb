@@ -32,6 +32,7 @@ module Pbs::EventSerializer
                                            :required_contact_attrs,
                                            :hidden_contact_attrs))
       entity :abteilungsleitung, item.abteilungsleitung, ContactSerializer
+      entity :leader, item.leader, ContactSerializer
       entity :coach, item.coach, ContactSerializer
     end
   end
