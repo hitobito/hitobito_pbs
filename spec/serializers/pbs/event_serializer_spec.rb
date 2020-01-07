@@ -7,7 +7,8 @@ require 'spec_helper'
 
 describe EventSerializer do
   let(:camp) { Fabricate(:pbs_camp) }
-  let(:serializer) { EventSerializer.new(camp)}
+  let(:controller) { double.as_null_object }
+  let(:serializer) { ::EventSerializer.new(camp, controller: controller)}
   subject(:serialized) { serializer.to_hash }
 
   it { is_expected.to eq({ id: camp.id, href: event_url(item.id, format: :json) }) }
