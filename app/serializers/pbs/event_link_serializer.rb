@@ -6,13 +6,13 @@
 #  https://github.com/hitobito/hitobito.
 
 class Pbs::EventLinkSerializer < ::ApplicationSerializer
-  extend ActiveSupport::Concern
 
   schema do
     json_api_properties
 
     map_properties :id
-    property :href, h.event_url(item.id, format: :json)
+    property :name, item.to_s
+    property :href, h.group_event_url(item.groups.first, item, format: :json)
   end
 end
 
