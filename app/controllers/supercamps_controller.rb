@@ -51,7 +51,7 @@ class SupercampsController < ApplicationController
   private
 
   def without_self(supercamps)
-    supercamps.reject { |supercamp| supercamp.id == camp_id }
+    supercamps.reject { |supercamp| supercamp.id.to_s == camp_id }
   end
 
   def group

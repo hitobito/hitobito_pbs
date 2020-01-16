@@ -278,7 +278,8 @@ class Event::Camp < Event
 
   def may_become_sub_camp
     if super_camp.present?
-      if !super_camp.allow_sub_camps || super_camp.state != 'created' || !super_camp.upcoming
+      if super_camp.id == self.id || !super_camp.allow_sub_camps ||
+         super_camp.state != 'created' || !super_camp.upcoming
         errors.add(:parent_id, :invalid)
       end
     else
