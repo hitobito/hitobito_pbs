@@ -277,9 +277,15 @@ class Event::Camp < Event
   end
 
   def may_become_sub_camp
-    return unless super_camp.present?
-    if !super_camp.allow_sub_camps || super_camp.state != 'created' || !super_camp.upcoming
-      errors.add(:parent_id, :invalid)
+    if super_camp.present?
+      if !super_camp.allow_sub_camps || super_camp.state != 'created' || !super_camp.upcoming
+        errors.add(:parent_id, :invalid)
+      end
+    else
+      unless Event::Camp.find(parent_id_was).state == 'created'
+        errors.add(:base, :cannot_remove_parent_id)
+        self.parent_id = parent_id_was
+      end
     end
   end
 

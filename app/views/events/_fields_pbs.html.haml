@@ -46,9 +46,7 @@
         = f.labeled_readonly_value(:super_camp,
                                    label: t('.supercamp'),
                                    value: format_camp_name_with_groups(entry.super_camp, link: true),
-                                   help_inline: link_to(I18n.t('global.associations.remove'),
-                                                        'javascript:void(0)',
-                                                        'data-remove-supercamp' => ''))
+                                   help_inline: supercamp_remove_link(entry))
       - else
         = f.labeled(:attach_to_supercamp, '&nbsp;'.html_safe) do
           = action_button(t('.attach_to_supercamp'),

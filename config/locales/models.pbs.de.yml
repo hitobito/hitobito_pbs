@@ -1182,6 +1182,10 @@ de:
           attributes:
             base:
               contact_attr_passed_on_to_supercamp_hidden: "'%{attribute}' muss entweder angezeigt oder nicht ans übergeordnete Lager weitergegeben werden"
+        event/camp:
+          attributes:
+            base:
+              cannot_remove_parent_id: "Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status \"Erstellt\" ist"
         role:
           attributes:
             created_at:
