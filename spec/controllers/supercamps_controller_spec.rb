@@ -84,6 +84,7 @@ describe SupercampsController do
         let(:supercamp_state) { 'created' }
         let(:event_form_data) { camp.attributes }
         let(:override_date) { nil }
+        let(:parent_id) { nil }
         let(:expected_required_contact_attrs) { {'email' => :required,
                                                  'first_name' => :required,
                                                  'last_name' => :required,
@@ -96,7 +97,8 @@ describe SupercampsController do
                        lagerreglement_applied: true,
                        coach_visiting: true,
                        j_s_rules_applied: true,
-                       al_present: true)
+                       al_present: true,
+                       parent_id: parent_id)
           supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
                             state: supercamp_state,
                             required_contact_attrs: [:town])
@@ -136,6 +138,14 @@ describe SupercampsController do
 
             it do
               expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist bereits vorbei')
+            end
+          end
+
+          context 'prohibits connecting again when already connected to a supercamp' do
+            let(:parent_id) { supercamp.id }
+
+            it do
+              expect(flash[:alert]).to eq('Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen')
             end
           end
 

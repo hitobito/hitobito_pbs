@@ -148,6 +148,9 @@ class SupercampsController < ApplicationController
     unless supercamp.upcoming
       raise CanCan::AccessDenied.new(I18n.t('supercamps.not_upcoming'), :connect, supercamp)
     end
+    if params[:event]['parent_id'].present?
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.already_connected'), :connect, supercamp)
+    end
   end
 
   def handle_access_denied(e)
