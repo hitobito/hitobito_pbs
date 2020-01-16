@@ -59,12 +59,12 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = without_self(group.decorate.supercamps_on_group_and_above)
+    @supercamps_on_group_and_above = without_self(group.decorate.upcoming_supercamps_on_group_and_above)
   end
 
   def matching_supercamps
-    Event::Camp.where('name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created')
+    Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
+               .where(allow_sub_camps: true, state: 'created').uniq
   end
 
   def camp_id

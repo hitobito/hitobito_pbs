@@ -7,7 +7,7 @@ require 'spec_helper'
 
 describe SupercampsController do
 
-  let!(:supercamp_dates) { event_dates(:sixth, :sixth_two) }
+  let!(:supercamp_dates) { event_dates(:sixth_upcoming, :sixth_two_upcoming) }
   let!(:supercamp_application_questions) { Fabricate(:question, event: supercamp) }
   let!(:supercamp_admin_questions) { Fabricate(:question, admin: true, event: supercamp) }
   let!(:supercamp) { events(:bund_supercamp) }
@@ -17,14 +17,10 @@ describe SupercampsController do
   end
 
   describe 'find available supercamps' do
-    let!(:supercamp_schekka) do
-      Fabricate(:event, type: Event::Camp.name, name: 'Schekka Super',
-                        groups: [groups(:schekka)], allow_sub_camps: true, state: 'created')
-    end
-    let!(:supercamp_tsueri) do
-      Fabricate(:event, type: Event::Camp.name, name: 'Tsueri Super', groups: [groups(:chaeib)],
-                        allow_sub_camps: true, state: 'created')
-    end
+    let!(:supercamp_schekka) { events(:schekka_supercamp) }
+    let!(:supercamp_tsueri) { events(:tsueri_supercamp) }
+    let!(:supercamp_dates_schekka) { event_dates(:seventh_upcoming) }
+    let!(:supercamp_dates_tsueri) { event_dates(:eighth_upcoming) }
     let(:camp) { events(:schekka_camp) }
     let(:group) { camp.groups.first }
 
@@ -35,15 +31,21 @@ describe SupercampsController do
     context 'available' do
       let(:subject) { assigns(:supercamps_on_group_and_above).map(&:name) }
 
-      it 'available finds supercamps on group and above' do
+      it 'finds supercamps on group and above' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.to include('Hauptlager', 'Schekka Super')
         is_expected.not_to include('Tsueri Super')
       end
 
-      it 'available excludes itself' do
+      it 'excludes itself' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.not_to include('Sommerlager')
+      end
+
+      it 'excludes past camps' do
+        supercamp_schekka.dates.first.update(start_at: DateTime.now - 1.year, finish_at: DateTime.now - 1.year + 2.days)
+        xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
+        is_expected.not_to include('Schekka Super')
       end
 
     end
