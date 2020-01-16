@@ -37,14 +37,26 @@ fifth:
   start_at: <%= Time.zone.parse("2012-6-01") %>
   finish_at: <%= Time.zone.parse("2012-6-08") %>
 
-sixth:
+sixth_upcoming:
   label: Vorweekend
   event: bund_supercamp
-  start_at: <%= Time.zone.parse("2012-6-01") %>
-  finish_at: <%= Time.zone.parse("2012-6-02") %>
+  start_at: <%= Time.zone.now + 1.month %>
+  finish_at: <%= Time.zone.now + 1.month + 2.days %>
 
-sixth_two:
+sixth_two_upcoming:
   label: Hauptlager
   event: bund_supercamp
-  start_at: <%= Time.zone.parse("2012-7-01") %>
-  finish_at: <%= Time.zone.parse("2012-7-08") %>
+  start_at: <%= Time.zone.now + 1.year %>
+  finish_at: <%= Time.zone.now + 1.year + 14.days %>
+
+seventh_upcoming:
+  label: Weekend
+  event: schekka_supercamp
+  start_at: <%= Time.zone.now + 1.month %>
+  finish_at: <%= Time.zone.now + 1.month + 2.days %>
+
+eighth_upcoming:
+  label: Weekend
+  event: tsueri_supercamp
+  start_at: <%= Time.zone.now + 1.month %>
+  finish_at: <%= Time.zone.now + 1.month + 2.days %>

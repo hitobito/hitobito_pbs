@@ -124,6 +124,24 @@ schekka_camp:
   lft: 9
   rgt: 10
 
+schekka_supercamp:
+  name: Schekka Super
+  groups: schekka
+  type: Event::Camp
+  allow_sub_camps: true
+  state: created
+  lft: 13
+  rgt: 14
+
+tsueri_supercamp:
+  name: Tsueri Super
+  groups: chaeib
+  type: Event::Camp
+  allow_sub_camps: true
+  state: created
+  lft: 15
+  rgt: 16
+
 bund_camp:
   name: Sammellager
   groups: bund

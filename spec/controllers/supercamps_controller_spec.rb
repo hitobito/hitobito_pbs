@@ -7,7 +7,7 @@ require 'spec_helper'
 
 describe SupercampsController do
 
-  let!(:supercamp_dates) { event_dates(:sixth, :sixth_two) }
+  let!(:supercamp_dates) { event_dates(:sixth_upcoming, :sixth_two_upcoming) }
   let!(:supercamp_application_questions) { Fabricate(:question, event: supercamp) }
   let!(:supercamp_admin_questions) { Fabricate(:question, admin: true, event: supercamp) }
   let!(:supercamp) { events(:bund_supercamp) }
@@ -17,14 +17,10 @@ describe SupercampsController do
   end
 
   describe 'find available supercamps' do
-    let!(:supercamp_schekka) do
-      Fabricate(:event, type: Event::Camp.name, name: 'Schekka Super',
-                        groups: [groups(:schekka)], allow_sub_camps: true, state: 'created')
-    end
-    let!(:supercamp_tsueri) do
-      Fabricate(:event, type: Event::Camp.name, name: 'Tsueri Super', groups: [groups(:chaeib)],
-                        allow_sub_camps: true, state: 'created')
-    end
+    let!(:supercamp_schekka) { events(:schekka_supercamp) }
+    let!(:supercamp_tsueri) { events(:tsueri_supercamp) }
+    let!(:supercamp_dates_schekka) { event_dates(:seventh_upcoming) }
+    let!(:supercamp_dates_tsueri) { event_dates(:eighth_upcoming) }
     let(:camp) { events(:schekka_camp) }
     let(:group) { camp.groups.first }
 
@@ -35,15 +31,21 @@ describe SupercampsController do
     context 'available' do
       let(:subject) { assigns(:supercamps_on_group_and_above).map(&:name) }
 
-      it 'available finds supercamps on group and above' do
+      it 'finds supercamps on group and above' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.to include('Hauptlager', 'Schekka Super')
         is_expected.not_to include('Tsueri Super')
       end
 
-      it 'available excludes itself' do
+      it 'excludes itself' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.not_to include('Sommerlager')
+      end
+
+      it 'excludes past camps' do
+        supercamp_schekka.dates.first.update(start_at: DateTime.now - 1.year, finish_at: DateTime.now - 1.year + 2.days)
+        xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
+        is_expected.not_to include('Schekka Super')
       end
 
     end
@@ -81,6 +83,8 @@ describe SupercampsController do
         let(:supercamp_allows_sub_camps) { true }
         let(:supercamp_state) { 'created' }
         let(:event_form_data) { camp.attributes }
+        let(:override_date) { nil }
+        let(:parent_id) { nil }
         let(:expected_required_contact_attrs) { {'email' => :required,
                                                  'first_name' => :required,
                                                  'last_name' => :required,
@@ -93,10 +97,17 @@ describe SupercampsController do
                        lagerreglement_applied: true,
                        coach_visiting: true,
                        j_s_rules_applied: true,
-                       al_present: true)
+                       al_present: true,
+                       parent_id: parent_id)
           supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
                             state: supercamp_state,
                             required_contact_attrs: [:town])
+
+          if override_date != nil
+            supercamp.dates.each do |date|
+              date.update(start_at: override_date, finish_at: nil)
+            end
+          end
 
           request.env['HTTP_REFERER'] = '/' + form.to_s
           if form == :create
@@ -119,6 +130,22 @@ describe SupercampsController do
             let(:supercamp_state) { 'confirmed' }
             it do
               expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"')
+            end
+          end
+
+          context 'checks that supercamp is upcoming' do
+            let(:override_date) { DateTime.now - 1.year }
+
+            it do
+              expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist bereits vorbei')
+            end
+          end
+
+          context 'prohibits connecting again when already connected to a supercamp' do
+            let(:parent_id) { supercamp.id }
+
+            it do
+              expect(flash[:alert]).to eq('Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen')
             end
           end
 

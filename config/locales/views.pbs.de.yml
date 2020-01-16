@@ -210,6 +210,7 @@ de:
       email: E-Mail
       attach_to_supercamp: An übergeordnetes Lager anschliessen
       direct_subcamps: direkt untergeordnete Lager
+      supercamp: Übergeordnetes Lager
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
@@ -358,6 +359,8 @@ de:
       none: Keine Ergebnisse gefunden
     does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
     not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
+    not_upcoming: Das gewählte übergeordnete Lager ist bereits vorbei
+    already_connected: Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen
 
   black_lists:
     form:

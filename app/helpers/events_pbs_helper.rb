@@ -232,4 +232,10 @@ module EventsPbsHelper
     end
   end
 
+  def supercamp_remove_link(entry)
+    return '' unless entry.super_camp && entry.super_camp.state == 'created'
+    link_to(I18n.t('global.associations.remove'), 'javascript:void(0)',
+            'data-remove-supercamp' => '')
+  end
+
 end

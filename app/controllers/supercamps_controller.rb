@@ -59,12 +59,13 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = without_self(group.decorate.supercamps_on_group_and_above)
+    @supercamps_on_group_and_above = without_self(
+        group.decorate.upcoming_supercamps_on_group_and_above)
   end
 
   def matching_supercamps
-    Event::Camp.where('name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created')
+    Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
+               .where(allow_sub_camps: true, state: 'created').uniq
   end
 
   def camp_id
@@ -143,6 +144,12 @@ class SupercampsController < ApplicationController
     unless supercamp.state == 'created'
       raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
                                      :connect, supercamp)
+    end
+    unless supercamp.upcoming
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_upcoming'), :connect, supercamp)
+    end
+    if params[:event]['parent_id'].present?
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.already_connected'), :connect, supercamp)
     end
   end
 
