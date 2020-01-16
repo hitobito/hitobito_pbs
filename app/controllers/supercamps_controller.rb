@@ -39,7 +39,7 @@ class SupercampsController < ApplicationController
   def query
     @found_supercamps = []
     if params.key?(:q) && params[:q].size >= 3
-      @found_supercamps = without_self(matching_supercamps.limit(10))
+      @found_supercamps = without_self_and_descendants(matching_supercamps.limit(10))
     end
   end
 
@@ -50,8 +50,9 @@ class SupercampsController < ApplicationController
 
   private
 
-  def without_self(supercamps)
-    supercamps.reject { |supercamp| supercamp.id == camp_id }
+  def without_self_and_descendants(supercamps)
+    child_ids = Event::Camp.find(camp_id).self_and_descendants.pluck(:id)
+    supercamps.reject { |supercamp| child_ids.include?(supercamp.id) }
   end
 
   def group
@@ -59,7 +60,7 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = without_self(
+    @supercamps_on_group_and_above = without_self_and_descendants(
         group.decorate.upcoming_supercamps_on_group_and_above)
   end
 

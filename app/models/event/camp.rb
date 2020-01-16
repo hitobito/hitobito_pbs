@@ -278,7 +278,8 @@ class Event::Camp < Event
 
   def may_become_sub_camp
     if super_camp.present?
-      if !super_camp.allow_sub_camps || super_camp.state != 'created' || !super_camp.upcoming
+      if is_ancestor_of(super_camp.id) || !super_camp.allow_sub_camps ||
+         super_camp.state != 'created' || !super_camp.upcoming
         errors.add(:parent_id, :invalid)
       end
     else
@@ -287,6 +288,10 @@ class Event::Camp < Event
         self.parent_id = parent_id_was
       end
     end
+  end
+
+  def is_ancestor_of(camp_id)
+    self.self_and_descendants.pluck(:id).include?(camp_id)
   end
 
   def assert_contact_attrs_passed_on_to_supercamp_valid
