@@ -83,6 +83,7 @@ describe SupercampsController do
         let(:supercamp_allows_sub_camps) { true }
         let(:supercamp_state) { 'created' }
         let(:event_form_data) { camp.attributes }
+        let(:override_date) { nil }
         let(:expected_required_contact_attrs) { {'email' => :required,
                                                  'first_name' => :required,
                                                  'last_name' => :required,
@@ -99,6 +100,12 @@ describe SupercampsController do
           supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
                             state: supercamp_state,
                             required_contact_attrs: [:town])
+
+          if override_date != nil
+            supercamp.dates.each do |date|
+              date.update(start_at: override_date, finish_at: nil)
+            end
+          end
 
           request.env['HTTP_REFERER'] = '/' + form.to_s
           if form == :create
@@ -121,6 +128,14 @@ describe SupercampsController do
             let(:supercamp_state) { 'confirmed' }
             it do
               expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"')
+            end
+          end
+
+          context 'checks that supercamp is upcoming' do
+            let(:override_date) { DateTime.now - 1.year }
+
+            it do
+              expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist bereits vorbei')
             end
           end
 

@@ -59,7 +59,8 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = without_self(group.decorate.upcoming_supercamps_on_group_and_above)
+    @supercamps_on_group_and_above = without_self(
+        group.decorate.upcoming_supercamps_on_group_and_above)
   end
 
   def matching_supercamps
@@ -143,6 +144,9 @@ class SupercampsController < ApplicationController
     unless supercamp.state == 'created'
       raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
                                      :connect, supercamp)
+    end
+    unless supercamp.upcoming
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_upcoming'), :connect, supercamp)
     end
   end
 

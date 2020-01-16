@@ -359,6 +359,7 @@ de:
       none: Keine Ergebnisse gefunden
     does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
     not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
+    not_upcoming: Das gewählte übergeordnete Lager ist bereits vorbei
 
   black_lists:
     form:
