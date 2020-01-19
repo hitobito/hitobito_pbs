@@ -22,15 +22,27 @@ describe EventSerializer do
       expect(event[:links]).not_to have_key :sub_camps
       expect(event[:links]).not_to have_key :super_camp
     end
+  end
+
+  context 'with leader and abteilungsleitung' do
+    let(:leader) { people(:al_schekka) }
+    let(:abteilungsleitung) { people(:al_berchtold) }
+
+    before do
+      event.leader = leader
+      event.abteilungsleitung = abteilungsleitung
+      event.save
+    end
+
 
     it 'includes leader' do
       hash = EventSerializer.new(event.decorate, controller: controller).to_hash
       event = hash[:events].first
 
-      expect(event[:links]).not_to have_key :sub_camps
-
+      expect(event[:links]).to have_key :leader
+      expect(event[:links]).to have_key :abteilungsleitung
+      expect(hash[:linked]['events'].first[:id]).to eq sub_camp.id
     end
-  end
 
   context 'sub_camps' do
     before { sub_camp.update(parent_id: super_camp.id) }
