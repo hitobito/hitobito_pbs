@@ -6,6 +6,7 @@
 require 'spec_helper'
 
 describe EventSerializer do
+  let(:event)          { events(:top_event) }
   let(:super_camp)     { events(:bund_supercamp) }
   let(:sub_camp)       { events(:schekka_camp) }
   let(:controller)     { double().as_null_object }
@@ -14,7 +15,6 @@ describe EventSerializer do
 
 
   context 'event' do
-    let(:event) { events(:top_event) }
 
     it 'does not have sub_camps nor super_camp  links' do
       hash = EventSerializer.new(event.decorate, controller: controller).to_hash
