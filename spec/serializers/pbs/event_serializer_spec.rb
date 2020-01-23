@@ -43,6 +43,7 @@ describe EventSerializer do
       expect(event[:links]).to have_key :abteilungsleitung
       expect(hash[:linked]['events'].first[:id]).to eq sub_camp.id
     end
+  end
 
   context 'sub_camps' do
     before { sub_camp.update(parent_id: super_camp.id) }
