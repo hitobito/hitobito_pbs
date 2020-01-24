@@ -29,3 +29,9 @@ schekka_camp_participant:
   person: al_schekka
   active: true
   state: assigned
+
+schekka_supercamp_leader:
+  event: schekka_supercamp
+  person: bulei
+  active: true
+  state: assigned

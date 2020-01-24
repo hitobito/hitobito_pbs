@@ -6,7 +6,6 @@
 require 'spec_helper'
 
 describe EventSerializer do
-  let(:event)          { events(:top_event) }
   let(:super_camp)     { events(:bund_supercamp) }
   let(:sub_camp)       { events(:schekka_camp) }
   let(:controller)     { double().as_null_object }
@@ -15,6 +14,7 @@ describe EventSerializer do
 
 
   context 'event' do
+    let(:event)          { events(:top_event) }
 
     it 'does not have sub_camps nor super_camp  links' do
       hash = EventSerializer.new(event.decorate, controller: controller).to_hash
@@ -25,15 +25,15 @@ describe EventSerializer do
   end
 
   context 'with leader and abteilungsleitung' do
-    let(:leader) { people(:al_schekka) }
-    let(:abteilungsleitung) { people(:al_berchtold) }
+    let(:event) { events(:schekka_supercamp) }
+    let!(:leader_role) { event_roles(:schekka_camp_leader) }
+    let!(:abteilungsleitung) { people(:al_schekka) }
 
     before do
-      event.leader = leader
-      event.abteilungsleitung = abteilungsleitung
+      event.send(:assign_abteilungsleitung)
       event.save
+      sub_camp.update_attributes(parent_id: event.id)
     end
-
 
     it 'includes leader' do
       hash = EventSerializer.new(event.decorate, controller: controller).to_hash

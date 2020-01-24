@@ -20,3 +20,7 @@ schekka_camp_leader:
 schekka_camp_tn:
   participation: schekka_camp_participant
   type: Event::Camp::Role::Participant
+
+schekka_supercamp_leader:
+  participation: schekka_supercamp_leader
+  type: Event::Camp::Role::Leader
