@@ -14,7 +14,7 @@ describe EventSerializer do
 
 
   context 'event' do
-    let(:event) { events(:top_event) }
+    let(:event)          { events(:top_event) }
 
     it 'does not have sub_camps nor super_camp  links' do
       hash = EventSerializer.new(event.decorate, controller: controller).to_hash
@@ -22,7 +22,28 @@ describe EventSerializer do
       expect(event[:links]).not_to have_key :sub_camps
       expect(event[:links]).not_to have_key :super_camp
     end
- end
+  end
+
+  context 'with leader and abteilungsleitung' do
+    let(:event) { events(:schekka_supercamp) }
+    let!(:leader_role) { event_roles(:schekka_camp_leader) }
+    let!(:abteilungsleitung) { people(:al_schekka) }
+
+    before do
+      event.send(:assign_abteilungsleitung)
+      event.save
+      sub_camp.update_attributes(parent_id: event.id)
+    end
+
+    it 'includes leader' do
+      hash = EventSerializer.new(event.decorate, controller: controller).to_hash
+      event = hash[:events].first
+
+      expect(event[:links]).to have_key :leader
+      expect(event[:links]).to have_key :abteilungsleitung
+      expect(hash[:linked]['events'].first[:id]).to eq sub_camp.id
+    end
+  end
 
   context 'sub_camps' do
     before { sub_camp.update(parent_id: super_camp.id) }
