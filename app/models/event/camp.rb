@@ -186,18 +186,6 @@ class Event::Camp < Event
     end
   end
 
-  def total_expected_participants
-    %w(wolf pfadi pio rover).product(%w(f m)).map do |level, gender|
-      send("expected_participants_#{level}_#{gender}") || 0
-    end.inject(&:+)
-  end
-
-  def total_expected_leading_participants
-    %w(leitung).product(%w(f m)).map do |level, gender|
-      send("expected_participants_#{level}_#{gender}") || 0
-    end.inject(&:+)
-  end
-
   private
 
   def assign_abteilungsleitung
