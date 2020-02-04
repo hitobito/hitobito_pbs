@@ -32,4 +32,24 @@ describe PersonAbility do
       is_expected.not_to be_able_to(action, member)
     end
   end
+
+  it 'may show member if oneself' do
+    expect(crisis_creator.crises.active).to be_none
+
+    personal_actions = [
+      :show,
+      :show_details,
+      :show_full,
+      :history,
+      :update,
+      :update_email,
+      :primary_group,
+      :log,
+      :update_settings
+    ]
+
+    personal_actions.each do |action|
+      is_expected.to be_able_to(action, crisis_creator)
+    end
+  end
 end

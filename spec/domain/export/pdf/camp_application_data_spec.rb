@@ -11,7 +11,7 @@ describe Export::Pdf::CampApplicationData do
 
   describe 'section group' do
     context 'abteilung' do
-      
+
       it 'returns Abteilung name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
@@ -19,7 +19,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.abteilung_name).to eq(abteilung.to_s)
       end
-      
+
       it 'returns Abteilung name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
@@ -27,7 +27,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.abteilung_name).to eq(groups(:schekka).to_s)
       end
-      
+
       it 'returns Group name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
@@ -47,7 +47,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.einheit_name).to be_nil
       end
-      
+
       it 'returns Einheit name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
@@ -74,7 +74,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.kantonalverband).to be_nil
       end
-      
+
       it 'returns Kantonalverband if camp at Kantonalverband' do
         canton = groups(:be)
         camp = Fabricate(:pbs_camp, groups: [canton])
@@ -99,7 +99,7 @@ describe Export::Pdf::CampApplicationData do
 
       it 'has 6 header columns' do
         header_column = data.expected_participant_table_header
-        expect(header_column).to eq ['', 'Wolf', 'Pfadi', 'Pio', 'Rover', 'Leiter']
+        expect(header_column).to eq ['', 'Wolf', 'Pfadi', 'Pio', 'Rover', 'Leitende']
       end
 
       it 'includes rows with expected participants count' do
@@ -109,7 +109,7 @@ describe Export::Pdf::CampApplicationData do
           expected_participants_pio_f: 33,
           expected_participants_rover_f: 3,
           expected_participants_leitung_f: 99
-        ) 
+        )
 
         row_f = data.expected_participant_table_row(:f)
         expect(row_f).to eq ['F', 1, 42, 33, 3, 99]
@@ -119,8 +119,8 @@ describe Export::Pdf::CampApplicationData do
           expected_participants_pfadi_m: 4,
           expected_participants_pio_m: 9,
           expected_participants_rover_m: 12,
-          expected_participants_leitung_m: 9 
-        ) 
+          expected_participants_leitung_m: 9
+        )
 
         row_m = data.expected_participant_table_row(:m)
         expect(row_m).to eq ['M', 3, 4, 9, 12, 9]

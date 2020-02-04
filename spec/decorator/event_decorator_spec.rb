@@ -39,4 +39,59 @@ describe EventDecorator do
     end
   end
 
+  context 'can_have_confirmations?' do
+
+    context 'regular event' do
+      let(:event) { Fabricate(:event) }
+      it { expect(decorator.can_have_confirmations?).to be_falsey }
+    end
+
+    context 'course' do
+      let(:event) { Fabricate(:pbs_course) }
+
+      it 'flag not set' do
+        expect(decorator.can_have_confirmations?).to be_falsey
+      end
+
+      it 'flag set' do
+        event.kind.can_have_confirmations = true
+        expect(decorator.can_have_confirmations?).to be_truthy
+      end
+    end
+
+    context 'camp' do
+      let(:event) { Fabricate(:pbs_camp) }
+      it { expect(decorator.can_have_confirmations?).to be_falsey }
+    end
+
+  end
+
+  context 'number of qualified course participants' do
+
+    let!(:role) { Fabricate(Event::Role::Participant.name, participation: participation) }
+    let(:participation) { Fabricate(:event_participation, event: event, qualified: true) }
+
+    context 'regular event' do
+      let(:event) { Fabricate(:event) }
+      it { expect(decorator.qualified_participants_count).to eq(0) }
+    end
+
+    context 'course' do
+      let(:event) { Fabricate(:pbs_course) }
+
+      before do
+        participation.event.kind.update(can_have_confirmations: true,
+                                        confirmation_name: 'basiskurs')
+      end
+
+      it { expect(decorator.qualified_participants_count).to eq(1) }
+    end
+
+    context 'camp' do
+      let(:event) { Fabricate(:pbs_camp) }
+      it { expect(decorator.qualified_participants_count).to eq(0) }
+    end
+
+  end
+
 end

@@ -106,9 +106,21 @@ module Event::Campy
       event.coach_visiting = false
       event.coach_visiting_date = nil
       event.coach_confirmed = false
-      event.camp_submitted = false
+      event.camp_submitted_at = nil
       event.camp_reminder_sent = false
     end
+  end
+
+  def total_expected_participants
+    %w(wolf pfadi pio rover).product(%w(f m)).map do |level, gender|
+      send("expected_participants_#{level}_#{gender}") || 0
+    end.inject(&:+)
+  end
+
+  def total_expected_leading_participants
+    %w(leitung).product(%w(f m)).map do |level, gender|
+      send("expected_participants_#{level}_#{gender}") || 0
+    end.inject(&:+)
   end
 
   private

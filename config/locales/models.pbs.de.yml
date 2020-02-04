@@ -1,11 +1,10 @@
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 
 de:
   activerecord:
@@ -861,7 +860,6 @@ de:
         other: Mitglieder
         description:
 
-
       event/camp:
         one: Lager
         other: Lager
@@ -981,9 +979,12 @@ de:
         bsv_days: Anzahl BSV-Tage
         camp_days: Anzahl Lagertage
         camp_submitted: Eingereicht
+        camp_submitted_at: Eingereicht am
+        total_expected_leading_participants: Leitungsteam erwartet
+        total_expected_participants: Teilnehmende erwartet
         course_languages: Kurssprachen
         express_fee: Expressgebühr
-        expected_participants: Erwartete Teilnehmer/-innen
+        expected_participants: Erwartete Anzahl Teilnehmende
         expected_participants_wolf: Wolf
         expected_participants_wolf_f: Anzahl Wölfe weiblich
         expected_participants_wolf_m: Anzahl Wölfe männlich
@@ -996,7 +997,7 @@ de:
         expected_participants_rover: Rover
         expected_participants_rover_f: Anzahl Rover weiblich
         expected_participants_rover_m: Anzahl Rover männlich
-        expected_participants_leitung: Leiter
+        expected_participants_leitung: Leitende
         expected_participants_leitung_f: Anzahl Leiter weiblich
         expected_participants_leitung_m: Anzahl Leiter männlich
         language_de: Kurssprache Deutsch
@@ -1070,6 +1071,11 @@ de:
         coach: Coach
         advisor_unassigned: Niemand zugeordnet
         leader_unassigned: Keine Leitenden erfasst
+        allow_sub_camps: untergeordnete Lager zulassen
+        super_camp: Übergeordnetes Lager
+
+      event/contact_attrs:
+        pass_on_to_supercamp: An übergeordnetes Lager weitergeben
 
       event/course:
         requires_approval: Empfehlung der Anmeldungen nötig durch
@@ -1083,9 +1089,14 @@ de:
       event/kind:
         documents_text: Zusatzformulare
         campy: Kurs als Lager anmelden
+        can_have_confirmations: Export Kursbestätigungen aktivieren
+        confirmation_name: Name der Kursart im Export-Tool
 
       event/participation:
         bsv_days: BSV-Tage
+
+      event/question:
+        pass_on_to_supercamp: An übergeordnetes Lager weitergeben
 
       person:
         layer_group_id: Id der Hauptebene
@@ -1111,6 +1122,15 @@ de:
         pbs_shortname: PBS Kürzel
         bank_account: Bank-/Postverbindung
         cantons: Kantone
+
+      group/abteilung:
+        gender: Geschlecht
+        genders:
+          _nil: Gemischt
+          m: Männer
+          w: Frauen
+        try_out_day_at: Schnuppertag
+        geolocations: Treffpunkte
 
       people_relation:
         kinds:
@@ -1172,7 +1192,16 @@ de:
     errors:
       messages:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
+        must_be_valid_social_security_number: muss eine gültige AHV-Nummer (756.1234.5678.97) sein
       models:
+        event:
+          attributes:
+            base:
+              contact_attr_passed_on_to_supercamp_hidden: "'%{attribute}' muss entweder angezeigt oder nicht ans übergeordnete Lager weitergegeben werden"
+        event/camp:
+          attributes:
+            base:
+              cannot_remove_parent_id: "Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status \"Erstellt\" ist"
         role:
           attributes:
             created_at:
@@ -1181,3 +1210,5 @@ de:
               after: muss nach "Von" liegen.
         crisis:
           another_active: Eine andere Krise ist bereits aktiv auf dieser Gruppe
+        group/abteilung:
+          too_many_geolocations: dürfen nicht mehr als %{max} sein

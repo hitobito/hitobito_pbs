@@ -11,13 +11,32 @@ module Pbs::EventsController
   included do
     before_action :remove_restricted, only: [:create, :update]
     before_action :check_checkpoint_attrs, only: [:create, :update]
+    before_action :merge_supercamp_data, only: [:new, :edit]
 
     prepend_before_action :entry, only: [:show_camp_application, :create_camp_application]
 
     before_render_show :load_participation_emails, if: :canceled?
 
+    alias_method_chain :edit, :assign_attributes
     alias_method_chain :permitted_attrs, :superior_and_coach_check
     alias_method_chain :sort_expression, :canton
+    alias_method_chain :assign_contact_attrs, :supercamp_flag
+
+    # Merge all hashes in permitted_attrs and move them to the end of the list, so we can more
+    # easily inject new nested attrs
+    self.permitted_attrs = self.permitted_attrs.reduce([[], {}]) do |result, attr|
+      result[0] << attr unless attr.is_a? Hash
+      result[1].merge! attr if attr.is_a? Hash
+      result
+    end.reduce(:<<)
+
+    self.permitted_attrs.last[:application_questions_attributes] << :pass_on_to_supercamp
+    self.permitted_attrs.last[:admin_questions_attributes] << :pass_on_to_supercamp
+  end
+
+  def edit_with_assign_attributes
+    assign_attributes if model_params
+    edit_without_assign_attributes
   end
 
   def sort_expression_with_canton
@@ -40,16 +59,26 @@ module Pbs::EventsController
                          Cantons.full_name(Event::Camp::ABROAD_CANTON))
   end
 
+  def assign_contact_attrs_with_supercamp_flag
+    contact_attrs = assign_contact_attrs_without_supercamp_flag
+
+    supercamp_contact_attrs = model_params.delete(:contact_attrs_passed_on_to_supercamp)
+    return contact_attrs if supercamp_contact_attrs.blank?
+    entry.contact_attrs_passed_on_to_supercamp =
+      supercamp_contact_attrs.reject { |_, v| v == '0' }.keys
+
+    contact_attrs
+  end
+
   def show_camp_application
     pdf = Export::Pdf::CampApplication.new(entry)
     send_data pdf.render, type: :pdf, disposition: 'inline', filename: pdf.filename
   end
 
   def create_camp_application
-    entry.camp_submitted = true
-    if entry.valid?
+    entry.camp_submitted_at = Time.zone.now.to_date
+    if entry.save
       Event::CampMailer.submit_camp(entry).deliver_later
-      entry.save!
       set_success_notice
     else
       flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
@@ -102,6 +131,13 @@ module Pbs::EventsController
         model_params.delete(attr.to_s)
       end
     end
+  end
+
+  def merge_supercamp_data
+    return unless entry.is_a?(Event::Camp)
+    return unless flash[:event_with_merged_supercamp]
+    params[:event] ||= {}
+    params[:event].merge!(flash[:event_with_merged_supercamp])
   end
 
 end

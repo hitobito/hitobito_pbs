@@ -13,6 +13,7 @@ describe Export::Tabular::Events::BsvRow do
   let(:course) { fabricate_course }
 
   let(:row) { Export::Tabular::Events::BsvRow.new(course) }
+  let(:bern) { Location.create!(name: 'Bern Stadt', canton: :be, zip_code: 3000) }
   subject { row }
 
   it { expect(row.fetch(:leader_count)).to eq 3 }
@@ -41,16 +42,32 @@ describe Export::Tabular::Events::BsvRow do
     expect(row.fetch(:bsv_days)).to be_blank
   end
 
-  it 'participant_count is zero' do
-    expect(row.fetch(:participant_count)).to eq 0
+  it 'bsv_eligible_participants_count is zero' do
+    expect(row.fetch(:bsv_eligible_participations_count)).to eq 0
   end
 
-  it 'participant_count counts only ch residents aged 17 to 30' do
-    bern = Location.create!(name: 'Bern Stadt', canton: :be, zip_code: 3000)
+  it 'bsv_eligible_participants_count counts only ch residents aged 17 to 30' do
     participant = course.people.joins(event_participations: :roles)
      .find_by(event_roles: { type: Event::Course::Role::Participant.sti_name  })
     participant.update(birthday: '01.01.1990', location: bern)
-    expect(row.fetch(:participant_count)).to eq 1
+    expect(row.fetch(:bsv_eligible_participations_count)).to eq 1
+  end
+
+  describe 'advanced_bsv_export' do
+    before do
+      course.bsv_days = 7
+      create_eligible_participation(course, location: bern, age: 20)
+      create_eligible_participation(course, location: bern, age: 12)
+    end
+
+    it 'bsv_eligible_attendance_summary' do
+      expect(row.fetch(:all_participants_count)).to eq(8)
+      expect(row.fetch(:all_participants_attendance_summary)).to eq('7x0, 2x7')
+      expect(row.fetch(:all_participants_attendances)).to eq(14)
+      expect(row.fetch(:bsv_eligible_attendance_summary)).to eq('1x7')
+      expect(row.fetch(:bsv_eligible_participations_count)).to eq(1)
+      expect(row.fetch(:bsv_eligible_attendances)).to eq(7)
+    end
   end
 
   private
@@ -61,6 +78,14 @@ describe Export::Tabular::Events::BsvRow do
     course.update!(language_de: true, language_fr: true, language_en: true)
     create_leader_participations(course)
     course
+  end
+
+  def create_eligible_participation(course, age: 20, location: nil, bsv_days: course.bsv_days)
+    birthday = (course.dates.first.start_at - age.years).to_date
+    person = Fabricate(:person, birthday: birthday, location: location)
+    participation = Fabricate(:event_participation, event: course, person: person,
+                              bsv_days: bsv_days, state: :attended)
+    Fabricate(Event::Course::Role::Participant.name, participation: participation)
   end
 
   def create_leader_participations(course)

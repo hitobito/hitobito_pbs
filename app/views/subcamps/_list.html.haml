@@ -1,0 +1,18 @@
+-#
+  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+  hitobito_pbs and licensed under the Affero General Public License version 3
+  or later. See the COPYING file at the top-level directory or at
+  https://github.com/hitobito/hitobito_pbs.
+
+- title event
+
+- content_for :filter do
+  = FilterNavigation::Camps.new(self).to_s
+
+= list_table do |t|
+  - t.col(t.sort_header(:name)) do |e|
+    %strong= link_to e.name, group_event_path(e.groups.first, e)
+  - t.attr(:description_short, t.attr_header(:description))
+  - t.attr(:booking_info)
+  - t.sortable_attr(:state)
+  - t.sortable_attr(:group_ids)

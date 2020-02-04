@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -82,7 +82,8 @@ de:
         leaders: Leitung
         cooks: Küche
         participants: Teilnehmende
-
+      list:
+        not_persisted: Noch nicht gespeichert
     lists:
       nav_left_camps:
         all_camps: Lager ganze Schweiz
@@ -102,6 +103,7 @@ de:
         title: Alle Lager im Ausland
         explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
       advanced_bsv_export_button: Erweiterter BSV/LKB Export
+    hierarchy: Lagerhierarchie
 
     participations:
       canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
@@ -121,6 +123,14 @@ de:
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
+    qualifications:
+      send_confirmation_notifications:
+        sent_to_qualified_participants: Die qualifizierten Teilnehmenden wurden benachrichtigt.
+      index:
+        send_confirmation_notifications:
+          one: Benachrichtigung an eine Person versenden
+          other: Benachrichtigungen an %{count} Personen versenden
+        button_explanation: Versendet eine E-Mail an alle qualifizierten Teilnehmenden. Darin enthalten ist ein Link zum Kurs, wo sie ihre PDF-Kursbestätigung abrufen können.
 
     approvals:
       form:
@@ -157,6 +167,12 @@ de:
       'false': Nicht bestätigt
     checkpoint_field_caption: Kann nur von der Lagerleitung bestätigt werden
 
+  event/course:
+    has_confirmations: PDF-Kursbestätigungen für Teilnehmende erstellen
+    participations:
+      actions_show_pbs:
+        course_confirmation: Kursbestätigung
+
   events:
     actions_show_pbs:
       camp_application: Lageranmeldung PBS
@@ -164,6 +180,7 @@ de:
       confirm_cancel: Willst Du Dich wirklich von diesem Lager abmelden?
       submit_camp: Einreichen
       camp_submitted: Eingereicht
+      camp_submitted_at: Eingereicht am
     application_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
       participants_can_apply_caption: Teilnehmende können sich selbst anmelden
@@ -191,6 +208,9 @@ de:
       phone_privat: Telefon Privat
       phone_mobil: Telefon Mobil
       email: E-Mail
+      attach_to_supercamp: An übergeordnetes Lager anschliessen
+      direct_subcamps: direkt untergeordnete Lager
+      supercamp: Übergeordnetes Lager
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
@@ -215,6 +235,7 @@ de:
     tabs:
       approvals: Empfehlungen
       attendances: Anwesenheit
+      sub_camps: Untergeordnete Lager
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Das Reglement zur Planung und Durchführung von Lagern ("Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt
@@ -222,6 +243,10 @@ de:
 
   filter_navigation/events:
     canton: 'durchgeführt im Kanton'
+
+  filter_navigation/camps:
+    all: Alle untergeordneten Lager
+    direct: nur direkt untergeordnete Lager
 
   group:
     pending_approvals:
@@ -236,6 +261,11 @@ de:
         title: Bereits getätigte Freigaben
         course_kind: Kurstyp
         course_kind_all: Alle
+    abteilung:
+      geolocations:
+        geolocation_fields:
+          lat: Lat
+          long: Long
 
   groups:
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
@@ -246,11 +276,12 @@ de:
     actions_show_pbs:
       crisis: Krise
       crisis_done: Krise quittieren
+      confirm_crisis: Bist du sicher, dass du die Krise auf der Gruppe auslösen möchtest. Die Zuständigen Krisenteams werden über deinen Zugriff informiert. Bitte gehe sorgsam mit den Daten um.
 
   help:
     index:
       title: Hilfe
-      description_html: Informationen zu den neusten Releases findest Du <a href="https://www.scout.ch/de/pfadi-online/midata/release/" target="_blank">hier</a>.
+      description_html: Informationen zu den neusten Updates findest du in den <a href="http://releasenotes.scouts.ch" target="_blank">Release-Notes</a>.
       power_users:
         title: Power User
         description: "Hier findest Du eine Übersicht der Power User in deinen Gruppen, die dir bei deinen Anliegen helfen könnten:"
@@ -269,7 +300,7 @@ de:
         anker:
           url: http://anker.scouts.ch
           title: "Anker: Leitfaden zur PBS Kursadministration"
-          description: "Für Kursleiter/innen und Leiterkursbetreuer/innen: Alle administrativen Vorgänge, die bei der Anmeldung und Durchführung eines J+S- oder BSV-Kurses beachtet werden müssen, sind hier detailliert beschrieben."
+          description: "Für Kursleiter*innen und Leitungskursbetreuer*innen: Alle administrativen Vorgänge, die bei der Anmeldung und Durchführung eines J+S- oder BSV-Kurses beachtet werden müssen, sind hier detailliert beschrieben."
         pilot:
           url: http://pilot.scouts.ch
           title: "Pilot: Leitfaden zur PBS-Kursadministration in der MiData und der NDBJS"
@@ -296,6 +327,8 @@ de:
     fields_pbs:
       non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
       in_abteilung: (in der Abteilung)
+    qualification_buttons_pbs:
+      print_course_confirmation: Kursbestätigung drucken
 
   population:
     index:
@@ -318,6 +351,20 @@ de:
     fields_pbs:
       notification: Benachrichtigung
       notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+
+  supercamps:
+    available:
+      select_supercamp: Übergeordnetes Lager auswählen
+      from_group_and_above: Auf dieser Gruppe und darüber
+      search_for_supercamp: Anderes übergeordnetes Lager suchen
+      search: Suchen
+      submit: Bestätigen
+    selectable_supercamps:
+      none: Keine Ergebnisse gefunden
+    does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
+    not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
+    not_upcoming: Das gewählte übergeordnete Lager ist bereits vorbei
+    already_connected: Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen
 
   black_lists:
     form:

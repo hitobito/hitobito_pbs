@@ -54,3 +54,14 @@ table tr.grouping td {
 .separated-header {
   padding: 6px 0;
 }
+
+.modal-content fieldset {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+[data-remove-supercamp] {
+  @extend .remove_nested_fields
+}
