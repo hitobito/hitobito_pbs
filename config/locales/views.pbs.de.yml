@@ -282,6 +282,10 @@ de:
     index:
       title: Hilfe
       description_html: Informationen zu den neusten Updates findest du in den <a href="http://releasenotes.scouts.ch" target="_blank">Release-Notes</a>.
+      power_users:
+        title: Power User
+        description: "Hier findest Du eine Übersicht der Power User in deinen Gruppen, die dir bei deinen Anliegen helfen könnten:"
+        none_found: Keine Power User gefunden
       guides:
         title: Leitfäden
         description: "Diese Leitfäden helfen dir bei der Administration von Kursen und Lagern:"

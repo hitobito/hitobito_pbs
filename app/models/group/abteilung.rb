@@ -128,6 +128,7 @@ class Group::Abteilung < Group
   class Adressverwaltung < ::Role
     self.permissions = [:group_and_below_full]
   end
+  class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
     self.permissions = [:group_read]
@@ -235,6 +236,7 @@ class Group::Abteilung < Group
         AbteilungsleitungStv,
         Sekretariat,
         Adressverwaltung,
+        PowerUser,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,

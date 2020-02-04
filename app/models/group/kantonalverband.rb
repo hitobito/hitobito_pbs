@@ -94,6 +94,7 @@ class Group::Kantonalverband < Group
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
   end
+  class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
     self.permissions = [:group_read]
@@ -264,6 +265,7 @@ class Group::Kantonalverband < Group
   roles Kantonsleitung,
         Sekretariat,
         Adressverwaltung,
+        PowerUser,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,

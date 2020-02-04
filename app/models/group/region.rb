@@ -77,6 +77,7 @@ class Group::Region < Group
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
   end
+  class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
     self.permissions = [:group_read]
@@ -243,6 +244,7 @@ class Group::Region < Group
   roles Regionalleitung,
         Sekretariat,
         Adressverwaltung,
+        PowerUser,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,
