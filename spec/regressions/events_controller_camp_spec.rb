@@ -212,11 +212,11 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr| 
+      detail_attrs.each do |attr|
         assert_no_attr(attr)
       end
 
-      expect(dom).not_to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).not_to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).not_to have_selector('dt', text: 'Durchgeführt von')
     end
 
@@ -225,11 +225,11 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr| 
+      detail_attrs.each do |attr|
         assert_attr(attr)
       end
 
-      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
 
@@ -238,11 +238,11 @@ describe EventsController, type: :controller do
 
       get :show, group_id: group.id, id: camp.id
 
-      detail_attrs.each do |attr| 
+      detail_attrs.each do |attr|
         assert_attr(attr)
       end
 
-      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
 
@@ -407,7 +407,7 @@ describe EventsController, type: :controller do
         kantonalverband_rules_applied: true,
         j_s_rules_applied: true,
         expected_participants_pio_f: 3,
-        camp_submitted: true
+        camp_submitted_at: Time.zone.now.to_date - 1.day
       }
     end
   end

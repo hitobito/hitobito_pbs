@@ -87,6 +87,11 @@ module EventsPbsHelper
     end
   end
 
+  def format_camp_name_with_groups(camp, options = {})
+    camp_name = options[:link] ? link_to(camp.name, camp) : content_tag(:strong, camp.name)
+    camp_name + ' ' + muted(safe_join(camp.groups, ', ', &:name))
+  end
+
   def format_event_canton(entry)
     Cantons.full_name(entry.canton.to_sym) if entry.canton
   end
@@ -225,6 +230,12 @@ module EventsPbsHelper
     else
       captionize(:abteilungsleitung_id, entry.klass)
     end
+  end
+
+  def supercamp_remove_link(entry)
+    return '' unless entry.super_camp && entry.super_camp.state == 'created'
+    link_to(I18n.t('global.associations.remove'), 'javascript:void(0)',
+            'data-remove-supercamp' => '')
   end
 
 end

@@ -1,0 +1,26 @@
+#supercamps-available.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.bold.modal-title
+          %b= t('.select_supercamp')
+      .modal-body
+
+        - if @supercamps_on_group_and_above.count > 0
+          = field_set_tag t('.from_group_and_above') do
+            = render 'selectable_supercamps',
+                     options: @supercamps_on_group_and_above, prefix: :above
+
+        = field_set_tag t('.search_for_supercamp'), id: :supercamp_search do
+          = form_tag group_query_supercamps_path(camp_id: @camp_id), method: :get, remote: true do
+            = text_field :selected_supercamp, :q, name: :q
+            .btn-group
+              = button_tag t('.search'), class: 'btn btn-secondary'
+          #supercamp-search-results
+
+      .modal-footer
+        .btn-group
+          = button_tag t('.submit'), id: 'supercamps-available-submit', class: 'btn btn-primary'
+        = link_to(ti('button.cancel'), '#',
+          class: 'link cancel',
+          onclick: "event.preventDefault(); $('#supercamps-available').modal('hide')")

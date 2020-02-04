@@ -18,6 +18,7 @@ module Pbs::Export::Tabular::Events
       delegate :id, :first_name, :last_name, :nickname,
                :address, :zip_code, :town, :country, :email, :salutation_value, to: :advisor
 
+
       remove_method :training_days
     end
 
@@ -58,51 +59,66 @@ module Pbs::Export::Tabular::Events
       @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes : {})
     end
 
-    def attendance_summary
-      format_attendances(attendances_grouped_by_bsv_days_for(@info.participants_aged_17_to_30))
+    def bsv_eligible_participations_count
+      bsv_eligible_participations.count
     end
 
     def all_participants_count
-      participations_for(all_participant_roles).count
+      all_participants.count
+    end
+
+    def all_participants_attendances
+      active_participations.map(&:bsv_days).compact.sum
+    end
+
+    def bsv_eligible_attendances
+      bsv_eligible_participations.map(&:bsv_days).compact.sum
     end
 
     def all_participants_attendance_summary
-      format_attendances(attendances_grouped_by_bsv_days_for(all_participants))
+      format_attendances(attendance_groups_by_bsv_days_for(active_participations))
+    end
+
+    def bsv_eligible_attendance_summary
+      format_attendances(attendance_groups_by_bsv_days_for(bsv_eligible_participations))
     end
 
     private
 
     def participations_for(role_types)
-      active_participations.select { |p| contains_any?(role_types, p.roles.collect(&:class)) }
+      info.send(:participations_for, role_types)
+    end
+
+    def bsv_eligible_participations
+      @bsv_eligible_participations ||= active_participations.select do |participation|
+                                         person = participation.person
+                                         person.birthday? &&
+                                         info.send(:aged_17_to_30?, person) &&
+                                         info.send(:ch_resident?, person)
+                                       end
     end
 
     def all_participants
-      participations_for(all_participant_roles).collect { |p| p.person }
+      @all_participants ||= participations_for(all_participant_roles).collect { |p| p.person }
     end
 
     def active_participations
-      entry.participations.where(active: true)
+      @active_participations ||= entry.participations.where(active: true)
     end
 
-    def attendances_grouped_by_bsv_days_for(participants)
-      active_participations.inject({}) do |attendances, p|
-        if participants.include? (p.person)
-          bsv_days = p.bsv_days || 0
-          attendances[bsv_days] ? attendances[bsv_days] += 1 : attendances[bsv_days] = 1
-        end
-        attendances
-      end
+    def attendance_groups_by_bsv_days_for(participations)
+      Hash[
+        participations.
+          group_by { |participation| participation.bsv_days || 0 }.
+          transform_values { |participation_group| participation_group.count }.
+          sort_by { |days, count| days.to_f }
+      ]
     end
 
-    def format_attendances(attendances)
-      sorted_attendances = attendances.sort_by { |days, count| days.to_f }.to_h
-      sorted_attendances.inject([]) do |formatted_counts, counts|
-        formatted_counts << "#{counts[1]}x#{sprintf('%g',counts[0])}"
-      end.join(', ').to_s
-    end
+    def format_attendances(attendance_groups)
+      return nil if attendance_groups.none?
 
-    def contains_any?(required, existing)
-      (required & existing).present?
+      attendance_groups.collect { |days, count| "#{count}x#{sprintf('%g', days)}" }.join(', ')
     end
   end
 end

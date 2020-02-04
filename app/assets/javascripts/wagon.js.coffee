@@ -26,3 +26,12 @@ $(document).on('change', 'select#event_canton', updateCantonSpecificHelpTextVisi
 $(document).on 'turbolinks:load', ->
   updateLocalScoutContactFieldsVisibility()
   updateCantonSpecificHelpTextVisibility()
+
+removeSupercamp = ->
+  $('#event_parent_id').val(null)
+  console.log($(this), $(this).closest('.control-group'))
+  $(this).closest('.control-group').hide()
+
+$(document).on('turbolinks:load', ->
+  $('[data-remove-supercamp]').click(removeSupercamp)
+)

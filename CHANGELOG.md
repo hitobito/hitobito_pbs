@@ -1,5 +1,15 @@
 # Hitobito PBS Changelog
 
+## Version 1.20
+
+*   Lagerhierarchien hinzugefügt
+*   weitere Anmeldeangaben standardmässig als verpflichtend gekennzeichnet.
+*   JSON-Export von Lagern erweitert
+*   Unterstützung für Pfadifinder hinzugefügt
+*   Hilfeseite mit Links zu Leitfäden der PBS hinzugefügt
+*   Kursbestätigungen als PDF herunterladen können
+
+
 ## Version 1.19
 
 *   Erweiterterter BSV / LKB Export

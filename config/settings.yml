@@ -26,6 +26,7 @@ application:
       it:
         "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
         "Datenschutz": https://www.scout.ch/it/scout-online/midata/utente/datennutzung_midata_pbs_it/at_download/file
+  course_confirmation_url: "https://corsiexp.scouts.ch/benevole/renderer/pdf/%{course_kind_confirmation_name}/%{locale}"
 
 
 # The person with this email has root access to everything

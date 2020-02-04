@@ -38,3 +38,25 @@
 
   = render 'expected_participants_fields', f: f
 
+  - entry.used?(:parent_id) do
+    = field_set_tag t('event.hierarchy') do
+
+      = f.hidden_field :parent_id
+      - if entry.super_camp
+        = f.labeled_readonly_value(:super_camp,
+                                   label: t('.supercamp'),
+                                   value: format_camp_name_with_groups(entry.super_camp, link: true),
+                                   help_inline: supercamp_remove_link(entry))
+      - else
+        = f.labeled(:attach_to_supercamp, '&nbsp;'.html_safe) do
+          = action_button(t('.attach_to_supercamp'),
+            group_supercamps_path(entry.groups.first, camp_id: entry.id),
+            nil,
+            data: { method: :get },
+            remote: true)
+
+      = f.labeled(:allow_sub_camps, '&nbsp;'.html_safe) do
+        = f.boolean_field :allow_sub_camps,
+                          caption: Event::Camp.human_attribute_name(:allow_sub_camps),
+                          readonly: entry.sub_camps.any?
+

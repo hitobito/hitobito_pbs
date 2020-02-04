@@ -222,5 +222,4 @@ describe Event::Course do
       expect(event).not_to be_valid
     end
   end
-
 end
