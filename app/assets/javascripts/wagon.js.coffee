@@ -16,10 +16,11 @@ updateLocalScoutContactFieldsVisibility = ->
 $(document).on('change', 'select#event_canton', updateLocalScoutContactFieldsVisibility)
 
 # Show help text depending on canton selection
-updateCantonSpecificHelpTextVisibility = (event) ->
-  canton_short_name = event && event.target.value
+updateCantonSpecificHelpTextVisibility = ->
+  canton_short_name = $('select#event_canton option:selected').val()
   $('.canton-specific-help-texts .help-block').hide()
-  $('.canton-specific-help-texts .help-block#' + canton_short_name).show()
+  if canton_short_name
+    $('.canton-specific-help-texts .help-block#' + canton_short_name).show()
 $(document).on('change', 'select#event_canton', updateCantonSpecificHelpTextVisibility)
 
 # On document load, run all visibility updates once
