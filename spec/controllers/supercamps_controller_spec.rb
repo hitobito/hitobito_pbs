@@ -37,6 +37,12 @@ describe SupercampsController do
         is_expected.not_to include('Tsueri Super')
       end
 
+      it 'finds supercamps on group and above when camp has no id yet' do
+        xhr :get, :available, group_id: group.id, format: :js
+        is_expected.to include('Hauptlager', 'Schekka Super')
+        is_expected.not_to include('Tsueri Super')
+      end
+
       it 'excludes itself' do
         xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
         is_expected.not_to include('Sommerlager')
@@ -55,6 +61,12 @@ describe SupercampsController do
 
       it 'query finds supercamps anywhere' do
         xhr :get, :query, group_id: group.id, camp_id: camp.id, q: 'sup', format: :js
+        is_expected.to include('Schekka Super', 'Tsueri Super')
+        is_expected.not_to include('Hauptlager')
+      end
+
+      it 'query finds supercamps anywhere when camp has no id yet' do
+        xhr :get, :query, group_id: group.id, q: 'sup', format: :js
         is_expected.to include('Schekka Super', 'Tsueri Super')
         is_expected.not_to include('Hauptlager')
       end

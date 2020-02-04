@@ -51,6 +51,7 @@ class SupercampsController < ApplicationController
   private
 
   def without_self_and_descendants(supercamps)
+    return supercamps unless camp_id
     child_ids = Event::Camp.find(camp_id).self_and_descendants.pluck(:id)
     supercamps.reject { |supercamp| child_ids.include?(supercamp.id) }
   end
