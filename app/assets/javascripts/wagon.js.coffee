@@ -3,6 +3,7 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
+# Show fields regarding local scout contact depending on canton selection
 updateLocalScoutContactFieldsVisibility = ->
   canton_field = $('select#event_canton')
   if canton_field.length
@@ -12,11 +13,20 @@ updateLocalScoutContactFieldsVisibility = ->
         local_scout_fields.closest('.control-group').show()
       else
         local_scout_fields.closest('.control-group').hide()
-
 $(document).on('change', 'select#event_canton', updateLocalScoutContactFieldsVisibility)
 
-$ ->
+# Show help text depending on canton selection
+updateCantonSpecificHelpTextVisibility = ->
+  canton_short_name = $('select#event_canton option:selected').val()
+  $('.canton-specific-help-texts .help-block').hide()
+  if canton_short_name
+    $('.canton-specific-help-texts .help-block#' + canton_short_name).show()
+$(document).on('change', 'select#event_canton', updateCantonSpecificHelpTextVisibility)
+
+# On document load, run all visibility updates once
+$(document).on 'turbolinks:load', ->
   updateLocalScoutContactFieldsVisibility()
+  updateCantonSpecificHelpTextVisibility()
 
 removeSupercamp = ->
   $('#event_parent_id').val(null)
