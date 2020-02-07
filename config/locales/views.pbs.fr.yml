@@ -258,23 +258,23 @@ fr:
         title: Fils conducteurs
         description: "Ces fils conducteurs te soutiennent pour l'administration de cours et de camps:"
         hering:
-          url: https://www.scout.ch/fr/association/downloads/programme/camp/sardine-guide-des-demarches-administratives-pour-les-camps-scouts-version-2016-avec-midata/view
+          url: http://heringfr.scouts.ch
           title: "Sardine: Guide des démarches administratives pour les camps scouts"
           description: "La sardine te donne toutes les informations pour l'administration de camps scouts. Elle te mène pas à pas à travers tous les documents importants. Avec ce guide, tu n'oublieras aucun point important."
         coaches:
-          url: https://www.scout.ch/fr/association/downloads/encadrement/coaching/ressources/1x1-midata-pour-les-coachs/view
+          url: http://coachesfr.scouts.ch
           title: 1x1 MiData pour coachs
           description: "Le « 1x1 MiData pour coachs » explique les fonctions les plus importantes pour les coachs dans l’utilisation de la base de données des membres du MSdS (MiData). Il sert autant de résumé que de préparation pour le MP-Coach et le cours de coachs."
         anker:
-          url: https://www.scout.ch/fr/association/downloads/formation/cours/administration/fils-conducteurs-a-ladministration-des-cours/l2019ancre-fil-conducteur-pour-l2019administration-des-cours-msds-version-2015-avec-midata/view
+          url: http://ankerfr.scouts.ch
           title: "L’ancre: Fil conducteur pour l’administration des cours MSdS"
           description: "Pour les chefs de cours et les conseillers/conseillères à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
         pilot:
-          url: https://www.scout.ch/fr/association/downloads/formation/cours/administration/fils-conducteurs-a-ladministration-des-cours/pilote-fil-conducteur-pour-ladministration-des-cours-du-msds-dans-la-midata-et-la-bdnjs-version-2015-avec-midata/view
+          url: http://pilotfr.scouts.ch
           title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNJS"
           description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNJS"
         ticket:
-          url: https://www.scout.ch/fr/association/downloads/formation/cours/inscription/ticket-fil-conduct-pour-lannonce-de-participation-aux-cours-version-2015-avec-midata/view
+          url: http://ticketfr.scouts.ch
           title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
           description: "Le Ticket décrit le processus d'inscription des participants par la MiData (banque nationale de données des membres du MSdS)"
   member_counts:
