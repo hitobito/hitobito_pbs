@@ -11,7 +11,7 @@ class HelpController < ApplicationController
   skip_authorization_check only: [:index]
 
   def index
-    @groups_and_power_users = current_user.groups.uniq.map do |group|
+    @groups_and_power_users = current_user.groups.distinct.map do |group|
       [group, power_users_for_group_or_above(group)]
     end
   end

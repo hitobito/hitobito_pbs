@@ -52,7 +52,7 @@ module Pbs::Event::ParticipationConfirmationJob
       joins(event_participations: :roles).
       where(event_participations: { event_id: participation.event_id, active: true }).
       where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
-      uniq
+      distinct
   end
 
 end

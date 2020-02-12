@@ -67,7 +67,7 @@ class SupercampsController < ApplicationController
 
   def matching_supercamps
     Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created').uniq
+               .where(allow_sub_camps: true, state: 'created').distinct
   end
 
   def camp_id

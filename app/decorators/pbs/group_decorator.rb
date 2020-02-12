@@ -9,7 +9,7 @@ module Pbs::GroupDecorator
   extend ActiveSupport::Concern
 
   def upcoming_supercamps
-    events.upcoming.where(allow_sub_camps: true, state: 'created').uniq
+    events.upcoming.where(allow_sub_camps: true, state: 'created').distinct
   end
 
   def upcoming_supercamps_on_group_and_above
