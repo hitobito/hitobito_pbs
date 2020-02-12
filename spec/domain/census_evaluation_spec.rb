@@ -268,7 +268,7 @@ end
 
 def delete_group_member_counts
   field = "#{group_to_delete.class.model_name.element}_id"
-  MemberCount.destroy_all(field => group_to_delete.id)
+  MemberCount.where(field => group_to_delete.id).destroy_all
 end
 
 # Group#protect_if :children_without_deleted
