@@ -71,7 +71,7 @@ module Export::Pdf
       qualis = QualificationKind.joins(:qualifications).
                where(qualifications: { person_id: person.id }).
                merge(Qualification.active).
-               uniq.
+               distinct.
                list.
                collect(&:to_s).
                join("\n")
