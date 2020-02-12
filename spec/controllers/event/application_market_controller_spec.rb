@@ -69,7 +69,7 @@ describe Event::ApplicationMarketController do
     end
 
     it 'PUT#put_on_waiting_list sets waiting_list_setter to current_user' do
-      put :put_on_waiting_list, params: {group_id: group.id, event_id: course.id, id: participation.id, event_application: {}}, format: :js
+      put :put_on_waiting_list, params: { group_id: group.id, event_id: course.id, id: participation.id, event_application: {} }, format: :js
       expect(participation.application.reload.waiting_list_setter).to eq user
     end
 
