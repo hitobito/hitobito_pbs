@@ -54,7 +54,7 @@ class Event::ApprovalsController < CrudController
   end
 
   def approver
-    @approver ||= Event::Approver.new(participation)
+    @approver ||= Event::Approver.new(participation.reload)
   end
 
   def notice_approve
