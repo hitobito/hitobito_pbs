@@ -29,7 +29,7 @@ describe 'event/participations/_form.html.haml' do
   end
 
   it 'includes documents_text in application' do
-    event.kind.update_attribute(:documents_text, 'some documents text')
+    event.kind.update(documents_text: 'some documents text')
     render
     expect(dom).to have_content 'some documents text'
   end

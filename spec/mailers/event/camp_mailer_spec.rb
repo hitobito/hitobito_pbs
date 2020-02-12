@@ -21,20 +21,20 @@ describe Event::CampMailer do
   let(:actuator) do
     actuator = Fabricate(Group::Woelfe::Einheitsleitung.name.to_sym,
                          group: groups(:sunnewirbu)).person
-    actuator.update_attributes(first_name: 'Wirbel', last_name: 'Sturm')
+    actuator.update(first_name: 'Wirbel', last_name: 'Sturm')
     actuator
   end
   let(:actuator_id) { actuator.id }
   let(:coach) do
     coach = Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person
-    coach.update_attributes(first_name: 'Heftige', last_name: 'Boe')
+    coach.update(first_name: 'Heftige', last_name: 'Boe')
     coach
   end
   let(:abteilungsleitung) { Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person }
   let(:other_person) do
     other_person = Fabricate(Group::Woelfe::Wolf.name.to_sym,
                              group: groups(:sunnewirbu)).person
-    other_person.update_attributes(first_name: 'Wind', last_name: 'Hose')
+    other_person.update(first_name: 'Wind', last_name: 'Hose')
     other_person
   end
   let(:leader) do
@@ -44,8 +44,8 @@ describe Event::CampMailer do
   let(:participation) { Fabricate(:event_participation, person: other_person, event: camp) }
 
   before do
-    camp.update_attributes(coach_id: coach.id)
-    camp.update_attributes(abteilungsleitung_id: abteilungsleitung.id)
+    camp.update(coach_id: coach.id)
+    camp.update(abteilungsleitung_id: abteilungsleitung.id)
   end
 
   describe '#camp_created' do
@@ -164,7 +164,7 @@ describe Event::CampMailer do
       end
 
       context 'foreign' do
-        before { camp.update_attribute(:canton, 'zz') }
+        before { camp.update(canton: 'zz') }
         subject { mail }
         its(:subject) { should eq 'Einreichung Lager' }
         its(:to)      { should eq ['lager@pbs.ch', 'auslandlager@pbs.ch'] }

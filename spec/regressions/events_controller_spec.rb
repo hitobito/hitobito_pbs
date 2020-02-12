@@ -48,7 +48,7 @@ describe EventsController, type: :controller  do
 
   it "Sekretariat may not update training_days and express_fee" do
     sign_in(sekretar.person)
-    course.update_attributes!(express_fee: '424', training_days: 42) 
+    course.update!(express_fee: '424', training_days: 42)
     post :update, params: { group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 } }
 
     course.reload
