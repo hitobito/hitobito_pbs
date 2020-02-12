@@ -16,7 +16,7 @@ describe CrisesController do
     context 'POST#create' do
       it 'creates crisis send mail and set crisis session' do
         expect do
-          post :create, group_id: group.id
+          post :create, params: { group_id: group.id }
         end.to change { Delayed::Job.count }.by 1
 
         expect(session[:crisis]).to be true
@@ -26,7 +26,7 @@ describe CrisesController do
       it 'shows error if another crisis is active' do
         group.crises.create!(creator: user)
         expect do
-          post :create, group_id: group.id
+          post :create, params: { group_id: group.id }
         end.not_to change { Delayed::Job.count }
 
         expect(session[:crisis]).to be nil
@@ -40,7 +40,7 @@ describe CrisesController do
       end
       it 'acknowledges crisis if not older then 3 days' do
         expect do
-          put :update, group_id: group.id, id: group.active_crisis.id
+          put :update, params: { group_id: group.id, id: group.active_crisis.id }
         end.to change { Delayed::Job.count }.by 1
 
         expect(group.active_crisis.reload).to be_acknowledged
@@ -49,7 +49,7 @@ describe CrisesController do
       it 'does not acknowledge if crisis older then 3 days' do
         group.active_crisis.update(created_at: 4.days.ago)
         expect do
-          put :update, group_id: group.id, id: group.active_crisis.id
+          put :update, params: { group_id: group.id, id: group.active_crisis.id }
 
         end.not_to change { Delayed::Job.count }
 

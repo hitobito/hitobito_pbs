@@ -24,7 +24,7 @@ describe GroupsController, type: :controller do
         Fabricate("#{group.type}::#{role}", group: group, person: person)
 
         sign_in(person)
-        get :show, id: groups(name).id
+        get :show, params: { id: groups(name).id }
         expect(dom).to have_link 'Kursfreigaben (0)'
       end
     end
@@ -33,7 +33,7 @@ describe GroupsController, type: :controller do
     Fabricate("Group::Bund::Geschaeftsleitung", group: groups(:bund), person: person)
 
     sign_in(person)
-    get :show, id: groups(:be).id
+    get :show, params: { id: groups(:be).id }
     expect(dom).not_to have_link 'Kursfreigaben'
   end
 
@@ -43,20 +43,20 @@ describe GroupsController, type: :controller do
     before       { sign_in(person); crises(:schekka).update(created_at: 1.day.ago) }
 
     it 'renders crisis done acknowledged button if acknowledgedable active crisis exists' do
-      get :show, id: group.id
+      get :show, params: { id: group.id }
       expect(dom).to have_link 'Krise quittieren'
     end
 
     it 'hides crisis done acknowledged button if active crisis may not be acknoledged by user' do
       group.active_crisis.update(creator: person)
-      get :show, id: group.id
+      get :show, params: { id: group.id }
       expect(dom).not_to have_link 'Krise quittieren'
       expect(dom).to have_content "#{person.full_name} hat auf dieser Gruppe eine Krise ausgelöst"
     end
 
     it 'it renders crisis trigger button if no active crisis exists' do
       group.active_crisis.destroy
-      get :show, id: group.id
+      get :show, params: { id: group.id }
       expect(dom).to have_link 'Krise'
     end
   end

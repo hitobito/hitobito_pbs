@@ -17,27 +17,31 @@ describe QualificationsController do
   before { non_manual }
 
   it 'contains only manual' do
-    get :new, group_id: groups(:schekka).id, person_id: person.id
+    get :new, params: { group_id: groups(:schekka).id, person_id: person.id }
     expect(assigns(:qualification_kinds)).not_to include(non_manual)
   end
 
   it 'can create manual qualification kind' do
     expect do
       post :create,
-           group_id: groups(:schekka).id,
-           person_id: person.id,
-           qualification: { qualification_kind_id: qualification_kinds(:alpk).id,
-                            start_at: Time.zone.today }
+           params: {
+             group_id: groups(:schekka).id,
+             person_id: person.id,
+             qualification: { qualification_kind_id: qualification_kinds(:alpk).id,
+                              start_at: Time.zone.today }
+           }
     end.to change { Qualification.count }.by(1)
   end
 
   it 'cannot create non-manual qualification kind' do
     expect do
       post :create,
-           group_id: groups(:schekka).id,
-           person_id: person.id,
-           qualification: { qualification_kind_id: non_manual.id,
-                            start_at: Time.zone.today }
+           params: {
+             group_id: groups(:schekka).id,
+             person_id: person.id,
+             qualification: { qualification_kind_id: non_manual.id,
+                              start_at: Time.zone.today }
+           }
     end.to raise_error(CanCan::AccessDenied)
   end
 
@@ -45,9 +49,11 @@ describe QualificationsController do
     quali = Fabricate(:qualification, qualification_kind: qualification_kinds(:alpk), person: person)
     expect do
       delete :destroy,
-             group_id: groups(:schekka).id,
-             person_id: person.id,
-             id: quali.id
+             params: {
+               group_id: groups(:schekka).id,
+               person_id: person.id,
+               id: quali.id
+             }
     end.to change { Qualification.count }.by(-1)
   end
 
@@ -55,9 +61,11 @@ describe QualificationsController do
     quali = Fabricate(:qualification, qualification_kind: non_manual, person: person)
     expect do
       delete :destroy,
-             group_id: groups(:schekka).id,
-             person_id: person.id,
-             id: quali.id
+             params: {
+               group_id: groups(:schekka).id,
+               person_id: person.id,
+               id: quali.id
+             }
     end.to raise_error(CanCan::AccessDenied)
   end
 end

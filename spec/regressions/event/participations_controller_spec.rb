@@ -34,7 +34,7 @@ describe Event::ParticipationsController, type: :controller  do
     it 'bulei does not see approve and reject buttons' do
       sign_in(people(:bulei))
 
-      get :show, group_id: group.id, event_id: course.id, id: participation.id
+      get :show, params: { group_id: group.id, event_id: course.id, id: participation.id }
       expect(dom).not_to have_content 'Freigeben'
       expect(dom).not_to have_content 'Ablehnen'
     end
@@ -42,7 +42,7 @@ describe Event::ParticipationsController, type: :controller  do
     it 'al schekka sees approve and reject buttons' do
       sign_in(al_schekka)
 
-      get :show, group_id: group.id, event_id: course.id, id: participation.id
+      get :show, params: { group_id: group.id, event_id: course.id, id: participation.id }
       expect(dom).to have_content 'Freigeben'
       expect(dom).to have_content 'Ablehnen'
     end
@@ -63,7 +63,7 @@ describe Event::ParticipationsController, type: :controller  do
                                                     approved: true,
                                                     approver: al_schekka)
 
-        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        get :show, params: { group_id: group.id, event_id: course.id, id: participation.id }
 
         expect(dom).to have_content 'Empfehlungen'
         expect(dom).to have_css('.badge.badge-success')
@@ -76,7 +76,7 @@ describe Event::ParticipationsController, type: :controller  do
       before { sign_in(people(:child)) }
 
       it 'does not see Empfehlungen aside' do
-        get :show, group_id: group.id, event_id: course.id, id: participation.id
+        get :show, params: { group_id: group.id, event_id: course.id, id: participation.id }
         expect(dom).not_to have_content 'Empfehlungen'
       end
     end

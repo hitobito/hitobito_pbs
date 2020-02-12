@@ -24,8 +24,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
       course.update!({ hidden_contact_attrs: ['salutation'] })
 
-      get :edit, group_id: course.groups.first.id, event_id: course.id,
-            event_role: { type: 'Event::Course::Role::Participant' }
+      get :edit, params: { group_id: course.groups.first.id, event_id: course.id, event_role: { type: 'Event::Course::Role::Participant' } }
 
       expect(dom).to have_selector('input#event_participation_contact_data_grade_of_school')
       expect(dom).to have_selector('input#event_participation_contact_data_title')
@@ -36,8 +35,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
     it 'shows all contact fields by default' do
 
-      get :edit, group_id: course.groups.first.id, event_id: course.id,
-            event_role: { type: 'Event::Course::Role::Participant' }
+      get :edit, params: { group_id: course.groups.first.id, event_id: course.id, event_role: { type: 'Event::Course::Role::Participant' } }
 
       contact_attrs = [:title, :grade_of_school,
                        :entry_date, :leaving_date]
@@ -63,9 +61,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
       contact_data_params = { first_name: 'Hans', last_name: 'Gugger', email: 'hans@pbs.ch', salutation: '' }
 
-      post :update, group_id: group.id, event_id: course.id,
-             event_participation_contact_data: contact_data_params,
-             event_role: { type: 'Event::Course::Role::Participant' }
+      post :update, params: { group_id: group.id, event_id: course.id, event_participation_contact_data: contact_data_params, event_role: { type: 'Event::Course::Role::Participant' } }
 
       is_expected.to render_template(:edit)
 
@@ -79,9 +75,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
                               email: 'dude@example.com', salutation: 'lieber_pfadiname',
                               address: 'Street 33' }
 
-      post :update, group_id: group.id, event_id: course.id,
-             event_participation_contact_data: contact_data_params,
-             event_role: { type: 'Event::Course::Role::Participant' }
+      post :update, params: { group_id: group.id, event_id: course.id, event_participation_contact_data: contact_data_params, event_role: { type: 'Event::Course::Role::Participant' } }
 
       is_expected.to redirect_to new_group_event_participation_path(group,
                                                                     course,

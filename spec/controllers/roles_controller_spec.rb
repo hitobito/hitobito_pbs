@@ -26,7 +26,7 @@ describe RolesController do
       it 'renders template' do
         role = roles(:al_schekka)
         role.update_attributes!(created_at: 100.days.ago, deleted_at: 5.days.ago)
-        get :edit, group_id: role.group_id, id: role.id
+        get :edit, params: { group_id: role.group_id, id: role.id }
         is_expected.to render_template('edit')
       end
     end
@@ -40,7 +40,7 @@ describe RolesController do
       end
 
       it 'creates role with dates set' do
-        expect { post :create, group_id: group.id, role: role_params }.to change { Role.with_deleted.count }.by(1)
+        expect { post :create, params: { group_id: group.id, role: role_params } }.to change { Role.with_deleted.count }.by(1)
 
         expect(role.created_at.to_date).to eq Date.new(2014, 3, 4)
         expect(role.deleted_at.to_date).to eq Date.new(2014, 3, 5)
@@ -48,7 +48,7 @@ describe RolesController do
       end
 
       it 'redirects' do
-        expect { post :create, group_id: group.id, role: role_params }.to change { Role.with_deleted.count }.by(1)
+        expect { post :create, params: { group_id: group.id, role: role_params } }.to change { Role.with_deleted.count }.by(1)
         expect(flash[:notice]).to eq 'Rolle <i>Mitarbeiter GS</i> für <i>AL Schekka / Torben</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
         is_expected.to redirect_to(group_people_path(group.id))
       end
@@ -61,7 +61,7 @@ describe RolesController do
       end
 
       it 'does not create role' do
-        expect { post :create, group_id: group.id, role: role_params }.not_to change { Role.with_deleted.count }
+        expect { post :create, params: { group_id: group.id, role: role_params } }.not_to change { Role.with_deleted.count }
         expect(role).to have(1).error_on(:deleted_at)
       end
     end
@@ -74,7 +74,7 @@ describe RolesController do
       end
 
       it 'does not create role' do
-        expect { post :create, group_id: group.id, role: role_params }.not_to change { Role.with_deleted.count }
+        expect { post :create, params: { group_id: group.id, role: role_params } }.not_to change { Role.with_deleted.count }
         expect(role).to have(1).error_on(:type)
         expect(role).to have(1).error_on(:deleted_at)
         is_expected.to render_template('crud/new')
@@ -100,7 +100,7 @@ describe RolesController do
         role_params = { group_id: home_group.id,
                         person_id: person.id,
                         type: Group::Abteilung::Sekretariat.sti_name }
-        expect { post :create, group_id: home_group.id, role: role_params }.
+        expect { post :create, params: { group_id: home_group.id, role: role_params } }.
           to change { Delayed::Job.count }.by(1)
         job = GroupMembershipJob.new(person, actuator, home_group)
         expect(Delayed::Job.where(handler: job.to_yaml).count).to eq 1
@@ -112,7 +112,7 @@ describe RolesController do
         role_params = { group_id: home_group.id,
                         person_id: person.id,
                         type: Group::Abteilung::Revisor.sti_name }
-        expect { post :create, group_id: home_group.id, role: role_params }.
+        expect { post :create, params: { group_id: home_group.id, role: role_params } }.
           not_to change { Delayed::Job.count }
       end
 
@@ -121,7 +121,7 @@ describe RolesController do
                         person_id: nil,
                         type: Group::Abteilung::Sekretariat.sti_name,
                         new_person: { first_name: 'Asdf', last_name: 'Asdf' } }
-        expect { post :create, group_id: home_group.id, role: role_params }.
+        expect { post :create, params: { group_id: home_group.id, role: role_params } }.
           not_to change { Delayed::Job.count }
       end
 
@@ -131,14 +131,14 @@ describe RolesController do
 
         role_params = { group_id: child_group.id,
                         type: Group::Woelfe::Wolf.sti_name }
-        expect { put :update, group_id: home_group.id, id: role.id, role: role_params }.
+        expect { put :update, params: { group_id: home_group.id, id: role.id, role: role_params } }.
           not_to change { Delayed::Job.count }
       end
 
       it 'is not sent on role destruction' do
         role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group, person: person)
 
-        expect { delete :destroy, group_id: home_group.id, id: role.id }.
+        expect { delete :destroy, params: { group_id: home_group.id, id: role.id } }.
           not_to change { Delayed::Job.count }
       end
     end

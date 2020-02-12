@@ -21,7 +21,7 @@ describe EventsController do
     before { sign_in(people(:bulei)) }
 
     it 'creates new event course with dates, advisor' do
-      post :create, event: event_attrs.merge(contact_id: Person.first, advisor_id: Person.last), group_id: group.id
+      post :create, params: { event: event_attrs.merge(contact_id: Person.first, advisor_id: Person.last), group_id: group.id }
       expect(event.dates).to have(1).item
       expect(event.dates.first).to be_persisted
       expect(event.contact).to eq Person.first
@@ -29,7 +29,7 @@ describe EventsController do
     end
 
     it 'creates new event course without contact, advisor' do
-      post :create, event: event_attrs.merge(contact_id: '', advisor_id: ''), group_id: group.id
+      post :create, params: { event: event_attrs.merge(contact_id: '', advisor_id: ''), group_id: group.id }
 
       expect(event.contact).not_to be_present
       expect(event.advisor).not_to be_present
@@ -46,17 +46,21 @@ describe EventsController do
     it 'allows coaches to edit coach_confirmed' do
       event.update!(coach_id: people(:al_schekka).id)
 
-      put :update, group_id: event.groups.first.id,
-                   id: event.id,
-                   event: { coach_confirmed: true }
+      put :update, params: {
+                     group_id: event.groups.first.id,
+                     id: event.id,
+                     event: { coach_confirmed: true }
+                   }
       expect(assigns(:event)).to be_valid
       expect(assigns(:event).coach_confirmed).to be_truthy
     end
 
     it 'prevents non-coaches from editing coach_confirmed' do
-      put :update, group_id: event.groups.first.id,
-                   id: event.id,
-                   event: { coach_confirmed: true }
+      put :update, params: {
+                     group_id: event.groups.first.id,
+                     id: event.id,
+                     event: { coach_confirmed: true }
+                   }
       expect(assigns(:event)).to be_valid
       expect(assigns(:event).coach_confirmed).to be_falsey
     end
@@ -67,17 +71,21 @@ describe EventsController do
       it 'allows coaches to edit coach_confirmed for campy courses' do
         event.update!(coach_id: people(:al_schekka).id)
 
-        put :update, group_id: event.groups.first.id,
-            id: event.id,
-            event: { coach_confirmed: true }
+        put :update, params: {
+              group_id: event.groups.first.id,
+              id: event.id,
+              event: { coach_confirmed: true }
+            }
         expect(assigns(:event)).to be_valid
         expect(assigns(:event).coach_confirmed).to be_truthy
       end
 
       it 'prevents non-coaches from editing coach_confirmed' do
-        put :update, group_id: event.groups.first.id,
-            id: event.id,
-            event: { coach_confirmed: true }
+        put :update, params: {
+              group_id: event.groups.first.id,
+              id: event.id,
+              event: { coach_confirmed: true }
+            }
         expect(assigns(:event)).to be_valid
         expect(assigns(:event).coach_confirmed).to be_falsey
       end
@@ -91,13 +99,13 @@ describe EventsController do
       before { sign_in(people(:bulei)) }
 
       it 'renders pdf' do
-        get :show_camp_application, group_id: event.groups.first.id, id: event.id
+        get :show_camp_application, params: { group_id: event.groups.first.id, id: event.id }
         expect(response).to be_ok
       end
 
       it 'renders pdf for campy course' do
         event = Fabricate(:course, kind: event_kinds(:fut))
-        get :show_camp_application, group_id: event.groups.first.id, id: event.id
+        get :show_camp_application, params: { group_id: event.groups.first.id, id: event.id }
         expect(response).to be_ok
       end
 
@@ -109,7 +117,7 @@ describe EventsController do
 
       it 'raises 401' do
         expect do
-          get :show_camp_application, group_id: event.groups.first.id, id: event.id
+          get :show_camp_application, params: { group_id: event.groups.first.id, id: event.id }
         end.to raise_error(CanCan::AccessDenied)
       end
     end
@@ -124,7 +132,7 @@ describe EventsController do
 
       it 'fails if no canton given' do
         group = event.groups.first
-        put :create_camp_application, group_id: group.id, id: event.id
+        put :create_camp_application, params: { group_id: group.id, id: event.id }
         expect(response).to redirect_to(group_event_path(group, event))
         expect(flash[:alert]).to match /Das Lager konnte nicht eingereicht werden:/
         expect(flash[:alert]).to match /Kanton.* muss ausgefüllt werden/
@@ -138,7 +146,7 @@ describe EventsController do
         mail = double('mail', deliver_later: nil)
         expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)
 
-        put :create_camp_application, group_id: group.id, id: event.id
+        put :create_camp_application, params: { group_id: group.id, id: event.id }
         expect(response).to redirect_to(group_event_path(group, event))
         expect(event.reload.camp_submitted_at).to eq Date.today
         expect(flash[:notice]).to match /eingereicht/
@@ -150,7 +158,7 @@ describe EventsController do
         event.update!(required_attrs_for_camp_submit)
         event.move_to_child_of(events(:bund_supercamp))
 
-        put :create_camp_application, group_id: group.id, id: event.id
+        put :create_camp_application, params: { group_id: group.id, id: event.id }
         expect(response).to redirect_to(group_event_path(group, event))
         expect(event.reload.camp_submitted_at).to eq Date.today
         expect(flash[:notice]).to match /eingereicht/
@@ -164,7 +172,7 @@ describe EventsController do
 
         it 'fails if no canton given' do
           group = event.groups.first
-          put :create_camp_application, group_id: group.id, id: event.id
+          put :create_camp_application, params: { group_id: group.id, id: event.id }
           expect(response).to redirect_to(group_event_path(group, event))
           expect(flash[:alert]).to match /Das Lager konnte nicht eingereicht werden:/
           expect(flash[:alert]).to match /Kanton.* muss ausgefüllt werden/
@@ -178,7 +186,7 @@ describe EventsController do
           mail = double('mail', deliver_later: nil)
           expect(Event::CampMailer).to receive(:submit_camp).and_return(mail)
 
-          put :create_camp_application, group_id: group.id, id: event.id
+          put :create_camp_application, params: { group_id: group.id, id: event.id }
           expect(response).to redirect_to(group_event_path(group, event))
           expect(flash[:alert]).to be_nil
           expect(flash[:notice]).to match /eingereicht/
@@ -208,7 +216,7 @@ describe EventsController do
 
       it 'raises 401' do
         expect do
-          put :create_camp_application, group_id: event.groups.first.id, id: event.id
+          put :create_camp_application, params: { group_id: event.groups.first.id, id: event.id }
         end.to raise_error(CanCan::AccessDenied)
       end
     end
@@ -221,8 +229,7 @@ describe EventsController do
     before { sign_in(people(:bulei)) }
 
     it 'is not possible for non camp leader user to update checkpoint attrs' do
-      put :update, group_id: camp.groups.first.id, id: camp.id,
-                   event: checkpoint_values
+      put :update, params: { group_id: camp.groups.first.id, id: camp.id, event: checkpoint_values }
 
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
         expect(camp.send(attr)).to be false
@@ -233,8 +240,7 @@ describe EventsController do
       camp.leader_id = people(:bulei).id
       camp.save!
 
-      put :update, group_id: camp.groups.first.id, id: camp.id,
-                   event: checkpoint_values
+      put :update, params: { group_id: camp.groups.first.id, id: camp.id, event: checkpoint_values }
 
       camp.reload
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
@@ -246,8 +252,7 @@ describe EventsController do
       let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
 
       it 'is not possible for non camp leader user to update checkpoint attrs' do
-        put :update, group_id: event.groups.first.id, id: event.id,
-            event: checkpoint_values
+        put :update, params: { group_id: event.groups.first.id, id: event.id, event: checkpoint_values }
 
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
           expect(event.send(attr)).to be false
@@ -258,8 +263,7 @@ describe EventsController do
         event.leader_id = people(:bulei).id
         event.save!
 
-        put :update, group_id: event.groups.first.id, id: event.id,
-            event: checkpoint_values
+        put :update, params: { group_id: event.groups.first.id, id: event.id, event: checkpoint_values }
 
         event.reload
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
@@ -293,7 +297,7 @@ describe EventsController do
     end
 
     it 'merges data from flash for camp' do
-      get :edit, group_id: camp.groups.first.id, id: camp.id
+      get :edit, params: { group_id: camp.groups.first.id, id: camp.id }
       expect(entry.name).to eq('Hierarchisches Lager: Schekka')
       expect(entry.dates.map(&:location)).to include('Linth-Ebene')
     end
@@ -302,7 +306,7 @@ describe EventsController do
 
       it 'does not merge for ' + event_type.to_s do
         e = send(event_type)
-        get :edit, group_id: e.groups.first.id, id: e.id
+        get :edit, params: { group_id: e.groups.first.id, id: e.id }
         expect(entry.name).not_to eq('Hierarchisches Lager: Schekka')
         expect(entry.dates.map(&:location)).not_to include('Linth-Ebene')
       end
@@ -320,9 +324,9 @@ describe EventsController do
 
     {application_questions: 1, admin_questions: 2}.each do |attr, qid|
       it attr do
-        put :update, group_id: group.id, id: event.id, event: {
+        put :update, params: { group_id: group.id, id: event.id, event: {
           (attr.to_s + '_attributes') => [ { id: qid, pass_on_to_supercamp: true } ]
-        }
+        } }
         expect(event.reload.send(attr)[0].pass_on_to_supercamp).to be_truthy
       end
     end
@@ -337,9 +341,8 @@ describe EventsController do
 
     it 'assigns contact_attributes_passed_on_to_supercamp' do
 
-      put :update, group_id: group.id, id: event.id,
-          event: { contact_attrs_passed_on_to_supercamp: {
-            first_name: '1', nickname: '1', address: '1', social_accounts: '1' } }
+      put :update, params: { group_id: group.id, id: event.id, event: { contact_attrs_passed_on_to_supercamp: {
+            first_name: '1', nickname: '1', address: '1', social_accounts: '1' } } }
 
       expect(event.reload.contact_attrs_passed_on_to_supercamp).to include('first_name')
       expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')
@@ -353,8 +356,7 @@ describe EventsController do
       event.update!({ contact_attrs_passed_on_to_supercamp:
                         ['first_name', 'social_accounts', 'address', 'nickname']})
 
-      put :update, group_id: group.id, id: event.id,
-          event: { contact_attrs_passed_on_to_supercamp: { nickname: '1' } }
+      put :update, params: { group_id: group.id, id: event.id, event: { contact_attrs_passed_on_to_supercamp: { nickname: '1' } } }
 
       expect(event.reload.contact_attrs_passed_on_to_supercamp).not_to include('first_name')
       expect(event.contact_attrs_passed_on_to_supercamp).to include('nickname')

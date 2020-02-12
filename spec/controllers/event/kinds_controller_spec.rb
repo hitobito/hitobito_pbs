@@ -11,11 +11,13 @@ describe Event::KindsController do
   before { sign_in(people(:bulei)) }
 
   it 'POST create accepts documents_text and campy' do
-    post :create, event_kind: { label: 'Foo',
-                                kurs_id_fiver: 'some id',
-                                vereinbarungs_id_fiver: 'some other id',
-                                documents_text: '<b>bar</b>',
-                                campy: true }
+    post :create, params: {
+                                event_kind: { label: 'Foo',
+                                                            kurs_id_fiver: 'some id',
+                                                            vereinbarungs_id_fiver: 'some other id',
+                                                            documents_text: '<b>bar</b>',
+                                                            campy: true }
+    }
 
     kind = assigns(:kind)
     expect(kind.reload.documents_text).to eq '<b>bar</b>'
