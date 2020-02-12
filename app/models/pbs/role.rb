@@ -100,7 +100,9 @@ module Pbs::Role
   end
 
   def soft_deleted_change?
-    changes.include?(:deleted_at) && changes[:deleted_at].first.nil? && changes[:deleted_at].last
+    previous_changes.include?(:deleted_at) &&
+      previous_changes[:deleted_at].first.nil? &&
+      previous_changes[:deleted_at].last
   end
 
   def set_first_primary_group_with_kantonalverband

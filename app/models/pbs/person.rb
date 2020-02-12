@@ -81,7 +81,7 @@ module Pbs::Person
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
     after_create :set_pbs_number!, if: :pbs_number_column_available?
-    after_save :reset_kantonalverband!, if: :primary_group_id_changed?
+    after_save :reset_kantonalverband!, if: :primary_group_id_previously_changed?
     after_save :send_black_list_mail, if: :blacklisted_attribute_changed?
   end
 
@@ -142,7 +142,7 @@ module Pbs::Person
   end
 
   def blacklisted_attribute_changed?
-    %w(first_name last_name email).any? { |k| changes.key?(k) } && black_listed?
+    %w(first_name last_name email).any? { |k| previous_changes.key?(k) } && black_listed?
   end
 
 end
