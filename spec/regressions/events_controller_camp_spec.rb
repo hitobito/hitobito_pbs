@@ -19,7 +19,7 @@ describe EventsController, type: :controller do
 
     it 'creates links for restricted role people' do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
-      camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
+      camp.update(advisor_mountain_security_id: advisor_mountain.id)
 
       sign_in(bulei)
 
@@ -31,7 +31,7 @@ describe EventsController, type: :controller do
 
     it 'only displays person\'s name if no access to show site' do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
-      camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
+      camp.update(advisor_mountain_security_id: advisor_mountain.id)
 
       participation = Fabricate(:event_participation, event: camp)
       Fabricate(Event::Camp::Role::Helper.name.to_sym, participation: participation)
@@ -75,7 +75,7 @@ describe EventsController, type: :controller do
           end
 
           it 'is marked as assigned if set' do
-            camp.update_attribute("#{key}_id", bulei.id)
+            camp.update("#{key}_id" => bulei.id)
 
             text = bulei.to_s
             text += "\nNicht bestätigt\nBesucht das Lager nicht\n" if key == 'coach'
@@ -102,7 +102,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -125,7 +125,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -135,9 +135,9 @@ describe EventsController, type: :controller do
 
       context 'security flags set' do
         before do
-          camp.update_attributes!(j_s_security_mountain: true,
-                                 j_s_security_snow: true,
-                                 j_s_security_water: true)
+          camp.update!(j_s_security_mountain: true,
+                       j_s_security_snow: true,
+                       j_s_security_water: true)
         end
 
         context 'no security leaders assigned' do
@@ -149,7 +149,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set but with leader warning' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, "#{bulei.to_s}Keine Leitenden erfasst", true)
               end
             end
@@ -172,7 +172,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -262,17 +262,17 @@ describe EventsController, type: :controller do
     end
 
     def update_camp_attrs
-      camp.update_attribute(:expected_participants_wolf_f, 33)
-      camp.update_attribute(:canton, 'zz')
-      camp.update_attribute(:coordinates, '34')
-      camp.update_attribute(:altitude, '344')
-      camp.update_attribute(:emergency_phone, '344')
-      camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
-      camp.update_attribute(:landlord, 'foo')
-      camp.update_attribute(:j_s_kind, 'j_s_child')
-      camp.update_attribute(:local_scout_contact_present, true)
-      camp.update_attribute(:local_scout_contact, 'foo guy')
-      camp.update_attribute(:location, 'foo place')
+      camp.update(expected_participants_wolf_f: 33,
+                  canton: 'zz',
+                  coordinates: '34',
+                  altitude: '344',
+                  emergency_phone: '344',
+                  advisor_mountain_security_id: people(:bulei).id,
+                  landlord: 'foo',
+                  j_s_kind: 'j_s_child',
+                  local_scout_contact_present: true,
+                  local_scout_contact: 'foo guy',
+                  location: 'foo place')
     end
   end
 

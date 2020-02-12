@@ -17,7 +17,7 @@ unless ch.address.present?
   ch.update_columns(seeder.group_attributes)
 
   ch.default_children.each do |child_class|
-    child_class.first.update_attributes(seeder.group_attributes)
+    child_class.first.updates(seeder.group_attributes)
   end
 end
 

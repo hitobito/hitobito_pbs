@@ -18,7 +18,7 @@ describe Event::QualificationsController do
   context 'course confirmation checkbox' do
 
     before do
-      course.update_attributes(has_confirmations: false)
+      course.update(has_confirmations: false)
     end
 
     it 'saves course confirmation setting' do

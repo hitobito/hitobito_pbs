@@ -25,7 +25,7 @@ describe RolesController do
     context 'deleted role' do
       it 'renders template' do
         role = roles(:al_schekka)
-        role.update_attributes!(created_at: 100.days.ago, deleted_at: 5.days.ago)
+        role.update!(created_at: 100.days.ago, deleted_at: 5.days.ago)
         get :edit, params: { group_id: role.group_id, id: role.id }
         is_expected.to render_template('edit')
       end
