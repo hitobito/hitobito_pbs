@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class RemoveCensusReminderContent < ActiveRecord::Migration
+class RemoveCensusReminderContent < ActiveRecord::Migration[4.2]
   def change
     CustomContent.where(key: 'census_reminder').destroy_all
   end

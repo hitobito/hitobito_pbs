@@ -1,4 +1,4 @@
-class AddCourseConfirmationAttrs < ActiveRecord::Migration
+class AddCourseConfirmationAttrs < ActiveRecord::Migration[4.2]
   def up
     add_column :event_kinds, :can_have_confirmations, :boolean, null: false, default: false
     add_column :event_kinds, :confirmation_name, :string, null: true

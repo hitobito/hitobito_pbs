@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddPfadiAttributes < ActiveRecord::Migration
+class AddPfadiAttributes < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :salutation, :string
     add_column :people, :title, :string

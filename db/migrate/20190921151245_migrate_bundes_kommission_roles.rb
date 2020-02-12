@@ -1,4 +1,4 @@
-class MigrateBundesKommissionRoles < ActiveRecord::Migration
+class MigrateBundesKommissionRoles < ActiveRecord::Migration[4.2]
   def change
     bundes_group_ids = Group.where(type: 'Group::BundesKommission').select(:id)
     bundes_mitglieder = Role.where(type: 'Group::Kommission::Mitglied').where(group_id: bundes_group_ids)
