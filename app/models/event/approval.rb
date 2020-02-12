@@ -84,7 +84,7 @@ class Event::Approval < ActiveRecord::Base
         statement << "WHEN '#{l}' THEN #{i} "
       end
       statement << 'END'
-      order(statement)
+      order(Arel.sql(statement))
     end
 
   end
