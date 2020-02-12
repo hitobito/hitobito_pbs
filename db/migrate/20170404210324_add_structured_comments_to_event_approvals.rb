@@ -1,4 +1,4 @@
-class AddStructuredCommentsToEventApprovals < ActiveRecord::Migration
+class AddStructuredCommentsToEventApprovals < ActiveRecord::Migration[4.2]
   def change
     add_column :event_approvals, :current_occupation, :string
     add_column :event_approvals, :current_level, :string

@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddParticipationToQualification < ActiveRecord::Migration
+class AddParticipationToQualification < ActiveRecord::Migration[4.2]
   def up
     add_reference :qualifications, :event_participation, foreign_key: { on_delete: :nullify }
     Qualification.reset_column_information

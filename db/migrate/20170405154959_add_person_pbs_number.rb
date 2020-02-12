@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddPersonPbsNumber < ActiveRecord::Migration
+class AddPersonPbsNumber < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :pbs_number, :string
 

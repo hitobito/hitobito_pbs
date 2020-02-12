@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddEventKindCampy < ActiveRecord::Migration
+class AddEventKindCampy < ActiveRecord::Migration[4.2]
   def change
     add_column :event_kinds, :campy, :boolean, null: false, default: false
   end

@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class RenameApprovalPersonToApprover < ActiveRecord::Migration
+class RenameApprovalPersonToApprover < ActiveRecord::Migration[4.2]
   def change
     rename_column :event_approvals, :person_id, :approver_id
   end
