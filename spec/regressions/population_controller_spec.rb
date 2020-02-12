@@ -17,7 +17,7 @@ describe PopulationController, type: :controller do
 
   describe 'GET index' do
 
-    before { get :index, id: group.id }
+    before { get :index, params: { id: group.id } }
 
     context 'with existing census' do
       let(:group) { groups(:schekka) }

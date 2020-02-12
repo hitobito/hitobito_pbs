@@ -24,7 +24,7 @@ describe EventsController, type: :controller  do
 
   it "MitarbeiterGS may edit training_days and express_fee" do
     sign_in(bulei)
-    get :edit, group_id: group.id, id: course.id
+    get :edit, params: { group_id: group.id, id: course.id }
 
     expect(dom).to have_content('Expressgebühr')
     expect(dom).to have_content('Ausbildungstage')
@@ -32,7 +32,7 @@ describe EventsController, type: :controller  do
 
   it "AssistenzAusbildung may edit training_days and express_fee" do
     sign_in(assistenz.person)
-    get :edit, group_id: bund.id, id: course_bund.id
+    get :edit, params: { group_id: bund.id, id: course_bund.id }
 
     expect(dom).to have_content('Expressgebühr')
     expect(dom).to have_content('Ausbildungstage')
@@ -40,7 +40,7 @@ describe EventsController, type: :controller  do
 
   it "Sekretariat may not edit training_days and express_fee" do
     sign_in(sekretar.person)
-    get :edit, group_id: group.id, id: course.id
+    get :edit, params: { group_id: group.id, id: course.id }
 
     expect(dom).not_to have_content('Expressgebühr')
     expect(dom).not_to have_content('Ausbildungstage')
@@ -49,7 +49,7 @@ describe EventsController, type: :controller  do
   it "Sekretariat may not update training_days and express_fee" do
     sign_in(sekretar.person)
     course.update_attributes!(express_fee: '424', training_days: 42) 
-    post :update, group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 }
+    post :update, params: { group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 } }
 
     course.reload
     expect(course.express_fee).to eq('424')
@@ -58,7 +58,7 @@ describe EventsController, type: :controller  do
 
   it "MitarbeiterGs may update training_days and express_fee" do
     sign_in(mitarbeiter_gs.person)
-    post :update, group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 }
+    post :update, params: { group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 } }
 
     course.reload
     expect(course.express_fee).to eq('909')
@@ -67,7 +67,7 @@ describe EventsController, type: :controller  do
 
   it "AssistenzAusbildung may update training_days and express_fee" do
     sign_in(assistenz.person)
-    post :update, group_id: bund.id, id: course_bund.id, event: { express_fee: 909, training_days: 33 }
+    post :update, params: { group_id: bund.id, id: course_bund.id, event: { express_fee: 909, training_days: 33 } }
 
     course_bund.reload
     expect(course_bund.express_fee).to eq('909')
@@ -77,7 +77,7 @@ describe EventsController, type: :controller  do
   it "shows 'Informieren' Button when course state is canceled" do
     sign_in(bulei)
     course.update!(state: 'canceled')
-    get :show, group_id: group.id, id: course.id
+    get :show, params: { group_id: group.id, id: course.id }
     link = dom.find_link 'Informieren'
     expect(link[:href]).to eq 'mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com'
   end
@@ -86,7 +86,7 @@ describe EventsController, type: :controller  do
     sign_in(bulei)
     lkb = people(:al_schekka)
     course.update!(advisor_id: lkb.id)
-    get :show, group_id: group.id, id: course.id
+    get :show, params: { group_id: group.id, id: course.id }
 
     expect(dom).to have_content('Betreuung')
     expect(dom).to have_content('LKB')
@@ -96,7 +96,7 @@ describe EventsController, type: :controller  do
   it "advisor (LKB) not shown if none assigned" do
     sign_in(bulei)
 
-    get :show, group_id: group.id, id: course.id
+    get :show, params: { group_id: group.id, id: course.id }
 
     expect(dom).not_to have_content('Betreuung')
     expect(dom).not_to have_content('LKB')

@@ -21,13 +21,13 @@ describe Event::ApplicationMarketController do
   end
 
   it 'PUT#add_participant sets application state to assigned' do
-    put :add_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+    put :add_participant, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
     expect(participation.reload.state).to eq 'assigned'
   end
 
 
   it 'DELETE#remove_participant sets application state to applied' do
-    delete :remove_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+    delete :remove_participant, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
     expect(participation.reload.state).to eq 'applied'
   end
 
@@ -44,7 +44,7 @@ describe Event::ApplicationMarketController do
       it 'enqueues notification job' do
         expect(Event::AssignedFromWaitingListJob).to receive(:new).with(participation, setter, user).and_call_original
         expect do
-          put :add_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+          put :add_participant, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
         end.to change { Delayed::Job.count }.by(1)
         expect(participation.application.reload.waiting_list_setter).to be_nil
       end
@@ -53,7 +53,7 @@ describe Event::ApplicationMarketController do
         participation.application.update!(waiting_list_setter: user)
 
         expect do
-          put :add_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+          put :add_participant, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
         end.not_to change { Delayed::Job.count }
         expect(participation.application.reload.waiting_list_setter).to be_nil
       end
@@ -62,14 +62,14 @@ describe Event::ApplicationMarketController do
         participation.update(event: Fabricate(:pbs_course))
 
         expect do
-          put :add_participant, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+          put :add_participant, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
         end.not_to change { Delayed::Job.count }
         expect(participation.application.reload.waiting_list_setter).to eq(setter)
       end
     end
 
     it 'PUT#put_on_waiting_list sets waiting_list_setter to current_user' do
-      put :put_on_waiting_list, group_id: group.id, event_id: course.id, id: participation.id, event_application: {}, format: :js
+      put :put_on_waiting_list, params: {group_id: group.id, event_id: course.id, id: participation.id, event_application: {}}, format: :js
       expect(participation.application.reload.waiting_list_setter).to eq user
     end
 
@@ -77,7 +77,7 @@ describe Event::ApplicationMarketController do
       it 'enqueues notification job' do
         expect(Event::RemovedFromWaitingListJob).to receive(:new).with(participation, setter, user).and_call_original
         expect do
-          delete :remove_from_waiting_list, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+          delete :remove_from_waiting_list, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
         end.to change { Delayed::Job.count }.by(1)
         expect(participation.application.reload.waiting_list_setter).to be_nil
       end
@@ -85,7 +85,7 @@ describe Event::ApplicationMarketController do
       it 'does not enqueue job when waiting_list_setter equals current_user' do
         participation.application.update!(waiting_list_setter: user)
         expect do
-          delete :remove_from_waiting_list, group_id: group.id, event_id: course.id, id: participation.id, format: :js
+          delete :remove_from_waiting_list, params: { group_id: group.id, event_id: course.id, id: participation.id }, format: :js
         end.not_to change { Delayed::Job.count }
         expect(participation.application.reload.waiting_list_setter).to be_nil
       end
@@ -103,7 +103,7 @@ describe Event::ApplicationMarketController do
     other = create_participant('assigned')
     tentative = create_participant('tentative')
 
-    get :index, group_id: group.id, event_id: course.id
+    get :index, params: { group_id: group.id, event_id: course.id }
 
     expect(assigns(:participants)).to include(other)
     expect(assigns(:participants)).not_to include(tentative)

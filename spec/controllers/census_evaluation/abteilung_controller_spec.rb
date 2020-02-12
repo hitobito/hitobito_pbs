@@ -15,7 +15,7 @@ describe CensusEvaluation::AbteilungController do
 
   describe 'GET total' do
 
-    before { get :index, id: abteilung.id }
+    before { get :index, params: { id: abteilung.id } }
 
     it 'assigns counts' do
       expect(assigns(:group_counts)).to be_blank

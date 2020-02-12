@@ -123,9 +123,9 @@ describe SupercampsController do
 
           request.env['HTTP_REFERER'] = '/' + form.to_s
           if form == :create
-            post :connect, group_id: group.id, supercamp_id: supercamp.id, event: event_form_data
+            post :connect, params: { group_id: group.id, supercamp_id: supercamp.id, event: event_form_data }
           else
-            patch :connect, group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id, event: event_form_data
+            patch :connect, params: { group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id, event: event_form_data }
           end
         end
 

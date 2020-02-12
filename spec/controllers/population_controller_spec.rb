@@ -28,7 +28,7 @@ describe PopulationController do
   before { sign_in(leader) }
 
   describe 'GET index' do
-    before { get :index, id: abteilung.id }
+    before { get :index, params: { id: abteilung.id } }
 
     describe 'groups' do
       subject { assigns(:groups) }
@@ -70,7 +70,7 @@ describe PopulationController do
   describe 'GET index does not include deleted groups' do
     before do
       groups(:poseidon).destroy
-      get :index, id: abteilung.id
+      get :index, params: { id: abteilung.id }
     end
 
     subject { assigns(:groups) }

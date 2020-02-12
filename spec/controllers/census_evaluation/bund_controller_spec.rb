@@ -20,7 +20,7 @@ describe CensusEvaluation::BundController do
     before { allow(Date).to receive_messages(today: censuses(:two_o_12).finish_at) }
     before { groups(:schweizerstern).destroy }
 
-    before { get :index, id: ch.id }
+    before { get :index, params: { id: ch.id } }
 
     it 'assigns counts' do
       counts = assigns(:group_counts)
