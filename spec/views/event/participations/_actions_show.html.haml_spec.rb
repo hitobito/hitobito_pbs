@@ -20,7 +20,8 @@ describe 'event/participations/_actions_show.html.haml' do
     allow(controller).to receive(:current_user).and_return(participant)
     controller.request.path_parameters[:event_id] = event.id
     controller.request.path_parameters[:group_id] = group.id
-    controller.request.path_parameters[:participiation_id] = participation.id
+    controller.request.path_parameters[:id] = participation.id
+    controller.request.path_parameters[:action] = 'show'
     allow(view).to receive(:entry).and_return(participation)
     allow(view).to receive(:course_confirmation_form).and_return('Kursbestätigung')
     assign(:event, event)
