@@ -45,7 +45,7 @@ class SupercampsController < ApplicationController
 
   def connect
     flash[:event_with_merged_supercamp] = event_with_merged_supercamp
-    redirect_to :back
+    redirect_back(fallback_location: group)
   end
 
   private
@@ -156,7 +156,7 @@ class SupercampsController < ApplicationController
   end
 
   def handle_access_denied(e)
-    redirect_to :back, alert: e.message
+    redirect_back(fallback_location: group, alert: e.message)
   end
 
 end
