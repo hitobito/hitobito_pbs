@@ -44,7 +44,7 @@ class SupercampsController < ApplicationController
   end
 
   def connect
-    flash[:event_with_merged_supercamp] = event_with_merged_supercamp
+    flash[:event_with_merged_supercamp] = event_with_merged_supercamp.to_unsafe_h
     redirect_back(fallback_location: group)
   end
 
@@ -115,7 +115,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                  .merge(supercamp_attributes_to_merge)
+      .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
