@@ -14,6 +14,8 @@ RSpec.describe SubcampsController, type: :controller do
   end
 
   describe "GET #index" do
+    render_views
+
     it "returns http success" do
       get :index, params: { group_id: supercamp.groups.first, event_id: supercamp }
       expect(response).to have_http_status(:success)
