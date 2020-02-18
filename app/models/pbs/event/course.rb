@@ -53,6 +53,17 @@ module Pbs::Event::Course
     (!application_closing_at || application_closing_at >= ::Time.zone.today)
   end
 
+  module ClassMethods
+    def campy_kind?(kind_id)
+      now = Time.zone.now.to_i
+      if (now - @campy_ids_updated_at.to_i) > 15
+        @campy_ids = Event::Kind.where(campy: true).pluck(:id)
+        @campy_ids_updated_at = now
+      end
+      @campy_ids.include?(kind_id)
+    end
+  end
+
   private
 
   def set_requires_approval
@@ -89,8 +100,7 @@ module Pbs::Event::Course
     if association(:kind).loaded?
       kind && kind.campy?
     else
-      # use custom query to not interfere with eager loading kinds.
-      Event::Kind.where(id: kind_id, campy: true).exists?
+      self.class.campy_kind?(kind_id)
     end
   end
 
