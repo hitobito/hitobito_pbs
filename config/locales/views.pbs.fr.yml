@@ -188,6 +188,7 @@ fr:
       email: Adresse e-mail
       attach_to_supercamp: Rallier au camp principal
       direct_subcamps: sous-camps directs
+      supercamp: Camp supérieur
     form_tab_pane_advisors:
       al_present_caption: La maîtrise de groupe sera présente au camp
       al_visiting_caption: La maîtrise de groupe visitera le camp
@@ -217,6 +218,17 @@ fr:
       lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camps ("règlement de camp") ainsi que le profil du scoutisme sont pris en compte et respectés
       kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prises en compte lors de la préparation du camp
       j_s_rules_applied_caption: "Pour les camps J+S: Les directives actuelles de Sport de camp/Trekking sont connues et respectées"
+    canton_specific_help_text:
+      zz_title: Consulte la brochure "Camps à l'étranger" dans la "Sardine" pour compléments
+      zz_url: http://international.msds.ch
+      ti_title: Observe la réglementation particulière pour les camps au Tessin ("Sardine" -> Cas particuliers de l'annonce de camp)
+      ti_url: http://sardine.scouts.ch
+      sg_title: Observe la réglementation spéciale pour les camps dans le canton de St-Gall ("Sardine" -> Cas particuliers de l'annonce de camp)
+      sg_url: http://sardine.scouts.ch
+      tg_title: Observe la réglementation spéciale pour les camps dans le canton de Thurgovie ("Sardine" -> Cas particuliers de l'annonce de camp)
+      tg_url: http://sardine.scouts.ch
+      vd_title: Observe la réglementation spéciale pour les camps dans le canton de Vaud ("Sardine" -> Cas particuliers de l'annonce de camp)
+      vd_url: http://sardine.scouts.ch
   filter_navigation/events:
     canton: 'Réalisé dans le canton de'
   filter_navigation/camps:
@@ -254,27 +266,31 @@ fr:
     index:
       title: Aide
       description_html: Les informations sur les derniers updates se trouvent dans les <a href="http://releasenotes.scouts.ch" target="_blank">release notes</a>.
+      power_users:
+        title: Power User
+        description: "Ici, tu trouveras une vue d'ensemble des Power Users dans tes groupes qui peuvent t'aider en cas de requête :"
+        none_found: Aucun Power User trouvé
       guides:
         title: Fils conducteurs
         description: "Ces fils conducteurs te soutiennent pour l'administration de cours et de camps:"
         hering:
-          url: http://heringfr.scouts.ch
+          url: https://www.scout.ch/fr/association/downloads/programme/camp/sardine-guide-des-demarches-administratives-pour-les-camps-scouts-version-2016-avec-midata/view
           title: "Sardine: Guide des démarches administratives pour les camps scouts"
           description: "La sardine te donne toutes les informations pour l'administration de camps scouts. Elle te mène pas à pas à travers tous les documents importants. Avec ce guide, tu n'oublieras aucun point important."
         coaches:
-          url: http://coachesfr.scouts.ch
+          url: https://www.scout.ch/fr/association/downloads/encadrement/coaching/ressources/1x1-midata-pour-les-coachs/view
           title: 1x1 MiData pour coachs
-          description: "Le « 1x1 MiData pour coachs » explique les fonctions les plus importantes pour les coachs dans l’utilisation de la base de données des membres du MSdS (MiData). Il sert autant de résumé que de préparation pour le MP-Coach et le cours de coachs."
+          description: "Le \"1x1 MiData pour les coachs\" explique aux coachs les fonctions les plus importantes de la base de données des membres (MiData). Elle fait office tant de factsheet que de préparation pour le MP coach et le cours coach."
         anker:
-          url: http://ankerfr.scouts.ch
+          url: https://www.scout.ch/fr/association/downloads/formation/cours/administration/fils-conducteurs-a-ladministration-des-cours/l2019ancre-fil-conducteur-pour-l2019administration-des-cours-msds-version-2015-avec-midata/view
           title: "L’ancre: Fil conducteur pour l’administration des cours MSdS"
-          description: "Pour les chefs de cours et les conseillers/conseillères à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
+          description: "Pour les responsables de cours et les conseillers·ères à la formation : tous les processus administratifs qui doivent être pris en compte lors de l'annonce et de la réalisation d'un cours J+S ou OFAS sont indiqués ici de manière détaillée."
         pilot:
-          url: http://pilotfr.scouts.ch
+          url: https://www.scout.ch/fr/association/downloads/formation/cours/administration/fils-conducteurs-a-ladministration-des-cours/pilote-fil-conducteur-pour-ladministration-des-cours-du-msds-dans-la-midata-et-la-bdnjs-version-2015-avec-midata/view
           title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNJS"
           description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNJS"
         ticket:
-          url: http://ticketfr.scouts.ch
+          url: https://www.scout.ch/fr/association/downloads/formation/cours/inscription/ticket-fil-conduct-pour-lannonce-de-participation-aux-cours-version-2015-avec-midata/view
           title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
           description: "Le Ticket décrit le processus d'inscription des participants par la MiData (banque nationale de données des membres du MSdS)"
   member_counts:
@@ -324,6 +340,8 @@ fr:
       none: Aucun évènement trouvé
     does_not_allow_sub_camps: Le camp sélectionné ne permet aucun sous-camp
     not_in_created_state: Le camp principal choisi n'a pas le statut "Créé"
+    not_upcoming: Le camp supérieur sélectionné est déjà terminé
+    already_connected: Le camp est déjà rattaché à un autre camp supérieur
   black_lists:
     form:
       pbs_number_format: Exemple 123-123-123
