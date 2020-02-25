@@ -83,6 +83,9 @@ fr:
         one: Administrateur/-trice des adresses
         other: Administrateur/-trice des adresses
         description: Administre les adresses.
+      group/bund/power_user:
+        one: PowerUser
+        other: PowerUser
       group/bund/assistenz_ausbildung:
         one: Assistance formation
         other: Assistance formation
@@ -219,6 +222,9 @@ fr:
       group/kantonalverband/adressverwaltung:
         one: Administrateur/-trice des adresses
         other: Administrateurs/-trices des adresses
+      group/kantonalverband/power_user:
+        one: PowerUser
+        other: PowerUser
       group/kantonalverband/praesidium:
         one: Président
         other: Présidents
@@ -342,6 +348,9 @@ fr:
       group/region/adressverwaltung:
         one: Administrateur/-trice des adresses
         other: Administrateurs/-trices des adresses
+      group/region/power_user:
+        one: PowerUser
+        other: PowerUser
       group/region/praesidium:
         one: Président
         other: Présidents
@@ -465,6 +474,9 @@ fr:
       group/abteilung/adressverwaltung:
         one: Administrateur/-trice des adresses
         other: Administrateurs/-trices des adresses
+      group/abteilung/power_user:
+        one: PowerUser
+        other: PowerUser
       group/abteilung/praesidium:
         one: Président
         other: Présidents
@@ -739,9 +751,11 @@ fr:
         camp_days: Nombre de jours de camp
         camp_submitted: Démission
         camp_submitted_at: 'Soumis le '
+        total_expected_leading_participants: Maîtrise attendue
+        total_expected_participants: Participant·e·s attendu·e·s
         course_languages: Langues de cours
         express_fee: Finances express
-        expected_participants: Participants/-es attendus/-ues
+        expected_participants: Nombre attendu de participant·e·s
         expected_participants_wolf: Louveteau
         expected_participants_wolf_f: Nombre de louveteaux filles
         expected_participants_wolf_m: Nombre de louveteaux garçons
@@ -754,7 +768,7 @@ fr:
         expected_participants_rover: Routier
         expected_participants_rover_f: Nombre de routiers filles
         expected_participants_rover_m: Nombre de routiers garçons
-        expected_participants_leitung: Responsable
+        expected_participants_leitung: Responsables
         expected_participants_leitung_f: Nombre de responsables fille
         expected_participants_leitung_m: Nombre de responsables garçons
         language_de: Langue de cours allemand
@@ -936,6 +950,10 @@ fr:
           attributes:
             base:
               contact_attr_passed_on_to_supercamp_hidden: "%{attribute} doit soit être affiché ou ne pas être transmis au camp principal"
+        event/camp:
+          attributes:
+            base:
+              cannot_remove_parent_id: "Le camp supérieur ne peut plus être quitté, vu qu'il n'apparaît plus dans le statut \"créé\""
         role:
           attributes:
             created_at:

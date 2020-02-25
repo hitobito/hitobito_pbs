@@ -753,9 +753,11 @@ it:
         camp_days: Numero di giorni di campo
         camp_submitted: Inoltrato
         camp_submitted_at: Inoltrato il
+        total_expected_leading_participants: Ci si aspetta un team di animatori
+        total_expected_participants: Ci si aspetta dei partecipanti
         course_languages: Lingua del corso
         express_fee: Spese per un'elaborazione espresso
-        expected_participants: Partecipanti stimati
+        expected_participants: Numero di partecipanti stimato
         expected_participants_wolf: Lupetto
         expected_participants_wolf_f: Numero di lupette
         expected_participants_wolf_m: Numero di lupetti
@@ -768,7 +770,7 @@ it:
         expected_participants_rover: Rover
         expected_participants_rover_f: Numero di rover femmine
         expected_participants_rover_m: Numero di rover maschi
-        expected_participants_leitung: Animatore
+        expected_participants_leitung: Animatori
         expected_participants_leitung_f: Numero di animatrici
         expected_participants_leitung_m: Numero di animatori
         language_de: Corso di tedesco
@@ -950,6 +952,10 @@ it:
           attributes:
             base:
               contact_attr_passed_on_to_supercamp_hidden: "'%{attribute}' deve essere indicato oppure non può venir trasmesso al campo superiore"
+        event/camp:
+          attributes:
+            base:
+              cannot_remove_parent_id: "Il campo superiore non può più essere lasciato, in quanto non è più nello stato \"Creato\"."
         role:
           attributes:
             created_at:
