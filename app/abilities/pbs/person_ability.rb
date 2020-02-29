@@ -10,15 +10,17 @@ module Pbs::PersonAbility
 
   included do
     on(Person) do
-
       permission(:any)
         .may(:show, :show_full, :show_details, :history,
-             :index_tags, :index_notes).if_member_of_crisis_group
+             :index_tags, :index_notes).if_member_of_crisis_group_or_oneself
     end
 
+    def if_member_of_crisis_group_or_oneself
+      herself || member_of_crisis_group
+    end
 
-    def if_member_of_crisis_group
-      contains_any?(user.crises.active.collect { |c| c.group.layer_group_id },
+    def member_of_crisis_group
+      contains_any?(user.layer_ids_with_active_crises,
                     subject.groups.flat_map { |g| g.layer_hierarchy.collect(&:id) })
     end
 

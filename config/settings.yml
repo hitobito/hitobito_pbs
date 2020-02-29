@@ -18,14 +18,15 @@ application:
   footer:
     links:
       de:
-        "Informationen und Hilfe": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung
-        "Datenschutz": https://www.scout.ch/de/pfadi-online/midata/abteilungsleitung/datennutzung/at_download/file
+        "Informationen und Hilfe": http://info-de.scouts.ch
+        "Datenschutz": http://danu-de.scouts.ch
       fr:
-        "Aide et assistance": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisateur?set_language=fr
-        "Datenschutz": https://www.scout.ch/fr/scout-online/midata/utilisateur/utilisation_des_donnees_midata_msds_fr/at_download/file
+        "Aide et assistance": http://info-fr.scouts.ch
+        "Datenschutz": http://danu-fr.scouts.ch
       it:
-        "Aiuto e assistenza": https://www.scout.ch/it/scout-online/midata/utente/utente?set_language=it
-        "Datenschutz": https://www.scout.ch/it/scout-online/midata/utente/datennutzung_midata_pbs_it/at_download/file
+        "Aiuto e assistenza": http://info-it.scouts.ch
+        "Datenschutz": http://danu-it.scouts.ch
+  course_confirmation_url: "https://corsiexp.scouts.ch/benevole/renderer/pdf/%{course_kind_confirmation_name}/%{locale}"
 
 
 # The person with this email has root access to everything

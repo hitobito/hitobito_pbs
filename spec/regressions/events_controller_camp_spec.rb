@@ -216,7 +216,7 @@ describe EventsController, type: :controller do
         assert_no_attr(attr)
       end
 
-      expect(dom).not_to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).not_to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).not_to have_selector('dt', text: 'Durchgeführt von')
     end
 
@@ -229,7 +229,7 @@ describe EventsController, type: :controller do
         assert_attr(attr)
       end
 
-      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
 
@@ -242,7 +242,7 @@ describe EventsController, type: :controller do
         assert_attr(attr)
       end
 
-      expect(dom).to have_selector('h2', text: 'Erwartete Teilnehmer/-innen')
+      expect(dom).to have_selector('h2', text: 'Erwartete Anzahl Teilnehmende')
       expect(dom).to have_selector('dt', text: 'Durchgeführt von')
     end
 

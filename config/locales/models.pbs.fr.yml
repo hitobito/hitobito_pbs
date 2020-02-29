@@ -30,7 +30,7 @@ fr:
         long: Commission fédérale
       group/elternrat:
         one: Comité des parents
-        other: Comités des parents
+        other: Conseil des parents
       group/gremium:
         one: Commission
         other: Commissions
@@ -171,6 +171,9 @@ fr:
       group/bund/verantwortung_integration:
         one: Responsable intégration
         other: Responsables intégration
+      group/bund/verantwortung_krisenteam:
+        one: Responsable de l'équipe de crise
+        other: Responsable de l'équipe de crise
       group/bund/verantwortung_lagermeldung:
         one: Responsable annonces de camp
         other: Responsables annonce de camp
@@ -688,6 +691,9 @@ fr:
       event/course/role/advisor:
         one: CAF
         other: CAFs
+      black_list:
+        one: Liste noir
+        other: Liste noir
       census:
         one: période couverte par l'annonce des effectifs
         other: Périodes couvertes par une annonce des effectifs
@@ -732,7 +738,7 @@ fr:
         bsv_days: nombre de jours OFAS
         camp_days: Nombre de jours de camp
         camp_submitted: Démission
-        camp_submitted_at: Déposée le
+        camp_submitted_at: 'Soumis le '
         course_languages: Langues de cours
         express_fee: Finances express
         expected_participants: Participants/-es attendus/-ues
@@ -820,6 +826,10 @@ fr:
         coach: Coach
         advisor_unassigned: Attribué à personne
         leader_unassigned: Pas de responsables saisis
+        allow_sub_camps: Permettre des sous-camps
+        super_camp: Camp principal
+      event/contact_attrs:
+        pass_on_to_supercamp: Transmettre au sous-camp
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
         advisor: CAF
@@ -831,8 +841,12 @@ fr:
       event/kind:
         documents_text: Formulaire supplémentaire
         campy: Inscrire un cours en tant que camp
+        can_have_confirmations: Activer l'export des confirmations de cours
+        confirmation_name: Nom du type du cours dans l'outil pour l'export
       event/participation:
         bsv_days: Jours OFAS
+      event/question:
+        pass_on_to_supercamp: Transmettre au camp principal
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem
@@ -856,9 +870,25 @@ fr:
         pbs_shortname: Abréviation MSdS
         bank_account: Référence bancaire  / postale
         cantons: Cantons
+      group/abteilung:
+        gender: Sexe
+        genders:
+          _nil: Mixte
+          m: Hommes
+          w: Femmes
+        try_out_day_at: Journée découverte
+        geolocations: Lieux de rendez-vous
       people_relation:
         kinds:
           sibling: fratrie
+      black_list:
+        first_name: Prénom
+        last_name: Nom de famille
+        pbs_number: ID-MSdS
+        email: Adresse e-mail
+        phone_number: Numéro de téléphone
+        reference_name: Nom de référence
+        reference_phone_number: Numéro de téléphone de référence
       census:
         year: Année
         start_at: A partir de
@@ -889,6 +919,10 @@ fr:
         dates: Dates
         created_at: Du
         deleted_at: Au
+        class:
+          permission:
+            description:
+              crisis_trigger: Déclencher et confirmer des crises
       qualification_kind:
         manual: Entrer manuellement
       label_format:
@@ -896,10 +930,19 @@ fr:
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
+        must_be_valid_social_security_number: doit être un numéro AVS (756.1234.5678.97) valide
       models:
+        event:
+          attributes:
+            base:
+              contact_attr_passed_on_to_supercamp_hidden: "%{attribute} doit soit être affiché ou ne pas être transmis au camp principal"
         role:
           attributes:
             created_at:
               on_or_before: Doit être antérieur à la date du jour.
             deleted_at:
               after: Doit être ultérieur à la date de début.
+        crisis:
+          another_active: Une autre crise est déjà activée sur ce groupe
+        group/abteilung:
+          too_many_geolocations: ne peuvent pas être plus de %{max}

@@ -1,0 +1,27 @@
+-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+-#  hitobito_pbs and licensed under the Affero General Public License version 3
+-#  or later. See the COPYING file at the top-level directory or at
+-#  https://github.com/hitobito/hitobito_pbs.
+
+- title event.to_s
+
+= form_tag('', method: :put) do
+
+  = render 'people'
+
+  - if event.can_have_confirmations?
+    .control-group
+      = label_tag :has_confirmations, {} do
+        = check_box_tag(:has_confirmations, 1, event.has_confirmations?)
+        = t('event/course.has_confirmations')
+
+        - if event.has_confirmations? && event.qualified_participants_count > 0
+          = action_button(t('.send_confirmation_notifications', count: event.qualified_participants_count),
+                          group_event_send_confirmation_notifications_path, :envelope,
+                          in_button_group: true, method: :post, remote: true,
+                          rel: :tooltip, title: t('.button_explanation'))
+
+  .btn-group
+    = button_tag(t('event.qualifications.index.save'),
+                 class: 'btn btn-primary',
+                 data: { disable_with: t('event.qualifications.index.save') })

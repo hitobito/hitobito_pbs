@@ -25,6 +25,9 @@ fr:
         remind: Rappel
   census_evaluation/kantonalverband:
     email_sent: Un courriel de rappel a été envoyé à %{abteilung}
+  crises:
+    update:
+      too_old: La crise est trop ancienne pour être confirmée
   devise:
     sessions:
       new:
@@ -64,6 +67,8 @@ fr:
         leaders: Maîtrise
         cooks: Cuisine
         participants: Participants
+      list:
+        not_persisted: Pas encore sauvegardé
     lists:
       nav_left_camps:
         all_camps: Camp dans toute la Suisse
@@ -82,6 +87,8 @@ fr:
       camps_abroad:
         title: Tous les camps à l'étranger
         explanation: 'Ici s''affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins à l''étranger. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n''ont pas été annulés sont pris en compte.'
+      advanced_bsv_export_button: Export étendu OFAS/CàF
+    hierarchy: Hiérarchie du camp
     participations:
       canceled_own_notice: Tu as été désinscrit de cette activité
       rejected_notice: "%{participant} a été refusé. %{mailto}"
@@ -100,6 +107,14 @@ fr:
       print:
         heading_event/camp: Annonce de camp %{year}
         read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu sa description du camp et je l'accepte.
+    qualifications:
+      send_confirmation_notifications:
+        sent_to_qualified_participants: Les participants qualifiés ont été informés.
+      index:
+        send_confirmation_notifications:
+          one: Envoyer une notification à une personne
+          other: Envoyer une notification à %{count} personnes
+        button_explanation: Envoie un e-mail à tous les participants qualifiés, qui contient un lien vers le cours où ils peuvent télécharger leur confirmation de cours en PDF.
     approvals:
       form:
         approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur du cours (rôle), le/la chef de cours (personne) et d'autres instances de recommandation.
@@ -131,6 +146,11 @@ fr:
       'true': Confirmé
       'false': Pas confirmé
     checkpoint_field_caption: Ne peut être confirmé que par la maîtrise de camp
+  event/course:
+    has_confirmations: Créer une confirmation de cours pour les participants
+    participations:
+      actions_show_pbs:
+        course_confirmation: Confirmation de cours
   events:
     actions_show_pbs:
       camp_application: Annonce de camp MSdS
@@ -138,7 +158,7 @@ fr:
       confirm_cancel: Souhaites-tu vraiment te désinscrire de ce camp?
       submit_camp: Transmettre
       camp_submitted: démission
-      camp_submitted_at: déposée le
+      camp_submitted_at: Déposé le
     application_fields_pbs:
       paper_application_required_caption: Les participants doivent envoyer une inscription papier
       participants_can_apply_caption: Les participants peuvent s'inscrire eux-mêmes
@@ -166,6 +186,8 @@ fr:
       phone_privat: Téléphone privé
       phone_mobil: Téléphone mobile
       email: Adresse e-mail
+      attach_to_supercamp: Rallier au camp principal
+      direct_subcamps: sous-camps directs
     form_tab_pane_advisors:
       al_present_caption: La maîtrise de groupe sera présente au camp
       al_visiting_caption: La maîtrise de groupe visitera le camp
@@ -190,12 +212,16 @@ fr:
     tabs:
       approvals: Recommandations
       attendances: Présence
+      sub_camps: Sous-camps
     form_actions_caption_pbs:
       lagerreglement_applied_caption: Le règlement sur la planification et la mise en œuvre des camps ("règlement de camp") ainsi que le profil du scoutisme sont pris en compte et respectés
       kantonalverband_rules_applied_caption: Les directives et recommandations disponibles de l'association cantonale sont prises en compte lors de la préparation du camp
       j_s_rules_applied_caption: "Pour les camps J+S: Les directives actuelles de Sport de camp/Trekking sont connues et respectées"
   filter_navigation/events:
     canton: 'Réalisé dans le canton de'
+  filter_navigation/camps:
+    all: Tous les sous-camps
+    direct: Que les sous-camps directes
   group:
     pending_approvals:
       index:
@@ -209,26 +235,48 @@ fr:
         title: Confirmations effectuées
         course_kind: Type de cours
         course_kind_all: Tous
+    abteilung:
+      geolocations:
+        geolocation_fields:
+          lat: Lat
+          long: Long
   groups:
+    ongoing_crisis: "%{creator} a déclenché une crise sur ce groupe"
     tabs:
       population: Effectifs
       statistic: Statistiques
       approvals: Validation du cours (%{count})
+    actions_show_pbs:
+      crisis: Crise
+      crisis_done: Confirmer la crise
+      confirm_crisis: Es-tu sûre de vouloir déclencher une crise sur ce groupe? Les responsables de l'équipe de crise seront informés de ton action. S'il-te-plaît fais attention à la protection des données.
   help:
     index:
       title: Aide
+      description_html: Les informations sur les derniers updates se trouvent dans les <a href="http://releasenotes.scouts.ch" target="_blank">release notes</a>.
       guides:
-        title: Guides
+        title: Fils conducteurs
+        description: "Ces fils conducteurs te soutiennent pour l'administration de cours et de camps:"
         hering:
           url: http://heringfr.scouts.ch
+          title: "Sardine: Guide des démarches administratives pour les camps scouts"
+          description: "La sardine te donne toutes les informations pour l'administration de camps scouts. Elle te mène pas à pas à travers tous les documents importants. Avec ce guide, tu n'oublieras aucun point important."
         coaches:
           url: http://coachesfr.scouts.ch
+          title: 1x1 MiData pour coachs
+          description: "Le « 1x1 MiData pour coachs » explique les fonctions les plus importantes pour les coachs dans l’utilisation de la base de données des membres du MSdS (MiData). Il sert autant de résumé que de préparation pour le MP-Coach et le cours de coachs."
         anker:
           url: http://ankerfr.scouts.ch
+          title: "L’ancre: Fil conducteur pour l’administration des cours MSdS"
+          description: "Pour les chefs de cours et les conseillers/conseillères à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
         pilot:
           url: http://pilotfr.scouts.ch
+          title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNJS"
+          description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNJS"
         ticket:
           url: http://ticketfr.scouts.ch
+          title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
+          description: "Le Ticket décrit le processus d'inscription des participants par la MiData (banque nationale de données des membres du MSdS)"
   member_counts:
     created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
     updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.
@@ -244,6 +292,8 @@ fr:
     fields_pbs:
       non_automatic_field: Ceci n'est pas un champ automatique et doit être adapté manuellement.
       in_abteilung: (dans le groupe)
+    qualification_buttons_pbs:
+      print_course_confirmation: Imprimer la confirmation du cours
   population:
     index:
       confirm_census_data: Confirmer les effectifs
@@ -263,3 +313,24 @@ fr:
     fields_pbs:
       notification: notification
       notification_hint: Les personnes existantes vont être informées par e-mail, du moment que tu peux accéder à plus de données personnelles.
+  supercamps:
+    available:
+      select_supercamp: Choisir le camp principal
+      from_group_and_above: Sur ce groupe et au-dessus
+      search_for_supercamp: Chercher un autre camp principal
+      search: Chercher
+      submit: Confirmer
+    selectable_supercamps:
+      none: Aucun évènement trouvé
+    does_not_allow_sub_camps: Le camp sélectionné ne permet aucun sous-camp
+    not_in_created_state: Le camp principal choisi n'a pas le statut "Créé"
+  black_lists:
+    form:
+      pbs_number_format: Exemple 123-123-123
+    global:
+      link:
+        add: Ajouter une personne
+    new:
+      title: Ajouter une personne
+    edit:
+      title: Modifier l'entrée

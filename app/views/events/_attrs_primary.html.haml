@@ -27,6 +27,10 @@
     - entry.used?(:state) do
       = labeled_attr(entry, :state_translated)
 
+  - if entry.is_a?(Event::Camp) && entry.super_camp.present?
+    %dl.dl-horizontal
+      = labeled_attr(entry, :super_camp)
+
   = render_present_attrs(entry, :description)
 
   - unless entry.is_a?(Event::Camp) && !can?(:show_details, entry)

@@ -8,9 +8,9 @@ it:
         one: sezione
         other: Sezioni
       group/abteilungs_gremium:
-        one: Comitato
-        other: Comitati
-        long: Comitato sezionale
+        one: Gremio
+        other: Gremi
+        long: Gremio sezionale
       group/abteilungs_rover:
         one: Rover
         other: Rover
@@ -25,15 +25,15 @@ it:
         one: Confederazione
         other: Confederazione
       group/bundes_gremium:
-        one: Commissione MSS
-        other: Commissioni MSS
-        long: Comitato federale
+        one: Gremio MSS
+        other: Gremi MSS
+        long: Gremio federale
       group/elternrat:
         one: consiglio dei genitori
         other: Consigli dei genitori
       group/gremium:
         one: comissione
-        other: Commissioni
+        other: Gremi
       group/kommission:
         one: Commissione
         other: Commissioni
@@ -41,9 +41,9 @@ it:
         one: associazione cantonale
         other: Associazioni cantonali
       group/kantonales_gremium:
-        one: Commissione
-        other: Commissioni
-        long: Comitato cantonale
+        one: Gremio
+        other: Gremi
+        long: Gremio cantonale
       group/pfadi:
         one: 'esplo
 
@@ -67,9 +67,9 @@ it:
         one: zona
         other: Zone
       group/regionales_gremium:
-        one: Commissione
-        other: Commissioni
-        long: Comitato di zona
+        one: Gremio
+        other: Gremi
+        long: Gremio di zona
       group/regionale_rover:
         one: Rover
         other: Rover
@@ -185,6 +185,9 @@ it:
       group/bund/verantwortung_integration:
         one: Responsabile integrazione
         other: Responsabili integrazione
+      group/bund/verantwortung_krisenteam:
+        one: Responsabile team di crisi
+        other: Responsabile team di crisi
       group/bund/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
         other: Responsabili annuncio campi
@@ -641,7 +644,7 @@ it:
         other: Membri
       group/gremium/leitung:
         one: Formatore
-        other: Formatore
+        other: Responsabile
       group/gremium/mitglied:
         one: Membro
         other: Membri
@@ -702,6 +705,9 @@ it:
       event/course/role/advisor:
         one: CaF
         other: CaF
+      black_list:
+        one: Lista nera
+        other: Lista nera
       census:
         one: Periodo considerato per i censimenti
         other: Periodi considerati per i censimenti
@@ -834,6 +840,10 @@ it:
         coach: Coach
         advisor_unassigned: Nessuna assegnazione
         leader_unassigned: Nessun animatore registrato
+        allow_sub_camps: Permettere il campo inferiore
+        super_camp: Campo superiore
+      event/contact_attrs:
+        pass_on_to_supercamp: Inoltrre al campo superiore
       event/course:
         requires_approval: Raccomandazione necessaria
         advisor: CaF
@@ -845,8 +855,12 @@ it:
       event/kind:
         documents_text: Formulari aggiuntivi
         campy: Annunciare il corso come campo
+        can_have_confirmations: Attivare l'esportazione delle conferme dei costi
+        confirmation_name: Nome del tipo di corso nel tool per l'esportazione
       event/participation:
         bsv_days: Numero di giorni UFAS
+      event/question:
+        pass_on_to_supercamp: Inoltrare al campo superiore
       person:
         layer_group_id: Id del livello principale
         nickname: Totem
@@ -870,9 +884,25 @@ it:
         pbs_shortname: Abbreviazione MSS
         bank_account: Coordinate bancarie/postali
         cantons: Cantoni
+      group/abteilung:
+        gender: Sesso
+        genders:
+          _nil: Misto
+          m: Uomini
+          w: Donne
+        try_out_day_at: Giornata di prova
+        geolocations: Punti d'incontro
       people_relation:
         kinds:
           sibling: Fratelli
+      black_list:
+        first_name: Nome
+        last_name: Cognome
+        pbs_number: MSS-ID
+        email: Indirizzo e-mail
+        phone_number: Numero di telefono
+        reference_name: Nome di riferimento
+        reference_phone_number: No di tel. di riferimento
       census:
         year: Anno
         start_at: Da
@@ -903,6 +933,10 @@ it:
         dates: Date
         created_at: Da
         deleted_at: A
+        class:
+          permission:
+            description:
+              crisis_trigger: Iniziare e terminare una crisi.
       qualification_kind:
         manual: Inserire manualmente
       label_format:
@@ -910,10 +944,19 @@ it:
     errors:
       messages:
         must_be_multiple_of: dev'essere un multiplo di %{multiple} .
+        must_be_valid_social_security_number: deve essere un numero AVS valevole (756.1234.5678.97)
       models:
+        event:
+          attributes:
+            base:
+              contact_attr_passed_on_to_supercamp_hidden: "'%{attribute}' deve essere indicato oppure non può venir trasmesso al campo superiore"
         role:
           attributes:
             created_at:
               on_or_before: non può essere nel futuro.
             deleted_at:
               after: non può essere prima della data d'inizio.
+        crisis:
+          another_active: Un'altra crisi è già attiva per questo gruppo
+        group/abteilung:
+          too_many_geolocations: non possono essere più di %{max}

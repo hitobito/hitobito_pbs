@@ -1,0 +1,12 @@
+- if options.empty?
+  = t('.none')
+- else
+  - options.each do |supercamp|
+    - id = prefix.to_s + '_supercamp_' + supercamp.id.to_s
+    = label_tag(id) do
+      = radio_button_tag(:supercamp,
+                         group_connect_supercamp_path(supercamp_id: supercamp.id,
+                                                      camp_id: camp_id),
+                         false,
+                         "id" => id)
+      = format_camp_name_with_groups(supercamp)

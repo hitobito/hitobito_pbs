@@ -8,7 +8,6 @@ services:
 branches:
   only:
     - master
-    - stable
     - cypress
 addons:
   apt:
@@ -23,9 +22,6 @@ env:
     - RAILS_ENV=development
 rvm:
   - 2.2.3
-  - 2.3.1
-  - 2.4.0
-  - 2.5.1
 before_install:
   # Repo for Yarn
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
@@ -52,8 +48,3 @@ script:
   - bundle exec rake db:clobber db:migrate wagon:migrate db:seed wagon:seed
   - bundle exec rails server -e test -p 5002 &
   - cd ../hitobito_pbs/spec && yarn ci:wait && yarn run cypress:run --record
-matrix:
-  allow_failures:
-  - rvm: 2.3.1
-  - rvm: 2.4.0
-  - rvm: 2.5.1

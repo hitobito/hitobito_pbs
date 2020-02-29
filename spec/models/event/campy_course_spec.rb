@@ -58,6 +58,14 @@ describe Event::Course do
       subject.expected_participants_pio_m = 42
       is_expected.to be_valid
     end
+
+    it 'responds to total_expected_participants' do
+      is_expected.to respond_to :total_expected_participants
+    end
+
+    it 'responds to total_expected_leading_participants' do
+      is_expected.to respond_to :total_expected_leading_participants
+    end
   end
 
   context '#j_s_kind' do

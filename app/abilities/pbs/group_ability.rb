@@ -53,8 +53,7 @@ module Pbs::GroupAbility
   end
 
   def if_crisis_manager
-    contains_any?(user.crises.active.collect { |c| c.group.layer_group_id },
-                  subject.layer_hierarchy.collect(&:id))
+    contains_any?(user.layer_ids_with_active_crises, subject.layer_hierarchy.collect(&:id))
   end
 
 end

@@ -117,6 +117,10 @@ module Pbs::Person
     Person::BlackListDetector.new(self, attributes.slice(*changed)).occures?
   end
 
+  def layer_ids_with_active_crises
+    @layer_ids_with_active_crises ||= crises.active.collect { |c| c.group.layer_group_id }
+  end
+
   private
 
   def find_kantonalverband

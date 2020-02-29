@@ -1,4 +1,4 @@
-class FixEventKindGlobalizedFields < ActiveRecord::Migration
+class FixEventKindPbsGlobalizedFields < ActiveRecord::Migration
   def up
     Event::Kind.add_translation_fields!({ documents_text: :text }, migrate_data: true)
 

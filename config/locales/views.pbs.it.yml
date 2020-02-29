@@ -25,6 +25,9 @@ it:
         remind: Ricordare
   census_evaluation/kantonalverband:
     email_sent: 'Promemoria spedito a %{abteilung} '
+  crises:
+    update:
+      too_old: La crisi è troppo vecchia per venir terminata
   devise:
     sessions:
       new:
@@ -64,6 +67,8 @@ it:
         leaders: Direzione
         cooks: Cucina
         participants: Partecipanti
+      list:
+        not_persisted: Non ancora salvato
     lists:
       nav_left_camps:
         all_camps: Campi in tutta la Svizzera
@@ -82,6 +87,8 @@ it:
       camps_abroad:
         title: Tutti i campi all'estero
         explanation: 'Qui vengono indicati tutti i campi che si svolgono all''estero. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
+      advanced_bsv_export_button: Esportazione estesa a UFAS/CaF
+    hierarchy: Gerarchia del campo
     participations:
       canceled_own_notice: Sei stata/o disiscritta/o da questo evento.
       rejected_notice: "%{participant} è stato rifiutato. %{mailto}"
@@ -100,6 +107,14 @@ it:
       print:
         heading_event/camp: Annuncio di campo %{year}
         read_and_agreed_for_event_camp: Adempio i presupposti per questo campo, ho letto la descrizione e la approvo.
+    qualifications:
+      send_confirmation_notifications:
+        sent_to_qualified_participants: I partecipanti qualificati sono stati informati
+      index:
+        send_confirmation_notifications:
+          one: Spedire gli avvisi a 1%{count} persone
+          other: Spedire gli avvisi a %{count} persone
+        button_explanation: Mandare un e-mail a tutti i partecipanti qualificati. All'interno si trova un link al corso tramite cui è possibile accedere alla conferma del corso in formato PDF.
     approvals:
       form:
         approval_stored: La raccomandazione viene salvata elettronicamente e può essere visionata dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone che raccomandano.
@@ -131,6 +146,11 @@ it:
       'true': Confermato
       'false': Non confermato
     checkpoint_field_caption: Può essere confermato solo dalla direzione del campo
+  event/course:
+    has_confirmations: Creare le conferme dei corsi per i partecipanti
+    participations:
+      actions_show_pbs:
+        course_confirmation: Conferma corso
   events:
     actions_show_pbs:
       camp_application: Annuncio di campo MSS
@@ -166,6 +186,8 @@ it:
       phone_privat: Telefono privato
       phone_mobil: Telefono mobile
       email: E-mail
+      attach_to_supercamp: Collegare al campo superiore
+      direct_subcamps: Direttamenta al campo inferiore
     form_tab_pane_advisors:
       al_present_caption: La direzione della sezione è presente al campo
       al_visiting_caption: La direzione della sezione visita il campo
@@ -190,12 +212,16 @@ it:
     tabs:
       approvals: Raccomandazioni
       attendances: Presenza
+      sub_camps: Campo inferiore
     form_actions_caption_pbs:
       lagerreglement_applied_caption: il regolamento per la pianificazione e lo svolgimento di campi ("Regolamento del campo") e il Profilo dello scoutismo sono considerati e rispettati.
       kantonalverband_rules_applied_caption: 'Durante la preparazione del campo vengono considerate  le prescrizioni o le raccomandazioni esistenti dell''associazione cantonale '
       j_s_rules_applied_caption: "Per i campi G+S: le prescrizioni in vigore della disciplina sportiva Sport di campo/Trekking sono conosciute e rispettate."
   filter_navigation/events:
     canton: 'eseguito nel cantone di'
+  filter_navigation/camps:
+    all: Tutti i campi inferiori
+    direct: Solo il campo direttamente inferiore
   group:
     pending_approvals:
       index:
@@ -209,26 +235,48 @@ it:
         title: Autorizzazioni già effettuate
         course_kind: Tipo di corso
         course_kind_all: Tutti
+    abteilung:
+      geolocations:
+        geolocation_fields:
+          lat: Lat
+          long: Long
   groups:
+    ongoing_crisis: "%{creator} ha creato una crisi per questo gruppo"
     tabs:
       population: Censimento dei membri
       statistic: Statistica
       approvals: Attivazione del corso (%{count})
+    actions_show_pbs:
+      crisis: Crisi
+      crisis_done: Uscire dalla crisi
+      confirm_crisis: Sei sicuro che vuoi creare la crisi sul gruppo. I teams di crisi responsabili verranno informati del tuo accesso
   help:
     index:
       title: Aiuto
+      description_html: Belle <a href="http://releasenotes.scouts.ch" target="_blank">Release-Notes</a>trovi informazioni sulle novità.
       guides:
-        title: Guide
+        title: Linee guida
+        description: "Queste linee guida ti aiutano nell'amministrazione di corsi e campi:"
         hering:
           url: http://heringit.scouts.ch
+          title: "Sardina: linee guida per l'amministrazione di campi scout"
+          description: "Sardina include tutte le informazioni per l'amministrazione di campi scout. Ti porta passo a passo a tutti i documenti più importanti. Con queste linee guida non dimenticherai nessun punto importante."
         coaches:
           url: http://coachesfr.scouts.ch
+          title: 1x1 MiData per coaches
+          description: "\"1x1 MiData per coaches\" spiega per i coaches le funzioni più importanti per la banca data dei membri del MSS (MiData). Vale sia quale Factsheet che come preparazione per il coach MF e per il corso coach."
         anker:
           url: http://ankerit.scouts.ch
+          title: "Ancora: guida sull'amministrazione dei corsi MSS"
+          description: "Per animatrici/tori e assistenti: tutti i passi amministrativi da rispettare nell'iscrizione e nello svolgimento di un corso G+S o UFAS sono descritti qui in dettaglio."
         pilot:
           url: http://pilotit.scouts.ch
+          title: "Pilot: linee guida per l'amministrazione dei corsi MSS in MiData e in NDBJS"
+          description: "Linee guida per i segretariati e i responsabili per la formazione per l'amministrazione dei corsi in MiData e NDBJS"
         ticket:
           url: http://ticketit.scouts.ch
+          title: "Ticket: linee guida per l'annuncio dei partecipanti al corso"
+          description: "Il ticket descrive il processo di annuncio dei partecipanti tramite MiData (banca dati dei membri del MSS)"
   member_counts:
     created_data_for_year: I censimenti per %{total} attivi nell'anno %{year} sono stati generati con successo.
     updated_data_for_year: Il numero dei membri per il %{year} è stato registrato con successo.
@@ -244,6 +292,8 @@ it:
     fields_pbs:
       non_automatic_field: Questo non è un campo automatico e deve essere aggiornato manualmente.
       in_abteilung: (in sezione)
+    qualification_buttons_pbs:
+      print_course_confirmation: Stampare la conferma del corso
   population:
     index:
       confirm_census_data: Confermare i censimenti
@@ -263,3 +313,24 @@ it:
     fields_pbs:
       notification: Notifica
       notification_hint: 'Queste persone saranno informate per email in caso di cambiamenti. '
+  supercamps:
+    available:
+      select_supercamp: Scegliere il campo superiore
+      from_group_and_above: Su questo gruppo e sopra
+      search_for_supercamp: Cercare un'altro campo superiore
+      search: Cercare
+      submit: Confermare
+    selectable_supercamps:
+      none: Non si sono trovati risultati
+    does_not_allow_sub_camps: Il campo scelto non permette campi inferiori
+    not_in_created_state: Il campo superiore non ha lo statuto "Creato"
+  black_lists:
+    form:
+      pbs_number_format: Esempio 123-123-123
+    global:
+      link:
+        add: Aggiungere persona
+    new:
+      title: Aggiungere persona
+    edit:
+      title: Editare l'iscrizione
