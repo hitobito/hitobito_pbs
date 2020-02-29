@@ -11,9 +11,9 @@ application:
     image: logo.svg
     width: 220
     height: 80
-  page_background:
-    test: '#7a498a'
-    development: '#d0768b'
+  page_background: # override default page background color depending on environment
+    hit-pbs-int.ocp.puzzle.ch: '#63003d'
+    dev: '#7a498a'
   languages:
     de: Deutsch
     fr: Français
@@ -48,4 +48,3 @@ email:
   camp:
     submit_recipient: lager@pbs.ch
     submit_abroad_recipient: auslandlager@pbs.ch
-
