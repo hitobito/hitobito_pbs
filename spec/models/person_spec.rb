@@ -73,6 +73,18 @@ describe Person do
       person.salutation = 'ahoi'
       expect(person).to have(1).error_on(:salutation)
     end
+
+    it 'fails for malformatted ahv number' do
+      person.ahv_number = 'malformed ahv'
+      expect(person).to have(1).error_on(:ahv_number)
+    end
+
+    it 'succeeds for ahv number with correct format' do
+      person = Person.new(last_name: 'dummy',
+                          nationality_j_s: 'CH',
+                          ahv_number: '756.1234.5678.97')
+      expect(person).to be_valid
+    end
   end
 
   context '#salutation_value' do
