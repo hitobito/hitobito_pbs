@@ -1211,4 +1211,7 @@ de:
         crisis:
           another_active: Eine andere Krise ist bereits aktiv auf dieser Gruppe
         group/abteilung:
+          attributes:
+            base:
+              geo_not_in_switzerland: Diese Koordinaten liegen nicht in der Schweiz.
           too_many_geolocations: dürfen nicht mehr als %{max} sein
