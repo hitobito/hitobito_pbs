@@ -81,8 +81,8 @@ describe GroupsController do
 
       context 'adding geolocations' do
         let(:params) { {group: {geolocations_attributes: [
-          {lat: 'lat1', long: 'long1', _destroy: 'false'},
-          {lat: '2 123 123', long: '1 123 123', _destroy: 'false'},
+          {lat: '47.0', long: '7.0', _destroy: 'false'},
+          {lat: '47.5', long: '8.5', _destroy: 'false'},
         ]}} }
 
         it 'adds geolocations' do
@@ -106,9 +106,9 @@ describe GroupsController do
         end
 
         let(:params) { {group: {geolocations_attributes: [
-          {id: Geolocation.last.id, lat: 'lat1', long: 'long1', _destroy: 1},
-          {lat: 'lat1', long: 'long1', _destroy: 'false'},
-          {lat: '2 123 123', long: '1 123 123', _destroy: 'false'},
+          {id: Geolocation.last.id, lat: '47.0', long: '7.0', _destroy: 1},
+          {lat: '47.0', long: '7.0', _destroy: 'false'},
+          {lat: '47.5', long: '8.5', _destroy: 'false'},
         ]}} }
 
         it 'allows to add more geolocations than allowed if removing others' do
@@ -121,8 +121,8 @@ describe GroupsController do
         let!(:geolocation2) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
         let!(:geolocation3) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
         let(:params) { {group: {geolocations_attributes: [
-          {id: geolocation1.id.to_s, lat: 'lat1', long: 'long1', _destroy: 1},
-          {id: geolocation2.id.to_s, lat: '2 123 123', long: '1 123 123', _destroy: 1},
+          {id: geolocation1.id.to_s, lat: '47.0', long: '7.0', _destroy: 1},
+          {id: geolocation2.id.to_s, lat: '47.5', long: '8.5', _destroy: 1},
         ]}} }
 
         it 'removes geolocations' do

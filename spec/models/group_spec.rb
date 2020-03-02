@@ -112,6 +112,12 @@ describe Group do
         expect(group.errors.full_messages.to_sentence).to match(/Treffpunkte dürfen nicht mehr als #{limit} sein/)
       end
 
+      it 'cannot have geolocations outide of Switzerland' do
+        Fabricate(:geolocation, lat: '47.0', long: '12.0', geolocatable: group)
+        expect(group.reload).to have(1).error_on(:base)
+        expect(group.errors.full_messages.to_sentence).to match(/Diese Koordinaten liegen nicht in der Schweiz./)
+      end
+
       it 'can have group finder fields' do
         group.update!(gender: 'm', try_out_day_at: '2019-03-23')
         expect(group.reload.gender).to eq 'm'
