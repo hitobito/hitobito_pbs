@@ -20,8 +20,10 @@ class Geolocation < ActiveRecord::Base
 
   belongs_to :geolocatable, polymorphic: true
 
-  validates :lat, format: { with: /\A-?([1-8]?[0-9]\.{1}\d{1,6}\z|90\.{1}0{1,6}\z)/ }
-  validates :long, format: { with: /\A-?((([1]?[0-7][0-9]|[1-9]?[0-9])\.{1}\d{1,6}\z)|[1]?[1-8][0]\.{1}0{1,6}\z)/ }
+  validates :lat, format: { with: %r{\A-?([1-8]?[0-9]
+    \.{1}\d{1,6}\z|90\.{1}0{1,6}\z)}x }
+  validates :long, format: { with: %r{\A-?((([1]?[0-7][0-9]|[1-9]?[0-9])
+    \.{1}\d{1,6}\z)|[1]?[1-8][0]\.{1}0{1,6}\z)}x }
 
   validates_by_schema
 
