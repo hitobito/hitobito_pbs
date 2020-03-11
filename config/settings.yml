@@ -12,8 +12,8 @@ application:
     width: 220
     height: 80
   page_background: # override default page background color depending on environment
-    hit-pbs-int.ocp.puzzle.ch: '#63003d'
-    dev: '#7a498a'
+    hit-pbs-int.ocp.puzzle.ch: '#61bfbc'
+    dev: '#d2d5dd'
   languages:
     de: Deutsch
     fr: Français
