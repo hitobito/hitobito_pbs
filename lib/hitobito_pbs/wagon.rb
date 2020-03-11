@@ -65,6 +65,15 @@ module HitobitoPbs
         :include, Pbs::Export::Tabular::People::PeopleFull
       )
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
+      Export::PeopleExportJob.send(
+       :include, Pbs::Export::PeopleExportJob
+      )
+      Export::EventParticipationsExportJob.send(
+        :include, Pbs::Export::EventParticipationsExportJob
+      )
+      Export::SubscriptionsJob.send(
+        :include, Pbs::Export::SubscriptionsJob
+      )
 
       ### abilities
       Ability.store.register Event::ApprovalAbility
@@ -112,6 +121,7 @@ module HitobitoPbs
       Event::QualificationsController.send :include, Pbs::Event::QualificationsController
       QualificationsController.send :include, Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
+      SubscriptionsController.send :include, Pbs::SubscriptionsController
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
