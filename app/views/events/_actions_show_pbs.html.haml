@@ -18,6 +18,6 @@
 - if show_camp_cancel_own_button?
   = action_button(t('.cancel_button'),
                   cancel_own_group_event_participation_path(@group, entry, @user_participation),
-                  'remove-circle',
+                  'times-circle',
                   data: { method: :put, confirm: t('.confirm_cancel') })
 
