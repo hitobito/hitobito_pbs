@@ -250,9 +250,9 @@ class Event::Camp < Event
 
   def layer_leaders
     layer_group = groups.first.layer_group
-    Person.joins(:roles, :groups)
-          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name] },
-                 groups: { id: layer_group.id })
+    Person.joins(:roles)
+          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name],
+                          group_id: layer_group.id })
   end
 
   def layer_leader_roles

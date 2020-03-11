@@ -445,6 +445,16 @@ describe Event::Camp do
         end
 
       end
+
+      it "is sent only once" do
+        group = Fabricate(Group::Abteilung.name)
+        leader = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: group).person
+        Role.create(group: group, person: leader, type: Group::Abteilung::Adressverwaltung.sti_name)
+        subject.update!(groups: [group])
+        mail = double('mail', deliver_later: nil)
+        expect(Event::CampMailer).to receive(:camp_created).with(subject, leader, nil).and_return(mail).once
+        subject.update!(location: 'Bern', state: 'confirmed')
+      end
     end
 
   end
