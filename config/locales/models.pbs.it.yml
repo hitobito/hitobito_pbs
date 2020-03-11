@@ -944,7 +944,6 @@ it:
     errors:
       messages:
         must_be_multiple_of: dev'essere un multiplo di %{multiple} .
-        must_be_valid_social_security_number: deve essere un numero AVS valevole (756.1234.5678.97)
       models:
         event:
           attributes:

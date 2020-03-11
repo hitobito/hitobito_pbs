@@ -930,7 +930,6 @@ fr:
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
-        must_be_valid_social_security_number: doit être un numéro AVS (756.1234.5678.97) valide
       models:
         event:
           attributes:
