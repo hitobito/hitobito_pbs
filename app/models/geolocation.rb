@@ -20,10 +20,10 @@ class Geolocation < ActiveRecord::Base
 
   belongs_to :geolocatable, polymorphic: true
 
-  validates :lat, format: { with: %r{\A-?([1-8]?[0-9]
-    \.{1}\d{1,6}\z|90\.{1}0{1,6}\z)}x }
-  validates :long, format: { with: %r{\A-?((([1]?[0-7][0-9]|[1-9]?[0-9])
-    \.{1}\d{1,6}\z)|[1]?[1-8][0]\.{1}0{1,6}\z)}x }
+  validates :lat, numericality: { greater_than_or_equal_to:  -90,
+    less_than_or_equal_to:  90 }, format: { with: /\A\d+\.\d{1,6}\z/ }
+  validates :long, numericality: { greater_than_or_equal_to:  -180,
+    less_than_or_equal_to:  180 }, format: { with: /\A\d+\.\d{1,6}\z/ }
 
   validates_by_schema
 

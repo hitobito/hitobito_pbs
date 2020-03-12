@@ -84,7 +84,7 @@ class Group::Abteilung < Group
       && GEOLOCATION_SWITZERLAND_WEST_LIMIT < geolocation.long.to_f \
       && geolocation.long.to_f < GEOLOCATION_SWITZERLAND_EAST_LIMIT
     end
-      errors.add(:base, :geo_not_in_switzerland) if !is_valid
+    errors.add(:base, :geo_not_in_switzerland) if !is_valid
   end
 
   include I18nEnums
