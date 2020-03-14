@@ -26,10 +26,10 @@ describe Export::Tabular::People::ParticipationNdbjsRow do
   it { expect(row.fetch(:town)).to eq 'Basel' }
   it { expect(row.fetch(:canton)).to eq 'BS' }
   it { expect(row.fetch(:country)).to eq 'CH' }
-  it { expect(row.fetch(:phone_private)).to eq '11 12 13' }
-  it { expect(row.fetch(:phone_work)).to eq '42 42 42' }
-  it { expect(row.fetch(:phone_mobile)).to eq '99 99 99' }
-  it { expect(row.fetch(:phone_fax)).to eq '33 33 33' }
+  it { expect(row.fetch(:phone_private)).to eq '+41 31 111 12 13' }
+  it { expect(row.fetch(:phone_work)).to eq '+41 24 422 42 42' }
+  it { expect(row.fetch(:phone_mobile)).to eq '+41 77 999 99 99' }
+  it { expect(row.fetch(:phone_fax)).to eq '+41 33 333 33 33' }
   it { expect(row.fetch(:nationality_j_s)).to eq 'FL' }
   it { expect(row.fetch(:first_language)).to eq 'I' }
   it { expect(row.fetch(:profession)).to eq 3 }
@@ -63,10 +63,10 @@ describe Export::Tabular::People::ParticipationNdbjsRow do
   end
 
   def create_contactables(person)
-    Fabricate(:phone_number, contactable: person, label: 'Privat', number: '11 12 13')
-    Fabricate(:phone_number, contactable: person, label: 'Arbeit', number: '42 42 42')
-    Fabricate(:phone_number, contactable: person, label: 'Mobil', number: '99 99 99')
-    Fabricate(:phone_number, contactable: person, label: 'Fax', number: '33 33 33')
+    Fabricate(:phone_number, contactable: person, label: 'Privat', number: '+41 31 111 12 13')
+    Fabricate(:phone_number, contactable: person, label: 'Arbeit', number: '+41 24 422 42 42')
+    Fabricate(:phone_number, contactable: person, label: 'Mobil', number: '+41 77 999 99 99')
+    Fabricate(:phone_number, contactable: person, label: 'Fax', number: '+41 33 333 33 33')
   end
 
 end

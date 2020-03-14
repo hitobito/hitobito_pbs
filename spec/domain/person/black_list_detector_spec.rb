@@ -45,11 +45,11 @@ describe Person::BlackListDetector do
   end
 
   it 'occures if any phone_number matches' do
-    number1 = Fabricate(:phone_number, number: '012 345 67 89')
-    number2 = Fabricate(:phone_number, number: 'none-matching')
+    number1 = Fabricate(:phone_number, number: '+41 44 345 67 89')
+    number2 = Fabricate(:phone_number, number: '+41 77 123 45 67')
     person.update(phone_numbers: [number1, number2])
 
-    Fabricate(:black_list, phone_number: '+41 12 345 67 89')
+    Fabricate(:black_list, phone_number: '+41 44 345 67 89')
 
     is_expected.to be true
   end
