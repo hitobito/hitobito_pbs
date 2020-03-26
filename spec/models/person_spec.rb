@@ -73,6 +73,7 @@ describe Person do
       person.salutation = 'ahoi'
       expect(person).to have(1).error_on(:salutation)
     end
+
   end
 
   context '#salutation_value' do

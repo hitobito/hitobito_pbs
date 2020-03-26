@@ -1192,7 +1192,6 @@ de:
     errors:
       messages:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
-        must_be_valid_social_security_number: muss eine gültige AHV-Nummer (756.1234.5678.97) sein
       models:
         event:
           attributes:
