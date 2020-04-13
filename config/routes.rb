@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   extend LanguageRouteScope
 
+  get '/healthcheck', to: 'healthcheck#show'
+
   language_scope do
 
     resources :censuses, only: [:new, :create]
