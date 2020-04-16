@@ -35,7 +35,7 @@ module Export::Pdf
       render_sections
 
       pdf.number_pages(t('event.participations.print.page_of_pages'),
-                       at: [0, 0],
+                       at: [0, -20],
                        align: :right,
                        size: 9)
       pdf.render
@@ -61,29 +61,29 @@ module Export::Pdf
         -> { render_j_s },
         -> { render_state }
       ]
-
-      start_new_page if cursor < 200
-
+      move_down_line
       in_columns [
         -> { render_abteilungsleitung },
         -> { render_coach }
-      ], 200
+      ]
     end
 
     def render_logos
-      image Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images', 'logo_pbs.png'),
-        at: [0, bounds.top_left[1] + 40], fit: [200, 55]
+      image_path = Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images')
+      image image_path.join('logo_pbs.png'), at: [0, bounds.top_left[1] + 40], fit: [200, 55]
 
-      image Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images', 'logo_js.png'),
+      return unless camp.j_s_kind.present?
+
+      image image_path.join('logo_js.png'), 
         at: [bounds.top_right[0] - 40, bounds.top_left[1] + 40], fit: [200, 55]
     end
 
     def render_title
-      move_down 30
-      font_size(20) do
+      move_down 28
+      font_size(18) do
         text title, style: :bold
       end
-      move_down 16
+      move_down 14
     end
 
     def render_group
@@ -104,8 +104,8 @@ module Export::Pdf
       cells << data.expected_participant_table_row(:f)
       cells << data.expected_participant_table_row(:m)
       table(cells,
-        cell_style: { align: :center, border_width: 0.25, font_size: 10 },
-        column_widths: [20, 44, 44, 44, 44, 44]
+        cell_style: { align: :center, border_width: 0.25, size: 8 },
+        column_widths: [30, 41, 41, 41, 41, 41]
         )
     end
 
@@ -132,7 +132,7 @@ module Export::Pdf
           header_row = assistant_leaders_header_row
           cells = cells.unshift(header_row)
           table(cells, width: 500,
-                       cell_style: { border_width: 0.25 },
+                       cell_style: { border_width: 0.25, size: 8 },
                        column_widths: [210, 55, 235])
         else
           text_nobody
@@ -178,6 +178,8 @@ module Export::Pdf
       section('j_s') do
         blank_text = "(#{t('global.nobody')})"
         labeled_camp_attr(:j_s_kind)
+        return unless camp.j_s_kind.present?
+
         labeled_value(translate('js_security'), data.js_security_value)
         move_down 6
         labeled_camp_attr(:advisor_mountain_security)
