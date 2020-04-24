@@ -19,8 +19,9 @@ class HealthcheckController < ApplicationController
 
   def render_json
     data = {}
-    tables = ['group_types', 'role_types', 'participation_types', 'j_s_kinds', 'camp_states', 'qualification_kinds', 'event_kinds',
-      'people', 'groups', 'courses', 'camps', 'roles', 'participations', 'qualifications']
+    tables = ['group_types', 'role_types', 'participation_types', 'j_s_kinds', 'camp_states',
+      'qualification_kinds', 'event_kinds', 'people', 'groups', 'courses', 'camps', 'roles',
+      'participations', 'qualifications']
     tables.each do |t|
       data[t] = self.send(t)
     end
@@ -41,14 +42,17 @@ class HealthcheckController < ApplicationController
     Group.all.as_json(only: [:id, :lft, :parent_id, :type, :name, :created_at, :deleted_at])
       .map {|h|
         canton = Group.where(':lft >= groups.lft AND :lft < groups.rgt AND ' \
-          'type = :type', {lft: h['lft'], type: 'Group::Kantonalverband'}).first.as_json(only: [:id, :name])
-        h.except('lft', 'type').merge({canton_id: canton.nil? ? nil : canton['id'], type_id: map_group(h['type'])})
+          'type = :type', {lft: h['lft'], type: 'Group::Kantonalverband'}).first
+          .as_json(only: [:id, :name])
+        h.except('lft', 'type').merge({canton_id: canton.nil? ? nil : canton['id'],
+          type_id: map_group(h['type'])})
       }
   end
 
   def courses
     Event.includes(:dates, :groups).where(type: 'Event::Course')
-      .as_json(only: [:id, :name, :kind_id], include: {dates: {only: [:start_at, :finish_at]}, groups: {only: :id}})
+      .as_json(only: [:id, :name, :kind_id], include: {dates: {only: [:start_at, :finish_at]},
+        groups: {only: :id}})
   end
 
   def camps
@@ -56,7 +60,8 @@ class HealthcheckController < ApplicationController
       .as_json(only: [:id, :name, :location, :kind_id, :j_s_kind, :state],
         include: {dates: {only: [:start_at, :finish_at]}, groups: {only: :id}})
       .map {|h|
-        h['j_s_kind_id'] = map_j_s_kind(h['j_s_kind'].present? ? "j_s_kind_#{h['j_s_kind']}" : 'j_s_kind_none')
+        h['j_s_kind_id'] = map_j_s_kind(h['j_s_kind'].present? ? "j_s_kind_#{h['j_s_kind']}" :
+          'j_s_kind_none')
         h['state_id'] = map_camp_state(h['state'])
         h.except('j_s_kind', 'state')
       }
@@ -76,8 +81,8 @@ class HealthcheckController < ApplicationController
   end
 
   def flatten_translations(items, key)
-    return items.map {|h| h.except('translations', key)
-      .merge(h['translations'].map {|t| [['%s_%s' % [key, t['locale']], t['label']]].to_h}.inject(:merge))}
+    return items.map {|h| h.except('translations', key).merge(h['translations']
+      .map {|t| [['%s_%s' % [key, t['locale']], t['label']]].to_h}.inject(:merge))}
   end
 
   def qualification_kinds
@@ -106,7 +111,8 @@ class HealthcheckController < ApplicationController
             I18n.locale = loc
             ["label_#{loc}", r.label]
           }.to_h
-          data.push({id: id, layer_type: layer, group_type: group, role_type: r.model_name}.merge(labels_localized))
+          data.push({id: id, layer_type: layer, group_type: group, role_type: r.model_name}
+            .merge(labels_localized))
           @role_mapping[r.model_name.to_s] = id
           id += 1
         end
