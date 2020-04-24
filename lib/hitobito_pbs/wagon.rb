@@ -32,6 +32,7 @@ module HitobitoPbs
       Event::Participation.send :include, Pbs::Event::Participation
       Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
       Event::Application.send :include, Pbs::Event::Application
+      ServiceToken.send :include, Pbs::ServiceToken
 
       Event.acts_as_nested_set(dependent: :nullify)
 
@@ -90,6 +91,7 @@ module HitobitoPbs
       Event::ParticipationAbility.send :include, Pbs::Event::Constraints
       Event::RoleAbility.send :include, Pbs::Event::Constraints
       QualificationAbility.send :include, Pbs::QualificationAbility
+      TokenAbility.send :include, Pbs::TokenAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### decorators
@@ -97,6 +99,7 @@ module HitobitoPbs
       ContactableDecorator.send :include, Pbs::ContactableDecorator
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
       GroupDecorator.send :include, Pbs::GroupDecorator
+      ServiceTokenDecorator.send :include, Pbs::ServiceTokenDecorator
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
@@ -110,6 +113,7 @@ module HitobitoPbs
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
                                                  :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
+      ServiceTokensController.permitted_attrs += [:healthcheck]
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
