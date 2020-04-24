@@ -1,0 +1,39 @@
+#  Copyright (c) 2018, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+# == Schema Information
+#
+# Table name: service_tokens
+#
+#  id                   :integer          not null, primary key
+#  layer_group_id       :integer          not null
+#  name                 :string(255)      not null
+#  description          :text(65535)
+#  token                :string(255)      not null
+#  last_access          :datetime
+#  people               :boolean          default(FALSE)
+#  people_below         :boolean          default(FALSE)
+#  groups               :boolean          default(FALSE)
+#  events               :boolean          default(FALSE)
+#  event_participations :boolean          default(FALSE)
+#  healthcheck          :boolean          default(FALSE)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rejected_top_group_token:
+  layer: bund
+  name: Rejected
+  description: MyText
+  token: RejectedToken
+  last_access: 2018-11-01 11:11:11
+  people: false
+  people_below: false
+  groups: false
+  events: false
+  invoices: false
+  event_participations: false
+  healthcheck: false
