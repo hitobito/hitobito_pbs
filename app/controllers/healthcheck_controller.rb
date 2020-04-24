@@ -7,12 +7,11 @@
 
 class HealthcheckController < ApplicationController
 
-  skip_authorization_check :only => :show
-
   J_S_KINDS = %w(j_s_kind_none j_s_kind_j_s_child j_s_kind_j_s_youth j_s_kind_j_s_mixed).freeze
   CAMP_STATES = %w(created confirmed assignment_closed canceled closed).freeze
 
   def show
+    authorize! :show, HealthcheckController
     render json: render_json
   end
 

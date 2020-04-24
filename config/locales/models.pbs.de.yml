@@ -1189,6 +1189,9 @@ de:
       label_format:
         nickname: Pfadiname auf Etikett
 
+      service_token:
+        healthcheck: HealthCheck Export-Endpunkt
+
     errors:
       messages:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
