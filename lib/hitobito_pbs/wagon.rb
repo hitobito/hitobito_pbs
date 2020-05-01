@@ -113,7 +113,7 @@ module HitobitoPbs
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
                                                  :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
-      ServiceTokensController.permitted_attrs += [:healthcheck]
+      ServiceTokensController.permitted_attrs += [:group_health]
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController

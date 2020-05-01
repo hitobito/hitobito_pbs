@@ -54,8 +54,8 @@ class Group::Abteilung < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at,
-                           :geolocations]
+  self.used_attributes += [:pta, :vkp, :group_health, :pbs_material_insurance, :gender,
+                           :try_out_day_at, :geolocations]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,

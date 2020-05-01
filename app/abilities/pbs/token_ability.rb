@@ -7,17 +7,17 @@ module Pbs::TokenAbility
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :define_token_abilities, :healthcheck
+    alias_method_chain :define_token_abilities, :group_health
   end
 
   private
 
-  def define_token_abilities_with_healthcheck
-    define_token_abilities_without_healthcheck
-    define_healthcheck_abilities if token.healthcheck?
+  def define_token_abilities_with_group_health
+    define_token_abilities_without_group_health
+    define_group_health_abilities if token.group_health?
   end
 
-  def define_healthcheck_abilities
-    can :show, HealthcheckController
+  def define_group_health_abilities
+    can :show, GroupHealthController
   end
 end

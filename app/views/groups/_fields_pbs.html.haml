@@ -41,3 +41,6 @@
   - entry.modifiable_attributes(:pta, :vkp, :pbs_material_insurance).each do |attr|
     = f.labeled_input_field attr
 
+= field_set_tag do
+  - entry.modifiable?(:group_health) do
+    = f.labeled_input_field :group_health

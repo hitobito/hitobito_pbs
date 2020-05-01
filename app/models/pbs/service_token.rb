@@ -17,7 +17,7 @@
 #  groups               :boolean          default(FALSE)
 #  events               :boolean          default(FALSE)
 #  event_participations :boolean          default(FALSE)
-#  healthcheck          :boolean          default(FALSE)
+#  group_health         :boolean          default(FALSE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #
@@ -26,7 +26,7 @@ module Pbs::ServiceToken
   extend ActiveSupport::Concern
 
   included do
-    validates :healthcheck, absence: true, if: :below_top_layer?
+    validates :group_health, absence: true, if: :below_top_layer?
   end
 
   private

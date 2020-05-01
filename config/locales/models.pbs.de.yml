@@ -1131,6 +1131,7 @@ de:
           w: Frauen
         try_out_day_at: Schnuppertag
         geolocations: Treffpunkte
+        group_health: Opt-In HealthCheck
 
       people_relation:
         kinds:
@@ -1190,7 +1191,7 @@ de:
         nickname: Pfadiname auf Etikett
 
       service_token:
-        healthcheck: HealthCheck Export-Endpunkt
+        group_health: HealthCheck Export-Endpunkt
 
     errors:
       messages:

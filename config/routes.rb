@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   extend LanguageRouteScope
 
-  get '/healthcheck', to: 'healthcheck#show'
+  get '/grouphealth' => 'group_health#show'
 
   language_scope do
 
