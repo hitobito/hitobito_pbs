@@ -17,4 +17,4 @@
         = f.boolean_field(:invoices, caption: model_class.human_attribute_name(:invoices))
       = f.boolean_field(:event_participations, caption: model_class.human_attribute_name(:event_participations))
       - if parent.class == Group::Bund
-        = f.boolean_field(:healthcheck, caption: model_class.human_attribute_name(:healthcheck))
+        = f.boolean_field(:group_health, caption: model_class.human_attribute_name(:group_health))

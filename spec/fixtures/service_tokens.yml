@@ -17,7 +17,7 @@
 #  groups               :boolean          default(FALSE)
 #  events               :boolean          default(FALSE)
 #  event_participations :boolean          default(FALSE)
-#  healthcheck          :boolean          default(FALSE)
+#  group_health         :boolean          default(FALSE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #
@@ -36,4 +36,4 @@ rejected_top_group_token:
   events: false
   invoices: false
   event_participations: false
-  healthcheck: false
+  group_health: false

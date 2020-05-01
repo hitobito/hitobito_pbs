@@ -3,8 +3,8 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddHealthcheckToServiceTokens < ActiveRecord::Migration[4.2]
+class AddGroupHealthToServiceTokens < ActiveRecord::Migration[4.2]
   def change
-    add_column(:service_tokens, :healthcheck, :boolean, default: false, null: false)
+    add_column(:service_tokens, :group_health, :boolean, default: false, null: false)
   end
 end

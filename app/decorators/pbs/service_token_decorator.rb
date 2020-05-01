@@ -9,12 +9,12 @@ module Pbs::ServiceTokenDecorator
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :abilities, :healthcheck
+    alias_method_chain :abilities, :group_health
   end
 
-  def abilities_with_healthcheck
+  def abilities_with_group_health
     kinds = [:people, :people_below, :events, :groups, :invoices,
-      :event_participations, :healthcheck]
+      :event_participations, :group_health]
 
     safe_join(kinds.map do |ability|
       ability_description(ability, :read) if public_send(ability)
