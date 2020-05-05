@@ -81,13 +81,25 @@ describe EventsController do
       end
 
       it 'prevents non-coaches from editing coach_confirmed' do
+        event.participations.create!(person: people(:al_schekka),
+                                    roles: [Event::Course::Role::Leader.new])
         put :update, params: {
-              group_id: event.groups.first.id,
-              id: event.id,
-              event: { coach_confirmed: true }
-            }
+          group_id: event.groups.first.id,
+          id: event.id,
+          event: { coach_confirmed: true }
+        }
         expect(assigns(:event)).to be_valid
         expect(assigns(:event).coach_confirmed).to be_falsey
+      end
+
+      it 'prevents participations from updating' do
+        expect do
+          put :update, params: {
+            group_id: event.groups.first.id,
+            id: event.id,
+            event: { coach_confirmed: true }
+          }
+        end.to raise_error(CanCan::AccessDenied)
       end
     end
   end
