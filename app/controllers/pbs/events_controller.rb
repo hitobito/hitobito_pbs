@@ -13,7 +13,8 @@ module Pbs::EventsController
     before_action :check_checkpoint_attrs, only: [:create, :update]
     before_action :merge_supercamp_data, only: [:new, :edit]
 
-    prepend_before_action :entry, only: CrudController::ACTIONS + [:show_camp_application, :create_camp_application]
+    prepend_before_action :entry, only: CrudController::ACTIONS +
+      [:show_camp_application, :create_camp_application]
 
     before_render_show :load_participation_emails, if: :canceled?
     before_render_form :load_canton_specific_help_texts

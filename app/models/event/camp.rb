@@ -222,7 +222,8 @@ class Event::Camp < Event
   end
 
   def state_changed_from_created?
-    state_previously_changed? && (state_previous_change.first == 'created' || state_previous_change.first.nil?)
+    state_previously_changed? &&
+      (state_previous_change.first == 'created' || state_previous_change.first.nil?)
   end
 
   def advisor_changed_except_in_created?(advisor_key)
