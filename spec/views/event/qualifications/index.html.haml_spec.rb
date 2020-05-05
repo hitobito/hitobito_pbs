@@ -18,6 +18,7 @@ describe 'event/qualifications/index.html.haml' do
   before do
     allow(view).to receive(:event).and_return(event)
     assign(:event, event)
+    assign(:group, event.groups.first)
     assign(:leaders, [])
     assign(:participants, [])
   end
