@@ -944,7 +944,6 @@ fr:
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
-        must_be_valid_social_security_number: doit être un numéro AVS (756.1234.5678.97) valide
       models:
         event:
           attributes:
@@ -963,4 +962,7 @@ fr:
         crisis:
           another_active: Une autre crise est déjà activée sur ce groupe
         group/abteilung:
+          attributes:
+            base:
+              geo_not_in_switzerland: Ces coordonnées ne sont pas situées en Suisse.
           too_many_geolocations: ne peuvent pas être plus de %{max}
