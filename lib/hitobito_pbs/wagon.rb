@@ -99,7 +99,7 @@ module HitobitoPbs
       ContactableDecorator.send :include, Pbs::ContactableDecorator
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
       GroupDecorator.send :include, Pbs::GroupDecorator
-      ServiceTokenDecorator.send :include, Pbs::ServiceTokenDecorator
+      ServiceTokenDecorator.kinds += [:group_health]
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
