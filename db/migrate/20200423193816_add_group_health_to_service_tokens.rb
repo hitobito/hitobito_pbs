@@ -6,5 +6,7 @@
 class AddGroupHealthToServiceTokens < ActiveRecord::Migration[4.2]
   def change
     add_column(:service_tokens, :group_health, :boolean, default: false, null: false)
+
+    ServiceToken.reset_column_information
   end
 end
