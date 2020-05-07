@@ -20,7 +20,7 @@ describe CensusEvaluation::KantonalverbandController do
   before { sign_in(people(:bulei)) }
 
   describe 'GET index' do
-    before { get :index, id: be.id }
+    before { get :index, params: { id: be.id } }
 
     it 'assigns counts' do
       counts = assigns(:group_counts)

@@ -184,6 +184,7 @@ describe Role do
 
       expect(person.primary_group_id).to eq(role.group.id)
 
+      another_role.created_at = 1.minute.ago
       another_role.deleted_at = Time.zone.now
       another_role.save!
 

@@ -71,7 +71,7 @@ class CensusEvaluation
   def sub_groups_with_counts
     Group.where(id: group.member_counts.where(year: year).
                                         select(sub_group_id_col).
-                                        uniq)
+                                        distinct)
   end
 
   def current_census_sub_groups

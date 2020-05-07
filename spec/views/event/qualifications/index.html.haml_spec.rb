@@ -18,6 +18,7 @@ describe 'event/qualifications/index.html.haml' do
   before do
     allow(view).to receive(:event).and_return(event)
     assign(:event, event)
+    assign(:group, event.groups.first)
     assign(:leaders, [])
     assign(:participants, [])
   end
@@ -25,13 +26,13 @@ describe 'event/qualifications/index.html.haml' do
   context 'confirmations checkbox depends on course kind setting' do
 
     it 'displays confirmations checkbox' do
-      event.kind.update_attributes(can_have_confirmations: true, confirmation_name: 'basiskurs')
+      event.kind.update(can_have_confirmations: true, confirmation_name: 'basiskurs')
       render
       expect(dom).to have_content 'PDF-Kursbestätigungen für Teilnehmende erstellen'
     end
 
     it 'does not display confirmations checkbox' do
-      event.kind.update_attributes(can_have_confirmations: false)
+      event.kind.update(can_have_confirmations: false)
       render
       expect(dom).not_to have_content 'PDF-Kursbestätigungen für Teilnehmende erstellen'
     end
@@ -41,7 +42,7 @@ describe 'event/qualifications/index.html.haml' do
   context 'confirmation info email button depends on number of qualified participants' do
 
     before do
-      event.kind.update_attributes(can_have_confirmations: true, confirmation_name: 'basiskurs')
+      event.kind.update(can_have_confirmations: true, confirmation_name: 'basiskurs')
       controller.request.path_parameters[:event_id] = event.id
       controller.request.path_parameters[:group_id] = event.groups.first.id
     end

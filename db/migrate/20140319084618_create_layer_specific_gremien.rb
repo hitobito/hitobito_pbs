@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class CreateLayerSpecificGremien < ActiveRecord::Migration
+class CreateLayerSpecificGremien < ActiveRecord::Migration[4.2]
   def up
     update_group_types('Group::Gremium',
                        [[Group::Bund, Group::BundesGremium],

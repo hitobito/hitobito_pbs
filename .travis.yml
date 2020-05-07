@@ -5,7 +5,7 @@ services:
   - mysql
 branches:
   only:
-    - master
+    - rails-5
 env:
   global:
     - HEADLESS=true
@@ -13,14 +13,13 @@ env:
     - RAILS_DB_NAME=hitobito_test
     - RAILS_ENV=development
 rvm:
-  - 2.2.3
+  - 2.5.5
 install:
   - unset BUNDLE_GEMFILE # we bundle in different directories
-  - export HITOBITO_BRANCH=$([ $TRAVIS_BRANCH = 'stable'] && echo ${TRAVIS_BRANCH} || echo 'master')
   - cd .. && git clone https://github.com/hitobito/hitobito_youth.git hitobito_youth
-  - cd hitobito_youth && git checkout -f $HITOBITO_BRANCH
+  - cd hitobito_youth && git checkout -f $([[ $TRAVIS_BRANCH = 'rails-5' ]] && echo 'rails-5' || echo 'master')
   - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
-  - cd hitobito && git checkout -f $HITOBITO_BRANCH
+  - cd hitobito && git checkout -f $([[ $TRAVIS_BRANCH = 'rails-5' ]] && echo 'rails-5' || echo 'master')
   - export HITOBITO_CORE_DIR=$PWD
   - cp -v Wagonfile.ci Wagonfile
   - rvm use $TRAVIS_RUBY_VERSION --fuzzy
@@ -28,5 +27,6 @@ install:
   - bundle install --path vendor/bundle
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
+  - mysql -e 'CREATE DATABASE hitobito_test'
 script:
   - bundle exec rake db:create ci:wagon --trace

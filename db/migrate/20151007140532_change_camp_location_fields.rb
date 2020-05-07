@@ -1,4 +1,4 @@
-class ChangeCampLocationFields < ActiveRecord::Migration
+class ChangeCampLocationFields < ActiveRecord::Migration[4.2]
   def change
     rename_column :events, :camp_location, :canton
     change_column :events, :canton, :string, limit: 2

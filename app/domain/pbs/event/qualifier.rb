@@ -17,7 +17,7 @@ module Pbs::Event::Qualifier
 
   def create_with_participation(kind)
     create_without_participation(kind).tap do |q|
-      q.update_attributes(event_participation: @participation)
+      q.update(event_participation: @participation)
     end
   end
 

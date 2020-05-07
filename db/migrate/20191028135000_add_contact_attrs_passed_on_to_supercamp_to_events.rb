@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddContactAttrsPassedOnToSupercampToEvents < ActiveRecord::Migration
+class AddContactAttrsPassedOnToSupercampToEvents < ActiveRecord::Migration[4.2]
   def up
     add_column :events, :contact_attrs_passed_on_to_supercamp, :text, limit: 65535
 

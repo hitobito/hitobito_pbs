@@ -30,7 +30,7 @@ class MemberCountsController < ApplicationController
   def update
     authorize!(:update_member_counts, abteilung)
 
-    if member_count.update_attributes(permitted_params)
+    if member_count.update(permitted_params)
       redirect_to census_abteilung_group_path(abteilung, year: year),
                   notice: translate('updated_data_for_year', year: year)
     else

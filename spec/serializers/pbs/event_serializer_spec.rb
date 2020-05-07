@@ -32,7 +32,7 @@ describe EventSerializer do
     before do
       event.send(:assign_abteilungsleitung)
       event.save
-      sub_camp.update_attributes(parent_id: event.id)
+      sub_camp.update(parent_id: event.id)
     end
 
     it 'includes leader' do

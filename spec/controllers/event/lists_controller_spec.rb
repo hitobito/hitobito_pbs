@@ -96,7 +96,7 @@ describe Event::ListsController do
       end
 
       it 'contains all camps in all subgroups this year' do
-        get :kantonalverband_camps, group_id: groups(:be).id
+        get :kantonalverband_camps, params: { group_id: groups(:be).id }
         is_expected.to match_array([@current, @early, @late])
       end
 
@@ -109,7 +109,7 @@ describe Event::ListsController do
       let(:user) { people(:bulei) }
 
       it 'is not allowed' do
-        expect { get :kantonalverband_camps, group_id: groups(:be).id }.to raise_error(CanCan::AccessDenied)
+        expect { get :kantonalverband_camps, params: { group_id: groups(:be).id } }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
@@ -142,7 +142,7 @@ describe Event::ListsController do
       end
 
       it 'contains all upcoming camps in this canton' do
-        get :camps_in_canton, canton: 'be'
+        get :camps_in_canton, params: { canton: 'be' }
         is_expected.to match_array([@current, @upcoming])
       end
 
@@ -207,8 +207,11 @@ describe Event::ListsController do
 
     context 'advanced' do
       it 'includes advanced attribute labels' do
-        get :bsv_export, bsv_export: { event_kinds: [kind.id], date_from: '09.09.2015' },
-          year: 2016, advanced: true
+        get :bsv_export, params: {
+            bsv_export: { event_kinds: [kind.id], date_from: '09.09.2015' },
+            year: 2016,
+            advanced: true
+          }
 
         labels = rows.first.split(';')
         expect(labels).to eq(["Vereinbarung-ID-FiVer",
@@ -244,8 +247,11 @@ describe Event::ListsController do
       end
 
       it 'inserts values correctly' do
-        get :bsv_export, bsv_export: { date_from: '09.09.2015' },
-          year: 2016, advanced: true
+        get :bsv_export, params: {
+            bsv_export: { date_from: '09.09.2015' },
+            year: 2016,
+            advanced: true
+          }
         headers = rows.first.split(';')
         values = rows.second.split(';')
         #main labels
@@ -265,8 +271,11 @@ describe Event::ListsController do
       end
 
       it 'sets date_to to date from if nothing is given' do
-        get :bsv_export, bsv_export: { date_from: '09.09.2015' },
-          year: 2016, advanced: true
+        get :bsv_export, params: {
+            bsv_export: { date_from: '09.09.2015' },
+            year: 2016,
+            advanced: true
+          }
 
         values = rows.third.split(';')
         expect(values[6]).to eq('11.11.2015')
@@ -282,8 +291,7 @@ describe Event::ListsController do
       it 'responses csv' do
         user.generate_authentication_token!
 
-        get :bsv_export, bsv_export: { date_from: '09.09.2015' }, year: 2016,
-          advanced: true, user_token: user.authentication_token, user_email: user.email
+        get :bsv_export, params: { bsv_export: { date_from: '09.09.2015' }, year: 2016, advanced: true, user_token: user.authentication_token, user_email: user.email }
 
         expect(rows.length).to eq(3)
       end

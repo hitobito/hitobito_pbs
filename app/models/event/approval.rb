@@ -44,7 +44,7 @@ class Event::Approval < ActiveRecord::Base
   ### VALIDATIONS
 
   validates_by_schema
-  validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id }
+  validates :layer, inclusion: LAYERS, uniqueness: { scope: :application_id, case_sensitive: false }
   validates :current_occupation, :current_level, :occupation_assessment,
             :strong_points, :weak_points,
             presence: { if: :approved? }
@@ -84,7 +84,7 @@ class Event::Approval < ActiveRecord::Base
         statement << "WHEN '#{l}' THEN #{i} "
       end
       statement << 'END'
-      order(statement)
+      order(Arel.sql(statement))
     end
 
   end

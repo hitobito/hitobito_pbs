@@ -18,19 +18,23 @@ describe Event::QualificationsController do
   context 'course confirmation checkbox' do
 
     before do
-      course.update_attributes(has_confirmations: false)
+      course.update(has_confirmations: false)
     end
 
     it 'saves course confirmation setting' do
       put :update,
-          group_id: group.id,
-          event_id: course.id,
-          has_confirmations: 1
+          params: {
+            group_id: group.id,
+            event_id: course.id,
+            has_confirmations: 1
+          }
       expect(course.reload.has_confirmations).to be_truthy
 
       put :update,
-          group_id: group.id,
-          event_id: course.id
+          params: {
+            group_id: group.id,
+            event_id: course.id
+          }
       expect(course.reload.has_confirmations).to be_falsey
     end
 
@@ -39,9 +43,11 @@ describe Event::QualificationsController do
 
       expect do
         put :update,
-            group_id: group.id,
-            event_id: course.id,
-            has_confirmations: 1
+            params: {
+              group_id: group.id,
+              event_id: course.id,
+              has_confirmations: 1
+            }
       end.to raise_exception
       expect(course.reload.has_confirmations).to be_falsey
     end
@@ -67,13 +73,13 @@ describe Event::QualificationsController do
     it 'sends email to all qualified participants' do
       expect(Event::Course::ConfirmationMailer).to receive(:notify).exactly(2).times
                                                      .and_call_original
-      xhr :post, :send_confirmation_notifications, group_id: group.id, event_id: course.id
+      post :send_confirmation_notifications, params: { group_id: group.id, event_id: course.id }, xhr: true
     end
 
     it 'checks permission' do
       sign_in(people(:al_schekka))
       expect {
-        xhr :post, :send_confirmation_notifications, group_id: group.id, event_id: course.id
+        post :send_confirmation_notifications, params: { group_id: group.id, event_id: course.id }, xhr: true
       }.to raise_error(CanCan::AccessDenied)
     end
 

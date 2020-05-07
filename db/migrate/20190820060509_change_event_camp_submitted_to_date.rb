@@ -1,4 +1,4 @@
-class ChangeEventCampSubmittedToDate < ActiveRecord::Migration
+class ChangeEventCampSubmittedToDate < ActiveRecord::Migration[4.2]
   def up
     add_column :events, :camp_submitted_at, :date
     execute("UPDATE events SET camp_submitted_at=created_at WHERE camp_submitted=true")

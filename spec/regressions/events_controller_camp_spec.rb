@@ -19,11 +19,11 @@ describe EventsController, type: :controller do
 
     it 'creates links for restricted role people' do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
-      camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
+      camp.update(advisor_mountain_security_id: advisor_mountain.id)
 
       sign_in(bulei)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       advisor_mountain_link = person_path(id: advisor_mountain)
       expect(dom.find_link(advisor_mountain.to_s)[:href]).to eq advisor_mountain_link
@@ -31,14 +31,14 @@ describe EventsController, type: :controller do
 
     it 'only displays person\'s name if no access to show site' do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
-      camp.update_attribute(:advisor_mountain_security_id, advisor_mountain.id)
+      camp.update(advisor_mountain_security_id: advisor_mountain.id)
 
       participation = Fabricate(:event_participation, event: camp)
       Fabricate(Event::Camp::Role::Helper.name.to_sym, participation: participation)
       participant = participation.person
       sign_in(participant)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       expect(dom).to have_no_selector('dl a', text: advisor_mountain.to_s)
       expect(dom).to have_selector('dl dd', text: advisor_mountain.to_s)
@@ -51,7 +51,7 @@ describe EventsController, type: :controller do
     end
 
     def assert_advisor(advisor_key, text, warning)
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       node = find_node_for_field(dom, advisor_key)
       expect(node.text).to eq(text)
@@ -75,7 +75,7 @@ describe EventsController, type: :controller do
           end
 
           it 'is marked as assigned if set' do
-            camp.update_attribute("#{key}_id", bulei.id)
+            camp.update("#{key}_id" => bulei.id)
 
             text = bulei.to_s
             text += "\nNicht bestätigt\nBesucht das Lager nicht\n" if key == 'coach'
@@ -102,7 +102,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -125,7 +125,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -135,9 +135,9 @@ describe EventsController, type: :controller do
 
       context 'security flags set' do
         before do
-          camp.update_attributes!(j_s_security_mountain: true,
-                                 j_s_security_snow: true,
-                                 j_s_security_water: true)
+          camp.update!(j_s_security_mountain: true,
+                       j_s_security_snow: true,
+                       j_s_security_water: true)
         end
 
         context 'no security leaders assigned' do
@@ -149,7 +149,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set but with leader warning' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, "#{bulei.to_s}Keine Leitenden erfasst", true)
               end
             end
@@ -172,7 +172,7 @@ describe EventsController, type: :controller do
               end
 
               it 'is marked as assigned if advisor set' do
-                camp.update_attribute("#{key}_id", bulei.id)
+                camp.update("#{key}_id" => bulei.id)
                 assert_advisor(key, bulei.to_s, false)
               end
             end
@@ -210,7 +210,7 @@ describe EventsController, type: :controller do
     it 'does not show details to person with participant role' do
       sign_in(child)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       detail_attrs.each do |attr|
         assert_no_attr(attr)
@@ -223,7 +223,7 @@ describe EventsController, type: :controller do
     it 'shows details to person with event leader role' do
       sign_in(camp_leader)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       detail_attrs.each do |attr|
         assert_attr(attr)
@@ -236,7 +236,7 @@ describe EventsController, type: :controller do
     it 'shows details to person with update permission' do
       sign_in(bulei)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       detail_attrs.each do |attr|
         assert_attr(attr)
@@ -262,17 +262,17 @@ describe EventsController, type: :controller do
     end
 
     def update_camp_attrs
-      camp.update_attribute(:expected_participants_wolf_f, 33)
-      camp.update_attribute(:canton, 'zz')
-      camp.update_attribute(:coordinates, '34')
-      camp.update_attribute(:altitude, '344')
-      camp.update_attribute(:emergency_phone, '344')
-      camp.update_attribute(:advisor_mountain_security_id, people(:bulei).id)
-      camp.update_attribute(:landlord, 'foo')
-      camp.update_attribute(:j_s_kind, 'j_s_child')
-      camp.update_attribute(:local_scout_contact_present, true)
-      camp.update_attribute(:local_scout_contact, 'foo guy')
-      camp.update_attribute(:location, 'foo place')
+      camp.update(expected_participants_wolf_f: 33,
+                  canton: 'zz',
+                  coordinates: '34',
+                  altitude: '344',
+                  emergency_phone: '344',
+                  advisor_mountain_security_id: people(:bulei).id,
+                  landlord: 'foo',
+                  j_s_kind: 'j_s_child',
+                  local_scout_contact_present: true,
+                  local_scout_contact: 'foo guy',
+                  location: 'foo place')
     end
   end
 
@@ -294,13 +294,13 @@ describe EventsController, type: :controller do
       end
 
       it 'show contact details of camp leader' do
-        get :show, group_id: group.id, id: camp.id
+        get :show, params: { group_id: group.id, id: camp.id }
         expect(dom).to have_selector('a', text: camp_leader.email)
       end
 
       it 'shows nothing if no leader is assigned' do
         camp.participations.destroy_all
-        get :show, group_id: group.id, id: camp.id
+        get :show, params: { group_id: group.id, id: camp.id }
         expect(dom).not_to have_selector('a', text: camp_leader.email)
       end
     end
@@ -312,7 +312,7 @@ describe EventsController, type: :controller do
       end
 
       it 'does not show contact details of camp leaders' do
-        get :show, group_id: outside_camp.group_ids.first, id: outside_camp.id
+        get :show, params: { group_id: outside_camp.group_ids.first, id: outside_camp.id }
         expect(dom).not_to have_selector('a', text: camp_leader.email)
       end
 
@@ -320,7 +320,7 @@ describe EventsController, type: :controller do
         outside_camp.update!(canton: 'be')
         canton.update!(cantons: ['be'])
 
-        get :show, group_id: outside_camp.group_ids.first, id: outside_camp.id
+        get :show, params: { group_id: outside_camp.group_ids.first, id: outside_camp.id }
         expect(dom).to have_selector('a', text: camp_leader.email)
       end
     end
@@ -332,7 +332,7 @@ describe EventsController, type: :controller do
     before { sign_in(bulei) }
 
     it 'checkpoint checkboxes are disabled for non camp leader user' do
-      get :edit, group_id: group.id, id: camp.id
+      get :edit, params: { group_id: group.id, id: camp.id }
 
       expect(dom).to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
       expect(dom).to have_selector('input#event_j_s_rules_applied[disabled=disabled]')
@@ -342,7 +342,7 @@ describe EventsController, type: :controller do
     it 'checkpoint checkboxes to camp leader user' do
       camp.update!(leader_id: people(:bulei).id)
 
-      get :edit, group_id: group.id, id: camp.id
+      get :edit, params: { group_id: group.id, id: camp.id }
 
       expect(dom).not_to have_selector('input#event_lagerreglement_applied[disabled=disabled]')
       expect(dom).to have_selector('input#event_lagerreglement_applied')
@@ -353,7 +353,7 @@ describe EventsController, type: :controller do
     end
 
     it 'shows checkpoint values' do
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       expect(dom).to have_selector('span', text: 'Lagerreglement berücksichtigt/eingehalten: nein')
       expect(dom).to have_selector('span', text: 'Vorschriften Kantonalverband berücksichtigt/eingehalten: nein')
@@ -366,7 +366,7 @@ describe EventsController, type: :controller do
     before { sign_in(bulei) }
 
     it 'not shown if not coach user' do
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       expect(dom).not_to have_selector('a', text: 'Einreichen')
       expect(dom).not_to have_selector('a.disabled', text: 'Eigereicht')
@@ -375,7 +375,7 @@ describe EventsController, type: :controller do
     it 'is shown to coach user if camp not submitted' do
       camp.update!(coach_id: people(:bulei).id)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       expect(dom).to have_selector('a', text: 'Einreichen')
     end
@@ -384,7 +384,7 @@ describe EventsController, type: :controller do
       camp.update!(coach_id: people(:bulei).id)
       submit_camp(camp)
 
-      get :show, group_id: group.id, id: camp.id
+      get :show, params: { group_id: group.id, id: camp.id }
 
       expect(dom).to have_selector('a.disabled', text: 'Eingereicht')
     end

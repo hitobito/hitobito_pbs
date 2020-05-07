@@ -44,8 +44,8 @@ class SupercampsController < ApplicationController
   end
 
   def connect
-    flash[:event_with_merged_supercamp] = event_with_merged_supercamp
-    redirect_to :back
+    flash[:event_with_merged_supercamp] = event_with_merged_supercamp.to_unsafe_h
+    redirect_back(fallback_location: group)
   end
 
   private
@@ -67,7 +67,7 @@ class SupercampsController < ApplicationController
 
   def matching_supercamps
     Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created').uniq
+               .where(allow_sub_camps: true, state: 'created').distinct
   end
 
   def camp_id
@@ -115,7 +115,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                  .merge(supercamp_attributes_to_merge)
+      .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
@@ -156,7 +156,7 @@ class SupercampsController < ApplicationController
   end
 
   def handle_access_denied(e)
-    redirect_to :back, alert: e.message
+    redirect_back(fallback_location: group, alert: e.message)
   end
 
 end

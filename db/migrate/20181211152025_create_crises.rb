@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class CreateCrises < ActiveRecord::Migration
+class CreateCrises < ActiveRecord::Migration[4.2]
   def change
     create_table :crises do |t|
       t.integer :creator_id, null: false

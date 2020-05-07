@@ -18,7 +18,7 @@ describe CensusEvaluation::AbteilungController, type: :controller do
   before { sign_in(people(:bulei)) }
 
   describe 'GET total' do
-    before { get :index, id: schekka.id }
+    before { get :index, params: { id: schekka.id } }
 
     it 'renders correct templates' do
       is_expected.to render_template('index')

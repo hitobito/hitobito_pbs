@@ -1,4 +1,4 @@
-class UpdateKantonalverband < ActiveRecord::Migration
+class UpdateKantonalverband < ActiveRecord::Migration[4.2]
 
   def up
 

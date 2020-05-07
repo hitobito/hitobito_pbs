@@ -12,7 +12,7 @@ module FilterNavigation
     end
 
     def active_label
-      label_for_filter(template.params.fetch(:filter, 'all'))
+      label_for_filter(template.params.to_unsafe_h.fetch(:filter, 'all'))
     end
 
     private
@@ -31,7 +31,7 @@ module FilterNavigation
     end
 
     def filter_path(name)
-      template.url_for(template.params.merge(filter: name))
+      template.url_for(template.params.to_unsafe_h.merge(filter: name, host_only: true))
     end
 
   end

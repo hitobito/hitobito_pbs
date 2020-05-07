@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddSalutationPlaceholdersToCustomContents < ActiveRecord::Migration
+class AddSalutationPlaceholdersToCustomContents < ActiveRecord::Migration[4.2]
 
   def up
     change_custom_content do |placeholders|

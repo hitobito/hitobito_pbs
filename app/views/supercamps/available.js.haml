@@ -9,6 +9,8 @@ $('#modal-placeholder').html("#{escape_javascript(render 'available')}")
     }
     var $form = $('form[id^=edit_event_], form#new_event')
     $form.attr('action', selectedSupercamp)
+    var metaToken = $('meta[name=csrf-token]')[0].content
+    $form.find('input[name=authenticity_token]').val(metaToken)
     $form.submit()
   })
 

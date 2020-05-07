@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddSubcampFieldToQuestions < ActiveRecord::Migration
+class AddSubcampFieldToQuestions < ActiveRecord::Migration[4.2]
   def up
     add_column :event_questions, :pass_on_to_supercamp, :boolean, null: false, default: false
   end

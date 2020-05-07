@@ -32,25 +32,25 @@ describe SupercampsController do
       let(:subject) { assigns(:supercamps_on_group_and_above).map(&:name) }
 
       it 'finds supercamps on group and above' do
-        xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
+        get :available, params: { group_id: group.id, camp_id: camp.id }, format: :js, xhr: true
         is_expected.to include('Hauptlager', 'Schekka Super')
         is_expected.not_to include('Tsueri Super')
       end
 
       it 'finds supercamps on group and above when camp has no id yet' do
-        xhr :get, :available, group_id: group.id, format: :js
+        get :available, params: { group_id: group.id }, format: :js, xhr: true
         is_expected.to include('Hauptlager', 'Schekka Super')
         is_expected.not_to include('Tsueri Super')
       end
 
       it 'excludes itself' do
-        xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
+        get :available, params: { group_id: group.id, camp_id: camp.id }, format: :js, xhr: true
         is_expected.not_to include('Sommerlager')
       end
 
       it 'excludes past camps' do
         supercamp_schekka.dates.first.update(start_at: DateTime.now - 1.year, finish_at: DateTime.now - 1.year + 2.days)
-        xhr :get, :available, group_id: group.id, camp_id: camp.id, format: :js
+        get :available, params: { group_id: group.id, camp_id: camp.id }, format: :js, xhr: true
         is_expected.not_to include('Schekka Super')
       end
 
@@ -60,24 +60,24 @@ describe SupercampsController do
       let(:subject) { assigns(:found_supercamps).map(&:name) }
 
       it 'query finds supercamps anywhere' do
-        xhr :get, :query, group_id: group.id, camp_id: camp.id, q: 'sup', format: :js
+        get :query, params: { group_id: group.id, camp_id: camp.id, q: 'sup' }, format: :js, xhr: true
         is_expected.to include('Schekka Super', 'Tsueri Super')
         is_expected.not_to include('Hauptlager')
       end
 
       it 'query finds supercamps anywhere when camp has no id yet' do
-        xhr :get, :query, group_id: group.id, q: 'sup', format: :js
+        get :query, params: { group_id: group.id, q: 'sup' }, format: :js, xhr: true
         is_expected.to include('Schekka Super', 'Tsueri Super')
         is_expected.not_to include('Hauptlager')
       end
 
       it 'query excludes itself' do
-        xhr :get, :query, group_id: group.id, camp_id: camp.id, q: 'lager', format: :js
+        get :query, params: { group_id: group.id, camp_id: camp.id, q: 'lager' }, format: :js, xhr: true
         is_expected.not_to include('Sommerlager')
       end
 
       it 'does not query for less than 3 characters' do
-        xhr :get, :query, group_id: group.id, camp_id: camp.id, q: 'su', format: :js
+        get :query, params: { group_id: group.id, camp_id: camp.id, q: 'su' }, format: :js, xhr: true
         is_expected.to be_empty
       end
 
@@ -123,9 +123,9 @@ describe SupercampsController do
 
           request.env['HTTP_REFERER'] = '/' + form.to_s
           if form == :create
-            post :connect, group_id: group.id, supercamp_id: supercamp.id, event: event_form_data
+            post :connect, params: { group_id: group.id, supercamp_id: supercamp.id, event: event_form_data }
           else
-            patch :connect, group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id, event: event_form_data
+            patch :connect, params: { group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id, event: event_form_data }
           end
         end
 
@@ -222,7 +222,7 @@ describe SupercampsController do
             :advisor_water_security
           ].each do |attr|
             it attr.to_s + ' from subcamp' do
-              expect(result[attr]).to eq(camp.attributes[attr.to_s])
+              expect(result[attr].to_s).to eq(camp.attributes[attr.to_s].to_s)
             end
           end
 
@@ -235,7 +235,7 @@ describe SupercampsController do
             :paper_application_required, :participants_can_apply, :participants_can_cancel
           ].each do |attr|
             it attr.to_s + ' from supercamp' do
-              expect(result[attr]).to eq(supercamp.attributes[attr.to_s])
+              expect(result[attr].to_s).to eq(supercamp.attributes[attr.to_s].to_s)
             end
           end
 

@@ -16,7 +16,7 @@ describe MemberCountsController, type: :controller do
   before { sign_in(people(:bulei)) }
 
   describe 'GET edit' do
-    before { get :edit, group_id: abteilung.id, year: 2012 }
+    before { get :edit, params: { group_id: abteilung.id, year: 2012 } }
 
     it 'should render template' do
       is_expected.to render_template('edit')
