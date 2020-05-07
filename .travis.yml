@@ -3,9 +3,6 @@ cache: bundler
 dist: xenial
 services:
   - mysql
-branches:
-  only:
-    - rails-5
 env:
   global:
     - HEADLESS=true
