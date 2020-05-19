@@ -8,7 +8,6 @@ env:
     - HEADLESS=true
     - RAILS_DB_ADAPTER=mysql2
     - RAILS_DB_NAME=hitobito_test
-    - RAILS_ENV=development
 rvm:
   - 2.5.5
 install:
