@@ -43,7 +43,8 @@
 
 class Group::KantonalesGremium < Group::Gremium
 
-  children Group::KantonalesGremium
+  children Group::KantonalesGremium,
+           Group::GeheimesKantonalesGremium
 
   class Leitung < Group::Gremium::Leitung
   end

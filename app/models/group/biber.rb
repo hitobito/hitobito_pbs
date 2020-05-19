@@ -46,7 +46,8 @@ class Group::Biber < Group
   self.event_types = [Event, Event::Camp]
 
   children Group::Biber,
-           Group::AbteilungsGremium
+           Group::AbteilungsGremium,
+           Group::GeheimesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
