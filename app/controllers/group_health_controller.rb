@@ -13,100 +13,91 @@ class GroupHealthController < ApplicationController
     ' layer.group_health = TRUE'.freeze
   DEFAULT_PAGE_SIZE = 20.freeze
 
-  def show
+  before_action do
     authorize! :show, GroupHealthController
-    render json: render_json
   end
 
-  private
-
-  def render_json
-    data = {}
-    tables = ['group_types', 'role_types', 'participation_types', 'j_s_kinds', 'camp_states',
-      'qualification_kinds', 'event_kinds', 'people', 'groups', 'courses', 'camps', 'roles',
-      'participations', 'qualifications']
-    table = (tables.include? params[:table]) ? params[:table] : 'people'
-    data[table] = self.send(table)
-    return data
-  end
+  # json only controller
+  respond_to :html, only: []
+  respond_to :json
 
   def people
-    Person.joins(roles: :group).joins(GROUP_HEALTH_JOIN).distinct
-      .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-      .as_json(only: [:id, :pbs_number, :first_name, :last_name, :nickname, :address, :town,
-      :zip_code, :country, :gender, :birthday, :entry_date, :leaving_date, :primary_group_id])
-      .map {|h| h.except('first_name', 'last_name', 'nickname')
-      .merge({name: h['nickname'].blank? ? '%s %s.' % [h['first_name'],
-        (h['last_name'] || '').first] : h['nickname']})}
+    render json: Person.joins(roles: :group).joins(GROUP_HEALTH_JOIN).distinct
+                     .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                     .as_json(only: [:id, :pbs_number, :first_name, :last_name, :nickname, :address,
+                                     :town, :zip_code, :country, :gender, :birthday, :entry_date,
+                                     :leaving_date, :primary_group_id])
+                     .map {|h| h.except('first_name', 'last_name', 'nickname')
+                     .merge({name: h['nickname'].blank? ? '%s %s.' % [h['first_name'],
+                       (h['last_name'] || '').first] : h['nickname']})}
   end
 
   def roles
-    Role.joins(:group).joins(GROUP_HEALTH_JOIN)
-      .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-      .as_json(only: [:id, :person_id, :group_id, :type, :created_at, :deleted_at])
+    render json: Role.joins(:group).joins(GROUP_HEALTH_JOIN)
+                     .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                     .as_json(only: [:id, :person_id, :group_id, :type, :created_at, :deleted_at])
   end
 
   def groups
-    Group.joins(GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
+    render json: Group.joins(GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
       ' groups.type = "Group::Kantonalverband"' \
       ' LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
       ' AND groups.lft < canton.rgt AND canton.type = "Group::Kantonalverband"')
-      .distinct
-      .select('groups.*', 'canton.id as canton_id', 'canton.name as canton_name')
-      .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-      .as_json(only: [:id, :parent_id, :type, :name, :created_at, :deleted_at,
-        :canton_id, :canton_name])
+                     .distinct
+                     .select('groups.*', 'canton.id as canton_id', 'canton.name as canton_name')
+                     .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                     .as_json(only: [:id, :parent_id, :type, :name, :created_at, :deleted_at,
+                                     :canton_id, :canton_name])
   end
 
   def courses
-    Event.joins(people: [{roles: :group}]).joins(GROUP_HEALTH_JOIN).distinct
-      .includes(:dates, :groups).where(type: 'Event::Course')
-      .as_json(only: [:id, :name, :kind_id], include: {dates: {only: [:start_at, :finish_at]},
-        groups: {only: :id}})
+    render json: Event.joins(people: [{roles: :group}]).joins(GROUP_HEALTH_JOIN).distinct
+                     .includes(:dates, :groups).where(type: 'Event::Course')
+                     .as_json(only: [:id, :name, :kind_id],
+                              include: {dates: {only: [:start_at, :finish_at]},
+                                        groups: {only: :id}})
   end
 
   def camps
-    Event.joins(people: [{roles: :group}]).joins(GROUP_HEALTH_JOIN).distinct
-      .includes(:dates, :groups).where(type: 'Event::Camp')
-      .as_json(only: [:id, :name, :location, :j_s_kind, :state],
-        include: {dates: {only: [:start_at, :finish_at]}, groups: {only: :id}})
-      .map {|h|
-        h['j_s_kind'] = h['j_s_kind'].present? ? "j_s_kind_#{h['j_s_kind']}" :
-          'j_s_kind_none'
-        h
-      }
+    render json: Event.joins(people: [{ roles: :group }]).joins(GROUP_HEALTH_JOIN).distinct
+                     .includes(:dates, :groups).where(type: 'Event::Camp')
+                     .as_json(only: [:id, :name, :location, :j_s_kind, :state],
+                              include: { dates: { only: [:start_at, :finish_at] },
+                                         groups: { only: :id } })
+                     .map { |h|
+                       h['j_s_kind'] = h['j_s_kind'].present? ? "j_s_kind_#{h['j_s_kind']}" :
+                                           'j_s_kind_none'
+                       h
+                     }
   end
 
   def participations
-    Event::Participation.joins(person: [{roles: :group}]).joins(GROUP_HEALTH_JOIN).distinct
-      .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-      .includes(:roles).as_json(only: [:id, :event_id, :person_id, :qualified],
-      include: {roles: {only: :type}})
+    render json: Event::Participation.joins(person: [{ roles: :group }])
+                     .joins(GROUP_HEALTH_JOIN).distinct
+                     .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                     .includes(:roles).as_json(only: [:id, :event_id, :person_id, :qualified],
+                                               include: { roles: { only: :type } })
   end
 
   def qualifications
-    Qualification.joins(person: [{roles: :group}]).joins(GROUP_HEALTH_JOIN).distinct.as_json()
-  end
-
-  def flatten_translations(items, key)
-    return items.map {|h| h.except('translations', key).merge(h['translations']
-      .map {|t| [['%s_%s' % [key, t['locale']], t['label']]].to_h}.inject(:merge))
-      .merge(empty_labels) { |key, v1, v2| v1 }}
+    render json: Qualification.joins(person: [{ roles: :group }])
+                     .joins(GROUP_HEALTH_JOIN).distinct.as_json()
   end
 
   def qualification_kinds
     data = QualificationKind.includes(:translations)
-      .as_json(only: [:id, :label, :validity],
-      include: {translations: {only: [:locale, :label]}})
-    return flatten_translations(data, 'label')
+               .as_json(only: [:id, :label, :validity],
+                        include: { translations: { only: [:locale, :label] } })
+    render json: flatten_translations(data, 'label')
   end
 
   def event_kinds
     data = Event::Kind.includes(:translations, :event_kind_qualification_kinds)
-      .as_json(only: :id,
-      include: {translations: {only: [:locale, :label]},
-      event_kind_qualification_kinds: {only: [:qualification_kind_id, :role, :category]}})
-    return flatten_translations(data, 'label')
+               .as_json(only: :id,
+                        include: { translations: { only: [:locale, :label] },
+                                   event_kind_qualification_kinds: { only: [:qualification_kind_id,
+                                                                            :role, :category] } })
+    render json: flatten_translations(data, 'label')
   end
 
   def role_types
@@ -114,20 +105,20 @@ class GroupHealthController < ApplicationController
     Role::TypeList.new(Group.root_types.first).each do |layer, groups|
       groups.each do |group, roles|
         roles.each do |r|
-          data.push({role_type: r.model_name, layer_type: layer, group_type: group}
-            .merge(localize_labels_type(r)))
+          data.push({ role_type: r.model_name, layer_type: layer, group_type: group }
+                        .merge(localize_labels_type(r)))
         end
       end
     end
-    return data
+    render json: data
   end
 
   def group_types
     data = []
     Group.all_types.each do |t|
-      data.push({group_type: t.model_name}.merge(localize_labels_type(t)))
+      data.push({ group_type: t.model_name }.merge(localize_labels_type(t)))
     end
-    return data
+    render json: data
   end
 
   def participation_types
@@ -136,27 +127,36 @@ class GroupHealthController < ApplicationController
     symbols.each do |s|
       s.role_types.each do |t|
         if not data.include? t.model_name then
-          data.push({participation_type: t.model_name}.merge(localize_labels_type(t)))
+          data.push({ participation_type: t.model_name }.merge(localize_labels_type(t)))
         end
       end
     end
-    return data
+    render json: data
   end
 
   def j_s_kinds
     data = []
     J_S_KINDS.each do |k|
-      data.push({j_s_kind: k}.merge(localize_labels("events.fields_pbs.#{k}")))
+      data.push({ j_s_kind: k }.merge(localize_labels("events.fields_pbs.#{k}")))
     end
-    return data
+    render json: data
   end
 
   def camp_states
     data = []
     CAMP_STATES.each do |s|
-      data.push({state: s}.merge(localize_labels("activerecord.attributes.event/camp.states.#{s}")))
+      data.push({ state: s }.merge(
+          localize_labels("activerecord.attributes.event/camp.states.#{s}")))
     end
-    return data
+    render json: data
+  end
+
+  private
+
+  def flatten_translations(items, key)
+    items.map {|h| h.except('translations', key).merge(h['translations']
+      .map {|t| [['%s_%s' % [key, t['locale']], t['label']]].to_h}.inject(:merge))
+                       .merge(empty_labels) { |key, v1, v2| v1 }}
   end
 
   def locales
