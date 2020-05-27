@@ -32,7 +32,7 @@ class GroupHealthController < ApplicationController
   GROUPS_JOIN = GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
       ' groups.type = "Group::Kantonalverband"' \
       ' LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
-      ' AND groups.lft < canton.rgt AND canton.type = "Group::Kantonalverband"'
+      ' AND groups.lft < canton.rgt AND canton.type = "Group::Kantonalverband"'.freeze
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action do
