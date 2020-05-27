@@ -28,7 +28,7 @@ class GroupHealthController < ApplicationController
 
 
   GROUP_HEALTH_JOIN = 'INNER JOIN groups AS layer ON groups.layer_group_id = layer.id AND' \
-    ' layer.group_health = TRUE'.freeze
+      ' layer.group_health = TRUE'.freeze
   GROUPS_JOIN = GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
       ' groups.type = "Group::Kantonalverband"' \
       ' LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
@@ -160,7 +160,7 @@ class GroupHealthController < ApplicationController
 
   def set_name(person)
     person.except('first_name', 'last_name', 'nickname')
-        .merge({ name: computed_name(person) })
+        .merge(name: computed_name(person))
   end
 
   def computed_name(person)
