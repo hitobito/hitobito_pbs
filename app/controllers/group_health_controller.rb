@@ -173,7 +173,8 @@ class GroupHealthController < ApplicationController
   end
 
   def set_j_s_kind(camp)
-    camp.merge('j_s_kind' => "j_s_kind_#{camp.fetch('j_s_kind', 'none')}")
+    j_s_kind = camp['j_s_kind'].presence || 'none'
+    camp.merge(j_s_kind: "j_s_kind_#{j_s_kind}")
   end
 
   def set_translations(item, key)
