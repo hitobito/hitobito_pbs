@@ -165,7 +165,11 @@ class GroupHealthController < ApplicationController
 
   def computed_name(person)
     return person['nickname'] unless person['nickname'].blank?
-    [person['first_name'], (person['last_name'] || '').first].join(' ')
+    [person['first_name'], abbreviate(person['last_name'])].join(' ')
+  end
+
+  def abbreviate(name)
+    name.present? ? "#{name.first}." : ''
   end
 
   def set_j_s_kind(camp)
