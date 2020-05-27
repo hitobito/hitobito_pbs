@@ -27,8 +27,11 @@ class GroupHealthController < ApplicationController
   EKQK_FIELDS = %i(qualification_kind_id role category).freeze
 
 
+  # query only subgroups of layers where the group health opt-in is enabled
   GROUP_HEALTH_JOIN = 'INNER JOIN groups AS layer ON groups.layer_group_id = layer.id AND' \
       ' layer.group_health = TRUE'.freeze
+  # query for groups of type "Bund" or "Kantonalverband" anyway, and query the group of
+  # type "Kantonalverband" which lies above in the hierarchical structure, if it exists
   GROUPS_JOIN = GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
       ' groups.type = "Group::Kantonalverband"' \
       ' LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
@@ -163,6 +166,9 @@ class GroupHealthController < ApplicationController
         .merge(name: computed_name(person))
   end
 
+  # If the nickname is not set, return the first name followed by the first letter of the last
+  # name and a dot, for example "Hussein K.", and otherwise return the nickname. Note that the
+  # presence of the first name is ensured by validation, whereas the last name could be blank.
   def computed_name(person)
     return person['nickname'] unless person['nickname'].blank?
     [person['first_name'], abbreviate(person['last_name'])].join(' ')
