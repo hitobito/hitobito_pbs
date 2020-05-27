@@ -80,10 +80,9 @@ module Export::Pdf
 
     def render_title
       move_down 28
-      font_size(18) do
+      font_size(14) do
         text title, style: :bold
       end
-      move_down 14
     end
 
     def render_group
@@ -99,14 +98,12 @@ module Export::Pdf
     def render_expected_participant_table
       text translate('expected_participants')
       move_down_line
-      cells = []
-      cells << data.expected_participant_table_header
-      cells << data.expected_participant_table_row(:f)
-      cells << data.expected_participant_table_row(:m)
+      cells = [data.expected_participant_table_header, 
+               data.expected_participant_table_row(:f),
+               data.expected_participant_table_row(:m)]
       table(cells,
         cell_style: { align: :center, border_width: 0.25, size: 8 },
-        column_widths: [30, 41, 41, 41, 41, 41]
-        )
+        column_widths: [30, 41, 41, 41, 41, 41])
     end
 
     def render_leader
@@ -125,6 +122,7 @@ module Export::Pdf
 
     def render_assistant_leaders
       section('assistant_leaders_header') do
+        move_down_line
         cells = data.camp_assistant_leaders.collect do |person|
           [person.to_s, person.birthday.try(:year).to_s, data.active_qualifications(person)]
         end
@@ -226,16 +224,14 @@ module Export::Pdf
 
     def section(header)
       @section_count += 1
-      move_down 6
+      move_down 10
       heading { text "#{@section_count}. #{translate(header)}", style: :bold }
-      move_down_line
       yield
-      2.times { move_down_line }
+      move_down_line
     end
 
     def sub_section(header)
       heading { text translate(header), style: :bold, size: 10 }
-      move_down_line
       yield
       move_down_line
     end
