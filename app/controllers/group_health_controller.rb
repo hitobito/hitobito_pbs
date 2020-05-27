@@ -66,9 +66,9 @@ class GroupHealthController < ApplicationController
   end
 
   def courses
-    respond(Event.joins(people: [{ roles: :group }])
+    respond(Event::Course.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
-                .includes(:dates, :groups).where(type: 'Event::Course')
+                .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: COURSES_FIELDS,
                          include: { dates: { only: EVENT_DATES_FIELDS },
@@ -76,9 +76,9 @@ class GroupHealthController < ApplicationController
   end
 
   def camps
-    respond(Event.joins(people: [{ roles: :group }])
+    respond(Event::Camp.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
-                .includes(:dates, :groups).where(type: 'Event::Camp')
+                .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: CAMPS_FIELDS,
                          include: { dates: { only: EVENT_DATES_FIELDS },
@@ -97,9 +97,9 @@ class GroupHealthController < ApplicationController
 
   def qualifications
     respond(Qualification.joins(person: [{ roles: :group }])
-                                .joins(GROUP_HEALTH_JOIN).distinct
-                                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-                                .as_json)
+                .joins(GROUP_HEALTH_JOIN).distinct
+                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                .as_json)
   end
 
   def qualification_kinds
