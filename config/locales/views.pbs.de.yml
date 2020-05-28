@@ -279,6 +279,8 @@ de:
           long: Long
 
   groups:
+    fields_pbs:
+      group_health_info: Wenn dieses Opt-In angekreuzt wird, stehen die Daten eurer Abteilung für die Entwicklung und das Testen des Tools HealthCheck zur Verfügung. Dieses Tool soll euch in Zukunft helfen, anhand der Mitgliederdaten zu analysieren, wie gut eure Abteilung dasteht. Die Daten werden abgesehen vom Softwareunternehmen, welches das Tool entwickelt, nicht an Dritte weitergegeben.
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
     tabs:
       population: Bestand
