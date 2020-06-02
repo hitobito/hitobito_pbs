@@ -276,23 +276,23 @@ it:
         title: Linee guida
         description: "Queste linee guida ti aiutano nell'amministrazione di corsi e campi:"
         hering:
-          url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
+          url: http://heringit.scouts.ch
           title: "Sardina: linee guida per l'amministrazione di campi scout"
           description: "Sardina include tutte le informazioni per l'amministrazione di campi scout. Ti porta passo a passo a tutti i documenti più importanti. Con queste linee guida non dimenticherai nessun punto importante."
         coaches:
-          url: https://www.scout.ch/it/associazione/download/sostegno/coaching/rimedi/1x1-midata-per-coach/view
+          url: http://coachesfr.scouts.ch
           title: 1x1 MiData per coaches
-          description: "L'\"1x1 MiData per coaches\" spiega ai coaches le funzioni più importanti della banca dati dei membri del MSS (Mi-Data). Vale sia quale Factsheet che come preparazione per il coach MF ed il corso coach."
+          description: "\"1x1 MiData per coaches\" spiega per i coaches le funzioni più importanti per la banca data dei membri del MSS (MiData). Vale sia quale Factsheet che come preparazione per il coach MF e per il corso coach."
         anker:
-          url: https://www.scout.ch/it/associazione/download/formazione/corsi/amministrazione/fili-conduttori/l2019ancre-fil-conducteur-pour-l2019administration-des-cours-msds-version-2015-avec-midata
+          url: http://ankerit.scouts.ch
           title: "Ancora: guida sull'amministrazione dei corsi MSS"
-          description: "Per animatrici/tori e formatrici/tori: tutti i processi amministrativi che devono venir considerati nello svolgimento e nell'iscrizione di un corso G+S o UFAS sono qui descritti in dettaglio."
+          description: "Per animatrici/tori e assistenti: tutti i passi amministrativi da rispettare nell'iscrizione e nello svolgimento di un corso G+S o UFAS sono descritti qui in dettaglio."
         pilot:
-          url: https://www.scout.ch/it/associazione/download/formazione/corsi/amministrazione/fili-conduttori/actions-25bc-pilote-fil-conducteur-pour-ladministration-des-cours-du-msds-dans-la-midata-et-la-bdnjs-version-2015-avec-midata
+          url: http://pilotit.scouts.ch
           title: "Pilot: linee guida per l'amministrazione dei corsi MSS in MiData e in NDBJS"
           description: "Linee guida per i segretariati e i responsabili per la formazione per l'amministrazione dei corsi in MiData e NDBJS"
         ticket:
-          url: http://ticket.scouts.ch
+          url: http://ticketit.scouts.ch
           title: "Ticket: linee guida per l'annuncio dei partecipanti al corso"
           description: "Il ticket descrive il processo di annuncio dei partecipanti tramite MiData (banca dati dei membri del MSS)"
   member_counts:

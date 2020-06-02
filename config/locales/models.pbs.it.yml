@@ -97,6 +97,9 @@ it:
         one: Amministratore bancadati
         other: Amministratore bancadati
         description: Amministra i dati contenuti in questa bancadati
+      group/bund/power_user:
+        one: PowerUser
+        other: PowerUser
       group/bund/assistenz_ausbildung:
         one: Assistenza nella formazione
         other: Assistenza nella formazione
@@ -233,6 +236,9 @@ it:
       group/kantonalverband/adressverwaltung:
         one: Amministratore bancadati
         other: Amministratori bancadati
+      group/kantonalverband/power_user:
+        one: PowerUser
+        other: PowerUser
       group/kantonalverband/praesidium:
         one: Presidente
         other: Presidenti
@@ -356,6 +362,9 @@ it:
       group/region/adressverwaltung:
         one: Amministratore bancadati
         other: Amministratori bancadati
+      group/region/power_user:
+        one: PowerUser
+        other: PowerUser
       group/region/praesidium:
         one: Presidente
         other: Presidenti
@@ -479,6 +488,9 @@ it:
       group/abteilung/adressverwaltung:
         one: Amministratore bancadati
         other: Amministratori bancadati
+      group/abteilung/power_user:
+        one: PowerUser
+        other: PowerUser
       group/abteilung/praesidium:
         one: Presidente
         other: Presidenti
@@ -964,4 +976,7 @@ it:
         crisis:
           another_active: Un'altra crisi è già attiva per questo gruppo
         group/abteilung:
+          attributes:
+            base:
+              geo_not_in_switzerland: Queste coordinate non si trovano in Svizzera.
           too_many_geolocations: non possono essere più di %{max}

@@ -962,4 +962,7 @@ fr:
         crisis:
           another_active: Une autre crise est déjà activée sur ce groupe
         group/abteilung:
+          attributes:
+            base:
+              geo_not_in_switzerland: Ces coordonnées ne sont pas situées en Suisse.
           too_many_geolocations: ne peuvent pas être plus de %{max}
