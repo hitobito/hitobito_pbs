@@ -253,6 +253,8 @@ fr:
           lat: Lat
           long: Long
   groups:
+    fields_pbs:
+      group_health_info: Si cette option est cochée, les données de votre service seront disponibles pour le développement et le test de l'outil HealthCheck. Cet outil vous aidera à analyser les activités de votre groupe sur la base des données des membres. Les données ne seront pas partagées avec une autre partie que l'entreprise de logiciels qui développe l'outil.
     ongoing_crisis: "%{creator} a déclenché une crise sur ce groupe"
     tabs:
       population: Effectifs

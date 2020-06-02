@@ -253,6 +253,8 @@ it:
           lat: Lat
           long: Long
   groups:
+    fields_pbs:
+      group_health_info: Se questo opt-in viene controllato, i dati del vostro dipartimento saranno disponibili per sviluppare e testare lo strumento HealthCheck. Questo strumento vi aiuterà ad analizzare i risultati del vostro dipartimento sulla base dei dati dei membri. I dati non saranno condivisi con terzi, ad eccezione della società di software che sviluppa lo strumento.
     ongoing_crisis: "%{creator} ha creato una crisi per questo gruppo"
     tabs:
       population: Censimento dei membri
