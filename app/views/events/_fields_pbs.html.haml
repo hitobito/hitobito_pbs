@@ -32,9 +32,11 @@
                                                :j_s_security_mountain,
                                                :j_s_security_water)
   - if j_s_security_attrs.present?
-    = f.labeled(:j_s_security) do
+    = f.labeled(:j_s_security, nil, nil, style: "padding-top: 5px") do
       - j_s_security_attrs.each do |attr|
-        = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
+        %div
+          = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
+          = f.render_help_text(attr)
 
   = render 'expected_participants_fields', f: f
 
