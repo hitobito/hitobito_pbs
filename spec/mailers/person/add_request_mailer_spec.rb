@@ -47,7 +47,7 @@ describe Person::AddRequestMailer do
 
     subject { mail }
 
-    its(:body) { should =~ /Liebe\(r\) Torben/ }
+    its(:body) { should =~ /Liebe\*r Torben/ }
 
   end
 
