@@ -45,15 +45,16 @@ describe EventsController, type: :controller do
     end
 
     def find_node_for_field(dom, key)
+      attr = Regexp.escape(Event::Camp.human_attribute_name(key))
       dom.find('dl dt',
-               text: /^#{Event::Camp.human_attribute_name(key)}$/)
+               text: /^#{attr}$/)
          .find(:xpath, 'following-sibling::*[1]')
     end
 
     def assert_advisor(advisor_key, text, warning)
       get :show, params: { group_id: group.id, id: camp.id }
 
-      node = find_node_for_field(dom, advisor_key)
+      node = find_node_for_field(dom, "#{advisor_key}_id")
       expect(node.text).to eq(text)
       if warning
         expect(node).to have_selector('.label-warning')
@@ -62,7 +63,7 @@ describe EventsController, type: :controller do
       end
     end
 
-    describe 'coach/abeilungsleitung warnings' do
+    describe 'coach/abteilungsleitung warnings' do
       before do
         camp.participations.destroy_all
         sign_in(bulei)
