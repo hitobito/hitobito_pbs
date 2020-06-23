@@ -80,6 +80,8 @@ module Pbs::Person
     validates :entry_date, :leaving_date,
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
+    validate :has_email_when_preferring_digital_correspondence
+
     after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_previously_changed?
     after_save :send_black_list_mail, if: :blacklisted_attribute_changed?
@@ -143,6 +145,12 @@ module Pbs::Person
 
   def blacklisted_attribute_changed?
     %w(first_name last_name email).any? { |k| previous_changes.key?(k) } && black_listed?
+  end
+
+  def has_email_when_preferring_digital_correspondence
+    if prefers_digital_correspondence && email.blank?
+      errors.add(:prefers_digital_correspondence, :email_must_exist)
+    end
   end
 
 end
