@@ -74,6 +74,30 @@ describe Person do
       expect(person).to have(1).error_on(:salutation)
     end
 
+    context 'prefers_digital_correspondence' do
+      it 'succeeds when preferring physical correspondence and having an email address' do
+        person.prefers_digital_correspondence = false
+        expect(person).to be_valid
+      end
+
+      it 'succeeds when preferring physical correspondence and not having an email address' do
+        person.email = nil
+        person.prefers_digital_correspondence = false
+        expect(person).to be_valid
+      end
+
+      it 'succeeds when preferring digital correspondence and having an email address' do
+        person.prefers_digital_correspondence = true
+        expect(person).to be_valid
+      end
+
+      it 'fails when preferring digital correspondence and not having an email address' do
+        person.email = nil
+        person.prefers_digital_correspondence = true
+        expect(person).to have(1).error_on(:prefers_digital_correspondence)
+      end
+    end
+
   end
 
   context '#salutation_value' do

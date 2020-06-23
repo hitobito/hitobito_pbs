@@ -1209,6 +1209,10 @@ de:
           attributes:
             base:
               cannot_remove_parent_id: "Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status \"Erstellt\" ist"
+        person:
+          attributes:
+            prefers_digital_correspondence:
+              email_must_exist: Für digitale Versandpräferenz muss die Haupt-E-Mail existieren
         role:
           attributes:
             created_at:
