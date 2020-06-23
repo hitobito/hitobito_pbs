@@ -56,11 +56,12 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language << :kantonalverband_id
+    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language <<
+                            :prefers_digital_correspondence << :kantonalverband_id
 
     alias_method_chain :full_name, :title
 
-    i18n_boolean_setter :brother_and_sisters
+    i18n_boolean_setter :brother_and_sisters, :prefers_digital_correspondence
 
 
     belongs_to :kantonalverband, class_name: 'Group' # might also be Group::Bund

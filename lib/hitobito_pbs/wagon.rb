@@ -106,7 +106,7 @@ module HitobitoPbs
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
-                                           :brother_and_sisters]
+                                           :prefers_digital_correspondence, :brother_and_sisters]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
                                                  :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
