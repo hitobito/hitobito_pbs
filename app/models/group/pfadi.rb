@@ -47,7 +47,7 @@ class Group::Pfadi < Group
 
   children Group::Pfadi,
            Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]

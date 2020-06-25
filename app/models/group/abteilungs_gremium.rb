@@ -44,7 +44,7 @@
 class Group::AbteilungsGremium < Group::Gremium
 
   children Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Leitung < Group::Gremium::Leitung
   end

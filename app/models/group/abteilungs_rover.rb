@@ -45,7 +45,7 @@ class Group::AbteilungsRover < Group::Rover
 
   children Group::AbteilungsRover,
            Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Einheitsleitung < Group::Rover::Einheitsleitung
   end

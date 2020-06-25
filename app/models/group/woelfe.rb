@@ -47,7 +47,7 @@ class Group::Woelfe < Group
 
   children Group::Woelfe,
            Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]

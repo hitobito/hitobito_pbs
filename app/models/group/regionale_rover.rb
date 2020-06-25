@@ -45,7 +45,7 @@ class Group::RegionaleRover < Group::Rover
 
   children Group::RegionaleRover,
            Group::RegionalesGremium,
-           Group::GeheimesRegionalesGremium
+           Group::InternesRegionalesGremium
 
   class Einheitsleitung < Group::Rover::Einheitsleitung
   end

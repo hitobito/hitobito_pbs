@@ -44,7 +44,7 @@
 class Group::Elternrat < Group
 
   children Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Praesidium < ::Role
     self.permissions = [:group_full]

@@ -44,7 +44,7 @@
 class Group::RegionalesGremium < Group::Gremium
 
   children Group::RegionalesGremium,
-           Group::GeheimesRegionalesGremium
+           Group::InternesRegionalesGremium
 
   class Leitung < Group::Gremium::Leitung
   end

@@ -41,14 +41,14 @@
 #  try_out_day_at              :date
 #
 
-class Group::GeheimesKantonalesGremium < Group::GeheimesGremium
+class Group::InternesAbteilungsGremium < Group::InternesGremium
 
-  children Group::GeheimesKantonalesGremium
+  children Group::InternesAbteilungsGremium
 
-  class Leitung < Group::GeheimesGremium::Leitung
+  class Leitung < Group::InternesGremium::Leitung
   end
 
-  class Mitglied < Group::GeheimesGremium::Mitglied
+  class Mitglied < Group::InternesGremium::Mitglied
   end
 
   roles Leitung, Mitglied

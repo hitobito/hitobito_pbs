@@ -66,7 +66,7 @@ class Group::Abteilung < Group
            Group::Pta,
            Group::Elternrat,
            Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   has_many :member_counts # rubocop:disable Rails/HasManyOrHasOneDependent since groups are only soft-deleted
   has_many :geolocations, as: :geolocatable, dependent: :destroy

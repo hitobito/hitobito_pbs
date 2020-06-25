@@ -40,21 +40,21 @@ de:
       group/elternrat:
         one: Elternrat
         other: Elternräte
-      group/geheimes_abteilungs_gremium:
-        one: Geheimes Gremium
-        other: Geheime Gremien
-        long: Geheimes Abteilungsgremium
-      group/geheimes_gremium:
-        one: Geheimes Gremium
-        other: Geheime Gremien
-      group/geheimes_kantonales_gremium:
-        one: Geheimes Gremium
-        other: Geheime Gremien
-        long: Geheimes Kantonales Gremium
-      group/geheimes_regionales_gremium:
-        one: Geheimes Gremium
-        other: Geheime Gremien
-        long: Geheimes Regionales Gremium
+      group/internes_abteilungs_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Abteilungsgremium
+      group/internes_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+      group/internes_kantonales_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Kantonales Gremium
+      group/internes_regionales_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Regionales Gremium
       group/gremium:
         one: Gremium
         other: Gremien
@@ -861,11 +861,11 @@ de:
         other: Mitglieder
         description:
 
-      group/geheimes_gremium/leitung:
+      group/internes_gremium/leitung:
         one: Leitung
         other: Leitung
         description:
-      group/geheimes_gremium/mitglied:
+      group/internes_gremium/mitglied:
         one: Mitglied
         other: Mitglieder
         description:

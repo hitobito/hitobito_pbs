@@ -47,7 +47,7 @@ class Group::Pio < Group
 
   children Group::Pio,
            Group::AbteilungsGremium,
-           Group::GeheimesAbteilungsGremium
+           Group::InternesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
