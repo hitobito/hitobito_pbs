@@ -41,16 +41,17 @@
 #  try_out_day_at              :date
 #
 
-class Group::GeheimesGremium < Group
+class Group::InternesRegionalesGremium < Group::InternesGremium
 
-  class Leitung < ::Role
-    self.permissions = [:group_and_below_full]
-    self.visible_from_above = false
+  children Group::InternesRegionalesGremium
+
+  class Leitung < Group::InternesGremium::Leitung
   end
 
-  class Mitglied < ::Role
-    self.permissions = [:group_read]
-    self.visible_from_above = false
+  class Mitglied < Group::InternesGremium::Mitglied
   end
+
+  roles Leitung, Mitglied
+  self.default_role = Mitglied
 
 end

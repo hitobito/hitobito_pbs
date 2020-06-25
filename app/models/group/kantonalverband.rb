@@ -51,7 +51,7 @@ class Group::Kantonalverband < Group
   children Group::Region,
            Group::Abteilung,
            Group::KantonalesGremium,
-           Group::GeheimesKantonalesGremium,
+           Group::InternesKantonalesGremium,
            Group::KantonaleKommission
 
 

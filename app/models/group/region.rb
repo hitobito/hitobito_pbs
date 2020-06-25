@@ -50,7 +50,7 @@ class Group::Region < Group
            Group::Abteilung,
            Group::RegionaleRover,
            Group::RegionalesGremium,
-           Group::GeheimesRegionalesGremium,
+           Group::InternesRegionalesGremium,
            Group::RegionaleKommission
 
   has_many :member_counts
