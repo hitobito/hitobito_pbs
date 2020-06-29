@@ -635,6 +635,10 @@ de:
         one: Präsident*in APV
         other: Präsident*innenAPV
         description:
+      group/abteilung/praesidium_elternrat:
+        one: Präsident*in Elternrat
+        other: Präsident*innen Elternrat
+        description:
       group/abteilung/praeses:
         one: Präses
         other: Präses

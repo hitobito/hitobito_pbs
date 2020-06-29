@@ -185,6 +185,10 @@ class Group::Abteilung < Group
     self.permissions = [:group_read]
   end
 
+  class PraesidiumElternrat < ::Role
+    self.permissions = [:group_read]
+  end
+
   class Redaktor < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
   end
@@ -253,6 +257,7 @@ class Group::Abteilung < Group
         Praesidium,
         VizePraesidium,
         PraesidiumApv,
+        PraesidiumElternrat,
         Praeses,
         Beisitz,
         Materialwart,
