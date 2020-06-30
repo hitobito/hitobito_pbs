@@ -36,6 +36,6 @@ describe Person::LoginMailer do
   its(:to)       { should == [recipient.email] }
   its(:reply_to) { should == [sender.email] }
   its(:subject)  { should == "Willkommen bei #{Settings.application.name}" }
-  its(:body)     { should =~ /Liebe\(r\) Torben<br\/>.*test.host\/users\/password\/edit\?reset_password_token=/ }
+  its(:body)     { should =~ /Liebe\*r Torben<br\/>.*test.host\/users\/password\/edit\?reset_password_token=/ }
 
 end

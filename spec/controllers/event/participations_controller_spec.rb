@@ -131,7 +131,7 @@ describe Event::ParticipationsController do
       expect(participation.active).to eq false
       expect(Delayed::Job.last.payload_object.instance_variable_get('@previous_state'))
         .to eq('assigned')
-      expect(flash[:notice]).to include 'Teilnehmer informieren'
+      expect(flash[:notice]).to include 'Teilnehmer*in informieren'
       expect(flash[:notice]).to include "mailto:#{participation.person.email}"
       expect(flash[:notice]).to include 'cc=bulei%40hitobito.example.com'
     end

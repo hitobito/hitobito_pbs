@@ -30,11 +30,8 @@ class GroupHealthController < ApplicationController
   # query only subgroups of layers where the group health opt-in is enabled
   GROUP_HEALTH_JOIN = 'INNER JOIN groups AS layer ON groups.layer_group_id = layer.id AND' \
       ' layer.group_health = TRUE'.freeze
-  # query for groups of type "Bund" or "Kantonalverband" anyway, and query the group of
-  # type "Kantonalverband" which lies above in the hierarchical structure, if it exists
-  GROUPS_JOIN = GROUP_HEALTH_JOIN + ' OR groups.type = "Group::Bund" OR' \
-      ' groups.type = "Group::Kantonalverband"' \
-      ' LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
+  # query the group of type "Kantonalverband" which lies above in the hierarchical structure
+  CANTON_JOIN = 'LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
       ' AND groups.lft < canton.rgt AND canton.type = "Group::Kantonalverband"'.freeze
   DEFAULT_PAGE_SIZE = 20.freeze
 
@@ -62,8 +59,7 @@ class GroupHealthController < ApplicationController
   end
 
   def groups
-    respond(Group.select('groups.*', 'canton.id as canton_id', 'canton.name as canton_name')
-                .joins(GROUPS_JOIN).distinct
+    respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) as groups")
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
   end
@@ -176,6 +172,25 @@ class GroupHealthController < ApplicationController
 
   def abbreviate(name)
     name.present? ? "#{name.first}." : ''
+  end
+
+  def bund
+    Group.select('groups.*', 'NULL as canton_id', 'NULL as canton_name')
+        .where(type: Group::Bund)
+        .to_sql
+  end
+
+  def cantons
+    Group.select('groups.*', 'id as canton_id', 'name as canton_name')
+        .where(type: Group::Kantonalverband)
+        .to_sql
+  end
+
+  def abt_and_below
+    Group.select('groups.*', 'canton.id as canton_id', 'canton.name as canton_name')
+        .joins(CANTON_JOIN)
+        .joins(GROUP_HEALTH_JOIN).distinct
+        .to_sql
   end
 
   def set_j_s_kind(camp)

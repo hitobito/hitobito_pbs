@@ -21,7 +21,7 @@ describe Salutation do
   context '#label' do
     subject { salutation.label }
 
-    it { expect(subject).to eq('Sehr geehrte(r) Frau/Herr [Titel] [Nachname]') }
+    it { expect(subject).to eq('Sehr geehrte*r Frau*Herr [Titel] [Nachname]') }
   end
 
   context '#value' do
@@ -43,12 +43,12 @@ describe Salutation do
 
     context 'no gender' do
       before { person.gender = nil }
-      it { expect(subject).to eq('Sehr geehrte(r) Dr. Leiter') }
+      it { expect(subject).to eq('Sehr geehrte*r Dr. Leiter') }
     end
 
     context 'empty gender' do
       before { person.gender = '' }
-      it { expect(subject).to eq('Sehr geehrte(r) Dr. Leiter') }
+      it { expect(subject).to eq('Sehr geehrte*r Dr. Leiter') }
     end
 
     context 'without salutation' do
