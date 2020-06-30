@@ -93,8 +93,8 @@ de:
         other: Sekretariat
         description:
       group/bund/adressverwaltung:
-        one: Adressverwalter
-        other: Adressverwalter
+        one: Adressverwalter*in
+        other: Adressverwalter*innen
         description: Verwaltet die Adressen.
       group/bund/power_user:
         one: PowerUser
@@ -105,56 +105,56 @@ de:
         other: Assistenz Ausbildung
         description: Unterstützt bei Ausbildungen.
       group/bund/praesidium:
-        one: Präsident
-        other: Präsidenten
+        one: Präsident*in
+        other: Präsident*innen
         description:
       group/bund/vize_praesidium:
-        one: Vize Präsident
-        other: Vize Präsidenten
+        one: Vize Präsident*in
+        other: Vize Präsident*innen
         description:
       group/bund/praesidium_apv:
-        one: Präsident APV
-        other: Präsidenten APV
+        one: Präsident*in APV
+        other: Präsident*innen APV
         description:
       group/bund/geschaeftsleitung:
-        one: Geschäftsleiter
-        other: Geschäftsleiter
+        one: Geschäftsleiter*in
+        other: Geschäftsleiter*innen
         description:
       group/bund/mitarbeiter:
-        one: Mitarbeiter
-        other: Mitarbeiter
+        one: Mitarbeiter*in
+        other: Mitarbeiter*innen
         description:
       group/bund/vertretung_pbs:
-        one: Vertreter PBS
-        other: Vertreter PBS
+        one: Vertreter*in PBS
+        other: Vertreter*innen PBS
         description:
       group/bund/beisitz:
-        one: Beisitzer
-        other: Beisitzer
+        one: Beisitzer*in
+        other: Beisitzer*innen
         description:
       group/bund/kassier:
-        one: Kassier
-        other: Kassiere
+        one: Kassier*in
+        other: Kassier*innen
         description:
       group/bund/revisor:
-        one: Revisor
-        other: Revisoren
+        one: Revisor*in
+        other: Revisor*innen
         description:
       group/bund/redaktor:
-        one: Redaktor
-        other: Redaktoren
+        one: Redaktor*in
+        other: Redaktor*innen
         description:
       group/bund/webmaster:
         one: Webmaster
         other: Webmaster
         description:
       group/bund/mediensprecher:
-        one: Mediensprecher
-        other: Mediensprecher
+        one: Mediensprecher*in
+        other: Mediensprecher*innen
         description:
       group/bund/uebersetzer:
-        one: Übersetzer
-        other: Übersetzer
+        one: Übersetzer*in
+        other: Übersetzer*innen
         description:
       group/bund/mitglied_krisenteam:
         one: Mitglied Krisenteam
@@ -169,67 +169,67 @@ de:
         other: Grossanlass Coaches
         description:
       group/bund/leitungskursbetreuung:
-        one: Leiterkursbetreuer
-        other: Leiterkursbetreuer
+        one: Leiterkursbetreuer*in
+        other: Leiterkursbetreuer*innen
         description:
       group/bund/leitung_kernaufgabe_ausbildung:
-        one: Leitung Kernaufgabe Ausbildung
-        other: Leitung Kernaufgabe Ausbildung
+        one: Leiter*in Kernaufgabe Ausbildung
+        other: Leiter*innen Kernaufgabe Ausbildung
         description:
       group/bund/leitung_kernaufgabe_kommunikation:
-        one: Leitung Kernaufgabe Kommunikation
-        other: Leitung Kernaufgabe Kommunikation
+        one: Leiter*in Kernaufgabe Kommunikation
+        other: Leiter*innen Kernaufgabe Kommunikation
         description:
       group/bund/leitung_kernaufgabe_programm:
-        one: Leitung Kernaufgabe Programm
-        other: Leitung Kernaufgabe Programm
+        one: Leiter*in Kernaufgabe Programm
+        other: Leiter*innen Kernaufgabe Programm
         description:
       group/bund/leitung_kernaufgabe_support:
-        one: Leitung Kernaufgabe Support
-        other: Leitung Kernaufgabe Support
+        one: Leiter*in Kernaufgabe Support
+        other: Leiter*innen Kernaufgabe Support
         description:
       group/bund/verantwortung_biberstufe:
         one: Verantwortlicher Biberstufe
         other: Verantwortliche Biberstufe
         description:
       group/bund/verantwortung_wolfstufe:
-        one: Verantwortlicher Wolfstufe
+        one: Verantwortliche*r Wolfstufe
         other: Verantwortliche Wolfstufe
         description:
       group/bund/verantwortung_pfadistufe:
-        one: Verantwortlicher Pfadistufe
+        one: Verantwortliche*r Pfadistufe
         other: Verantwortliche Pfadistufe
         description:
       group/bund/verantwortung_piostufe:
-        one: Verantwortlicher Piostufe
+        one: Verantwortliche*r Piostufe
         other: Verantwortliche Piostufe
         description:
       group/bund/verantwortung_roverstufe:
-        one: Verantwortlicher Roverstufe
+        one: Verantwortliche*r Roverstufe
         other: Verantwortliche Roverstufe
         description:
       group/bund/verantwortung_pfadi_trotz_allem:
-        one: Verantwortlicher Pfadi Trotz Allem
+        one: Verantwortliche*r Pfadi Trotz Allem
         other: Verantwortliche Pfadi Trotz Allem
         description:
       group/bund/verantwortung_integration:
-        one: Verantwortlicher Integration
+        one: Verantwortliche*r Integration
         other: Verantwortliche Integration
         description:
       group/bund/verantwortung_krisenteam:
-        one: Verantwortlicher Krisenteam
+        one: Verantwortliche*r Krisenteam
         other: Verantwortliche Krisenteam
         description:
       group/bund/verantwortung_lagermeldung:
-        one: Verantwortlicher Lagermeldung
+        one: Verantwortliche*r Lagermeldung
         other: Verantwortliche Lagermeldung
         description:
       group/bund/verantwortung_pr:
-        one: Verantwortlicher PR
+        one: Verantwortliche*r PR
         other: Verantwortliche PR
         description:
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
-        one: Verantwortlicher Prävention
+        one: Verantwortliche*r Prävention
         other: Verantwortliche Prävention
         description:
       group/bund/international_commissioner_ic_wagggs:
