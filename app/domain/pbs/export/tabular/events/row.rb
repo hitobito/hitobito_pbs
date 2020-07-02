@@ -11,11 +11,16 @@ module Pbs::Export::Tabular::Events
 
     included do
       dynamic_attributes[/^advisor_/] = :contactable_attribute
+      alias_method_chain :leader, :pbs_restriction
     end
 
     def advisor
       # Only Event::Course provides restricted advisor role
       entry.try(:advisor)
+    end
+
+    def leader_with_pbs_restriction
+      @leader ||= entry.participations_for(Event::Camp::Role::Leader).first.try(:person)
     end
   end
 end
