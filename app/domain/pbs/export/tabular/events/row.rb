@@ -11,7 +11,7 @@ module Pbs::Export::Tabular::Events
 
     included do
       dynamic_attributes[/^advisor_/] = :contactable_attribute
-      alias_method_chain :leader, :pbs_restriction
+      alias_method_chain :leader, :camp
     end
 
     def advisor
@@ -19,8 +19,13 @@ module Pbs::Export::Tabular::Events
       entry.try(:advisor)
     end
 
-    def leader_with_pbs_restriction
-      @leader ||= entry.participations_for(Event::Camp::Role::Leader).first.try(:person)
+    def leader_with_camp
+      # for reasons unknowns (86f7c17) Event::Camp::Role::Leader kind is set to nil
+      if entry.is_a?(Event::Camp)
+        entry.participations_for(Event::Camp::Role::Leader).first.try(:person)
+      else
+        leader_without_camp
+      end
     end
   end
 end
