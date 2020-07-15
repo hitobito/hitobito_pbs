@@ -95,7 +95,9 @@ module HitobitoPbs
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### decorators
+      EventDecorator.icons['Event::Camp'] = :campground
       EventDecorator.send :include, Pbs::EventDecorator
+
       ContactableDecorator.send :include, Pbs::ContactableDecorator
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
       GroupDecorator.send :include, Pbs::GroupDecorator
