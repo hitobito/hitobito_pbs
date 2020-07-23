@@ -34,6 +34,7 @@ module Pbs::Export::Tabular::Events::List
   end
 
   def add_contact_labels_with_advisor(labels)
+    add_used_attribute_label(labels, :emergency_phone)
     add_contact_labels_without_advisor(labels)
     if attr_used?(:advisor_id)
       add_prefixed_contactable_labels(labels, :advisor)
