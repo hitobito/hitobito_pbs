@@ -9,20 +9,20 @@ module Pbs::PersonDecorator
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :filtered_roles, :visibility_check
-    alias_method_chain :roles_grouped, :visibility_check
-  end
 
-  private
-    def filtered_roles_with_visibility_check(group = nil)
+    def filtered_roles(group = nil)
       filtered_functions(visible_roles.to_a, :group, group)
     end
 
-    def roles_grouped_with_visibility_check
+    def roles_grouped
       visible_roles.each_with_object(Hash.new { |h, k| h[k] = [] }) do |role, memo|
         memo[role.group] << role
       end
     end
+
+  end
+
+  private
 
     def layer_group_ids
       @layer_group_ids ||= current_user.layer_group_ids
