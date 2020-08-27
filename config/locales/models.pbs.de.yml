@@ -213,8 +213,8 @@ de:
         other: Verantwortliche Pfadi Trotz Allem
         description:
       group/bund/verantwortung_integration:
-        one: Verantwortliche*r Integration
-        other: Verantwortliche Integration
+        one: Verantwortliche*r Diversität und Inklusion
+        other: Verantwortliche Diversität und Inklusion
         description:
       group/bund/verantwortung_krisenteam:
         one: Verantwortliche*r Krisenteam
@@ -382,8 +382,8 @@ de:
         other: Verantwortliche Betreuung
         description:
       group/kantonalverband/verantwortung_integration:
-        one: Verantwortliche*r Integration
-        other: Verantwortliche Integration
+        one: Verantwortliche*r Diversität und Inklusion
+        other: Verantwortliche Diversität und Inklusion
         description:
       group/kantonalverband/verantwortung_internationales:
         one: Verantwortliche*r Internationales
@@ -551,8 +551,8 @@ de:
         other: Verantwortliche Betreuung
         description:
       group/region/verantwortung_integration:
-        one: Verantwortliche*r Integration
-        other: Verantwortliche Integration
+        one: Verantwortliche*r Diversität und Inklusion
+        other: Verantwortliche Diversität und Inklusion
         description:
       group/region/verantwortung_internationales:
         one: Verantwortliche*r Internationales
