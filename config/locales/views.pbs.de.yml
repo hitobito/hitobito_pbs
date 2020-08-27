@@ -135,14 +135,14 @@ de:
     approvals:
       form:
         approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator*innen, Kursleiter*innen (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
-        placeholder_current_occupation: Momentane Tätigkeit des Teilnehmers/der Teilnehmerin
+        placeholder_current_occupation: Momentane Tätigkeit des*der Teilnehmer*in
         current_level: Stufe
         occupation_assessment: Wie bewährt er*sie sich dabei? z.B. Einsatz, Qualität des*der TN
         strong_points: Wo liegen seine*ihre Stärken?
         weak_points: Wo sollte man ihn*sie fördern?
         comment: Wünsche, Anregungen oder Bemerkungen an die Kursleitung
         title_approve: Empfehlung für %{participant} freigeben
-        title_reject: Empfehlung für %{participant} ablehen
+        title_reject: Empfehlung für %{participant} ablehnen
         title_update_approved: Freigabe für %{participant} aktualisieren
         title_update_rejected: Ablehnung für %{participant} aktualisieren
 
