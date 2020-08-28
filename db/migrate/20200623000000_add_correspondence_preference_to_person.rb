@@ -8,5 +8,6 @@
 class AddCorrespondencePreferenceToPerson < ActiveRecord::Migration[6.0]
   def change
     add_column :people, :prefers_digital_correspondence, :boolean, null: false, default: false
+    Person.reset_column_information
   end
 end
