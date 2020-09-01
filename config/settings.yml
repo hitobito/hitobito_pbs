@@ -49,3 +49,7 @@ email:
   camp:
     submit_recipient: lager@pbs.ch
     submit_abroad_recipient: auslandlager@pbs.ch
+
+
+people:
+  abos: false
