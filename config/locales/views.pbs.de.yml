@@ -243,6 +243,8 @@ de:
     canton_specific_help_text:
       zz_title: Beachte zusätzlich zum «Hering» die Broschüre «Auslandlager»
       zz_url: http://international.pbs.ch
+      lu_title: Beachte die Sonderregelung für Lager im Kanton Luzern («Hering» -> Kantonale Sonderregelungen)
+      lu_url: http://hering.scouts.ch
       ti_title: Beachte die Sonderregelung für Lager im Kanton Tessin («Hering» -> Sonderfälle der Lageranmeldung)
       ti_url: http://hering.scouts.ch
       sg_title: Beachte die Sonderregelung für Lager im Kanton St. Gallen («Hering» -> Sonderfälle der Lageranmeldung)
