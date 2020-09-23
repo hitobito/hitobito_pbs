@@ -44,15 +44,18 @@ class GroupHealthController < ApplicationController
   respond_to :json
 
   def people
-    respond(Person.joins(roles: :group)
-                .joins(GROUP_HEALTH_JOIN).distinct
-                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-                .as_json(only: PERSON_FIELDS)
-                .map { |item| set_name(item) })
+    Role.unscoped {
+      respond(Person.joins(roles: :group)
+                  .joins(GROUP_HEALTH_JOIN).distinct
+                  .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                  .as_json(only: PERSON_FIELDS)
+                  .map { |item| set_name(item) })
+    }
   end
 
   def roles
-    respond(Role.joins(:group)
+    respond(Role.with_deleted
+                .joins(:group)
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: ROLES_FIELDS))
