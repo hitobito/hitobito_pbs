@@ -6,5 +6,5 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module HitobitoPbs
-  VERSION = '1.22.3'.freeze
+  VERSION = '1.22.5'.freeze
 end
