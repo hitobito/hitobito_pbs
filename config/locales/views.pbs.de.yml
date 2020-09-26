@@ -181,15 +181,7 @@ de:
       submit_camp: Einreichen
       camp_submitted: Eingereicht
       camp_submitted_at: Eingereicht am
-    application_fields_pbs:
-      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
-      participants_can_apply_caption: Teilnehmende können sich selbst anmelden
-      participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
-      requires_approval_abteilung: Abteilung
-      requires_approval_region: Region
-      requires_approval_kantonalverband: Kantonalverband
-      requires_approval_bund: Bundesebene
-    application_fieldsmiddle_pbs:
+    application_middle_fields_pbs:
       paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
       participants_can_apply_caption: Teilnehmende können sich selbst anmelden
       participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
