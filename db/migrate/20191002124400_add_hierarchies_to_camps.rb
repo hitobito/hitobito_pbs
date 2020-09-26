@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddHierarchiesToCamps < ActiveRecord::Migration
+class AddHierarchiesToCamps < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :parent_id, :integer, null: true
     add_column :events, :allow_sub_camps, :boolean, null: false, default: false

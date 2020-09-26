@@ -31,21 +31,23 @@ describe Group::PendingApprovalsController do
     Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei),
                                                            group: groups(:be))
     sign_in(people(:bulei))
-    get :index, id: groups(:be).id
+    get :index, params: { id: groups(:be).id }
     expect(assigns(:pending_approvals)).to have(2).item
     expect(assigns(:pending_approvals).first).to eq @other_approval
   end
 
   it 'denies access to listing if not authorized' do
     sign_in(people(:bulei))
-    expect { get :index, id: groups(:be).id }.to raise_error CanCan::AccessDenied
+    expect { get :index, params: { id: groups(:be).id } }.to raise_error CanCan::AccessDenied
   end
 
   it 'updates application_approver_role to role with :approve_applications' do
     Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
     sign_in(people(:bulei))
-    patch :update_role, id: groups(:be).id,
-                        approver_role: Group::Kantonalverband::VerantwortungAusbildung.name
+    patch :update_role, params: {
+                          id: groups(:be).id,
+                          approver_role: Group::Kantonalverband::VerantwortungAusbildung.name
+                        }
     expect(groups(:be).reload.application_approver_role)
       .to eq(Group::Kantonalverband::VerantwortungAusbildung.name)
   end
@@ -53,7 +55,7 @@ describe Group::PendingApprovalsController do
   it 'updates application_approver_role to all roles if blank' do
     Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
     sign_in(people(:bulei))
-    patch :update_role, id: groups(:be).id, approver_role: '  '
+    patch :update_role, params: { id: groups(:be).id, approver_role: '  ' }
     expect(groups(:be).reload.application_approver_role).to eq(nil)
   end
 
@@ -96,7 +98,7 @@ describe Group::PendingApprovalsController do
     it 'lists approved approvals for layer newest at the top' do
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
       sign_in(people(:bulei))
-      get :index, id: groups(:be).id
+      get :index, params: { id: groups(:be).id }
       expect(assigns(:approved_approvals)).to have(2).item
       expect(assigns(:approved_approvals)).to include(@other_approved_approval)
       expect(assigns(:approved_course_kinds)).to eq([event_kinds(:lpk), event_kinds(:bkws)])
@@ -105,7 +107,7 @@ describe Group::PendingApprovalsController do
     it 'provides action get approved approvals filterable by course kind via xhr' do
       Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
       sign_in(people(:bulei))
-      xhr :get, :approved, id: groups(:be).id, course_kind_id: event_kinds(:lpk).id
+      get :approved, params: { id: groups(:be).id, course_kind_id: event_kinds(:lpk).id }, xhr: true
       expect(assigns(:approved_approvals)).to have(1).item
       expect(assigns(:approved_approvals).first).to eq @approved_approval
       expect(assigns(:approved_course_kinds)).to eq([event_kinds(:lpk), event_kinds(:bkws)])

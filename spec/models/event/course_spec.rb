@@ -59,7 +59,7 @@ describe Event::Course do
     end
 
     context 'with opening date in the past' do
-      before { subject.application_opening_at = Date.today - 1 }
+      before { subject.application_opening_at = Time.zone.now.to_date - 1 }
       it { is_expected.to be_application_possible }
 
       context 'in other state' do
@@ -69,22 +69,22 @@ describe Event::Course do
     end
 
     context 'with opening date today' do
-      before { subject.application_opening_at = Date.today }
+      before { subject.application_opening_at = Time.zone.now.to_date }
       it { is_expected.to be_application_possible }
     end
 
     context 'with opening date in the future' do
-      before { subject.application_opening_at = Date.today + 1 }
+      before { subject.application_opening_at = Time.zone.now.to_date + 1 }
       it { is_expected.not_to be_application_possible }
     end
 
     context 'with closing date in the past' do
-      before { subject.application_closing_at = Date.today - 1 }
+      before { subject.application_closing_at = Time.zone.now.to_date - 1 }
       it { is_expected.not_to be_application_possible }
     end
 
     context 'with closing date today' do
-      before { subject.application_closing_at = Date.today }
+      before { subject.application_closing_at = Time.zone.now.to_date }
       it { is_expected.to be_application_possible }
     end
 

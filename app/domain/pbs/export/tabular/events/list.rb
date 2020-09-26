@@ -24,9 +24,17 @@ module Pbs::Export::Tabular::Events::List
     add_used_attribute_label(labels, :language_fr)
     add_used_attribute_label(labels, :language_it)
     add_used_attribute_label(labels, :language_en)
+
+    add_used_attribute_label(labels, :j_s_kind)
+    add_used_attribute_label(labels, :canton)
+    add_used_attribute_label(labels, :camp_submitted)
+    add_used_attribute_label(labels, :camp_submitted_at)
+    add_used_attribute_label(labels, :total_expected_leading_participants)
+    add_used_attribute_label(labels, :total_expected_participants)
   end
 
   def add_contact_labels_with_advisor(labels)
+    add_used_attribute_label(labels, :emergency_phone)
     add_contact_labels_without_advisor(labels)
     if attr_used?(:advisor_id)
       add_prefixed_contactable_labels(labels, :advisor)

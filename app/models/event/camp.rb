@@ -103,7 +103,9 @@ class Event::Camp < Event
 
   self.used_attributes += [
     :state, :group_ids, :participants_can_apply, :participants_can_cancel,
-    :parent_id, :allow_sub_camps, :contact_attrs_passed_on_to_supercamp
+    :parent_id, :allow_sub_camps, :contact_attrs_passed_on_to_supercamp,
+    :j_s_kind, :canton, :camp_submitted, :camp_submitted_at,
+    :total_expected_leading_participants, :total_expected_participants
   ]
 
   self.used_attributes -= [:contact_id, :applications_cancelable]
@@ -211,7 +213,7 @@ class Event::Camp < Event
 
   def send_advisor_assignment_info(advisor_key)
     person = send(advisor_key)
-    if person &&
+    if person && person.email &&
        person != Person.stamper &&
        (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
       Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper).
@@ -220,7 +222,8 @@ class Event::Camp < Event
   end
 
   def state_changed_from_created?
-    state_changed? && (state_change.first == 'created' || state_change.first.nil?)
+    state_previously_changed? &&
+      (state_previous_change.first == 'created' || state_previous_change.first.nil?)
   end
 
   def advisor_changed_except_in_created?(advisor_key)
@@ -248,9 +251,9 @@ class Event::Camp < Event
 
   def layer_leaders
     layer_group = groups.first.layer_group
-    Person.joins(:roles, :groups)
-          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name] },
-                 groups: { id: layer_group.id })
+    Person.joins(:roles)
+          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name],
+                          group_id: layer_group.id })
   end
 
   def layer_leader_roles
@@ -263,9 +266,21 @@ class Event::Camp < Event
   end
 
   def may_become_sub_camp
-    if super_camp.present? && (!super_camp.allow_sub_camps || super_camp.state != 'created')
-      errors.add(:parent_id, :invalid)
+    if super_camp.present?
+      if is_ancestor_of(super_camp.id) || !super_camp.allow_sub_camps ||
+         super_camp.state != 'created' || !super_camp.upcoming
+        errors.add(:parent_id, :invalid)
+      end
+    else
+      unless Event::Camp.find(parent_id_was).state == 'created'
+        errors.add(:base, :cannot_remove_parent_id)
+        self.parent_id = parent_id_was
+      end
     end
+  end
+
+  def is_ancestor_of(camp_id)
+    self.self_and_descendants.pluck(:id).include?(camp_id)
   end
 
   def assert_contact_attrs_passed_on_to_supercamp_valid

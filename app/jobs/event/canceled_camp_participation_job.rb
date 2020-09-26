@@ -35,7 +35,7 @@ class Event::CanceledCampParticipationJob < BaseJob
       joins(event_participations: :roles).
       where(event_participations: { active: true }).
       where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
-      uniq.
+      distinct.
       includes(:additional_emails)
   end
 

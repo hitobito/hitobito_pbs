@@ -280,6 +280,14 @@ describe Event::Camp do
                       advisor_snow_security_id: nil)
     end
 
+    it 'is not sent if freshly assigned does not have email set' do
+      people(:al_schekka).update(email: nil)
+      expect(Event::CampMailer).not_to receive(:advisor_assigned)
+      subject.update!(location: 'Bern',
+                      coach_id: people(:al_schekka).id,
+                      advisor_snow_security_id: nil)
+    end
+
     %w(coach advisor_mountain_security advisor_snow_security advisor_water_security).each do |key|
       context "mail for #{key}" do
         it 'is sent' do
@@ -287,7 +295,7 @@ describe Event::Camp do
           mail = double('mail', deliver_later: nil)
 
           person = Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person
-          person.update_attribute(:first_name, key)
+          person.update(first_name: key)
           expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, person, key, nil)
                                                                  .and_return(mail)
           subject.send("#{key}_id=", person.id)
@@ -437,6 +445,16 @@ describe Event::Camp do
         end
 
       end
+
+      it "is sent only once" do
+        group = Fabricate(Group::Abteilung.name)
+        leader = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: group).person
+        Role.create(group: group, person: leader, type: Group::Abteilung::Adressverwaltung.sti_name)
+        subject.update!(groups: [group])
+        mail = double('mail', deliver_later: nil)
+        expect(Event::CampMailer).to receive(:camp_created).with(subject, leader, nil).and_return(mail).once
+        subject.update!(location: 'Bern', state: 'confirmed')
+      end
     end
 
   end
@@ -492,7 +510,7 @@ describe Event::Camp do
       subject.save!
 
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |c|
-        subject.update_attribute(c, true)
+        subject.update(c => true)
       end
 
       subject.leader_id = people(:al_schekka).id
@@ -512,7 +530,7 @@ describe Event::Camp do
     subject { events(:schekka_camp) }
 
     it 'is not valid if camp_submitted and required value missing' do
-      update_attributes(subject)
+      updates(subject)
       required_attrs_for_camp_application.each do |a, v|
         subject.reload
         subject.camp_submitted_at = Time.zone.now.to_date - 1.day
@@ -524,13 +542,13 @@ describe Event::Camp do
     end
 
     it 'is valid if camp_submitted and all required values are present' do
-      update_attributes(subject)
+      updates(subject)
       subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
 
     it 'is valid if camp_submitted and all required values are present, without advisor security' do
-      update_attributes(subject, false)
+      updates(subject, false)
       subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
@@ -564,7 +582,7 @@ describe Event::Camp do
       }
     end
 
-    def update_attributes(camp, with_advisor_security = true)
+    def updates(camp, with_advisor_security = true)
       required_attrs_for_camp_application.each do |a, v|
         unless !with_advisor_security && advisor_security_attributes.include?(a)
           attrs = {}
@@ -614,22 +632,22 @@ describe Event::Camp do
       let(:sub_camp) { events(:schekka_camp) }
 
       it 'may only be attached to a super-camp that allows it' do
-        super_camp.update_attribute(:allow_sub_camps, false)
+        super_camp.update(allow_sub_camps: false)
         sub_camp.parent_id = super_camp.id
 
         expect(sub_camp).to_not be_valid
       end
 
       it 'may only be attached to a super-camp in created state' do
-        super_camp.update_attribute(:state, 'confirmed')
+        super_camp.update(state: 'confirmed')
         sub_camp.parent_id = super_camp.id
 
         expect(sub_camp).to_not be_valid
       end
 
       it 'may be detached from a super-camp at any time' do
-        sub_camp.update_attribute(:parent_id, super_camp.id)
-        super_camp.update_attributes(state: 'confirmed', allow_sub_camps: false)
+        sub_camp.update(parent_id: super_camp.id)
+        super_camp.update(state: 'confirmed', allow_sub_camps: false)
         sub_camp.parent_id = nil
 
         expect(sub_camp).to be_valid
@@ -638,7 +656,7 @@ describe Event::Camp do
     end
 
     context 'allowed to have sub_camps' do
-      before { subject.update_attribute(:allow_sub_camps, true) }
+      before { subject.update(allow_sub_camps: true) }
 
       it 'can have sub_camps' do
         expect do
@@ -656,7 +674,7 @@ describe Event::Camp do
     end
 
     context 'not allowed to have sub_camps' do
-      before { subject.update_attribute(:allow_sub_camps, false) }
+      before { subject.update(allow_sub_camps: false) }
 
       it 'is invalid if sub_camps are added' do
         sub_camp = events(:schekka_camp)
@@ -681,7 +699,7 @@ describe Event::Camp do
 
     context 'having sub_camps' do
       before do
-        subject.update_attribute(:allow_sub_camps, true)
+        subject.update(allow_sub_camps: true)
         subject.sub_camps << events(:schekka_camp)
       end
 

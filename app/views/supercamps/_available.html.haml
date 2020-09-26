@@ -12,8 +12,7 @@
                      options: @supercamps_on_group_and_above, prefix: :above
 
         = field_set_tag t('.search_for_supercamp'), id: :supercamp_search do
-          = form_tag group_query_supercamps_path, method: :get, remote: true do
-            = hidden_field :selected_supercamp, :id
+          = form_tag group_query_supercamps_path(camp_id: @camp_id), method: :get, remote: true do
             = text_field :selected_supercamp, :q, name: :q
             .btn-group
               = button_tag t('.search'), class: 'btn btn-secondary'

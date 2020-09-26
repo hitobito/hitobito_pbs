@@ -85,5 +85,21 @@ Rails.application.routes.draw do
 
   end
 
+  namespace :group_health, defaults: {format: :json} do
+    get :people
+    get :roles
+    get :groups
+    get :courses
+    get :camps
+    get :participations
+    get :qualifications
+    get :qualification_kinds
+    get :event_kinds
+    get :role_types
+    get :group_types
+    get :participation_types
+    get :j_s_kinds
+    get :camp_states
+  end
 
 end

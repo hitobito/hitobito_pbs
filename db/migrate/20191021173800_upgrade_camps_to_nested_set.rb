@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class UpgradeCampsToNestedSet < ActiveRecord::Migration
+class UpgradeCampsToNestedSet < ActiveRecord::Migration[4.2]
   def change
     nested_set_class = Event
 

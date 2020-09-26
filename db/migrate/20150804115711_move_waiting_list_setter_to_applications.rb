@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class MoveWaitingListSetterToApplications < ActiveRecord::Migration
+class MoveWaitingListSetterToApplications < ActiveRecord::Migration[4.2]
   def up
     remove_column(:event_participations, :waiting_list_setter_id)
     add_column(:event_applications, :waiting_list_setter_id, :integer)

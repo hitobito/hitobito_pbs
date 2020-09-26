@@ -49,11 +49,11 @@ describe Event::ApplicationsController do
   end
 
   def approve
-    put :approve, group_id: group.id, event_id: course.id, id: application.id
+    put :approve, params: { group_id: group.id, event_id: course.id, id: application.id }
   end
 
   def reject
-    delete :reject, group_id: group.id, event_id: course.id, id: application.id
+    delete :reject, params: { group_id: group.id, event_id: course.id, id: application.id }
   end
 
 end

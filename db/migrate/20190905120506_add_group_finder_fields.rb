@@ -1,4 +1,4 @@
-class AddGroupFinderFields < ActiveRecord::Migration
+class AddGroupFinderFields < ActiveRecord::Migration[4.2]
   def up
     add_column :groups, :gender, :string, limit: 1
     add_column :groups, :try_out_day_at, :date

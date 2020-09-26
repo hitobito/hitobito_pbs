@@ -44,14 +44,18 @@ class Group::Abteilung < Group
   GENDERS = %w(m w).freeze
 
   GEOLOCATION_COUNT_LIMIT = 4
+  GEOLOCATION_SWITZERLAND_NORTH_LIMIT = 47.811263
+  GEOLOCATION_SWITZERLAND_SOUTH_LIMIT = 45.811958
+  GEOLOCATION_SWITZERLAND_EAST_LIMIT = 10.523665
+  GEOLOCATION_SWITZERLAND_WEST_LIMIT = 5.922318
 
   CONTENT_GROUPFINDER_FIELDS_INFO = 'groupfinder_fields_info'.freeze
 
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:pta, :vkp, :pbs_material_insurance, :gender, :try_out_day_at,
-                           :geolocations]
+  self.used_attributes += [:pta, :vkp, :group_health, :pbs_material_insurance, :gender,
+                           :try_out_day_at, :geolocations]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,
@@ -73,6 +77,15 @@ class Group::Abteilung < Group
   # Can't use validates :geolocations, length: { ... } because it counts in the
   # nested records that are #marked_for_destruction?
   validate :assert_geolocation_count
+  validate do
+    is_valid = geolocations.all? do |geolocation|
+      GEOLOCATION_SWITZERLAND_SOUTH_LIMIT < geolocation.lat.to_f \
+      && geolocation.lat.to_f < GEOLOCATION_SWITZERLAND_NORTH_LIMIT \
+      && GEOLOCATION_SWITZERLAND_WEST_LIMIT < geolocation.long.to_f \
+      && geolocation.long.to_f < GEOLOCATION_SWITZERLAND_EAST_LIMIT
+    end
+    errors.add(:base, :geo_not_in_switzerland) if !is_valid
+  end
 
   include I18nEnums
   i18n_enum :gender, GENDERS
@@ -128,6 +141,7 @@ class Group::Abteilung < Group
   class Adressverwaltung < ::Role
     self.permissions = [:group_and_below_full]
   end
+  class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
     self.permissions = [:group_read]
@@ -168,6 +182,10 @@ class Group::Abteilung < Group
   end
 
   class PraesidiumApv < ::Role
+    self.permissions = [:group_read]
+  end
+
+  class PraesidiumElternrat < ::Role
     self.permissions = [:group_read]
   end
 
@@ -235,9 +253,11 @@ class Group::Abteilung < Group
         AbteilungsleitungStv,
         Sekretariat,
         Adressverwaltung,
+        PowerUser,
         Praesidium,
         VizePraesidium,
         PraesidiumApv,
+        PraesidiumElternrat,
         Praeses,
         Beisitz,
         Materialwart,

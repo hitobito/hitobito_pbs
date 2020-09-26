@@ -10,7 +10,6 @@ module Pbs::Event::ParticipationsController
 
   included do
     before_render_show :load_approvals
-    before_render_show :course_confirmation_url, if: -> { entry.event.course_kind? }
     before_render_form :inform_about_email_sent_to_participant
 
     after_action :send_discarded_info, only: [:cancel, :reject]
@@ -34,13 +33,6 @@ module Pbs::Event::ParticipationsController
                  where(application_id: entry.application_id).
                  includes(:approver).
                  order_by_layer
-  end
-
-  def course_confirmation_url
-    @course_confirmation_url = sprintf(Settings.application.course_confirmation_url,
-                                       course_kind_confirmation_name:
-                                         entry.event.kind.confirmation_name,
-                                       locale: I18n.locale.to_s)
   end
 
   def send_confirmation_email_with_current_user

@@ -1,4 +1,4 @@
-class AdaptOldMemberCountsToRegionalDisplay < ActiveRecord::Migration
+class AdaptOldMemberCountsToRegionalDisplay < ActiveRecord::Migration[4.2]
   def change
     say_with_time "Updating Regions of Member-Counts" do
       MemberCount.find_each do |mc|

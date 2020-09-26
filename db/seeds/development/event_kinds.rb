@@ -30,7 +30,7 @@ QualificationKind::Translation.seed(:qualification_kind_id, :locale,
 
   {qualification_kind_id: quali_kinds[2].id,
    locale: 'de',
-   label: 'J+S Leiter LS/T Jungendsport'},
+   label: 'J+S Leiter LS/T Jugendsport'},
 
   {qualification_kind_id: quali_kinds[3].id,
    locale: 'de',

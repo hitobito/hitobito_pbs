@@ -28,7 +28,7 @@ module Pbs::Event::ApplicationMarketController
 
   def put_on_waiting_list_with_setter
     application.update!(waiting_list: true,
-                        waiting_list_comment: params[:event_application][:waiting_list_comment],
+                        waiting_list_comment: params.dig(:event_application, :waiting_list_comment),
                         waiting_list_setter: current_user)
 
     render 'waiting_list'

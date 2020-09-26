@@ -23,7 +23,7 @@ describe Event::Course::ConfirmationMailer do
     subject { mail.body }
 
     it 'renders placeholders' do
-      is_expected.to match(/Liebe\(r\) Torben/)
+      is_expected.to match(/Liebe\*r Torben/)
       is_expected.to match(/Für den bestandenen Kurs "Top Course" kann jetzt hier eine Bestätigung/)
       is_expected.to match(Regexp.new("/groups/#{participation.event.groups.first.id}" +
                                         "/events/#{participation.event.id}" +

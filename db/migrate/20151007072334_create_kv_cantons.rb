@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class CreateKvCantons < ActiveRecord::Migration
+class CreateKvCantons < ActiveRecord::Migration[4.2]
   def change
     create_table :kantonalverband_cantons do |t|
       t.integer :kantonalverband_id, null: false

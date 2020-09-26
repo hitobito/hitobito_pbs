@@ -17,4 +17,10 @@ module Pbs::Event
     !camp_submitted_at.nil?
   end
   alias :camp_submitted :camp_submitted?
+
+  def upcoming
+    dates.any? do |date|
+      date.start_at.to_date.future? || (date.finish_at && date.finish_at.to_date.future?)
+    end
+  end
 end

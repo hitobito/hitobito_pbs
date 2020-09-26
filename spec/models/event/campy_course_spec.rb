@@ -58,6 +58,14 @@ describe Event::Course do
       subject.expected_participants_pio_m = 42
       is_expected.to be_valid
     end
+
+    it 'responds to total_expected_participants' do
+      is_expected.to respond_to :total_expected_participants
+    end
+
+    it 'responds to total_expected_leading_participants' do
+      is_expected.to respond_to :total_expected_leading_participants
+    end
   end
 
   context '#j_s_kind' do
@@ -133,7 +141,7 @@ describe Event::Course do
       subject.save!
 
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |c|
-        subject.update_attribute(c, true)
+        subject.update(c => true)
       end
 
       subject.leader_id = people(:al_schekka).id
@@ -151,7 +159,7 @@ describe Event::Course do
   context 'camp application' do
 
     it 'is not valid if camp_submitted and required value missing' do
-      update_attributes(subject)
+      updates(subject)
       required_attrs_for_camp_application.each do |a, v|
         subject.reload
         subject.camp_submitted_at = Time.zone.now.to_date - 1.day
@@ -163,13 +171,13 @@ describe Event::Course do
     end
 
     it 'is valid if camp_submitted and all required values are present' do
-      update_attributes(subject)
+      updates(subject)
       subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
 
     it 'is valid if camp_submitted and all required values are present, without advisor security' do
-      update_attributes(subject, false)
+      updates(subject, false)
       subject.camp_submitted_at = Time.zone.now.to_date - 1.day
       expect(subject).to be_valid
     end
@@ -203,7 +211,7 @@ describe Event::Course do
       }
     end
 
-    def update_attributes(camp, with_advisor_security = true)
+    def updates(camp, with_advisor_security = true)
       required_attrs_for_camp_application.each do |a, v|
         unless !with_advisor_security && advisor_security_attributes.include?(a)
           attrs = {}

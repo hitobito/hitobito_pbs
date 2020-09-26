@@ -16,7 +16,7 @@ describe EventsPbsHelper do
     subject { events(:schekka_camp) }
 
     it 'returns true if at least one value present' do
-      subject.update_attributes(expected_participants_pio_f: 3)
+      subject.update(expected_participants_pio_f: 3)
       expect(expected_participants_value_present?(subject)).to be true
     end
 
@@ -83,20 +83,20 @@ describe EventsPbsHelper do
   context '#camp_visiting_info' do
 
     subject { events(:schekka_camp) }
-    before { subject.update_attribute(:al_visiting, true) }
+    before { subject.update(al_visiting: true) }
 
     it 'shows value without date if date missing' do
       expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager')
     end
 
     it 'shows date if date present' do
-      subject.update_attribute(:al_visiting_date, Date.parse('15.05.2011'))
+      subject.update(al_visiting_date: Date.parse('15.05.2011'))
       expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager am 15.05.2011')
     end
 
     it 'shows no date if al not visiting' do
-      subject.update_attribute(:al_visiting, false)
-      subject.update_attribute(:al_visiting_date, Date.parse('15.05.2011'))
+      subject.update(al_visiting: false)
+      subject.update(al_visiting_date: Date.parse('15.05.2011'))
       expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq('Besucht das Lager nicht')
     end
 
@@ -107,13 +107,13 @@ describe EventsPbsHelper do
 
     it 'returns canton full name' do
       camp = events(:schekka_camp)
-      camp.update_attribute(:canton, 'so')
+      camp.update(canton: 'so')
       expect(format_event_canton(camp)).to eq 'Solothurn'
     end
 
     it 'returns ausland' do
       camp = events(:schekka_camp)
-      camp.update_attribute(:canton, Event::Camp::ABROAD_CANTON)
+      camp.update(canton: Event::Camp::ABROAD_CANTON)
       expect(format_event_canton(camp)).to eq 'Ausland'
     end
 

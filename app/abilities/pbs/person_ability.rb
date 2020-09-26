@@ -20,7 +20,7 @@ module Pbs::PersonAbility
     end
 
     def member_of_crisis_group
-      contains_any?(user.crises.active.collect { |c| c.group.layer_group_id },
+      contains_any?(user.layer_ids_with_active_crises,
                     subject.groups.flat_map { |g| g.layer_hierarchy.collect(&:id) })
     end
 

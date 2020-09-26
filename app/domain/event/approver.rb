@@ -106,7 +106,7 @@ class Event::Approver
       where(roles: { group_id: groups.collect(&:id),
                      type: role_types.collect(&:sti_name),
                      deleted_at: nil }).
-      uniq
+      distinct
   end
 
   def approver_role_types_of(layer_type)

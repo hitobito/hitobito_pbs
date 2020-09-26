@@ -20,6 +20,11 @@ class Geolocation < ActiveRecord::Base
 
   belongs_to :geolocatable, polymorphic: true
 
+  validates :lat, numericality: { greater_than_or_equal_to:  -90,
+    less_than_or_equal_to:  90 }, format: { with: /\A\d+\.\d{1,6}\z/ }
+  validates :long, numericality: { greater_than_or_equal_to:  -180,
+    less_than_or_equal_to:  180 }, format: { with: /\A\d+\.\d{1,6}\z/ }
+
   validates_by_schema
 
   def to_s

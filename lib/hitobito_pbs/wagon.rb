@@ -22,15 +22,17 @@ module HitobitoPbs
     config.to_prepare do # rubocop:disable Metrics/BlockLength
 
       ### models
-      Group.send        :include, Pbs::Group
-      Person.send       :include, Pbs::Person
-      Role.send         :include, Pbs::Role
-      Event.send        :include, Pbs::Event
-      Event::Kind.send  :include, Pbs::Event::Kind
+      Group.send         :include, Pbs::Group
+      Person.send        :include, Pbs::Person
+      Role.send          :include, Pbs::Role
+      Qualification.send :include, Pbs::Qualification
+      Event.send         :include, Pbs::Event
+      Event::Kind.send   :include, Pbs::Event::Kind
       Event::Course.send :include, Pbs::Event::Course
       Event::Participation.send :include, Pbs::Event::Participation
       Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
       Event::Application.send :include, Pbs::Event::Application
+      ServiceToken.send :include, Pbs::ServiceToken
 
       Event.acts_as_nested_set(dependent: :nullify)
 
@@ -42,6 +44,7 @@ module HitobitoPbs
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
       Event::Filter.send :include, Pbs::Event::Filter
+      Event::Qualifier.send :include, Pbs::Event::Qualifier
       Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.send(
@@ -63,6 +66,15 @@ module HitobitoPbs
         :include, Pbs::Export::Tabular::People::PeopleFull
       )
       Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
+      Export::PeopleExportJob.send(
+       :include, Pbs::Export::PeopleExportJob
+      )
+      Export::EventParticipationsExportJob.send(
+        :include, Pbs::Export::EventParticipationsExportJob
+      )
+      Export::SubscriptionsJob.send(
+        :include, Pbs::Export::SubscriptionsJob
+      )
 
       ### abilities
       Ability.store.register Event::ApprovalAbility
@@ -79,26 +91,32 @@ module HitobitoPbs
       Event::ParticipationAbility.send :include, Pbs::Event::Constraints
       Event::RoleAbility.send :include, Pbs::Event::Constraints
       QualificationAbility.send :include, Pbs::QualificationAbility
+      TokenAbility.send :include, Pbs::TokenAbility
       VariousAbility.send :include, Pbs::VariousAbility
 
       ### decorators
+      EventDecorator.icons['Event::Camp'] = :campground
       EventDecorator.send :include, Pbs::EventDecorator
+
       ContactableDecorator.send :include, Pbs::ContactableDecorator
       Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
       GroupDecorator.send :include, Pbs::GroupDecorator
+      ServiceTokenDecorator.kinds += [:group_health]
 
       ### serializers
       PersonSerializer.send :include, Pbs::PersonSerializer
       GroupSerializer.send  :include, Pbs::GroupSerializer
       EventSerializer.send :include, Pbs::EventSerializer
+      EventParticipationSerializer.send :include, Pbs::EventParticipationSerializer
 
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
-                                           :brother_and_sisters]
+                                           :prefers_digital_correspondence, :brother_and_sisters]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
                                                  :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
+      ServiceTokensController.permitted_attrs += [:group_health]
 
       RolesController.send :include, Pbs::RolesController
       GroupsController.send :include, Pbs::GroupsController
@@ -110,6 +128,7 @@ module HitobitoPbs
       Event::QualificationsController.send :include, Pbs::Event::QualificationsController
       QualificationsController.send :include, Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
+      SubscriptionsController.send :include, Pbs::SubscriptionsController
 
       ### sheets
       Sheet::Group.send :include, Pbs::Sheet::Group
@@ -135,6 +154,7 @@ module HitobitoPbs
       NavigationHelper::MAIN.insert(
         i + 1,
         label: :camps,
+        icon_name: :campground,
         url: :list_camps_path,
         active_for: %w(list_all_camps
                        list_camps_abroad

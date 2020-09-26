@@ -85,7 +85,7 @@ describe Event::ParticipationMailer do
       subject { mail.parts.first.body }
 
       it 'contains the name with a salutation' do
-        is_expected.to match(/Liebe\(r\) Torben/)
+        is_expected.to match(/Liebe\*r Torben/)
       end
 
     end
@@ -138,7 +138,7 @@ describe Event::ParticipationMailer do
       subject { mail.body }
 
       it 'contains the name with a salutation' do
-        is_expected.to match(/Liebe\(r\) Torben/)
+        is_expected.to match(/Liebe\*r Torben/)
       end
 
     end

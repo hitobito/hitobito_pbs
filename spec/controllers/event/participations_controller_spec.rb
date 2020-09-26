@@ -23,9 +23,11 @@ describe Event::ParticipationsController do
       it "works for #{kind}" do
         instance = send(kind)
         get :show,
-            group_id: group.id,
-            event_id: instance.id,
-            id: instance.participations.first.id
+            params: {
+              group_id: group.id,
+              event_id: instance.id,
+              id: instance.participations.first.id
+            }
         expect(response).to have_http_status(:ok)
       end
     end
@@ -34,9 +36,11 @@ describe Event::ParticipationsController do
   context 'GET#new' do
     it 'informs about email sent to participant' do
       get :new,
-          group_id: group.id,
-          event_id: course.id,
-          event_participation: { person_id: people(:child).id }
+          params: {
+            group_id: group.id,
+            event_id: course.id,
+            event_participation: { person_id: people(:child).id }
+          }
       expect(flash[:notice]).to be_present
     end
   end
@@ -47,9 +51,11 @@ describe Event::ParticipationsController do
     it 'creates confirmation job when creating for other user' do
       expect do
         post :create,
-             group_id: group.id,
-             event_id: course.id,
-             event_participation: { person_id: people(:child).id }
+             params: {
+               group_id: group.id,
+               event_id: course.id,
+               event_participation: { person_id: people(:child).id }
+             }
         expect(participation).to be_valid
       end.to change { Delayed::Job.count }.by(1)
       expect(flash[:notice]).not_to include 'Für die definitive Anmeldung musst du diese Seite über <i>Drucken</i> ausdrucken, '
@@ -57,7 +63,7 @@ describe Event::ParticipationsController do
 
     it 'creates participation for camp' do
       camp = Fabricate(:pbs_camp, paper_application_required: true)
-      post :create, group_id: group.id, event_id: camp.id, event_participation: {}
+      post :create, params: {group_id: group.id, event_id: camp.id, event_participation: {}}
 
       participation = assigns(:participation)
       expect(participation).to be_valid
@@ -74,10 +80,12 @@ describe Event::ParticipationsController do
     it 'cancels participation' do
       expect do
         post :cancel,
-             group_id: group.id,
-             event_id: course.id,
-             id: participation.id,
-             event_participation: { canceled_at: Date.today }
+             params: {
+               group_id: group.id,
+               event_id: course.id,
+               id: participation.id,
+               event_participation: { canceled_at: Date.today }
+             }
       end.to change { Delayed::Job.count }.by(1)
       expect(flash[:notice]).to be_present
       participation.reload
@@ -92,10 +100,12 @@ describe Event::ParticipationsController do
       participation.update!(state: 'canceled', canceled_at: Date.today)
       expect do
         post :cancel,
-             group_id: group.id,
-             event_id: course.id,
-             id: participation.id,
-             event_participation: { canceled_at: Date.today }
+             params: {
+               group_id: group.id,
+               event_id: course.id,
+               id: participation.id,
+               event_participation: { canceled_at: Date.today }
+             }
       end.to change { Delayed::Job.count }.by(0)
     end
 
@@ -110,16 +120,18 @@ describe Event::ParticipationsController do
     it 'rejects participation with mailto link if email present' do
       expect do
         post :reject,
-             group_id: group.id,
-             event_id: course.id,
-             id: participation.id
+             params: {
+               group_id: group.id,
+               event_id: course.id,
+               id: participation.id
+             }
       end.to change { Delayed::Job.count }.by(1)
       participation.reload
       expect(participation.state).to eq 'rejected'
       expect(participation.active).to eq false
       expect(Delayed::Job.last.payload_object.instance_variable_get('@previous_state'))
         .to eq('assigned')
-      expect(flash[:notice]).to include 'Teilnehmer informieren'
+      expect(flash[:notice]).to include 'Teilnehmer*in informieren'
       expect(flash[:notice]).to include "mailto:#{participation.person.email}"
       expect(flash[:notice]).to include 'cc=bulei%40hitobito.example.com'
     end
@@ -127,9 +139,11 @@ describe Event::ParticipationsController do
     it 'rejects participation without mailto link if email missing' do
       participation.person.update(email: nil)
       post :reject,
-           group_id: group.id,
-           event_id: course.id,
-           id: participation.id
+           params: {
+             group_id: group.id,
+             event_id: course.id,
+             id: participation.id
+           }
       expect(flash[:notice]).to be_present
       expect(flash[:notice]).not_to include 'Teilnehmer informieren'
       participation.reload
@@ -141,9 +155,11 @@ describe Event::ParticipationsController do
       participation.update!(state: 'rejected')
       expect do
         post :reject,
-             group_id: group.id,
-             event_id: course.id,
-             id: participation.id
+             params: {
+               group_id: group.id,
+               event_id: course.id,
+               id: participation.id
+             }
       end.to change { Delayed::Job.count }.by(0)
     end
   end
@@ -156,10 +172,12 @@ describe Event::ParticipationsController do
 
       it 'updates state' do
         put :update,
-            group_id: group.id,
-            event_id: course.id,
-            id: participation.id,
-            event_participation: { state: 'absent' }
+            params: {
+              group_id: group.id,
+              event_id: course.id,
+              id: participation.id,
+              event_participation: { state: 'absent' }
+            }
         expect(flash[:notice]).to be_present
         participation.reload
         expect(participation.state).to eq 'absent'
@@ -170,10 +188,12 @@ describe Event::ParticipationsController do
       it 'does not update state' do
         state = participation.state
         put :update,
-            group_id: group.id,
-            event_id: course.id,
-            id: participation.id,
-            event_participation: { state: 'cancelled' }
+            params: {
+              group_id: group.id,
+              event_id: course.id,
+              id: participation.id,
+              event_participation: { state: 'cancelled' }
+            }
         expect(flash[:notice]).to be_present
         participation.reload
         expect(participation.state).to eq state
@@ -190,9 +210,11 @@ describe Event::ParticipationsController do
 
       expect do
         put :cancel_own,
-            group_id: camp.groups.first.id,
-            event_id: camp.id,
-            id: participation.id
+            params: {
+              group_id: camp.groups.first.id,
+              event_id: camp.id,
+              id: participation.id
+            }
       end.to change { Delayed::Job.count }.by(1)
 
       expect(flash[:notice]).to be_present

@@ -22,7 +22,7 @@ describe Export::Tabular::People::PeopleFull do
      :ahv_number, :j_s_number, :salutation, :title, :grade_of_school,
      :entry_date, :leaving_date, :correspondence_language,
      :brother_and_sisters, :kantonalverband_id,
-     :pbs_number, :layer_group,
+     :pbs_number, :prefers_digital_correspondence, :layer_group,
      :roles, :tags, :id, :layer_group_id]
   end
 

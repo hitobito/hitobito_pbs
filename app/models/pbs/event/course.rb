@@ -19,7 +19,9 @@ module Pbs::Event::Course
     self.used_attributes += [:advisor_id, :express_fee, :bsv_days, :has_confirmations] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
-    self.used_attributes -= [:requires_approval]
+    self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,
+                             :camp_submitted_at, :total_expected_leading_participants,
+                             :total_expected_participants]
 
     self.superior_attributes = [:express_fee, :training_days]
 
@@ -49,6 +51,17 @@ module Pbs::Event::Course
     application_open? &&
     (!application_opening_at || application_opening_at <= ::Time.zone.today) &&
     (!application_closing_at || application_closing_at >= ::Time.zone.today)
+  end
+
+  module ClassMethods
+    def campy_kind?(kind_id)
+      now = Time.zone.now.to_i
+      if (now - @campy_ids_updated_at.to_i) > 15
+        @campy_ids = Event::Kind.where(campy: true).pluck(:id)
+        @campy_ids_updated_at = now
+      end
+      @campy_ids.include?(kind_id)
+    end
   end
 
   private
@@ -87,8 +100,7 @@ module Pbs::Event::Course
     if association(:kind).loaded?
       kind && kind.campy?
     else
-      # use custom query to not interfere with eager loading kinds.
-      Event::Kind.where(id: kind_id, campy: true).exists?
+      self.class.campy_kind?(kind_id)
     end
   end
 

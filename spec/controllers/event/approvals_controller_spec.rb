@@ -85,15 +85,15 @@ describe Event::ApprovalsController do
     end
 
     it 'lists grouped approvals' do
-      get :index, group_id: group.id, event_id: course.id
+      get :index, params: { group_id: group.id, event_id: course.id }
 
       list = [@p1, @p2, @p3].sort_by { |p| p.person.last_name }
 
       expect(assigns(:approvals).keys).to eq(list)
 
-      expect(assigns(:approvals)[@p1]).to eq([@a11, @a12, @a13])
-      expect(assigns(:approvals)[@p2]).to eq([@a21, @a22])
-      expect(assigns(:approvals)[@p3]).to eq([@a31, @a32])
+      expect(assigns(:approvals)[@p1]).to match_array([@a11, @a12, @a13])
+      expect(assigns(:approvals)[@p2]).to match_array([@a21, @a22])
+      expect(assigns(:approvals)[@p3]).to match_array([@a31, @a32])
     end
 
     def create_approval(participation, layer, approved)
@@ -139,7 +139,7 @@ describe Event::ApprovalsController do
 
       it 'redirects to participation if no approval exists' do
         application.approvals.destroy_all
-        get :new, group_id: group.id, event_id: course.id, participation_id: participation.id
+        get :new, params: { group_id: group.id, event_id: course.id, participation_id: participation.id }
         expect(response).to redirect_to [group, course, participation]
       end
 
@@ -160,11 +160,11 @@ describe Event::ApprovalsController do
     end
 
     def new_approve
-      get :new, group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :approve
+      get :new, params: { group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :approve }
     end
 
     def new_reject
-      get :new, group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :reject
+      get :new, params: { group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :reject }
     end
 
   end
@@ -218,15 +218,17 @@ describe Event::ApprovalsController do
       context 'approve with invalid fields' do
         it 'renders form again if fields are blank' do
           post :create,
-               group_id: group.id,
-               event_id: course.id,
-               participation_id: participation.id,
-               decision: 'approve',
-               event_approval: {
-                 comment: nil,
-                 current_occupation: 'chief',
-                 current_level: '',
-                 occupation_assessment: '  '
+               params: {
+                 group_id: group.id,
+                 event_id: course.id,
+                 participation_id: participation.id,
+                 decision: 'approve',
+                 event_approval: {
+                   comment: nil,
+                   current_occupation: 'chief',
+                   current_level: '',
+                   occupation_assessment: '  '
+                 }
                }
 
           is_expected.to render_template('new')
@@ -259,33 +261,37 @@ describe Event::ApprovalsController do
 
     def approve
       post :create,
-           group_id: group.id,
-           event_id: course.id,
-           participation_id: participation.id,
-           decision: 'approve',
-           event_approval: {
-             comment: 'test',
-             current_occupation: 'chief',
-             current_level: 'junior',
-             occupation_assessment: 'good',
-             strong_points: 'strong',
-             weak_points: 'weak'
+           params: {
+             group_id: group.id,
+             event_id: course.id,
+             participation_id: participation.id,
+             decision: 'approve',
+             event_approval: {
+               comment: 'test',
+               current_occupation: 'chief',
+               current_level: 'junior',
+               occupation_assessment: 'good',
+               strong_points: 'strong',
+               weak_points: 'weak'
+             }
            }
     end
 
     def reject
       post :create,
-           group_id: group.id,
-           event_id: course.id,
-           participation_id: participation.id,
-           decision: 'reject',
-           event_approval: {
-             comment: 'test',
-             current_occupation: 'chief',
-             current_level: 'junior',
-             occupation_assessment: 'good',
-             strong_points: 'strong',
-             weak_points: 'weak'
+           params: {
+             group_id: group.id,
+             event_id: course.id,
+             participation_id: participation.id,
+             decision: 'reject',
+             event_approval: {
+               comment: 'test',
+               current_occupation: 'chief',
+               current_level: 'junior',
+               occupation_assessment: 'good',
+               strong_points: 'strong',
+               weak_points: 'weak'
+             }
            }
     end
 
@@ -327,7 +333,7 @@ describe Event::ApprovalsController do
     end
 
     def edit_approval
-      get :edit, group_id: group.id, event_id: course.id, participation_id: participation.id, id: approval.id
+      get :edit, params: { group_id: group.id, event_id: course.id, participation_id: participation.id, id: approval.id }
     end
 
     def approve_application!

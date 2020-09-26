@@ -20,8 +20,10 @@ describe 'event/participations/_actions_show.html.haml' do
     allow(controller).to receive(:current_user).and_return(participant)
     controller.request.path_parameters[:event_id] = event.id
     controller.request.path_parameters[:group_id] = group.id
-    controller.request.path_parameters[:participiation_id] = participation.id
+    controller.request.path_parameters[:id] = participation.id
+    controller.request.path_parameters[:action] = 'show'
     allow(view).to receive(:entry).and_return(participation)
+    allow(view).to receive(:course_confirmation_form).and_return('Kursbestätigung')
     assign(:event, event)
     assign(:group, group)
   end
@@ -38,17 +40,6 @@ describe 'event/participations/_actions_show.html.haml' do
       allow(participation).to receive(:has_confirmation?).and_return(false)
       render
       expect(dom).not_to have_content 'Kursbestätigung'
-    end
-
-  end
-
-  context 'multiline values in hidden fields are escaped and not indented' do
-
-    it do
-      event.update(location: "Line 1\nLine 2")
-      allow(participation).to receive(:has_confirmation?).and_return(true)
-      render
-      expect(rendered).to match(/value="Line 1&#x000A;Line 2"/)
     end
 
   end

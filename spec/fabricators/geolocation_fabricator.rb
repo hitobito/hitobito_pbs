@@ -17,6 +17,6 @@
 #
 
 Fabricator(:geolocation) do
-  lat   { Faker::Number.number(7) }
-  long  { Faker::Number.number(7) }
+  lat   { (46.0 + 1.5 * rand).round(3).to_s }
+  long  { (6.0 + 4 * rand).round(3).to_s }
 end

@@ -30,7 +30,7 @@ describe Event::QualificationsController, type: :controller do
 
         course.update!(advisor_id: advisor.id)
 
-        get :index, group_id: course.groups.first.id, event_id: course.id
+        get :index, params: { group_id: course.groups.first.id, event_id: course.id }
 
         expect(page).to have_selector('input[type=checkbox]')
       end

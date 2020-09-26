@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddWaitingListSetterToEventParticipations < ActiveRecord::Migration
+class AddWaitingListSetterToEventParticipations < ActiveRecord::Migration[4.2]
 
   def change
     add_column(:event_participations, :waiting_list_setter_id, :integer)

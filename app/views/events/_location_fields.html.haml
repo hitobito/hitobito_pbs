@@ -14,6 +14,14 @@
                             { include_blank: true },
                              class: 'chosen-select',
                              data: { placeholder: ' ' })
+    .canton-specific-help-texts
+      - @canton_specific_help_texts.each do |help_text|
+        - if help_text[:title].present?
+          .help-block{id: help_text[:id], style: 'clear: both'}
+            - if help_text[:url].blank?
+              = help_text[:title]
+            - else
+              %a{href: help_text[:url], target: '_blank'}= help_text[:title]
   = f.labeled_input_fields(:coordinates, help_inline: t('.coordinates_help'))
   = f.labeled_input_field(:altitude)
   = f.labeled_input_field(:emergency_phone, label: t('.emergency_phone_field'))

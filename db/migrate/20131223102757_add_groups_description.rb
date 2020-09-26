@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddGroupsDescription < ActiveRecord::Migration
+class AddGroupsDescription < ActiveRecord::Migration[4.2]
   def change
     unless column_exists?(:groups, :description)
       add_column(:groups, :description, :text)

@@ -1,4 +1,4 @@
-class ResetMissingKantonalverband < ActiveRecord::Migration
+class ResetMissingKantonalverband < ActiveRecord::Migration[4.2]
   def change
     # due to callback-issues, many kantonalverband-ids were not set
     say_with_time 'Infering the Kantonalverband from the primary group' do

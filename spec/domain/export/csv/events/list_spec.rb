@@ -137,6 +137,58 @@ describe Export::Tabular::Events::List do
     end
   end
 
+  context 'camps' do
+    let(:test_camp) { events(:schekka_camp).dup }
+    let(:camps) { Event::Camp.all }
+    let(:list)  { Export::Tabular::Events::List.new(camps) }
+    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
+
+    before do
+      test_camp.update!(
+        **required_attrs_for_camp_submit,
+        camp_submitted_at: Time.zone.now.to_date
+      )
+    end
+
+    context 'headers' do
+      subject { csv.first }
+      it {
+        is_expected.to eq <<-CSV_HEADERS.chomp
+Name;Organisatoren;Beschreibung;Lagerstatus;Ort / Adresse;Datum 1 Bezeichnung;Datum 1 Ort;Datum 1 Zeitraum;Datum 2 Bezeichnung;Datum 2 Ort;Datum 2 Zeitraum;Datum 3 Bezeichnung;Datum 3 Ort;Datum 3 Zeitraum;Notfallnummer;Kontaktperson Name;Kontaktperson Adresse;Kontaktperson PLZ;Kontaktperson Ort;Kontaktperson Haupt-E-Mail;Kontaktperson Telefonnummern;Hauptleitung Name;Hauptleitung Adresse;Hauptleitung PLZ;Hauptleitung Ort;Hauptleitung Haupt-E-Mail;Hauptleitung Telefonnummern;Motto;Kosten;Anmeldebeginn;Anmeldeschluss;Maximale Teilnehmerzahl;Externe Anmeldungen;J+S-Rahmen;Kanton / Land;Eingereicht;Eingereicht am;Leitungsteam erwartet;Teilnehmende erwartet;Anzahl Leitungsteam;Anzahl Teilnehmende;Anzahl Anmeldungen
+        CSV_HEADERS
+      }
+    end
+
+    context 'body' do
+      let(:regular_camp_row) { csv.second.split(';') }
+      let(:test_camp_row) { csv.last.split(';') }
+
+      it 'shows camp j+s kind and canton' do
+        expect(regular_camp_row[-9]).to eq ''
+        expect(test_camp_row[-9]).to eq 'j_s_child'
+
+        expect(regular_camp_row[-8]).to eq ''
+        expect(test_camp_row[-8]).to eq 'be'
+      end
+
+      it 'shows camp submission status and date' do
+        expect(regular_camp_row[-7]).to eq 'nein'
+        expect(test_camp_row[-7]).to eq 'ja'
+
+        expect(regular_camp_row[-6]).to eq ''
+        expect(test_camp_row[-6]).to eq I18n.l(test_camp.camp_submitted_at)
+      end
+
+      it 'shows total expected (leading) participants' do
+        expect(regular_camp_row[-5]).to eq '0'
+        expect(test_camp_row[-5]).to eq '1'
+
+        expect(regular_camp_row[-4]).to eq '0'
+        expect(test_camp_row[-4]).to eq '3'
+      end
+    end
+  end
+
   context 'for simple events' do
     let(:courses) { Event.where(id: event) }
     let(:event) { Fabricate(:event, groups: [groups(:be)], location: 'somewhere') }
@@ -148,6 +200,28 @@ describe Export::Tabular::Events::List do
       it { is_expected.not_to match(/LKB/) }
       it { is_expected.not_to match(/Kurssprache/) }
     end
+  end
+
+  def required_attrs_for_camp_submit
+    {
+      canton: 'be',
+      location: 'foo',
+      coordinates: '42',
+      altitude: '1001',
+      emergency_phone: '080011',
+      landlord: 'georg',
+      coach_confirmed: true,
+      lagerreglement_applied: true,
+      kantonalverband_rules_applied: true,
+      j_s_kind: :j_s_child,
+      j_s_rules_applied: true,
+      expected_participants_leitung_f: 1,
+      expected_participants_pio_f: 3,
+      coach_id: Fabricate(:person).id,
+      leader_id: Fabricate(:person).id,
+      dates: [Fabricate(:event_date, start_at: Time.zone.now, finish_at: Time.zone.now)],
+      groups: [groups(:schekka)]
+    }
   end
 
 end

@@ -29,8 +29,8 @@ fr:
         other: Commissions
         long: Commission fédérale
       group/elternrat:
-        one: Conseil des parents
-        other: Conseils des parents
+        one: Comité des parents
+        other: Conseil des parents
       group/gremium:
         one: Commission
         other: Commissions
@@ -45,8 +45,8 @@ fr:
         other: Commissions
         long: Commission cantonale
       group/pfadi:
-        one: Eclaireur
-        other: Eclaireurs
+        one: Eclaireur·reuse
+        other: Eclaireurs·reuses
       group/pio:
         one: Pico
         other: Picos
@@ -71,8 +71,8 @@ fr:
         one: Louveteau
         other: Louveteaux
       group/bund/mitarbeiter_gs:
-        one: Collaborateur du SG
-        other: Collaborateur du SG
+        one: Collaborateur·trice du SG
+        other: Collaborateur·trice du SG
       group/bund/it_support:
         one: Support informatique
         other: Support informatique
@@ -80,43 +80,46 @@ fr:
         one: secrétariat
         other: secrétariat
       group/bund/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateur/-trice des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateur·trice des adresses
         description: Administre les adresses.
+      group/bund/power_user:
+        one: PowerUser
+        other: PowerUser
       group/bund/assistenz_ausbildung:
         one: Assistance formation
         other: Assistance formation
         description: Soutien pour la formation
       group/bund/praesidium:
-        one: Président
-        other: Présidents
+        one: Président·e
+        other: Président·e·s
       group/bund/vize_praesidium:
-        one: Vice-président
-        other: Vice-présidents
+        one: Vice-président·e
+        other: Vice-président·e·s
       group/bund/praesidium_apv:
-        one: Président de l'AdA
-        other: Présidents de l'AdA
+        one: Président·e de l'AdA
+        other: Président·e·s de l'AdA
       group/bund/geschaeftsleitung:
-        one: Secrétaire général
-        other: Secrétaire général
+        one: Secrétaire·trice général
+        other: Secrétaire·trice général
       group/bund/mitarbeiter:
-        one: collaborateur
-        other: collaborateur
+        one: collaborateur·trice
+        other: collaborateurs·trices
       group/bund/vertretung_pbs:
-        one: Représentant du MSdS
-        other: Représentant du MSdS
+        one: Représentant·e du MSdS
+        other: Représentant·e·s du MSdS
       group/bund/beisitz:
-        one: assesseur
-        other: assesseur
+        one: assesseur·euse
+        other: assesseurs·euses
       group/bund/kassier:
-        one: Trésorier
-        other: Trésoriers
+        one: Trésorier·ère
+        other: Trésoriers·ères
       group/bund/revisor:
-        one: Réviseur aux comptes
-        other: Réviseurs aux comptes
+        one: Réviseur·euse aux comptes
+        other: Réviseurs·euses aux comptes
       group/bund/redaktor:
-        one: Rédacteur
-        other: Rédacteurs
+        one: Rédacteur·trice
+        other: Rédacteurs·trices
       group/bund/webmaster:
         one: Webmaster
         other: Webmaster
@@ -124,8 +127,8 @@ fr:
         one: porte-parole
         other: porte-parole
       group/bund/uebersetzer:
-        one: traducteur
-        other: traducteur
+        one: traducteur·trice
+        other: traducteurs·trices
       group/bund/mitglied_krisenteam:
         one: Responsable cellule de crise
         other: Responsables cellule de crise
@@ -136,8 +139,8 @@ fr:
         one: Coach grandes manifestations
         other: Coaches grandes manifestations
       group/bund/leitungskursbetreuung:
-        one: conseiller à la formation
-        other: conseiller à la formation
+        one: conseiller·ère à la formation
+        other: conseillers·ères à la formation
       group/bund/leitung_kernaufgabe_ausbildung:
         one: Responsable tâche essentielle formation
         other: Responsable tâche essentielle formation
@@ -171,6 +174,9 @@ fr:
       group/bund/verantwortung_integration:
         one: Responsable intégration
         other: Responsables intégration
+      group/bund/verantwortung_krisenteam:
+        one: Responsable de l'équipe de crise
+        other: Responsable de l'équipe de crise
       group/bund/verantwortung_lagermeldung:
         one: Responsable annonces de camp
         other: Responsables annonce de camp
@@ -199,8 +205,8 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/bund/passivmitglied:
-        one: Membre passif
-        other: Membres passif
+        one: Membre passif·ve
+        other: Membres passif·ve
       group/bund/kontaktperson:
         one: Personne de contact
         other: Personnes de contact
@@ -208,38 +214,41 @@ fr:
         one: Membre
         other: Membres
       group/kantonalverband/kantonsleitung:
-        one: Responsable cantonal
-        other: Responsables cantonal
+        one: Responsable cantonal·e
+        other: Responsables cantonaux·ales
       group/kantonalverband/sekretariat:
         one: secrétariat
         other: secrétariats
       group/kantonalverband/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
+      group/kantonalverband/power_user:
+        one: PowerUser
+        other: PowerUser
       group/kantonalverband/praesidium:
-        one: Président
-        other: Présidents
+        one: Président·e
+        other: Président·e·s
       group/kantonalverband/vize_praesidium:
-        one: Vice-président
-        other: Vice-présidents
+        one: Vice-président·e
+        other: Vice-président·e·s
       group/kantonalverband/praesidium_apv:
-        one: Président de l'AdA
-        other: Présidents de l'AdA
+        one: Président·e de l'AdA
+        other: Président·e·s de l'AdA
       group/kantonalverband/mitarbeiter:
-        one: Collaborateur
-        other: Collaborateurs
+        one: Collaborateur·trice
+        other: Collaborateurs·trices
       group/kantonalverband/beisitz:
-        one: Assesseur
-        other: Assesseurs
+        one: Assesseur·euse
+        other: Assesseurs·euses
       group/kantonalverband/kassier:
-        one: Trésorier
-        other: Trésoriers
+        one: Trésorier·ère
+        other: Trésoriers·ères
       group/kantonalverband/revisor:
-        one: Réviseur aux comptes
-        other: Réviseurs aux comptes
+        one: Réviseur·euse aux comptes
+        other: Réviseurs·euses aux comptes
       group/kantonalverband/redaktor:
-        one: Rédacteur
-        other: Rédacteurs
+        one: Rédacteur·trice
+        other: Rédacteurs·trices
       group/kantonalverband/webmaster:
         one: Webmaster
         other: Webmaster
@@ -247,8 +256,8 @@ fr:
         one: Porte-parole
         other: Porte-paroles
       group/kantonalverband/uebersetzer:
-        one: Traducteur
-        other: Traducteurs
+        one: Traducteur·trice
+        other: Traducteurs·trices
       group/kantonalverband/mitglied_krisenteam:
         one: Membre cellule de crise
         other: Membres cellule de crise
@@ -256,8 +265,8 @@ fr:
         one: Coach
         other: Coaches
       group/kantonalverband/leitungskursbetreuung:
-        one: Conseiller à la formation
-        other: Conseillers à la formation
+        one: Conseiller·ère à la formation
+        other: Conseillers·ères à la formation
       group/kantonalverband/verantwortung_biberstufe:
         one: Responsable branche Castors
         other: Responsables branche Castors
@@ -328,44 +337,47 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/kantonalverband/passivmitglied:
-        one: Membre passif
-        other: Membres passifs
+        one: Membre passif·ve
+        other: Membres passifs·ves
       group/region/regionalleitung:
-        one: Responsable régional
-        other: Responsables régional
+        one: Responsable régional·e
+        other: Responsables régional·aux
       group/region/sekretariat:
         one: Secrétariat
         other: Secrétariats
       group/region/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
+      group/region/power_user:
+        one: PowerUser
+        other: PowerUser
       group/region/praesidium:
-        one: Président
-        other: Présidents
+        one: Président·e
+        other: Président·e·s
       group/region/vize_praesidium:
-        one: Vice-président
-        other: Vice-présidents
+        one: Vice-président·e
+        other: Vice-président·e·s
       group/region/praesidium_apv:
-        one: Président de l'AdA
-        other: Présidents de l'AdA
+        one: Président·e de l'AdA
+        other: Président·e·s de l'AdA
       group/region/praeses:
-        one: Aumônier
-        other: Aumôniers
+        one: Aumônier·euse
+        other: Aumôniers·euses
       group/region/mitarbeiter:
-        one: Collaborateur
-        other: Collaborateurs
+        one: Collaborateur·trice
+        other: Collaborateurs·trices
       group/region/beisitz:
-        one: Assesseur
-        other: Assesseurs
+        one: Assesseur·euse
+        other: Assesseurs·euses
       group/region/kassier:
-        one: Trésorier
-        other: Trésoriers
+        one: Trésorier·ère
+        other: Trésoriers·ères
       group/region/revisor:
-        one: Réviseur aux comptes
-        other: Réviseurs aux comptes
+        one: Réviseur·euse aux comptes
+        other: Réviseurs·euses aux comptes
       group/region/redaktor:
-        one: Rédacteur
-        other: Rédacteurs
+        one: Rédacteur·trice
+        other: Rédacteurs·trices
       group/region/webmaster:
         one: Webmaster
         other: Webmaster
@@ -379,8 +391,8 @@ fr:
         one: Coach
         other: Coaches
       group/region/leitungskursbetreuung:
-        one: Conseiller à la formation
-        other: Conseillers à la formation
+        one: Conseiller·ère à la formation
+        other: Conseillers·ères à la formation
       group/region/verantwortung_biberstufe:
         one: Responsable branche Castors
         other: Responsables branche Castors
@@ -448,8 +460,8 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/region/passivmitglied:
-        one: Membre passif
-        other: Membres passifs
+        one: Membre passif·ve
+        other: Membres passifs·ves
       group/abteilung/abteilungsleitung:
         one: Responsable de groupe
         other: Responsables de groupe
@@ -460,29 +472,32 @@ fr:
         one: Secrétariat
         other: Secrétariats
       group/abteilung/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
+      group/abteilung/power_user:
+        one: PowerUser
+        other: PowerUser
       group/abteilung/praesidium:
-        one: Président
-        other: Présidents
+        one: Président·e
+        other: Président·e·s
       group/abteilung/vize_praesidium:
-        one: Vice-président
-        other: Vice-présidents
+        one: Vice-président·e
+        other: Vice-président·e·s
       group/abteilung/praesidium_apv:
-        one: Président de l'AdA
-        other: Présidents de l'AdA
+        one: Président·e de l'AdA
+        other: Président·e·s de l'AdA
       group/abteilung/praeses:
-        one: Aumônier
-        other: Aumôniers
+        one: Aumônier·euse
+        other: Aumôniers·euses
       group/abteilung/beisitz:
-        one: Assesseur
-        other: Assesseurs
+        one: Assesseur·euse
+        other: Assesseurs·euses
       group/abteilung/materialwart:
-        one: Responsables du matériel
+        one: Responsable du matériel
         other: Responsables du matériel
       group/abteilung/heimverwaltung:
-        one: Administrateur à domicile
-        other: Administrateurs à domicile
+        one: Administrateur·trice à domicile
+        other: Administrateurs·trices à domicile
       group/abteilung/stufenleitung_biber:
         one: Responsable de branche Castors
         other: Responsables de branche Castors
@@ -502,14 +517,14 @@ fr:
         one: Responsable de branche SMT
         other: Responsables de branche SMT
       group/abteilung/kassier:
-        one: Trésorier
-        other: Trésoriers
+        one: Trésorier·ère
+        other: Trésoriers·ères
       group/abteilung/revisor:
-        one: Réviseur aux comptes
-        other: Réviseurs aux comptes
+        one: Réviseur·euse aux comptes
+        other: Réviseurs·euses aux comptes
       group/abteilung/redaktor:
-        one: Rédacteur
-        other: Rédacteurs
+        one: Rédacteur·trice
+        other: Rédacteurs·trices
       group/abteilung/webmaster:
         one: Webmaster
         other: Webmaster
@@ -532,17 +547,17 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/abteilung/passivmitglied:
-        one: Membre passif
-        other: Membres passifs
+        one: Membre passif·ve
+        other: Membres passifs·ves
       group/biber/einheitsleitung:
         one: Responsable d'unité
         other: Responsables d'unité
       group/biber/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·e
       group/biber/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/biber/biber:
         one: Castor
         other: Castor
@@ -551,15 +566,15 @@ fr:
         one: Responsable d'unité
         other: Responsables d'unité
       group/woelfe/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·e
       group/woelfe/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/woelfe/leitwolf:
-        one: Sizenier/Sizenière
-        other: Sizenier/Sizenière
-        long: Sizenier/Sizenière
+        one: Sizenier·ière
+        other: Sizeniers·ières
+        long: Sizenier·ière
       group/woelfe/wolf:
         one: Louveteau
         other: Louveteaux
@@ -568,11 +583,11 @@ fr:
         one: Responsables d'unité
         other: Responsables d'unité
       group/pfadi/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·e
       group/pfadi/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/pfadi/leitpfadi:
         one: Responsable de patrouille
         other: Responsables de patrouille
@@ -585,11 +600,11 @@ fr:
         one: Responsable d'unité
         other: Responsables d'unité
       group/pio/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·es
       group/pio/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/pio/pio:
         one: Pico
         other: Picos
@@ -598,11 +613,11 @@ fr:
         one: Responsable d'unité
         other: Responsables d'unité
       group/rover/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·es
       group/rover/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/rover/rover:
         one: Routier
         other: Routiers
@@ -611,17 +626,17 @@ fr:
         one: Responsable d'unité
         other: Responsables d'unité
       group/pta/mitleitung:
-        one: Responsable adjoint
-        other: Responsables adjoint
+        one: Responsable adjoint·e
+        other: Responsables adjoint·es
       group/pta/adressverwaltung:
-        one: Administrateur/-trice des adresses
-        other: Administrateurs/-trices des adresses
+        one: Administrateur·trice des adresses
+        other: Administrateurs·trices des adresses
       group/pta/mitglied:
         one: Membre
         other: Membres
       group/elternrat/praesidium:
-        one: Président
-        other: Présidents
+        one: Président·e
+        other: Président·e·s
       group/elternrat/mitglied:
         one: Membre
         other: Membres
@@ -650,8 +665,8 @@ fr:
         one: Cuisine / Aide
         other: Cuisine / Aide
       event/camp/role/participant:
-        one: Participant/-e
-        other: Participant/-es
+        one: Participant·e
+        other: Participant·e·s
       event/camp/role/leader_mountain_security:
         one: Responsable activité de sécurité Montagne
         other: Responsables activité de sécurité Montagne
@@ -680,14 +695,17 @@ fr:
         one: Chef de cours
         other: Chefs de cours
       event/course/role/class_leader:
-        one: Formateur
+        one: Formateur·trice
         other: Chef de classe
       event/course/role/helper:
-        one: Assistant de cours
-        other: Assistants de cours
+        one: Assistant·e de cours
+        other: Assistant·e·s de cours
       event/course/role/advisor:
         one: CAF
         other: CAFs
+      black_list:
+        one: Liste noir
+        other: Liste noir
       census:
         one: période couverte par l'annonce des effectifs
         other: Périodes couvertes par une annonce des effectifs
@@ -702,29 +720,29 @@ fr:
             other: Bonjour %{greeting_name}
         available:
           lieber_pfadiname:
-            label: Cher/Chère [totem]
+            label: Cher·Chère [totem]
             value:
               m: Cher %{nickname}
               w: Chère %{nickname}
-              other: Cher/Chère %{nickname}
+              other: Cher·Chère %{nickname}
           lieber_vorname:
-            label: Cher/Chère [prénom]
+            label: Cher·Chère [prénom]
             value:
               m: Cher %{first_name}
               w: Chère  %{first_name}
-              other: Cher/Chère %{first_name}
+              other: Cher·Chère %{first_name}
           lieber_titel_nachname:
-            label: Chère Madame/Cher Monsieur [Titel] [Nachname]
+            label: Chère Madame · Cher Monsieur [Titel] [Nachname]
             value:
               m: Cher Monsieur %{title_last_name}
               w: Chère Madame %{title_last_name}
-              other: Cher/Chère %{title_last_name)
+              other: Cher·Chère %{title_last_name)
           sehr_geehrter_titel_nachname:
-            label: Chère Madame / Cher Monsieur [Titel] [Nachname]
+            label: Chère Madame · Cher Monsieur [Titel] [Nachname]
             value:
               m: Cher Monsieur %{title_last_name}
               w: Chère Madame %{title_last_name}
-              other: Cher/Chère %{title_last_name}
+              other: Cher·Chère %{title_last_name}
     attributes:
       cantons:
         zz: International
@@ -732,10 +750,12 @@ fr:
         bsv_days: nombre de jours OFAS
         camp_days: Nombre de jours de camp
         camp_submitted: Démission
-        camp_submitted_at: Déposée le
+        camp_submitted_at: 'Soumis le '
+        total_expected_leading_participants: Maîtrise attendue
+        total_expected_participants: Participant·e·s attendu·e·s
         course_languages: Langues de cours
         express_fee: Finances express
-        expected_participants: Participants/-es attendus/-ues
+        expected_participants: Nombre attendu de participant·e·s
         expected_participants_wolf: Louveteau
         expected_participants_wolf_f: Nombre de louveteaux filles
         expected_participants_wolf_m: Nombre de louveteaux garçons
@@ -748,7 +768,7 @@ fr:
         expected_participants_rover: Routier
         expected_participants_rover_f: Nombre de routiers filles
         expected_participants_rover_m: Nombre de routiers garçons
-        expected_participants_leitung: Responsable
+        expected_participants_leitung: Responsables
         expected_participants_leitung_f: Nombre de responsables fille
         expected_participants_leitung_m: Nombre de responsables garçons
         language_de: Langue de cours allemand
@@ -764,7 +784,7 @@ fr:
         coordinates: Coordonnées
         altitude: Altitude par rapport au niveau de la mer
         emergency_phone: Numéro en cas d'urgence
-        landlord: Propriétaire / loueur/-euse
+        landlord: Propriétaire / loueur·euse
         landlord_permission_obtained: Autorisation du / de la propriétaire
         paper_application_required: Inscription papier obligatoire
         participants_can_apply: Inscription obligatoire
@@ -777,7 +797,7 @@ fr:
         local_scout_contact_present: Contact scout local
         local_scout_contact: Informations de contact des scouts locaux
         updated_at: Actualisé pour la dernière fois
-        any_expected_participant_attr: Participants/-es attendus/-ues
+        any_expected_participant_attr: Participant·e·s attendu·e·s
         abteilungsleitung_id: maîtrise de groupe
         abteilungsleitung: maîtrise de groupe
         leader: maîtrise de camp
@@ -808,7 +828,7 @@ fr:
         states:
           created: Créé
           confirmed: Confirmé
-          assignment_closed: Participants saisis
+          assignment_closed: Participant·e·s saisis
           canceled: Annulé
           closed: Clôturé
         participation_states:
@@ -820,6 +840,10 @@ fr:
         coach: Coach
         advisor_unassigned: Attribué à personne
         leader_unassigned: Pas de responsables saisis
+        allow_sub_camps: Permettre des sous-camps
+        super_camp: Camp principal
+      event/contact_attrs:
+        pass_on_to_supercamp: Transmettre au sous-camp
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
         advisor: CAF
@@ -831,8 +855,12 @@ fr:
       event/kind:
         documents_text: Formulaire supplémentaire
         campy: Inscrire un cours en tant que camp
+        can_have_confirmations: Activer l'export des confirmations de cours
+        confirmation_name: Nom du type du cours dans l'outil pour l'export
       event/participation:
         bsv_days: Jours OFAS
+      event/question:
+        pass_on_to_supercamp: Transmettre au camp principal
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem
@@ -856,9 +884,25 @@ fr:
         pbs_shortname: Abréviation MSdS
         bank_account: Référence bancaire  / postale
         cantons: Cantons
+      group/abteilung:
+        gender: Sexe
+        genders:
+          _nil: Mixte
+          m: Hommes
+          w: Femmes
+        try_out_day_at: Journée découverte
+        geolocations: Lieux de rendez-vous
       people_relation:
         kinds:
           sibling: fratrie
+      black_list:
+        first_name: Prénom
+        last_name: Nom de famille
+        pbs_number: ID-MSdS
+        email: Adresse e-mail
+        phone_number: Numéro de téléphone
+        reference_name: Nom de référence
+        reference_phone_number: Numéro de téléphone de référence
       census:
         year: Année
         start_at: A partir de
@@ -889,6 +933,10 @@ fr:
         dates: Dates
         created_at: Du
         deleted_at: Au
+        class:
+          permission:
+            description:
+              crisis_trigger: Déclencher et confirmer des crises
       qualification_kind:
         manual: Entrer manuellement
       label_format:
@@ -897,9 +945,24 @@ fr:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
       models:
+        event:
+          attributes:
+            base:
+              contact_attr_passed_on_to_supercamp_hidden: "%{attribute} doit soit être affiché ou ne pas être transmis au camp principal"
+        event/camp:
+          attributes:
+            base:
+              cannot_remove_parent_id: "Le camp supérieur ne peut plus être quitté, vu qu'il n'apparaît plus dans le statut \"créé\""
         role:
           attributes:
             created_at:
               on_or_before: Doit être antérieur à la date du jour.
             deleted_at:
               after: Doit être ultérieur à la date de début.
+        crisis:
+          another_active: Une autre crise est déjà activée sur ce groupe
+        group/abteilung:
+          attributes:
+            base:
+              geo_not_in_switzerland: Ces coordonnées ne sont pas situées en Suisse.
+          too_many_geolocations: ne peuvent pas être plus de %{max}

@@ -11,7 +11,7 @@ describe Export::Pdf::CampApplicationData do
 
   describe 'section group' do
     context 'abteilung' do
-      
+
       it 'returns Abteilung name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
@@ -19,7 +19,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.abteilung_name).to eq(abteilung.to_s)
       end
-      
+
       it 'returns Abteilung name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
@@ -27,7 +27,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.abteilung_name).to eq(groups(:schekka).to_s)
       end
-      
+
       it 'returns Group name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
@@ -47,7 +47,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.einheit_name).to be_nil
       end
-      
+
       it 'returns Einheit name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
@@ -74,7 +74,7 @@ describe Export::Pdf::CampApplicationData do
 
         expect(data.kantonalverband).to be_nil
       end
-      
+
       it 'returns Kantonalverband if camp at Kantonalverband' do
         canton = groups(:be)
         camp = Fabricate(:pbs_camp, groups: [canton])
@@ -99,28 +99,28 @@ describe Export::Pdf::CampApplicationData do
 
       it 'has 6 header columns' do
         header_column = data.expected_participant_table_header
-        expect(header_column).to eq ['', 'Wolf', 'Pfadi', 'Pio', 'Rover', 'Leiter']
+        expect(header_column).to eq ['', 'Wolf', 'Pfadi', 'Pio', 'Rover', 'Leitende']
       end
 
       it 'includes rows with expected participants count' do
-        camp.update_attributes(
+        camp.update(
           expected_participants_wolf_f: 1,
           expected_participants_pfadi_f: 42,
           expected_participants_pio_f: 33,
           expected_participants_rover_f: 3,
           expected_participants_leitung_f: 99
-        ) 
+        )
 
         row_f = data.expected_participant_table_row(:f)
         expect(row_f).to eq ['F', 1, 42, 33, 3, 99]
 
-        camp.update_attributes(
+        camp.update(
           expected_participants_wolf_m: 3,
           expected_participants_pfadi_m: 4,
           expected_participants_pio_m: 9,
           expected_participants_rover_m: 12,
-          expected_participants_leitung_m: 9 
-        ) 
+          expected_participants_leitung_m: 9
+        )
 
         row_m = data.expected_participant_table_row(:m)
         expect(row_m).to eq ['M', 3, 4, 9, 12, 9]
@@ -158,59 +158,59 @@ describe Export::Pdf::CampApplicationData do
 
       context 'coach' do
         it 'prints no if coach not visiting' do
-          camp.update_attribute(:coach_visiting_date, Date.parse('15.07.1982'))
-          camp.update_attribute(:coach_visiting, false)
+          camp.update(coach_visiting_date: Date.parse('15.07.1982'))
+          camp.update(coach_visiting: false)
           expect(data.camp_attr_value(:coach_visiting)).to eq 'nein'
         end
         it 'prints yes with date if coach visiting' do
-          camp.update_attribute(:coach_visiting_date, Date.parse('15.07.1982'))
-          camp.update_attribute(:coach_visiting, true)
+          camp.update(coach_visiting_date: Date.parse('15.07.1982'))
+          camp.update(coach_visiting: true)
           expect(data.camp_attr_value(:coach_visiting)).to eq 'ja, 15.07.1982'
         end
         it 'prints yes without date if coach visiting' do
-          camp.update_attribute(:coach_visiting, true)
+          camp.update(coach_visiting: true)
           expect(data.camp_attr_value(:coach_visiting)).to eq 'ja'
         end
       end
 
       context 'abteilungsleitung' do
         it 'prints no if al not visiting' do
-          camp.update_attribute(:al_visiting_date, Date.parse('15.07.2000'))
-          camp.update_attribute(:al_visiting, false)
+          camp.update(al_visiting_date: Date.parse('15.07.2000'))
+          camp.update(al_visiting: false)
           expect(data.camp_attr_value(:al_visiting)).to eq 'nein'
         end
         it 'prints yes with date if al visiting' do
-          camp.update_attribute(:al_visiting_date, Date.parse('15.07.2000'))
-          camp.update_attribute(:al_visiting, true)
+          camp.update(al_visiting_date: Date.parse('15.07.2000'))
+          camp.update(al_visiting: true)
           expect(data.camp_attr_value(:al_visiting)).to eq 'ja, 15.07.2000'
         end
         it 'prints yes without date if al visiting' do
-          camp.update_attribute(:al_visiting, true)
+          camp.update(al_visiting: true)
           expect(data.camp_attr_value(:al_visiting)).to eq 'ja'
         end
       end
 
       context 'canton' do
         it 'prints full canton name' do
-          camp.update_attribute(:canton, 'be')
+          camp.update(canton: 'be')
           expect(data.camp_attr_value(:canton)).to eq 'Bern'
         end
         it 'prints ausland' do
-          camp.update_attribute(:canton, 'zz')
+          camp.update(canton: 'zz')
           expect(data.camp_attr_value(:canton)).to eq 'Ausland'
         end
       end
 
       context 'j+s kind' do
         it 'prints j+s kind' do
-          camp.update_attribute(:j_s_kind, 'j_s_child')
+          camp.update(j_s_kind: 'j_s_child')
           expect(data.camp_attr_value(:j_s_kind)).to eq 'J+S Kindersport'
         end
       end
 
       context 'camp state' do
         it 'prints camp state' do
-          camp.update_attribute(:state, 'canceled')
+          camp.update(state: 'canceled')
           expect(data.camp_attr_value(:state)).to eq 'Abgesagt'
         end
       end
@@ -218,7 +218,7 @@ describe Export::Pdf::CampApplicationData do
       context 'format person' do
         it 'prints name and nick' do
           advisor_water = Fabricate(:person)
-          camp.update_attribute(:advisor_water_security_id, advisor_water.id)
+          camp.update(advisor_water_security_id: advisor_water.id)
           expect(data.camp_attr_value(:advisor_water_security)).to eq advisor_water.to_s
         end
       end
@@ -229,8 +229,8 @@ describe Export::Pdf::CampApplicationData do
         end
 
         it 'prints snow and water' do
-          camp.update_attribute(:j_s_security_snow, true)
-          camp.update_attribute(:j_s_security_mountain, true)
+          camp.update(j_s_security_snow: true)
+          camp.update(j_s_security_mountain: true)
           expect(data.js_security_value).to eq 'Winter, Berg'
         end
       end

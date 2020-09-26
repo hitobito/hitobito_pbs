@@ -8,12 +8,12 @@
 module Pbs::GroupDecorator
   extend ActiveSupport::Concern
 
-  def supercamps
-    events.where(allow_sub_camps: true, state: 'created')
+  def upcoming_supercamps
+    events.upcoming.where(allow_sub_camps: true, state: 'created').distinct
   end
 
-  def supercamps_on_group_and_above
-    supercamps + (root? ? [] : parent.supercamps_on_group_and_above)
+  def upcoming_supercamps_on_group_and_above
+    upcoming_supercamps + (root? ? [] : parent.upcoming_supercamps_on_group_and_above)
   end
 
 end

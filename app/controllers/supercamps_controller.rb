@@ -39,19 +39,21 @@ class SupercampsController < ApplicationController
   def query
     @found_supercamps = []
     if params.key?(:q) && params[:q].size >= 3
-      @found_supercamps = without_self(matching_supercamps.limit(10))
+      @found_supercamps = without_self_and_descendants(matching_supercamps.limit(10))
     end
   end
 
   def connect
-    flash[:event_with_merged_supercamp] = event_with_merged_supercamp
-    redirect_to :back
+    flash[:event_with_merged_supercamp] = event_with_merged_supercamp.to_unsafe_h
+    redirect_back(fallback_location: group)
   end
 
   private
 
-  def without_self(supercamps)
-    supercamps.reject { |supercamp| supercamp.id == camp_id }
+  def without_self_and_descendants(supercamps)
+    return supercamps unless camp_id
+    child_ids = Event::Camp.find(camp_id).self_and_descendants.pluck(:id)
+    supercamps.reject { |supercamp| child_ids.include?(supercamp.id) }
   end
 
   def group
@@ -59,12 +61,13 @@ class SupercampsController < ApplicationController
   end
 
   def supercamps_on_group_and_above
-    @supercamps_on_group_and_above = without_self(group.decorate.supercamps_on_group_and_above)
+    @supercamps_on_group_and_above = without_self_and_descendants(
+        group.decorate.upcoming_supercamps_on_group_and_above)
   end
 
   def matching_supercamps
-    Event::Camp.where('name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created')
+    Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
+               .where(allow_sub_camps: true, state: 'created').distinct
   end
 
   def camp_id
@@ -112,7 +115,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                  .merge(supercamp_attributes_to_merge)
+      .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
@@ -144,10 +147,16 @@ class SupercampsController < ApplicationController
       raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
                                      :connect, supercamp)
     end
+    unless supercamp.upcoming
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_upcoming'), :connect, supercamp)
+    end
+    if params[:event]['parent_id'].present?
+      raise CanCan::AccessDenied.new(I18n.t('supercamps.already_connected'), :connect, supercamp)
+    end
   end
 
   def handle_access_denied(e)
-    redirect_to :back, alert: e.message
+    redirect_back(fallback_location: group, alert: e.message)
   end
 
 end

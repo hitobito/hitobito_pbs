@@ -23,11 +23,13 @@ describe Event::RolesController do
       it 'creates helper in state nil' do
         expect do
           post :create,
-               group_id: group.id,
-               event_id: event.id,
-               event_role: {
-                 type: Event::Role::Cook.sti_name,
-                 person_id: people(:al_berchtold).id
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Role::Cook.sti_name,
+                   person_id: people(:al_berchtold).id
+                 }
                }
         end.to change { Event::Participation.count }.by(1)
 
@@ -43,11 +45,13 @@ describe Event::RolesController do
       it 'creates helper in state assigned' do
         expect do
           post :create,
-               group_id: group.id,
-               event_id: event.id,
-               event_role: {
-                 type: Event::Role::Cook.sti_name,
-                 person_id: people(:al_berchtold).id
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Role::Cook.sti_name,
+                   person_id: people(:al_berchtold).id
+                 }
                }
         end.to change { Event::Participation.count }.by(1)
 
@@ -64,11 +68,13 @@ describe Event::RolesController do
       it 'creates camp role' do
         expect do
           post :create,
-               group_id: group.id,
-               event_id: event.id,
-               event_role: {
-                 type: Event::Camp::Role::LeaderSnowSecurity.sti_name,
-                 person_id: people(:al_berchtold).id
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Camp::Role::LeaderSnowSecurity.sti_name,
+                   person_id: people(:al_berchtold).id
+                 }
                }
         end.to change { Event::Participation.count }.by(1)
 
@@ -85,11 +91,13 @@ describe Event::RolesController do
       it 'creates helper in state assigned' do
         expect do
           post :create,
-               group_id: group.id,
-               event_id: event.id,
-               event_role: {
-                 type: Event::Camp::Role::Helper.sti_name,
-                 person_id: people(:al_berchtold).id
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Camp::Role::Helper.sti_name,
+                   person_id: people(:al_berchtold).id
+                 }
                }
         end.to change { Event::Participation.count }.by(1)
 
@@ -101,11 +109,13 @@ describe Event::RolesController do
       it 'creates participant in state assigned' do
         expect do
           post :create,
-               group_id: group.id,
-               event_id: event.id,
-               event_role: {
-                 type: Event::Camp::Role::Participant.sti_name,
-                 person_id: people(:al_berchtold).id
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Camp::Role::Participant.sti_name,
+                   person_id: people(:al_berchtold).id
+                 }
                }
         end.to change { Event::Participation.count }.by(1)
 

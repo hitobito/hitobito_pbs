@@ -51,7 +51,7 @@ de:
   export/pdf/camp_application:
     title: Lageranmeldung %{camp}
     group_header: Abteilung und Einheit
-    leader_header: Lagerleiter/-in
+    leader_header: Lagerleiter*in
     assistant_leaders_header: Lagerleitung
     name: Name
     address: Adresse
@@ -108,8 +108,8 @@ de:
     participations:
       canceled_own_notice: Du wurdest von diesem Anlass abgemeldet.
       rejected_notice: "%{participant} wurde abgelehnt. %{mailto}"
-      rejected_email_link: Teilnehmer informieren
-      inform_about_email_sent_to_participant: Der Teilnehmer wird per E-Mail über die Anmeldung informiert.
+      rejected_email_link: Teilnehmer*in informieren
+      inform_about_email_sent_to_participant: Teilnehmer*in wird per E-Mail über die Anmeldung informiert.
       approvals:
         title: Empfehlungen
       missing_preconditions: fehlende Vorbedingungen
@@ -119,7 +119,7 @@ de:
         approve_title: Teilnahme freigeben
         reject_title: Teilnahme ablehnen
       popover_cancel:
-        cancel_info: Kursleiter/-in, Kursorganisator/-in, Abteilungsleiter/-in und Empfehlungsinstanzen werden über die Abmeldung informiert.
+        cancel_info: Kursleiter*in, Kursorganisator*in, Abteilungsleiter*in und Empfehlungsinstanzen werden über die Abmeldung informiert.
       print:
         heading_event/camp: Lageranmeldung %{year}
         read_and_agreed_for_event_camp: Ich erfülle die Voraussetzungen für dieses Lager, habe die Lagerbeschreibung gelesen und bin damit einverstanden.
@@ -134,15 +134,15 @@ de:
 
     approvals:
       form:
-        approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisatoren (Rolle), Kursleiter/-innen (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
-        placeholder_current_occupation: Momentane Tätigkeit des Teilnehmers/der Teilnehmerin
+        approval_stored: Die Empfehlung wird elektronisch gespeichert und kann von Kursorganisator*innen, Kursleiter*innen (Person) und weiteren Empfehlungsinstanzen eingesehen werden.
+        placeholder_current_occupation: Momentane Tätigkeit des*der Teilnehmer*in
         current_level: Stufe
-        occupation_assessment: Wie bewährt er/sie sich dabei? z.B. Einsatz, Qualität des/der TN
-        strong_points: Wo liegen seine/ihre Stärken?
-        weak_points: Wo sollte man ihn/sie fördern?
+        occupation_assessment: Wie bewährt er*sie sich dabei? z.B. Einsatz, Qualität des*der TN
+        strong_points: Wo liegen seine*ihre Stärken?
+        weak_points: Wo sollte man ihn*sie fördern?
         comment: Wünsche, Anregungen oder Bemerkungen an die Kursleitung
         title_approve: Empfehlung für %{participant} freigeben
-        title_reject: Empfehlung für %{participant} ablehen
+        title_reject: Empfehlung für %{participant} ablehnen
         title_update_approved: Freigabe für %{participant} aktualisieren
         title_update_rejected: Ablehnung für %{participant} aktualisieren
 
@@ -152,7 +152,7 @@ de:
         success: Die Anwesenheiten wurden erfolgreich aktualisiert.
 
   event/approvals:
-    rejected_inform_participant: Bitte informiere %{participant} und die Gruppenleiter persönlich darüber.
+    rejected_inform_participant: Bitte informiere %{participant} und die Abteilungsleiter*innen persönlich darüber.
 
   event/camp:
     al_present_info:
@@ -165,7 +165,7 @@ de:
     coach_confirmed_info:
       'true': Bestätigt
       'false': Nicht bestätigt
-    checkpoint_field_caption: Kann nur von der Lagerleitung bestätigt werden
+    checkpoint_field_caption: Kann nur von dem*der Lagerleiter*in bestätigt werden
 
   event/course:
     has_confirmations: PDF-Kursbestätigungen für Teilnehmende erstellen
@@ -177,7 +177,7 @@ de:
     actions_show_pbs:
       camp_application: Lageranmeldung PBS
       cancel_button: Abmelden
-      confirm_cancel: Willst Du Dich wirklich von diesem Lager abmelden?
+      confirm_cancel: Willst du Dich wirklich von diesem Lager abmelden?
       submit_camp: Einreichen
       camp_submitted: Eingereicht
       camp_submitted_at: Eingereicht am
@@ -194,7 +194,7 @@ de:
         success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
         error: 'Das Lager konnte nicht eingereicht werden:'
     expected_participants_fields:
-      expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiterinnen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
+      expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiter*innen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
     fields_pbs:
       language_de: Deutsch
       language_fr: Französisch
@@ -210,10 +210,11 @@ de:
       email: E-Mail
       attach_to_supercamp: An übergeordnetes Lager anschliessen
       direct_subcamps: direkt untergeordnete Lager
+      supercamp: Übergeordnetes Lager
     form_tab_pane_advisors:
       al_present_caption: Die Abteilungsleitung ist im Lager anwesend
       al_visiting_caption: Die Abteilungsleitung besucht das Lager
-      coach_visiting_caption: Coach besucht das Lager
+      coach_visiting_caption: Der*die Coach besucht das Lager
     global:
       link:
         add_event/camp: Lager erstellen
@@ -224,8 +225,8 @@ de:
       location_placeholder: Adresse, Platz, Flurname, etc.
       location_help: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
       coordinates_help: CH1903+ / LV95 (Beispiel 2604'870, 1211'271)
-      landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer eingeholt
-      local_scout_contact_present_caption: Kontakt zu lokalem Pfadfinder vorhanden
+      landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer*innen eingeholt
+      local_scout_contact_present_caption: Kontakt zu lokalen Pfadfis vorhanden
       emergency_phone_field: Notfallnummer, Notfallkontakt
     show:
       inform_by_email: Informieren
@@ -239,6 +240,19 @@ de:
       lagerreglement_applied_caption: Das Reglement zur Planung und Durchführung von Lagern ("Lagerreglement“) sowie das Pfadiprofil werden berücksichtigt und eingehalten
       kantonalverband_rules_applied_caption: Allenfalls vorhandene Vorschriften oder Empfehlungen des Kantonalverbandes werden bei der Vorbereitung des Lagers berücksichtigt
       j_s_rules_applied_caption: "Für J+S-Lager: Die aktuellen Vorschriften des Sportfachs Lagersport/Trekking sind mir bekannt und werden eingehalten"
+    canton_specific_help_text:
+      zz_title: Beachte zusätzlich zum «Hering» die Broschüre «Auslandlager»
+      zz_url: http://international.pbs.ch
+      lu_title: Beachte die Sonderregelung für Lager im Kanton Luzern («Hering» -> Kantonale Sonderregelungen)
+      lu_url: http://hering.scouts.ch
+      ti_title: Beachte die Sonderregelung für Lager im Kanton Tessin («Hering» -> Sonderfälle der Lageranmeldung)
+      ti_url: http://hering.scouts.ch
+      sg_title: Beachte die Sonderregelung für Lager im Kanton St. Gallen («Hering» -> Sonderfälle der Lageranmeldung)
+      sg_url: http://hering.scouts.ch
+      tg_title: Beachte die Sonderregelung für Lager im Kanton Thurgau («Hering» -> Kantonale Sonderregelungen)
+      tg_url: http://hering.scouts.ch
+      vd_title: Beachte die Sonderregelung für Lager im Kanton Waadt («Hering» -> Kantonale Sonderregelungen)
+      vd_url: http://hering.scouts.ch
 
   filter_navigation/events:
     canton: 'durchgeführt im Kanton'
@@ -267,6 +281,8 @@ de:
           long: Long
 
   groups:
+    fields_pbs:
+      group_health_info: Wenn dieses Opt-In angekreuzt wird, stehen die Daten eurer Abteilung für die Entwicklung und das Testen des Tools HealthCheck zur Verfügung. Dieses Tool soll euch in Zukunft helfen, anhand der Mitgliederdaten zu analysieren, wie gut eure Abteilung dasteht. Die Daten werden abgesehen vom Softwareunternehmen, welches das Tool entwickelt, nicht an Dritte weitergegeben.
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
     tabs:
       population: Bestand
@@ -281,6 +297,10 @@ de:
     index:
       title: Hilfe
       description_html: Informationen zu den neusten Updates findest du in den <a href="http://releasenotes.scouts.ch" target="_blank">Release-Notes</a>.
+      power_users:
+        title: PowerUser
+        description: "Hier findest Du eine Übersicht der PowerUser in deinen Gruppen, die dir bei deinen Anliegen helfen könnten:"
+        none_found: Keine Power User gefunden
       guides:
         title: Leitfäden
         description: "Diese Leitfäden helfen dir bei der Administration von Kursen und Lagern:"
@@ -291,11 +311,11 @@ de:
         coaches:
           url: http://coaches.scouts.ch
           title: 1x1 MiData für Coaches
-          description: "Das «1x1 MiData für Coaches» erläutert die für Coaches wichtigsten Funktionen der PBS-Mitgliederdatenbank (Mi- Data). Es dient sowohl als Factsheet, als auch als Vorbereitung für das MF-Coach und den Coachkurs."
+          description: "Das «1x1 MiData für Coaches» erläutert die für Coaches wichtigsten Funktionen der PBS-Mitgliederdatenbank (Mi-Data). Es dient sowohl als Factsheet, als auch als Vorbereitung für das MF-Coach und den Coachkurs."
         anker:
           url: http://anker.scouts.ch
           title: "Anker: Leitfaden zur PBS Kursadministration"
-          description: "Für Kursleiter/innen und Leiterkursbetreuer/innen: Alle administrativen Vorgänge, die bei der Anmeldung und Durchführung eines J+S- oder BSV-Kurses beachtet werden müssen, sind hier detailliert beschrieben."
+          description: "Für Kursleiter*innen und Leitungskursbetreuer*innen: Alle administrativen Vorgänge, die bei der Anmeldung und Durchführung eines J+S- oder BSV-Kurses beachtet werden müssen, sind hier detailliert beschrieben."
         pilot:
           url: http://pilot.scouts.ch
           title: "Pilot: Leitfaden zur PBS-Kursadministration in der MiData und der NDBJS"
@@ -322,6 +342,8 @@ de:
     fields_pbs:
       non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
       in_abteilung: (in der Abteilung)
+    qualification_buttons_pbs:
+      print_course_confirmation: Kursbestätigung drucken
 
   population:
     index:
@@ -343,7 +365,7 @@ de:
   roles:
     fields_pbs:
       notification: Benachrichtigung
-      notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern Du dadurch mehr Personendaten einsehen kannst.
+      notification_hint: Bestehende Personen werden per E-Mail über die Änderung informiert, sofern du dadurch mehr Personendaten einsehen kannst.
 
   supercamps:
     available:
@@ -356,6 +378,8 @@ de:
       none: Keine Ergebnisse gefunden
     does_not_allow_sub_camps: Das gewählte Lager erlaubt keine untergeordneten Lager
     not_in_created_state: Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"
+    not_upcoming: Das gewählte übergeordnete Lager ist bereits vorbei
+    already_connected: Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen
 
   black_lists:
     form:

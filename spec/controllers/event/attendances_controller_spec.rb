@@ -36,7 +36,7 @@ describe Event::AttendancesController do
   context 'GET index' do
 
     it 'loads participants' do
-      get :index, group_id: group.id, id: course.id
+      get :index, params: { group_id: group.id, id: course.id }
 
       expect(assigns(:leaders)).to match_array([@p1, @p2, @p3])
       expect(assigns(:cooks)).to match_array([@p4])
@@ -49,12 +49,14 @@ describe Event::AttendancesController do
 
     it 'updates all given bsv_days' do
       patch :update,
-            group_id: group.id,
-            id: course.id,
-            bsv_days: {
-              @p1.id.to_s => 1.5,
-              @p2.id.to_s => '',
-              @p4.id.to_s => 0
+            params: {
+              group_id: group.id,
+              id: course.id,
+              bsv_days: {
+                @p1.id.to_s => 1.5,
+                @p2.id.to_s => '',
+                @p4.id.to_s => 0
+              }
             }
 
       expect(response).to redirect_to(attendances_group_event_path(group.id, course.id))
@@ -66,13 +68,15 @@ describe Event::AttendancesController do
 
     it 'ignores invalid values' do
       patch :update,
-            group_id: group.id,
-            id: course.id,
-            bsv_days: {
-              @p1.id.to_s => -1.5,
-              @p2.id.to_s => RUBY_VERSION >= '2.4.0' ? -23.42 : 'jada', # ruby 2.4's big decimal does not handle strings
-              @p3.id.to_s => 6,
-              @p4.id.to_s => 2.25
+            params: {
+              group_id: group.id,
+              id: course.id,
+              bsv_days: {
+                @p1.id.to_s => -1.5,
+                @p2.id.to_s => RUBY_VERSION >= '2.4.0' ? -23.42 : 'jada', # ruby 2.4's big decimal does not handle strings
+                @p3.id.to_s => 6,
+                @p4.id.to_s => 2.25
+              }
             }
 
       expect(response).to redirect_to(attendances_group_event_path(group.id, course.id))

@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class AddEventsBsvDays < ActiveRecord::Migration
+class AddEventsBsvDays < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :bsv_days, :decimal, scale: 2, precision: 6
 

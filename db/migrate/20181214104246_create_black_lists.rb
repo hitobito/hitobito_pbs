@@ -1,4 +1,4 @@
-class CreateBlackLists < ActiveRecord::Migration
+class CreateBlackLists < ActiveRecord::Migration[4.2]
   def change
     create_table :black_lists do |t|
       t.string :first_name
