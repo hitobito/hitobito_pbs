@@ -168,6 +168,14 @@ it:
       requires_approval_region: Zona
       requires_approval_kantonalverband: Associazione cantonale
       requires_approval_bund: Livello federale
+    application_fieldsmiddle_pbs:
+      paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
+      participants_can_apply_caption: I partecipanti possono iscrivere sé stessi
+      participants_can_cancel_caption: I partecipanti possono disiscrivere sé stessi
+      requires_approval_abteilung: Sezione
+      requires_approval_region: Zona
+      requires_approval_kantonalverband: Associazione cantonale
+      requires_approval_bund: Livello federale
     create_camp_application:
       flash:
         success: Il campo è stato inoltrato al MSS. Ricevi una copia dell'e-mail.

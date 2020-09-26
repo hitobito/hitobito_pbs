@@ -193,6 +193,14 @@ de:
       requires_approval_region: Region
       requires_approval_kantonalverband: Kantonalverband
       requires_approval_bund: Bundesebene
+    application_fieldsmiddle_pbs:
+      paper_application_required_caption: Teilnehmende müssen eine Papieranmeldung einreichen
+      participants_can_apply_caption: Teilnehmende können sich selbst anmelden
+      participants_can_cancel_caption: Teilnehmende können sich selbst abmelden
+      requires_approval_abteilung: Abteilung
+      requires_approval_region: Region
+      requires_approval_kantonalverband: Kantonalverband
+      requires_approval_bund: Bundesebene
     create_camp_application:
       flash:
         success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.

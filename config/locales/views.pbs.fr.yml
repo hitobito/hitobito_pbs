@@ -168,6 +168,14 @@ fr:
       requires_approval_region: Région
       requires_approval_kantonalverband: Association cantonale
       requires_approval_bund: Niveau fédéral
+    application_fieldsmiddle_pbs:
+      paper_application_required_caption: Les participant·e·s doivent envoyer une inscription papier
+      participants_can_apply_caption: Les participant·e·s peuvent s'inscrire eux·elles-mêmes
+      participants_can_cancel_caption: Les participant·e·s peuvent se désinscrire eux·elles-mêmes
+      requires_approval_abteilung: Groupe
+      requires_approval_region: Région
+      requires_approval_kantonalverband: Association cantonale
+      requires_approval_bund: Niveau fédéral
     create_camp_application:
       flash:
         success: Le camp a été remis au MSdS. Tu recevras une copie par l'e-mail.
