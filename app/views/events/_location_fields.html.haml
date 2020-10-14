@@ -6,7 +6,7 @@
 - if entry.is_a?(Event::Campy)
   = f.labeled_input_field(:location, label: t('.location_caption'), help: t('.location_help'), placeholder: t('.location_placeholder'))
   = f.labeled(:canton) do
-    .span6{style: 'margin-left: 0px'}
+    .span6.shown{style: 'margin-left: 0px'}
       = f.collection_select(:canton,
                             camp_possible_canton_labels,
                             :first,
