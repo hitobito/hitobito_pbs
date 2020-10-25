@@ -69,6 +69,7 @@ module HitobitoPbs
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
       GroupAbility.include Pbs::GroupAbility
+      GroupAbility.include Pbs::ServiceToken::Constraints
       PersonReadables.include Pbs::PersonReadables
       PersonAbility.include Pbs::PersonAbility
       EventAbility.include Pbs::EventAbility
@@ -79,6 +80,7 @@ module HitobitoPbs
       Event::ParticipationAbility.include Pbs::Event::Constraints
       Event::RoleAbility.include Pbs::Event::Constraints
       QualificationAbility.include Pbs::QualificationAbility
+      ServiceTokenAbility.include Pbs::ServiceToken::Constraints
       TokenAbility.include Pbs::TokenAbility
       VariousAbility.include Pbs::VariousAbility
 
