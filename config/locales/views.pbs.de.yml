@@ -282,7 +282,7 @@ de:
 
   groups:
     fields_pbs:
-      group_health_info: Wenn dieses Opt-In angekreuzt wird, stehen die Daten eurer Abteilung für die Entwicklung und das Testen des Tools HealthCheck zur Verfügung. Dieses Tool soll euch in Zukunft helfen, anhand der Mitgliederdaten zu analysieren, wie gut eure Abteilung dasteht. Die Daten werden abgesehen vom Softwareunternehmen, welches das Tool entwickelt, nicht an Dritte weitergegeben.
+      group_health_info: Wenn diese Checkbox ausgewählt ist, dann werden die Daten der Abteilung nächtlich an die Applikation HealthCheck (https://hc.scout.ch) weitergeleitet. Dort haben berechtigte Personen die Möglichkeit erweiterte Statistiken einzusehen. Die Statistiken stehen frühestens am Tag nach der Auswahl der Checkbox zur Verfügung.
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
     tabs:
       population: Bestand
