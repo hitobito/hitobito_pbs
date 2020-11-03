@@ -46,7 +46,7 @@ fr:
     qualifications: Formation
     abteilung: Groupe
     einheit: Unité
-    expected_participants: Nombre attendu de participant·e·s
+    expected_participants: Nombre attendu de participants
     camp: Camp
     camp_dates: Données de camp
     camp_location: Lieu de camp
@@ -66,15 +66,15 @@ fr:
         info: Saisis le nombre de journées OFAS pour chaque personne.
         leaders: Maîtrise
         cooks: Cuisine
-        participants: Participant·e·s
+        participants: Participants
       list:
         not_persisted: Pas encore sauvegardé
     lists:
       nav_left_camps:
-        all_camps: Camps dans toute la Suisse
-        kantonalverband_camps: Camps %{group}
-        camps_in_canton: Camps à %{canton}
-        camps_abroad: Camps à l'étranger
+        all_camps: Camp dans toute la Suisse
+        kantonalverband_camps: Camp %{group}
+        camps_in_canton: Camp à %{canton}
+        camps_abroad: Camp à l'étranger
       all_camps:
         title: Camps à venir dans toute la Suisse
         explanation: 'Ici s''affichent tous les camps du MSdS qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins. Seuls les camps annoncés et qui n''ont pas été annulés sont pris en compte.'
@@ -90,10 +90,10 @@ fr:
       advanced_bsv_export_button: Export étendu OFAS/CàF
     hierarchy: Hiérarchie du camp
     participations:
-      canceled_own_notice: Tu as été désinscrit·e de cette activité
-      rejected_notice: "%{participant} a été refusé·e. %{mailto}"
-      rejected_email_link: Informer les participant·e·s
-      inform_about_email_sent_to_participant: Le·la participant·e sera averti·e de l'inscription par e-mail.
+      canceled_own_notice: Tu as été désinscrit de cette activité
+      rejected_notice: "%{participant} a été refusé. %{mailto}"
+      rejected_email_link: Informer les participant-e-s
+      inform_about_email_sent_to_participant: La·le participant·e sera averti·e de l'inscription par e-mail.
       approvals:
         title: Recommandations
       missing_preconditions: Conditions préalables manquantes
@@ -103,24 +103,24 @@ fr:
         approve_title: Accepter la participation
         reject_title: Refuser la participation
       popover_cancel:
-        cancel_info: Le·la chef de cours, l'organisateur·trice du cours, le·la responsable de groupe et les instances de recommandation vont être informé·e·s de la désinscription.
+        cancel_info: La·le chef·fe de cours, l'organisateur·trice du cours, la·le responsable de groupe et les instances de recommandation vont être informé·e·s de la désinscription.
       print:
         heading_event/camp: Annonce de camp %{year}
-        read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu sa description du camp et je l'accepte.
+        read_and_agreed_for_event_camp: Je remplis les conditions pour ce camp, j'ai lu la description du camp et je l'accepte.
     qualifications:
       send_confirmation_notifications:
-        sent_to_qualified_participants: Les participant·e·s qualifié·e·s ont été informé·e·s.
+        sent_to_qualified_participants: Les participants qualifiés ont été informés.
       index:
         send_confirmation_notifications:
           one: Envoyer une notification à une personne
           other: Envoyer une notification à %{count} personnes
-        button_explanation: Envoie un e-mail à tous les participant·e·s qualifié·e·s, qui contient un lien vers le cours où ils peuvent télécharger leur confirmation de cours en PDF.
+        button_explanation: Envoie un e-mail à tous les participants qualifiés, qui contient un lien vers le cours où ils peuvent télécharger leur confirmation de cours en PDF.
     approvals:
       form:
-        approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur·trice du cours (rôle), le·la chef de cours (personne) et d'autres instances de recommandation.
-        placeholder_current_occupation: Activité actuelle du·de la participant·e
+        approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur·trice du cours, la·le chef·fe de cours (personne) et d'autres instances de recommandation.
+        placeholder_current_occupation: Activité actuelle du-de la participant-e
         current_level: Branche
-        occupation_assessment: Dans quelle mesure fait-il·elle ses preuves? p.ex. enthousiasme, qualité du·de la participant·e
+        occupation_assessment: Dans quelle mesure fait-elle·il ses preuves? p.ex. enthousiasme, qualité de la·du participant·e
         strong_points: Quelles sont ses forces?
         weak_points: Dans quel(s) domaine(s) faut-il l'encourager?
         comment: Suggestions ou commentaires à la maîtrise de cours
@@ -136,8 +136,8 @@ fr:
     rejected_inform_participant: Prière d'informer %{participant} et les responsables de groupe personnellement.
   event/camp:
     al_present_info:
-      'true': Présent·e au camp
-      'false': Absent·e au camp
+      'true': Présent au camp
+      'false': Absent au camp
     visiting_info:
       at: Visitera le camp le %{date}
       'true': Visitera le camp
@@ -145,9 +145,9 @@ fr:
     coach_confirmed_info:
       'true': Confirmé
       'false': Pas confirmé
-    checkpoint_field_caption: Ne peut être confirmé que par le·la chef de camp
+    checkpoint_field_caption: Ne peut être confirmé que par la·le responsable de camp
   event/course:
-    has_confirmations: Créer une confirmation de cours pour les participant·e·s
+    has_confirmations: Créer une confirmation de cours pour les participants
     participations:
       actions_show_pbs:
         course_confirmation: Confirmation de cours
@@ -160,9 +160,9 @@ fr:
       camp_submitted: démission
       camp_submitted_at: Déposé le
     application_fields_pbs:
-      paper_application_required_caption: Les participant·e·s doivent envoyer une inscription papier
-      participants_can_apply_caption: Les participant·e·s peuvent s'inscrire eux·elles-mêmes
-      participants_can_cancel_caption: Les participant·e·s peuvent se désinscrire eux·elles-mêmes
+      paper_application_required_caption: Les participants doivent envoyer une inscription papier
+      participants_can_apply_caption: Les participant·e·s peuvent s'inscrire elles·eux-mêmes
+      participants_can_cancel_caption: Les participant·e·s peuvent se désinscrire elles·eux-mêmes
       requires_approval_abteilung: Groupe
       requires_approval_region: Région
       requires_approval_kantonalverband: Association cantonale
@@ -192,7 +192,7 @@ fr:
     form_tab_pane_advisors:
       al_present_caption: La maîtrise de groupe sera présente au camp
       al_visiting_caption: La maîtrise de groupe visitera le camp
-      coach_visiting_caption: Le·la coach visitera le camp
+      coach_visiting_caption: La·le coach visitera le camp
     global:
       link:
         add_event/camp: Établir le camp
@@ -203,7 +203,7 @@ fr:
       location_placeholder: Adresse, lieu, lieu-dit, etc.
       location_help: Décrire également le lieu du camp dans le cas d'un camp à l'étranger, en incluant le pays
       coordinates_help: CH1903+ / LV95 (Exemple 2604'870, 1211'271)
-      landlord_permission_obtained_caption: Renseignements pris des probpriétaires du terrain ainsi que du forêt
+      landlord_permission_obtained_caption: Renseignements pris des probpriétaires du terrain ainsi que de la forêt
       local_scout_contact_present_caption: Contact avec les scout·e·s locaux·ales disponible
       emergency_phone_field: Numéro en cas d'urgence, contact en cas d'urgence
     show:
@@ -221,6 +221,8 @@ fr:
     canton_specific_help_text:
       zz_title: Consulte la brochure "Camps à l'étranger" dans la "Sardine" pour compléments
       zz_url: http://international.msds.ch
+      lu_title: Observe la réglementation spéciale pour les camps dans le canton de Lucerne ("Sardine" -> Cas particuliers de l'annonce de camp)
+      lu_url: http://heringfr.scouts.ch
       ti_title: Observe la réglementation particulière pour les camps au Tessin ("Sardine" -> Cas particuliers de l'annonce de camp)
       ti_url: http://sardine.scouts.ch
       sg_title: Observe la réglementation spéciale pour les camps dans le canton de St-Gall ("Sardine" -> Cas particuliers de l'annonce de camp)
@@ -254,7 +256,7 @@ fr:
           long: Long
   groups:
     fields_pbs:
-      group_health_info: Si cette option est cochée, les données de votre service seront disponibles pour le développement et le test de l'outil HealthCheck. Cet outil vous aidera à analyser les activités de votre groupe sur la base des données des membres. Les données ne seront pas partagées avec une autre partie que l'entreprise de logiciels qui développe l'outil.
+      group_health_info: Si cette boîte est cochée, les données du groupe seront transmises tous les soirs à l'application HealthCheck (https://hc.scout.ch). Les personnes autorisées ont la possibilité d'y consulter des statistiques étendues. Les statistiques sont disponibles au plus tôt le lendemain du jour où la boîte à cocher a été sélectionnée.
     ongoing_crisis: "%{creator} a déclenché une crise sur ce groupe"
     tabs:
       population: Effectifs
@@ -263,7 +265,7 @@ fr:
     actions_show_pbs:
       crisis: Crise
       crisis_done: Confirmer la crise
-      confirm_crisis: Es-tu sûre de vouloir déclencher une crise sur ce groupe? Les responsables de l'équipe de crise seront informé·e·s de ton action. S'il-te-plaît fais attention à la protection des données.
+      confirm_crisis: Es-tu sûre de vouloir déclencher une crise sur ce groupe? Les responsables de l'équipe de crise seront informés de ton action. S'il-te-plaît fais attention à la protection des données.
   help:
     index:
       title: Aide
@@ -286,15 +288,15 @@ fr:
         anker:
           url: http://ankerfr.scouts.ch
           title: "L’ancre: Fil conducteur pour l’administration des cours MSdS"
-          description: "Pour les chefs de cours et les conseillers·ères à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
+          description: "Pour les chef·fe·s de cours et les conseiller·ère·s à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
         pilot:
           url: http://pilotfr.scouts.ch
           title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNJS"
           description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNJS"
         ticket:
           url: http://ticketfr.scouts.ch
-          title: "Ticket: Fil conducteur pour l’annonce de participant·e·s aux cours"
-          description: "Le Ticket décrit le processus d'inscription des participant·e·s par la MiData (banque nationale de données des membres du MSdS)"
+          title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
+          description: "Le Ticket décrit le processus d'inscription des participants par la MiData (banque nationale de données des membres du MSdS)"
   member_counts:
     created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
     updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.

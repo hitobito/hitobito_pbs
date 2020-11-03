@@ -118,14 +118,14 @@ it:
     approvals:
       form:
         approval_stored: La raccomandazione viene salvata elettronicamente e può essere visionata dall'organizzatore del corso (ruolo), dal capo corso (persona) e da altre persone che raccomandano.
-        placeholder_current_occupation: Attività attuale del partecipante
+        placeholder_current_occupation: Compito attuale della/del partecipante
         current_level: Branca
         occupation_assessment: Dove si è dimostrato valido? p.es. impegno, qualità del partecipante
         strong_points: Quali sono le sue qualità?
         weak_points: Dove va sostenuto?
         comment: Desideri, spunti o osservazioni per la direzione del corso
         title_approve: 'Autorizzare la raccomandazione per %{participant} '
-        title_reject: 'Rifiutare la raccomandazione per %{participant} '
+        title_reject: Respingere la raccomandazione per %{participant}
         title_update_approved: 'Aggiornare l''autorizzazione per %{participant} '
         title_update_rejected: 'Aggiornare il rifiuto per %{participant} '
   event/attendances:
@@ -221,6 +221,8 @@ it:
     canton_specific_help_text:
       zz_title: Oltre all'opuscolo "Sardina" prendi in considerazione anche l'opuscolo "Campi all'estero"
       zz_url: https://www.scout.ch/it/quotidianita/internazionalita/internazionalita?set_language=it
+      lu_title: Fai attenzione alle regole particolari per i campi nel Canton Lucerna ("Sardina" -> casi particolari per l'iscrizione al campo)
+      lu_url: https://pfadi.swiss/media/files/bf/208814it-sardina_guida_di_campi_scout-20200424-coacc.pdf
       ti_title: Fai attenzione alle regole particolari per i campi nel Canton Ticino ("Sardina" -> casi particolari per l'iscrizione al campo)
       ti_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
       sg_title: Fai attenzione alle regole particolari per i campi nel Canton San Gallo ("Sardina" -> casi particolari per l'iscrizione al campo)
@@ -254,7 +256,7 @@ it:
           long: Long
   groups:
     fields_pbs:
-      group_health_info: Se questo opt-in viene controllato, i dati del vostro dipartimento saranno disponibili per sviluppare e testare lo strumento HealthCheck. Questo strumento vi aiuterà ad analizzare i risultati del vostro dipartimento sulla base dei dati dei membri. I dati non saranno condivisi con terzi, ad eccezione della società di software che sviluppa lo strumento.
+      group_health_info: Se si sceglie questo checkbox, i dati della sezione vengono spediti di notte all’applicazione HealthCheck (https://hc.scout.ch). Lì le persone che ne hanno il diritto hanno la possibilità di vedere delle statistiche estese. Le statistiche saranno a disposizione al più presto un giorno dopo avere scelto il checkbox.
     ongoing_crisis: "%{creator} ha creato una crisi per questo gruppo"
     tabs:
       population: Censimento dei membri
