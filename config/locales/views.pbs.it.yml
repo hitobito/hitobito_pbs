@@ -36,30 +36,31 @@ it:
     change_state: Modificare lo stato
   export/pdf/camp_application:
     title: Annuncio di campo %{camp}
-    group_header: Sezione e unità
-    leader_header: Capo campo
-    assistant_leaders_header: Direzione del campo
-    name: Cognome
-    address: Indirizzo
-    zip_town: NAP / luogo
-    birthday: Data di nascita
-    qualifications: Formazione
+    by: da parte di
+  export/pdf/camp_application/group_section:
+    group_title: 1. Sezione e unità
     abteilung: Sezione
     einheit: Unità
     expected_participants: Numero di partecipanti stimato
-    camp: Campo
-    camp_dates: Date del campo
-    camp_location: Luogo del campo
-    j_s: Ambito G+S
-    state: Stato del campo
-    by: da parte di
-    abteilungsleitung: Direzione della sezione
-    coach: Coach
     kantonalverband: Associazione cantonale
+    leader_title: 2. Capo campo
+    qualifications: Formazione
+  export/pdf/camp_application/leaders_section:
+    title: 3. Direzione del campo
     assistant_leader_name: Nome cognome / totem
     assistant_leader_year: Anno di nascita
     assistant_leader_qualifications: Formazioni valide
+  export/pdf/camp_application/camp_section:
+    title: 4. Campo
+    camp_dates: Date del campo
+    camp_location: Luogo del campo
+  export/pdf/camp_application/registration_section:
+    js_title: 5. Ambito G+S
+    state_title: 6. Stato del campo
     js_security: Ambito di sicurezza
+  export/pdf/camp_application/supervision_section:
+    abteilungsleitung_title: 7. Direzione della sezione
+    coach_title: 8. Coach
   event:
     attendances:
       index:

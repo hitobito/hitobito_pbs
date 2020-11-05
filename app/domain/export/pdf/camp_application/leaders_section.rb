@@ -15,7 +15,9 @@ module Export::Pdf
 
           table(table_data.unshift(table_header), width: bounds.width,
                       cell_style: { border_width: 0.25, size: 8 },
-                      column_widths: [190, 55, nil])
+                      column_widths: [190, 55, nil]) do 
+                            row(0).style(font_style: :bold)
+                      end
         end
       end
 

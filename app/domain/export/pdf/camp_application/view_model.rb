@@ -130,6 +130,8 @@ module Export::Pdf
       def format_updated_at(value)
         date = format_date_time(value)
         person = @camp.updater.to_s
+        return date if person.blank?
+
         "#{date} #{t('export/pdf/camp_application.by')} #{person}"
       end
 

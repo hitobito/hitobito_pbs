@@ -22,11 +22,13 @@ module Export::Pdf
         labeled_value(translate('abteilung'), @context.abteilung_name)
         labeled_value(translate('einheit'), @context.einheit_name) if @context.einheit_name
         labeled_value(translate('kantonalverband'), kantonalverband) if kantonalverband
-        move_down 16
+        move_down 12
         text translate('expected_participants')
-        move_down 10
-        table(table_data, cell_style: { align: :center, border_width: 0.25, size: 8 },
-                          column_widths: [30, 40, 40, 40, 40, 40])
+        move_down 9
+        table(table_data, cell_style: { align: :center, border_width: 0.25 },
+                          column_widths: [30, 40, 40, 40, 40, 40]) do
+                            row(0).style(size: 6)
+                          end
       end
 
       def render_leader
@@ -38,7 +40,7 @@ module Export::Pdf
         else
           text(I18n.t('global.nobody')) unless leader
         end
-        move_down 10
+        move_down 9
         render_checkpoints
       end
 

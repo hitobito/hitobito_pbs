@@ -26,7 +26,7 @@ module Export::Pdf
         @context.camp.dates.each do |date| 
           labeled_value(date.duration.to_s, date.label, { column_widths: [95, nil]} ) 
         end
-        move_down 10
+        move_down 9
         labeled_camp_attr(:camp_days)
       end
 
@@ -39,7 +39,7 @@ module Export::Pdf
         labeled_camp_attr(:altitude)
         labeled_camp_attr(:emergency_phone)
         labeled_camp_attr(:landlord)
-        move_down 10
+        move_down 9
         labeled_checkpoint(:landlord_permission_obtained)
       end
     end

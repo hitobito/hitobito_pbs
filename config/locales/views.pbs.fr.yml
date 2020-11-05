@@ -36,30 +36,31 @@ fr:
     change_state: Changer le statut
   export/pdf/camp_application:
     title: Annonce de camp %{camp}
-    group_header: Groupe et unité
-    leader_header: Responsable de camp
-    assistant_leaders_header: Maîtrise de camp
-    name: Nom
-    address: Adresse
-    zip_town: Code postal / Lieu
-    birthday: Anniversaire
-    qualifications: Formation
+    by: par
+  export/pdf/camp_application/group_section:
+    group_title: 1. Groupe et unité
     abteilung: Groupe
     einheit: Unité
     expected_participants: Nombre attendu de participants
-    camp: Camp
-    camp_dates: Données de camp
-    camp_location: Lieu de camp
-    j_s: Cadre J+S
-    state: Statut de camp
-    by: par
-    abteilungsleitung: Maîtrise de groupe
-    coach: Coach
     kantonalverband: Association cantonale
+    leader_title: 2. Responsable de camp
+    qualifications: Formation
+  export/pdf/camp_application/leaders_section:
+    title: 3. Maîtrise de camp
     assistant_leader_name: Prénom Nom / Totem
     assistant_leader_year: Année
     assistant_leader_qualifications: Formations valables
+  export/pdf/camp_application/camp_section:
+    title: 4. Camp
+    camp_dates: Données de camp
+    camp_location: Lieu de camp
+  export/pdf/camp_application/registration_section:
+    js_title: 5. Cadre J+S
+    state_title: 6. Statut de camp
     js_security: Domaine de sécurité
+  export/pdf/camp_application/supervision_section:
+    abteilungsleitung_title: 7. Maîtrise de groupe
+    coach_title: 8. Coach
   event:
     attendances:
       index:
