@@ -237,6 +237,9 @@ it:
     all: Tutti i campi inferiori
     direct: Solo il campo direttamente inferiore
   group:
+    educations:
+      index:
+        legende: Leggenda
     pending_approvals:
       index:
         pending_title: Autorizzazioni aperte
