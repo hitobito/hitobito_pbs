@@ -263,6 +263,9 @@ de:
     direct: nur direkt untergeordnete Lager
 
   group:
+    educations:
+      index:
+        legende: Legende
     pending_approvals:
       index:
         pending_title: Offene Freigaben

@@ -238,6 +238,9 @@ fr:
     all: Tous les sous-camps
     direct: Que les sous-camps directes
   group:
+    educations:
+      index:
+        legende: Légende
     pending_approvals:
       index:
         pending_title: Confirmations en attente
