@@ -28,7 +28,7 @@ module Export::Pdf
       def table_data
         table_data = leaders.collect do |person|
           [person.to_s, person.birthday.try(:year).to_s, @context.active_qualifications(person)]
-        end * 10
+        end
       end
 
       def table_header

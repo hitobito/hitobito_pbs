@@ -42,9 +42,16 @@ module Export::Pdf
       render_title
       GroupSection.new(@document, context: @context).render
       LeadersSection.new(@document, context: @context).render
+      break_page_if_under(200)
       CampSection.new(@document, context: @context).render
+      break_page_if_under(120)
       RegistrationSection.new(@document, context: @context).render
+      break_page_if_under(120)
       SupervisionSection.new(@document, context: @context).render
+    end
+
+    def break_page_if_under(value)
+      start_new_page && move_cursor_to(bounds.top) if cursor < value
     end
 
     def render_logos

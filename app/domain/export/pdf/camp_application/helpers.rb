@@ -52,13 +52,15 @@ module Export::Pdf
       def labeled_person(person, details = true)
         labeled_value(Person.human_attribute_name(:name), person)
         labeled_value(Person.human_attribute_name(:address), person.address)
-        labeled_value(Person.human_attribute_name(:town), [person.zip_code, person.town].compact.join(' '))
+        labeled_value(Person.human_attribute_name(:town), [person.zip_code, 
+                                                           person.town].compact.join(' '))
         labeled_email(person)
         labeled_phone_number(person, 'Privat')
         labeled_phone_number(person, 'Mobil')
         return unless details
 
-        labeled_value(Person.human_attribute_name(:birthday), person.birthday.presence && I18n.l(person.birthday)) 
+        birthday = person.birthday.presence && I18n.l(person.birthday)
+        labeled_value(Person.human_attribute_name(:birthday), birthday) 
       end
 
       def title(title)

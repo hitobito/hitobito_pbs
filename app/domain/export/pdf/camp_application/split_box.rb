@@ -19,27 +19,16 @@ module Export::Pdf
       end
       
       def render 
-        original = @document 
-        @document = original.clone
-        page_count_was = @document.page_count
-        render_container
-        page_count_is = @document.page_count
-        @document = original 
-        # start_new_page if page_count_is > page_count_was
-        # render_container
-      end
-
-      def render_container
         bounding_box([0, cursor], width: bounds.width) do
           bounding_box([0, bounds.top], width: children_width) do
             @left.yield if @left
           end
-          @height = cursor
+          lowest = cursor
           bounding_box([children_width + @gap, bounds.top], width: children_width) do
             @right.yield if @right
           end
-          @height = cursor if cursor < @height
-          move_cursor_to @height
+          lowest = cursor if cursor < lowest
+          move_cursor_to lowest
         end
       end
 

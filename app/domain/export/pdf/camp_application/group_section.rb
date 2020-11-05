@@ -21,7 +21,7 @@ module Export::Pdf
         title('group_title')
         labeled_value(translate('abteilung'), @context.abteilung_name)
         labeled_value(translate('einheit'), @context.einheit_name) if @context.einheit_name
-        labeled_value(translate('kantonalverband'), @context.kantonalverband) if @context.kantonalverband
+        labeled_value(translate('kantonalverband'), kantonalverband) if kantonalverband
         move_down 16
         text translate('expected_participants')
         move_down 10
@@ -49,6 +49,10 @@ module Export::Pdf
       end
 
       protected
+
+      def kantonalverband
+        @context.kantonalverband
+      end
 
       def table_data
         [@context.expected_participant_table_header, 
