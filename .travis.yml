@@ -24,5 +24,10 @@ install:
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
   - mysql -e 'CREATE DATABASE hitobito_test'
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn install
+  - bundle exec rails webpacker:compile
 script:
   - bundle exec rake db:create ci:wagon --trace
