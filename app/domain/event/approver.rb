@@ -76,8 +76,11 @@ class Event::Approver
   end
 
   def request_approval(layer_name)
-    application.approvals.create!(layer: layer_name)
-    send_approval_request
+    approval = application.approvals.where(layer: layer_name)
+    unless approval.exists?
+      approval.create!
+      send_approval_request
+    end
   end
 
   def update_approval(approved, attrs, user)
