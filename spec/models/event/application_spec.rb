@@ -24,18 +24,36 @@ describe Event::Application do
           end
         end
 
-        it 'calls Event::Approver.application_created on creation' do
-          expect_any_instance_of(Event::Approver).to receive(:application_created).once
+        it 'calls Event::Approver.request_approvals on creation' do
+          expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
           Fabricate(:event_application, priority_1: course, priority_2: course2,
                                         participation: participation)
         end
 
-        it 'does not call Event::Approver.application_create on update' do
-          expect_any_instance_of(Event::Approver).to receive(:application_created).once
+        it 'does not call Event::Approver.request_approvals on update' do
+          expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
           application = Fabricate(:event_application, priority_1: course,
                                                       priority_2: course2,
                                                       participation: participation)
           application.save!
+        end
+
+        it 'calls Event::Approver.request_approvals when prio 1 course changes the approval flag' do
+          course.update(requires_approval_abteilung: false)
+
+          expect_any_instance_of(Event::Approver).to receive(:request_approvals).twice
+          Fabricate(:event_application, priority_1: course, priority_2: course2,
+                    participation: participation)
+          course.update(requires_approval_abteilung: true)
+        end
+
+        it 'calls Event::Approver.request_approvals when prio 2 course changes the approval flag' do
+          course2.update(requires_approval_abteilung: false)
+
+          expect_any_instance_of(Event::Approver).to receive(:request_approvals).twice
+          Fabricate(:event_application, priority_1: course, priority_2: course2,
+                    participation: participation)
+          course2.update(requires_approval_abteilung: true)
         end
       end
     end
