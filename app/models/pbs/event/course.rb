@@ -83,7 +83,7 @@ module Pbs::Event::Course
   end
 
   def request_missing_approvals
-    if APPROVALS.any? { |approval_attr| saved_changes_to_attr? approval_attr.to_sym }
+    if APPROVALS.any? { |approval_attr| saved_changes_to_attribute? approval_attr.to_sym }
       participations.each do |participation|
         Event::Approver.new(participation).request_approvals
       end
