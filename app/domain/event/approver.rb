@@ -14,7 +14,7 @@ class Event::Approver
     @participation = participation
   end
 
-  def application_created
+  def request_approvals
     return unless primary_group && application
 
     layer_name = next_approval_layer
