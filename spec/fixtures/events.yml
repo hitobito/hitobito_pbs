@@ -91,13 +91,11 @@
 #
 
 top_event:
-  name: Top Event
   groups: bund
   lft: 11
   rgt: 12
 
 top_course:
-  name: Top Course
   groups: be
   type: Event::Course
   kind: lpk
@@ -109,7 +107,6 @@ top_course:
   rgt: 2
 
 bund_course:
-  name: Bund Kurs
   groups: bund
   kind: lpk
   type: Event::Course
@@ -118,14 +115,12 @@ bund_course:
   rgt: 4
 
 schekka_camp:
-  name: Sommerlager
   groups: schekka
   type: Event::Camp
   lft: 9
   rgt: 10
 
 schekka_supercamp:
-  name: Schekka Super
   groups: schekka
   type: Event::Camp
   allow_sub_camps: true
@@ -134,7 +129,6 @@ schekka_supercamp:
   rgt: 14
 
 tsueri_supercamp:
-  name: Tsueri Super
   groups: chaeib
   type: Event::Camp
   allow_sub_camps: true
@@ -143,14 +137,12 @@ tsueri_supercamp:
   rgt: 16
 
 bund_camp:
-  name: Sammellager
   groups: bund
   type: Event::Camp
   lft: 7
   rgt: 8
 
 bund_supercamp:
-  name: Hauptlager
   groups: bund
   type: Event::Camp
   allow_sub_camps: true
