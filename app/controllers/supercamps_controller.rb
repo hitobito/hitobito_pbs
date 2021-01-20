@@ -1,4 +1,6 @@
-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+# frozen_string_literal: true
+
+#  Copyright (c) 2019-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -68,7 +70,9 @@ class SupercampsController < ApplicationController
   end
 
   def matching_supercamps
-    Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
+    Event::Camp.upcoming
+               .left_joins(:translations)
+               .where('event_translations.name LIKE ?', "%#{params[:q]}%")
                .where(allow_sub_camps: true, state: 'created').distinct
   end
 
