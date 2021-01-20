@@ -52,6 +52,7 @@ class SupercampsController < ApplicationController
 
   def without_self_and_descendants(supercamps)
     return supercamps unless camp_id
+
     child_ids = Event::Camp.find(camp_id).self_and_descendants.pluck(:id)
     supercamps.reject { |supercamp| child_ids.include?(supercamp.id) }
   end
@@ -62,7 +63,8 @@ class SupercampsController < ApplicationController
 
   def supercamps_on_group_and_above
     @supercamps_on_group_and_above = without_self_and_descendants(
-        group.decorate.upcoming_supercamps_on_group_and_above)
+      group.decorate.upcoming_supercamps_on_group_and_above
+    )
   end
 
   def matching_supercamps
@@ -76,7 +78,7 @@ class SupercampsController < ApplicationController
 
   def supercamp
     @supercamp ||= Event.includes(:dates, :application_questions, :admin_questions)
-                     .find(params[:supercamp_id])
+                        .find(params[:supercamp_id])
   end
 
   def dates_attributes
@@ -98,9 +100,10 @@ class SupercampsController < ApplicationController
   def required_contact_attrs
     all_required_attrs = supercamp.required_contact_attrs +
       Event::ParticipationContactData.mandatory_contact_attrs
-    all_required_attrs.map do |attr|
-      [attr, :required]
-    end.to_h
+
+    all_required_attrs.index_with do |_attr|
+      :required
+    end
   end
 
   def supercamp_attributes_to_merge
@@ -115,7 +118,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-      .merge(supercamp_attributes_to_merge)
+                                  .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
@@ -155,8 +158,8 @@ class SupercampsController < ApplicationController
     end
   end
 
-  def handle_access_denied(e)
-    redirect_back(fallback_location: group, alert: e.message)
+  def handle_access_denied(err)
+    redirect_back(fallback_location: group, alert: err.message)
   end
 
 end
