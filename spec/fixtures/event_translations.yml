@@ -1,0 +1,68 @@
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+top_event_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:top_event) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Top Event
+
+top_course_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:top_course) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Top Course
+
+bund_course_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:bund_course) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Bund Kurs
+
+schekka_camp_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:schekka_camp) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Sommerlager
+
+schekka_supercamp_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:schekka_supercamp) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Schekka Super
+
+tsueri_supercamp_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:tsueri_supercamp) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Tsueri Super
+
+bund_camp_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:bund_camp) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Sammellager
+
+bund_supercamp_de:
+  event_id: <%= ActiveRecord::FixtureSet.identify(:bund_supercamp) %>
+  locale: de
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+  name: Hauptlager
