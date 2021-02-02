@@ -15,7 +15,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Abteilung name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.abteilung_name).to eq(abteilung.to_s)
       end
@@ -23,7 +23,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Abteilung name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.abteilung_name).to eq(groups(:schekka).to_s)
       end
@@ -31,7 +31,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Group name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.abteilung_name).to eq(bund.to_s)
       end
@@ -43,7 +43,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'does not return Einheit name if camp at Abteilung' do
         abteilung = groups(:patria)
         camp = Fabricate(:pbs_camp, groups: [abteilung])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.einheit_name).to be_nil
       end
@@ -51,7 +51,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Einheit name if camp below Abteilung' do
         pfadi = groups(:medusa)
         camp = Fabricate(:pbs_camp, groups: [pfadi])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.einheit_name).to eq(pfadi.to_s)
       end
@@ -59,7 +59,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'does not return Einheit name if camp above Abteilung' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.einheit_name).to be_nil
       end
@@ -70,7 +70,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'does not return Kantonalverband if camp at Bund' do
         bund = groups(:bund)
         camp = Fabricate(:pbs_camp, groups: [bund])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.kantonalverband).to be_nil
       end
@@ -78,7 +78,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Kantonalverband if camp at Kantonalverband' do
         canton = groups(:be)
         camp = Fabricate(:pbs_camp, groups: [canton])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.kantonalverband).to eq(canton)
       end
@@ -86,7 +86,7 @@ describe Export::Pdf::CampApplication::ViewModel do
       it 'returns Kantonalverband if camp below Kantonalverband' do
         kyburg = groups(:kyburg)
         camp = Fabricate(:pbs_camp, groups: [kyburg])
-        data = Export::Pdf::CampApplicationData.new(camp)
+        data = described_class.new(camp)
 
         expect(data.kantonalverband).to eq(groups(:be))
       end
@@ -95,7 +95,7 @@ describe Export::Pdf::CampApplication::ViewModel do
     context 'expected participations table' do
 
       let(:camp) { Fabricate(:pbs_camp) }
-      let(:data) { Export::Pdf::CampApplicationData.new(camp) }
+      let(:data) { described_class.new(camp) }
 
       it 'has 6 header columns' do
         header_column = data.expected_participant_table_header
@@ -132,7 +132,7 @@ describe Export::Pdf::CampApplication::ViewModel do
 
       let(:camp) { Fabricate(:pbs_camp) }
       let(:leader) { Fabricate(:person) }
-      let(:data) { Export::Pdf::CampApplicationData.new(camp) }
+      let(:data) { described_class.new(camp) }
 
       it 'lists the leaders qualifications' do
         quali1 = Fabricate(:qualification, person: leader)
@@ -154,7 +154,7 @@ describe Export::Pdf::CampApplication::ViewModel do
     context 'camp attribute value formatting' do
       let(:coach) { Fabricate(:person) }
       let(:camp) { Fabricate(:pbs_camp, coach_id: coach.id) }
-      let(:data) { Export::Pdf::CampApplicationData.new(camp) }
+      let(:data) { described_class.new(camp) }
 
       context 'coach' do
         it 'prints no if coach not visiting' do
