@@ -7,7 +7,7 @@
 
 require 'spec_helper'
 
-describe Export::Pdf::CampApplicationData do
+describe Export::Pdf::CampApplication::ViewModel do
 
   describe 'section group' do
     context 'abteilung' do
