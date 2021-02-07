@@ -11,7 +11,7 @@ module Export::Pdf
       def render
         bounding_box([0, cursor], width: bounds.width) do
           title('title')
-          return text(I18n.t('global.nobody')) unless leaders.any?
+          next text(I18n.t('global.nobody')) unless leaders.any?
 
           table(table_data.unshift(table_header), width: bounds.width,
                       cell_style: { border_width: 0.25, size: 8 },
