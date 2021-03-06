@@ -52,7 +52,7 @@ email:
 
 
 people:
-  abos: false
+  abos: true
 
 messages:
   enable_writing: true
