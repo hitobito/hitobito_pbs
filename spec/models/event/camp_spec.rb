@@ -87,7 +87,6 @@
 #  required_contact_attrs            :text
 #  hidden_contact_attrs              :text
 #  display_booking_info              :boolean          default(TRUE), not null
-#  bsv_days                          :decimal(6, 2)
 #
 
 

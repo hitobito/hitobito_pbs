@@ -8,7 +8,7 @@
     %th{ colspan: 3 }
       %h2= caption
     %th
-      = entries.sum { |p| p.bsv_days || @event.bsv_days || 0 }
+      = entries.sum { |p| p.training_days || @event.training_days || 0 }
 %tbody
   - entries.each do |p|
     %tr{id: dom_id(p)}
@@ -17,11 +17,11 @@
       %td= p.roles_short
       %td= p.town
       %td
-        = number_field_tag("bsv_days[#{p.id}]",
-                           p.bsv_days || @event.bsv_days,
+        = number_field_tag("training_days[#{p.id}]",
+                           p.training_days || @event.training_days,
                            min: 0,
                            step: 0.5,
                            size: 10,
                            class: 'span2')
-        - if p.bsv_days.nil?
+        - if p.training_days.nil?
           %span.muted{ style: 'float:xleft;' }= t('.not_persisted')

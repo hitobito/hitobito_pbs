@@ -18,11 +18,11 @@ class Event::AttendancesController < ApplicationController
   end
 
   def update
-    bsv_days = params[:bsv_days]
-    if bsv_days
+    training_days = params[:training_days]
+    if training_days
       event.participations.each do |p|
-        next unless bsv_days.key?(p.id.to_s)
-        p.update(bsv_days: bsv_days[p.id.to_s])
+        next unless training_days.key?(p.id.to_s)
+        p.update(training_days: training_days[p.id.to_s])
       end
     end
     redirect_to attendances_group_event_path(group, event),

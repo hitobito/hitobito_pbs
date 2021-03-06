@@ -17,20 +17,20 @@ describe Event::AttendancesController do
 
     @p1 = Fabricate(Event::Course::Role::Leader.name.to_sym,
                     participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
-    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym, participation: Fabricate(:event_participation, event: course, bsv_days: 5)).participation
+                                             event: course, training_days: 5)).participation
+    @p2 = Fabricate(Event::Course::Role::Helper.name.to_sym, participation: Fabricate(:event_participation, event: course, training_days: 5)).participation
     @p3 = Fabricate(Event::Role::Speaker.name.to_sym,
                     participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+                                             event: course, training_days: 5)).participation
     @p4 = Fabricate(Event::Role::Cook.name.to_sym,
                     participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+                                             event: course, training_days: 5)).participation
     @p5 = Fabricate(Event::Course::Role::Participant.name.to_sym,
                     participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+                                             event: course, training_days: 5)).participation
     @p6 = Fabricate(Event::Course::Role::Participant.name.to_sym,
                     participation: Fabricate(:event_participation,
-                                             event: course, bsv_days: 5)).participation
+                                             event: course, training_days: 5)).participation
   end
 
   context 'GET index' do
@@ -47,12 +47,12 @@ describe Event::AttendancesController do
 
   context 'PATCH update' do
 
-    it 'updates all given bsv_days' do
+    it 'updates all given training_days' do
       patch :update,
             params: {
               group_id: group.id,
               id: course.id,
-              bsv_days: {
+              training_days: {
                 @p1.id.to_s => 1.5,
                 @p2.id.to_s => '',
                 @p4.id.to_s => 0
@@ -60,10 +60,10 @@ describe Event::AttendancesController do
             }
 
       expect(response).to redirect_to(attendances_group_event_path(group.id, course.id))
-      expect(@p1.reload.bsv_days).to eq(1.5)
-      expect(@p2.reload.bsv_days).to be_nil
-      expect(@p3.reload.bsv_days).to eq(5)
-      expect(@p4.reload.bsv_days).to eq(0)
+      expect(@p1.reload.training_days).to eq(1.5)
+      expect(@p2.reload.training_days).to be_nil
+      expect(@p3.reload.training_days).to eq(5)
+      expect(@p4.reload.training_days).to eq(0)
     end
 
     it 'ignores invalid values' do
@@ -71,7 +71,7 @@ describe Event::AttendancesController do
             params: {
               group_id: group.id,
               id: course.id,
-              bsv_days: {
+              training_days: {
                 @p1.id.to_s => -1.5,
                 @p2.id.to_s => RUBY_VERSION >= '2.4.0' ? -23.42 : 'jada', # ruby 2.4's big decimal does not handle strings
                 @p3.id.to_s => 6,
@@ -80,11 +80,11 @@ describe Event::AttendancesController do
             }
 
       expect(response).to redirect_to(attendances_group_event_path(group.id, course.id))
-      expect(@p1.reload.bsv_days).to eq(5)
-      expect(@p2.reload.bsv_days).to eq(5)
-      expect(@p3.reload.bsv_days).to eq(6)
-      expect(@p4.reload.bsv_days).to eq(5)
-      expect(@p5.reload.bsv_days).to eq(5)
+      expect(@p1.reload.training_days).to eq(5)
+      expect(@p2.reload.training_days).to eq(5)
+      expect(@p3.reload.training_days).to eq(6)
+      expect(@p4.reload.training_days).to eq(5)
+      expect(@p5.reload.training_days).to eq(5)
     end
 
   end

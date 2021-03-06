@@ -11,8 +11,8 @@ module Pbs
       module People
         module ParticipationRow
 
-          def bsv_days
-            participation.bsv_days || participation.event.bsv_days
+          def training_days
+            participation.training_days || participation.event.training_days
           end
 
         end

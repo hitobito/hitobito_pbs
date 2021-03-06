@@ -90,7 +90,6 @@
 #  hidden_contact_attrs                 :text(65535)
 #  contact_attrs_passed_on_to_supercamp :text(65535)
 #  display_booking_info                 :boolean          default(TRUE), not null
-#  bsv_days                             :decimal(6, 2)
 #
 
 class Event::Camp < Event
