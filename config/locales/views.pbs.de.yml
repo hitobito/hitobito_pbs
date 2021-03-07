@@ -396,3 +396,6 @@ de:
       title: Person hinzufügen
     edit:
       title: Eintrag editieren
+
+  global:
+    title_event/camp: Lager
