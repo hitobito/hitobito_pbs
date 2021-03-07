@@ -100,6 +100,30 @@ jobs:
         with:
           path: 'hitobito_pbs'
 
+      - name: 'create cache key'
+        run: cp Gemfile.lock Gemfile.lock.backup
+
+      - uses: actions/cache@v2
+        with:
+          path: hitobito/vendor/bundle
+          key: ${{ runner.os }}-ruby-bundle-${{ hashFiles('**/Gemfile.lock.backup') }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-bundle-
+
+      - uses: actions/cache@v2
+        with:
+          path: hitobito_youth/vendor/bundle
+          key: ${{ runner.os }}-ruby-bundle-${{ hashFiles('**/Gemfile.lock.backup') }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-bundle-
+
+      - uses: actions/cache@v2
+        with:
+          path: hitobito_pbs/vendor/bundle
+          key: ${{ runner.os }}-ruby-bundle-${{ hashFiles('**/Gemfile.lock.backup') }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-bundle-
+
       - name: 'Bundle install core'
         run: |
           bundle install --jobs 4 --retry 3 --path vendor/bundle
