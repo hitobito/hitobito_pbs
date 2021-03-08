@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -220,6 +220,16 @@ describe Event::Course do
     it 'is not valid when not multiple of 0.5' do
       event.bsv_days = 2.25
       expect(event).not_to be_valid
+    end
+  end
+
+  context 'globally visible' do
+    it 'is true by default' do
+      expect(event).to be_globally_visible
+    end
+
+    it 'is not editable' do
+      expect(event).to_not be_attr_used(:globally_visible)
     end
   end
 end

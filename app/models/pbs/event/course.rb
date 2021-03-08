@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -21,7 +21,7 @@ module Pbs::Event::Course
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,
                              :camp_submitted_at, :total_expected_leading_participants,
-                             :total_expected_participants]
+                             :total_expected_participants, :globally_visible]
 
     self.superior_attributes = [:express_fee, :training_days]
 
@@ -43,6 +43,7 @@ module Pbs::Event::Course
     ### CALLBACKS
     after_initialize :become_campy
     before_save :set_requires_approval
+    before_save :set_globally_visible
   end
 
 
@@ -74,6 +75,10 @@ module Pbs::Event::Course
       requires_approval_bund?
 
     true
+  end
+
+  def set_globally_visible
+    self.globally_visible = true
   end
 
   def assert_bsv_days_precision
