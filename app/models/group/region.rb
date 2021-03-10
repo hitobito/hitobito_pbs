@@ -79,7 +79,6 @@ class Group::Region < Group
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
   end
-  class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
     self.permissions = [:group_read]
@@ -121,6 +120,9 @@ class Group::Region < Group
   class Passivmitglied < ::Role
     self.permissions = []
     self.kind = :passive
+  end
+
+  class PowerUser < Adressverwaltung
   end
 
   class Praeses < ::Role
