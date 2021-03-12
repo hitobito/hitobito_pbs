@@ -1,4 +1,6 @@
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+# frozen_string_literal: true
+
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -76,6 +78,11 @@ module Pbs::EventAbility
     end
 
     alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
+    alias_method_chain :if_globally_visible_or_participating, :pbs
+  end
+
+  def if_globally_visible_or_participating_with_pbs
+    if_globally_visible_or_participating_without_pbs || participating?
   end
 
   def for_advised_courses
