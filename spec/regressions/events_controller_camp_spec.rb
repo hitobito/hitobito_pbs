@@ -29,7 +29,7 @@ describe EventsController, type: :controller do
       expect(dom.find_link(advisor_mountain.to_s)[:href]).to eq advisor_mountain_link
     end
 
-    it 'only displays person\'s name if no access to show site' do
+    it "only displays person's name if no access to show site" do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
       camp.update(advisor_mountain_security_id: advisor_mountain.id)
 

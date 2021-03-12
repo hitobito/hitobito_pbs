@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
@@ -22,92 +21,74 @@ module HitobitoPbs
     config.to_prepare do # rubocop:disable Metrics/BlockLength
 
       ### models
-      Group.send         :include, Pbs::Group
-      Person.send        :include, Pbs::Person
-      Role.send          :include, Pbs::Role
-      Qualification.send :include, Pbs::Qualification
-      Event.send         :include, Pbs::Event
-      Event::Kind.send   :include, Pbs::Event::Kind
-      Event::Course.send :include, Pbs::Event::Course
-      Event::Participation.send :include, Pbs::Event::Participation
-      Event::ParticipationContactData.send :include, Pbs::Event::ParticipationContactData
-      Event::Application.send :include, Pbs::Event::Application
-      ServiceToken.send :include, Pbs::ServiceToken
+      Group.include Pbs::Group
+      Person.include Pbs::Person
+      Role.include Pbs::Role
+      Qualification.include Pbs::Qualification
+      Event.include Pbs::Event
+      Event::Kind.include Pbs::Event::Kind
+      Event::Course.include Pbs::Event::Course
+      Event::Participation.include Pbs::Event::Participation
+      Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
+      Event::Application.include Pbs::Event::Application
+      ServiceToken.include Pbs::ServiceToken
 
       Event.acts_as_nested_set(dependent: :nullify)
 
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
-      PhoneNumber.send :include, Pbs::PhoneNumber
+      PhoneNumber.include Pbs::PhoneNumber
 
       ## domain
       Bsv::Info.leader_roles += [Event::Course::Role::Helper]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
-      Event::ParticipantAssigner.send :include, Pbs::Event::ParticipantAssigner
-      Event::Filter.send :include, Pbs::Event::Filter
-      Event::Qualifier.send :include, Pbs::Event::Qualifier
-      Export::Tabular::Events::List.send :include, Pbs::Export::Tabular::Events::List
-      Export::Tabular::Events::Row.send :include, Pbs::Export::Tabular::Events::Row
-      Export::Tabular::People::ParticipationsFull.send(
-        :include, Pbs::Export::Tabular::People::ParticipationsFull
-      )
-      Export::Tabular::People::ParticipationRow.send(
-        :include, Pbs::Export::Tabular::People::ParticipationRow
-      )
-      Export::Tabular::People::ParticipationNdbjsRow.send(
-        :include, Pbs::Export::Tabular::People::ParticipationNdbjsRow
-      )
-      Export::Tabular::People::PersonRow.send(
-        :include, Pbs::Export::Tabular::People::PersonRow
-      )
-      Export::Tabular::People::PeopleAddress.send(
-        :include, Pbs::Export::Tabular::People::PeopleAddress
-      )
-      Export::Tabular::People::PeopleFull.send(
-        :include, Pbs::Export::Tabular::People::PeopleFull
-      )
-      Export::Tabular::Events::BsvRow.send :include, Pbs::Export::Tabular::Events::BsvRow
-      Export::PeopleExportJob.send(
-       :include, Pbs::Export::PeopleExportJob
-      )
-      Export::EventParticipationsExportJob.send(
-        :include, Pbs::Export::EventParticipationsExportJob
-      )
-      Export::SubscriptionsJob.send(
-        :include, Pbs::Export::SubscriptionsJob
-      )
+      Event::ParticipantAssigner.include Pbs::Event::ParticipantAssigner
+      Event::Filter.include Pbs::Event::Filter
+      Event::Qualifier.include Pbs::Event::Qualifier
+      Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
+      Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
+      Export::Tabular::People::ParticipationsFull.include Pbs::Export::Tabular::People::ParticipationsFull
+      Export::Tabular::People::ParticipationRow.include Pbs::Export::Tabular::People::ParticipationRow
+      Export::Tabular::People::ParticipationNdbjsRow.include Pbs::Export::Tabular::People::ParticipationNdbjsRow
+      Export::Tabular::People::PersonRow.include Pbs::Export::Tabular::People::PersonRow
+      Export::Tabular::People::PeopleAddress.include Pbs::Export::Tabular::People::PeopleAddress
+      Export::Tabular::People::PeopleFull.include Pbs::Export::Tabular::People::PeopleFull
+      Export::Tabular::Events::BsvRow.include Pbs::Export::Tabular::Events::BsvRow
+      Export::PeopleExportJob.include Pbs::Export::PeopleExportJob
+      Export::EventParticipationsExportJob.include Pbs::Export::EventParticipationsExportJob
+      Export::SubscriptionsJob.include Pbs::Export::SubscriptionsJob
 
       ### abilities
       Ability.store.register Event::ApprovalAbility
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
-      GroupAbility.send :include, Pbs::GroupAbility
-      PersonReadables.send :include, Pbs::PersonReadables
-      PersonAbility.send :include, Pbs::PersonAbility
-      EventAbility.send :include, Pbs::EventAbility
-      EventAbility.send :include, Pbs::Event::Constraints
-      Event::ApplicationAbility.send :include, Pbs::Event::ApplicationAbility
-      Event::ApplicationAbility.send :include, Pbs::Event::Constraints
-      Event::ParticipationAbility.send :include, Pbs::Event::ParticipationAbility
-      Event::ParticipationAbility.send :include, Pbs::Event::Constraints
-      Event::RoleAbility.send :include, Pbs::Event::Constraints
-      QualificationAbility.send :include, Pbs::QualificationAbility
-      TokenAbility.send :include, Pbs::TokenAbility
-      VariousAbility.send :include, Pbs::VariousAbility
+      GroupAbility.include Pbs::GroupAbility
+      PersonReadables.include Pbs::PersonReadables
+      PersonAbility.include Pbs::PersonAbility
+      EventAbility.include Pbs::EventAbility
+      EventAbility.include Pbs::Event::Constraints
+      Event::ApplicationAbility.include Pbs::Event::ApplicationAbility
+      Event::ApplicationAbility.include Pbs::Event::Constraints
+      Event::ParticipationAbility.include Pbs::Event::ParticipationAbility
+      Event::ParticipationAbility.include Pbs::Event::Constraints
+      Event::RoleAbility.include Pbs::Event::Constraints
+      QualificationAbility.include Pbs::QualificationAbility
+      TokenAbility.include Pbs::TokenAbility
+      VariousAbility.include Pbs::VariousAbility
 
       ### decorators
       EventDecorator.icons['Event::Camp'] = :campground
-      EventDecorator.send :include, Pbs::EventDecorator
-      PersonDecorator.send :include, Pbs::PersonDecorator
-      ContactableDecorator.send :include, Pbs::ContactableDecorator
-      Event::ParticipationDecorator.send :include, Pbs::Event::ParticipationDecorator
-      GroupDecorator.send :include, Pbs::GroupDecorator
+      EventDecorator.include Pbs::EventDecorator
+      PersonDecorator.include Pbs::PersonDecorator
+      ContactableDecorator.include Pbs::ContactableDecorator
+      Event::ParticipationDecorator.include Pbs::Event::ParticipationDecorator
+      GroupDecorator.include Pbs::GroupDecorator
       ServiceTokenDecorator.kinds += [:group_health]
 
       ### serializers
-      PersonSerializer.send :include, Pbs::PersonSerializer
-      GroupSerializer.send  :include, Pbs::GroupSerializer
-      EventSerializer.send :include, Pbs::EventSerializer
-      EventParticipationSerializer.send :include, Pbs::EventParticipationSerializer
+      PersonSerializer.include Pbs::PersonSerializer
+      GroupSerializer.include Pbs::GroupSerializer
+      EventSerializer.include Pbs::EventSerializer
+      EventParticipationSerializer.include Pbs::EventParticipationSerializer
 
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
@@ -118,36 +99,36 @@ module HitobitoPbs
       QualificationKindsController.permitted_attrs += [:manual]
       ServiceTokensController.permitted_attrs += [:group_health]
 
-      RolesController.send :include, Pbs::RolesController
-      GroupsController.send :include, Pbs::GroupsController
-      PeopleController.send :include, Pbs::PeopleController
-      EventsController.send :include, Pbs::EventsController
-      Event::ApplicationMarketController.send :include, Pbs::Event::ApplicationMarketController
-      Event::ListsController.send :include, Pbs::Event::ListsController
-      Event::ParticipationsController.send :include, Pbs::Event::ParticipationsController
-      Event::QualificationsController.send :include, Pbs::Event::QualificationsController
-      QualificationsController.send :include, Pbs::QualificationsController
+      RolesController.include Pbs::RolesController
+      GroupsController.include Pbs::GroupsController
+      PeopleController.include Pbs::PeopleController
+      EventsController.include Pbs::EventsController
+      Event::ApplicationMarketController.include Pbs::Event::ApplicationMarketController
+      Event::ListsController.include Pbs::Event::ListsController
+      Event::ParticipationsController.include Pbs::Event::ParticipationsController
+      Event::QualificationsController.include Pbs::Event::QualificationsController
+      QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
-      SubscriptionsController.send :include, Pbs::SubscriptionsController
+      SubscriptionsController.include Pbs::SubscriptionsController
 
       ### sheets
-      Sheet::Group.send :include, Pbs::Sheet::Group
-      Sheet::Event.send :include, Pbs::Sheet::Event
+      Sheet::Group.include Pbs::Sheet::Group
+      Sheet::Event.include Pbs::Sheet::Event
 
       ### helpers
-      FilterNavigation::Events.send :include, Pbs::FilterNavigation::Events
+      FilterNavigation::Events.include Pbs::FilterNavigation::Events
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'black_lists'
-      ContactAttrs::ControlBuilder.send :include, Pbs::ContactAttrs::ControlBuilder
+      ContactAttrs::ControlBuilder.include Pbs::ContactAttrs::ControlBuilder
 
       ### jobs
-      Event::ParticipationConfirmationJob.send :include, Pbs::Event::ParticipationConfirmationJob
+      Event::ParticipationConfirmationJob.include Pbs::Event::ParticipationConfirmationJob
 
       ### mailers
-      Event::ParticipationMailer.send :include, Pbs::Event::ParticipationMailer
-      Event::RegisterMailer.send :include, Pbs::Event::RegisterMailer
-      Person::AddRequestMailer.send :include, Pbs::Person::AddRequestMailer
-      Person::LoginMailer.send :include, Pbs::Person::LoginMailer
+      Event::ParticipationMailer.include Pbs::Event::ParticipationMailer
+      Event::RegisterMailer.include Pbs::Event::RegisterMailer
+      Person::AddRequestMailer.include Pbs::Person::AddRequestMailer
+      Person::LoginMailer.include Pbs::Person::LoginMailer
 
       # Main navigation
       i = NavigationHelper::MAIN.index { |opts| opts[:label] == :courses }
@@ -173,8 +154,6 @@ module HitobitoPbs
         icon_name: :'info-circle',
         url: :help_path
       )
-
-      # rubocop:enable SingleSpaceBeforeFirstArg
 
       if Delayed::Job.table_exists?
         Event::CampReminderJob.new.schedule
