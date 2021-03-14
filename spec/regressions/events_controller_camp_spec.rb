@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -312,9 +312,10 @@ describe EventsController, type: :controller do
         Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
       end
 
-      it 'does not show contact details of camp leaders' do
-        get :show, params: { group_id: outside_camp.group_ids.first, id: outside_camp.id }
-        expect(dom).not_to have_selector('a', text: camp_leader.email)
+      it 'does not allow access' do
+        expect do
+          get :show, params: { group_id: outside_camp.group_ids.first, id: outside_camp.id }
+        end.to raise_error(CanCan::AccessDenied)
       end
 
       it 'show contact details if camp is located in own canton' do

@@ -1,4 +1,4 @@
-#  Copyright (c) 2019 Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2021 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -13,7 +13,7 @@ describe SupercampsController do
   let!(:supercamp) { events(:bund_supercamp) }
 
   before do
-    sign_in(people(:al_schekka))
+    sign_in(people(:bulei))
   end
 
   describe 'find available supercamps' do
