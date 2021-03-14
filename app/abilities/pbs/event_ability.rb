@@ -82,7 +82,9 @@ module Pbs::EventAbility
   end
 
   def if_globally_visible_or_participating_with_pbs
-    if_globally_visible_or_participating_without_pbs || participating?
+    if_globally_visible_or_participating_without_pbs ||
+      participating? ||
+      if_part_of_krisenteam
   end
 
   def for_advised_courses
