@@ -11,7 +11,7 @@ describe Event::Application do
 
   let(:course) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk)) }
   let(:course2) { Fabricate(:course, groups: [groups(:schekka)], kind: event_kinds(:lpk)) }
-  let(:participation) { Fabricate(:pbs_participation, person: people(:al_schekka)) }
+  let(:participation) { Fabricate(:pbs_participation, person: people(:al_schekka), event: course) }
 
   [true, false].each do |requires_approval|
     context requires_approval && 'approval required' || 'approval not required' do
@@ -29,31 +29,36 @@ describe Event::Application do
       end
 
       it 'does not call Event::Approver.request_approvals on update' do
-        expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
         application = Fabricate(:event_application, priority_1: course,
                                                     priority_2: course2,
                                                     participation: participation)
+
+        expect_any_instance_of(Event::Approver).not_to receive(:request_approvals)
+
         application.save!
       end
     end
   end
 
-  it 'changing approval requirement on prio 1 course calls Event::Approver.request_approvals' do
-    course.update(requires_approval_abteilung: false)
+  context 'changing requires_approval_*' do
+    let!(:application) { Fabricate(:event_application, priority_1: participation.event,
+                                           priority_2: course2, participation: participation) }
 
-    expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
-    Fabricate(:event_application, priority_1: course, priority_2: course2,
-              participation: participation)
-    course.update(requires_approval_abteilung: true)
-  end
+    before do
+      course.participations.reload
+      course2.participations.reload
+      expect(course.participations).not_to be_empty
+    end
 
-  it 'changing approval requirement on prio 2 course calls Event::Approver.request_approvals' do
-    course2.update(requires_approval_abteilung: false)
+    it 'changing approval requirement on prio 1 course calls Event::Approver.request_approvals' do
+      expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
+      course.update(requires_approval_abteilung: true)
+    end
 
-    expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
-    Fabricate(:event_application, priority_1: course, priority_2: course2,
-              participation: participation)
-    course2.update(requires_approval_abteilung: true)
+    it 'changing approval requirement on prio 2 course calls Event::Approver.request_approvals' do
+      expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
+      course2.update(requires_approval_abteilung: true)
+    end
   end
 
 end
