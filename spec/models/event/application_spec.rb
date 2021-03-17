@@ -55,8 +55,8 @@ describe Event::Application do
       course.update(requires_approval_abteilung: true)
     end
 
-    it 'changing approval requirement on prio 2 course calls Event::Approver.request_approvals' do
-      expect_any_instance_of(Event::Approver).to receive(:request_approvals).once
+    it 'changing approval requirement on prio 2 course does not call Event::Approver.request_approvals' do
+      expect_any_instance_of(Event::Approver).not_to receive(:request_approvals)
       course2.update(requires_approval_abteilung: true)
     end
   end
