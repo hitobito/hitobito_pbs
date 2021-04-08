@@ -335,6 +335,8 @@ de:
           url: http://ticket.scouts.ch
           title: "Ticket: Leitfaden zur Anmeldung von Kursteilnehmenden"
           description: "Das Ticket beschreibt den TN-Anmeldeprozess über die MiData (Mitgliederdatenbank der PBS)"
+      groups_and_roles_that_see_me:
+        title: Rollen, die auf mich Zugriff haben
 
   member_counts:
     created_data_for_year: Die Zahlen von Total %{total} Mitgliedern wurden für %{year} erfolgreich erzeugt.
