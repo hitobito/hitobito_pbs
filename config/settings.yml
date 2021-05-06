@@ -58,3 +58,4 @@ people:
 
 messages:
   enable_writing: true
+  personal_salutation: true
