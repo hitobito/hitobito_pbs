@@ -46,7 +46,8 @@ class Group::Pfadi < Group
   self.event_types = [Event, Event::Camp]
 
   children Group::Pfadi,
-           Group::AbteilungsGremium
+           Group::AbteilungsGremium,
+           Group::InternesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]

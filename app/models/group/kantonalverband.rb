@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -51,6 +51,7 @@ class Group::Kantonalverband < Group
   children Group::Region,
            Group::Abteilung,
            Group::KantonalesGremium,
+           Group::InternesKantonalesGremium,
            Group::KantonaleKommission
 
 
@@ -118,11 +119,11 @@ class Group::Kantonalverband < Group
   end
 
   class Leitungskursbetreuung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Mediensprecher < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class Mitarbeiter < ::Role
@@ -130,7 +131,7 @@ class Group::Kantonalverband < Group
   end
 
   class MitgliedKrisenteam < ::Role
-    self.permissions = [:group_read, :contact_data, :crisis_trigger]
+    self.permissions = [:layer_and_below_read, :contact_data, :crisis_trigger]
   end
 
   class Krisenverantworlicher < ::Role
@@ -183,7 +184,7 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungBetreuung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class VerantwortungBiberstufe < ::Role
@@ -207,11 +208,11 @@ class Group::Kantonalverband < Group
   end
 
   class VerantwortungKrisenteam < ::Role
-    self.permissions = [:group_read, :contact_data, :crisis_trigger]
+    self.permissions = [:layer_and_below_read, :contact_data, :crisis_trigger]
   end
 
   class VerantwortungLagermeldung < ::Role
-    self.permissions = [:group_read, :contact_data]
+    self.permissions = [:layer_and_below_read, :contact_data]
   end
 
   class VerantwortungLagerplaetze < ::Role

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -28,7 +28,10 @@ class PbsEventSeeder < EventSeeder
   end
 
   def seed_camp(values)
-    event = Event::Camp.seed(:name, camp_attributes(values)).first
+    attributes = camp_attributes(values)
+    event = Event::Camp.find_or_initialize_by(name: attributes.delete(:name))
+    event.attributes = attributes
+    event.save(validate: false)
 
     seed_dates(event, values[:application_opening_at] + 90.days)
     seed_questions(event)

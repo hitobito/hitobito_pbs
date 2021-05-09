@@ -50,30 +50,31 @@ de:
 
   export/pdf/camp_application:
     title: Lageranmeldung %{camp}
-    group_header: Abteilung und Einheit
-    leader_header: Lagerleiter*in
-    assistant_leaders_header: Lagerleitung
-    name: Name
-    address: Adresse
-    zip_town: PLZ / Ort
-    birthday: Geburtstag
-    qualifications: Ausbildung
+    by: durch
+  export/pdf/camp_application/group_section:
+    group_title: 1. Abteilung und Einheit
     abteilung: Abteilung
     einheit: Einheit
     expected_participants: Erwartete Anzahl Teilnehmende
-    camp: Lager
-    camp_dates: Lagerdaten
-    camp_location: Lagerort
-    j_s: J+S Rahmen
-    state: Lagerstatus
-    by: durch
-    abteilungsleitung: Abteilungsleitung
-    coach: Coach
     kantonalverband: Kantonalverband
+    leader_title: 2. Lagerleiter*in
+    qualifications: Ausbildung
+  export/pdf/camp_application/leaders_section:
+    title: 3. Lagerleitung
     assistant_leader_name: Vorname Name / Pfadiname
     assistant_leader_year: Jahrgang
     assistant_leader_qualifications: Gültige Ausbildungen
+  export/pdf/camp_application/camp_section:
+    title: 4. Lager
+    camp_dates: Lagerdaten
+    camp_location: Lagerort
+  export/pdf/camp_application/registration_section:
+    js_title: 5. J+S Rahmen
+    state_title: 6. Lagerstatus
     js_security: Sicherheitsbereich
+  export/pdf/camp_application/supervision_section:
+    abteilungsleitung_title: 7. Abteilungsleitung
+    coach_title: 8. Coach
 
   event:
     attendances:
@@ -262,6 +263,9 @@ de:
     direct: nur direkt untergeordnete Lager
 
   group:
+    educations:
+      index:
+        legende: Legende
     pending_approvals:
       index:
         pending_title: Offene Freigaben
@@ -282,7 +286,7 @@ de:
 
   groups:
     fields_pbs:
-      group_health_info: Wenn dieses Opt-In angekreuzt wird, stehen die Daten eurer Abteilung für die Entwicklung und das Testen des Tools HealthCheck zur Verfügung. Dieses Tool soll euch in Zukunft helfen, anhand der Mitgliederdaten zu analysieren, wie gut eure Abteilung dasteht. Die Daten werden abgesehen vom Softwareunternehmen, welches das Tool entwickelt, nicht an Dritte weitergegeben.
+      group_health_info: Wenn diese Checkbox ausgewählt ist, dann werden die Daten der Abteilung nächtlich an die Applikation HealthCheck (https://hc.scout.ch) weitergeleitet. Dort haben berechtigte Personen die Möglichkeit erweiterte Statistiken einzusehen. Die Statistiken stehen frühestens am Tag nach der Auswahl der Checkbox zur Verfügung.
     ongoing_crisis: "%{creator} hat auf dieser Gruppe eine Krise ausgelöst"
     tabs:
       population: Bestand
@@ -318,8 +322,8 @@ de:
           description: "Für Kursleiter*innen und Leitungskursbetreuer*innen: Alle administrativen Vorgänge, die bei der Anmeldung und Durchführung eines J+S- oder BSV-Kurses beachtet werden müssen, sind hier detailliert beschrieben."
         pilot:
           url: http://pilot.scouts.ch
-          title: "Pilot: Leitfaden zur PBS-Kursadministration in der MiData und der NDBJS"
-          description: "Leitfaden für Sekretariate und kantonale Ausbildungsverantwortliche zur Kursadministration in der MiData und der NDBJS"
+          title: "Pilot: Leitfaden zur PBS-Kursadministration in der MiData und der NDS"
+          description: "Leitfaden für Sekretariate und kantonale Ausbildungsverantwortliche zur Kursadministration in der MiData und der NDS"
         ticket:
           url: http://ticket.scouts.ch
           title: "Ticket: Leitfaden zur Anmeldung von Kursteilnehmenden"
@@ -392,3 +396,6 @@ de:
       title: Person hinzufügen
     edit:
       title: Eintrag editieren
+
+  global:
+    title_event/camp: Lager

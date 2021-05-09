@@ -45,8 +45,8 @@ fr:
         other: Commissions
         long: Commission cantonale
       group/pfadi:
-        one: Eclaireur·reuse
-        other: Eclaireurs·reuses
+        one: Eclaireur
+        other: Eclaireurs
       group/pio:
         one: Pico
         other: Picos
@@ -72,7 +72,7 @@ fr:
         other: Louveteaux
       group/bund/mitarbeiter_gs:
         one: Collaborateur·trice du SG
-        other: Collaborateur·trice du SG
+        other: Collaborateur·trice·s du SG
       group/bund/it_support:
         one: Support informatique
         other: Support informatique
@@ -81,7 +81,7 @@ fr:
         other: secrétariat
       group/bund/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateur·trice des adresses
+        other: Administrateur·trice·s des adresses
         description: Administre les adresses.
       group/bund/power_user:
         one: PowerUser
@@ -100,11 +100,11 @@ fr:
         one: Président·e de l'AdA
         other: Président·e·s de l'AdA
       group/bund/geschaeftsleitung:
-        one: Secrétaire·trice général
-        other: Secrétaire·trice général
+        one: Secrétaire général·e
+        other: Secrétaires général·e·s
       group/bund/mitarbeiter:
         one: collaborateur·trice
-        other: collaborateurs·trices
+        other: collaborateur·trice·s
       group/bund/vertretung_pbs:
         one: Représentant·e du MSdS
         other: Représentant·e·s du MSdS
@@ -113,13 +113,13 @@ fr:
         other: assesseurs·euses
       group/bund/kassier:
         one: Trésorier·ère
-        other: Trésoriers·ères
+        other: Trésorier·ère·s
       group/bund/revisor:
         one: Réviseur·euse aux comptes
         other: Réviseurs·euses aux comptes
       group/bund/redaktor:
         one: Rédacteur·trice
-        other: Rédacteurs·trices
+        other: Rédacteur·trice·s
       group/bund/webmaster:
         one: Webmaster
         other: Webmaster
@@ -128,7 +128,7 @@ fr:
         other: porte-parole
       group/bund/uebersetzer:
         one: traducteur·trice
-        other: traducteurs·trices
+        other: traducteur·trice·s
       group/bund/mitglied_krisenteam:
         one: Responsable cellule de crise
         other: Responsables cellule de crise
@@ -140,7 +140,7 @@ fr:
         other: Coaches grandes manifestations
       group/bund/leitungskursbetreuung:
         one: conseiller·ère à la formation
-        other: conseillers·ères à la formation
+        other: conseiller·ère·s à la formation
       group/bund/leitung_kernaufgabe_ausbildung:
         one: Responsable tâche essentielle formation
         other: Responsable tâche essentielle formation
@@ -172,8 +172,8 @@ fr:
         one: Responsable Scout Malgré Tout
         other: Responsables Scout Malgré Tout
       group/bund/verantwortung_integration:
-        one: Responsable intégration
-        other: Responsables intégration
+        one: Responsable diversité et inclusion
+        other: Responsables diversité et inclusion
       group/bund/verantwortung_krisenteam:
         one: Responsable de l'équipe de crise
         other: Responsable de l'équipe de crise
@@ -205,8 +205,8 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/bund/passivmitglied:
-        one: Membre passif·ve
-        other: Membres passif·ve
+        one: Membre passif
+        other: Membres passif
       group/bund/kontaktperson:
         one: Personne de contact
         other: Personnes de contact
@@ -221,7 +221,7 @@ fr:
         other: secrétariats
       group/kantonalverband/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/kantonalverband/power_user:
         one: PowerUser
         other: PowerUser
@@ -236,19 +236,19 @@ fr:
         other: Président·e·s de l'AdA
       group/kantonalverband/mitarbeiter:
         one: Collaborateur·trice
-        other: Collaborateurs·trices
+        other: Collaborateur·trice·s
       group/kantonalverband/beisitz:
         one: Assesseur·euse
         other: Assesseurs·euses
       group/kantonalverband/kassier:
         one: Trésorier·ère
-        other: Trésoriers·ères
+        other: Trésorier·ère·s
       group/kantonalverband/revisor:
-        one: Réviseur·euse aux comptes
-        other: Réviseurs·euses aux comptes
+        one: Réviseur-euse
+        other: Réviseurs-euses
       group/kantonalverband/redaktor:
         one: Rédacteur·trice
-        other: Rédacteurs·trices
+        other: Rédacteur·trice·s
       group/kantonalverband/webmaster:
         one: Webmaster
         other: Webmaster
@@ -257,7 +257,7 @@ fr:
         other: Porte-paroles
       group/kantonalverband/uebersetzer:
         one: Traducteur·trice
-        other: Traducteurs·trices
+        other: Traducteur·trice·s
       group/kantonalverband/mitglied_krisenteam:
         one: Membre cellule de crise
         other: Membres cellule de crise
@@ -266,7 +266,7 @@ fr:
         other: Coaches
       group/kantonalverband/leitungskursbetreuung:
         one: Conseiller·ère à la formation
-        other: Conseillers·ères à la formation
+        other: Conseiller·ère·s à la formation
       group/kantonalverband/verantwortung_biberstufe:
         one: Responsable branche Castors
         other: Responsables branche Castors
@@ -298,8 +298,8 @@ fr:
         one: Responsable encadrement
         other: Responsables encadrement
       group/kantonalverband/verantwortung_integration:
-        one: Responsable intégration
-        other: Responsables intégration
+        one: Responsable diversité et inclusion
+        other: Responsables diversité et inclusion
       group/kantonalverband/verantwortung_internationales:
         one: Responsable international
         other: Responsables international
@@ -337,17 +337,17 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/kantonalverband/passivmitglied:
-        one: Membre passif·ve
-        other: Membres passifs·ves
+        one: Membre passif
+        other: Membres passifs
       group/region/regionalleitung:
-        one: Responsable régional·e
-        other: Responsables régional·aux
+        one: Responsable régional-e
+        other: Responsables régionaux-ales
       group/region/sekretariat:
         one: Secrétariat
         other: Secrétariats
       group/region/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/region/power_user:
         one: PowerUser
         other: PowerUser
@@ -361,23 +361,23 @@ fr:
         one: Président·e de l'AdA
         other: Président·e·s de l'AdA
       group/region/praeses:
-        one: Aumônier·euse
-        other: Aumôniers·euses
+        one: Aumônier·ère
+        other: Aumônier·ère·s
       group/region/mitarbeiter:
         one: Collaborateur·trice
-        other: Collaborateurs·trices
+        other: Collaborateur·trice·s
       group/region/beisitz:
-        one: Assesseur·euse
-        other: Assesseurs·euses
+        one: assesseur-euse
+        other: assesseurs-euses
       group/region/kassier:
         one: Trésorier·ère
-        other: Trésoriers·ères
+        other: Trésorier·ère·s
       group/region/revisor:
-        one: Réviseur·euse aux comptes
-        other: Réviseurs·euses aux comptes
+        one: Réviseur aux comptes
+        other: Réviseurs aux comptes
       group/region/redaktor:
         one: Rédacteur·trice
-        other: Rédacteurs·trices
+        other: Rédacteur·trice·s
       group/region/webmaster:
         one: Webmaster
         other: Webmaster
@@ -392,7 +392,7 @@ fr:
         other: Coaches
       group/region/leitungskursbetreuung:
         one: Conseiller·ère à la formation
-        other: Conseillers·ères à la formation
+        other: Conseiller·ère·s à la formation
       group/region/verantwortung_biberstufe:
         one: Responsable branche Castors
         other: Responsables branche Castors
@@ -424,8 +424,8 @@ fr:
         one: Responsable encadrement
         other: Responsables encadrement
       group/region/verantwortung_integration:
-        one: Responsable intégration
-        other: Responsables intégration
+        one: Responsable diversité et inclusion
+        other: Responsables diversité et inclusion
       group/region/verantwortung_internationales:
         one: Responsable international
         other: Responsables international
@@ -460,20 +460,20 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/region/passivmitglied:
-        one: Membre passif·ve
-        other: Membres passifs·ves
+        one: Membre passif
+        other: Membres passifs
       group/abteilung/abteilungsleitung:
         one: Responsable de groupe
         other: Responsables de groupe
       group/abteilung/abteilungsleitung_stv:
-        one: Responsable de groupe adjoint
-        other: Responsables de groupe adjoint
+        one: Remplaçant-e du-de la responsable de groupe
+        other: Remplaçant-e-s du-de la responsable de groupe
       group/abteilung/sekretariat:
         one: Secrétariat
         other: Secrétariats
       group/abteilung/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/abteilung/power_user:
         one: PowerUser
         other: PowerUser
@@ -486,18 +486,21 @@ fr:
       group/abteilung/praesidium_apv:
         one: Président·e de l'AdA
         other: Président·e·s de l'AdA
+      group/abteilung/praesidium_elternrat:
+        one: Président-e du Conseil des parents
+        other: Président-e-s du Conseil des parents
       group/abteilung/praeses:
-        one: Aumônier·euse
-        other: Aumôniers·euses
+        one: Aumônier·ère
+        other: Aumônier·ère·s
       group/abteilung/beisitz:
-        one: Assesseur·euse
-        other: Assesseurs·euses
+        one: assesseur-euse
+        other: assesseurs-euses
       group/abteilung/materialwart:
         one: Responsable du matériel
         other: Responsables du matériel
       group/abteilung/heimverwaltung:
         one: Administrateur·trice à domicile
-        other: Administrateurs·trices à domicile
+        other: Administrateur·trice·s à domicile
       group/abteilung/stufenleitung_biber:
         one: Responsable de branche Castors
         other: Responsables de branche Castors
@@ -505,26 +508,26 @@ fr:
         one: Responsable de branche Louveteaux
         other: Responsables de branche Louveteaux
       group/abteilung/stufenleitung_pfadi:
-        one: Responsable de branche Eclais
-        other: Responsables de branche Eclais
+        one: Responsable de branche Éclais
+        other: Responsables de branche Éclais
       group/abteilung/stufenleitung_pio:
         one: Responsable de branche Picos
         other: Responsables de branche Picos
       group/abteilung/stufenleitung_rover:
-        one: Responsable de branche Route
+        one: Responsables de branche Route
         other: Responsables de branche Route
       group/abteilung/stufenleitung_pta:
         one: Responsable de branche SMT
         other: Responsables de branche SMT
       group/abteilung/kassier:
         one: Trésorier·ère
-        other: Trésoriers·ères
+        other: Trésorier·ère·s
       group/abteilung/revisor:
-        one: Réviseur·euse aux comptes
-        other: Réviseurs·euses aux comptes
+        one: Réviseur-euse
+        other: Réviseurs-euses
       group/abteilung/redaktor:
         one: Rédacteur·trice
-        other: Rédacteurs·trices
+        other: Rédacteur·trice·s
       group/abteilung/webmaster:
         one: Webmaster
         other: Webmaster
@@ -547,17 +550,17 @@ fr:
         one: Membre d'honneur
         other: Membres d'honneur
       group/abteilung/passivmitglied:
-        one: Membre passif·ve
-        other: Membres passifs·ves
+        one: Membre passif
+        other: Membres passifs
       group/biber/einheitsleitung:
         one: Responsable d'unité
         other: Responsables d'unité
       group/biber/mitleitung:
-        one: Responsable adjoint·e
-        other: Responsables adjoint·e
+        one: Co-responsable
+        other: Co-responsables
       group/biber/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/biber/biber:
         one: Castor
         other: Castor
@@ -570,11 +573,11 @@ fr:
         other: Responsables adjoint·e
       group/woelfe/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/woelfe/leitwolf:
-        one: Sizenier·ière
-        other: Sizeniers·ières
-        long: Sizenier·ière
+        one: Responsable de sizaine
+        other: Responsables de sizaine
+        long: Responsable de sizaine
       group/woelfe/wolf:
         one: Louveteau
         other: Louveteaux
@@ -587,7 +590,7 @@ fr:
         other: Responsables adjoint·e
       group/pfadi/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/pfadi/leitpfadi:
         one: Responsable de patrouille
         other: Responsables de patrouille
@@ -604,7 +607,7 @@ fr:
         other: Responsables adjoint·es
       group/pio/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/pio/pio:
         one: Pico
         other: Picos
@@ -617,7 +620,7 @@ fr:
         other: Responsables adjoint·es
       group/rover/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/rover/rover:
         one: Routier
         other: Routiers
@@ -630,7 +633,7 @@ fr:
         other: Responsables adjoint·es
       group/pta/adressverwaltung:
         one: Administrateur·trice des adresses
-        other: Administrateurs·trices des adresses
+        other: Administrateur·trice·s des adresses
       group/pta/mitglied:
         one: Membre
         other: Membres
@@ -656,8 +659,8 @@ fr:
         one: Camp
         other: Camps
       event/camp/role/leader:
-        one: Maîtrise de camp
-        other: Maîtrises de camp
+        one: Responsable de camp
+        other: Responsables de camp
       event/camp/role/assistant_leader:
         one: Responsable
         other: Responsables
@@ -677,8 +680,8 @@ fr:
         one: Responsable activité de sécurité Eau
         other: Responsables activité de sécurité Eau
       event/camp/role/abteilungsleitung:
-        one: Maîtrise de groupe
-        other: Maîtrise de groupe
+        one: Responsable de groupe
+        other: Responsables de groupe
       event/camp/role/coach:
         one: Coach
         other: Coaches
@@ -692,11 +695,11 @@ fr:
         one: Encadrement activité de sécurité Eau
         other: Encadrement activité de sécurité Eau
       event/course/role/leader:
-        one: Chef de cours
-        other: Chefs de cours
+        one: Chef·fe de cours
+        other: Chef·fe·s de cours
       event/course/role/class_leader:
         one: Formateur·trice
-        other: Chef de classe
+        other: Formateur·trice·s
       event/course/role/helper:
         one: Assistant·e de cours
         other: Assistant·e·s de cours
@@ -730,7 +733,7 @@ fr:
             value:
               m: Cher %{first_name}
               w: Chère  %{first_name}
-              other: Cher·Chère %{first_name}
+              other: Cher/Chère %{first_name}
           lieber_titel_nachname:
             label: Chère Madame · Cher Monsieur [Titel] [Nachname]
             value:
@@ -798,10 +801,10 @@ fr:
         local_scout_contact: Informations de contact des scouts locaux
         updated_at: Actualisé pour la dernière fois
         any_expected_participant_attr: Participant·e·s attendu·e·s
-        abteilungsleitung_id: maîtrise de groupe
-        abteilungsleitung: maîtrise de groupe
-        leader: maîtrise de camp
-        leader_id: maîtrise de camp
+        abteilungsleitung_id: responsable de groupe
+        abteilungsleitung: responsable de groupe
+        leader: Responsable de camp
+        leader_id: Responsable de camp
         coach_confirmed: coach confirmé
         advisor_mountain_security_id: Encadrement activité de sécurité Montagne
         advisor_mountain_security: Encadrement activité de sécurité Montagne
@@ -828,7 +831,7 @@ fr:
         states:
           created: Créé
           confirmed: Confirmé
-          assignment_closed: Participant·e·s saisis
+          assignment_closed: Participants saisis
           canceled: Annulé
           closed: Clôturé
         participation_states:
@@ -876,6 +879,7 @@ fr:
         brother_and_sisters: Frères et soeurs
         relations_to_tails: fratrie
         kv: Assocation cantonale
+        prefers_digital_correspondence: Préfère la correspondance numérique
       group:
         pta: SMT
         vkp: ASC
@@ -892,6 +896,7 @@ fr:
           w: Femmes
         try_out_day_at: Journée découverte
         geolocations: Lieux de rendez-vous
+        group_health: Opt-in Healthcheck
       people_relation:
         kinds:
           sibling: fratrie
@@ -941,6 +946,8 @@ fr:
         manual: Entrer manuellement
       label_format:
         nickname: Nom scout sur l'étiquette
+      service_token:
+        group_health: Fin de l'export du Healthcheck
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
@@ -953,6 +960,10 @@ fr:
           attributes:
             base:
               cannot_remove_parent_id: "Le camp supérieur ne peut plus être quitté, vu qu'il n'apparaît plus dans le statut \"créé\""
+        person:
+          attributes:
+            prefers_digital_correspondence:
+              email_must_exist: Pour la préférence d'envoi digitale, l'adresse e-mail principale doit exister
         role:
           attributes:
             created_at:

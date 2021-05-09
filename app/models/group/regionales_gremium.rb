@@ -43,7 +43,8 @@
 
 class Group::RegionalesGremium < Group::Gremium
 
-  children Group::RegionalesGremium
+  children Group::RegionalesGremium,
+           Group::InternesRegionalesGremium
 
   class Leitung < Group::Gremium::Leitung
   end

@@ -28,11 +28,14 @@ class GroupHealthController < ApplicationController
 
 
   # query only subgroups of layers where the group health opt-in is enabled
-  GROUP_HEALTH_JOIN = 'INNER JOIN groups AS layer ON groups.layer_group_id = layer.id AND' \
-      ' layer.group_health = TRUE'.freeze
+  GROUP_HEALTH_JOIN = "INNER JOIN #{Group.quoted_table_name} AS layer " \
+                      "ON #{Group.quoted_table_name}.layer_group_id = layer.id " \
+                      'AND layer.group_health = TRUE'.freeze
   # query the group of type "Kantonalverband" which lies above in the hierarchical structure
-  CANTON_JOIN = 'LEFT JOIN groups AS canton ON groups.lft >= canton.lft' \
-      ' AND groups.lft < canton.rgt AND canton.type = "Group::Kantonalverband"'.freeze
+  CANTON_JOIN = "LEFT JOIN #{Group.quoted_table_name} AS canton " \
+                "ON #{Group.quoted_table_name}.lft >= canton.lft " \
+                "AND #{Group.quoted_table_name}.lft < canton.rgt " \
+                'AND canton.type = "Group::Kantonalverband"'.freeze
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action do
@@ -62,7 +65,8 @@ class GroupHealthController < ApplicationController
   end
 
   def groups
-    respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) as groups")
+    respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
+                       "AS #{Group.quoted_table_name}")
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
   end
@@ -178,19 +182,20 @@ class GroupHealthController < ApplicationController
   end
 
   def bund
-    Group.select('groups.*', 'NULL as canton_id', 'NULL as canton_name')
+    Group.select("#{Group.quoted_table_name}.*", 'NULL as canton_id', 'NULL as canton_name')
         .where(type: Group::Bund)
         .to_sql
   end
 
   def cantons
-    Group.select('groups.*', 'id as canton_id', 'name as canton_name')
+    Group.select("#{Group.quoted_table_name}.*", 'id as canton_id', 'name as canton_name')
         .where(type: Group::Kantonalverband)
         .to_sql
   end
 
   def abt_and_below
-    Group.select('groups.*', 'canton.id as canton_id', 'canton.name as canton_name')
+    Group.select("#{Group.quoted_table_name}.*", 'canton.id as canton_id',
+                 'canton.name as canton_name')
         .joins(CANTON_JOIN)
         .joins(GROUP_HEALTH_JOIN).distinct
         .to_sql

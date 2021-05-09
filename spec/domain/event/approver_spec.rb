@@ -76,7 +76,7 @@ describe Event::Approver do
       end
 
       it 'creates no Event::Approval and sends no emails if participation has no application' do
-        approver.application_created
+        approver.request_approvals
         expect(Event::Approval.count).to eq(0)
         expect(Event::ParticipationMailer).to_not have_received(:approval)
       end

@@ -36,6 +36,11 @@ describe Person::LoginMailer do
   its(:to)       { should == [recipient.email] }
   its(:reply_to) { should == [sender.email] }
   its(:subject)  { should == "Willkommen bei #{Settings.application.name}" }
-  its(:body)     { should =~ /Liebe\*r Torben<br\/>.*test.host\/users\/password\/edit\?reset_password_token=/ }
 
+  it 'sends a mail with a html-body with interpolated placeholders' do
+    body = subject.body.raw_source
+
+    expect(body).to match(/Liebe\*r Torben/)
+    expect(body).to match(/test.host\/users\/password\/edit\?reset_password_token=/)
+  end
 end

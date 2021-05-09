@@ -13,16 +13,21 @@ rvm:
 install:
   - unset BUNDLE_GEMFILE # we bundle in different directories
   - cd .. && git clone https://github.com/hitobito/hitobito_youth.git hitobito_youth
-  - cd hitobito_youth && git checkout -f $([[ $TRAVIS_BRANCH = 'rails-5' ]] && echo 'rails-5' || echo 'master')
+  - cd hitobito_youth && git checkout -f master
   - cd .. && git clone https://github.com/hitobito/hitobito.git hitobito
-  - cd hitobito && git checkout -f $([[ $TRAVIS_BRANCH = 'rails-5' ]] && echo 'rails-5' || echo 'master')
+  - cd hitobito && git checkout -f master
   - export HITOBITO_CORE_DIR=$PWD
   - cp -v Wagonfile.ci Wagonfile
   - rvm use $TRAVIS_RUBY_VERSION --fuzzy
-  - gem install bundler --version 1.9.10
+  - gem install bundler --version 1.17.3
   - bundle install --path vendor/bundle
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
   - mysql -e 'CREATE DATABASE hitobito_test'
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn install
+  - bundle exec rails webpacker:compile
 script:
   - bundle exec rake db:create ci:wagon --trace

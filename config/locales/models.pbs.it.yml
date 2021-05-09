@@ -185,9 +185,6 @@ it:
       group/bund/verantwortung_pfadi_trotz_allem:
         one: responsabile SOC
         other: Responsabili SOC
-      group/bund/verantwortung_integration:
-        one: Responsabile integrazione
-        other: Responsabili integrazione
       group/bund/verantwortung_krisenteam:
         one: Responsabile team di crisi
         other: Responsabile team di crisi
@@ -311,9 +308,6 @@ it:
       group/kantonalverband/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
         other: Responsabili dell'accompagnamento
-      group/kantonalverband/verantwortung_integration:
-        one: Responsabile integrazione
-        other: Responsabili integrazione
       group/kantonalverband/verantwortung_internationales:
         one: Responsabile internizionale
         other: Responsabili internizionale
@@ -437,9 +431,6 @@ it:
       group/region/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
         other: Responsabili dell'accompagnamento
-      group/region/verantwortung_integration:
-        one: Responsabile integrazione
-        other: Responsabili integrazione
       group/region/verantwortung_internationales:
         one: Responsabile internizionale
         other: Responsabili internizionale
@@ -890,6 +881,7 @@ it:
         brother_and_sisters: Fratelli
         relations_to_tails: Fratelli
         kv: Associazione cantonale
+        prefers_digital_correspondence: Si preferisce la corrispondenza digitale
       group:
         pta: Scout a ogni costo
         vkp: Federazione scout cattolici VKP
@@ -906,6 +898,7 @@ it:
           w: Donne
         try_out_day_at: Giornata di prova
         geolocations: Punti d'incontro
+        group_health: Opt-In HealthCheck
       people_relation:
         kinds:
           sibling: Fratelli
@@ -955,6 +948,8 @@ it:
         manual: Inserire manualmente
       label_format:
         nickname: Nome scout sull'etichetta
+      service_token:
+        group_health: HealthCheck Export-punto finale
     errors:
       messages:
         must_be_multiple_of: dev'essere un multiplo di %{multiple} .
@@ -967,6 +962,10 @@ it:
           attributes:
             base:
               cannot_remove_parent_id: "Il campo superiore non può più essere lasciato, in quanto non è più nello stato \"Creato\"."
+        person:
+          attributes:
+            prefers_digital_correspondence:
+              email_must_exist: Per una preferenza di invio digitale deve esistere l'e-mail principale
         role:
           attributes:
             created_at:

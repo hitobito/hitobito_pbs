@@ -50,6 +50,11 @@ email:
     submit_recipient: lager@pbs.ch
     submit_abroad_recipient: auslandlager@pbs.ch
 
+event:
+  globally_visible_by_default: false
 
 people:
   abos: true
+
+messages:
+  enable_writing: true

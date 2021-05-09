@@ -2,6 +2,7 @@
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
+
 # == Schema Information
 #
 # Table name: groups
@@ -65,7 +66,8 @@ class Group::Abteilung < Group
            Group::AbteilungsRover,
            Group::Pta,
            Group::Elternrat,
-           Group::AbteilungsGremium
+           Group::AbteilungsGremium,
+           Group::InternesAbteilungsGremium
 
   has_many :member_counts # rubocop:disable Rails/HasManyOrHasOneDependent since groups are only soft-deleted
   has_many :geolocations, as: :geolocatable, dependent: :destroy

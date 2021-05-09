@@ -40,6 +40,21 @@ de:
       group/elternrat:
         one: Elternrat
         other: Elternräte
+      group/internes_abteilungs_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Abteilungsgremium
+      group/internes_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+      group/internes_kantonales_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Kantonales Gremium
+      group/internes_regionales_gremium:
+        one: Internes Gremium
+        other: Interne Gremien
+        long: Internes Regionales Gremium
       group/gremium:
         one: Gremium
         other: Gremien
@@ -846,6 +861,15 @@ de:
         other: Mitglieder
         description:
 
+      group/internes_gremium/leitung:
+        one: Leitung
+        other: Leitung
+        description:
+      group/internes_gremium/mitglied:
+        one: Mitglied
+        other: Mitglieder
+        description:
+
       group/gremium/leitung:
         one: Leiter*in
         other: Leiter*innen
@@ -1209,7 +1233,7 @@ de:
         event/camp:
           attributes:
             base:
-              cannot_remove_parent_id: "Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status \"Erstellt\" ist"
+              cannot_remove_parent_id: 'Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status "Erstellt" ist'
         person:
           attributes:
             prefers_digital_correspondence:

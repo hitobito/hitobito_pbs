@@ -1,4 +1,6 @@
-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+# frozen_string_literal: true
+
+#  Copyright (c) 2019-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -52,6 +54,7 @@ class SupercampsController < ApplicationController
 
   def without_self_and_descendants(supercamps)
     return supercamps unless camp_id
+
     child_ids = Event::Camp.find(camp_id).self_and_descendants.pluck(:id)
     supercamps.reject { |supercamp| child_ids.include?(supercamp.id) }
   end
@@ -62,11 +65,14 @@ class SupercampsController < ApplicationController
 
   def supercamps_on_group_and_above
     @supercamps_on_group_and_above = without_self_and_descendants(
-        group.decorate.upcoming_supercamps_on_group_and_above)
+      group.decorate.upcoming_supercamps_on_group_and_above
+    )
   end
 
   def matching_supercamps
-    Event::Camp.upcoming.where('name LIKE ?', "%#{params[:q]}%")
+    Event::Camp.upcoming
+               .left_joins(:translations)
+               .where('event_translations.name LIKE ?', "%#{params[:q]}%")
                .where(allow_sub_camps: true, state: 'created').distinct
   end
 
@@ -76,7 +82,7 @@ class SupercampsController < ApplicationController
 
   def supercamp
     @supercamp ||= Event.includes(:dates, :application_questions, :admin_questions)
-                     .find(params[:supercamp_id])
+                        .find(params[:supercamp_id])
   end
 
   def dates_attributes
@@ -98,9 +104,10 @@ class SupercampsController < ApplicationController
   def required_contact_attrs
     all_required_attrs = supercamp.required_contact_attrs +
       Event::ParticipationContactData.mandatory_contact_attrs
-    all_required_attrs.map do |attr|
-      [attr, :required]
-    end.to_h
+
+    all_required_attrs.index_with do |_attr|
+      :required
+    end
   end
 
   def supercamp_attributes_to_merge
@@ -115,7 +122,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-      .merge(supercamp_attributes_to_merge)
+                                  .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
@@ -155,8 +162,8 @@ class SupercampsController < ApplicationController
     end
   end
 
-  def handle_access_denied(e)
-    redirect_back(fallback_location: group, alert: e.message)
+  def handle_access_denied(err)
+    redirect_back(fallback_location: group, alert: err.message)
   end
 
 end
