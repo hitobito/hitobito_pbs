@@ -1,5 +1,7 @@
 language: ruby
-cache: bundler
+cache:
+  bundler: true
+  yarn: true
 dist: xenial
 services:
   - mysql
@@ -24,7 +26,7 @@ install:
   - for d in ../hitobito_*; do cd $d && cp -v $HITOBITO_CORE_DIR/Gemfile.lock ./ && rvm use $TRAVIS_RUBY_VERSION --fuzzy && bundle install --path vendor/bundle; done
   - cd $HITOBITO_CORE_DIR && rvm use $TRAVIS_RUBY_VERSION --fuzzy
   - mysql -e 'CREATE DATABASE hitobito_test'
-  - nvm install node
+  - nvm install v15.14.0
   - node -v
   - npm i -g yarn
   - yarn install
