@@ -32,4 +32,4 @@ install:
   - yarn install
   - bundle exec rails webpacker:compile
 script:
-  - bundle exec rake db:create db:migrate wagon:migrate ci:wagon --trace
+  - bundle exec rake db:create ci:wagon --trace
