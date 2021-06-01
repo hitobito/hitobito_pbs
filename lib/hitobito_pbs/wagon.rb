@@ -62,6 +62,7 @@ module HitobitoPbs
       Export::PeopleExportJob.include Pbs::Export::PeopleExportJob
       Export::EventParticipationsExportJob.include Pbs::Export::EventParticipationsExportJob
       Export::SubscriptionsJob.include Pbs::Export::SubscriptionsJob
+      Salutation.prepend Pbs::Salutation
 
       ### abilities
       Ability.store.register Event::ApprovalAbility
