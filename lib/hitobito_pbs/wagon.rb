@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -47,13 +47,13 @@ module HitobitoPbs
       Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.include(
-          Pbs::Export::Tabular::People::ParticipationsFull
+        Pbs::Export::Tabular::People::ParticipationsFull
       )
       Export::Tabular::People::ParticipationRow.include(
-          Pbs::Export::Tabular::People::ParticipationRow
+        Pbs::Export::Tabular::People::ParticipationRow
       )
       Export::Tabular::People::ParticipationNdbjsRow.include(
-          Pbs::Export::Tabular::People::ParticipationNdbjsRow
+        Pbs::Export::Tabular::People::ParticipationNdbjsRow
       )
       Export::Tabular::People::PersonRow.include Pbs::Export::Tabular::People::PersonRow
       Export::Tabular::People::PeopleAddress.include Pbs::Export::Tabular::People::PeopleAddress
@@ -69,6 +69,7 @@ module HitobitoPbs
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
       GroupAbility.include Pbs::GroupAbility
+      GroupAbility.prepend Pbs::ServiceToken::Constraints
       PersonReadables.include Pbs::PersonReadables
       PersonAbility.include Pbs::PersonAbility
       EventAbility.include Pbs::EventAbility
@@ -79,6 +80,7 @@ module HitobitoPbs
       Event::ParticipationAbility.include Pbs::Event::Constraints
       Event::RoleAbility.include Pbs::Event::Constraints
       QualificationAbility.include Pbs::QualificationAbility
+      ServiceTokenAbility.prepend Pbs::ServiceToken::Constraints
       TokenAbility.include Pbs::TokenAbility
       VariousAbility.include Pbs::VariousAbility
 
