@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -69,7 +69,7 @@ module HitobitoPbs
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
       GroupAbility.include Pbs::GroupAbility
-      GroupAbility.include Pbs::ServiceToken::Constraints
+      GroupAbility.prepend Pbs::ServiceToken::Constraints
       PersonReadables.include Pbs::PersonReadables
       PersonAbility.include Pbs::PersonAbility
       EventAbility.include Pbs::EventAbility
@@ -80,7 +80,7 @@ module HitobitoPbs
       Event::ParticipationAbility.include Pbs::Event::Constraints
       Event::RoleAbility.include Pbs::Event::Constraints
       QualificationAbility.include Pbs::QualificationAbility
-      ServiceTokenAbility.include Pbs::ServiceToken::Constraints
+      ServiceTokenAbility.prepend Pbs::ServiceToken::Constraints
       TokenAbility.include Pbs::TokenAbility
       VariousAbility.include Pbs::VariousAbility
 
