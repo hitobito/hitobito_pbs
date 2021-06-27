@@ -47,13 +47,13 @@ module HitobitoPbs
       Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.include(
-          Pbs::Export::Tabular::People::ParticipationsFull
+        Pbs::Export::Tabular::People::ParticipationsFull
       )
       Export::Tabular::People::ParticipationRow.include(
-          Pbs::Export::Tabular::People::ParticipationRow
+        Pbs::Export::Tabular::People::ParticipationRow
       )
       Export::Tabular::People::ParticipationNdbjsRow.include(
-          Pbs::Export::Tabular::People::ParticipationNdbjsRow
+        Pbs::Export::Tabular::People::ParticipationNdbjsRow
       )
       Export::Tabular::People::PersonRow.include Pbs::Export::Tabular::People::PersonRow
       Export::Tabular::People::PeopleAddress.include Pbs::Export::Tabular::People::PeopleAddress
