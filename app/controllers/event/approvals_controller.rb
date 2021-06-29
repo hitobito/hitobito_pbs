@@ -13,7 +13,7 @@ class Event::ApprovalsController < CrudController
   decorates :group, :event, :participation
 
   def new
-    redirect_to participation_path unless entry
+    redirect_to participation_path unless entry && (decision rescue nil)
   end
 
   def index
