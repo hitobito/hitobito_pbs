@@ -2,9 +2,6 @@
 
 This hitobito wagon defines the organization hierarchy with groups and roles of Pfadibewegung Schweiz.
 
-[![Build
-Status](https://travis-ci.org/hitobito/hitobito_pbs.svg)](https://travis-ci.org/hitobito/hitobito_pbs)
-
 # Pfadi Organization Hierarchy
 
     * Bund
