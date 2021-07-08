@@ -86,6 +86,14 @@ describe GroupHealthController do
           expect(groups.size).to eq(1)
         end
 
+        it 'exports geolocations' do
+          location = Fabricate(:geolocation, geolocatable: groups(:schekka))
+          get :groups, format: :json
+          json = JSON.parse(response.body)
+          groups = json['groups'].select {|g| g['name'] == groups(:schekka).name}
+          expect(groups[0]['geolocations']).to eq([{ 'id' => location.id, 'lat' => location.lat, 'long' => location.long }])
+        end
+
         it 'does only export people with roles in a group having opted in' do
           get :people, format: :json
           json = JSON.parse(response.body)
