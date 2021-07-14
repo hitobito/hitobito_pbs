@@ -17,7 +17,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
 
   context 'header' do
     it 'includes name, address attributes and layer group columns' do
-      expect(households.attributes).to eq [:name, :address, :zip_code, :town,
+      expect(households.attributes).to eq [:salutation, :name, :address, :zip_code, :town,
                                            :country, :layer_group, :correspondence_language,
                                            :kantonalverband_id,
                                            :id, :layer_group_id, :company_name, :company]
