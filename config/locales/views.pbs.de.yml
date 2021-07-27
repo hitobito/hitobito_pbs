@@ -175,6 +175,9 @@ de:
         course_confirmation: Kursbestätigung
 
   events:
+    courses:
+      group_filter:
+        filter_by_layer: Kursträger
     actions_show_pbs:
       camp_application: Lageranmeldung PBS
       cancel_button: Abmelden
