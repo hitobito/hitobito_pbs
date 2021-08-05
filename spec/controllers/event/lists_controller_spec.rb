@@ -208,10 +208,14 @@ describe Event::ListsController do
     context 'advanced' do
       it 'includes advanced attribute labels' do
         get :bsv_export, params: {
-            bsv_export: { event_kinds: [kind.id], date_from: '09.09.2015' },
-            year: 2016,
-            advanced: true
-          }
+            filter: {
+              bsv_since: '09.09.2015',
+              bsv_until: '08.09.2016',
+              states: ['closed'],
+              kinds: [kind.id],
+          },
+          advanced: true
+        }
 
         labels = rows.first.split(';')
         expect(labels).to eq(["Vereinbarung-ID-FiVer",
@@ -248,8 +252,11 @@ describe Event::ListsController do
 
       it 'inserts values correctly' do
         get :bsv_export, params: {
-            bsv_export: { date_from: '09.09.2015' },
-            year: 2016,
+            filter: {
+                bsv_since: '09.09.2015',
+                bsv_until: '08.09.2016',
+                states: ['closed'],
+            },
             advanced: true
           }
         headers = rows.first.split(';')
@@ -272,8 +279,11 @@ describe Event::ListsController do
 
       it 'sets date_to to date from if nothing is given' do
         get :bsv_export, params: {
-            bsv_export: { date_from: '09.09.2015' },
-            year: 2016,
+            filter: {
+                bsv_since: '09.09.2015',
+                bsv_until: '08.09.2016',
+                states: ['closed'],
+            },
             advanced: true
           }
 
@@ -291,7 +301,15 @@ describe Event::ListsController do
       it 'responses csv' do
         user.generate_authentication_token!
 
-        get :bsv_export, params: { bsv_export: { date_from: '09.09.2015' }, year: 2016, advanced: true, user_token: user.authentication_token, user_email: user.email }
+        get :bsv_export, params: {
+            filter: {
+                bsv_since: '09.09.2015',
+                bsv_until: '08.09.2016',
+                states: ['closed']
+            },
+            advanced: true,
+            user_token: user.authentication_token, user_email: user.email
+        }
 
         expect(rows.length).to eq(3)
       end
