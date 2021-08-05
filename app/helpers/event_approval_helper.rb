@@ -21,7 +21,7 @@ module EventApprovalHelper
   end
 
   def format_event_approval_layer(approval)
-    t("events.application_fields_pbs.requires_approval_#{approval.layer}")
+    t("events.application_middle_fields_pbs.requires_approval_#{approval.layer}")
   end
 
   def format_event_approval_status(approval)

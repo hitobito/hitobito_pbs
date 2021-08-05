@@ -160,7 +160,7 @@ it:
       submit_camp: Inoltrare
       camp_submitted: Inoltrato
       camp_submitted_at: Inoltrato il
-    application_fields_pbs:
+    application_middle_fields_pbs:
       paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
       participants_can_apply_caption: I partecipanti possono iscrivere sé stessi
       participants_can_cancel_caption: I partecipanti possono disiscrivere sé stessi
