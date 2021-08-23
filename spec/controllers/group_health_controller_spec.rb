@@ -79,13 +79,6 @@ describe GroupHealthController do
           groups(:schekka).update(group_health: true)
         end
 
-        it 'does export the group having opted in' do
-          get :groups, format: :json
-          json = JSON.parse(response.body)
-          groups = json['groups'].select {|g| g['name'] == groups(:schekka).name}
-          expect(groups.size).to eq(1)
-        end
-
         it 'does only export people with roles in a group having opted in' do
           get :people, format: :json
           json = JSON.parse(response.body)
