@@ -440,6 +440,10 @@ de:
         one: Verantwortliche*r Programm
         other: Verantwortliche Programm
         description:
+      group/kantonalverband/verantwortung_nachhaltigkeit:
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
+        description:
       group/kantonalverband/spezialfunktion:
         one: Spezialfunktion
         other: Spezialfunktion
@@ -452,6 +456,7 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      
 
       group/region/regionalleitung:
         one: Regionsleiter*in
