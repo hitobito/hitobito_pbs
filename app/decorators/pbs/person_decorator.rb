@@ -24,14 +24,15 @@ module Pbs::PersonDecorator
 
   private
 
-    def layer_group_ids
-      @layer_group_ids ||= (current_user || current_service_token.dynamic_user).layer_group_ids
-    end
+  def layer_group_ids
+    @layer_group_ids ||= (current_user || current_service_token.dynamic_user).layer_group_ids
+  end
 
-    def visible_roles
-      @visible_roles ||= roles.select do |role|
-        layer_group_ids.include?(role.group.layer_group_id) || role.visible_from_above
-      end
+  def visible_roles
+    @visible_roles ||= roles_with_deleted.select do |role|
+      (layer_group_ids.include?(role.group.layer_group_id) || role.visible_from_above) &&
+          (!role.deleted? || can?(:show_past_members, role.group))
     end
+  end
 
 end

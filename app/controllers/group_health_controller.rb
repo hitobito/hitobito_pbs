@@ -31,11 +31,6 @@ class GroupHealthController < ApplicationController
   GROUP_HEALTH_JOIN = "INNER JOIN #{Group.quoted_table_name} AS layer " \
                       "ON #{Group.quoted_table_name}.layer_group_id = layer.id " \
                       'AND layer.group_health = TRUE'.freeze
-  # query the group of type "Kantonalverband" which lies above in the hierarchical structure
-  CANTON_JOIN = "LEFT JOIN #{Group.quoted_table_name} AS canton " \
-                "ON #{Group.quoted_table_name}.lft >= canton.lft " \
-                "AND #{Group.quoted_table_name}.lft < canton.rgt " \
-                'AND canton.type = "Group::Kantonalverband"'.freeze
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action do
@@ -65,7 +60,7 @@ class GroupHealthController < ApplicationController
   end
 
   def groups
-    respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
+    respond(Group.from("((#{bund}) UNION (#{cantons})) " \
                        "AS #{Group.quoted_table_name}")
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
@@ -190,14 +185,6 @@ class GroupHealthController < ApplicationController
   def cantons
     Group.select("#{Group.quoted_table_name}.*", 'id as canton_id', 'name as canton_name')
         .where(type: Group::Kantonalverband)
-        .to_sql
-  end
-
-  def abt_and_below
-    Group.select("#{Group.quoted_table_name}.*", 'canton.id as canton_id',
-                 'canton.name as canton_name')
-        .joins(CANTON_JOIN)
-        .joins(GROUP_HEALTH_JOIN).distinct
         .to_sql
   end
 

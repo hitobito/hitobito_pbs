@@ -29,6 +29,10 @@ module Pbs::GroupAbility
         may(:remind_census, :update_member_counts, :delete_member_counts).
         in_same_layer_or_below_if_leader
 
+      permission(:layer_and_below_full).
+          may(:show_past_members).
+          if_abteilungsleitung_in_layer
+
       permission(:approve_applications).may(:index_pending_approvals).if_layer_and_in_same_group
 
       permission(:any).may(:'index_event/camps').all
@@ -46,6 +50,11 @@ module Pbs::GroupAbility
 
   def if_mitarbeiter_gs
     role_type?(Group::Bund::MitarbeiterGs)
+  end
+
+  def if_abteilungsleitung_in_layer
+    in_same_layer_or_below &&
+      role_type?(Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv)
   end
 
   def if_layer_and_in_same_group

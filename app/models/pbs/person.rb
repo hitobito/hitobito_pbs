@@ -57,7 +57,8 @@ module Pbs::Person
 
   included do
     Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language <<
-                            :prefers_digital_correspondence << :kantonalverband_id
+                            :prefers_digital_correspondence << :kantonalverband_id <<
+                            :pbs_number << :entry_date << :leaving_date
 
     alias_method_chain :full_name, :title
 

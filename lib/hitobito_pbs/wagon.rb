@@ -95,6 +95,7 @@ module HitobitoPbs
 
       ### serializers
       PersonSerializer.include Pbs::PersonSerializer
+      PeopleSerializer.include Pbs::PeopleSerializer
       GroupSerializer.include Pbs::GroupSerializer
       EventSerializer.include Pbs::EventSerializer
       EventParticipationSerializer.include Pbs::EventParticipationSerializer
