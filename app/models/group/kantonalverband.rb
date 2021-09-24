@@ -263,6 +263,10 @@ class Group::Kantonalverband < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungNachhaltigkeit < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   roles Kantonsleitung,
         Sekretariat,
         Adressverwaltung,
@@ -305,6 +309,7 @@ class Group::Kantonalverband < Group
         VerantwortungPr,
         VerantwortungPraeventionSexuellerAusbeutung,
         VerantwortungProgramm,
+        VerantwortungNachhaltigkeit,
 
         Spezialfunktion,
 
