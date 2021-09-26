@@ -52,6 +52,10 @@ class AddSalutationPlaceholdersToCustomContents < ActiveRecord::Migration[4.2]
         if cc.nil?
           say "not found"
           next
+        elsif
+          cc.body.body.nil?
+          say "CustomContent.body.body is nil"
+          next
         end
 
         placeholders = cc.placeholders_optional.split(', ')

@@ -351,6 +351,8 @@ de:
       in_abteilung: (in der Abteilung)
     qualification_buttons_pbs:
       print_course_confirmation: Kursbestätigung drucken
+    household_attrs_pbs:
+      prefers_digital_correspondence: Bevorzugt eine digitale Korrespondenz
 
   population:
     index:
