@@ -11,7 +11,7 @@ module Pbs::Export::Tabular::People
     def person_attributes
       super +
       [:correspondence_language, :kantonalverband_id,
-       :id, :layer_group_id, :company_name, :company]
+       :id, :layer_group_id, :company_name, :company, :tags]
     end
   end
 end
