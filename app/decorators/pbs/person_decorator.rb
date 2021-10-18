@@ -10,7 +10,7 @@ module Pbs::PersonDecorator
 
   included do
 
-    def filtered_roles(group = nil)
+    def filtered_roles(group = nil, multiple_groups = false)
       filtered_functions(visible_roles.to_a, :group, group)
     end
 
