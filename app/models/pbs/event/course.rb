@@ -33,6 +33,8 @@ module Pbs::Event::Course
                        Event::Role::Cook,
                        Event::Course::Role::Participant]
 
+    self.supports_invitations = false
+
     restricted_role :advisor, Event::Course::Role::Advisor
 
 
