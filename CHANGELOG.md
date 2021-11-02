@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 1.26
 
 *   Neue Rolle "Verantwortliche*r Nachhaltigkeit und Umwelt" auf dem Kantonalverband hinzugefügt
 
