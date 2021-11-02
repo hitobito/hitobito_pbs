@@ -117,7 +117,7 @@ module Pbs::EventAbility
   end
 
   def like_in_core_or_as_leader_of_supercamp
-    for_participations_read_events_and_course_participants ||
+    for_participations_read_events_or_visible_fellow_participants ||
       if_participating_as_leader_role_of_supercamp
   end
 
