@@ -41,23 +41,23 @@ it:
     group_title: 1. Sezione e unità
     abteilung: Sezione
     einheit: Unità
-    expected_participants: Numero di partecipanti stimato
+    expected_participants: Numero di partecipanti atteso
     kantonalverband: Associazione cantonale
     leader_title: 2. Capo campo
     qualifications: Formazione
   export/pdf/camp_application/leaders_section:
     title: 3. Direzione del campo
-    assistant_leader_name: Nome cognome / totem
+    assistant_leader_name: Nome cognome / nome scout
     assistant_leader_year: Anno di nascita
     assistant_leader_qualifications: Formazioni valide
   export/pdf/camp_application/camp_section:
     title: 4. Campo
-    camp_dates: Date del campo
+    camp_dates: Dati del campo
     camp_location: Luogo del campo
   export/pdf/camp_application/registration_section:
-    js_title: 5. Ambito G+S
+    js_title: 5. Quadro G+S
     state_title: 6. Stato del campo
-    js_security: Ambito di sicurezza
+    js_security: Settore di sicurezza
   export/pdf/camp_application/supervision_section:
     abteilungsleitung_title: 7. Direzione della sezione
     coach_title: 8. Coach
@@ -153,6 +153,9 @@ it:
       actions_show_pbs:
         course_confirmation: Conferma corso
   events:
+    courses:
+      group_filter:
+        filter_by_layer: Organizzatore del corso
     actions_show_pbs:
       camp_application: Annuncio di campo MSS
       cancel_button: Scollegarsi
@@ -162,10 +165,10 @@ it:
       camp_submitted_at: Inoltrato il
     application_middle_fields_pbs:
       paper_application_required_caption: I partecipanti devono inoltrare un'iscrizione cartacea
-      participants_can_apply_caption: I partecipanti possono iscrivere sé stessi
-      participants_can_cancel_caption: I partecipanti possono disiscrivere sé stessi
+      participants_can_apply_caption: I partecipanti possono iscriversi dassoli
+      participants_can_cancel_caption: I partecipanti possono disiscriversi dassoli
       requires_approval_abteilung: Sezione
-      requires_approval_region: Zona
+      requires_approval_region: Regione
       requires_approval_kantonalverband: Associazione cantonale
       requires_approval_bund: Livello federale
     create_camp_application:
@@ -295,8 +298,8 @@ it:
           description: "Per animatrici/tori e assistenti: tutti i passi amministrativi da rispettare nell'iscrizione e nello svolgimento di un corso G+S o UFAS sono descritti qui in dettaglio."
         pilot:
           url: http://pilotit.scouts.ch
-          title: "Pilot: linee guida per l'amministrazione dei corsi MSS in MiData e in NDBJS"
-          description: "Linee guida per i segretariati e i responsabili per la formazione per l'amministrazione dei corsi in MiData e NDBJS"
+          title: "Pilota: linee guida per l'amministrazione dei corsi del MSS in Midata e nella banca dati nazionale per lo sport di G+S"
+          description: "Linee guida per i segretariati ed i responabili cantonali della formazione per l'amministrazione dei corsi in MiData e nella banca dati nazionale per lo sport di G+S"
         ticket:
           url: http://ticketit.scouts.ch
           title: "Ticket: linee guida per l'annuncio dei partecipanti al corso"
@@ -360,3 +363,5 @@ it:
       title: Aggiungere persona
     edit:
       title: Editare l'iscrizione
+  global:
+    title_event/camp: Campo

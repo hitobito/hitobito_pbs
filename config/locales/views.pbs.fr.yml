@@ -39,25 +39,25 @@ fr:
     by: par
   export/pdf/camp_application/group_section:
     group_title: 1. Groupe et unité
-    abteilung: Groupe
-    einheit: Unité
-    expected_participants: Nombre attendu de participants
-    kantonalverband: Association cantonale
-    leader_title: 2. Responsable de camp
-    qualifications: Formation
+    abteilung: groupe
+    einheit: unité
+    expected_participants: nombre de participants attendu
+    kantonalverband: association cantonale
+    leader_title: 2. Chef·fe de camp
+    qualifications: formation
   export/pdf/camp_application/leaders_section:
     title: 3. Maîtrise de camp
-    assistant_leader_name: Prénom Nom / Totem
-    assistant_leader_year: Année
-    assistant_leader_qualifications: Formations valables
+    assistant_leader_name: Prénom Nom / totem
+    assistant_leader_year: année
+    assistant_leader_qualifications: formations valables
   export/pdf/camp_application/camp_section:
     title: 4. Camp
-    camp_dates: Données de camp
-    camp_location: Lieu de camp
+    camp_dates: dates du camp
+    camp_location: lieu du camp
   export/pdf/camp_application/registration_section:
-    js_title: 5. Cadre J+S
-    state_title: 6. Statut de camp
-    js_security: Domaine de sécurité
+    js_title: 5. cadre J+S
+    state_title: 6. statut du camp
+    js_security: domaine de sécurité
   export/pdf/camp_application/supervision_section:
     abteilungsleitung_title: 7. Maîtrise de groupe
     coach_title: 8. Coach
@@ -153,6 +153,9 @@ fr:
       actions_show_pbs:
         course_confirmation: Confirmation de cours
   events:
+    courses:
+      group_filter:
+        filter_by_layer: Initiateur du cours
     actions_show_pbs:
       camp_application: Annonce de camp MSdS
       cancel_button: Désinscription
@@ -161,9 +164,9 @@ fr:
       camp_submitted: démission
       camp_submitted_at: Déposé le
     application_middle_fields_pbs:
-      paper_application_required_caption: Les participant·e·s doivent envoyer une inscription papier
-      participants_can_apply_caption: Les participant·e·s peuvent s'inscrire eux·elles-mêmes
-      participants_can_cancel_caption: Les participant·e·s peuvent se désinscrire eux·elles-mêmes
+      paper_application_required_caption: Les participant.e.s doivent envoyer un formulaire d'inscription sur papier.
+      participants_can_apply_caption: Les participant.e.s peuvent s'inscrire directement.
+      participants_can_cancel_caption: Les participant.e.s peuvent se désinscrire directement.
       requires_approval_abteilung: Groupe
       requires_approval_region: Région
       requires_approval_kantonalverband: Association cantonale
@@ -295,8 +298,8 @@ fr:
           description: "Pour les chef·fe·s de cours et les conseiller·ère·s à la formation: tous les processus administratifs qui doivent être pris en compte lors de l'inscription et de la réalisation d'un cours J+S ou OFAS y sont décrits de manière détaillée."
         pilot:
           url: http://pilotfr.scouts.ch
-          title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNJS"
-          description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNJS"
+          title: "Pilote: Fil conducteur pour l'administration des cours du MSdS dans MiData et la BDNS"
+          description: "Fil conducteur pour les secrétariats et les responsables de la formation cantonaux sur l'administration des cours dans la MiData et la BDNS"
         ticket:
           url: http://ticketfr.scouts.ch
           title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
@@ -360,3 +363,5 @@ fr:
       title: Ajouter une personne
     edit:
       title: Modifier l'entrée
+  global:
+    title_event/camp: camp

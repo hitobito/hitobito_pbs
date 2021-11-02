@@ -31,6 +31,21 @@ it:
       group/elternrat:
         one: consiglio dei genitori
         other: Consigli dei genitori
+      group/internes_abteilungs_gremium:
+        one: Gremio interna
+        other: Commissioni interne
+        long: Gremio sezionale interna
+      group/internes_gremium:
+        one: Comitato interno
+        other: Gremi interni
+      group/internes_kantonales_gremium:
+        one: Gremio interna
+        other: Commissioni interne
+        long: Gremio cantonale interna
+      group/internes_regionales_gremium:
+        one: Gremio interna
+        other: Commissioni interne
+        long: Gremio regionale interna
       group/gremium:
         one: comissione
         other: Gremi
@@ -185,6 +200,9 @@ it:
       group/bund/verantwortung_pfadi_trotz_allem:
         one: responsabile SOC
         other: Responsabili SOC
+      group/bund/verantwortung_integration:
+        one: Responsabile diversità ed inclusione
+        other: Responsabile diversità ed inclusione
       group/bund/verantwortung_krisenteam:
         one: Responsabile team di crisi
         other: Responsabile team di crisi
@@ -308,6 +326,9 @@ it:
       group/kantonalverband/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
         other: Responsabili dell'accompagnamento
+      group/kantonalverband/verantwortung_integration:
+        one: Responsabile diversità ed inclusione
+        other: Responsabile diversità ed inclusione
       group/kantonalverband/verantwortung_internationales:
         one: Responsabile internizionale
         other: Responsabili internizionale
@@ -338,6 +359,9 @@ it:
       group/kantonalverband/verantwortung_programm:
         one: Responsabile del programma
         other: Responsabili del programma
+      group/kantonalverband/verantwortung_nachhaltigkeit:
+        one: Responsabile sostenibilità e ambiente
+        other: Responsabili sostenibilità e ambiente
       group/kantonalverband/spezialfunktion:
         one: Funzione speciale
         other: Funzioni speciale
@@ -431,6 +455,9 @@ it:
       group/region/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
         other: Responsabili dell'accompagnamento
+      group/region/verantwortung_integration:
+        one: Responsabile diversità ed inclusione
+        other: Responsabile diversità ed inclusione
       group/region/verantwortung_internationales:
         one: Responsabile internizionale
         other: Responsabili internizionale
@@ -491,6 +518,9 @@ it:
       group/abteilung/praesidium_apv:
         one: Presidenti degli scout anziani
         other: Presidenti scout anziani
+      group/abteilung/praesidium_elternrat:
+        one: Presidente del consiglio dei genitori
+        other: Presidente del consiglio dei genitori
       group/abteilung/praeses:
         one: Assistente spirituale
         other: Assistenti spirituale
@@ -643,6 +673,12 @@ it:
         one: Presidente
         other: Presidenti
       group/elternrat/mitglied:
+        one: Membro
+        other: Membri
+      group/internes_gremium/leitung:
+        one: Direzione
+        other: Direzione
+      group/internes_gremium/mitglied:
         one: Membro
         other: Membri
       group/gremium/leitung:
@@ -961,7 +997,7 @@ it:
         event/camp:
           attributes:
             base:
-              cannot_remove_parent_id: "Il campo superiore non può più essere lasciato, in quanto non è più nello stato \"Creato\"."
+              cannot_remove_parent_id: 'Il campo superiore non può più essere lasciato, in quanto non è più nello stato "Creato".'
         person:
           attributes:
             prefers_digital_correspondence:

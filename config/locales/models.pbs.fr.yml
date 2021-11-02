@@ -8,9 +8,9 @@ fr:
         one: Groupe
         other: Groupes
       group/abteilungs_gremium:
-        one: Commission
+        one: Comité
         other: Commissions
-        long: Commission de groupe
+        long: Comité de groupe
       group/abteilungs_rover:
         one: Routier
         other: Routiers
@@ -25,15 +25,30 @@ fr:
         one: Niveau fédéral
         other: Niveau fédéral
       group/bundes_gremium:
-        one: Commission
+        one: Comité
         other: Commissions
-        long: Commission fédérale
+        long: Comité fédéral
       group/elternrat:
         one: Comité des parents
         other: Conseil des parents
+      group/internes_abteilungs_gremium:
+        one: Comité interne
+        other: Comités internes
+        long: Comité de groupe interne
+      group/internes_gremium:
+        one: comité interne
+        other: Comités internes
+      group/internes_kantonales_gremium:
+        one: Comité interne
+        other: Comités internes
+        long: Comité cantonal interne
+      group/internes_regionales_gremium:
+        one: Comité interne
+        other: Comités internes
+        long: Comité régional interne
       group/gremium:
         one: Commission
-        other: Commissions
+        other: Comités
       group/kommission:
         one: Commission
         other: Commissions
@@ -41,9 +56,9 @@ fr:
         one: Association cantonale
         other: Associations cantonales
       group/kantonales_gremium:
-        one: Commission
+        one: Comité
         other: Commissions
-        long: Commission cantonale
+        long: Comité cantonal
       group/pfadi:
         one: Eclaireur
         other: Eclaireurs
@@ -57,9 +72,9 @@ fr:
         one: Région
         other: Régions
       group/regionales_gremium:
-        one: Commission
+        one: Comité
         other: Commissions
-        long: Commission régionale
+        long: Comité régional
       group/regionale_rover:
         one: Routier
         other: Routiers
@@ -330,6 +345,9 @@ fr:
       group/kantonalverband/verantwortung_programm:
         one: Responsable du programme
         other: Responsables du programme
+      group/kantonalverband/verantwortung_nachhaltigkeit:
+        one: Responsable du développement durable et de l'environnement
+        other: Responsables du développement durable et de l'environnement
       group/kantonalverband/spezialfunktion:
         one: fonction spéciale
         other: fonction spéciale
@@ -643,6 +661,12 @@ fr:
       group/elternrat/mitglied:
         one: Membre
         other: Membres
+      group/internes_gremium/leitung:
+        one: Direction
+        other: Direction
+      group/internes_gremium/mitglied:
+        one: membre
+        other: membres
       group/gremium/leitung:
         one: Responsable
         other: Responsables
@@ -870,7 +894,7 @@ fr:
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse
         salutation_value: Formule de politesse
-        title: Titre
+        title: Civilité
         grade_of_school: Classe scolaire
         entry_date: Membre depuis
         leaving_date: Date de départ
@@ -959,7 +983,7 @@ fr:
         event/camp:
           attributes:
             base:
-              cannot_remove_parent_id: "Le camp supérieur ne peut plus être quitté, vu qu'il n'apparaît plus dans le statut \"créé\""
+              cannot_remove_parent_id: 'Le camp supérieur ne peut plus être quitté, vu qu''il n''apparaît plus dans le statut "créé"'
         person:
           attributes:
             prefers_digital_correspondence:
