@@ -201,8 +201,8 @@ describe Event::ListsController do
     end
 
     before do
+      create_course('125', '11.11.2015')
       create_course('124', '11.11.2015', '12.11.2015')
-      create_course('124', '11.11.2015')
     end
 
     context 'advanced' do
@@ -262,8 +262,9 @@ describe Event::ListsController do
         headers = rows.first.split(';')
         values = rows.second.split(';')
         #main labels
-        expect(values[0..8]).to eq(["", "", "LPK (Leitpfadikurs)", "Zürich, Bern",
-                              '""', "124", "11.11.2015", "12.11.2015", ""])
+        expect(values[0..8]).to eq(
+          ["", "", "LPK (Leitpfadikurs)", "Zürich, Bern", '""', "124", "11.11.2015", "12.11.2015", ""]
+        )
         #counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.
 
