@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -56,8 +56,9 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language <<
-                            :prefers_digital_correspondence << :kantonalverband_id
+    Person::PUBLIC_ATTRS = (Person::PUBLIC_ATTRS + %w[title salutation correspondence_language
+                                                      kantonalverband_id]).freeze
+    Person::ADDRESS_ATTRS = (Person::ADDRESS_ATTRS + %w[prefers_digital_correspondence]).freeze
 
     alias_method_chain :full_name, :title
 
@@ -81,7 +82,7 @@ module Pbs::Person
     validates :entry_date, :leaving_date,
               timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
 
-    validate :has_email_when_preferring_digital_correspondence
+    validate :has_email_in_household, if: :prefers_digital_correspondence
 
     after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_previously_changed?
@@ -148,10 +149,9 @@ module Pbs::Person
     %w(first_name last_name email).any? { |k| previous_changes.key?(k) } && black_listed?
   end
 
-  def has_email_when_preferring_digital_correspondence
-    if prefers_digital_correspondence && email.blank?
-      errors.add(:prefers_digital_correspondence, :email_must_exist)
-    end
-  end
+  def has_email_in_household
+    return if email.present? || household_people.any? { |p| p.email.present? }
 
+    errors.add(:prefers_digital_correspondence, :email_must_exist)
+  end
 end

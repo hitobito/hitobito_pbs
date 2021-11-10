@@ -110,6 +110,7 @@ module HitobitoPbs
 
       RolesController.include Pbs::RolesController
       GroupsController.include Pbs::GroupsController
+      Person::HouseholdsController.include Pbs::Person::HouseholdsController
       PeopleController.include Pbs::PeopleController
       EventsController.include Pbs::EventsController
       Event::ApplicationMarketController.include Pbs::Event::ApplicationMarketController
