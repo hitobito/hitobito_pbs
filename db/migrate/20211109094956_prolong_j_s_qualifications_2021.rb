@@ -4,6 +4,13 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class ProlongJSQualifications2021 < ActiveRecord::Migration[6.0]
+
+  QUALIFICATION_KIND_LABELS =
+    ['J+S Leiter LS/T Kindersport',
+     'J+S Leiter LS/T Jugendsport'].freeze
+
+  PROLONGED_DATE = Date.new(2022, 12, 31).freeze
+
   # prolongs a fixed list of J+S qualifications due to COVID-19.
   #
   # Alle J+S-Leiterinnen und -Leiter, welche 2019 zuletzt eine J+S-Ausbildung (z.B. Leiterkurs) oder ein
@@ -12,17 +19,40 @@ class ProlongJSQualifications2021 < ActiveRecord::Migration[6.0]
   # Source: https://www.jugendundsport.ch/de/corona/faq.html#ui-collapse-840
   # Nicht betroffen von dieser Massnahme sind J+S-Expertinnen und -Experten, J+S-Coaches sowie J+S-Leiterinnen und -Leiter,
   # welche letztmals 2018 oder früher in einer J+S-Aus- oder Weiterbildung absolviert haben.
-  def change
-    finish_dates = ['2020-12-31', '2019-12-31', '2018-12-31']
-    qualification_kinds = [
-        'J+S Leiter LS/T Kindersport',
-        'J+S Leiter LS/T Jugendsport'
-    ]
-    qualification_kind_ids = QualificationKind
-                                 .where(label: qualification_kinds)
-                                 .pluck(:id)
-    # Qualification
-        # .where(qualification_kind: qualification_kind_ids, finish_at: finish_dates)
-        # .update_all(finish_at: '2021-12-31')
+  def up
+    require 'pry'; binding.pry unless $pstop
+    js_quali_courses_2021.find_each do |c|
+      participant_ids = c.event_participations.collect(&:person_id)
+      qualis = Qualification.where(person_id: participant_ids,
+                                   qualification_kind_id:
+                                   kind.id,
+                                   start_at: c.qualification_date)
+      qualis.update_all(finish_at: PROLONGED_DATE)
+    end
   end
+
+  private
+
+  def js_quali_courses_2021
+    Event::Course
+      .joins(:dates)
+      .joins(:kind)
+      .includes(:participations)
+      .between(Date.new(2019, 1, 1), Date.new(2019, 12, 31))
+      .where(event_kinds: { id: js_event_kind_ids })
+  end
+
+  def js_event_kind_ids
+    Event::KindQualificationKind
+      .where(qualification_kind_id: qualification_kind_ids)
+      .pluck(:event_kind_id)
+  end
+
+  def qualification_kind_ids
+    @qualification_kind_ids ||=
+      QualificationKind
+      .where(label: QUALIFICATION_KIND_LABELS)
+      .pluck(:id)
+  end
+
 end

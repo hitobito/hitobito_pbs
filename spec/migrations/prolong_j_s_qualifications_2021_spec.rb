@@ -7,33 +7,64 @@ require migration_file_name
 
 describe ProlongJSQualifications2021 do
 
-  before(:all) { self.use_transactional_tests = false }
-  after(:all)  { self.use_transactional_tests = true }
-
   let(:migration) { described_class.new.tap { |m| m.verbose = false } }
 
   let!(:ek_qk_js) do
-    qk = QualificationKind.create!(label: 'J+S Leiter LS/T Kindersport')
+    qk = QualificationKind.create!(label: 'J+S Leiter LS/T Kindersport', validity: 2)
     Event::KindQualificationKind.create!(qualification_kind: qk,
                                          event_kind: event_kinds(:lpk),
                                          category: 'qualification',
                                          role: 'participant')
   end
   let!(:event_kind_js) { Event::Kind.create!(label: 'JS', event_kind_qualification_kinds: [ek_qk_js]) }
-  # let!(:qk_js_2) { create_qualification_kind('J+S Leiter LS/T Jugendsport') }
 
-  let!(:js_course_2021) { Fabricate(:course, kind: event_kind_js, dates: event_dates(2021)) }
-  let!(:js_course_2019) { Fabricate(:course, kind: event_kind_js, dates: event_dates(2019)) }
+  let!(:js_course_2021) { create_js_course(2021) }
+  let!(:js_course_2020) { create_js_course(2020) }
+  let!(:js_course_2019) { create_js_course(2019) }
+  let!(:js_course_2018) { create_js_course(2018) }
+
+  let(:extension_date) { Date.new(2022, 12, 31) }
 
   context '#up' do
 
-    it 'prolongs all js qualifications completed in 2019' do
-      require 'pry'; binding.pry unless $pstop
-      #migration.up
+    it 'prolongs specific js qualifications completed in 2019' do
+      migration.up
+
+      js_course_2018.participations.each do |p|
+        expect(p.person.qualifications.first.finish_at).not_to eq(extension_date)
+      end
+
+      js_course_2019.participations.each do |p|
+        # should be prolonged
+        expect(p.person.qualifications.first.finish_at).to eq(extension_date)
+      end
+
+      js_course_2020.participations.each do |p|
+        # was already set to 2022-12-31 when issued
+        expect(p.person.qualifications.first.finish_at).to eq(extension_date)
+      end
+
+      js_course_2021.participations.each do |p|
+        expect(p.person.qualifications.first.finish_at).not_to eq(extension_date)
+      end
     end
   end
 
   private
+  
+  def create_js_course(year)
+    course = Fabricate(:course, kind: event_kind_js, dates: event_dates(year))
+    12.times do
+      participation = Fabricate(:event_participation, event: course, qualified: true, state: :assigned,
+                roles: [Event::Course::Role::Participant.new])
+      Event::Qualifier.for(participation).issue
+    end
+    course
+  end
+
+  def create_qualifications
+    Event::Qualifier.for(participation)
+  end
 
   def event_dates(year)
     start_at = Date.new(year, 06, 11)
