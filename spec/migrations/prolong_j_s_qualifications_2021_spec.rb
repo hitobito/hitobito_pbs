@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# Copyright (c) 2021, Pfadibewegung Schweiz. This file is part of
+# hitobito_pbs and licensed under the Affero General Public License version 3
+# or later. See the COPYING file at the top-level directory or at
+# https://github.com/hitobito/hitobito_pbs.
+
 require 'spec_helper'
 migration_file_name = Dir[Rails.root.join('../hitobito_pbs/db/migrate/20211109094956_prolong_j_s_qualifications_2021.rb')].first
 require migration_file_name
