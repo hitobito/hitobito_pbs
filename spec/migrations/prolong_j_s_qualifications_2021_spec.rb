@@ -14,14 +14,29 @@ describe ProlongJSQualifications2021 do
 
   let(:migration) { described_class.new.tap { |m| m.verbose = false } }
 
-  let!(:ek_qk_js) do
-    qk = QualificationKind.create!(label: 'J+S Leiter*in LS/T Kindersport', validity: 2)
-    Event::KindQualificationKind.create!(qualification_kind: qk,
+  let!(:qk_js_leiter) do
+    QualificationKind.create!(label: 'J+S Leiter*in LS/T Kindersport', validity: 2)
+  end
+
+  let!(:ek_qk_js_leiter) do
+    Event::KindQualificationKind.create!(qualification_kind: qk_js_leiter,
                                          event_kind: event_kinds(:lpk),
                                          category: 'qualification',
                                          role: 'participant')
   end
-  let!(:event_kind_js) { Event::Kind.create!(label: 'JS', event_kind_qualification_kinds: [ek_qk_js]) }
+
+  let!(:qk_js_coach) do
+    QualificationKind.create!(label: 'J+S Coach', validity: 2)
+  end
+
+  let!(:ek_qk_js_coach) do
+    Event::KindQualificationKind.create!(qualification_kind: qk_js_coach,
+                                         event_kind: event_kinds(:lpk),
+                                         category: 'qualification',
+                                         role: 'participant')
+  end
+
+  let!(:event_kind_js) { Event::Kind.create!(label: 'JS', event_kind_qualification_kinds: [ek_qk_js_leiter, ek_qk_js_coach]) }
 
   let!(:js_course_2021) { create_js_course(2021) }
   let!(:js_course_2020) { create_js_course(2020) }
@@ -40,8 +55,11 @@ describe ProlongJSQualifications2021 do
       end
 
       js_course_2019.participations.each do |p|
-        # should be prolonged
-        expect(p.person.qualifications.first.finish_at).to eq(extension_date)
+        # should be prolonged (leiter)
+        expect(qualifications(p.person, qk_js_leiter).first.finish_at).to eq(extension_date)
+
+        # should not be changed (coach)
+        expect(qualifications(p.person, qk_js_coach).first.finish_at).not_to eq(extension_date)
       end
 
       js_course_2020.participations.each do |p|
@@ -56,6 +74,10 @@ describe ProlongJSQualifications2021 do
   end
 
   private
+
+  def qualifications(person, qualification_kind)
+    person.qualifications.where(qualification_kind_id: qualification_kind)
+  end
   
   def create_js_course(year)
     course = Fabricate(:course, kind: event_kind_js, dates: event_dates(year))
