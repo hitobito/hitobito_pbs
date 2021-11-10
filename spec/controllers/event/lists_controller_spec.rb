@@ -201,8 +201,8 @@ describe Event::ListsController do
     end
 
     before do
-      create_course('125', '11.11.2015')
       create_course('124', '11.11.2015', '12.11.2015')
+      create_course('125', '11.11.2015')
     end
 
     context 'advanced' do
