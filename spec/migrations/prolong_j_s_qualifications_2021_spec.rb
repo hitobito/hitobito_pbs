@@ -15,7 +15,7 @@ describe ProlongJSQualifications2021 do
   let(:migration) { described_class.new.tap { |m| m.verbose = false } }
 
   let!(:ek_qk_js) do
-    qk = QualificationKind.create!(label: 'J+S Leiter LS/T Kindersport', validity: 2)
+    qk = QualificationKind.create!(label: 'J+S Leiter*in LS/T Kindersport', validity: 2)
     Event::KindQualificationKind.create!(qualification_kind: qk,
                                          event_kind: event_kinds(:lpk),
                                          category: 'qualification',
@@ -65,10 +65,6 @@ describe ProlongJSQualifications2021 do
       Event::Qualifier.for(participation).issue
     end
     course
-  end
-
-  def create_qualifications
-    Event::Qualifier.for(participation)
   end
 
   def event_dates(year)

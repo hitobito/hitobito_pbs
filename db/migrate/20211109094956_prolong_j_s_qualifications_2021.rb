@@ -17,14 +17,14 @@ class ProlongJSQualifications2021 < ActiveRecord::Migration[6.0]
   # welche letztmals 2018 oder früher in einer J+S-Aus- oder Weiterbildung absolviert haben.
 
   QUALIFICATION_KIND_LABELS =
-    ['J+S Leiter LS/T Kindersport',
-     'J+S Leiter LS/T Jugendsport'].freeze
+    ['J+S Leiter*in LS/T Kindersport',
+     'J+S Leiter*in LS/T Jugendsport'].freeze
 
   PROLONGED_DATE = Date.new(2022, 12, 31).freeze
 
   def up
     js_quali_courses_2021.find_each do |c|
-      participant_ids = c.participations.collect(&:person_id)
+      participant_ids = c.participations.where(qualified: true).collect(&:person_id)
       qualis = Qualification.where(person_id: participant_ids,
                                    qualification_kind_id:
                                    qualification_kind_ids,
@@ -46,7 +46,7 @@ class ProlongJSQualifications2021 < ActiveRecord::Migration[6.0]
 
   def js_event_kind_ids
     Event::KindQualificationKind
-      .where(qualification_kind_id: qualification_kind_ids)
+      .where(qualification_kind_id: qualification_kind_ids, role: 'participant')
       .pluck(:event_kind_id)
   end
 
