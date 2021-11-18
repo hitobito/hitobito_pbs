@@ -13,7 +13,7 @@ module Pbs::Export::SubscriptionsJob
   end
 
   def exporter_with_detail
-    return Pbs::Export::Tabular::People::HouseholdsFull if  @options[:household_details]
+    return Pbs::Export::Tabular::People::HouseholdsFull if @options[:household_details]
     exporter_without_detail
   end
 

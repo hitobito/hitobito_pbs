@@ -56,9 +56,9 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS = (Person::PUBLIC_ATTRS + %w[title salutation correspondence_language
-                                                      kantonalverband_id]).freeze
-    Person::ADDRESS_ATTRS = (Person::ADDRESS_ATTRS + %w[prefers_digital_correspondence]).freeze
+    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language <<
+        :prefers_digital_correspondence << :kantonalverband_id
+    Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
     alias_method_chain :full_name, :title
 
