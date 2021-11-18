@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Pfadibewegung Schweiz This file is part of
+#  Copyright (c) 2021, Pfadibewegung Schweiz This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -23,7 +23,7 @@ describe PeopleSerializer do
 
   let(:hash) { serializer.to_hash }
 
-  let(:serialized_people) { hash[:peoples] } # for some reason, pluralization is wrong in this test
+  let(:serialized_people) { hash[:people] }
   let(:linked_roles) { hash[:linked]['roles'] }
 
   before { Fabricate(Group::Woelfe::Wolf.name.to_sym, person: person, group: group) }
