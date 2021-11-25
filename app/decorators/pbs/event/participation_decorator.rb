@@ -8,6 +8,8 @@
 module Pbs::Event::ParticipationDecorator
   extend ActiveSupport::Concern
 
+  delegate :prefers_digital_correspondence, to: :person
+
   def course_confirmation_form(&block)
     return nil unless event.course_kind? && has_confirmation?
     h.form_tag(course_confirmation_url,

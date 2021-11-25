@@ -31,6 +31,25 @@ describe Event::ParticipationsController do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context 'if the participant lives in a household' do
+      render_views
+
+      before do
+        participant.update(household_key: '1111-2222-3333')
+        Fabricate(:person, household_key: participant.household_key)
+      end
+
+      it 'it still works' do
+        get :show,
+            params: {
+                group_id: group.id,
+                event_id: course.id,
+                id: course.participations.last.id
+            }
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   context 'GET#new' do
