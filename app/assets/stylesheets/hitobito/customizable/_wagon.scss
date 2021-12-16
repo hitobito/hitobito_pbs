@@ -70,3 +70,7 @@ table tr.grouping td {
 [data-remove-supercamp] {
   @extend .remove_nested_fields
 }
+
+.birth_year {
+  background-color: $chartBars;
+}

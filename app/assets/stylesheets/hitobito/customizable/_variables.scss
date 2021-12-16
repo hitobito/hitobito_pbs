@@ -18,44 +18,54 @@ $grayLight:             #E8EBF0 !default;
 $grayLighter:           #F8F9FA !default;
 $white:                 #fff !default;
 
+$blackberry:            #632949 !default;
+$lightBlackberry:       #8b426b !default;
+$darkBlackberry:        #521d3a !default;
+$pbsRed:                #d84e23 !default;
+$pbsLightGreen:         #b1c9a4 !default;
+
 // Colors
 // ----------------------------
-$blue:                  #329897 !default;
+$blue:                  $darkBlackberry !default;
 $blueDark:              darken($blue, 10%) !default;
-$green:                 #8DB850 !default;
+$green:                 $pbsLightGreen !default;
 $greenDark:             darken($green, 10%) !default;
+
+$btnDangerBackground:   $pbsRed;
 
 $orange:                #DC795B;
 $orangeDark:            #C75B3B;
-$purple:                #925D97;
-$purpleDark:            #6A396F;
+$purple:                $blackberry;
+$purpleDark:            $blackberry;
 
 $red:                   $orange !default;
 
 $textColor:             $black !default;
 $borderColor:           $grayLight !default;
 
-$pageBackground:        lighten($green, 5%) !default;
+$pageBackground:        $blackberry !default;
 $contentBackground:     $grayLight;
-$footerBackground:      $blue;
+$footerBackground:      $darkBlackberry;
 $bodyBackground:        $blue;
 
 $focusColor:            $purple;
 $shadowColor:           darken($pageBackground, 10%);
-$linkColor:             $blue !default;
-$linkColorHover:        $purpleDark !default;
+$linkColor:             $darkBlackberry !default;
+$linkColorHover:        lighten($darkBlackberry, 20%) !default;
 
 $footerColor:           $white;
 $footerColorHover:      $white;
 
-$tableColorHover:       lighten($purple, 50%);
+$tableColorHover:       lighten(#925D97, 50%);
+
+$chartBars:             $pbsLightGreen;
 
 // Typography
 // -------------------------
 
-$sansFontFamily:        'Noto Sans', sans-serif;
-$headingFontFamily:     'Noto Sans', sans-serif; //'Quicksand', $sansFontFamily !default;
-$baseFontFamily:        'Noto Sans', sans-serif; //'Varela Round', $sansFontFamily !default;
+$sansFontFamily:        'Source Sans Pro', sans-serif;
+$headingFontFamily:     'Source Sans Pro', sans-serif; //'Quicksand', $sansFontFamily !default;
+$baseFontFamily:        'Source Sans Pro', sans-serif; //'Varela Round', $sansFontFamily !default;
 $headingsFontWeight:    normal !default; // instead of browser default, bold
 
 // Decoration
