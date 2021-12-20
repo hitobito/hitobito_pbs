@@ -15,6 +15,10 @@
   }
 
   & > .sheet { margin: 0 20px; }
+
+  .is-logged-out & {
+    padding-top: 7rem;
+  }
 }
 
 
