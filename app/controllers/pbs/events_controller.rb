@@ -15,6 +15,7 @@ module Pbs::EventsController
 
     prepend_before_action :entry, only: CrudController::ACTIONS +
       [:show_camp_application, :create_camp_application]
+    prepend_before_action :preview_camp_application_validation, only: :show
 
     before_render_show :load_participation_emails, if: :canceled?
     before_render_form :load_canton_specific_help_texts
@@ -70,6 +71,22 @@ module Pbs::EventsController
       supercamp_contact_attrs.reject { |_, v| v == '0' }.keys
 
     contact_attrs
+  end
+
+  def preview_camp_application_validation
+    return unless entry.is_a?(Event::Campy)
+    return unless [entry.leader, entry.coach].include? current_person
+    return if entry.camp_submitted?
+
+    original_camp_submitted_at = entry.camp_submitted_at
+    entry.camp_submitted_at = Time.zone.now.to_date
+    if entry.valid?
+      flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
+    else
+      flash.now[:warn] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
+                        "<br />#{entry.errors.full_messages.join('; ')}"
+    end
+    entry.camp_submitted_at = original_camp_submitted_at
   end
 
   def show_camp_application
