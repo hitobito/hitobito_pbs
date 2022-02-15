@@ -83,7 +83,7 @@ module Pbs::EventsController
       flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
     else
       flash.now[:warn] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
-                        "<br />#{entry.errors.full_messages.join('; ')}"
+                        "<br />#{entry.errors.full_messages.to_sentence}"
     end
     entry.restore_attributes # restore the simulated change to camp_submitted_at
   end
@@ -100,7 +100,7 @@ module Pbs::EventsController
       set_success_notice
     else
       flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
-                      "<br />#{entry.errors.full_messages.join('; ')}"
+                      "<br />#{entry.errors.full_messages.to_sentence}"
     end
     redirect_to path_args(entry)
   end
