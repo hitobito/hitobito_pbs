@@ -78,7 +78,6 @@ module Pbs::EventsController
     return unless [entry.leader, entry.coach].include? current_person
     return if entry.camp_submitted?
 
-    original_camp_submitted_at = entry.camp_submitted_at
     entry.camp_submitted_at = Time.zone.now.to_date
     if entry.valid?
       flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
@@ -86,7 +85,7 @@ module Pbs::EventsController
       flash.now[:warn] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
                         "<br />#{entry.errors.full_messages.join('; ')}"
     end
-    entry.camp_submitted_at = original_camp_submitted_at
+    entry.restore_attributes # restore the simulated change to camp_submitted_at
   end
 
   def show_camp_application
