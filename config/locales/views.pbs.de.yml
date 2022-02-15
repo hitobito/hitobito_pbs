@@ -197,6 +197,8 @@ de:
       flash:
         success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
         error: 'Das Lager konnte nicht eingereicht werden:'
+        preview: 'Das Lager kann noch nicht durch den*die Coach eingereicht werden:'
+        preview_success: Es sind alle Informationen zum Einreichen des Lagers vorhanden.
     expected_participants_fields:
       expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiter*innen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
     fields_pbs:

@@ -15,6 +15,7 @@ module Pbs::EventsController
 
     prepend_before_action :entry, only: CrudController::ACTIONS +
       [:show_camp_application, :create_camp_application]
+    prepend_before_action :preview_camp_application_validation, only: :show
 
     before_render_show :load_participation_emails, if: :canceled?
     before_render_form :load_canton_specific_help_texts
@@ -72,6 +73,21 @@ module Pbs::EventsController
     contact_attrs
   end
 
+  def preview_camp_application_validation
+    return unless entry.is_a?(Event::Campy)
+    return unless [entry.leader, entry.coach].include? current_person
+    return if entry.camp_submitted?
+
+    entry.camp_submitted_at = Time.zone.now.to_date
+    if entry.valid?
+      flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
+    else
+      flash.now[:warn] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
+                        "<br />#{entry.errors.full_messages.to_sentence}"
+    end
+    entry.restore_attributes # restore the simulated change to camp_submitted_at
+  end
+
   def show_camp_application
     pdf = Export::Pdf::CampApplication.new(entry)
     send_data pdf.render, type: :pdf, disposition: 'inline', filename: pdf.filename
@@ -84,7 +100,7 @@ module Pbs::EventsController
       set_success_notice
     else
       flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
-                      "<br />#{entry.errors.full_messages.join('; ')}"
+                      "<br />#{entry.errors.full_messages.to_sentence}"
     end
     redirect_to path_args(entry)
   end
