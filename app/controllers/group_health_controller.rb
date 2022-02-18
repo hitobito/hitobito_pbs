@@ -14,6 +14,7 @@ class GroupHealthController < ApplicationController
                       gender birthday entry_date leaving_date primary_group_id).freeze
   ROLES_FIELDS = %i(id person_id group_id type created_at deleted_at).freeze
   GROUPS_FIELDS = %i(id parent_id type name created_at deleted_at canton_id canton_name).freeze
+  GEOLOCATIONS_FIELDS = %i(id lat long).freeze
   COURSES_FIELDS = %i(id name kind_id).freeze
   CAMPS_FIELDS = %i(id name location j_s_kind state).freeze
   EVENT_DATES_FIELDS = %i(start_at finish_at).freeze
@@ -65,10 +66,18 @@ class GroupHealthController < ApplicationController
   end
 
   def groups
-    respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
+    # geolocations only exist on Group::Abteilung, thus we can't include geolocations in
+    # the queries for other group types
+    abt = Group.from("((#{abteilung})) " \
                        "AS #{Group.quoted_table_name}")
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-                .as_json(only: GROUPS_FIELDS))
+                .as_json(only: GROUPS_FIELDS,
+                         include: { geolocations: { only: GEOLOCATIONS_FIELDS } })
+    rest = Group.from("((#{bund}) UNION (#{cantons}) UNION (#{below_abteilung})) " \
+                       "AS #{Group.quoted_table_name}")
+                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
+                .as_json(only: GROUPS_FIELDS)
+    respond(rest.concat(abt))
   end
 
   def courses
@@ -193,11 +202,22 @@ class GroupHealthController < ApplicationController
         .to_sql
   end
 
-  def abt_and_below
+  def abteilung
+    Group.select("#{Group.quoted_table_name}.*", 'canton.id as canton_id',
+                 'canton.name as canton_name')
+        .includes(:geolocations)
+        .joins(CANTON_JOIN)
+        .joins(GROUP_HEALTH_JOIN).distinct
+        .where(type: Group::Abteilung)
+        .to_sql
+  end
+
+  def below_abteilung
     Group.select("#{Group.quoted_table_name}.*", 'canton.id as canton_id',
                  'canton.name as canton_name')
         .joins(CANTON_JOIN)
         .joins(GROUP_HEALTH_JOIN).distinct
+        .where.not(type: Group::Abteilung)
         .to_sql
   end
 
