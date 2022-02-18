@@ -59,3 +59,9 @@ people:
 messages:
   enable_writing: true
   personal_salutation: true
+
+groups:
+  self_registration:
+    enabled: false
+  statistics:
+    enabled: false
