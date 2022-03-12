@@ -26,6 +26,7 @@ module HitobitoPbs
       Role.include Pbs::Role
       Qualification.include Pbs::Qualification
       Event.include Pbs::Event
+      MailingList.include Pbs::MailingList
       Event::Kind.include Pbs::Event::Kind
       Event::Course.include Pbs::Event::Course
       Event::Participation.include Pbs::Event::Participation
@@ -110,6 +111,7 @@ module HitobitoPbs
 
       RolesController.include Pbs::RolesController
       GroupsController.include Pbs::GroupsController
+      MailingListsController.include Pbs::MailingListsController
       Person::HouseholdsController.include Pbs::Person::HouseholdsController
       PeopleController.include Pbs::PeopleController
       EventsController.include Pbs::EventsController
