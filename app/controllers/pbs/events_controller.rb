@@ -75,7 +75,7 @@ module Pbs::EventsController
 
   def preview_camp_application_validation
     return unless entry.is_a?(Event::Campy)
-    return unless [entry.leader, entry.coach].include? current_person
+    return unless [entry.leader, entry.coach, entry.abteilungsleitung].include? current_person
     return if entry.camp_submitted?
 
     entry.camp_submitted_at = Time.zone.now.to_date
