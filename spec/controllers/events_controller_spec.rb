@@ -131,7 +131,7 @@ describe EventsController do
       let(:event) { events(:schekka_camp) }
 
       context 'as camp leader' do
-        before { event.update!(coach_id: people(:al_berchtold).id, leader_id: person.id) }
+        before { event.update!(coach_id: people(:al_berchtold).id, leader_id: person.id, abteilungsleitung_id: people(:al_berchtold).id) }
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
@@ -159,7 +159,34 @@ describe EventsController do
       end
 
       context 'as coach' do
-        before { event.update!(coach_id: person.id, leader_id: people(:al_berchtold).id) }
+        before { event.update!(coach_id: person.id, leader_id: people(:al_berchtold).id, abteilungsleitung_id: people(:al_berchtold).id) }
+
+        it 'shows failing validation' do
+          get :show, params: { group_id: event.groups.first.id, id: event.id }
+          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:notice]).to be_blank
+        end
+
+        it 'shows success message on successful validation' do
+          fill_in_required_columns(event)
+
+          get :show, params: { group_id: event.groups.first.id, id: event.id }
+          expect(flash[:warn]).to be_blank
+          expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
+        end
+
+        it 'shows no message after the camp has been submitted' do
+          fill_in_required_columns(event)
+          event.update(camp_submitted_at: Time.zone.now.to_date)
+
+          get :show, params: { group_id: event.groups.first.id, id: event.id }
+          expect(flash[:warn]).to be_blank
+          expect(flash[:notice]).to be_blank
+        end
+      end
+
+      context 'as abteilungsleitung' do
+        before { event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_berchtold).id, abteilungsleitung_id: person.id) }
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
