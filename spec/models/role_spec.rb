@@ -45,36 +45,6 @@ describe Role do
       end
     end
 
-
-    context 'are not valid if' do
-      [:created_at, :deleted_at].each do |field|
-        it "#{field} in future" do
-          role.update_column(field, '2014-05-03 17:00:00')
-          expect(role).not_to be_valid
-          expect(role).to have(1).error_on(field)
-        end
-      end
-
-      it 'created_at after deleted_at' do
-        role.update_column(:deleted_at, '2014-04-03 11:00:00')
-        expect(role).not_to be_valid
-        expect(role).to have(1).error_on(:deleted_at)
-      end
-
-      it 'created_at has illegal format' do
-        role.created_at = '303030'
-        expect(role).not_to be_valid
-        expect(role).to have(2).error_on(:created_at)
-        expect(role.created_at).to be_nil
-      end
-
-      it 'deleted_at has illegal format' do
-        role.deleted_at = '303030'
-        expect(role).not_to be_valid
-        expect(role).to have(1).error_on(:deleted_at)
-        expect(role.deleted_at).to be_nil
-      end
-    end
   end
 
   context 'notification if person is on black list' do

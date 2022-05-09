@@ -21,17 +21,6 @@ describe RolesController do
 
   before { sign_in(people(:bulei)) }
 
-  describe 'GET #edit' do
-    context 'deleted role' do
-      it 'renders template' do
-        role = roles(:al_schekka)
-        role.update!(created_at: 100.days.ago, deleted_at: 5.days.ago)
-        get :edit, params: { group_id: role.group_id, id: role.id }
-        is_expected.to render_template('edit')
-      end
-    end
-  end
-
   describe 'POST #create' do
     context 'with valid params' do
       let(:role_params) do
@@ -39,45 +28,10 @@ describe RolesController do
                             deleted_at: Date.new(2014, 3, 5))
       end
 
-      it 'creates role with dates set' do
-        expect { post :create, params: { group_id: group.id, role: role_params } }.to change { Role.with_deleted.count }.by(1)
-
-        expect(role.created_at.to_date).to eq Date.new(2014, 3, 4)
-        expect(role.deleted_at.to_date).to eq Date.new(2014, 3, 5)
-        is_expected.to redirect_to(group_people_path(group.id))
-      end
-
       it 'redirects' do
         expect { post :create, params: { group_id: group.id, role: role_params } }.to change { Role.with_deleted.count }.by(1)
         expect(flash[:notice]).to eq 'Rolle <i>Mitarbeiter*in GS</i> für <i>AL Schekka / Torben</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt.'
         is_expected.to redirect_to(group_people_path(group.id))
-      end
-    end
-
-    context 'with deleted before created at' do
-      let(:role_params) do
-        role_defaults.merge(deleted_at: Date.new(2014, 3, 4),
-                            created_at: Date.new(2014, 3, 5))
-      end
-
-      it 'does not create role' do
-        expect { post :create, params: { group_id: group.id, role: role_params } }.not_to change { Role.with_deleted.count }
-        expect(role).to have(1).error_on(:deleted_at)
-      end
-    end
-
-    context 'with deleted before created at and empty type' do
-      let(:role_params) do
-        role_defaults.merge(deleted_at: Date.new(2014, 3, 4),
-                            created_at: Date.new(2014, 3, 5),
-                            type: '')
-      end
-
-      it 'does not create role' do
-        expect { post :create, params: { group_id: group.id, role: role_params } }.not_to change { Role.with_deleted.count }
-        expect(role).to have(1).error_on(:type)
-        expect(role).to have(1).error_on(:deleted_at)
-        is_expected.to render_template('crud/new')
       end
     end
 

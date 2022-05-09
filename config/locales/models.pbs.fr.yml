@@ -959,9 +959,6 @@ fr:
         pta_m: SMT masc.
         pta_f: SMT fém.
       role:
-        dates: Dates
-        created_at: Du
-        deleted_at: Au
         class:
           permission:
             description:
