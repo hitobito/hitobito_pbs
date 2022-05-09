@@ -1209,10 +1209,6 @@ de:
         pta_f: PTA w
 
       role:
-        dates: Daten
-        created_at: Von
-        deleted_at: Bis
-
         class:
           permission:
             description:

@@ -108,7 +108,6 @@ module HitobitoPbs
       QualificationKindsController.permitted_attrs += [:manual]
       ServiceTokensController.permitted_attrs += [:group_health]
 
-      RolesController.include Pbs::RolesController
       GroupsController.include Pbs::GroupsController
       Person::HouseholdsController.include Pbs::Person::HouseholdsController
       PeopleController.include Pbs::PeopleController

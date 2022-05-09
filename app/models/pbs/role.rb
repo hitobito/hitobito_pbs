@@ -23,22 +23,7 @@ module Pbs::Role
   extend ActiveSupport::Concern
 
   included do
-    self.used_attributes += [:created_at, :deleted_at]
-
     Role::Types::Permissions << :crisis_trigger
-
-    validates :created_at, presence: true, on: :update
-
-    validates :created_at,
-              timeliness: { type: :datetime,
-                            on_or_before: :now,
-                            allow_blank: true }
-
-    validates :deleted_at,
-              timeliness: { type: :datetime,
-                            on_or_before: :now,
-                            after: ->(role) { role.created_at },
-                            allow_blank: true }
 
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
@@ -48,20 +33,6 @@ module Pbs::Role
 
     alias_method_chain :set_first_primary_group, :kantonalverband
     alias_method_chain :reset_primary_group, :kantonalverband
-  end
-
-  def created_at=(value)
-    super(value)
-  rescue ArgumentError
-    # could not set value
-    super(nil)
-  end
-
-  def deleted_at=(value)
-    super(value)
-  rescue ArgumentError
-    # could not set value
-    super(nil)
   end
 
   def detect_group_membership_notification
