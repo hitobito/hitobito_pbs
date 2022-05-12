@@ -31,6 +31,7 @@ module HitobitoPbs
       Event::Participation.include Pbs::Event::Participation
       Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
       Event::Application.include Pbs::Event::Application
+      MailingList.include Pbs::MailingList
       ServiceToken.include Pbs::ServiceToken
 
       Event.acts_as_nested_set(dependent: :nullify)
