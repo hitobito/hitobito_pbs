@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## Version 1.27
+
+*   Es können für Abos nur noch Mailadressen mit dem korrekten PBS-Kürzel vergeben werden (siehe https://pfadi.swiss/media/files/0e/betriebshandbuch_v32_20160223_de.pdf#page52R_mcid34 Seite 11, Kapitel 4.2, dritter Punkt).
+
 ## Version 1.26
 
 *   Neue Rolle "Verantwortliche*r Nachhaltigkeit und Umwelt" auf dem Kantonalverband hinzugefügt
