@@ -456,7 +456,7 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
-      
+
 
       group/region/regionalleitung:
         one: Regionsleiter*in
@@ -1227,6 +1227,10 @@ de:
       messages:
         must_be_multiple_of: muss ein vielfaches von %{multiple} sein.
       models:
+        mailing_list:
+          attributes:
+            mail_name:
+              must_end_with_layer_suffix: muss mit dem PBS-Gruppenkürzel %{suffix} enden.
         event:
           attributes:
             base:
