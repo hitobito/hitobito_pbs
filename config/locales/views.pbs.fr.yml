@@ -114,6 +114,7 @@ fr:
       index:
         send_confirmation_notifications:
           one: Envoyer une notification à une personne
+          many: Envoyer une notification à %{count} personnes
           other: Envoyer une notification à %{count} personnes
         button_explanation: Envoie un e-mail à tous les participants qualifiés, qui contient un lien vers le cours où ils peuvent télécharger leur confirmation de cours en PDF.
     approvals:
@@ -175,6 +176,8 @@ fr:
       flash:
         success: Le camp a été remis au MSdS. Tu recevras une copie par l'e-mail.
         error: 'Le camp n''a pas pu être remis:'
+        preview: 'Le camp ne peut pas encore être transmis par le·la coach :'
+        preview_success: Toutes les informations nécessaires pour transmettre le camp sont disponibles.
     expected_participants_fields:
       expected_participants_help_inline: Saisir le nombre de participant·e·s et le nombre de responsables. Si ces données ne sont pas encore connues, mettre le nombre de participant·e·s attendu·e·s.
     fields_pbs:
@@ -321,6 +324,8 @@ fr:
       in_abteilung: (dans le groupe)
     qualification_buttons_pbs:
       print_course_confirmation: Imprimer la confirmation du cours
+    household_attrs_pbs:
+      prefers_digital_correspondence: Préfère la correspondance numérique
   population:
     index:
       confirm_census_data: Confirmer les effectifs

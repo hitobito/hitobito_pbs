@@ -114,6 +114,7 @@ it:
       index:
         send_confirmation_notifications:
           one: Spedire gli avvisi a 1%{count} persone
+          many: Spedire gli avvisi a %{count} persone
           other: Spedire gli avvisi a %{count} persone
         button_explanation: Mandare un e-mail a tutti i partecipanti qualificati. All'interno si trova un link al corso tramite cui è possibile accedere alla conferma del corso in formato PDF.
     approvals:
@@ -175,6 +176,8 @@ it:
       flash:
         success: Il campo è stato inoltrato al MSS. Ricevi una copia dell'e-mail.
         error: 'Il campo non può essere salvato:'
+        preview: 'Il campo non può ancora essere annunciato dalla/dal coach:'
+        preview_success: Sono disponibili tutte le informazioni per l'annuncio del campo.
     expected_participants_fields:
       expected_participants_help_inline: Qui vengono registrati il numero di partecipanti e il numero di animatori. Se non si conoscono ancora questi dati, va indicato il numero stimato.
     fields_pbs:
@@ -321,6 +324,8 @@ it:
       in_abteilung: (in sezione)
     qualification_buttons_pbs:
       print_course_confirmation: Stampare la conferma del corso
+    household_attrs_pbs:
+      prefers_digital_correspondence: Preferisce una corrispondenza digitale
   population:
     index:
       confirm_census_data: Confermare i censimenti

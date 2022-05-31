@@ -3,9 +3,11 @@ it:
     models:
       event/approval:
         one: Suggerimento
+        many: Suggerimenti
         other: Suggerimenti
       group/abteilung:
         one: sezione
+        many: Sezioni
         other: Sezioni
       group/abteilungs_gremium:
         one: Gremio
@@ -17,12 +19,15 @@ it:
         long: Clan Rover
       group/ausbildungskommission:
         one: Commissione della formazione
+        many: Commissioni della formazione
         other: Commissioni della formazione
       group/biber:
         one: castoro
+        many: Castori
         other: Castori
       group/bund:
         one: Confederazione
+        many: Confederazione
         other: Confederazione
       group/bundes_gremium:
         one: Gremio MSS
@@ -30,6 +35,7 @@ it:
         long: Gremio federale
       group/elternrat:
         one: consiglio dei genitori
+        many: Consigli dei genitori
         other: Consigli dei genitori
       group/internes_abteilungs_gremium:
         one: Gremio interna
@@ -37,6 +43,7 @@ it:
         long: Gremio sezionale interna
       group/internes_gremium:
         one: Comitato interno
+        many: Gremi interni
         other: Gremi interni
       group/internes_kantonales_gremium:
         one: Gremio interna
@@ -48,12 +55,15 @@ it:
         long: Gremio regionale interna
       group/gremium:
         one: comissione
+        many: Gremi
         other: Gremi
       group/kommission:
         one: Commissione
+        many: Commissioni
         other: Commissioni
       group/kantonalverband:
         one: associazione cantonale
+        many: Associazioni cantonali
         other: Associazioni cantonali
       group/kantonales_gremium:
         one: Gremio
@@ -67,19 +77,23 @@ it:
           esploratrice (f)
 
           scout'
+        many: Esploratori
         other: Esploratori
       group/pio:
         one: 'pio
 
           pioniere'
+        many: Pionieri
         other: Pionieri
       group/pta:
         one: 'Scout ad Ogni Costo
 
           SOC'
+        many: Scout a Ogni Costo
         other: Scout a Ogni Costo
       group/region:
         one: zona
+        many: Zone
         other: Zone
       group/regionales_gremium:
         one: Gremio
@@ -91,6 +105,7 @@ it:
         long: Rover di zona
       group/rover:
         one: rover
+        many: Rover
         other: Rover
       group/woelfe:
         one: 'lupo
@@ -98,15 +113,19 @@ it:
           lupetto
 
           lupetta'
+        many: Lupetti
         other: Lupetti
       group/bund/mitarbeiter_gs:
         one: Collaboratore del segretariato generale
+        many: Collaboratori del segretariato generale
         other: Collaboratori del segretariato generale
       group/bund/it_support:
         one: Supporto IT
+        many: Supporto IT
         other: Supporto IT
       group/bund/sekretariat:
         one: Segretariato
+        many: Segretariato
         other: Segretariato
       group/bund/adressverwaltung:
         one: Amministratore bancadati
@@ -114,6 +133,7 @@ it:
         description: Amministra i dati contenuti in questa bancadati
       group/bund/power_user:
         one: PowerUser
+        many: PowerUser
         other: PowerUser
       group/bund/assistenz_ausbildung:
         one: Assistenza nella formazione
@@ -121,477 +141,635 @@ it:
         description: Sostenuto nelle formazioni
       group/bund/praesidium:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       group/bund/vize_praesidium:
         one: Vicepresidente
+        many: Vicepresidenti
         other: Vicepresidenti
       group/bund/praesidium_apv:
         one: Presidente scout anziani
+        many: Presidenti scout anziani
         other: Presidenti scout anziani
       group/bund/geschaeftsleitung:
         one: Segretario generale
+        many: Segretario generale
         other: Segretario generale
       group/bund/mitarbeiter:
         one: Collaboratore
+        many: Collaboratori
         other: Collaboratori
       group/bund/vertretung_pbs:
         one: Delegato MSS
+        many: Delegato MSS
         other: Delegato MSS
       group/bund/beisitz:
         one: Delegato
+        many: Delegato
         other: Delegato
       group/bund/kassier:
         one: Cassieri
+        many: Cassiere
         other: Cassiere
       group/bund/revisor:
         one: Revisore
+        many: Revisori
         other: Revisori
       group/bund/redaktor:
         one: Redattore
+        many: Redattori
         other: Redattori
       group/bund/webmaster:
         one: Webmaster
+        many: Webmaster
         other: Webmaster
       group/bund/mediensprecher:
         one: Portavoce
+        many: Portavoce
         other: Portavoce
       group/bund/uebersetzer:
         one: Traduttore
+        many: Traduttore
         other: Traduttore
       group/bund/mitglied_krisenteam:
         one: Membro della cellula di crisi
+        many: Membri della cellula di crisi
         other: Membri della cellula di crisi
       group/bund/coach:
         one: Coach
+        many: Coaches
         other: Coaches
       group/bund/grossanlass_coach:
         one: Coach grandi eventi
+        many: Coaches grandi eventi
         other: Coaches grandi eventi
       group/bund/leitungskursbetreuung:
         one: Consigliere alla formazione
+        many: Consigliere alla formazione
         other: Consigliere alla formazione
       group/bund/leitung_kernaufgabe_ausbildung:
         one: Responsabile compito principale formazione
+        many: Responsabili compito principale formazione
         other: Responsabili compito principale formazione
       group/bund/leitung_kernaufgabe_kommunikation:
         one: Responsabile compito principale comunicazione
+        many: Responsabili compito principale comunicazione
         other: Responsabili compito principale comunicazione
       group/bund/leitung_kernaufgabe_programm:
         one: Responsabile compito principale programma
+        many: Responsabili compito principale programma
         other: Responsabili compito principale programma
       group/bund/leitung_kernaufgabe_support:
         one: Responsabile compito principale supporto
+        many: Responsabili compito principale supporto
         other: Responsabili compito principale supporto
       group/bund/verantwortung_biberstufe:
         one: Responsabile branca castori
+        many: Responsabili branca castori
         other: Responsabili branca castori
       group/bund/verantwortung_wolfstufe:
         one: Responsabile branca lupetti
+        many: Responsabili branca lupetti
         other: Responsabili branca lupetti
       group/bund/verantwortung_pfadistufe:
         one: Responsabile branca esploratori
+        many: Responsabili branca esploratori
         other: Responsabili branca esploratori
       group/bund/verantwortung_piostufe:
         one: Responsabile branca pionieri
+        many: Responsabili branca pionieri
         other: Responsabili branca pionieri
       group/bund/verantwortung_roverstufe:
         one: Responsabile branca rover
+        many: Responsabili branca rover
         other: Responsabili branca rover
       group/bund/verantwortung_pfadi_trotz_allem:
         one: responsabile SOC
+        many: Responsabili SOC
         other: Responsabili SOC
       group/bund/verantwortung_integration:
         one: Responsabile diversità ed inclusione
+        many: Responsabile diversità ed inclusione
         other: Responsabile diversità ed inclusione
       group/bund/verantwortung_krisenteam:
         one: Responsabile team di crisi
+        many: Responsabile team di crisi
         other: Responsabile team di crisi
       group/bund/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
+        many: Responsabili annuncio campi
         other: Responsabili annuncio campi
       group/bund/verantwortung_pr:
         one: Responsabile PR
+        many: Responsabili PR
         other: Responsabili PR
       group/bund/verantwortung_praevention_sexueller_ausbeutung:
         one: Responsabile della prevenzione
+        many: Responsabili della prevenzione
         other: Responsabili della prevenzione
       group/bund/international_commissioner_ic_wagggs:
         one: Commissario internazionale WAGGGS
+        many: Commissarii internazionale WAGGGS
         other: Commissarii internazionale WAGGGS
       group/bund/international_commissioner_ic_wosm:
         one: Commissario internazionale WOSM
+        many: Commissarii internazionale WOSM
         other: Commissarii internazionale WOSM
       group/bund/stv_ic_programme_wagggs:
         one: Commissario internazionale aggiunto WAGGGS
+        many: Commissarii internazionale aggiunto WAGGGS
         other: Commissarii internazionale aggiunto WAGGGS
       group/bund/stv_ic_programme_wosm:
         one: Commissario internazionale aggiunto WOSM
+        many: Commissarii internazionale aggiunto WOSM
         other: Commissarii internazionale aggiunto WOSM
       group/bund/spezialfunktion:
         one: Funzione speciale
+        many: Funzioni speciale
         other: Funzioni speciale
       group/bund/ehrenmitglied:
         one: Membri onorario
+        many: Membro onorario
         other: Membro onorario
       group/bund/passivmitglied:
         one: Membro passivo
+        many: Membri passivo
         other: Membri passivo
       group/bund/kontaktperson:
         one: Persona di contatto
+        many: Persone di contatto
         other: Persone di contatto
       group/ausbildungskommission/mitglied:
         one: Membro
+        many: Membri
         other: Membri
       group/kantonalverband/kantonsleitung:
         one: Responsabile cantonale
+        many: Responsabili cantonale
         other: Responsabili cantonale
       group/kantonalverband/sekretariat:
         one: Segretariato
+        many: Segretariati
         other: Segretariati
       group/kantonalverband/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/kantonalverband/power_user:
         one: PowerUser
+        many: PowerUser
         other: PowerUser
       group/kantonalverband/praesidium:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       group/kantonalverband/vize_praesidium:
         one: Vicepresidente
+        many: Vicepresidenti
         other: Vicepresidenti
       group/kantonalverband/praesidium_apv:
         one: Presidente scout anziani
+        many: Presidenti scout anziani
         other: Presidenti scout anziani
       group/kantonalverband/mitarbeiter:
         one: Collaboratore
+        many: Collaboratori
         other: Collaboratori
       group/kantonalverband/beisitz:
         one: Delegato
+        many: Delegati
         other: Delegati
       group/kantonalverband/kassier:
         one: Cassiere
+        many: Cassieri
         other: Cassieri
       group/kantonalverband/revisor:
         one: Revisore
+        many: Revisori
         other: Revisori
       group/kantonalverband/redaktor:
         one: Redattore
+        many: Redattori
         other: Redattori
       group/kantonalverband/webmaster:
         one: Webmaster
+        many: Webmaster
         other: Webmaster
       group/kantonalverband/mediensprecher:
         one: Portavoce
+        many: Portavoci
         other: Portavoci
       group/kantonalverband/uebersetzer:
         one: Traduttore
+        many: Traduttori
         other: Traduttori
       group/kantonalverband/mitglied_krisenteam:
         one: Membro della cellula di crisi
+        many: Membri della cellula di crisi
         other: Membri della cellula di crisi
       group/kantonalverband/coach:
         one: Coach
+        many: Coaches
         other: Coaches
       group/kantonalverband/leitungskursbetreuung:
         one: Consigliere alla formazione
+        many: Consiglieri alla formazione
         other: Consiglieri alla formazione
       group/kantonalverband/verantwortung_biberstufe:
         one: Responsabile branca castori
+        many: Responsabili branca castori
         other: Responsabili branca castori
       group/kantonalverband/verantwortung_wolfstufe:
         one: Responsabile branca lupetti
+        many: Responsabili branca lupetti
         other: Responsabili branca lupetti
       group/kantonalverband/verantwortung_pfadistufe:
         one: Responsabile branca esploratori
+        many: Responsabili branca esploratori
         other: Responsabili branca esploratori
       group/kantonalverband/verantwortung_piostufe:
         one: Responsabile branca pionieri
+        many: Responsabili branca pionieri
         other: Responsabili branca pionieri
       group/kantonalverband/verantwortung_roverstufe:
         one: Responsabile branca rover
+        many: Responsabili branca rover
         other: Responsabili branca rover
       group/kantonalverband/verantwortung_pfadi_trotz_allem:
         one: Responsabile SOC
+        many: Responsabili SOC
         other: Responsabili SOC
       group/kantonalverband/verantwortung_abteilungen:
         one: Responsabile delle sezioni
+        many: Responsabili delle sezioni
         other: Responsabili delle sezioni
       group/kantonalverband/verantwortung_animation_spirituelle:
         one: Responsabile dell'animazione spirituale
+        many: Responsabili dell'animazione spirituale
         other: Responsabili dell'animazione spirituale
       group/kantonalverband/verantwortung_ausbildung:
         one: Responsabile della formazione
+        many: Responsabili della formazione
         other: Responsabili della formazione
       group/kantonalverband/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
+        many: Responsabili dell'accompagnamento
         other: Responsabili dell'accompagnamento
       group/kantonalverband/verantwortung_integration:
         one: Responsabile diversità ed inclusione
+        many: Responsabile diversità ed inclusione
         other: Responsabile diversità ed inclusione
       group/kantonalverband/verantwortung_internationales:
         one: Responsabile internizionale
+        many: Responsabili internizionale
         other: Responsabili internizionale
       group/kantonalverband/verantwortung_suchtpraeventionsprogramm:
         one: Responsabile cantonale del programma di prevenzione dalle dipendenze
+        many: Responsabili cantonale del programma di prevenzione dalle dipendenze
         other: Responsabili cantonale del programma di prevenzione dalle dipendenze
       group/kantonalverband/verantwortung_kantonsarchiv:
         one: Responsabile dell'archivio cantonale
+        many: Responsabili dell'archivio cantonale
         other: Responsabili dell'archivio cantonale
       group/kantonalverband/verantwortung_krisenteam:
         one: Responsabile della cellula di crisi
+        many: Responsabili della cellula di crisi
         other: Responsabili della cellula di crisi
       group/kantonalverband/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
+        many: Responsabili annuncio campi
         other: Responsabili annuncio campi
       group/kantonalverband/verantwortung_lagerplaetze:
         one: Responsabile dei luoghi da campo
+        many: Responsabili dei luoghi da campo
         other: Responsabili dei luoghi da campo
       group/kantonalverband/verantwortung_materialverkaufsstelle:
         one: Responsabile economato
+        many: Responsabili economato
         other: Responsabili economato
       group/kantonalverband/verantwortung_pr:
         one: Responsabile PR
+        many: Responsabili PR
         other: Responsabili PR
       group/kantonalverband/verantwortung_praevention_sexueller_ausbeutung:
         one: Responsabile della prevenzione
+        many: Responsabili della prevenzione
         other: Responsabili della prevenzione
       group/kantonalverband/verantwortung_programm:
         one: Responsabile del programma
+        many: Responsabili del programma
         other: Responsabili del programma
       group/kantonalverband/verantwortung_nachhaltigkeit:
         one: Responsabile sostenibilità e ambiente
+        many: Responsabili sostenibilità e ambiente
         other: Responsabili sostenibilità e ambiente
       group/kantonalverband/spezialfunktion:
         one: Funzione speciale
+        many: Funzioni speciale
         other: Funzioni speciale
       group/kantonalverband/ehrenmitglied:
         one: Membro onorario
+        many: Membri onorario
         other: Membri onorario
       group/kantonalverband/passivmitglied:
         one: Membro passivo
+        many: Membri passivo
         other: Membri passivo
       group/region/regionalleitung:
         one: Responsabile di zona
+        many: Responsabili di zona
         other: Responsabili di zona
       group/region/sekretariat:
         one: Segretariato
+        many: Segretariati
         other: Segretariati
       group/region/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/region/power_user:
         one: PowerUser
+        many: PowerUser
         other: PowerUser
       group/region/praesidium:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       group/region/vize_praesidium:
         one: Vicepresidente
+        many: Vicepresidenti
         other: Vicepresidenti
       group/region/praesidium_apv:
         one: Presidente scout anziani
+        many: Presidenti scout anziani
         other: Presidenti scout anziani
       group/region/praeses:
         one: Assistente spirituale
+        many: Assistenti spirituale
         other: Assistenti spirituale
       group/region/mitarbeiter:
         one: Collaboratore
+        many: Collaboratori
         other: Collaboratori
       group/region/beisitz:
         one: Delegato
+        many: Delegati
         other: Delegati
       group/region/kassier:
         one: Cassiere
+        many: Cassieri
         other: Cassieri
       group/region/revisor:
         one: Revisore
+        many: Revisori
         other: Revisori
       group/region/redaktor:
         one: Redattore
+        many: Redattori
         other: Redattori
       group/region/webmaster:
         one: Webmaster
+        many: Webmaster
         other: Webmaster
       group/region/mediensprecher:
         one: Portavoce
+        many: Portavoci
         other: Portavoci
       group/region/mitglied_krisenteam:
         one: Membro della cellula di crisi
+        many: Membri della cellula di crisi
         other: Membri della cellula di crisi
       group/region/coach:
         one: Coach
+        many: Coaches
         other: Coaches
       group/region/leitungskursbetreuung:
         one: Consigliere alla formazione
+        many: Consiglieri alla formazione
         other: Consiglieri alla formazione
       group/region/verantwortung_biberstufe:
         one: Responsabile branca castori
+        many: Responsabili branca castori
         other: Responsabili branca castori
       group/region/verantwortung_wolfstufe:
         one: Responsabile branca lupetti
+        many: Responsabili branca lupetti
         other: Responsabili branca lupetti
       group/region/verantwortung_pfadistufe:
         one: Responsabile branca esploratori
+        many: Responsabili branca esploratori
         other: Responsabili branca esploratori
       group/region/verantwortung_piostufe:
         one: Responsabile branca pionieri
+        many: Responsabili branca pionieri
         other: Responsabili branca pionieri
       group/region/verantwortung_roverstufe:
         one: Responsabile branca rover
+        many: Responsabili branca rover
         other: Responsabili branca rover
       group/region/verantwortung_pfadi_trotz_allem:
         one: Responsabile SOC
+        many: Responsabili SOC
         other: Responsabili SOC
       group/region/verantwortung_abteilungen:
         one: Responsabile delle sezioni
+        many: Responsabili delle sezioni
         other: Responsabili delle sezioni
       group/region/verantwortung_animation_spirituelle:
         one: Responsabile dell'animazione spirituale
+        many: Responsabili dell'animazione spirituale
         other: Responsabili dell'animazione spirituale
       group/region/verantwortung_ausbildung:
         one: Responsabile della formazione
+        many: Responsabili della formazione
         other: Responsabili della formazione
       group/region/verantwortung_betreuung:
         one: Responsabile dell'accompagnamento
+        many: Responsabili dell'accompagnamento
         other: Responsabili dell'accompagnamento
       group/region/verantwortung_integration:
         one: Responsabile diversità ed inclusione
+        many: Responsabile diversità ed inclusione
         other: Responsabile diversità ed inclusione
       group/region/verantwortung_internationales:
         one: Responsabile internizionale
+        many: Responsabili internizionale
         other: Responsabili internizionale
       group/region/verantwortung_suchtpraeventionsprogramm:
         one: Responsabile cantonale del programma di prevenzione dalle dipendenze
+        many: Responsabili cantonale del programma di prevenzione dalle dipendenze
         other: Responsabili cantonale del programma di prevenzione dalle dipendenze
       group/region/verantwortung_krisenteam:
         one: Responsabile della cellula di crisi
+        many: Responsabili della cellula di crisi
         other: Responsabili della cellula di crisi
       group/region/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
+        many: Responsabili annuncio campi
         other: Responsabili annuncio campi
       group/region/verantwortung_lagerplaetze:
         one: Responsabile dei luoghi da campo
+        many: Responsabili dei luoghi da campo
         other: Responsabili dei luoghi da campo
       group/region/verantwortung_materialverkaufsstelle:
         one: Responsabile economato
+        many: Responsabili economato
         other: Responsabili economato
       group/region/verantwortung_pr:
         one: Responsabile PR
+        many: Responsabili PR
         other: Responsabili PR
       group/region/verantwortung_praevention_sexueller_ausbeutung:
         one: Responsabile della prevenzione
+        many: Responsabili della prevenzione
         other: Responsabili della prevenzione
       group/region/verantwortung_programm:
         one: Responsabile del programma
+        many: Responsabili del programma
         other: Responsabili del programma
       group/region/spezialfunktion:
         one: Funzione speciale
+        many: Funzioni speciale
         other: Funzioni speciale
       group/region/ehrenmitglied:
         one: Membro onorario
+        many: Membri onorario
         other: Membri onorario
       group/region/passivmitglied:
         one: Membro passivo
+        many: Membri passivo
         other: Membri passivo
       group/abteilung/abteilungsleitung:
         one: Capo sezione
+        many: Capi sezione
         other: Capi sezione
       group/abteilung/abteilungsleitung_stv:
         one: Vice capo sezione
+        many: Vice capi sezione
         other: Vice capi sezione
       group/abteilung/sekretariat:
         one: Segretariato
+        many: Segretariati
         other: Segretariati
       group/abteilung/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/abteilung/power_user:
         one: PowerUser
+        many: PowerUser
         other: PowerUser
       group/abteilung/praesidium:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       group/abteilung/vize_praesidium:
         one: Vicepresidente
+        many: Vicepresidenti
         other: Vicepresidenti
       group/abteilung/praesidium_apv:
         one: Presidenti degli scout anziani
+        many: Presidenti scout anziani
         other: Presidenti scout anziani
       group/abteilung/praesidium_elternrat:
         one: Presidente del consiglio dei genitori
+        many: Presidente del consiglio dei genitori
         other: Presidente del consiglio dei genitori
       group/abteilung/praeses:
         one: Assistente spirituale
+        many: Assistenti spirituale
         other: Assistenti spirituale
       group/abteilung/beisitz:
         one: Delegato
+        many: Delegati
         other: Delegati
       group/abteilung/materialwart:
         one: Responsabile del materiale
+        many: Responsabili del materiale
         other: Responsabili del materiale
       group/abteilung/heimverwaltung:
         one: Amministratore di casa
+        many: Amministratori di casa
         other: Amministratori di casa
       group/abteilung/stufenleitung_biber:
         one: Capo branca castori
+        many: Capi branca castori
         other: Capi branca castori
       group/abteilung/stufenleitung_woelfe:
         one: Capo branca lupetti
+        many: Capi branca lupetti
         other: Capi branca lupetti
       group/abteilung/stufenleitung_pfadi:
         one: Capo branca esploratori
+        many: Capi branca esploratori
         other: Capi branca esploratori
       group/abteilung/stufenleitung_pio:
         one: Capo branca pionieri
+        many: Capi branca pionieri
         other: Capi branca pionieri
       group/abteilung/stufenleitung_rover:
         one: Capo branca rover
+        many: Capi branca rover
         other: Capi branca rover
       group/abteilung/stufenleitung_pta:
         one: Capo branca SOC
+        many: Capi branca SOC
         other: Capi branca SOC
       group/abteilung/kassier:
         one: Cassiere
+        many: Cassieri
         other: Cassieri
       group/abteilung/revisor:
         one: Revisore
+        many: Revisori
         other: Revisori
       group/abteilung/redaktor:
         one: Redattore
+        many: Redattori
         other: Redattori
       group/abteilung/webmaster:
         one: Webmaster
+        many: Webmaster
         other: Webmaster
       group/abteilung/coach:
         one: Coach
+        many: Coaches
         other: Coaches
       group/abteilung/verantwortung_materialverkaufsstelle:
         one: Responsabile economato
+        many: Responsabili economato
         other: Responsabili economato
       group/abteilung/verantwortung_pfadi_trotz_allem:
         one: Responsabile SOC
+        many: Responsabili SOC
         other: Responsabili SOC
       group/abteilung/verantwortung_pr:
         one: Responsabile PR
+        many: Responsabili PR
         other: Responsabili PR
       group/abteilung/spezialfunktion:
         one: Funzione speciale
+        many: Funzioni speciale
         other: Funzioni speciale
       group/abteilung/ehrenmitglied:
         one: Membro onorario
+        many: Membri onorario
         other: Membri onorario
       group/abteilung/passivmitglied:
         one: Membro passivo
+        many: Membri passivo
         other: Membri passivo
       group/biber/einheitsleitung:
         one: Capo colonia
+        many: Capi colonia
         other: Capi colonia
       group/biber/mitleitung:
         one: Aggiunto capo colonia
+        many: Aggiunti capo colonia
         other: Aggiunti capo colonia
       group/biber/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/biber/biber:
         one: Castoro
@@ -599,12 +777,15 @@ it:
         long: Castoro
       group/woelfe/einheitsleitung:
         one: Capo muta
+        many: Capi muta
         other: Capi muta
       group/woelfe/mitleitung:
         one: Aggiunto capo muta
+        many: Aggiunti capo muta
         other: Aggiunti capo muta
       group/woelfe/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/woelfe/leitwolf:
         one: Capo sestena
@@ -616,12 +797,15 @@ it:
         long: Lupetto
       group/pfadi/einheitsleitung:
         one: Capo reparto
+        many: Capi reparto
         other: Capi reparto
       group/pfadi/mitleitung:
         one: Aggiunto capo reparto
+        many: Aggiunti capo reparto
         other: Aggiunti capo reparto
       group/pfadi/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/pfadi/leitpfadi:
         one: Capo pattuglia
@@ -633,12 +817,15 @@ it:
         long: Esploratore
       group/pio/einheitsleitung:
         one: Capo posto
+        many: Capi posto
         other: Capi posto
       group/pio/mitleitung:
         one: Aggiunto capo posto
+        many: Aggiunti capo posto
         other: Aggiunti capo posto
       group/pio/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/pio/pio:
         one: Pioniere
@@ -646,12 +833,15 @@ it:
         long: Pioniere
       group/rover/einheitsleitung:
         one: Capo clan
+        many: Capi clan
         other: Capi clan
       group/rover/mitleitung:
         one: Aggiunto capo clan
+        many: Aggiunti capo clan
         other: Aggiunti capo clan
       group/rover/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/rover/rover:
         one: Rover
@@ -659,96 +849,127 @@ it:
         long: Rover
       group/pta/einheitsleitung:
         one: Capo unità SOC
+        many: Capi unità SOC
         other: Capi unità SOC
       group/pta/mitleitung:
         one: Aggiunto capo unità SOC
+        many: Aggiunti capo unità SOC
         other: Aggiunti capo unità SOC
       group/pta/adressverwaltung:
         one: Amministratore bancadati
+        many: Amministratori bancadati
         other: Amministratori bancadati
       group/pta/mitglied:
         one: Membro
+        many: Membri
         other: Membri
       group/elternrat/praesidium:
         one: Presidente
+        many: Presidenti
         other: Presidenti
       group/elternrat/mitglied:
         one: Membro
+        many: Membri
         other: Membri
       group/internes_gremium/leitung:
         one: Direzione
+        many: Direzione
         other: Direzione
       group/internes_gremium/mitglied:
         one: Membro
+        many: Membri
         other: Membri
       group/gremium/leitung:
         one: Formatore
+        many: Responsabile
         other: Responsabile
       group/gremium/mitglied:
         one: Membro
+        many: Membri
         other: Membri
       group/kommission/leitung:
         one: Responsabile
+        many: Responsabili
         other: Responsabili
       group/kommission/mitglied:
         one: Collaboratore
+        many: Membri
         other: Membri
       event/camp:
         one: Campo
+        many: Campi
         other: Campi
       event/camp/role/leader:
         one: Direzione del campo
+        many: Direzioni del campo
         other: Direzioni del campo
       event/camp/role/assistant_leader:
         one: Responsabile
+        many: Responsabili
         other: Responsabili
       event/camp/role/helper:
         one: Cucina / aiutante
+        many: Cucina / aiutanti
         other: Cucina / aiutanti
       event/camp/role/participant:
         one: Partecipante
+        many: Partecipanti
         other: Partecipanti
       event/camp/role/leader_mountain_security:
         one: Animatore ambito di sicurezza Montagna
+        many: Animatori ambito di sicurezza Montagna
         other: Animatori ambito di sicurezza Montagna
       event/camp/role/leader_snow_security:
         one: Animatore ambito di sicurezza Inverno
+        many: Animatori ambito di sicurezza Inverno
         other: Animatori ambito di sicurezza Inverno
       event/camp/role/leader_water_security:
         one: Animatore ambito di sicurezza Acqua
+        many: Animatori ambito di sicurezza Acqua
         other: Animatori ambito di sicurezza Acqua
       event/camp/role/abteilungsleitung:
         one: Direzione della sezione
+        many: Direzioni della sezione
         other: Direzioni della sezione
       event/camp/role/coach:
         one: Coach
+        many: Coaches
         other: Coaches
       event/camp/role/advisor_mountain_security:
         one: Accompagnamento ambito di sicurezza Montagna
+        many: Accompagnamento ambito di sicurezza Montagna
         other: Accompagnamento ambito di sicurezza Montagna
       event/camp/role/advisor_schnee_security:
         one: Accompagnamento ambito di sicurezza Inverno
+        many: Accompagnamento ambito di sicurezza Inverno
         other: Accompagnamento ambito di sicurezza Inverno
       event/camp/role/advisor_wasser_security:
         one: Accompagnamento ambito di sicurezza Acqua
+        many: Accompagnamento ambito di sicurezza Acqua
         other: Accompagnamento ambito di sicurezza Acqua
       event/course/role/leader:
         one: Direzione dei corsi
+        many: Direzioni dei corsi
         other: Direzioni dei corsi
       event/course/role/class_leader:
         one: Docente di classe
+        many: Docenti di classe
         other: Docenti di classe
       event/course/role/helper:
         one: Aiute ai corsi
+        many: Aiuti ai corsi
         other: Aiuti ai corsi
       event/course/role/advisor:
         one: CaF
+        many: CaF
         other: CaF
       black_list:
         one: Lista nera
+        many: Lista nera
         other: Lista nera
       census:
         one: Periodo considerato per i censimenti
+        many: Periodi considerati per i censimenti
         other: Periodi considerati per i censimenti
       salutation:
         one: Appellativo
@@ -838,7 +1059,7 @@ it:
         local_scout_contact_present: Contatto scout locali
         local_scout_contact: Info contatto scout locali
         updated_at: Ultimo aggiornamento
-        any_expected_participant_attr: Partecipanti stimati
+        any_expected_participant_attr: Numero di partecipanti attesi
         abteilungsleitung_id: Direzione della sezione
         abteilungsleitung: Direzione della sezione
         leader: Direzione del campo
