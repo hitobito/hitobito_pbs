@@ -6,7 +6,7 @@
       %tr.grouping
         %td
           .profil
-            = image_tag(p.person.picture.thumb.url, size: '32x32')
+            = image_tag(upload_url(p.person, :picture, variant: :thumb), size: '32x32')
         %td{ colspan: 3 }
           %strong
             -# Any person listed can be shown
