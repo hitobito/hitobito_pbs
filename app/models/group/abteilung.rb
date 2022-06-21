@@ -166,6 +166,14 @@ class Group::Abteilung < Group
     self.permissions = [:layer_and_below_read, :contact_data]
   end
 
+  class Rechnungen < ::Role
+    self.permissions = [:layer_and_below_read, :finance, :contact_data]
+  end
+
+  class Finanzverwaltung < ::Role
+    self.permissions = [:layer_and_below_read, :finance, :financials, :contact_data]
+  end
+
   class Materialwart < ::Role
     self.permissions = [:group_read]
   end
@@ -273,6 +281,8 @@ class Group::Abteilung < Group
         StufenleitungPta,
 
         Kassier,
+        Rechnungen,
+        Finanzverwaltung,
         Revisor,
         Redaktor,
         Webmaster,
