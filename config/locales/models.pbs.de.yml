@@ -151,6 +151,10 @@ de:
         one: Kassier*in
         other: Kassier*innen
         description:
+      group/bund/rechnungen:
+        one: Rechnungen
+        other: Rechnungen
+        description:
       group/bund/revisor:
         one: Revisor*in
         other: Revisor*innen
@@ -323,6 +327,10 @@ de:
       group/kantonalverband/kassier:
         one: Kassier*in
         other: Kassier*innen
+        description:
+      group/kantonalverband/rechnungen:
+        one: Rechnungen
+        other: Rechnungen
         description:
       group/kantonalverband/revisor:
         one: Revisor*in
@@ -501,6 +509,10 @@ de:
       group/region/kassier:
         one: Kassier*in
         other: Kassier*innen
+        description:
+      group/region/rechnungen:
+        one: Rechnungen
+        other: Rechnungen
         description:
       group/region/revisor:
         one: Revisor
@@ -702,6 +714,10 @@ de:
       group/abteilung/kassier:
         one: Kassier*in
         other: Kassier*innen
+        description:
+      group/abteilung/rechnungen:
+        one: Rechnungen
+        other: Rechnungen
         description:
       group/abteilung/revisor:
         one: Revisor*in

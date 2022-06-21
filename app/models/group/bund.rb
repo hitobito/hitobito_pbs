@@ -187,10 +187,6 @@ class Group::Bund < Group
     self.permissions = [:layer_and_below_full, :finance, :contact_data]
   end
 
-  class Finanzverwaltung < ::Role
-    self.permissions = [:layer_and_below_read, :finance, :financials, :contact_data]
-  end
-
   class Spezialfunktion < ::Role
     self.permissions = [:group_read]
   end
@@ -279,7 +275,6 @@ class Group::Bund < Group
 
         Kassier,
         Rechnungen,
-        Finanzverwaltung,
         Revisor,
         Redaktor,
         Webmaster,
