@@ -184,7 +184,7 @@ class Group::Bund < Group
   end
 
   class Rechnungen < ::Role
-    self.permissions = [:layer_and_below_full, :finance, :contact_data]
+    self.permissions = [:layer_and_below_read, :finance, :contact_data]
   end
 
   class Spezialfunktion < ::Role
