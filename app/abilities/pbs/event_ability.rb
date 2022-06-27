@@ -52,6 +52,9 @@ module Pbs::EventAbility
         may(:index_approvals).
         for_advised_or_participations_full_events
 
+      permission(:any).may(:manage_attendances).if_assistanz_ausbildung
+      permission(:any).may(:qualifications_read).if_assistanz_ausbildung
+
       permission(:layer_full).may(:manage_attendances, :index_approvals).in_same_layer
 
       permission(:layer_and_below_full).may(:manage_attendances).in_same_layer
@@ -94,6 +97,10 @@ module Pbs::EventAbility
   def if_education_responsible
     role_type?(Group::Bund::AssistenzAusbildung,
                Group::Bund::MitarbeiterGs)
+  end
+
+  def if_assistanz_ausbildung
+    role_type?(Group::Bund::AssistenzAusbildung)
   end
 
   def if_mitarbeiter_gs
