@@ -44,6 +44,7 @@ module HitobitoPbs
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.include Pbs::Event::ParticipantAssigner
       Event::Filter.include Pbs::Event::Filter
+      Events::Filter::Groups.include Pbs::Events::Filter::Groups
       Event::Qualifier.include Pbs::Event::Qualifier
       Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
@@ -126,6 +127,7 @@ module HitobitoPbs
       Sheet::Event.include Pbs::Sheet::Event
 
       ### helpers
+      EventsHelper.include Pbs::EventsHelper
       FilterNavigation::Events.include Pbs::FilterNavigation::Events
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
       admin[:active_for] << 'black_lists'
