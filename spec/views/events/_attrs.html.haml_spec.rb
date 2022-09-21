@@ -34,8 +34,9 @@ describe 'events/_attrs.html.haml' do
       end
 
       it 'shows application conditions and general information when set' do
-        event.kind.update!(application_conditions: 'some application conditions',
-                           general_information: 'some general informations')
+        event.update!(application_conditions: 'some application conditions')
+        event.kind.update!(general_information: 'some general informations')
+
         render
         is_expected.to have_content 'some general informations'
         is_expected.to have_content 'some application conditions'
