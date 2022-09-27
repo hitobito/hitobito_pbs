@@ -122,6 +122,21 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             expect(json['participations'].size).to eq(2)
           end
+
+          it 'exports census evaluations' do
+            get :census_evaluations, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['abteilungen'].size).to eq(1)
+            abteilung_evaluation = json['census_evaluations']['abteilungen'].first
+            expect(abteilung_evaluation['kantonalverband_id']).to eq(groups(:be).id)
+            expect(abteilung_evaluation['region_id']).to eq(groups(:bern).id)
+            expect(abteilung_evaluation['abteilung_id']).to eq(groups(:schekka).id)
+            expect(abteilung_evaluation.keys.size).to eq(18)
+            expect(abteilung_evaluation['leiter_f']).to eq(2)
+            expect(abteilung_evaluation['leiter_m']).to eq(3)
+            expect(abteilung_evaluation['pfadis_f']).to eq(4)
+            expect(abteilung_evaluation['pfadis_m']).to eq(3)
+          end
         end
 
         context 'be' do
@@ -159,6 +174,21 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             expect(json['participations'].size).to eq(1)
           end
+
+          it 'exports census evaluations' do
+            get :census_evaluations, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['kantonalverbaende'].size).to eq(1)
+            kantonalverband_evaluation = json['census_evaluations']['kantonalverbaende'].first
+            expect(kantonalverband_evaluation['kantonalverband_id']).to eq(groups(:be).id)
+            expect(kantonalverband_evaluation['region_id']).to eq(groups(:bern).id)
+            expect(kantonalverband_evaluation['abteilung_id']).to eq(groups(:schekka).id)
+            expect(kantonalverband_evaluation.keys.size).to eq(18)
+            expect(kantonalverband_evaluation['leiter_f']).to eq(3)
+            expect(kantonalverband_evaluation['leiter_m']).to eq(5)
+            expect(kantonalverband_evaluation['pfadis_f']).to eq(5)
+            expect(kantonalverband_evaluation['pfadis_m']).to eq(6)
+          end
         end
 
         context 'bern' do
@@ -184,6 +214,21 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             expect(json['camps'].size).to eq(1)
             expect(json['camps'][0]['name']).to eq(events(:bern_camp).name)
+          end
+
+          it 'exports census evaluations' do
+            get :census_evaluations, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['regionen'].size).to eq(1)
+            region_evaluation = json['census_evaluations']['regionen'].first
+            expect(region_evaluation['kantonalverband_id']).to eq(groups(:be).id)
+            expect(region_evaluation['region_id']).to eq(groups(:bern).id)
+            expect(region_evaluation['abteilung_id']).to eq(groups(:schekka).id)
+            expect(region_evaluation.keys.size).to eq(18)
+            expect(region_evaluation['leiter_f']).to eq(2)
+            expect(region_evaluation['leiter_m']).to eq(3)
+            expect(region_evaluation['pfadis_f']).to eq(4)
+            expect(region_evaluation['pfadis_m']).to eq(3)
           end
         end
       end

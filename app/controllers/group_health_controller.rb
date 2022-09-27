@@ -144,7 +144,8 @@ class GroupHealthController < ApplicationController
   end
 
   def group_types
-    respond(Group.all_types.excluding(Group::InternesGremium).map do |type|
+    respond(Group.all_types.excluding(Group::InternesGremium,
+                                      Group::InternesAbteilungsGremium).map do |type|
       localize_type_labels(type).merge(group_type: type.model_name)
     end)
   end
@@ -168,6 +169,21 @@ class GroupHealthController < ApplicationController
       localize_labels("activerecord.attributes.event/camp.states.#{state}")
           .merge(state: state)
     end)
+  end
+
+  def census_evaluations
+    year = params[:year] || Census.current.year || Time.zone.today.year
+    abteilungen = Group::Abteilung.where(group_health: true)
+                                  .map { |g| g.census_total(year) }
+    regionen = Group::Region.where(group_health: true)
+                            .map { |g| g.census_total(year) }
+    kantonalverbaende = Group::Kantonalverband.where(group_health: true)
+                                              .map { |g| g.census_total(year) }
+    respond({
+      abteilungen: abteilungen,
+      regionen: regionen,
+      kantonalverbaende: kantonalverbaende
+    })
   end
 
   private
