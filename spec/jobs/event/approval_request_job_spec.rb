@@ -62,7 +62,7 @@ describe Event::ApprovalRequestJob do
 
       expect(Event::ParticipationMailer).to receive(:approval) do |participation, people|
         expect(participation).to eq(participation)
-        expect(people).to match_array([leitung, ausbildung])
+        expect(people).to include(leitung, ausbildung)
 
         mailer
       end
