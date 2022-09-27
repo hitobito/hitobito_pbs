@@ -75,39 +75,104 @@ describe GroupHealthController do
       end
 
       context 'opt-in' do
-        before do
-          groups(:schekka).update(group_health: true)
+        context 'schekka' do
+          before do
+            groups(:schekka).update(group_health: true)
+          end
+
+          it 'does export the group having opted in' do
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == groups(:schekka).name}
+            expect(groups.size).to eq(1)
+          end
+
+          it 'does only export people with roles in a group having opted in' do
+            get :people, format: :json
+            json = JSON.parse(response.body)
+            expect(json['people'].size).to eq(2)
+          end
+
+          it 'does only export camps with participants having roles in a group having opted in' do
+            get :camps, format: :json
+            json = JSON.parse(response.body)
+            expect(json['camps'].size).to eq(1)
+            expect(json['camps'][0]['name']).to eq(events(:schekka_camp).name)
+          end
+
+          it 'does paginate' do
+            Role.create(group: groups(:schekka), person: people(:bulei),
+                        type: Group::Abteilung::Sekretariat.sti_name)
+            get :participations, params: { size: 3 }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['participations'].size).to eq(3)
+            get :participations, params: { page: 2, size: 3 }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['participations'].size).to eq(2)
+          end
         end
 
-        it 'does export the group having opted in' do
-          get :groups, format: :json
-          json = JSON.parse(response.body)
-          groups = json['groups'].select {|g| g['name'] == groups(:schekka).name}
-          expect(groups.size).to eq(1)
+        context 'be' do
+          before do
+            groups(:be).update(group_health: true)
+          end
+
+          it 'does export the group having opted in' do
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == groups(:be).name}
+            expect(groups.size).to eq(1)
+          end
+
+          it 'does only export people with roles in a group having opted in' do
+            get :people, format: :json
+            json = JSON.parse(response.body)
+            expect(json['people'].size).to eq(1)
+          end
+
+          it 'does only export camps with participants having roles in a group having opted in' do
+            get :camps, format: :json
+            json = JSON.parse(response.body)
+            expect(json['camps'].size).to eq(1)
+            expect(json['camps'][0]['name']).to eq(events(:be_camp).name)
+          end
+
+          it 'does paginate' do
+            Role.create(group: groups(:be), person: people(:bulei),
+                        type: Group::Kantonalverband::Sekretariat.sti_name)
+            get :participations, params: { size: 3 }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['participations'].size).to eq(3)
+            get :participations, params: { page: 2, size: 3 }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['participations'].size).to eq(1)
+          end
         end
 
-        it 'does only export people with roles in a group having opted in' do
-          get :people, format: :json
-          json = JSON.parse(response.body)
-          expect(json['people'].size).to eq(2)
-        end
+        context 'bern' do
+          before do
+            groups(:bern).update(group_health: true)
+          end
 
-        it 'does only export camps with participants having roles in a group having opted in' do
-          get :camps, format: :json
-          json = JSON.parse(response.body)
-          expect(json['camps'].size).to eq(1)
-          expect(json['camps'][0]['name']).to eq(events(:schekka_camp).name)
-        end
+          it 'does export the group having opted in' do
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == groups(:bern).name}
+            expect(groups.size).to eq(1)
+          end
 
-        it 'does paginate' do
-          Role.create(group: groups(:schekka), person: people(:bulei),
-                      type: Group::Abteilung::Sekretariat.sti_name)
-          get :participations, params: { size: 3 }, format: :json
-          json = JSON.parse(response.body)
-          expect(json['participations'].size).to eq(3)
-          get :participations, params: { page: 2, size: 3 }, format: :json
-          json = JSON.parse(response.body)
-          expect(json['participations'].size).to eq(2)
+          it 'does only export people with roles in a group having opted in' do
+            get :people, format: :json
+            json = JSON.parse(response.body)
+            expect(json['people'].size).to eq(1)
+          end
+
+          it 'does only export camps with participants having roles in a group having opted in' do
+            get :camps, format: :json
+            json = JSON.parse(response.body)
+            expect(json['camps'].size).to eq(1)
+            expect(json['camps'][0]['name']).to eq(events(:bern_camp).name)
+          end
         end
       end
     end

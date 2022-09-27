@@ -36,6 +36,11 @@ class GroupHealthController < ApplicationController
                 "ON #{Group.quoted_table_name}.lft >= canton.lft " \
                 "AND #{Group.quoted_table_name}.lft < canton.rgt " \
                 'AND canton.type = "Group::Kantonalverband"'.freeze
+
+  # exclude Group::InternesGremium groups
+  EXCLUDE_INTERNES_GREMIUM = "#{Group.quoted_table_name}.type <> 'Group::InternesGremium'".freeze
+  
+  
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action do
@@ -50,6 +55,7 @@ class GroupHealthController < ApplicationController
     Role.unscoped {
       respond(Person.joins(roles: :group)
                   .joins(GROUP_HEALTH_JOIN).distinct
+                  .where(EXCLUDE_INTERNES_GREMIUM)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                   .as_json(only: PERSON_FIELDS)
                   .map { |item| set_name(item) })
@@ -59,6 +65,7 @@ class GroupHealthController < ApplicationController
   def roles
     respond(Role.with_deleted
                 .joins(:group)
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: ROLES_FIELDS))
@@ -67,6 +74,7 @@ class GroupHealthController < ApplicationController
   def groups
     respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
                        "AS #{Group.quoted_table_name}")
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
   end
@@ -74,6 +82,7 @@ class GroupHealthController < ApplicationController
   def courses
     respond(Event::Course.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: COURSES_FIELDS,
@@ -84,6 +93,7 @@ class GroupHealthController < ApplicationController
   def camps
     respond(Event::Camp.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: CAMPS_FIELDS,
@@ -95,6 +105,7 @@ class GroupHealthController < ApplicationController
   def participations
     respond(Event::Participation.joins(person: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .includes(:roles)
                 .as_json(only: PARTICIPATIONS_FIELDS,
@@ -104,6 +115,7 @@ class GroupHealthController < ApplicationController
   def qualifications
     respond(Qualification.joins(person: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json)
   end
@@ -132,7 +144,7 @@ class GroupHealthController < ApplicationController
   end
 
   def group_types
-    respond(Group.all_types.map do |type|
+    respond(Group.all_types.excluding(Group::InternesGremium).map do |type|
       localize_type_labels(type).merge(group_type: type.model_name)
     end)
   end
