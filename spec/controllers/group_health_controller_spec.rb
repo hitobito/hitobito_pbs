@@ -1,4 +1,6 @@
-#  Copyright (c) 2020 Pfadibewegung Schweiz. This file is part of
+# frozen_string_literal: true
+#
+#  Copyright (c) 2020-2022 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -85,6 +87,16 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json['groups'].select {|g| g['name'] == groups(:schekka).name}
             expect(groups.size).to eq(1)
+          end
+
+          it 'does not export internes Gremium' do
+            intern_group = Group::InternesAbteilungsGremium.create!(name: "Internes Gremium",
+                                                                     parent: groups(:schekka))
+
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == intern_group.name}
+            expect(groups).to be_empty
           end
 
           it 'does only export people with roles in a group having opted in' do
@@ -176,7 +188,5 @@ describe GroupHealthController do
         end
       end
     end
-
   end
-
 end
