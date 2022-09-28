@@ -172,6 +172,8 @@ class GroupHealthController < ApplicationController
   end
 
   def census_evaluations
+    authorize! :census_evaluations, GroupHealthController
+
     year = params[:year] || Census.current.year || Time.zone.today.year
     abteilungen = Group::Abteilung.where(group_health: true)
                                   .map { |g| g.census_total(year) }
