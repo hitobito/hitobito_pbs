@@ -49,6 +49,7 @@ module Pbs::EventAbility
       permission(:any).may(:manage_attendances).for_leaded_events_or_assistenz_ausbildung
       permission(:any).may(:update).for_advised_courses
       permission(:any).may(:qualifications_read).for_advised_courses_or_assistenz_ausbildung
+      permission(:any).may(:qualify).if_assistenz_ausbildung
       permission(:any).
         may(:index_approvals).
         for_advised_or_participations_full_events
