@@ -118,7 +118,7 @@ describe GroupHealthController do
       end
 
       context 'opt-in' do
-        context 'schekka' do
+        context 'for abteilung' do
           before do
             groups(:schekka).update(group_health: true)
           end
@@ -193,7 +193,7 @@ describe GroupHealthController do
           end
         end
 
-        context 'be' do
+        context 'for Kantonalverband' do
           before do
             groups(:be).update(group_health: true)
           end
@@ -268,7 +268,7 @@ describe GroupHealthController do
           end
         end
 
-        context 'bern' do
+        context 'for region' do
           before do
             groups(:bern).update(group_health: true)
           end
