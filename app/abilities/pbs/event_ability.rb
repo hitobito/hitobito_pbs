@@ -46,14 +46,12 @@ module Pbs::EventAbility
     end
 
     on(Event::Course) do
-      permission(:any).may(:manage_attendances).for_leaded_events
-      permission(:any).may(:update, :qualifications_read).for_advised_courses
+      permission(:any).may(:manage_attendances).for_leaded_events_or_assistenz_ausbildung
+      permission(:any).may(:update).for_advised_courses
+      permission(:any).may(:qualifications_read).for_advised_courses_or_assistenz_ausbildung
       permission(:any).
         may(:index_approvals).
         for_advised_or_participations_full_events
-
-      permission(:any).may(:manage_attendances).if_assistenz_ausbildung
-      permission(:any).may(:qualifications_read).if_assistenz_ausbildung
 
       permission(:layer_full).may(:manage_attendances, :index_approvals).in_same_layer
 
@@ -88,6 +86,14 @@ module Pbs::EventAbility
     if_globally_visible_or_participating_without_pbs ||
       participating? ||
       if_part_of_krisenteam
+  end
+
+  def for_advised_courses_or_assistenz_ausbildung
+    for_advised_courses || if_assistenz_ausbildung
+  end
+
+  def for_leaded_events_or_assistenz_ausbildung
+    for_leaded_events || if_assistenz_ausbildung
   end
 
   def for_advised_courses
