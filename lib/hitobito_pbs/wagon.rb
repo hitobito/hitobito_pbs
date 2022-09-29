@@ -39,6 +39,8 @@ module HitobitoPbs
       PeopleRelation.kind_opposites['sibling'] = 'sibling'
       PhoneNumber.include Pbs::PhoneNumber
 
+      Event::Role::Speaker.qualifiable = true # According to https://github.com/hitobito/hitobito_pbs/issues/233
+
       ## domain
       Bsv::Info.leader_roles += [Event::Course::Role::Helper]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
