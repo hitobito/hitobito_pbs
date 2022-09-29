@@ -39,8 +39,9 @@ class GroupHealthController < ApplicationController
                 'AND canton.type = "Group::Kantonalverband"'.freeze
 
   # exclude Group::InternesGremium groups
+  INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium]
   EXCLUDE_INTERNES_GREMIUM = "#{Group.quoted_table_name}.type NOT IN" \
-                             '("Group::InternesGremium", "Group::InternesAbteilungsGremium")'.freeze
+    "(#{INTERNES_GREMIUM_GROUP_TYPES.map { |type| "'#{type.to_s}'" }.join(', ')})".freeze
   
   DEFAULT_PAGE_SIZE = 20.freeze
 
@@ -145,8 +146,7 @@ class GroupHealthController < ApplicationController
   end
 
   def group_types
-    respond(Group.all_types.excluding(Group::InternesGremium,
-                                      Group::InternesAbteilungsGremium).map do |type|
+    respond(Group.all_types.excluding(INTERNES_GREMIUM_GROUP_TYPES).map do |type|
       localize_type_labels(type).merge(group_type: type.model_name)
     end)
   end
