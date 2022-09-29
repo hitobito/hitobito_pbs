@@ -5,6 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+# rubocop:disable Metrics/ClassLength
 class GroupHealthController < ApplicationController
 
   EVENT_TYPES = [Event, Event::Course, Event::Camp].freeze
@@ -176,11 +177,11 @@ class GroupHealthController < ApplicationController
 
     year = params[:year] || Census.current.year || Time.zone.today.year
     abteilungen = Group::Abteilung.where(group_health: true)
-                                  .map { |g| g.census_total(year) }
+                                  .map { |g| census_data(g.census_total(year)) }
     regionen = Group::Region.where(group_health: true)
-                            .map { |g| g.census_total(year) }
+                            .map { |g| census_data(g.census_total(year)) }
     kantonalverbaende = Group::Kantonalverband.where(group_health: true)
-                                              .map { |g| g.census_total(year) }
+                                              .map { |g| census_data(g.census_total(year)) }
     respond({
       abteilungen: abteilungen,
       regionen: regionen,
@@ -197,6 +198,21 @@ class GroupHealthController < ApplicationController
   def set_name(person)
     person.except('first_name', 'last_name', 'nickname')
         .merge(name: computed_name(person))
+  end
+
+  def census_data(total)
+    data = {
+      kantonalverband_id: total.kantonalverband_id,
+      region_id: total.region_id,
+      abteilung_id: total.abteilung_id,
+      total: { total: total.total, f: total.f, m: total.m }
+    }
+    
+    [:f, :m].each_with_object(data) do |gender, data|
+      data[gender] = MemberCount::COUNT_CATEGORIES.each_with_object({}) do |category, d|
+        d[category] = total.send("#{category}_#{gender}")
+      end
+    end
   end
 
   # If the nickname is not set, return the first name followed by the first letter of the last

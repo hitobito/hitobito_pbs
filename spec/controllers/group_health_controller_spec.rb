@@ -131,11 +131,18 @@ describe GroupHealthController do
             expect(abteilung_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(abteilung_evaluation['region_id']).to eq(groups(:bern).id)
             expect(abteilung_evaluation['abteilung_id']).to eq(groups(:schekka).id)
-            expect(abteilung_evaluation.keys.size).to eq(18)
-            expect(abteilung_evaluation['leiter_f']).to eq(2)
-            expect(abteilung_evaluation['leiter_m']).to eq(3)
-            expect(abteilung_evaluation['pfadis_f']).to eq(4)
-            expect(abteilung_evaluation['pfadis_m']).to eq(3)
+
+            expect(abteilung_evaluation.keys.size).to eq(6)
+            expect(abteilung_evaluation['f'].size).to eq(7)
+            expect(abteilung_evaluation['m'].size).to eq(7)
+            expect(abteilung_evaluation['f']['leiter']).to eq(2)
+            expect(abteilung_evaluation['m']['leiter']).to eq(3)
+            expect(abteilung_evaluation['f']['pfadis']).to eq(4)
+            expect(abteilung_evaluation['m']['pfadis']).to eq(3)
+
+            expect(abteilung_evaluation['total']['total']).to eq(12)
+            expect(abteilung_evaluation['total']['f']).to eq(6)
+            expect(abteilung_evaluation['total']['m']).to eq(6)
           end
         end
 
@@ -183,11 +190,18 @@ describe GroupHealthController do
             expect(kantonalverband_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(kantonalverband_evaluation['region_id']).to eq(groups(:bern).id)
             expect(kantonalverband_evaluation['abteilung_id']).to eq(groups(:schekka).id)
-            expect(kantonalverband_evaluation.keys.size).to eq(18)
-            expect(kantonalverband_evaluation['leiter_f']).to eq(3)
-            expect(kantonalverband_evaluation['leiter_m']).to eq(5)
-            expect(kantonalverband_evaluation['pfadis_f']).to eq(5)
-            expect(kantonalverband_evaluation['pfadis_m']).to eq(6)
+
+            expect(kantonalverband_evaluation.keys.size).to eq(6)
+            expect(kantonalverband_evaluation['f'].size).to eq(7)
+            expect(kantonalverband_evaluation['m'].size).to eq(7)
+            expect(kantonalverband_evaluation['f']['leiter']).to eq(3)
+            expect(kantonalverband_evaluation['m']['leiter']).to eq(5)
+            expect(kantonalverband_evaluation['f']['pfadis']).to eq(5)
+            expect(kantonalverband_evaluation['m']['pfadis']).to eq(6)
+
+            expect(kantonalverband_evaluation['total']['total']).to eq(19)
+            expect(kantonalverband_evaluation['total']['f']).to eq(8)
+            expect(kantonalverband_evaluation['total']['m']).to eq(11)
           end
         end
 
@@ -224,11 +238,18 @@ describe GroupHealthController do
             expect(region_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(region_evaluation['region_id']).to eq(groups(:bern).id)
             expect(region_evaluation['abteilung_id']).to eq(groups(:schekka).id)
-            expect(region_evaluation.keys.size).to eq(18)
-            expect(region_evaluation['leiter_f']).to eq(2)
-            expect(region_evaluation['leiter_m']).to eq(3)
-            expect(region_evaluation['pfadis_f']).to eq(4)
-            expect(region_evaluation['pfadis_m']).to eq(3)
+
+            expect(region_evaluation.keys.size).to eq(6)
+            expect(region_evaluation['f'].size).to eq(7)
+            expect(region_evaluation['m'].size).to eq(7)
+            expect(region_evaluation['f']['leiter']).to eq(2)
+            expect(region_evaluation['m']['leiter']).to eq(3)
+            expect(region_evaluation['f']['pfadis']).to eq(4)
+            expect(region_evaluation['m']['pfadis']).to eq(3)
+
+            expect(region_evaluation['total']['total']).to eq(12)
+            expect(region_evaluation['total']['f']).to eq(6)
+            expect(region_evaluation['total']['m']).to eq(6)
           end
         end
       end
