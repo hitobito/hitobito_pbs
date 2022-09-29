@@ -178,10 +178,13 @@ class GroupHealthController < ApplicationController
     year = params[:year] || Census.current.year || Time.zone.today.year
     abteilungen = Group::Abteilung.where(group_health: true)
                                   .map { |g| census_data(g.census_total(year)) }
+                                  .compact
     regionen = Group::Region.where(group_health: true)
                             .map { |g| census_data(g.census_total(year)) }
+                            .compact
     kantonalverbaende = Group::Kantonalverband.where(group_health: true)
                                               .map { |g| census_data(g.census_total(year)) }
+                                              .compact
     respond({
       abteilungen: abteilungen,
       regionen: regionen,
@@ -201,6 +204,8 @@ class GroupHealthController < ApplicationController
   end
 
   def census_data(total)
+    return unless total
+
     data = {
       kantonalverband_id: total.kantonalverband_id,
       region_id: total.region_id,

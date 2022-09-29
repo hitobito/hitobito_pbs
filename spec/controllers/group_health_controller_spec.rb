@@ -29,14 +29,55 @@ describe GroupHealthController do
   end
 
   describe 'service-token' do
-    before do
-      token.update(group_health: true)
+    context 'with group_health' do
+      before do
+        token.update(group_health: true)
+      end
+
+      it 'is authorized for non census evaluation endpoints' do
+        request.headers['X-Token'] = token.token
+        get :groups, format: :json
+        expect(response).to have_http_status(200)
+      end
+
+      it 'is unauthorized for census evaluation endpoint' do
+        request.headers['X-Token'] = token.token
+        expect { get :census_evaluations, format: :json }.to raise_error(CanCan::AccessDenied)
+      end
     end
 
-    it 'is authorized' do
-      request.headers['X-Token'] = token.token
-      get :groups, format: :json
-      expect(response).to have_http_status(200)
+    context 'with census_evaluations' do
+      before do
+        token.update(census_evaluations: true)
+      end
+
+      it 'is unauthorized for non census evaluation endpoints' do
+        request.headers['X-Token'] = token.token
+        expect { get :groups, format: :json }.to raise_error(CanCan::AccessDenied)
+      end
+
+      it 'is unauthorized for census evaluation endpoint' do
+        request.headers['X-Token'] = token.token
+        expect { get :census_evaluations, format: :json }.to raise_error(CanCan::AccessDenied)
+      end
+    end
+
+    context 'with group_health and census_evaluations' do
+      before do
+        token.update(group_health: true, census_evaluations: true)
+      end
+
+      it 'is authorized for non census evaluation endpoints' do
+        request.headers['X-Token'] = token.token
+        get :groups, format: :json
+        expect(response).to have_http_status(200)
+      end
+
+      it 'is authorized for census evaluation endpoint' do
+        request.headers['X-Token'] = token.token
+        get :census_evaluations, format: :json
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
@@ -123,7 +164,7 @@ describe GroupHealthController do
             expect(json['participations'].size).to eq(2)
           end
 
-          it 'exports census evaluations' do
+          it 'exports census evaluations of current census year' do
             get :census_evaluations, format: :json
             json = JSON.parse(response.body)
             expect(json['census_evaluations']['abteilungen'].size).to eq(1)
@@ -144,6 +185,12 @@ describe GroupHealthController do
             expect(abteilung_evaluation['total']['f']).to eq(6)
             expect(abteilung_evaluation['total']['m']).to eq(6)
           end
+
+          it 'exports census evaluations of given year' do
+            get :census_evaluations, params: { year: '2013' }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['abteilungen']).to be_empty
+          end
         end
 
         context 'be' do
@@ -156,6 +203,16 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json['groups'].select {|g| g['name'] == groups(:be).name}
             expect(groups.size).to eq(1)
+          end
+
+          it 'does not export internes Gremium' do
+            intern_group = Group::InternesAbteilungsGremium.create!(name: "Internes Gremium",
+                                                                     parent: groups(:schekka))
+
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == intern_group.name}
+            expect(groups).to be_empty
           end
 
           it 'does only export people with roles in a group having opted in' do
@@ -203,6 +260,12 @@ describe GroupHealthController do
             expect(kantonalverband_evaluation['total']['f']).to eq(8)
             expect(kantonalverband_evaluation['total']['m']).to eq(11)
           end
+
+          it 'exports census evaluations of given year' do
+            get :census_evaluations, params: { year: '2013' }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['kantonalverbaende']).to be_empty
+          end
         end
 
         context 'bern' do
@@ -215,6 +278,16 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json['groups'].select {|g| g['name'] == groups(:bern).name}
             expect(groups.size).to eq(1)
+          end
+
+          it 'does not export internes Gremium' do
+            intern_group = Group::InternesAbteilungsGremium.create!(name: "Internes Gremium",
+                                                                     parent: groups(:schekka))
+
+            get :groups, format: :json
+            json = JSON.parse(response.body)
+            groups = json['groups'].select {|g| g['name'] == intern_group.name}
+            expect(groups).to be_empty
           end
 
           it 'does only export people with roles in a group having opted in' do
@@ -250,6 +323,12 @@ describe GroupHealthController do
             expect(region_evaluation['total']['total']).to eq(12)
             expect(region_evaluation['total']['f']).to eq(6)
             expect(region_evaluation['total']['m']).to eq(6)
+          end
+
+          it 'exports census evaluations of given year' do
+            get :census_evaluations, params: { year: '2013' }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['census_evaluations']['regionen']).to be_empty
           end
         end
       end
