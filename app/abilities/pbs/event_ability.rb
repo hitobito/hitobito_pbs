@@ -46,8 +46,10 @@ module Pbs::EventAbility
     end
 
     on(Event::Course) do
-      permission(:any).may(:manage_attendances).for_leaded_events
-      permission(:any).may(:update, :qualifications_read).for_advised_courses
+      permission(:any).may(:manage_attendances).for_leaded_events_or_assistenz_ausbildung
+      permission(:any).may(:update).for_advised_courses
+      permission(:any).may(:qualifications_read).for_advised_courses_or_assistenz_ausbildung
+      permission(:any).may(:qualify).if_assistenz_ausbildung
       permission(:any).
         may(:index_approvals).
         for_advised_or_participations_full_events
@@ -87,6 +89,14 @@ module Pbs::EventAbility
       if_part_of_krisenteam
   end
 
+  def for_advised_courses_or_assistenz_ausbildung
+    for_advised_courses || if_assistenz_ausbildung
+  end
+
+  def for_leaded_events_or_assistenz_ausbildung
+    for_leaded_events || if_assistenz_ausbildung
+  end
+
   def for_advised_courses
     event.advisor_id == user.id
   end
@@ -94,6 +104,10 @@ module Pbs::EventAbility
   def if_education_responsible
     role_type?(Group::Bund::AssistenzAusbildung,
                Group::Bund::MitarbeiterGs)
+  end
+
+  def if_assistenz_ausbildung
+    role_type?(Group::Bund::AssistenzAusbildung)
   end
 
   def if_mitarbeiter_gs

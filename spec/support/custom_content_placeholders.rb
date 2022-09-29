@@ -43,4 +43,3 @@ CustomContent.seed(:key,
     placeholders_required: 'person-name, request-body',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, rejecter-name, rejecter-roles' },
 )
-

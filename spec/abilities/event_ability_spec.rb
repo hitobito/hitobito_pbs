@@ -290,6 +290,30 @@ describe EventAbility do
     end
   end
 
+  context :manage_attendances do
+
+    context 'assistenz ausbildung' do
+      let(:role) { Fabricate(Group::Bund::AssistenzAusbildung.name.to_sym, group: groups(:bund)) }
+
+      context 'in kanton' do
+        it 'may manage attendances and qualifications' do
+          is_expected.to be_able_to(:manage_attendances, events(:top_course))
+          is_expected.to be_able_to(:qualifications_read, events(:top_course))
+        end
+      end
+    end
+
+    context 'mitarbeiter gs' do
+      let(:role) { Fabricate(Group::Bund::MitarbeiterGs.name.to_sym, group: groups(:bund)) }
+
+      context 'in kanton' do
+        it 'may manage attendances and qualifications' do
+          is_expected.not_to be_able_to(:manage_attendances, events(:top_course))
+          is_expected.not_to be_able_to(:qualifications_read, events(:top_course))
+        end
+      end
+    end
+  end
 
   context :modify_superior do
 
