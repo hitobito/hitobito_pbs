@@ -235,7 +235,7 @@ describe Event::Approver do
   describe '#current_approvers' do
 
     before do
-      @rl = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: groups(:bern)).person
+      @rl = people(:rl_bern)
       @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
       @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
 
@@ -244,14 +244,14 @@ describe Event::Approver do
     end
 
     it 'contains all roles if none is selected' do
-      expect(approver.current_approvers).to include(@rl, @va1, @va2)
+      expect(approver.current_approvers).to match_array([@rl, @va1, @va2])
     end
 
     it 'contains only selected roles' do
       groups(:bern).update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
       person.reload
 
-      expect(approver.current_approvers).to include(@va1, @va2)
+      expect(approver.current_approvers).to match_array([@va1, @va2])
     end
 
     it 'contains all roles if no person with selected exists' do
@@ -260,7 +260,7 @@ describe Event::Approver do
       people(:rl_bern).destroy!
       person.reload
 
-      expect(approver.current_approvers).to include(@va1, @va2)
+      expect(approver.current_approvers).to match_array([@va1, @va2])
     end
 
     context 'with multiple groups' do
@@ -279,7 +279,7 @@ describe Event::Approver do
         corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
         person.reload
 
-        expect(approver.current_approvers).to include(@rl, @va_corps)
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
       end
 
       it 'does not contain person with different role in actual group' do
@@ -287,7 +287,7 @@ describe Event::Approver do
         Fabricate(Group::Region::Kassier.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
         person.reload
 
-        expect(approver.current_approvers).to include(@rl, @va1, @va2, @va_corps)
+        expect(approver.current_approvers).to match_array([@rl, @va1, @va2, @va_corps])
       end
 
       it 'does not contain person with approver role in other group' do
@@ -296,7 +296,7 @@ describe Event::Approver do
         Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
         person.reload
 
-        expect(approver.current_approvers).to include(@rl, @va_corps)
+        expect(approver.current_approvers).to match_array([@rl, @va_corps])
       end
     end
 
