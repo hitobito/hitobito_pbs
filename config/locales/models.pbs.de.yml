@@ -1184,6 +1184,12 @@ de:
         geolocations: Treffpunkte
         group_health: Opt-In HealthCheck
 
+      group/region:
+        group_health: Opt-In HealthCheck
+
+      group/kantonalverband:
+        group_health: Opt-In HealthCheck
+
       people_relation:
         kinds:
           sibling: Geschwister
@@ -1239,6 +1245,7 @@ de:
 
       service_token:
         group_health: HealthCheck Export-Endpunkt
+        census_evaluations: Bestandesmeldung Export-Endpunkt
 
     errors:
       messages:
