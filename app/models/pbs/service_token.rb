@@ -27,6 +27,7 @@ module Pbs::ServiceToken
 
   included do
     validates :group_health, absence: true, if: :below_top_layer?
+    validates :census_evaluations, absence: true, if: :below_top_layer?
   end
 
   private

@@ -8,6 +8,7 @@ module Pbs::TokenAbility
 
   included do
     alias_method_chain :define_token_abilities, :group_health
+    alias_method_chain :define_token_abilities, :census_evaluations
   end
 
   private
@@ -17,7 +18,16 @@ module Pbs::TokenAbility
     define_group_health_abilities if token.group_health?
   end
 
+  def define_token_abilities_with_census_evaluations
+    define_token_abilities_without_census_evaluations
+    define_census_evaluations_abilities if token.census_evaluations?
+  end
+
   def define_group_health_abilities
     can :show, GroupHealthController
+  end
+
+  def define_census_evaluations_abilities
+    can :census_evaluations, GroupHealthController
   end
 end

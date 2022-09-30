@@ -32,6 +32,11 @@ crisis_member:
   group: be
   type: Group::Kantonalverband::MitgliedKrisenteam
 
+rl_bern:
+  person: rl_bern
+  group: bern
+  type: Group::Region::Regionalleitung
+
 al_schekka:
   person: al_schekka
   group: schekka

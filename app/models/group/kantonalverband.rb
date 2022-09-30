@@ -46,7 +46,7 @@ class Group::Kantonalverband < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
-  self.used_attributes += [:cantons]
+  self.used_attributes += [:cantons, :group_health]
 
   children Group::Region,
            Group::Abteilung,

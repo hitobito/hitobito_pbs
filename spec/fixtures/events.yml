@@ -149,3 +149,15 @@ bund_supercamp:
   state: created
   lft: 5
   rgt: 6
+
+be_camp:
+  groups: be
+  type: Event::Camp
+  lft: 17
+  rgt: 18
+
+bern_camp:
+  groups: bern
+  type: Event::Camp
+  lft: 19
+  rgt: 20

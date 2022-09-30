@@ -47,6 +47,8 @@ class Group::Region < Group
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
+  self.used_attributes += [:group_health]
+
   children Group::Region,
            Group::Abteilung,
            Group::RegionaleRover,

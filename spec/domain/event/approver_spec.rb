@@ -235,7 +235,7 @@ describe Event::Approver do
   describe '#current_approvers' do
 
     before do
-      @rl = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: groups(:bern)).person
+      @rl = people(:rl_bern)
       @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
       @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
 
@@ -257,6 +257,7 @@ describe Event::Approver do
     it 'contains all roles if no person with selected exists' do
       groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
       @rl.destroy!
+      people(:rl_bern).destroy!
       person.reload
 
       expect(approver.current_approvers).to match_array([@va1, @va2])

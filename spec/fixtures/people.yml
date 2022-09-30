@@ -98,6 +98,13 @@ be_crisis_member:
   primary_group: be
   kantonalverband: be
 
+rl_bern:
+  first_name: Regional
+  last_name: Leiter
+  email: regionalleter@hitobito.example.com
+  primary_group: bern
+  kantonalverband: be
+
 root:
   company_name: 'Puzzle ITC'
   company: true

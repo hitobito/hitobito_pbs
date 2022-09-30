@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     get :participation_types
     get :j_s_kinds
     get :camp_states
+    get :census_evaluations
   end
 
 end

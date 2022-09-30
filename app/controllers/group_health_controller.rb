@@ -1,10 +1,11 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-#  Copyright (c) 2020, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2020-2022, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
+# rubocop:disable Metrics/ClassLength
 class GroupHealthController < ApplicationController
 
   EVENT_TYPES = [Event, Event::Course, Event::Camp].freeze
@@ -36,6 +37,12 @@ class GroupHealthController < ApplicationController
                 "ON #{Group.quoted_table_name}.lft >= canton.lft " \
                 "AND #{Group.quoted_table_name}.lft < canton.rgt " \
                 'AND canton.type = "Group::Kantonalverband"'.freeze
+
+  # exclude Group::InternesGremium groups
+  INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium]
+  EXCLUDE_INTERNES_GREMIUM = "#{Group.quoted_table_name}.type NOT IN" \
+    "(#{INTERNES_GREMIUM_GROUP_TYPES.map { |type| "'#{type.to_s}'" }.join(', ')})".freeze
+  
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action do
@@ -50,6 +57,7 @@ class GroupHealthController < ApplicationController
     Role.unscoped {
       respond(Person.joins(roles: :group)
                   .joins(GROUP_HEALTH_JOIN).distinct
+                  .where(EXCLUDE_INTERNES_GREMIUM)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                   .as_json(only: PERSON_FIELDS)
                   .map { |item| set_name(item) })
@@ -59,6 +67,7 @@ class GroupHealthController < ApplicationController
   def roles
     respond(Role.with_deleted
                 .joins(:group)
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: ROLES_FIELDS))
@@ -67,6 +76,7 @@ class GroupHealthController < ApplicationController
   def groups
     respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
                        "AS #{Group.quoted_table_name}")
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
   end
@@ -74,6 +84,7 @@ class GroupHealthController < ApplicationController
   def courses
     respond(Event::Course.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: COURSES_FIELDS,
@@ -84,6 +95,7 @@ class GroupHealthController < ApplicationController
   def camps
     respond(Event::Camp.joins(people: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: CAMPS_FIELDS,
@@ -95,6 +107,7 @@ class GroupHealthController < ApplicationController
   def participations
     respond(Event::Participation.joins(person: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .includes(:roles)
                 .as_json(only: PARTICIPATIONS_FIELDS,
@@ -104,6 +117,7 @@ class GroupHealthController < ApplicationController
   def qualifications
     respond(Qualification.joins(person: [{ roles: :group }])
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .where(EXCLUDE_INTERNES_GREMIUM)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json)
   end
@@ -132,7 +146,7 @@ class GroupHealthController < ApplicationController
   end
 
   def group_types
-    respond(Group.all_types.map do |type|
+    respond(Group.all_types.excluding(INTERNES_GREMIUM_GROUP_TYPES).map do |type|
       localize_type_labels(type).merge(group_type: type.model_name)
     end)
   end
@@ -158,6 +172,26 @@ class GroupHealthController < ApplicationController
     end)
   end
 
+  def census_evaluations
+    authorize! :census_evaluations, GroupHealthController
+
+    year = params[:year] || Census.current.year || Time.zone.today.year
+    abteilungen = Group::Abteilung.where(group_health: true)
+                                  .map { |g| census_data(g.census_total(year)) }
+                                  .compact
+    regionen = Group::Region.where(group_health: true)
+                            .map { |g| census_data(g.census_total(year)) }
+                            .compact
+    kantonalverbaende = Group::Kantonalverband.where(group_health: true)
+                                              .map { |g| census_data(g.census_total(year)) }
+                                              .compact
+    respond({
+      abteilungen: abteilungen,
+      regionen: regionen,
+      kantonalverbaende: kantonalverbaende
+    })
+  end
+
   private
 
   def respond(data)
@@ -167,6 +201,23 @@ class GroupHealthController < ApplicationController
   def set_name(person)
     person.except('first_name', 'last_name', 'nickname')
         .merge(name: computed_name(person))
+  end
+
+  def census_data(total)
+    return unless total
+
+    data = {
+      kantonalverband_id: total.kantonalverband_id,
+      region_id: total.region_id,
+      abteilung_id: total.abteilung_id,
+      total: { total: total.total, f: total.f, m: total.m }
+    }
+    
+    [:f, :m].each_with_object(data) do |gender, data|
+      data[gender] = MemberCount::COUNT_CATEGORIES.each_with_object({}) do |category, d|
+        d[category] = total.send("#{category}_#{gender}")
+      end
+    end
   end
 
   # If the nickname is not set, return the first name followed by the first letter of the last

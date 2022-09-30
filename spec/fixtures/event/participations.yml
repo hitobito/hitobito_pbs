@@ -35,3 +35,15 @@ schekka_supercamp_leader:
   person: bulei
   active: true
   state: assigned
+
+be_camp_participant:
+  event: be_camp
+  person: be_crisis_member
+  active: true
+  state: assigned
+
+bern_camp_participant:
+  event: bern_camp
+  person: rl_bern
+  active: true
+  state: assigned
