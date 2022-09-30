@@ -3,6 +3,7 @@
 ## unreleased
 
 *   Referent*innen eines Kurses werden neu nach Abschluss des Kurses im Tab "Qualifikationen" angezeigt. Dort können ihnen dann die Qualifikation ausgestellt werden (hitobito_pbs#233)
+*   Group Health Endpunkt enthält keine Internen Gremien mehr. Neu können auch Regionen und Kantonalverbände in den Group Health Check aufgenommen werden. Zusätzlich gibt es neu den Endpunkt `/group_health/census_evaluations` welcher die Gruppenstatistik für Group Health Gruppen ausgibt. Dafür muss das Service Token aber zusätzlich die Berechtigung Bestandesmeldung Export-Endpunkt besitzen.
 
 ## Version 1.27
 
