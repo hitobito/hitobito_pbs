@@ -55,7 +55,7 @@ module Pbs::Group
     root_types Group::Bund
   end
 
-  def roles_without_person_access
+  def roles_without_permissions
     self.role_types.select do |r|
       r.permissions.none?
     end

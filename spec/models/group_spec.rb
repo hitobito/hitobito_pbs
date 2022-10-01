@@ -128,8 +128,8 @@ describe Group do
       end
     end
 
-    context 'roles_without_person_access' do
-      its(:roles_without_person_access) do
+    context 'roles_without_permissions' do
+      its(:roles_without_permissions) do
       should eq [Group::Abteilung::Ehrenmitglied,
                  Group::Abteilung::Passivmitglied,
                  Group::Abteilung::Selbstregistriert]
