@@ -97,6 +97,14 @@ describe Group do
         expect(group.reload.cantons).to eq []
       end
     end
+
+    context 'roles_without_permissions' do
+      its(:roles_without_permissions) do
+      should eq [Group::Kantonalverband::Ehrenmitglied,
+                 Group::Kantonalverband::Passivmitglied,
+                 Group::Kantonalverband::Selbstregistriert]
+      end
+    end
   end
 
   describe Group::Abteilung do
@@ -133,6 +141,17 @@ describe Group do
       should eq [Group::Abteilung::Ehrenmitglied,
                  Group::Abteilung::Passivmitglied,
                  Group::Abteilung::Selbstregistriert]
+      end
+    end
+  end
+
+  describe Group::Pio do
+    let(:group) { groups(:Sparta) }
+
+    context 'roles_without_permissions' do
+      its(:roles_without_permissions) do
+      should eq [Group::Pio::Pio,
+                 Group::Pio::Selbstregistriert]
       end
     end
   end
