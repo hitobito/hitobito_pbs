@@ -62,17 +62,6 @@ class Group::Rover < Group
     self.visible_from_above = false
   end
 
-  class Selbstregistriert < ::Role
-    self.permissions = []
-    self.visible_from_above = false
-  end
-
-    roles Einheitsleitung,
-        Mitleitung,
-        Adressverwaltung,
-        Rover,
-        Selbstregistriert
-
-  self.default_role = Pfadi
+  self.default_role = Rover
 
 end

@@ -55,12 +55,6 @@ module Pbs::Group
     root_types Group::Bund
   end
 
-  def roles_without_permissions
-    self.role_types.select do |r|
-      r.permissions.none?
-    end
-  end
-
   def active_crisis_acknowledgeable?(person)
     active_crisis && !active_crisis.acknowledged && active_crisis.creator != person
   end

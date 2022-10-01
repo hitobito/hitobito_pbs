@@ -98,8 +98,8 @@ describe Group do
       end
     end
 
-    context 'roles_without_permissions' do
-      its(:roles_without_permissions) do
+    context 'allowed_' do
+      its(:allowed_roles_for_self_registration) do
       should eq [Group::Kantonalverband::Ehrenmitglied,
                  Group::Kantonalverband::Passivmitglied,
                  Group::Kantonalverband::Selbstregistriert]
@@ -136,8 +136,8 @@ describe Group do
       end
     end
 
-    context 'roles_without_permissions' do
-      its(:roles_without_permissions) do
+    context 'allowed_roles_for_self_registration' do
+      its(:allowed_roles_for_self_registration) do
       should eq [Group::Abteilung::Ehrenmitglied,
                  Group::Abteilung::Passivmitglied,
                  Group::Abteilung::Selbstregistriert]
@@ -148,8 +148,8 @@ describe Group do
   describe Group::Pio do
     let(:group) { groups(:Sparta) }
 
-    context 'roles_without_permissions' do
-      its(:roles_without_permissions) do
+    context 'allowed_roles_for_self_registration' do
+      its(:allowed_roles_for_self_registration) do
       should eq [Group::Pio::Pio,
                  Group::Pio::Selbstregistriert]
       end

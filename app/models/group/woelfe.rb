@@ -71,17 +71,11 @@ class Group::Woelfe < Group
     self.visible_from_above = false
   end
 
-  class Selbstregistriert < ::Role
-    self.permissions = []
-    self.visible_from_above = false
-  end
-
   roles Einheitsleitung,
         Mitleitung,
         Adressverwaltung,
         Leitwolf,
-        Wolf,
-        Selbstregistriert
+        Wolf
 
   self.default_role = Wolf
 

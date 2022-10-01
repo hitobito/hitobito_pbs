@@ -793,10 +793,6 @@ de:
         other: Biber
         long: Biber
         description:
-      group/biber/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
-        description:
 
       group/woelfe/einheitsleitung:
         one: Einheitsleiter*in
@@ -820,10 +816,6 @@ de:
         other: Wölfe
         long: Wolf
         description:
-      group/woelfe/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
-        description:
 
       group/pfadi/einheitsleitung:
         one: Einheitsleiter*in
@@ -845,10 +837,6 @@ de:
         one: Pfadi
         other: Pfadis
         long: Pfadi
-      group/pfadi/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
-        description:
 
       group/pio/einheitsleitung:
         one: Einheitsleiter*in
@@ -866,10 +854,6 @@ de:
         one: Pio
         other: Pios
         long: Pio
-      group/pio/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
-        description:
 
       group/rover/einheitsleitung:
         one: Einheitsleiter*in
@@ -887,10 +871,6 @@ de:
         one: Rover
         other: Rovers
         long: Rover
-      group/rover/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
-        description:
 
       group/pta/einheitsleitung:
         one: Einheitsleiter*in
@@ -907,10 +887,6 @@ de:
       group/pta/mitglied:
         one: Mitglied
         other: Mitglieder
-        description:
-      group/pta/selbstregistriert:
-        one: Selbstregistrierte*r
-        other: Selbstregistrierte
         description:
 
       group/elternrat/praesidium:
