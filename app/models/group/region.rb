@@ -128,6 +128,10 @@ class Group::Region < Group
     self.kind = :passive
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
   class PowerUser < Adressverwaltung
   end
 
@@ -297,5 +301,6 @@ class Group::Region < Group
         Spezialfunktion,
 
         Ehrenmitglied,
-        Passivmitglied
+        Passivmitglied,
+        Selbstregistriert
 end

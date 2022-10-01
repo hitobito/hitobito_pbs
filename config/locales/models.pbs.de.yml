@@ -279,6 +279,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/bund/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
       group/bund/kontaktperson:
         one: Kontaktperson
         other: Kontaktpersonen
@@ -464,6 +468,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/kantonalverband/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
 
       group/region/regionalleitung:
@@ -634,6 +642,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/region/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/abteilung/abteilungsleitung:
         one: Abteilungsleiter*in
@@ -759,6 +771,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/abteilung/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/biber/einheitsleitung:
         one: Einheitsleiter*in
@@ -776,6 +792,10 @@ de:
         one: Biber
         other: Biber
         long: Biber
+        description:
+      group/biber/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
         description:
 
       group/woelfe/einheitsleitung:
@@ -800,6 +820,10 @@ de:
         other: Wölfe
         long: Wolf
         description:
+      group/woelfe/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/pfadi/einheitsleitung:
         one: Einheitsleiter*in
@@ -821,6 +845,10 @@ de:
         one: Pfadi
         other: Pfadis
         long: Pfadi
+      group/pfadi/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/pio/einheitsleitung:
         one: Einheitsleiter*in
@@ -838,6 +866,10 @@ de:
         one: Pio
         other: Pios
         long: Pio
+      group/pio/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/rover/einheitsleitung:
         one: Einheitsleiter*in
@@ -855,6 +887,10 @@ de:
         one: Rover
         other: Rovers
         long: Rover
+      group/rover/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/pta/einheitsleitung:
         one: Einheitsleiter*in
@@ -872,6 +908,10 @@ de:
         one: Mitglied
         other: Mitglieder
         description:
+      group/pta/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/elternrat/praesidium:
         one: Präsident*in
@@ -880,6 +920,10 @@ de:
       group/elternrat/mitglied:
         one: Mitglied
         other: Mitglieder
+        description:
+      group/elternrat/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
         description:
 
       group/internes_gremium/leitung:
@@ -899,6 +943,10 @@ de:
         one: Mitglied
         other: Mitglieder
         description:
+      group/gremium/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/kommission/leitung:
         one: Leiter*in
@@ -907,6 +955,10 @@ de:
       group/kommission/mitglied:
         one: Mitglied
         other: Mitglieder
+        description:
+      group/kommission/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
         description:
 
       event/camp:

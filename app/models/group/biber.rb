@@ -66,10 +66,16 @@ class Group::Biber < Group
     self.visible_from_above = false
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+    self.visible_from_above = false
+  end
+
   roles Einheitsleitung,
         Mitleitung,
         Adressverwaltung,
-        Biber
+        Biber,
+        Selbstregistriert
 
   self.default_role = Biber
 

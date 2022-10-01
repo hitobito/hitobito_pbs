@@ -54,7 +54,12 @@ class Group::Elternrat < Group
     self.permissions = [:group_read]
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
   roles Praesidium,
-        Mitglied
+        Mitglied,
+        Selbstregistriert
   self.default_role = Mitglied
 end

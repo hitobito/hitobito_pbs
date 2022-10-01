@@ -127,6 +127,13 @@ describe Group do
         expect(group.reload.try_out_day_at).to eq Date.parse('2019-03-23')
       end
     end
-  end
 
+    context 'roles_without_person_access' do
+      its(:roles_without_person_access) do
+      should eq [Group::Abteilung::Ehrenmitglied,
+                 Group::Abteilung::Passivmitglied,
+                 Group::Abteilung::Selbstregistriert]
+      end
+    end
+  end
 end

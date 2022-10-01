@@ -163,6 +163,10 @@ class Group::Bund < Group
     self.kind = :passive
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
   class Praesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -312,6 +316,7 @@ class Group::Bund < Group
 
         Ehrenmitglied,
         Passivmitglied,
-        Kontaktperson
+        Kontaktperson,
+        Selbstregistriert
 
 end

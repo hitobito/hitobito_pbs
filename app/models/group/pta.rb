@@ -66,10 +66,16 @@ class Group::Pta < Group
     self.visible_from_above = false
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+    self.visible_from_above = false
+  end
+
   roles Einheitsleitung,
         Mitleitung,
         Adressverwaltung,
-        Mitglied
+        Mitglied,
+        Selbstregistriert
 
   self.default_role = Mitglied
 
