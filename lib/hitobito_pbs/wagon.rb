@@ -91,6 +91,7 @@ module HitobitoPbs
       ### decorators
       EventDecorator.icons['Event::Camp'] = :campground
       EventDecorator.include Pbs::EventDecorator
+      GroupDecorator.include Pbs::GroupDecorator
       PersonDecorator.include Pbs::PersonDecorator
       ContactableDecorator.include Pbs::ContactableDecorator
       Event::ParticipationDecorator.include Pbs::Event::ParticipationDecorator

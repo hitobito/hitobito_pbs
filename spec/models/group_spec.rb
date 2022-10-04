@@ -97,14 +97,6 @@ describe Group do
         expect(group.reload.cantons).to eq []
       end
     end
-
-    context 'allowed_' do
-      its(:allowed_roles_for_self_registration) do
-      should eq [Group::Kantonalverband::Ehrenmitglied,
-                 Group::Kantonalverband::Passivmitglied,
-                 Group::Kantonalverband::Selbstregistriert]
-      end
-    end
   end
 
   describe Group::Abteilung do
@@ -133,25 +125,6 @@ describe Group do
         group.update!(gender: 'm', try_out_day_at: '2019-03-23')
         expect(group.reload.gender).to eq 'm'
         expect(group.reload.try_out_day_at).to eq Date.parse('2019-03-23')
-      end
-    end
-
-    context 'allowed_roles_for_self_registration' do
-      its(:allowed_roles_for_self_registration) do
-      should eq [Group::Abteilung::Ehrenmitglied,
-                 Group::Abteilung::Passivmitglied,
-                 Group::Abteilung::Selbstregistriert]
-      end
-    end
-  end
-
-  describe Group::Pio do
-    let(:group) { groups(:Sparta) }
-
-    context 'allowed_roles_for_self_registration' do
-      its(:allowed_roles_for_self_registration) do
-      should eq [Group::Pio::Pio,
-                 Group::Pio::Selbstregistriert]
       end
     end
   end
