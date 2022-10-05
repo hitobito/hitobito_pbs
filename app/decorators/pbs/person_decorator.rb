@@ -25,7 +25,9 @@ module Pbs::PersonDecorator
   private
 
     def layer_group_ids
-      @layer_group_ids ||= (current_user || current_service_token.dynamic_user).layer_group_ids
+      @layer_group_ids ||= current_user&.layer_group_ids ||
+        [current_service_token&.layer_group_id].compact.presence ||
+        Person.find(current_oauth_token.resource_owner_id)&.layer_group_ids
     end
 
     def visible_roles
