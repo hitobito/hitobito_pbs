@@ -52,7 +52,10 @@ class Group::KantonalesGremium < Group::Gremium
   class Mitglied < Group::Gremium::Mitglied
   end
 
-  roles Leitung, Mitglied
+  class Selbstregistriert < Group::Gremium::Selbstregistriert
+  end
+
+  roles Leitung, Mitglied, Selbstregistriert
   self.default_role = Mitglied
 
 end

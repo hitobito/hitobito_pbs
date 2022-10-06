@@ -51,4 +51,7 @@ class Group::Gremium < Group
     self.permissions = [:group_read]
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
 end

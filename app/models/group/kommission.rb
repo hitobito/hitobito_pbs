@@ -51,4 +51,8 @@ class Group::Kommission < Group
     self.permissions = [:layer_and_below_read]
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
 end

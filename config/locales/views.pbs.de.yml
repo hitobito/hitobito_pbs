@@ -301,6 +301,8 @@ de:
       crisis: Krise
       crisis_done: Krise quittieren
       confirm_crisis: Bist du sicher, dass du die Krise auf der Gruppe auslösen möchtest. Die Zuständigen Krisenteams werden über deinen Zugriff informiert. Bitte gehe sorgsam mit den Daten um.
+    form:
+      hint_external_registration: Es sind keine Rollen auswählbar, die es erlauben, andere Personen zu sehen.
 
   help:
     index:

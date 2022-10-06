@@ -279,6 +279,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/bund/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
       group/bund/kontaktperson:
         one: Kontaktperson
         other: Kontaktpersonen
@@ -464,6 +468,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/kantonalverband/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
 
       group/region/regionalleitung:
@@ -634,6 +642,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/region/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/abteilung/abteilungsleitung:
         one: Abteilungsleiter*in
@@ -759,6 +771,10 @@ de:
         one: Passivmitglied
         other: Passivmitglieder
         description:
+      group/abteilung/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/biber/einheitsleitung:
         one: Einheitsleiter*in
@@ -881,6 +897,10 @@ de:
         one: Mitglied
         other: Mitglieder
         description:
+      group/elternrat/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/internes_gremium/leitung:
         one: Leitung
@@ -899,6 +919,10 @@ de:
         one: Mitglied
         other: Mitglieder
         description:
+      group/gremium/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
+        description:
 
       group/kommission/leitung:
         one: Leiter*in
@@ -907,6 +931,10 @@ de:
       group/kommission/mitglied:
         one: Mitglied
         other: Mitglieder
+        description:
+      group/kommission/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
         description:
 
       event/camp:

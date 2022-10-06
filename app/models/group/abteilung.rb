@@ -179,6 +179,10 @@ class Group::Abteilung < Group
     self.kind = :passive
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
   class Praeses < ::Role
     self.permissions = [:group_read]
   end
@@ -290,5 +294,6 @@ class Group::Abteilung < Group
         Spezialfunktion,
 
         Ehrenmitglied,
-        Passivmitglied
+        Passivmitglied,
+        Selbstregistriert
 end

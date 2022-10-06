@@ -147,6 +147,10 @@ class Group::Kantonalverband < Group
     self.kind = :passive
   end
 
+  class Selbstregistriert < ::Role
+    self.permissions = []
+  end
+
   class Praesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -319,5 +323,6 @@ class Group::Kantonalverband < Group
         Spezialfunktion,
 
         Ehrenmitglied,
-        Passivmitglied
+        Passivmitglied,
+        Selbstregistriert
 end

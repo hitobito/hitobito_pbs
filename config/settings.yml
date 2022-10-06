@@ -62,6 +62,6 @@ messages:
 
 groups:
   self_registration:
-    enabled: false
+    enabled: true
   statistics:
     enabled: false

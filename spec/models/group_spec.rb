@@ -128,5 +128,4 @@ describe Group do
       end
     end
   end
-
 end
