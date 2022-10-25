@@ -157,6 +157,10 @@ fr:
         one: Trésorier·ère
         many: Trésorier·ère·s
         other: Trésorier·ère·s
+      group/bund/rechnungen:
+        one: Factures
+        many: Factures
+        other: Factures
       group/bund/revisor:
         one: Réviseur·euse aux comptes
         many: Réviseurs·euses aux comptes
@@ -281,6 +285,10 @@ fr:
         one: Membre passif
         many: Membres passif
         other: Membres passif
+      group/bund/selbstregistriert:
+        one: auto-enregistré•e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/bund/kontaktperson:
         one: Personne de contact
         many: Personnes de contact
@@ -329,6 +337,10 @@ fr:
         one: Trésorier·ère
         many: Trésorier·ère·s
         other: Trésorier·ère·s
+      group/kantonalverband/rechnungen:
+        one: Factures
+        many: Factures
+        other: Factures
       group/kantonalverband/revisor:
         one: Réviseur-euse
         many: Réviseurs-euses
@@ -461,6 +473,10 @@ fr:
         one: Membre passif
         many: Membres passifs
         other: Membres passifs
+      group/kantonalverband/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/region/regionalleitung:
         one: Responsable régional-e
         many: Responsables régionaux-ales
@@ -505,6 +521,10 @@ fr:
         one: Trésorier·ère
         many: Trésorier·ère·s
         other: Trésorier·ère·s
+      group/region/rechnungen:
+        one: Factures
+        many: Factures
+        other: Factures
       group/region/revisor:
         one: Réviseur aux comptes
         many: Réviseurs aux comptes
@@ -625,6 +645,10 @@ fr:
         one: Membre passif
         many: Membres passifs
         other: Membres passifs
+      group/region/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/abteilung/abteilungsleitung:
         one: Responsable de groupe
         many: Responsables de groupe
@@ -705,6 +729,10 @@ fr:
         one: Trésorier·ère
         many: Trésorier·ère·s
         other: Trésorier·ère·s
+      group/abteilung/rechnungen:
+        one: Factures
+        many: Factures
+        other: Factures
       group/abteilung/revisor:
         one: Réviseur-euse
         many: Réviseurs-euses
@@ -745,6 +773,10 @@ fr:
         one: Membre passif
         many: Membres passifs
         other: Membres passifs
+      group/abteilung/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/biber/einheitsleitung:
         one: Responsable d'unité
         many: Responsables d'unité
@@ -857,6 +889,10 @@ fr:
         one: Membre
         many: Membres
         other: Membres
+      group/elternrat/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/internes_gremium/leitung:
         one: Direction
         many: Direction
@@ -873,6 +909,10 @@ fr:
         one: Membres
         many: Membres
         other: Membres
+      group/gremium/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/kommission/leitung:
         one: Responsable
         many: Responsables
@@ -881,6 +921,10 @@ fr:
         one: Membre
         many: Membres
         other: Membres
+      group/kommission/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       event/camp:
         one: Camp
         many: Camps
@@ -1106,6 +1150,7 @@ fr:
         can_have_confirmations: Activer l'export des confirmations de cours
         confirmation_name: Nom du type du cours dans l'outil pour l'export
       event/participation:
+        additional_information: Remarques (remarques générales, habitudes alimentaires, etc.)
         bsv_days: Jours OFAS
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
@@ -1141,6 +1186,10 @@ fr:
           w: Femmes
         try_out_day_at: Journée découverte
         geolocations: Lieux de rendez-vous
+        group_health: Opt-in Healthcheck
+      group/region:
+        group_health: Opt-in Healthcheck
+      group/kantonalverband:
         group_health: Opt-in Healthcheck
       people_relation:
         kinds:
@@ -1190,10 +1239,15 @@ fr:
         nickname: Nom scout sur l'étiquette
       service_token:
         group_health: Fin de l'export du Healthcheck
+        census_evaluations: Liste des effectifs - Point final de l'exportation
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
       models:
+        mailing_list:
+          attributes:
+            mail_name:
+              must_end_with_layer_suffix: doit se terminer par l'abréviation du groupe %{suffix}.
         event:
           attributes:
             base:

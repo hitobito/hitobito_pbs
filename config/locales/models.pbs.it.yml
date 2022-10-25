@@ -171,6 +171,10 @@ it:
         one: Cassieri
         many: Cassiere
         other: Cassiere
+      group/bund/rechnungen:
+        one: Fatture
+        many: Fatture
+        other: Fatture
       group/bund/revisor:
         one: Revisore
         many: Revisori
@@ -295,6 +299,10 @@ it:
         one: Membro passivo
         many: Membri passivo
         other: Membri passivo
+      group/bund/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/bund/kontaktperson:
         one: Persona di contatto
         many: Persone di contatto
@@ -343,6 +351,10 @@ it:
         one: Cassiere
         many: Cassieri
         other: Cassieri
+      group/kantonalverband/rechnungen:
+        one: Fatture
+        many: Fatture
+        other: Fatture
       group/kantonalverband/revisor:
         one: Revisore
         many: Revisori
@@ -475,6 +487,10 @@ it:
         one: Membro passivo
         many: Membri passivo
         other: Membri passivo
+      group/kantonalverband/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/region/regionalleitung:
         one: Responsabile di zona
         many: Responsabili di zona
@@ -519,6 +535,10 @@ it:
         one: Cassiere
         many: Cassieri
         other: Cassieri
+      group/region/rechnungen:
+        one: Fatture
+        many: Fatture
+        other: Fatture
       group/region/revisor:
         one: Revisore
         many: Revisori
@@ -639,6 +659,10 @@ it:
         one: Membro passivo
         many: Membri passivo
         other: Membri passivo
+      group/region/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/abteilung/abteilungsleitung:
         one: Capo sezione
         many: Capi sezione
@@ -719,6 +743,10 @@ it:
         one: Cassiere
         many: Cassieri
         other: Cassieri
+      group/abteilung/rechnungen:
+        one: Fatture
+        many: Fatture
+        other: Fatture
       group/abteilung/revisor:
         one: Revisore
         many: Revisori
@@ -759,6 +787,10 @@ it:
         one: Membro passivo
         many: Membri passivo
         other: Membri passivo
+      group/abteilung/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/biber/einheitsleitung:
         one: Capo colonia
         many: Capi colonia
@@ -871,6 +903,10 @@ it:
         one: Membro
         many: Membri
         other: Membri
+      group/elternrat/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/internes_gremium/leitung:
         one: Direzione
         many: Direzione
@@ -887,6 +923,10 @@ it:
         one: Membro
         many: Membri
         other: Membri
+      group/gremium/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/kommission/leitung:
         one: Responsabile
         many: Responsabili
@@ -895,6 +935,10 @@ it:
         one: Collaboratore
         many: Membri
         other: Membri
+      group/kommission/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       event/camp:
         one: Campo
         many: Campi
@@ -1120,6 +1164,7 @@ it:
         can_have_confirmations: Attivare l'esportazione delle conferme dei costi
         confirmation_name: Nome del tipo di corso nel tool per l'esportazione
       event/participation:
+        additional_information: Note (generali, abitudini alimentari, ecc.)
         bsv_days: Numero di giorni UFAS
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
@@ -1155,6 +1200,10 @@ it:
           w: Donne
         try_out_day_at: Giornata di prova
         geolocations: Punti d'incontro
+        group_health: Opt-In HealthCheck
+      group/region:
+        group_health: Opt-In HealthCheck
+      group/kantonalverband:
         group_health: Opt-In HealthCheck
       people_relation:
         kinds:
@@ -1204,10 +1253,15 @@ it:
         nickname: Nome scout sull'etichetta
       service_token:
         group_health: HealthCheck Export-punto finale
+        census_evaluations: Punto finale dell'esportazione dei censimento dei membri
     errors:
       messages:
         must_be_multiple_of: dev'essere un multiplo di %{multiple} .
       models:
+        mailing_list:
+          attributes:
+            mail_name:
+              must_end_with_layer_suffix: deve terminare con l'abbreviazione del gruppo MSS %{suffix}.
         event:
           attributes:
             base:

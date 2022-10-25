@@ -276,6 +276,8 @@ it:
       crisis: Crisi
       crisis_done: Uscire dalla crisi
       confirm_crisis: Sei sicuro che vuoi creare la crisi sul gruppo. I teams di crisi responsabili verranno informati del tuo accesso
+    form:
+      hint_external_registration: Non sono selezionabili ruoli che consentano di vedere altre persone.
   help:
     index:
       title: Aiuto

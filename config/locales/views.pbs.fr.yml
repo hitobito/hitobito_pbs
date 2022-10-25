@@ -276,6 +276,8 @@ fr:
       crisis: Crise
       crisis_done: Confirmer la crise
       confirm_crisis: Es-tu sûre de vouloir déclencher une crise sur ce groupe? Les responsables de l'équipe de crise seront informés de ton action. S'il-te-plaît fais attention à la protection des données.
+    form:
+      hint_external_registration: Il n'est pas possible de sélectionner des rôles qui permettent de voir d'autres personnes.
   help:
     index:
       title: Aide
