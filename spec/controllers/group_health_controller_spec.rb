@@ -42,7 +42,8 @@ describe GroupHealthController do
 
       it 'is unauthorized for census evaluation endpoint' do
         request.headers['X-Token'] = token.token
-        expect { get :census_evaluations, format: :json }.to have_http_status(403)
+        get :census_evaluations, format: :json
+        expect(response).to have_http_status(403)
       end
     end
 
@@ -53,12 +54,14 @@ describe GroupHealthController do
 
       it 'is unauthorized for non census evaluation endpoints' do
         request.headers['X-Token'] = token.token
-        expect { get :groups, format: :json }.to have_http_status(403)
+        get :groups, format: :json
+        expect(response).to have_http_status(403)
       end
 
       it 'is unauthorized for census evaluation endpoint' do
         request.headers['X-Token'] = token.token
-        expect { get :census_evaluations, format: :json }.to have_http_status(403)
+        get :census_evaluations, format: :json
+        expect(response).to have_http_status(403)
       end
     end
 

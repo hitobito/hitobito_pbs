@@ -78,9 +78,8 @@ describe Event::QualificationsController do
 
     it 'checks permission' do
       sign_in(people(:al_schekka))
-      expect {
-        post :send_confirmation_notifications, params: { group_id: group.id, event_id: course.id }, xhr: true
-      }.to have_http_status(403)
+      post :send_confirmation_notifications, params: { group_id: group.id, event_id: course.id }, xhr: true
+      expect(response).to have_http_status(403)
     end
 
   end
