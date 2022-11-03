@@ -16,7 +16,7 @@ module Pbs::Event::Course
   included do
     include Event::RestrictedRole
 
-    self.used_attributes += [:advisor_id, :express_fee, :bsv_days, :has_confirmations] +
+    self.used_attributes += [:advisor_id, :express_fee, :has_confirmations] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,
@@ -37,10 +37,7 @@ module Pbs::Event::Course
 
     restricted_role :advisor, Event::Course::Role::Advisor
 
-
     validates :number, presence: true
-    validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
-    validate :assert_bsv_days_precision
 
     ### CALLBACKS
     after_initialize :become_campy

@@ -18,7 +18,7 @@ module Pbs
 
           def build_attribute_labels_with_pbs
             build_attribute_labels_without_pbs.tap do |labels|
-              labels[:bsv_days] = ::Event::Participation.human_attribute_name(:bsv_days)
+              labels[:training_days] = ::Event::Participation.human_attribute_name(:training_days)
             end
           end
         end

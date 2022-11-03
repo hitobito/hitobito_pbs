@@ -32,10 +32,6 @@ module Pbs::Export::Tabular::Events
       Kernel.format('%g', entry.training_days) if entry.training_days
     end
 
-    def bsv_days
-      Kernel.format('%g', entry.bsv_days) if entry.bsv_days
-    end
-
     def kurs_kind
       entry.kind.to_s
     end
@@ -68,19 +64,19 @@ module Pbs::Export::Tabular::Events
     end
 
     def all_participants_attendances
-      active_participations.map(&:bsv_days).compact.sum
+      active_participations.map(&:training_days).compact.sum
     end
 
     def bsv_eligible_attendances
-      bsv_eligible_participations.map(&:bsv_days).compact.sum
+      bsv_eligible_participations.map(&:training_days).compact.sum
     end
 
     def all_participants_attendance_summary
-      format_attendances(attendance_groups_by_bsv_days_for(active_participations))
+      format_attendances(attendance_groups_by_training_days_for(active_participations))
     end
 
     def bsv_eligible_attendance_summary
-      format_attendances(attendance_groups_by_bsv_days_for(bsv_eligible_participations))
+      format_attendances(attendance_groups_by_training_days_for(bsv_eligible_participations))
     end
 
     private
@@ -106,10 +102,10 @@ module Pbs::Export::Tabular::Events
       @active_participations ||= entry.participations.where(active: true)
     end
 
-    def attendance_groups_by_bsv_days_for(participations)
+    def attendance_groups_by_training_days_for(participations)
       Hash[
         participations.
-          group_by { |participation| participation.bsv_days || 0 }.
+          group_by { |participation| participation.training_days || 0 }.
           transform_values { |participation_group| participation_group.count }.
           sort_by { |days, count| days.to_f }
       ]

@@ -348,8 +348,7 @@ describe Event::ListsController do
                                     number: number,
                                     state: 'closed',
                                     advisor_id: person.id,
-                                    training_days: 5,
-                                    bsv_days: 3
+                                    training_days: 5
                                     )
     course.dates.destroy_all
     date_from = Date.parse(date_from)
@@ -366,7 +365,7 @@ describe Event::ListsController do
 
   def create_participation(course, role)
     person = Fabricate(:person, birthday: Date.new(1995,1,1), zip_code: 3012)
-    participation = Fabricate(:event_participation, event: course, person: person, bsv_days: 3)
+    participation = Fabricate(:event_participation, event: course, person: person)
     Fabricate(role.to_sym, participation: participation)
   end
 

@@ -33,15 +33,6 @@ describe Export::Tabular::Events::BsvRow do
     expect(row.fetch(:training_days)).to be_blank
   end
 
-  it 'formats bsv_days' do
-    course.bsv_days = 1
-    expect(row.fetch(:bsv_days)).to eq '1'
-    course.bsv_days = 1.5
-    expect(row.fetch(:bsv_days)).to eq '1.5'
-    course.bsv_days = nil
-    expect(row.fetch(:bsv_days)).to be_blank
-  end
-
   it 'bsv_eligible_participants_count is zero' do
     expect(row.fetch(:bsv_eligible_participations_count)).to eq 0
   end
@@ -55,7 +46,7 @@ describe Export::Tabular::Events::BsvRow do
 
   describe 'advanced_bsv_export' do
     before do
-      course.bsv_days = 7
+      course.training_days = 7
       create_eligible_participation(course, location: bern, age: 20)
       create_eligible_participation(course, location: bern, age: 12)
     end
@@ -80,11 +71,11 @@ describe Export::Tabular::Events::BsvRow do
     course
   end
 
-  def create_eligible_participation(course, age: 20, location: nil, bsv_days: course.bsv_days)
+  def create_eligible_participation(course, age: 20, location: nil, training_days: course.training_days)
     birthday = (course.dates.first.start_at - age.years).to_date
     person = Fabricate(:person, birthday: birthday, location: location)
     participation = Fabricate(:event_participation, event: course, person: person,
-                              bsv_days: bsv_days, state: :attended)
+                              training_days: training_days, state: :attended)
     Fabricate(Event::Course::Role::Participant.name, participation: participation)
   end
 
