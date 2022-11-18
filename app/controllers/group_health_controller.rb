@@ -45,7 +45,7 @@ class GroupHealthController < ApplicationController
   
   DEFAULT_PAGE_SIZE = 20.freeze
 
-  before_action do
+  before_action(except: [:census_evaluations]) do
     authorize! :show, GroupHealthController
   end
 
@@ -176,13 +176,13 @@ class GroupHealthController < ApplicationController
     authorize! :census_evaluations, GroupHealthController
 
     year = params[:year] || Census.current.year || Time.zone.today.year
-    abteilungen = Group::Abteilung.where(group_health: true)
+    abteilungen = Group::Abteilung.all
                                   .map { |g| census_data(g.census_total(year)) }
                                   .compact
-    regionen = Group::Region.where(group_health: true)
+    regionen = Group::Region.all
                             .map { |g| census_data(g.census_total(year)) }
                             .compact
-    kantonalverbaende = Group::Kantonalverband.where(group_health: true)
+    kantonalverbaende = Group::Kantonalverband.all
                                               .map { |g| census_data(g.census_total(year)) }
                                               .compact
     respond({
