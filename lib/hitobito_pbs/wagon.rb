@@ -56,8 +56,8 @@ module HitobitoPbs
       Export::Tabular::People::ParticipationRow.include(
         Pbs::Export::Tabular::People::ParticipationRow
       )
-      Export::Tabular::People::ParticipationNdbjsRow.include(
-        Pbs::Export::Tabular::People::ParticipationNdbjsRow
+      Export::Tabular::People::ParticipationNdsRow.include(
+        Pbs::Export::Tabular::People::ParticipationNdsRow
       )
       Export::Tabular::People::PersonRow.include Pbs::Export::Tabular::People::PersonRow
       Export::Tabular::People::PeopleAddress.include Pbs::Export::Tabular::People::PeopleAddress
