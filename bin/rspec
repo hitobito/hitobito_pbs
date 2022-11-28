@@ -3,4 +3,8 @@
 # shellcheck disable=SC2068
 # SC2068: Double quote array expansions to avoid re-splitting elements.
 
-bundle exec spring rspec $@
+if [[ $DISABLE_SPRING ]]; then
+  bundle exec rspec $@
+else
+  bundle exec spring rspec $@
+fi
