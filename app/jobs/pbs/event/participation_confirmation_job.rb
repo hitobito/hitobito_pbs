@@ -24,7 +24,6 @@ module Pbs::Event::ParticipationConfirmationJob
     store_locale
   end
 
-
   def send_confirmation_with_current_user
     if participation.person_id == current_user_id
       send_confirmation_without_current_user
@@ -34,8 +33,7 @@ module Pbs::Event::ParticipationConfirmationJob
     end
   end
 
-  def send_approval_with_noop
-  end
+  def send_approval_with_noop; end
 
   def send_camp_leader_information
     return unless participation.event.is_a?(Event::Camp)

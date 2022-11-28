@@ -39,15 +39,14 @@ module Pbs::Event::Participation
     if event.try(:bsv_days).present? && %w[attended].include?(state) && bsv_days.blank?
       msg = I18n.t('activerecord.errors.messages.must_exist')
       errors.add(:bsv_days, msg)
-    end 
+    end
   end
-  
+
   def person_blacklisted?
     person.black_listed?
   end
 
   # disable core's confirmation since
   # pbs wagon has customized participation notifications
-  def send_confirmation_with_pbs
-  end
+  def send_confirmation_with_pbs; end
 end
