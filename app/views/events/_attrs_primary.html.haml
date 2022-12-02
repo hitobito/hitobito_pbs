@@ -31,7 +31,10 @@
     %dl.dl-horizontal
       = labeled_attr(entry, :super_camp)
 
-  = render_present_attrs(entry, :description)
+  - if entry.description.present?
+    %dl.dl-horizontal
+      = labeled(entry.class.human_attribute_name(:description)) do
+        %p.multiline= safe_auto_link(entry.description, html: { target: '_blank' })
 
   - unless entry.is_a?(Event::Camp) && !can?(:show_details, entry)
     = render_present_attrs(entry, :location)
