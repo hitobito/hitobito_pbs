@@ -21,8 +21,7 @@ module Pbs::Event::Course
                             APPROVALS.collect(&:to_sym)
     self.used_attributes -= [:requires_approval, :j_s_kind, :canton, :camp_submitted,
                              :camp_submitted_at, :total_expected_leading_participants,
-                             :total_expected_participants, :globally_visible,
-                             :supports_applications]
+                             :total_expected_participants, :globally_visible]
 
     self.superior_attributes = [:express_fee, :training_days]
 
@@ -56,10 +55,6 @@ module Pbs::Event::Course
     application_open? &&
     (!application_opening_at || application_opening_at <= ::Time.zone.today) &&
     (!application_closing_at || application_closing_at >= ::Time.zone.today)
-  end
-
-  def supports_applications
-    true
   end
 
   module ClassMethods
