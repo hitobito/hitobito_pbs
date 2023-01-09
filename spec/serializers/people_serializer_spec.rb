@@ -19,7 +19,7 @@ describe PeopleSerializer do
                        serializer: PeopleSerializer,
                        controller: controller)
   end
-  let(:service_token) { Fabricate(:service_token, layer_group_id: group.layer_group_id, people: true, people_below: true) }
+  let(:service_token) { Fabricate(:service_token, layer_group_id: group.layer_group_id, people: true, permission: :layer_and_below_read) }
 
   let(:hash) { serializer.to_hash }
 

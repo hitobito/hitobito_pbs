@@ -31,7 +31,6 @@ rejected_top_group_token:
   token: RejectedToken
   last_access: 2018-11-01 11:11:11
   people: false
-  people_below: false
   groups: false
   events: false
   invoices: false
