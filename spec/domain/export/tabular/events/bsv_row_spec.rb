@@ -83,7 +83,7 @@ describe Export::Tabular::Events::BsvRow do
   def create_eligible_participation(course, age: 20, location: nil, bsv_days: course.bsv_days)
     birthday = (course.dates.first.start_at - age.years).to_date
     person = Fabricate(:person, birthday: birthday, location: location)
-    participation = Fabricate(:event_participation, event: course, person: person,
+    participation = Fabricate(:pbs_participation, event: course, person: person,
                               bsv_days: bsv_days, state: :attended)
     Fabricate(Event::Course::Role::Participant.name, participation: participation)
   end
@@ -96,7 +96,7 @@ describe Export::Tabular::Events::BsvRow do
 
   def create_leader_participation(course, role)
     person = Fabricate(:person)
-    participation = Fabricate(:event_participation, event: course, person: person)
+    participation = Fabricate(:pbs_participation, event: course, person: person)
     Fabricate(role.to_sym, participation: participation)
   end
 

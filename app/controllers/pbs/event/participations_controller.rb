@@ -8,6 +8,9 @@
 module Pbs::Event::ParticipationsController
   extend ActiveSupport::Concern
 
+  CONTENT_KEY_JS_DATA_SHARING_INFO_SELF = 'pbs_js_data_sharing_info_self'.freeze
+  CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER = 'pbs_js_data_sharing_info_other'.freeze
+
   included do
     before_render_show :load_approvals
     before_render_form :inform_about_email_sent_to_participant
@@ -17,6 +20,8 @@ module Pbs::Event::ParticipationsController
 
     alias_method_chain :send_confirmation_email, :current_user
     alias_method_chain :permitted_attrs, :state
+
+    self.permitted_attrs += [:j_s_data_sharing_accepted]
   end
 
   def cancel_own
@@ -71,5 +76,4 @@ module Pbs::Event::ParticipationsController
     attrs << :state if event.is_a?(Event::Camp)
     attrs
   end
-
 end

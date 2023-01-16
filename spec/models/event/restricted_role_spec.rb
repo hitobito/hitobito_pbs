@@ -95,7 +95,7 @@ describe Event::RestrictedRole do
     event.update!(abteilungsleitung_id: '')
     Fabricate(:event_question, event: event)
     event.reload
-    p = Fabricate(:event_participation, event: event, person: person)
+    p = Fabricate(:pbs_participation, event: event, person: person)
     p.init_answers
     p.save!
     Fabricate(Event::Camp::Role::Helper.name, participation: p)

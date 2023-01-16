@@ -31,6 +31,7 @@ module HitobitoPbs
       Event::Participation.include Pbs::Event::Participation
       Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
       Event::Application.include Pbs::Event::Application
+      Event::Role.include Pbs::Event::Role
       MailingList.include Pbs::MailingList
       ServiceToken.include Pbs::ServiceToken
 
@@ -121,6 +122,7 @@ module HitobitoPbs
       Event::ListsController.include Pbs::Event::ListsController
       Event::ParticipationsController.include Pbs::Event::ParticipationsController
       Event::QualificationsController.include Pbs::Event::QualificationsController
+      Event::RolesController.include Pbs::Event::RolesController
       QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController

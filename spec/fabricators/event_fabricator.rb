@@ -13,4 +13,5 @@ Fabricator(:pbs_camp, from: :event, class_name: :'Event::Camp') do
 end
 
 Fabricator(:pbs_participation, from: :event_participation) do
+  j_s_data_sharing_accepted_at { Time.zone.now }
 end

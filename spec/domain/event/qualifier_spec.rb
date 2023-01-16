@@ -5,7 +5,7 @@ describe Event::Qualifier do
   let(:course) { events(:bund_course) }
 
   let(:participation) do
-    participation = Fabricate(:event_participation, event: course)
+    participation = Fabricate(:pbs_participation, event: course)
     Fabricate(Event::Role::Participant.name.to_sym, participation: participation)
     participation.reload
   end

@@ -11,7 +11,7 @@ require 'csv'
 describe Export::Tabular::People::ParticipationsFull do
 
   let(:person) { people(:child) }
-  let(:participation) { Fabricate(:event_participation, person: person, event: events(:top_course), bsv_days: 4.5) }
+  let(:participation) { Fabricate(:pbs_participation, person: person, event: events(:top_course), bsv_days: 4.5) }
   let(:list) { [participation] }
   let(:people_list) { Export::Tabular::People::ParticipationsFull.new(list) }
 

@@ -14,7 +14,7 @@ module Pbs::Event::Course
                  requires_approval_kantonalverband requires_approval_bund).freeze
 
   included do
-    include Event::RestrictedRole
+    include Pbs::Event::RestrictedRole
 
     self.used_attributes += [:advisor_id, :express_fee, :bsv_days, :has_confirmations] +
                             LANGUAGES.collect { |key| "language_#{key}".to_sym } +

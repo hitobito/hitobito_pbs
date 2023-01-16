@@ -41,6 +41,12 @@ class PbsEventSeeder < EventSeeder
     event
   end
 
+  def seed_participation(event)
+    super.tap do |participation|
+      participation.j_s_data_sharing_accepted_at = Time.zone.now
+    end
+  end
+
   def approvals
     count = rand(Event::Course::APPROVALS.size + 1)
     Event::Course::APPROVALS.sample(count).map do |attr|

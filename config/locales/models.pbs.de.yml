@@ -1172,6 +1172,7 @@ de:
       event/participation:
         additional_information: Bemerkungen (Allgemeines, Essgewohnheiten, usw.)
         bsv_days: BSV-Tage
+        j_s_data_sharing_accepted: J+S Datenweitergabe
 
       event/question:
         pass_on_to_supercamp: An übergeordnetes Lager weitergeben

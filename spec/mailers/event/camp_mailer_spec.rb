@@ -14,7 +14,8 @@ describe Event::CampMailer do
     SeedFu.seed [Rails.root.join('db', 'seeds')]
   end
 
-  let(:camp) { Fabricate(:pbs_camp, groups: [groups(:sunnewirbu)], name: 'Wirbelcamp') }
+  let(:camp) {
+    Fabricate(:pbs_camp, groups: [groups(:sunnewirbu)], name: 'Wirbelcamp') }
   let(:camp_url) { group_event_url(camp.groups.first, camp) }
   let(:recipient) { people(:al_schekka) }
   let(:recipients) { [people(:al_schekka)] }
@@ -39,9 +40,9 @@ describe Event::CampMailer do
   end
   let(:leader) do
     role = Fabricate(:event_role, type: Event::Camp::Role::Leader.sti_name)
-    Fabricate(:event_participation, event: camp, roles: [role], active: true).person
+    Fabricate(:pbs_participation, event: camp, roles: [role], active: true).person
   end
-  let(:participation) { Fabricate(:event_participation, person: other_person, event: camp) }
+  let(:participation) { Fabricate(:pbs_participation, person: other_person, event: camp) }
 
   before do
     camp.update(coach_id: coach.id)

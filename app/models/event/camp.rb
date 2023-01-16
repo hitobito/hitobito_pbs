@@ -99,7 +99,7 @@ class Event::Camp < Event
   require_dependency 'event/camp/role/helper'
   require_dependency 'event/camp/role/participant'
 
-  include Event::RestrictedRole
+  include Pbs::Event::RestrictedRole
 
   self.used_attributes += [
     :state, :group_ids, :participants_can_apply, :participants_can_cancel,

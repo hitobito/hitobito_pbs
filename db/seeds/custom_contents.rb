@@ -88,6 +88,7 @@ CustomContent.seed_once(:key,
 )
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
+
 participation_confirmation_other_id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_CONFIRMATION_OTHER).id
 participation_canceled_id =
@@ -536,3 +537,44 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
    label: 'Trovatore delle sezioni scout: Testo d\'informazioni su dati della sezione' },
 
 )
+
+[Event::Course, Event::Camp, Event::Campy].each do |event_type|
+  self_key = [Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_SELF, event_type&.name].compact.join('-')
+  other_key = [Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER, event_type&.name].compact.join('-')
+
+  CustomContent.seed_once(:key,
+    { key: self_key },
+    { key: other_key }
+  )
+
+  self_id = CustomContent.get(self_key).id
+  other_id = CustomContent.get(other_key).id
+
+  event_type_label_de = "Anlass (#{event_type.name.demodulize})"
+  event_type_label_fr = "Événement (#{event_type.name.demodulize})"
+  event_type_label_it = "Evento (#{event_type.name.demodulize})"
+  event_type_label_en = "Event (#{event_type.name.demodulize})"
+
+  CustomContent::Translation.seed_once(:custom_content_id, :locale,
+    { custom_content_id: self_id,
+      locale: 'de',
+      label: "#{event_type_label_de} Anmeldung: Einverständnis zur Datenweitergabe",
+      subject: 'Einverständnis zur Datenweitergabe',
+      body: 'Ich bin mit der Weitergabe meiner Daten an J+S wie im Merkblatt "XY" beschrieben einverstanden'},
+
+    { custom_content_id: self_id, locale: 'fr', label: "#{event_type_label_fr} inscription : consentement au transfert de données" },
+    { custom_content_id: self_id, locale: 'it', label: "#{event_type_label_it} registrazione: consenso al trasferimento dei dati" },
+    { custom_content_id: self_id, locale: 'en', label: "#{event_type_label_en} registration: consent to data transfer" },
+
+    { custom_content_id: other_id,
+      locale: 'de',
+      label: "#{event_type_label_de} Fremdanmeldung: Einverständnis zur Datenweitergabe",
+      subject: 'Einverständnis zur Datenweitergabe',
+      body: 'Die angemeldete Persion ist mit der Weitergabe ihrer Daten an J+S wie im Merkblatt "XY" beschrieben einverstanden'},
+
+    { custom_content_id: other_id, locale: 'fr', label: "#{event_type_label_fr} enregistrement de tiers : consentement au transfert de données" },
+    { custom_content_id: other_id, locale: 'it', label: "#{event_type_label_it} registrazione di terze parti : consenso al trasferimento dei dati" },
+    { custom_content_id: other_id, locale: 'en', label: "#{event_type_label_en} third-party registration: consent to data transfer" }
+  )
+end
+

@@ -18,9 +18,9 @@ describe Event::CanceledCampParticipationJob do
     let(:camp_leaders) { job.send(:camp_leaders) }
 
     it 'contains all leaders' do
-      l1 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:event_participation, event: event)).participation
+      l1 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: event)).participation
       Fabricate(Event::Camp::Role::Leader.name, participation: l1)
-      Fabricate(Event::Camp::Role::AssistantLeader.name, participation: Fabricate(:event_participation, event: event))
+      Fabricate(Event::Camp::Role::AssistantLeader.name, participation: Fabricate(:pbs_participation, event: event))
 
       expect(camp_leaders).to eq([people(:bulei), l1.person])
     end

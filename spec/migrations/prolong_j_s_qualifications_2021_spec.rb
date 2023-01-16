@@ -78,11 +78,11 @@ describe ProlongJSQualifications2021 do
   def qualifications(person, qualification_kind)
     person.qualifications.where(qualification_kind_id: qualification_kind)
   end
-  
+
   def create_js_course(year)
     course = Fabricate(:course, kind: event_kind_js, dates: event_dates(year))
     12.times do
-      participation = Fabricate(:event_participation, event: course, qualified: true, state: :assigned,
+      participation = Fabricate(:pbs_participation, event: course, qualified: true, state: :assigned,
                 roles: [Event::Course::Role::Participant.new])
       Event::Qualifier.for(participation).issue
     end

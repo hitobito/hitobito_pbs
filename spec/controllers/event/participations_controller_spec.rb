@@ -17,7 +17,11 @@ describe Event::ParticipationsController do
   context 'GET#show' do
     let(:event) { events(:top_event) }
     let(:camp) { events(:bund_camp) }
-    let!(:participant) { Fabricate(:person, events: [event, camp, course]) }
+    let!(:participant) { Fabricate(:person) }
+
+    before do
+      [event, camp, course].each {|e| Fabricate(:pbs_participation, person: participant, event: e) }
+    end
 
     [ :event, :camp, :course ].each do |kind|
       it "works for #{kind}" do
@@ -73,7 +77,7 @@ describe Event::ParticipationsController do
              params: {
                group_id: group.id,
                event_id: course.id,
-               event_participation: { person_id: people(:child).id }
+               event_participation: { person_id: people(:child).id, j_s_data_sharing_accepted: true }
              }
         expect(participation).to be_valid
       end.to change { Delayed::Job.count }.by(1)
@@ -82,7 +86,7 @@ describe Event::ParticipationsController do
 
     it 'creates participation for camp' do
       camp = Fabricate(:pbs_camp, paper_application_required: true)
-      post :create, params: {group_id: group.id, event_id: camp.id, event_participation: {}}
+      post :create, params: {group_id: group.id, event_id: camp.id, event_participation: {j_s_data_sharing_accepted: true}}
 
       participation = assigns(:participation)
       expect(participation).to be_valid

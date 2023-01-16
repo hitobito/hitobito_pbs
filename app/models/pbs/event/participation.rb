@@ -6,11 +6,13 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module Pbs::Event::Participation
-
   extend ActiveSupport::Concern
+
+  J_S_KINDS_DATA_SHARING_ACCEPTANCE = %w(j_s_child j_s_youth j_s_mixed).freeze
 
   included do
     validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+    validates :j_s_data_sharing_accepted, presence: true, if: :j_s_data_sharing_acceptance_required?
     validate :assert_bsv_days_precision
     validate :assert_bsv_days_set
     after_create :send_black_list_mail, if: :person_blacklisted?
@@ -20,6 +22,23 @@ module Pbs::Event::Participation
 
   def approvers
     Person.where(id: application && application.approvals.collect(&:approver_id))
+  end
+
+  def j_s_data_sharing_accepted
+    j_s_data_sharing_accepted_at.present?
+  end
+  alias_method :j_s_data_sharing_accepted?, :j_s_data_sharing_accepted
+
+  def j_s_data_sharing_accepted=(value)
+    accepted = ActiveModel::Type::Boolean.new.cast(value) || false
+    return if j_s_data_sharing_accepted_at? || !accepted
+
+    self.j_s_data_sharing_accepted_at = Time.zone.now
+  end
+
+  def j_s_data_sharing_acceptance_required?
+    [Event::Camp.name, Event::Campy.name, Event::Course.name].include?(event&.type) &&
+      J_S_KINDS_DATA_SHARING_ACCEPTANCE.include?(event&.j_s_kind)
   end
 
   private

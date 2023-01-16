@@ -19,7 +19,7 @@ describe Event::ParticipationAbility do
 
       it "is allowed to manage event participation" do
         event = Fabricate(:event, groups: [group])
-        participation = Fabricate(:event_participation, event: event)
+        participation = Fabricate(:pbs_participation, event: event)
         role = Fabricate(Event::Role::Leader.name, participation: participation)
         is_expected.to be_able_to(:show, participation)
         is_expected.to be_able_to(:show_details, participation)
@@ -34,7 +34,7 @@ describe Event::ParticipationAbility do
 
       it "is not allowed to manage course participation" do
         event = Fabricate(:pbs_course, groups: [group])
-        participation = Fabricate(:event_participation, event: event)
+        participation = Fabricate(:pbs_participation, event: event)
         role = Fabricate(Event::Course::Role::Leader.name, participation: participation)
         is_expected.not_to be_able_to(:show, participation)
         is_expected.not_to be_able_to(:show_details, participation)
@@ -50,7 +50,7 @@ describe Event::ParticipationAbility do
       it 'is allowed to show course participation from same layer' do
         event = Fabricate(:pbs_course, groups: [group])
         person = Fabricate(Group::Pfadi::Pfadi.name, group: groups(:pegasus)).person
-        participation = Fabricate(:event_participation, event: event, person: person, application: Fabricate(:pbs_application))
+        participation = Fabricate(:pbs_participation, event: event, person: person, application: Fabricate(:pbs_application))
         is_expected.to be_able_to(:show, participation)
         is_expected.to be_able_to(:show_approval, participation.application)
         is_expected.not_to be_able_to(:show_details, participation)
@@ -63,7 +63,7 @@ describe Event::ParticipationAbility do
 
       it "is allowed to manage event participation" do
         event = Fabricate(:event, groups: [group])
-        participation = Fabricate(:event_participation, event: event)
+        participation = Fabricate(:pbs_participation, event: event)
         role = Fabricate(Event::Role::Leader.name, participation: participation)
         is_expected.to be_able_to(:show, participation)
         is_expected.to be_able_to(:show_details, participation)
@@ -78,7 +78,7 @@ describe Event::ParticipationAbility do
 
       it "is allowed to manage course participation" do
         event = Fabricate(:pbs_course, groups: [group])
-        participation = Fabricate(:event_participation, event: event)
+        participation = Fabricate(:pbs_participation, event: event)
         role = Fabricate(Event::Course::Role::Leader.name, participation: participation)
         is_expected.to be_able_to(:show, participation)
         is_expected.to be_able_to(:show_details, participation)
@@ -98,7 +98,7 @@ describe Event::ParticipationAbility do
     let(:role) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:baereried)) }
     let(:event) { events(:schekka_camp) }
     let(:person) { role.person }
-    let(:participation) { Fabricate(:event_participation, event: event, person: person) }
+    let(:participation) { Fabricate(:pbs_participation, event: event, person: person) }
 
     it 'is allowed to cancel if state is confirmed' do
       event.update!(participants_can_cancel: true, state: 'confirmed')
@@ -117,13 +117,13 @@ describe Event::ParticipationAbility do
 
     it 'is not allowed to cancel if already canceled' do
       event.update!(participants_can_cancel: true, state: 'confirmed')
-      participation = Fabricate(:event_participation, event: event, person: role.person, state: 'canceled')
+      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: 'canceled')
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 
     it 'is not allowed to cancel if already canceled' do
       event.update!(participants_can_cancel: true, state: 'confirmed')
-      participation = Fabricate(:event_participation, event: event, person: role.person, state: 'canceled')
+      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: 'canceled')
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 

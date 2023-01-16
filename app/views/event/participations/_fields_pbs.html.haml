@@ -1,0 +1,3 @@
+- if show_js_data_sharing_option?(entry)
+  = f.check_box(:j_s_data_sharing_accepted, disabled: entry.j_s_data_sharing_accepted, required: true)
+  = f.help_inline(js_data_sharing_help_text(entry, params[:for_someone_else]))

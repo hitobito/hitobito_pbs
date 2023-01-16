@@ -33,7 +33,7 @@ describe EventsController, type: :controller do
       advisor_mountain = Fabricate(Group::Bund::Coach.name.to_sym, group: groups(:bund)).person
       camp.update(advisor_mountain_security_id: advisor_mountain.id)
 
-      participation = Fabricate(:event_participation, event: camp)
+      participation = Fabricate(:pbs_participation, event: camp)
       Fabricate(Event::Camp::Role::Helper.name.to_sym, participation: participation)
       participant = participation.person
       sign_in(participant)
@@ -114,7 +114,7 @@ describe EventsController, type: :controller do
           before do
             [Event::Camp::Role::LeaderMountainSecurity, Event::Camp::Role::LeaderSnowSecurity,
              Event::Camp::Role::LeaderWaterSecurity].each do |role|
-              Fabricate(role.name.to_sym, participation: Fabricate(:event_participation, event: camp))
+              Fabricate(role.name.to_sym, participation: Fabricate(:pbs_participation, event: camp))
             end
           end
 
@@ -161,7 +161,7 @@ describe EventsController, type: :controller do
           before do
             [Event::Camp::Role::LeaderMountainSecurity, Event::Camp::Role::LeaderSnowSecurity,
              Event::Camp::Role::LeaderWaterSecurity].each do |role|
-              Fabricate(role.name.to_sym, participation: Fabricate(:event_participation, event: camp))
+              Fabricate(role.name.to_sym, participation: Fabricate(:pbs_participation, event: camp))
             end
           end
 

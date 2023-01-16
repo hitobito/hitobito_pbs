@@ -57,15 +57,15 @@ describe Event::QualificationsController do
   context 'course confirmation info email' do
 
     before do
-      Fabricate(:event_participation, event: course, qualified: true, state: :assigned,
+      Fabricate(:pbs_participation, event: course, qualified: true, state: :assigned,
                                       roles: [Event::Course::Role::Leader.new])
-      Fabricate(:event_participation, event: course, qualified: true, state: :tentative,
+      Fabricate(:pbs_participation, event: course, qualified: true, state: :tentative,
                                       roles: [Event::Course::Role::Participant.new])
-      Fabricate(:event_participation, event: course, qualified: false, state: :assigned,
+      Fabricate(:pbs_participation, event: course, qualified: false, state: :assigned,
                                       roles: [Event::Course::Role::Participant.new])
-      Fabricate(:event_participation, event: course, qualified: true, state: :assigned,
+      Fabricate(:pbs_participation, event: course, qualified: true, state: :assigned,
                                       roles: [Event::Course::Role::Participant.new])
-      Fabricate(:event_participation, event: course, qualified: true, state: :assigned,
+      Fabricate(:pbs_participation, event: course, qualified: true, state: :assigned,
                                       roles: [Event::Course::Role::Helper.new,
                                               Event::Course::Role::Participant.new])
     end

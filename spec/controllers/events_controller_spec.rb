@@ -82,7 +82,8 @@ describe EventsController do
 
       it 'prevents non-coaches from editing coach_confirmed' do
         event.participations.create!(person: people(:al_schekka),
-                                    roles: [Event::Course::Role::Leader.new])
+                                    roles: [Event::Course::Role::Leader.new],
+                                    j_s_data_sharing_accepted_at: Time.zone.now)
         put :update, params: {
           group_id: event.groups.first.id,
           id: event.id,
