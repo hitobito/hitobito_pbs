@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_jubla and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
@@ -56,7 +56,7 @@ module Pbs::Export::Tabular::Events
     end
 
     def advisor
-      @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes : {})
+      @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes.except('picture') : {})
     end
 
     def bsv_eligible_participations_count
