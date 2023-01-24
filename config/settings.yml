@@ -53,6 +53,11 @@ email:
 event:
   globally_visible_by_default: false
 
+csv:
+  # optimized for <!-- M$ Excel --> normal applications
+  separator: ;
+  encoding: UTF-8
+
 people:
   abos: true
 
