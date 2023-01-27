@@ -54,9 +54,9 @@ event:
   globally_visible_by_default: false
 
 csv:
-  # optimized for <!-- M$ Excel --> normal applications
   separator: ;
   encoding: UTF-8
+  utf8_bom: true # allowing M$ Excel to read UTF-8
 
 people:
   abos: true
