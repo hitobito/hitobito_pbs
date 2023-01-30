@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## unreleased
+
+*   Bei J+S Kursen/Lager müssen Teilnehmer bei Anmeldung der Datenweitergabe zustimmen (hitobito_pbs#1956)
+
 ## Version 1.28
 
 *   Referent*innen eines Kurses werden neu nach Abschluss des Kurses im Tab "Qualifikationen" angezeigt. Dort können ihnen dann die Qualifikation ausgestellt werden (hitobito_pbs#233)
