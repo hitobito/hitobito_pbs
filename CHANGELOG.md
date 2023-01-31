@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 1.28
 
 *   Bei J+S Kursen/Lager müssen Teilnehmer bei Anmeldung der Datenweitergabe zustimmen (hitobito_pbs#1956)
 
