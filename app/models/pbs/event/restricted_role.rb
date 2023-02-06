@@ -14,7 +14,9 @@ module Pbs::Event::RestrictedRole
 
   def build_restricted_role(role, id)
     super.tap do |role|
-      role.participation.j_s_data_sharing_accepted = true if role.participation.j_s_data_sharing_acceptance_required?
+      if role.participation.j_s_data_sharing_acceptance_required?
+        role.participation.j_s_data_sharing_accepted = true
       end
+    end
   end
 end
