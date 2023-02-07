@@ -12,8 +12,10 @@ module Pbs
     end
 
     def js_data_sharing_help_text(participation, for_someone_else)
-      base_key_self = ::Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_SELF
-      base_key_other = ::Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER
+      base_key_self =
+        ::Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_SELF
+      base_key_other =
+        ::Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER
       base_key = for_someone_else ? base_key_other : base_key_self
       content_key = "#{base_key}-#{participation.event.type}"
 
