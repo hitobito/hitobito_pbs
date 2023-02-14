@@ -1,14 +1,13 @@
 [main]
 host = https://www.transifex.com
-type = YML
 
-[hitobito_pbs.views-pbs]
-file_filter = config/locales/views.pbs.<lang>.yml
-source_file = config/locales/views.pbs.de.yml
-source_lang = de
-
-[hitobito_pbs.models-pbs]
+[o:hitobito:p:hitobito_pbs:r:models-pbs]
 file_filter = config/locales/models.pbs.<lang>.yml
 source_file = config/locales/models.pbs.de.yml
+source_lang = de
+
+[o:hitobito:p:hitobito_pbs:r:views-pbs]
+file_filter = config/locales/views.pbs.<lang>.yml
+source_file = config/locales/views.pbs.de.yml
 source_lang = de
 
