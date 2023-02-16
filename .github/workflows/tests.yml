@@ -20,3 +20,6 @@ jobs:
     with:
       wagon_repository: ${{ github.event.repository.name }}
       wagon_dependency_repository: hitobito_youth
+    secrets:
+      HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL }}
+      HEARTBEAT_TOKEN: ${{ secrets.HEARTBEAT_TOKEN }}
