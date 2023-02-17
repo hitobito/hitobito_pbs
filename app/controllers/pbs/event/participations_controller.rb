@@ -1,6 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -8,8 +8,8 @@
 module Pbs::Event::ParticipationsController
   extend ActiveSupport::Concern
 
-  CONTENT_KEY_JS_DATA_SHARING_INFO_SELF = 'pbs_js_data_sharing_info_self'.freeze
-  CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER = 'pbs_js_data_sharing_info_other'.freeze
+  CONTENT_KEY_JS_DATA_SHARING_INFO_SELF = 'pbs_js_data_sharing_info_self'
+  CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER = 'pbs_js_data_sharing_info_other'
 
   included do
     before_render_show :load_approvals
@@ -45,7 +45,8 @@ module Pbs::Event::ParticipationsController
   end
 
   def send_discarded_info
-    return unless entry.previous_changes[:state].present?
+    return if entry.previous_changes[:state].blank?
+
     Event::DiscardedCourseParticipationJob.new(entry, entry.previous_changes[:state].first).enqueue!
   end
 
