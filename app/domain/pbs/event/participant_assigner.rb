@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -11,9 +11,16 @@ module Pbs::Event::ParticipantAssigner
 
   included do
     alias_method_chain :remove_from_waiting_list, :setter
+    alias_method_chain :set_active, :camp
   end
 
   private
+
+  def set_active_with_camp(active)
+    state = participation.event.send(:default_participation_state, participation)
+
+    participation.update!(active: active, state: active ? state : 'applied')
+  end
 
   def remove_from_waiting_list_with_setter
     if application.waiting_list_setter && application.waiting_list_setter != user

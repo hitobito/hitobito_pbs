@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -160,7 +160,7 @@ describe Event::Participation do
 
       it 'set participant applied_electronically if paper application required' do
         event.update!(paper_application_required: true)
-        p = Fabricate(:pbs_participation, event: event, person: Fabricate(:person))
+        p = Fabricate.build(:pbs_participation, event: event, person: Fabricate(:person))
         p.roles.build(type: Event::Camp::Role::Participant.sti_name)
         p.save!
         expect(p.state).to eq('applied_electronically')
