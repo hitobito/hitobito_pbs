@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -17,7 +17,7 @@ describe Export::Tabular::People::PeopleAddress do
        Digitale\ Korrespondenz\ bevorzugt Kantonalverband Id) << 'Id der Hauptebene'
   end
   let(:list) { Person.where(id: person) }
-  let(:data) { Export::Tabular::People::PeopleAddress.csv(list) }
+  let(:data) { Export::Tabular::People::PeopleAddress.csv(list).delete_prefix(Export::Csv::UTF8_BOM) }
   let(:csv)  { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
   subject { csv }

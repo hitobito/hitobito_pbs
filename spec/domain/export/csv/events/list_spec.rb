@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -70,7 +70,7 @@ describe Export::Tabular::Events::List do
                 language_it: true,
                 advisor_id: people(:bulei).id)
     end
-    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
+    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")  }
 
     context 'headers' do
       subject { csv.first }
@@ -141,7 +141,7 @@ describe Export::Tabular::Events::List do
     let(:test_camp) { events(:schekka_camp).dup }
     let(:camps) { Event::Camp.all }
     let(:list)  { Export::Tabular::Events::List.new(camps) }
-    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
+    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")  }
 
     before do
       test_camp.update!(
@@ -192,10 +192,11 @@ Name;Organisatoren;Beschreibung;Lagerstatus;Ort / Adresse;Datum 1 Bezeichnung;Da
   context 'for simple events' do
     let(:courses) { Event.where(id: event) }
     let(:event) { Fabricate(:event, groups: [groups(:be)], location: 'somewhere') }
-    let(:csv) { Export::Csv::Generator.new(list).call.split("\n")  }
+    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")  }
 
     context 'headers' do
       subject { csv.first }
+
       it { is_expected.to match(/^Name;Organisatoren;Beschreibung;Ort.*Anzahl Anmeldungen$/) }
       it { is_expected.not_to match(/LKB/) }
       it { is_expected.not_to match(/Kurssprache/) }

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -190,7 +190,7 @@ describe Event::ListsController do
   end
 
   describe 'GET #bsv_export' do
-    let(:rows) { response.body.split("\r\n") }
+    let(:rows) { response.body.delete_prefix(Export::Csv::UTF8_BOM).split("\r\n") }
     let(:user) { people(:bulei) }
     let(:kind) { event_kinds(:fut) }
     let(:person) do

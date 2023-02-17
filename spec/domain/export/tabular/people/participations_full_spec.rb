@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2017-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -22,7 +22,7 @@ describe Export::Tabular::People::ParticipationsFull do
   end
 
   context 'integration' do
-    let(:data) { Export::Tabular::People::ParticipationsFull.export(:csv, list) }
+    let(:data) { Export::Tabular::People::ParticipationsFull.export(:csv, list).delete_prefix(Export::Csv::UTF8_BOM) }
     let(:csv) { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }
