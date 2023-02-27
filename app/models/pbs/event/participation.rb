@@ -8,8 +8,6 @@
 module Pbs::Event::Participation
   extend ActiveSupport::Concern
 
-  J_S_KINDS_DATA_SHARING_ACCEPTANCE = %w(j_s_child j_s_youth j_s_mixed).freeze
-
   included do
     validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
     validates :j_s_data_sharing_accepted, presence: true, if: :j_s_data_sharing_acceptance_required?
@@ -18,6 +16,8 @@ module Pbs::Event::Participation
     after_create :send_black_list_mail, if: :person_blacklisted?
 
     alias_method_chain :send_confirmation, :pbs
+
+    delegate :j_s_data_sharing_acceptance_required?, to: :event
   end
 
   def approvers
@@ -34,11 +34,6 @@ module Pbs::Event::Participation
     return if j_s_data_sharing_accepted_at? || !accepted
 
     self.j_s_data_sharing_accepted_at = Time.zone.now
-  end
-
-  def j_s_data_sharing_acceptance_required?
-    [Event::Camp.name, Event::Campy.name, Event::Course.name].include?(event&.type) &&
-      J_S_KINDS_DATA_SHARING_ACCEPTANCE.include?(event&.j_s_kind)
   end
 
   private
