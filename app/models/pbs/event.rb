@@ -8,6 +8,8 @@
 module Pbs::Event
   extend ActiveSupport::Concern
 
+  J_S_KINDS_DATA_SHARING_ACCEPTANCE = %w(j_s_child j_s_youth j_s_mixed).freeze
+
   included do
     class_attribute :superior_attributes
     self.superior_attributes = []
@@ -22,5 +24,10 @@ module Pbs::Event
     dates.any? do |date|
       date.start_at.to_date.future? || (date.finish_at && date.finish_at.to_date.future?)
     end
+  end
+
+  def j_s_data_sharing_acceptance_required?
+    [Event::Camp.name, Event::Campy.name, Event::Course.name].include?(type) &&
+      J_S_KINDS_DATA_SHARING_ACCEPTANCE.include?(j_s_kind)
   end
 end
