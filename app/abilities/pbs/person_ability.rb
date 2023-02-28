@@ -12,11 +12,11 @@ module Pbs::PersonAbility
     on(Person) do
       permission(:any)
         .may(:show, :show_full, :show_details, :history,
-             :index_tags, :index_notes).if_member_of_crisis_group_or_oneself
+             :index_tags, :index_notes).if_member_of_crisis_group_or_oneself_or_manager
     end
 
-    def if_member_of_crisis_group_or_oneself
-      herself || member_of_crisis_group
+    def if_member_of_crisis_group_or_oneself_or_manager
+      herself || manager || member_of_crisis_group
     end
 
     def member_of_crisis_group
