@@ -36,7 +36,7 @@ describe 'event/participations/_form.html.haml' do
 
   context 'js data sharing agreement checkbox' do
     it 'is included when participation.j_s_data_sharing_acceptance_required? is true' do
-      event.update(j_s_kind: Pbs::Event::Participation::J_S_KINDS_DATA_SHARING_ACCEPTANCE.first)
+      event.update(j_s_kind: Pbs::Event::J_S_KINDS_DATA_SHARING_ACCEPTANCE.first)
       participation.update_column(:j_s_data_sharing_accepted_at, nil)
       expect(participation.j_s_data_sharing_acceptance_required?).to eq true
       render
@@ -44,7 +44,7 @@ describe 'event/participations/_form.html.haml' do
     end
 
     it 'is shown disabled if already accepted before' do
-      event.update(j_s_kind: Pbs::Event::Participation::J_S_KINDS_DATA_SHARING_ACCEPTANCE.first)
+      event.update(j_s_kind: Pbs::Event::J_S_KINDS_DATA_SHARING_ACCEPTANCE.first)
       participation.update(j_s_data_sharing_accepted_at: Time.zone.now)
       expect(participation.j_s_data_sharing_acceptance_required?).to eq true
       render
