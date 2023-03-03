@@ -24,6 +24,10 @@ module Pbs::PersonAbility
                     subject.groups.flat_map { |g| g.layer_hierarchy.collect(&:id) })
     end
 
+    def manager
+      contains_any?([user.id], person.managers.pluck(:id))
+    end
+
   end
 
 end
