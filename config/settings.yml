@@ -59,6 +59,8 @@ csv:
   utf8_bom: true # allowing M$ Excel to read UTF-8
 
 people:
+  people_managers:
+    enabled: false # disabled for now, so we can release without rolling out a partially complete feature
   abos: true
 
 messages:
