@@ -127,7 +127,7 @@ module HitobitoPbs
       Event::ListsController.include Pbs::Event::ListsController
       Event::ParticipationsController.include Pbs::Event::ParticipationsController
       Event::QualificationsController.include Pbs::Event::QualificationsController
-      Event::RolesController.include Pbs::Event::RolesController
+      Event::RolesController.prepend Pbs::Event::RolesController
       QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController
