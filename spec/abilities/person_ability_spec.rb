@@ -52,4 +52,22 @@ describe PersonAbility do
       is_expected.to be_able_to(action, crisis_creator)
     end
   end
+
+  it 'may show member if manager' do
+    member.people_managers.create!(manager: crisis_creator)
+    expect(crisis_creator.crises.active).to be_none
+
+    read_actions = [
+      :show,
+      :show_details,
+      :show_full,
+      :history,
+      :index_tags,
+      :index_notes
+    ]
+
+    read_actions.each do |action|
+      is_expected.to be_able_to(action, member)
+    end
+  end
 end
