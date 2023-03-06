@@ -28,7 +28,10 @@ describe Event::RolesController do
                  event_id: event.id,
                  event_role: {
                    type: Event::Role::Cook.sti_name,
-                   person_id: people(:al_berchtold).id
+                   person_id: people(:al_berchtold).id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
                  }
                }
         end.to change { Event::Participation.count }.by(1)
@@ -50,7 +53,10 @@ describe Event::RolesController do
                  event_id: event.id,
                  event_role: {
                    type: Event::Role::Cook.sti_name,
-                   person_id: people(:al_berchtold).id
+                   person_id: people(:al_berchtold).id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
                  }
                }
         end.to change { Event::Participation.count }.by(1)
@@ -73,7 +79,10 @@ describe Event::RolesController do
                  event_id: event.id,
                  event_role: {
                    type: Event::Camp::Role::LeaderSnowSecurity.sti_name,
-                   person_id: people(:al_berchtold).id
+                   person_id: people(:al_berchtold).id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
                  }
                }
         end.to change { Event::Participation.count }.by(1)
@@ -96,7 +105,10 @@ describe Event::RolesController do
                  event_id: event.id,
                  event_role: {
                    type: Event::Camp::Role::Helper.sti_name,
-                   person_id: people(:al_berchtold).id
+                   person_id: people(:al_berchtold).id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
                  }
                }
         end.to change { Event::Participation.count }.by(1)
@@ -114,10 +126,35 @@ describe Event::RolesController do
                  event_id: event.id,
                  event_role: {
                    type: Event::Camp::Role::Participant.sti_name,
-                   person_id: people(:al_berchtold).id
+                   person_id: people(:al_berchtold).id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
                  }
                }
         end.to change { Event::Participation.count }.by(1)
+
+        role = assigns(:role)
+        expect(role).to be_persisted
+        expect(role.participation.state).to eq 'assigned'
+      end
+
+      it 'creates assistant leader role for existing participant' do
+        person = event.participations.first.person
+        expect do
+          post :create,
+               params: {
+                 group_id: group.id,
+                 event_id: event.id,
+                 event_role: {
+                   type: Event::Camp::Role::AssistantLeader.sti_name,
+                   person_id: person.id,
+                   participation_attributes: {
+                     j_s_data_sharing_accepted: [ '0', '1' ]
+                   }
+                 }
+               }
+        end.to change { Event::Role.count }.by(1)
 
         role = assigns(:role)
         expect(role).to be_persisted
