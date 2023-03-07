@@ -17,17 +17,9 @@ module Pbs::Event::ParticipantAssigner
   private
 
   def set_active_with_camp(active)
-    default_state = participation.event.send(:default_participation_state, participation)
+    active_state = participation.event.send(:default_participation_state, participation, true)
 
-    active_state_from_youth_wagon = 'assigned'
-    active_state = if participation.state == active_state_from_youth_wagon
-                     active_state_from_youth_wagon
-                   else
-                     default_state
-                   end
-    inactive_state = 'applied'
-
-    participation.update!(active: active, state: active ? active_state : inactive_state)
+    participation.update!(active: active, state: active ? active_state : 'applied')
   end
 
   def remove_from_waiting_list_with_setter
