@@ -220,7 +220,7 @@ module EventsPbsHelper
       html_options[:disabled] = 'disabled'
       html_options[:title] = t('event/camp.checkpoint_field_caption')
     end
-    f.boolean_field(attr, html_options)
+    f.boolean_field(attr, html_options) + f.render_help_text(attr)
   end
 
   def campy_al_caption(entry, short_version = false)
