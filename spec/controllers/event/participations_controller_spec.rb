@@ -94,6 +94,21 @@ describe Event::ParticipationsController do
       expect(participation.state).to eq('applied_electronically')
     end
 
+    it 'always requires approval for pbs courses' do
+      course.update!(requires_approval: false, state: 'application_open', priorization: false)
+
+      post :create,
+        params: {
+          group_id: group.id,
+          event_id: course.id,
+          event_role: { type: Event::Course::Role::Participant.to_s }
+        }
+
+      participation = course.participations.first
+      expect(participation.state).to eq('applied')
+      expect(participation).not_to be_active
+    end
+
   end
 
   context 'POST cancel' do
