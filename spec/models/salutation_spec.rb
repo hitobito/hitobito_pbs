@@ -56,9 +56,19 @@ describe Salutation do
       it { expect(subject).to eq('Hallo Bundes') }
     end
 
+    context 'hallo pfadiname' do
+      before { person.salutation = 'hallo_pfadiname' }
+      it { expect(subject).to eq('Hallo Scout') }
+    end
+
     context 'lieber pfadiname' do
       before { person.salutation = 'lieber_pfadiname' }
       it { expect(subject).to eq('Lieber Scout') }
+    end
+
+    context 'hallo vorname' do
+      before { person.salutation = 'hallo_vorname' }
+      it { expect(subject).to eq('Hallo Bundes') }
     end
 
     context 'lieber vorname' do
