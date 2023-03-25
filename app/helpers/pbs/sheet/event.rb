@@ -16,7 +16,7 @@ module Pbs::Sheet::Event
                      if: (lambda do |view, _group, event|
                        event.course_kind? && view.can?(:index_approvals, event)
                      end)),
-      Sheet::Tab.new('events.tabs.attendances',
+      Sheet::Tab.new(:attendances_tab_label,
                      :attendances_group_event_path,
                      if: (lambda do |view, _group, event|
                        event.course_kind? && view.can?(:manage_attendances, event)
