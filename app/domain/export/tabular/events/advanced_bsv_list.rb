@@ -31,8 +31,8 @@ module Export::Tabular::Events
     def add_counts(labels)
       labels[:training_days] = 'Ausbildungstage'
       labels[:bsv_days] = 'BSV Tage'
-      labels[:bsv_eligible_participations_count] = 'Berechtigte Teilnehmende (17-30)'
-      labels[:bsv_eligible_attendance_summary] = 'Berechtigte Teilnehmende (17-30) x Tage'
+      labels[:bsv_eligible_participations_count] = 'Berechtigte Teilnehmende (bis 30)'
+      labels[:bsv_eligible_attendance_summary] = 'Berechtigte Teilnehmende (bis 30) x Tage'
       labels[:bsv_eligible_attendances] = 'Berechtigte Tage'
       labels[:leader_count] = 'Kursleitende'
       labels[:all_participants_count] = 'Teilnehmende Total (inkl. Kursleitende)'
