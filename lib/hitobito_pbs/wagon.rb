@@ -65,7 +65,7 @@ module HitobitoPbs
       Export::Tabular::People::PeopleFull.include Pbs::Export::Tabular::People::PeopleFull
       Export::Tabular::Events::BsvRow.include Pbs::Export::Tabular::Events::BsvRow
       Export::PeopleExportJob.include Pbs::Export::PeopleExportJob
-      Export::EventParticipationsExportJob.include Pbs::Export::EventParticipationsExportJob
+      Export::EventParticipationsExportJob.prepend Pbs::Export::EventParticipationsExportJob
       Export::SubscriptionsJob.include Pbs::Export::SubscriptionsJob
 
       Person::AddRequest::Approver::Event.prepend(
