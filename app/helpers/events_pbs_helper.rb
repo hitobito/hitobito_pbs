@@ -240,11 +240,11 @@ module EventsPbsHelper # rubocop:disable Metrics/ModuleLength
 
   def attendances_tab_label(event)
     label = t('events.tabs.attendances')
-    label << ' <span style="color: red;">!</span>' if check_unsaved_bsv_days(event)
+    label << ' <span style="color: red;">!</span>' if unsaved_bsv_days?(event)
     label.html_safe
   end
 
-  def check_unsaved_bsv_days(event)
+  def unsaved_bsv_days?(event)
     participations = event.decorate.participations_for_attendence.values.flatten
 
     participations.any? { |p| p.bsv_days.nil? } && %w[completed closed].include?(event.state)
