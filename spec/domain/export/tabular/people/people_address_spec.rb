@@ -13,8 +13,8 @@ describe Export::Tabular::People::PeopleAddress do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
     %w(Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
-       Geschlecht Geburtstag Hauptebene Rollen Tags Titel Anrede Korrespondenzsprache
-       Digitale\ Korrespondenz\ bevorzugt Kantonalverband Id) << 'Id der Hauptebene'
+       Hauptebene Rollen Tags Titel Anrede Korrespondenzsprache Digitale\ Korrespondenz\ bevorzugt
+       Kantonalverband Id) << 'Id der Hauptebene'
   end
   let(:list) { Person.where(id: person) }
   let(:data) { Export::Tabular::People::PeopleAddress.csv(list).delete_prefix(Export::Csv::UTF8_BOM) }
@@ -32,7 +32,6 @@ describe Export::Tabular::People::PeopleAddress do
       its(['Nachname']) { should eq person.last_name }
       its(['Haupt-E-Mail']) { should eq person.email }
       its(['Ort']) { should eq person.town }
-      its(['Geschlecht']) { should eq person.gender_label }
       its(['Rollen']) { should eq 'Mitarbeiter*in GS Pfadibewegung Schweiz' }
       its(['Titel']) { should eq 'Dr.' }
       its(['Anrede']) { should eq 'Sehr geehrter Herr Dr. Leiter' }
