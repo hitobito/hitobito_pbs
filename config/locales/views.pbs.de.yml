@@ -408,3 +408,8 @@ de:
 
   global:
     title_event/camp: Lager
+
+  dropdown/people_export:
+    nds_course: NDS-Kurs (nur TN)
+    nds_camp: NDS-Lager (nur TN)
+    slrg: SLRG-Kurs (nur TN)

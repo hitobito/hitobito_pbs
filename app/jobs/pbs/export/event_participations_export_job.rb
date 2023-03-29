@@ -6,17 +6,32 @@
 #  https://github.com/hitobito/hitobito.
 
 module Pbs::Export::EventParticipationsExportJob
-  extend ActiveSupport::Concern
 
-  included do
-    alias_method_chain :exporter, :detail
-  end
-
-  def exporter_with_detail
+  def exporter
     if @options[:household_details]
       return Pbs::Export::Tabular::People::ParticipationsHouseholdsFull
     end
-    exporter_without_detail
+    super
+  end
+
+  def entries
+    filtered = super
+    if @options[:nds_course] && ability.can?(:show_details, filtered.first)
+      unfiltered_participants
+    elsif @options[:nds_camp] && ability.can?(:show_details, filtered.first)
+      unfiltered_participants
+    elsif @options[:slrg] && ability.can?(:show_details, filtered.first)
+      unfiltered_participants
+    else
+      super
+    end
+  end
+
+  def unfiltered_participants
+    @filter.event.participants_scope.
+      includes(::Event::ParticipationFilter.load_entries_includes).
+      references(:people).
+      distinct
   end
 
 end
