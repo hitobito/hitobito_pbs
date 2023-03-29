@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 # update these contents from hitobito-core, always, to supersede (haha) the seeds from hitobito-core
-CustomContent.seed(:key,
+CustomContent.seed_once(:key,
   { key: Person::LoginMailer::CONTENT_LOGIN,
     placeholders_required: 'login-url',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name, sender-name'},
