@@ -141,8 +141,9 @@ class Group::Abteilung < Group
   end
 
   class Adressverwaltung < ::Role
-    self.permissions = [:group_and_below_full]
+    self.permissions = [:layer_full]
   end
+
   class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
