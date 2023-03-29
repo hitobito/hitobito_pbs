@@ -166,7 +166,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Abteilungsleiter Stv: [:layer_and_below_full, :contact_data, :approve_applications]
         * Sekretariat: [:layer_and_below_full, :contact_data]
         * Adressverwalter: [:layer_full]
-	* PowerUser: [:layer_full]
+	      * PowerUser: [:layer_full]
         * Präsident: [:group_read, :contact_data]
         * Vize Präsident: [:group_read, :contact_data]
         * Präsident APV: [:group_read]
