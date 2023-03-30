@@ -64,9 +64,9 @@ describe Export::Tabular::Events::BsvRow do
       expect(row.fetch(:all_participants_count)).to eq(8)
       expect(row.fetch(:all_participants_attendance_summary)).to eq('7x0, 2x7')
       expect(row.fetch(:all_participants_attendances)).to eq(14)
-      expect(row.fetch(:bsv_eligible_attendance_summary)).to eq('1x7')
-      expect(row.fetch(:bsv_eligible_participations_count)).to eq(1)
-      expect(row.fetch(:bsv_eligible_attendances)).to eq(7)
+      expect(row.fetch(:bsv_eligible_attendance_summary)).to eq('2x7')
+      expect(row.fetch(:bsv_eligible_participations_count)).to eq(2)
+      expect(row.fetch(:bsv_eligible_attendances)).to eq(14)
     end
   end
 
