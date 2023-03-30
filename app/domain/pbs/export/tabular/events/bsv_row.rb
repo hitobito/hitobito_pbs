@@ -93,7 +93,7 @@ module Pbs::Export::Tabular::Events
       @bsv_eligible_participations ||= active_participations.select do |participation|
                                          person = participation.person
                                          person.birthday? &&
-                                         info.send(:aged_17_to_30?, person) &&
+                                         info.send(:aged_under_30?, person) &&
                                          info.send(:ch_resident?, person)
                                        end
     end
