@@ -26,4 +26,13 @@ module Pbs::EventDecorator
     @qualified_participants_count ||= participations.includes(:roles).decorate
                                         .select(&:has_confirmation?).count
   end
+
+  def participations_for_attendence
+    types = role_types
+    {
+      leaders: participations_for(*types.select(&:leader?), Event::Role::Speaker).includes(:roles),
+      participants: participations_for(Event::Course::Role::Participant).includes(:roles),
+      cooks: participations_for(Event::Role::Cook).includes(:roles)
+    }
+  end
 end

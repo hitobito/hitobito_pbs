@@ -6,7 +6,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 
-module EventsPbsHelper
+module EventsPbsHelper # rubocop:disable Metrics/ModuleLength
 
   def format_course_languages(entry)
     Event::Course::LANGUAGES.map do |key|
@@ -236,6 +236,18 @@ module EventsPbsHelper
     return '' unless entry.super_camp && entry.super_camp.state == 'created'
     link_to(I18n.t('global.associations.remove'), 'javascript:void(0)',
             'data-remove-supercamp' => '')
+  end
+
+  def attendances_tab_label(event)
+    label = t('events.tabs.attendances')
+    label << ' <span style="color: red;">!</span>' if unsaved_bsv_days?(event)
+    label.html_safe
+  end
+
+  def unsaved_bsv_days?(event)
+    participations = event.decorate.participations_for_attendence.values.flatten
+
+    participations.any? { |p| p.bsv_days.nil? } && %w[completed closed].include?(event.state)
   end
 
 end

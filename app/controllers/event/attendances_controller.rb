@@ -33,10 +33,10 @@ class Event::AttendancesController < ApplicationController
   private
 
   def load_entries
-    types = event.role_types
-    @leaders = participations(*types.select(&:leader?), Event::Role::Speaker)
-    @participants = participations(Event::Course::Role::Participant)
-    @cooks = participations(Event::Role::Cook)
+    participations = event.decorate.participations_for_attendence
+    @leaders = participations[:leaders]
+    @participants = participations[:participants]
+    @cooks = participations[:cooks]
   end
 
   def event
@@ -47,13 +47,8 @@ class Event::AttendancesController < ApplicationController
     @group ||= Group.find(params[:group_id])
   end
 
-  def participations(*role_types)
-    event.participations_for(*role_types).includes(:roles)
-  end
-
   def authorize
     not_found unless event.course_kind?
     authorize!(:manage_attendances, event)
   end
-
 end
