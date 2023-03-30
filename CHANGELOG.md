@@ -1,5 +1,10 @@
 # Hitobito PBS Changelog
 
+## unreleased
+
+*   Das Anwesenheiten-Tab bei Kursen im Status "Qualifikationen erfasst" und "Abgeschlossen" wird neu mit einem Ausrufezeichen markiert, wenn die Anwesenheiten noch gespeichert werden müssen. Merci @ewangler! (hitobito/hitobito_pbs#262)
+*   Adressverwalter\*innen auf der Abteilungsebene können neu auch für Zugriffsanfragen ausgewählt werden. Merci @philobr! (hitobito/hitobito_pbs#261)
+
 ## Version 1.28
 
 *   Bei J+S Kursen/Lager müssen Teilnehmer bei Anmeldung der Datenweitergabe zustimmen (hitobito_pbs#1956)
