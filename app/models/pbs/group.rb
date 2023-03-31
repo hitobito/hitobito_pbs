@@ -74,4 +74,10 @@ module Pbs::Group
   def census?
     respond_to?(:census_total)
   end
+
+  def require_person_add_requests
+    true
+  end
+
+  alias_method :require_person_add_requests?, :require_person_add_requests
 end
