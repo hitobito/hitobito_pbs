@@ -80,6 +80,7 @@ class Group::Region < Group
 
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
+    self.two_factor_authentication_enforced = true
   end
 
   class Beisitz < ::Role
@@ -88,6 +89,7 @@ class Group::Region < Group
 
   class Coach < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Ehrenmitglied < ::Role
@@ -101,18 +103,22 @@ class Group::Region < Group
 
   class Kassier < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Rechnungen < ::Role
     self.permissions = [:layer_and_below_read, :finance, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Leitungskursbetreuung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mediensprecher < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mitarbeiter < ::Role
@@ -121,6 +127,7 @@ class Group::Region < Group
 
   class MitgliedKrisenteam < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Passivmitglied < ::Role
@@ -149,10 +156,12 @@ class Group::Region < Group
 
   class Redaktor < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Regionalleitung < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class Revisor < ::Role
@@ -161,6 +170,7 @@ class Group::Region < Group
 
   class Sekretariat < ::Role
     self.permissions = [:layer_and_below_full, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Spezialfunktion < ::Role
@@ -177,10 +187,12 @@ class Group::Region < Group
 
   class VerantwortungAusbildung < ::Role
     self.permissions = [:layer_full, :layer_and_below_read, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungBetreuung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungBiberstufe < ::Role
@@ -201,10 +213,12 @@ class Group::Region < Group
 
   class VerantwortungKrisenteam < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungLagermeldung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungLagerplaetze < ::Role
