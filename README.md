@@ -4,6 +4,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 
 # Pfadi Organization Hierarchy
 
+<!-- roles:start -->
     * Bund
       * Bund
         * Mitarbeiter*in GS: 2FA [:layer_and_below_full, :contact_data, :admin]
@@ -257,3 +258,4 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Mitglied: [:group_read]
 
 (Output of rake app:hitobito:roles)
+<!-- roles:end -->
