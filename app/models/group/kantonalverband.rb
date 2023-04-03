@@ -94,6 +94,7 @@ class Group::Kantonalverband < Group
 
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
+    self.two_factor_authentication_enforced = true
   end
   class PowerUser < Adressverwaltung; end
 
@@ -103,6 +104,7 @@ class Group::Kantonalverband < Group
 
   class Coach < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Ehrenmitglied < ::Role
@@ -112,22 +114,27 @@ class Group::Kantonalverband < Group
 
   class Kantonsleitung < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class Kassier < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Rechnungen < ::Role
     self.permissions = [:layer_and_below_read, :finance, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Leitungskursbetreuung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mediensprecher < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mitarbeiter < ::Role
@@ -136,6 +143,7 @@ class Group::Kantonalverband < Group
 
   class MitgliedKrisenteam < ::Role
     self.permissions = [:layer_and_below_read, :contact_data, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class Krisenverantworlicher < ::Role
@@ -161,6 +169,7 @@ class Group::Kantonalverband < Group
 
   class Redaktor < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Revisor < ::Role
@@ -169,6 +178,7 @@ class Group::Kantonalverband < Group
 
   class Sekretariat < ::Role
     self.permissions = [:layer_and_below_full, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Spezialfunktion < ::Role
@@ -189,10 +199,12 @@ class Group::Kantonalverband < Group
 
   class VerantwortungAusbildung < ::Role
     self.permissions = [:layer_full, :layer_and_below_read, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungBetreuung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungBiberstufe < ::Role
@@ -217,10 +229,12 @@ class Group::Kantonalverband < Group
 
   class VerantwortungKrisenteam < ::Role
     self.permissions = [:layer_and_below_read, :contact_data, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungLagermeldung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungLagerplaetze < ::Role

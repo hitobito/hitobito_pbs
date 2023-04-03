@@ -73,6 +73,7 @@ class Group::Bund < Group
 
   class Adressverwaltung < ::Role
     self.permissions = [:layer_and_below_full]
+    self.two_factor_authentication_enforced = true
   end
   class PowerUser < Adressverwaltung; end
 
@@ -86,6 +87,7 @@ class Group::Bund < Group
 
   class Coach < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Ehrenmitglied < ::Role
@@ -95,10 +97,12 @@ class Group::Bund < Group
 
   class Geschaeftsleitung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class GrossanlassCoach < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class InternationalCommissionerIcWagggs < ::Role
@@ -111,6 +115,7 @@ class Group::Bund < Group
 
   class Kassier < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Kontaktperson < ::Role
@@ -140,6 +145,7 @@ class Group::Bund < Group
 
   class Mediensprecher < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mitarbeiter < ::Role
@@ -148,14 +154,17 @@ class Group::Bund < Group
 
   class MitarbeiterGs < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :admin]
+    self.two_factor_authentication_enforced = true
   end
 
   class ItSupport < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :admin, :impersonation]
+    self.two_factor_authentication_enforced = true
   end
 
   class MitgliedKrisenteam < ::Role
     self.permissions = [:layer_and_below_read, :contact_data, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class Passivmitglied < ::Role
@@ -177,6 +186,7 @@ class Group::Bund < Group
 
   class Redaktor < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Revisor < ::Role
@@ -185,10 +195,12 @@ class Group::Bund < Group
 
   class Sekretariat < ::Role
     self.permissions = [:layer_and_below_full, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Rechnungen < ::Role
     self.permissions = [:layer_and_below_read, :finance, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Spezialfunktion < ::Role
