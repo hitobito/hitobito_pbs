@@ -9,9 +9,16 @@ module Pbs::Event::ParticipantAssigner
 
   extend ActiveSupport::Concern
 
+  module Prepends
+    # noop - disable core's confirmation since pbs wagon has customized participation notifications
+    def send_confirmation; end
+  end
+
   included do
     alias_method_chain :remove_from_waiting_list, :setter
     alias_method_chain :set_active, :camp
+
+    prepend Prepends
   end
 
   private

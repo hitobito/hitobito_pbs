@@ -15,8 +15,6 @@ module Pbs::Event::Participation
     validate :assert_bsv_days_set
     after_create :send_black_list_mail, if: :person_blacklisted?
 
-    alias_method_chain :send_confirmation, :pbs
-
     delegate :j_s_data_sharing_acceptance_required?, to: :event
   end
 
@@ -59,8 +57,4 @@ module Pbs::Event::Participation
   def person_blacklisted?
     person.black_listed?
   end
-
-  # disable core's confirmation since
-  # pbs wagon has customized participation notifications
-  def send_confirmation_with_pbs; end
 end
