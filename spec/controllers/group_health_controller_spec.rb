@@ -114,21 +114,25 @@ describe GroupHealthController do
         context 'for abteilung' do
           it 'exports census evaluations of current census year' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['abteilungen'].size).to eq(3)
-            abteilung_evaluation = json['census_evaluations']['abteilungen'].find { |a| a['abteilung_id'] == groups(:schekka).id }
+            abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
+            expect(abteilung_evaluations.size).to eq(3)
+            abteilung_evaluation = abteilung_evaluations.find { |a| a['abteilung_id'] == groups(:schekka).id }
             expect(abteilung_evaluation).to be_present
             expect(abteilung_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(abteilung_evaluation['region_id']).to eq(groups(:bern).id)
             expect(abteilung_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(abteilung_evaluation.keys.size).to eq(6)
+            expect(abteilung_evaluation.keys.size).to eq(10)
             expect(abteilung_evaluation['f'].size).to eq(7)
             expect(abteilung_evaluation['m'].size).to eq(7)
             expect(abteilung_evaluation['f']['leiter']).to eq(2)
             expect(abteilung_evaluation['m']['leiter']).to eq(3)
             expect(abteilung_evaluation['f']['pfadis']).to eq(4)
             expect(abteilung_evaluation['m']['pfadis']).to eq(3)
+            expect(abteilung_evaluation['group_type']).to eq(Group::Abteilung.sti_name)
+            expect(abteilung_evaluation['group_id']).to eq(groups(:schekka).id)
+            expect(abteilung_evaluation['group_name']).to eq(groups(:schekka).name)
+            expect(abteilung_evaluation['parent_id']).to eq(groups(:schekka).parent_id)
 
             expect(abteilung_evaluation['total']['total']).to eq(12)
             expect(abteilung_evaluation['total']['f']).to eq(6)
@@ -137,28 +141,32 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['abteilungen']).to be_empty
+            abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
+            expect(abteilung_evaluations).to be_empty
           end
         end
 
         context 'for Kantonalverband' do
           it 'exports census evaluations' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['kantonalverbaende'].size).to eq(2)
-            kantonalverband_evaluation = json['census_evaluations']['kantonalverbaende'].find { |a| a['kantonalverband_id'] == groups(:be).id }
+            kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
+            expect(kantonalverband_evaluations.size).to eq(2)
+            kantonalverband_evaluation = kantonalverband_evaluations.find { |a| a['kantonalverband_id'] == groups(:be).id }
             expect(kantonalverband_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(kantonalverband_evaluation['region_id']).to eq(groups(:bern).id)
             expect(kantonalverband_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(kantonalverband_evaluation.keys.size).to eq(6)
+            expect(kantonalverband_evaluation.keys.size).to eq(10)
             expect(kantonalverband_evaluation['f'].size).to eq(7)
             expect(kantonalverband_evaluation['m'].size).to eq(7)
             expect(kantonalverband_evaluation['f']['leiter']).to eq(3)
             expect(kantonalverband_evaluation['m']['leiter']).to eq(5)
             expect(kantonalverband_evaluation['f']['pfadis']).to eq(5)
             expect(kantonalverband_evaluation['m']['pfadis']).to eq(6)
+            expect(kantonalverband_evaluation['group_type']).to eq(Group::Kantonalverband.sti_name)
+            expect(kantonalverband_evaluation['group_id']).to eq(groups(:be).id)
+            expect(kantonalverband_evaluation['group_name']).to eq(groups(:be).name)
+            expect(kantonalverband_evaluation['parent_id']).to eq(groups(:be).parent_id)
 
             expect(kantonalverband_evaluation['total']['total']).to eq(19)
             expect(kantonalverband_evaluation['total']['f']).to eq(8)
@@ -167,28 +175,32 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['kantonalverbaende']).to be_empty
+            kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
+            expect(kantonalverband_evaluations).to be_empty
           end
         end
 
         context 'for region' do
           it 'exports census evaluations' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['regionen'].size).to eq(2)
-            region_evaluation = json['census_evaluations']['regionen'].find { |a| a['region_id'] == groups(:bern).id }
+            region_evaluations = evaluations_by_group_type(Group::Region)
+            expect(region_evaluations.size).to eq(2)
+            region_evaluation = region_evaluations.find { |a| a['region_id'] == groups(:bern).id }
             expect(region_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(region_evaluation['region_id']).to eq(groups(:bern).id)
             expect(region_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(region_evaluation.keys.size).to eq(6)
+            expect(region_evaluation.keys.size).to eq(10)
             expect(region_evaluation['f'].size).to eq(7)
             expect(region_evaluation['m'].size).to eq(7)
             expect(region_evaluation['f']['leiter']).to eq(2)
             expect(region_evaluation['m']['leiter']).to eq(3)
             expect(region_evaluation['f']['pfadis']).to eq(4)
             expect(region_evaluation['m']['pfadis']).to eq(3)
+            expect(region_evaluation['group_type']).to eq(Group::Region.sti_name)
+            expect(region_evaluation['group_id']).to eq(groups(:bern).id)
+            expect(region_evaluation['group_name']).to eq(groups(:bern).name)
+            expect(region_evaluation['parent_id']).to eq(groups(:bern).parent_id)
 
             expect(region_evaluation['total']['total']).to eq(12)
             expect(region_evaluation['total']['f']).to eq(6)
@@ -197,8 +209,8 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['regionen']).to be_empty
+            region_evaluations = evaluations_by_group_type(Group::Region)
+            expect(region_evaluations).to be_empty
           end
         end
       end
@@ -252,21 +264,25 @@ describe GroupHealthController do
 
           it 'exports census evaluations of current census year' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['abteilungen'].size).to eq(3)
-            abteilung_evaluation = json['census_evaluations']['abteilungen'].find { |a| a['abteilung_id'] == groups(:schekka).id }
+            abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
+            expect(abteilung_evaluations.size).to eq(3)
+            abteilung_evaluation = abteilung_evaluations.find { |a| a['abteilung_id'] == groups(:schekka).id }
             expect(abteilung_evaluation).to be_present
             expect(abteilung_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(abteilung_evaluation['region_id']).to eq(groups(:bern).id)
             expect(abteilung_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(abteilung_evaluation.keys.size).to eq(6)
+            expect(abteilung_evaluation.keys.size).to eq(10)
             expect(abteilung_evaluation['f'].size).to eq(7)
             expect(abteilung_evaluation['m'].size).to eq(7)
             expect(abteilung_evaluation['f']['leiter']).to eq(2)
             expect(abteilung_evaluation['m']['leiter']).to eq(3)
             expect(abteilung_evaluation['f']['pfadis']).to eq(4)
             expect(abteilung_evaluation['m']['pfadis']).to eq(3)
+            expect(abteilung_evaluation['group_type']).to eq(Group::Abteilung.sti_name)
+            expect(abteilung_evaluation['group_id']).to eq(groups(:schekka).id)
+            expect(abteilung_evaluation['group_name']).to eq(groups(:schekka).name)
+            expect(abteilung_evaluation['parent_id']).to eq(groups(:schekka).parent_id)
 
             expect(abteilung_evaluation['total']['total']).to eq(12)
             expect(abteilung_evaluation['total']['f']).to eq(6)
@@ -275,8 +291,8 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['abteilungen']).to be_empty
+            abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
+            expect(abteilung_evaluations).to be_empty
           end
         end
 
@@ -328,20 +344,24 @@ describe GroupHealthController do
 
           it 'exports census evaluations' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['kantonalverbaende'].size).to eq(2)
-            kantonalverband_evaluation = json['census_evaluations']['kantonalverbaende'].find { |a| a['kantonalverband_id'] == groups(:be).id }
+            kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
+            expect(kantonalverband_evaluations.size).to eq(2)
+            kantonalverband_evaluation = kantonalverband_evaluations.find { |a| a['kantonalverband_id'] == groups(:be).id }
             expect(kantonalverband_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(kantonalverband_evaluation['region_id']).to eq(groups(:bern).id)
             expect(kantonalverband_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(kantonalverband_evaluation.keys.size).to eq(6)
+            expect(kantonalverband_evaluation.keys.size).to eq(10)
             expect(kantonalverband_evaluation['f'].size).to eq(7)
             expect(kantonalverband_evaluation['m'].size).to eq(7)
             expect(kantonalverband_evaluation['f']['leiter']).to eq(3)
             expect(kantonalverband_evaluation['m']['leiter']).to eq(5)
             expect(kantonalverband_evaluation['f']['pfadis']).to eq(5)
             expect(kantonalverband_evaluation['m']['pfadis']).to eq(6)
+            expect(kantonalverband_evaluation['group_type']).to eq(Group::Kantonalverband.sti_name)
+            expect(kantonalverband_evaluation['group_id']).to eq(groups(:be).id)
+            expect(kantonalverband_evaluation['group_name']).to eq(groups(:be).name)
+            expect(kantonalverband_evaluation['parent_id']).to eq(groups(:be).parent_id)
 
             expect(kantonalverband_evaluation['total']['total']).to eq(19)
             expect(kantonalverband_evaluation['total']['f']).to eq(8)
@@ -350,8 +370,8 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['kantonalverbaende']).to be_empty
+            kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
+            expect(kantonalverband_evaluations).to be_empty
           end
         end
 
@@ -392,20 +412,24 @@ describe GroupHealthController do
 
           it 'exports census evaluations' do
             get :census_evaluations, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['regionen'].size).to eq(2)
-            region_evaluation = json['census_evaluations']['regionen'].find { |a| a['region_id'] == groups(:bern).id }
+            region_evaluations = evaluations_by_group_type(Group::Region)
+            expect(region_evaluations.size).to eq(2)
+            region_evaluation = region_evaluations.find { |a| a['region_id'] == groups(:bern).id }
             expect(region_evaluation['kantonalverband_id']).to eq(groups(:be).id)
             expect(region_evaluation['region_id']).to eq(groups(:bern).id)
             expect(region_evaluation['abteilung_id']).to eq(groups(:schekka).id)
 
-            expect(region_evaluation.keys.size).to eq(6)
+            expect(region_evaluation.keys.size).to eq(10)
             expect(region_evaluation['f'].size).to eq(7)
             expect(region_evaluation['m'].size).to eq(7)
             expect(region_evaluation['f']['leiter']).to eq(2)
             expect(region_evaluation['m']['leiter']).to eq(3)
             expect(region_evaluation['f']['pfadis']).to eq(4)
             expect(region_evaluation['m']['pfadis']).to eq(3)
+            expect(region_evaluation['group_type']).to eq(Group::Region.sti_name)
+            expect(region_evaluation['group_id']).to eq(groups(:bern).id)
+            expect(region_evaluation['group_name']).to eq(groups(:bern).name)
+            expect(region_evaluation['parent_id']).to eq(groups(:bern).parent_id)
 
             expect(region_evaluation['total']['total']).to eq(12)
             expect(region_evaluation['total']['f']).to eq(6)
@@ -414,11 +438,16 @@ describe GroupHealthController do
 
           it 'exports census evaluations of given year' do
             get :census_evaluations, params: { year: '2013' }, format: :json
-            json = JSON.parse(response.body)
-            expect(json['census_evaluations']['regionen']).to be_empty
+            region_evaluations = evaluations_by_group_type(Group::Region)
+            expect(region_evaluations).to be_empty
           end
         end
       end
     end
+  end
+
+  def evaluations_by_group_type(type)
+    json = JSON.parse(response.body)
+    json['census_evaluations']['groups'].select { |g| g['group_type'] == type.sti_name }
   end
 end

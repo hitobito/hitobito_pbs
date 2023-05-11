@@ -9,6 +9,7 @@
 class GroupHealthController < ApplicationController
 
   EVENT_TYPES = [Event, Event::Course, Event::Camp].freeze
+  CENSUS_EVALUTATIONS_GROUP_TYPES = [Group::Abteilung, Group::Kantonalverband, Group::Region].freeze
   J_S_KINDS = %w(j_s_kind_none j_s_kind_j_s_child j_s_kind_j_s_youth j_s_kind_j_s_mixed).freeze
   CAMP_STATES = %w(created confirmed assignment_closed canceled closed).freeze
   PERSON_FIELDS = %i(id pbs_number first_name last_name nickname address town zip_code country
@@ -42,7 +43,7 @@ class GroupHealthController < ApplicationController
   INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium]
   EXCLUDE_INTERNES_GREMIUM = "#{Group.quoted_table_name}.type NOT IN" \
     "(#{INTERNES_GREMIUM_GROUP_TYPES.map { |type| "'#{type.to_s}'" }.join(', ')})".freeze
-  
+
   DEFAULT_PAGE_SIZE = 20.freeze
 
   before_action(except: [:census_evaluations]) do
@@ -176,19 +177,14 @@ class GroupHealthController < ApplicationController
     authorize! :census_evaluations, GroupHealthController
 
     year = params[:year] || Census.current.year || Time.zone.today.year
-    abteilungen = Group::Abteilung.all
-                                  .map { |g| census_data(g.census_total(year)) }
-                                  .compact
-    regionen = Group::Region.all
-                            .map { |g| census_data(g.census_total(year)) }
-                            .compact
-    kantonalverbaende = Group::Kantonalverband.all
-                                              .map { |g| census_data(g.census_total(year)) }
-                                              .compact
+
+
+    data = Group.where(type: CENSUS_EVALUTATIONS_GROUP_TYPES.map(&:sti_name))
+                .map { |g| census_data(g.census_total(year), g) }
+                .compact
+
     respond({
-      abteilungen: abteilungen,
-      regionen: regionen,
-      kantonalverbaende: kantonalverbaende
+      groups: data
     })
   end
 
@@ -203,16 +199,20 @@ class GroupHealthController < ApplicationController
         .merge(name: computed_name(person))
   end
 
-  def census_data(total)
+  def census_data(total, group)
     return unless total
 
     data = {
       kantonalverband_id: total.kantonalverband_id,
       region_id: total.region_id,
       abteilung_id: total.abteilung_id,
+      group_id: group.id,
+      group_name: group.name,
+      group_type: group.type,
+      parent_id: group.parent_id,
       total: { total: total.total, f: total.f, m: total.m }
     }
-    
+
     [:f, :m].each_with_object(data) do |gender, data|
       data[gender] = MemberCount::COUNT_CATEGORIES.each_with_object({}) do |category, d|
         d[category] = total.send("#{category}_#{gender}")
