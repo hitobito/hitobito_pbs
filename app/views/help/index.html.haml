@@ -33,14 +33,3 @@
           %strong= link_to t(".guides.#{help_key}.title"), t(".guides.#{help_key}.url"), target: '_blank'
         %td
           = t(".guides.#{help_key}.description")
-
-%h2= t('.groups_and_roles_that_see_me.title')
-
-%table.table.table-striped
-  %tbody
-    - @groups_and_roles_that_see_me.each do |id, group|
-      %tr
-        %td
-          %strong= link_to group[:name], group_path(id)
-        %td
-          %p= group[:roles].join(", ")
