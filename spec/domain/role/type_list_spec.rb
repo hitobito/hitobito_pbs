@@ -21,6 +21,7 @@ describe Role::TypeList do
       ['Region', ['Region', 'Rover', 'Gremium', 'Internes Gremium', 'Kommission']],
       ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio',
                      'Rover', 'PTA', 'Elternrat', 'Gremium', 'Internes Gremium']],
+      ['Global', ['Ehemalige']]
     ])
   end
 

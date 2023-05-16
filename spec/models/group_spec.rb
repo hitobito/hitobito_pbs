@@ -76,6 +76,7 @@ describe Group do
          Group::KantonalesGremium,
          Group::InternesKantonalesGremium,
          Group::KantonaleKommission,
+         Group::Ehemalige,
          Group::Ausbildungskommission,
          Group::BundesGremium,
          Group::BundesKommission].collect(&:name))
