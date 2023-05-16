@@ -52,7 +52,8 @@ class Group::Kantonalverband < Group
            Group::Abteilung,
            Group::KantonalesGremium,
            Group::InternesKantonalesGremium,
-           Group::KantonaleKommission
+           Group::KantonaleKommission,
+           Group::Ehemalige
 
 
   has_many :member_counts
