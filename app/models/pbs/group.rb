@@ -52,7 +52,7 @@ module Pbs::Group
     validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
     has_many :crises
 
-    root_types Group::Bund
+    root_types Group::Root
   end
 
   def active_crisis_acknowledgeable?(person)
