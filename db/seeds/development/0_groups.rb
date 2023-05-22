@@ -9,7 +9,7 @@ require Rails.root.join('db', 'seeds', 'support', 'group_seeder')
 
 seeder = GroupSeeder.new
 
-ch = Group.roots.first
+ch = Group::Bund.first
 srand(42)
 
 unless ch.address.present?
