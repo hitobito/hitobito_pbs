@@ -133,7 +133,7 @@ module Pbs::Person
 
   def kantonalverband_for(group)
     group.hierarchy.select(:id).find_by(type: ::Group::Kantonalverband.sti_name) ||
-    Group.select(:id).root
+      Group::Bund.select(:id).first
   end
 
   def set_pbs_number!
