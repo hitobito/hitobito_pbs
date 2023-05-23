@@ -5,6 +5,9 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 # Pfadi Organization Hierarchy
 
 <!-- roles:start -->
+    * Root
+      * Root
+        * Admin: 2FA [:layer_and_below_full]
     * Bund
       * Bund
         * Mitarbeiter*in GS: 2FA [:layer_and_below_full, :contact_data, :admin]
@@ -256,6 +259,10 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
       * Internes Gremium
         * Leitung: [:group_and_below_full]
         * Mitglied: [:group_read]
+    * Silverscouts
+      * Silverscouts
+        * Leitung: [:group_read, :contact_data]
+        * Mitglied: []
     * Global
       * Ehemalige
         * Mitglied: []
