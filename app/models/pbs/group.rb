@@ -53,6 +53,10 @@ module Pbs::Group
     has_many :crises
 
     root_types Group::Root
+
+    def self.bund
+      Group::Bund.first
+    end
   end
 
   def active_crisis_acknowledgeable?(person)

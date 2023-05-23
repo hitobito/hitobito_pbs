@@ -8,6 +8,8 @@
 class Group::Root < ::Group
   self.layer = true
 
+  self.event_types = [] # only managing structure, does not have events (as of 2023-05-23)
+
   class Admin < ::Role
     self.permissions = [:layer_and_below_full]
     self.two_factor_authentication_enforced = true

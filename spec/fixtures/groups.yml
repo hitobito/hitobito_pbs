@@ -39,11 +39,21 @@
 #  gender                      :string(1)
 #  try_out_day_at              :date
 #
-
-bund:
+root:
   parent:
   lft: 1
-  rgt: 52
+  rgt: 56
+  name: Root
+  short_name: Root
+  type: Group::Root
+  email: root@example.net
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:root) %>
+  pbs_shortname: Root
+
+bund:
+  parent: root
+  lft: 2
+  rgt: 53
   name: Pfadibewegung Schweiz
   short_name: PBS
   type: Group::Bund
@@ -57,8 +67,8 @@ bund:
 
 be:
   parent: bund
-  lft: 2
-  rgt: 41
+  lft: 3
+  rgt: 42
   name: Bern
   short_name: BE
   type: Group::Kantonalverband
@@ -72,8 +82,8 @@ be:
 
 zh:
   parent: bund
-  lft: 44
-  rgt: 51
+  lft: 45
+  rgt: 52
   name: Zürich
   short_name: ZH
   type: Group::Kantonalverband
@@ -87,8 +97,8 @@ zh:
 
 vd:
   parent: bund
-  lft: 42
-  rgt: 43
+  lft: 43
+  rgt: 44
   name: Waadt
   short_name: VD
   type: Group::Kantonalverband
@@ -102,16 +112,16 @@ vd:
 
 fg_security:
   parent: be
-  lft: 3
-  rgt: 4
+  lft: 4
+  rgt: 5
   name: FG Sicherheit
   type: Group::KantonalesGremium
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:be) %>
 
 fg_football:
   parent: be
-  lft: 5
-  rgt: 6
+  lft: 6
+  rgt: 7
   name: FG Football
   short_name:
   type: Group::KantonalesGremium
@@ -119,8 +129,8 @@ fg_football:
 
 bern:
   parent: be
-  lft: 7
-  rgt: 30
+  lft: 8
+  rgt: 31
   name: Stadt Bern
   short_name: NJ
   type: Group::Region
@@ -132,8 +142,8 @@ bern:
 
 oberland:
   parent: be
-  lft: 31
-  rgt: 40
+  lft: 32
+  rgt: 41
   name: Berner Oberland
   short_name: DN
   type: Group::Region
@@ -145,8 +155,8 @@ oberland:
 
 zuerich:
   parent: zh
-  lft: 45
-  rgt: 50
+  lft: 46
+  rgt: 51
   name: Stadt
   short_name: BJ
   type: Group::Region
@@ -158,8 +168,8 @@ zuerich:
 
 kyburg:
   parent: oberland
-  lft: 32
-  rgt: 39
+  lft: 33
+  rgt: 40
   name: Verband Kyburg Thun
   short_name: BJ
   type: Group::Region
@@ -171,8 +181,8 @@ kyburg:
 
 patria:
   parent: bern
-  lft: 8
-  rgt: 9
+  lft: 9
+  rgt: 10
   name: Patria
   short_name: SG
   type: Group::Abteilung
@@ -184,8 +194,8 @@ patria:
 
 schekka:
   parent: bern
-  lft: 10
-  rgt: 27
+  lft: 11
+  rgt: 28
   name: Schekka
   short_name: RA
   type: Group::Abteilung
@@ -197,8 +207,8 @@ schekka:
 
 schweizerstern:
   parent: bern
-  lft: 28
-  rgt: 29
+  lft: 29
+  rgt: 30
   name: Schweizerstern
   short_name: RN
   type: Group::Abteilung
@@ -210,8 +220,8 @@ schweizerstern:
 
 chaeib:
   parent: zuerich
-  lft: 46
-  rgt: 49
+  lft: 47
+  rgt: 50
   name: Chräis Chäib
   short_name: PZ
   type: Group::Abteilung
@@ -223,8 +233,8 @@ chaeib:
 
 kcbr:
   parent: chaeib
-  lft: 47
-  rgt: 48
+  lft: 48
+  rgt: 49
   name: KCBR
   short_name: PP
   type: Group::Pfadi
@@ -237,8 +247,8 @@ kcbr:
 
 berchtold:
   parent: kyburg
-  lft: 33
-  rgt: 38
+  lft: 34
+  rgt: 39
   name: Berchtold
   short_name: OP
   type: Group::Abteilung
@@ -250,8 +260,8 @@ berchtold:
 
 sunnewirbu:
   parent: schekka
-  lft: 11
-  rgt: 12
+  lft: 12
+  rgt: 13
   name: Sunnewirbu
   short_name:
   type: Group::Woelfe
@@ -259,8 +269,8 @@ sunnewirbu:
 
 aries:
   parent: berchtold
-  lft: 34
-  rgt: 35
+  lft: 35
+  rgt: 36
   name: Aries
   short_name:
   type: Group::Woelfe
@@ -268,8 +278,8 @@ aries:
 
 pegasus:
   parent: schekka
-  lft: 13
-  rgt: 18
+  lft: 14
+  rgt: 19
   name: Pegasus
   short_name:
   type: Group::Pfadi
@@ -277,8 +287,8 @@ pegasus:
 
 baereried:
   parent: schekka
-  lft: 19
-  rgt: 20
+  lft: 20
+  rgt: 21
   name: Bäreried
   short_name:
   type: Group::Pfadi
@@ -286,8 +296,8 @@ baereried:
 
 schloss:
   parent: berchtold
-  lft: 36
-  rgt: 37
+  lft: 37
+  rgt: 38
   name: Schloss
   short_name:
   type: Group::Pfadi
@@ -295,8 +305,8 @@ schloss:
 
 poseidon:
   parent: pegasus
-  lft: 14
-  rgt: 15
+  lft: 15
+  rgt: 16
   name: Poseidon
   short_name:
   type: Group::Pfadi
@@ -304,8 +314,8 @@ poseidon:
 
 medusa:
   parent: pegasus
-  lft: 16
-  rgt: 17
+  lft: 17
+  rgt: 18
   name: Medusa
   short_name:
   type: Group::Pfadi
@@ -313,8 +323,8 @@ medusa:
 
 rovers:
   parent: schekka
-  lft: 21
-  rgt: 22
+  lft: 22
+  rgt: 23
   name: Rovers
   short_name:
   type: Group::AbteilungsRover
@@ -322,8 +332,8 @@ rovers:
 
 elternrat:
   parent: schekka
-  lft: 23
-  rgt: 24
+  lft: 24
+  rgt: 25
   name: Elternrat
   short_name:
   type: Group::Elternrat
@@ -331,9 +341,18 @@ elternrat:
 
 fussballers:
   parent: schekka
-  lft: 25
-  rgt: 26
+  lft: 26
+  rgt: 27
   name: Fussballers
   short_name:
   type: Group::AbteilungsGremium
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
+
+silverscouts:
+  parent: root
+  lft: 54
+  rgt: 55
+  name: Silverscouts
+  short_name: SiSc
+  type: Group::Silverscouts
+  layer_group_id: <%= ActiveRecord::FixtureSet.identify(:silverscouts) %>
