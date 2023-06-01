@@ -60,7 +60,7 @@ csv:
 
 people:
   people_managers:
-    enabled: false # disabled for now, so we can release without rolling out a partially complete feature
+    enabled: true
   abos: true
 
 messages:
