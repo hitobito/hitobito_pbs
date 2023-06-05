@@ -79,6 +79,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
       is_expected.to redirect_to new_group_event_participation_path(group,
                                                                     course,
+                                                                    event_participation: { person_id: 337180612 },
                                                                     event_role: { type: 'Event::Course::Role::Participant' })
 
       person.reload
