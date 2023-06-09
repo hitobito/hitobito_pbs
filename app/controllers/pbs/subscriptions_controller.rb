@@ -17,8 +17,8 @@ module Pbs::SubscriptionsController
       Export::SubscriptionsJob.new(format,
                                    current_person.id,
                                    mailing_list.id,
-                                   params.slice(:household, :household_details)
-                                    .merge(filename: filename)).enqueue!
+                                   params.slice(:household, :household_details, :selection)
+                                         .merge(filename: filename)).enqueue!
     end
   end
 
