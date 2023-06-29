@@ -59,8 +59,6 @@ csv:
   utf8_bom: true # allowing M$ Excel to read UTF-8
 
 people:
-  people_managers:
-    enabled: true
   abos: true
 
 messages:
