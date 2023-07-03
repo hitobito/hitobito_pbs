@@ -1166,6 +1166,7 @@ it:
       event/participation:
         additional_information: Note (generali, abitudini alimentari, ecc.)
         bsv_days: Numero di giorni UFAS
+        j_s_data_sharing_accepted: Trasferimento dati G+S
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
       person:

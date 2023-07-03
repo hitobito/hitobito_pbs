@@ -372,3 +372,7 @@ fr:
       title: Modifier l'entrée
   global:
     title_event/camp: camp
+  dropdown/people_export:
+    nds_course: Cours BDNS (seulement participants)
+    nds_camp: Camp BDNS (seulement participants)
+    slrg: Cours SSS (seulement participants)

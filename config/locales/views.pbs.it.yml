@@ -372,3 +372,7 @@ it:
       title: Editare l'iscrizione
   global:
     title_event/camp: Campo
+  dropdown/people_export:
+    nds_course: Corso BDNS (solo partecipanti)
+    nds_camp: Campo BDNS (solo partecipanti)
+    slrg: Corso SSS (solo partecipanti)

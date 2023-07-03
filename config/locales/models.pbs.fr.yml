@@ -1152,6 +1152,7 @@ fr:
       event/participation:
         additional_information: Remarques (remarques générales, habitudes alimentaires, etc.)
         bsv_days: Jours OFAS
+        j_s_data_sharing_accepted: Transmission des données à J+S
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
       person:
