@@ -28,7 +28,7 @@ describe PeopleSerializer do
 
   before { Fabricate(Group::Woelfe::Wolf.name.to_sym, person: person, group: group) }
   before do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(nil)
+    allow_any_instance_of(PersonDecorator).to receive(:current_user).and_return(nil)
     allow_any_instance_of(ApplicationController).to receive(:current_service_token).and_return(service_token)
   end
 
