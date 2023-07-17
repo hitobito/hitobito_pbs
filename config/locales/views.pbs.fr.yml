@@ -293,10 +293,6 @@ fr:
           url: http://heringfr.scouts.ch
           title: "Sardine: Guide des démarches administratives pour les camps scouts"
           description: "La sardine te donne toutes les informations pour l'administration de camps scouts. Elle te mène pas à pas à travers tous les documents importants. Avec ce guide, tu n'oublieras aucun point important."
-        coaches:
-          url: http://coachesfr.scouts.ch
-          title: 1x1 MiData pour coachs
-          description: "Le « 1x1 MiData pour coachs » explique les fonctions les plus importantes pour les coachs dans l’utilisation de la base de données des membres du MSdS (MiData). Il sert autant de résumé que de préparation pour le MP-Coach et le cours de coachs."
         anker:
           url: http://ankerfr.scouts.ch
           title: "L’ancre: Fil conducteur pour l’administration des cours MSdS"
