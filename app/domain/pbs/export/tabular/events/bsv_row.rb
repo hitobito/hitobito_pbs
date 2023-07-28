@@ -103,7 +103,13 @@ module Pbs::Export::Tabular::Events
     end
 
     def active_participations
-      @active_participations ||= entry.participations.where(active: true)
+      @active_participations ||= entry.participations.where(active: true).select {
+        |p| exclude_advisor(p)
+      }
+    end
+
+    def exclude_advisor(participation)
+      !(participation.roles.one? && (participation.roles.collect(&:class).include? Event::Course::Role::Advisor))
     end
 
     def attendance_groups_by_bsv_days_for(participations)

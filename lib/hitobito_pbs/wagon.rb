@@ -32,7 +32,6 @@ module HitobitoPbs
       Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
       Event::Application.include Pbs::Event::Application
       Event::Role.include Pbs::Event::Role
-      Event::Role::Cook.include Pbs::Event::Role::Cook
       MailingList.include Pbs::MailingList
       ServiceToken.include Pbs::ServiceToken
 
@@ -45,6 +44,7 @@ module HitobitoPbs
 
       ## domain
       Bsv::Info.leader_roles += [Event::Course::Role::Helper]
+      Bsv::Info.leader_roles += [Event::Role::Cook]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.include Pbs::Event::ParticipantAssigner
       Event::Filter.include Pbs::Event::Filter
