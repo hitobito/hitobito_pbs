@@ -293,10 +293,6 @@ it:
           url: http://heringit.scouts.ch
           title: "Sardina: linee guida per l'amministrazione di campi scout"
           description: "Sardina include tutte le informazioni per l'amministrazione di campi scout. Ti porta passo a passo a tutti i documenti più importanti. Con queste linee guida non dimenticherai nessun punto importante."
-        coaches:
-          url: http://coachesfr.scouts.ch
-          title: 1x1 MiData per coaches
-          description: "\"1x1 MiData per coaches\" spiega per i coaches le funzioni più importanti per la banca data dei membri del MSS (MiData). Vale sia quale Factsheet che come preparazione per il coach MF e per il corso coach."
         anker:
           url: http://ankerit.scouts.ch
           title: "Ancora: guida sull'amministrazione dei corsi MSS"

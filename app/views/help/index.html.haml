@@ -27,7 +27,7 @@
 
 %table.table.table-striped
   %tbody
-    - %w(hering coaches ticket anker pilot).each do |help_key|
+    - %w(hering ticket anker pilot).each do |help_key|
       %tr
         %td
           %strong= link_to t(".guides.#{help_key}.title"), t(".guides.#{help_key}.url"), target: '_blank'
