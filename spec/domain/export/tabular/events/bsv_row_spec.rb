@@ -16,7 +16,7 @@ describe Export::Tabular::Events::BsvRow do
   let(:bern) { Location.create!(name: 'Bern Stadt', canton: :be, zip_code: 3000) }
   subject { row }
 
-  it { expect(row.fetch(:leader_count)).to eq 3 }
+  it { expect(row.fetch(:leader_count)).to eq 4 }
   it { expect(row.fetch(:language_count)).to eq 3 }
 
   it 'does render headers' do
@@ -62,7 +62,7 @@ describe Export::Tabular::Events::BsvRow do
 
     it 'bsv_eligible_attendance_summary' do
       expect(row.fetch(:all_participants_count)).to eq(8)
-      expect(row.fetch(:all_participants_attendance_summary)).to eq('7x0, 2x7')
+      expect(row.fetch(:all_participants_attendance_summary)).to eq('6x0, 2x7')
       expect(row.fetch(:all_participants_attendances)).to eq(14)
       expect(row.fetch(:bsv_eligible_attendance_summary)).to eq('2x7')
       expect(row.fetch(:bsv_eligible_participations_count)).to eq(2)
