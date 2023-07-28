@@ -109,7 +109,7 @@ module Pbs::Export::Tabular::Events
     end
 
     def exclude_advisor(participation)
-      !(participation.roles.one? && (participation.roles.collect(&:class).include? Event::Course::Role::Advisor))
+      !(participation.roles.one? && participation.roles.first.class == Event::Course::Role::Advisor)
     end
 
     def attendance_groups_by_bsv_days_for(participations)
