@@ -32,6 +32,7 @@ module HitobitoPbs
       Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
       Event::Application.include Pbs::Event::Application
       Event::Role.include Pbs::Event::Role
+      Event::Role::Cook.include Pbs::Event::Role::Cook
       MailingList.include Pbs::MailingList
       ServiceToken.include Pbs::ServiceToken
 
