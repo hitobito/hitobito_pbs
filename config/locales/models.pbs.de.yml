@@ -239,6 +239,10 @@ de:
         one: Verantwortliche*r Krisenteam
         other: Verantwortliche Krisenteam
         description:
+      group/bund/verantwortung_ehrenamt:
+        one: Verantwortliche*r Ehrenamtlichen-Management
+        other: Verantwortliche Ehrenamtlichen-Management
+        description:
       group/bund/verantwortung_lagermeldung:
         one: Verantwortliche*r Lagermeldung
         other: Verantwortliche Lagermeldung
@@ -428,6 +432,10 @@ de:
         one: Verantwortliche*r Krisenteam
         other: Verantwortliche Krisenteam
         description:
+      group/kantonalverband/verantwortung_ehrenamt:
+        one: Verantwortliche*r Ehrenamtlichen-Management
+        other: Verantwortliche Ehrenamtlichen-Management
+        description:
       group/kantonalverband/verantwortung_lagermeldung:
         one: Verantwortliche*r Lagermeldung
         other: Verantwortliche Lagermeldung
@@ -605,6 +613,10 @@ de:
       group/region/verantwortung_krisenteam:
         one: Verantwortliche*r Krisenteam
         other: Verantwortliche Krisenteam
+        description:
+      group/region/verantwortung_ehrenamt:
+        one: Verantwortliche*r Ehrenamtlichen-Management
+        other: Verantwortliche Ehrenamtlichen-Management
         description:
       group/region/verantwortung_lagermeldung:
         one: Verantwortliche*r Lagermeldung
