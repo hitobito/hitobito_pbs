@@ -229,6 +229,7 @@ class Group::Bund < Group
 
   class VerantwortungKrisenteam < ::Role
     self.permissions = [:group_read, :contact_data, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungLagermeldung < ::Role
