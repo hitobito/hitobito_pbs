@@ -10,10 +10,18 @@ class InsertNewRootGroup < ActiveRecord::Migration[6.1]
     admin_layer = nil
 
     say_with_time 'Create new root-group' do
-      admin_layer = Group.find_or_create_by(
+      admin_layer_attrs = {
         name: 'hitobito',
         type: 'Group::Root',
-      )
+      }
+      admin_layer = if Group.exists?(admin_layer_attrs)
+                      Group.find_by(admin_layer_attrs)
+                    else
+                      Group.new(admin_layer_attrs).tap do |g|
+                        g.save(validate: false)
+                        g.reload
+                      end
+                    end
     end
 
     say_with_time 'Move bund group below new root-group' do
@@ -23,7 +31,8 @@ class InsertNewRootGroup < ActiveRecord::Migration[6.1]
     end
 
     say_with_time 'Create new silverscouts group below new root-group' do
-      Group::Silverscouts.create(name: 'Silverscouts', short_name: 'SiSc', type: 'Group::Silverscouts')
+      sisc = Group::Silverscouts.new(name: 'Silverscouts', short_name: 'SiSc', type: 'Group::Silverscouts')
+      sisc.save(validate: false)
       Group
         .where(type: 'Group::Silverscouts', parent_id: nil)
         .update_all(parent_id: admin_layer.id, lft: nil, rgt: nil)
