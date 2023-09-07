@@ -20,6 +20,12 @@ module Pbs::PersonDecorator
       end
     end
 
+    def siblings_in_layer(group)
+      Role.joins(person: :relations_to_tails)
+          .where(group: group.groups_in_same_layer, person: { people_relations: { kind: :sibling, tail_id: id } })
+          .any?
+    end
+
   end
 
   private
