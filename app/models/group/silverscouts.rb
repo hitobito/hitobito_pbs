@@ -8,12 +8,19 @@
 class Group::Silverscouts < ::Group
   self.layer = true
 
-  class Leitung < ::Role
-    self.permissions = [:group_read, :contact_data]
+  class Verantwortung < ::Role
+    self.permissions = [:layer_and_below_full]
   end
 
-  class Mitglied < ::Role
+  class Lesezugriff < ::Role
+    self.permissions = [:layer_and_below_read]
   end
 
-  roles Leitung, Mitglied
+  class PowerUser < ::Role
+    self.permissions = [:layer_full]
+  end
+
+  roles Verantwortung, Lesezugriff, PowerUser
+
+  children Silverscouts::Region
 end
