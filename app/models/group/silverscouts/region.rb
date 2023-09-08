@@ -5,17 +5,15 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class Group::Root < ::Group
+class Group::Silverscouts::Region < ::Group
   self.layer = true
 
-  self.event_types = [] # only managing structure, does not have events (as of 2023-05-23)
-
-  class Admin < ::Role
-    self.permissions = [:layer_and_below_full, :admin]
-    self.two_factor_authentication_enforced = true
+  class Leitung < ::Role
+    self.permissions = [:group_read, :contact_data]
   end
 
-  roles Admin
+  class Mitglied < ::Role
+  end
 
-  children Group::Bund, Group::Silverscouts
+  roles Leitung, Mitglied
 end
