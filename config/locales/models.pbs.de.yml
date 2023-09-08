@@ -100,6 +100,9 @@ de:
       group/silverscouts:
         one: Silverscouts
         other: Silverscouts
+      group/silverscouts/region:
+        one: Region
+        other: Regionen
       group/woelfe:
         one: Wölfe
         other: Wölfe
@@ -672,11 +675,24 @@ de:
         one: Admin
         other: Admin
 
-      group/silverscouts/leitung:
+      group/silverscouts/verantwortung:
+        one: Verantwortliche*r
+        other: Verantwortliche
+        description:
+      group/silverscouts/lesezugriff:
+        one: Lesezugriff
+        other: Lesezugriff
+        description:
+      group/silverscouts/power_user:
+        one: PowerUser
+        other: PowerUser
+        description:
+
+      group/silverscouts/region/leitung:
         one: Leitung
         other: Leitung
         description:
-      group/silverscouts/mitglied:
+      group/silverscouts/region/mitglied:
         one: Mitglied
         other: Mitglieder
         description:
