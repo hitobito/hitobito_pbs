@@ -232,6 +232,11 @@ class Group::Bund < Group
     self.two_factor_authentication_enforced = true
   end
 
+  class VerantwortungEhrenamt < ::Role
+    self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
+  end
+
   class VerantwortungLagermeldung < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -319,6 +324,7 @@ class Group::Bund < Group
         VerantwortungPr,
         VerantwortungPraeventionSexuellerAusbeutung,
         VerantwortungKrisenteam,
+        VerantwortungEhrenamt,
 
         InternationalCommissionerIcWagggs,
         InternationalCommissionerIcWosm,

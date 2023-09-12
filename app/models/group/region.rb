@@ -216,6 +216,11 @@ class Group::Region < Group
     self.two_factor_authentication_enforced = true
   end
 
+  class VerantwortungEhrenamt < ::Role
+    self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
+  end
+
   class VerantwortungLagermeldung < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
     self.two_factor_authentication_enforced = true
@@ -305,6 +310,7 @@ class Group::Region < Group
         VerantwortungInternationales,
         VerantwortungSuchtpraeventionsprogramm,
         VerantwortungKrisenteam,
+        VerantwortungEhrenamt,
         VerantwortungLagermeldung,
         VerantwortungLagerplaetze,
         VerantwortungMaterialverkaufsstelle,
