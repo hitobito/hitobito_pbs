@@ -23,29 +23,29 @@ describe PersonDecorator do
 
   let!(:sibling_relation) { Fabricate(:family_member, person: person, other: sibling, kind: :sibling) }
 
-  describe '#has_siblings_in_layer' do
+  describe '#siblings_in_layer' do
 
     subject do
-      decorator.has_siblings_in_layer(person_group)
+      decorator.siblings_in_layer(person_group)
     end
 
     context 'without siblings' do
       let!(:sibling_relation) { nil }
-      it { is_expected.to be_falsy }
+      it { is_expected.to be_empty }
     end
 
     context 'with siblings in different groups' do
       let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: Fabricate(Group::Abteilung.name))}
-      it { is_expected.to be_falsy }
+      it { is_expected.to be_empty }
     end
 
     context 'with siblings in same group' do
       let(:sibling_group) { person_group }
-      it { is_expected.to be_truthy }
+      it { is_expected.to contain_exactly(sibling_role) }
     end
 
     context 'with siblings in same layer' do
-      it { is_expected.to be_truthy }
+      it { is_expected.to contain_exactly(sibling_role) }
     end
 
     context 'with siblings with deleted role in same group' do
@@ -53,7 +53,7 @@ describe PersonDecorator do
         Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group, 
                                                    created_at: 2.months.ago, deleted_at: 1.month.ago)
       end
-      it { is_expected.to be_falsy }
+      it { is_expected.to be_empty }
     end
 
   end

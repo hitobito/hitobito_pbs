@@ -62,8 +62,7 @@ module Pbs::Person
 
     alias_method_chain :full_name, :title
 
-    i18n_boolean_setter :brother_and_sisters, :prefers_digital_correspondence
-
+    i18n_boolean_setter :prefers_digital_correspondence
 
     belongs_to :kantonalverband, class_name: 'Group' # might also be Group::Bund
     has_many :crises, foreign_key: :creator_id
