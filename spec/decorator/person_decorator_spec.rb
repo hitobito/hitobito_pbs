@@ -21,12 +21,12 @@ describe PersonDecorator do
   let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: layer)}
   let!(:sibling_role) { Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group) }
 
-  let!(:sibling_relation) { Fabricate(:people_relation, head: person, tail: sibling, kind: :sibling) }
+  let!(:sibling_relation) { Fabricate(:family_member, person: person, other: sibling, kind: :sibling) }
 
-  context 'siblings_in_layer' do
+  describe '#has_siblings_in_layer' do
 
     subject do
-      decorator.siblings_in_layer(person_group)
+      decorator.has_siblings_in_layer(person_group)
     end
 
     context 'without siblings' do
