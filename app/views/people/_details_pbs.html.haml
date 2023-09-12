@@ -4,6 +4,14 @@
 -#  https://github.com/hitobito/hitobito_pbs.
 
 = render_attrs(entry, :pbs_number, :salutation, :correspondence_language,
-                      :grade_of_school, :brother_and_sisters)
+                      :grade_of_school)
+
+%dl.dl-horizontal
+  = labeled(t('people.fields_pbs.siblings_in_layer', layer: parent.layer_group)) do
+    - if entry.has_siblings_in_layer(parent.layer_group)
+      = simple_list entry.siblings_in_layer(parent.layer_group) do |sibling_role|
+        -  assoc_link(sibling_role.person)
+    - else
+      = t('global.associations.no_entry')
 
 = render_attrs(entry, :entry_date, :leaving_date)
