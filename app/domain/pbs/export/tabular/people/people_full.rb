@@ -17,11 +17,12 @@ module Pbs
           end
 
           def person_attributes_with_pbs
-            person_attributes_without_pbs + [:id, :layer_group_id, :pbs_number, 
-                                             :has_siblings_in_layer]
+            attrs = person_attributes_without_pbs + [:id, :layer_group_id, :pbs_number]
+            attrs += [:has_siblings_in_layer] if @group.present?
+            attrs
           end
 
-          def initialize(list, group)
+          def initialize(list, group = nil)
             super(list)
             @group = group
           end
@@ -29,6 +30,8 @@ module Pbs
           private
 
           def row_for(entry, format = nil)
+            return super unless row_class == ::Export::Tabular::People::PersonRow && 
+                                               @group.present?
             row_class.new(entry, format, @group)
           end
 

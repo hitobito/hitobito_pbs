@@ -12,8 +12,6 @@ module Pbs
         module PersonRow
           extend ActiveSupport::Concern
 
-          attr_reader :group
-
           def initialize(entry, format = nil, group = nil)
             super(entry, format)
             @group = group 
@@ -33,7 +31,7 @@ module Pbs
 
           def has_siblings_in_layer
             ::Person::FamilyMemberFinder.new(entry)
-                                        .family_members_in_context(group, kind: :sibling).any?
+                                        .family_members_in_context(@group, kind: :sibling)&.any?
           end
         end
       end

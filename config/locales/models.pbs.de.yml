@@ -1243,6 +1243,7 @@ de:
         additional_information: Wie möchtest du dich im Anlass ernähren? Was sind deine Essgewohnheiten?
         bsv_days: BSV-Tage
         j_s_data_sharing_accepted: J+S Datenweitergabe
+        has_siblings_in_event: Geschwister im Anlass
 
       event/question:
         pass_on_to_supercamp: An übergeordnetes Lager weitergeben

@@ -18,7 +18,7 @@ module Pbs::Export::PeopleExportJob
   end
 
   def data
-    return super unless  exporter == ::Export::Tabular::People::PeopleFull
+    return super unless exporter == ::Export::Tabular::People::PeopleFull
     ::Export::Tabular::People::PeopleFull.export(@format, entries, group)
   end
 end

@@ -15,6 +15,13 @@ module Pbs
             participation.bsv_days || participation.event.bsv_days
           end
 
+          def has_siblings_in_event
+            event = participation.event
+
+            ::Person::FamilyMemberFinder.new(participation.person)
+                                        .family_members_in_context(event, kind: :sibling).any?
+          end
+          
         end
       end
     end
