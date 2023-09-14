@@ -7,9 +7,9 @@
 
 require 'spec_helper'
 
-describe PersonDecorator do
+describe Person::FamilyMemberFinder do
 
-  let(:decorator) { PersonDecorator.new(person) }
+  let(:service) { described_class.new(person) }
 
   let(:layer) { Fabricate(Group::Abteilung.name) }
 
@@ -26,7 +26,7 @@ describe PersonDecorator do
   describe '#siblings_in_layer' do
 
     subject do
-      decorator.siblings_in_layer(person_group)
+      service.siblings_in_layer(person_group)
     end
 
     context 'without siblings' do

@@ -21,14 +21,20 @@ module Pbs::PersonDecorator
     end
 
     def siblings_in_layer(group)
-      Role.joins(person: :family_members)
-          .where(group: group.groups_in_same_layer, 
-                 person: { family_members: { kind: :sibling, other: self } })
+      family_member_finder.siblings_in_layer(group)
+    end
+
+    def has_siblings_in_layer(group)
+      siblings_in_layer.any?
     end
 
   end
 
   private
+
+    def family_member_finder 
+      @family_member_finder ||= Person::FamilyMemberFinder.new(self)
+    end
 
     def layer_group_ids
       @layer_group_ids ||= current_user&.layer_group_ids ||
