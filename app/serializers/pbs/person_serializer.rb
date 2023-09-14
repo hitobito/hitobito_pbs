@@ -12,7 +12,11 @@ module Pbs::PersonSerializer
     extension(:details) do |_|
       map_properties :pbs_number, :salutation_value, :correspondence_language,
                      :prefers_digital_correspondence, :grade_of_school, :entry_date, :leaving_date
+
+      
+      property :has_siblings_in_layer, item.siblings_in_context(context[:group]).any? if context[:group]
     end
+
   end
 
 end

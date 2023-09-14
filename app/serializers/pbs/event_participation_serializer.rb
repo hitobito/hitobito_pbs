@@ -16,6 +16,8 @@ module Pbs::EventParticipationSerializer
           translated_label: number.translated_label
         }
       end)
+
+      property :has_siblings_in_event, item.person.siblings_in_context(item.event).any? 
     end
   end
 end
