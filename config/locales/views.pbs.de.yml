@@ -348,8 +348,7 @@ de:
       no_sensitive_information: In diesem Feld keine besonders schützenswerte Personendaten erfassen.
     fields_pbs:
       non_automatic_field: Dies ist kein automatisches Feld und muss manuell angepasst werden.
-      in_abteilung: (in der Abteilung)
-      siblings_in_layer: Geschwister in %{layer}
+      siblings_in_context: Geschwister in %{context}
     qualification_buttons_pbs:
       print_course_confirmation: Kursbestätigung drucken
     household_attrs_pbs:
