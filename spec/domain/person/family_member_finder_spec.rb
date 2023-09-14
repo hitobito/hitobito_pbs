@@ -10,23 +10,55 @@ require 'spec_helper'
 describe Person::FamilyMemberFinder do
 
   let(:service) { described_class.new(person) }
-
-  let(:layer) { Fabricate(Group::Abteilung.name) }
-
   let(:person) { Fabricate(:person) }
-  let(:person_group) { Fabricate(Group::Pfadi.name, parent: layer)}
-  let!(:person_role) { Fabricate(person_group.default_role.name, person: person, group: person_group) }
-
   let(:sibling) { Fabricate(:person) }
-  let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: layer)}
-  let!(:sibling_role) { Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group) }
 
   let!(:sibling_relation) { Fabricate(:family_member, person: person, other: sibling, kind: :sibling) }
 
-  describe '#siblings_in_layer' do
+  describe '#family_members_in_event' do
+
+    let(:person_event) { Fabricate(:event) }
+    let!(:person_participation) { Fabricate(:event_participation, person: person, event: person_event) }
+    let(:sibling_event) { Fabricate(:event) }
+    let!(:sibling_participation) { Fabricate(:event_participation, person: sibling, event: sibling_event) }
 
     subject do
-      service.siblings_in_layer(person_group)
+      service.family_members_in_event(person_event, kind: :sibling)
+    end
+
+    context 'without siblings' do
+      let!(:sibling_relation) { nil }
+      it { is_expected.to be_empty }
+    end
+
+    context 'with siblings in different events' do
+      it { is_expected.to be_empty }
+    end
+
+    context 'with siblings in same event' do
+      let(:sibling_event) { person_event }
+      it { is_expected.to contain_exactly(sibling_participation) }
+    end
+
+    context 'with siblings with deleted role in same group' do
+      let!(:sibling_participation) { Fabricate(:event_participation, person: sibling, event: sibling_event, active: false) }
+      it { is_expected.to be_empty }
+    end
+
+  end
+
+  describe '#family_members_in_layer' do
+
+    let(:layer) { Fabricate(Group::Abteilung.name) }
+
+    let(:person_group) { Fabricate(Group::Pfadi.name, parent: layer)}
+    let!(:person_role) { Fabricate(person_group.default_role.name, person: person, group: person_group) }
+
+    let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: layer)}
+    let!(:sibling_role) { Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group) }
+
+    subject do
+      service.family_members_in_layer(person_group, kind: :sibling)
     end
 
     context 'without siblings' do
