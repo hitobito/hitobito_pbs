@@ -1259,8 +1259,7 @@ de:
         leaving_date: Austrittsdatum
         j_s_number: J+S Personennummer
         correspondence_language: Korrespondenzsprache
-        brother_and_sisters: Geschwister
-        relations_to_tails: Geschwister
+        has_siblings_in_layer: Geschwister in der Ebene
         kv: Kantonalverband
         prefers_digital_correspondence: Digitale Korrespondenz bevorzugt
 
