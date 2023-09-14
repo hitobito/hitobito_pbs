@@ -20,12 +20,8 @@ module Pbs::PersonDecorator
       end
     end
 
-    def siblings_in_layer(group)
-      family_member_finder.siblings_in_layer(group)
-    end
-
-    def has_siblings_in_layer(group)
-      siblings_in_layer.any?
+    def siblings_in_context(context)
+      family_member_finder.family_members_in_context(context, kind: :sibling)
     end
 
   end

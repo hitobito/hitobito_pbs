@@ -22,4 +22,13 @@ class Person::FamilyMemberFinder
                           event: event)
     end
 
+    def family_members_in_context(context, kind: :sibling)
+      case context
+      when Event
+        family_members_in_event(context, kind: kind)
+      when Group
+        family_members_in_layer(context, kind: kind)
+      end
+    end
+
 end
