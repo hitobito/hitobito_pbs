@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## unreleased
+
+*	  Das Feld "Geschwister in der Abteilung" wird neu von eingetragenen Geschwistern abgeleitet und pro Ebene bzw. pro Anlass berechnet und angezeigt. (hitobito#2147)
+
 ## Version 1.30
 
 *   Das Anwesenheiten-Tab bei Kursen im Status "Qualifikationen erfasst" und "Abgeschlossen" wird neu mit einem Ausrufezeichen markiert, wenn die Anwesenheiten noch gespeichert werden müssen. Merci @ewangler! (hitobito/hitobito_pbs#262)
