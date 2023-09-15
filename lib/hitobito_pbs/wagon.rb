@@ -74,6 +74,10 @@ module HitobitoPbs
 
       Salutation.prepend Pbs::Salutation
 
+      TableDisplays::People::LayerGroupLabelColumn.prepend(
+        Pbs::TableDisplays::People::LayerGroupLabelColumn
+      )
+
       ### abilities
       Ability.store.register Event::ApprovalAbility
       AbilityDsl::UserContext::GROUP_PERMISSIONS << :crisis_trigger
