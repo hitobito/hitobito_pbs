@@ -10,8 +10,11 @@ module Pbs::PersonSerializer
 
   included do
     extension(:details) do |_|
-      map_properties :pbs_number, :salutation_value, :correspondence_language,
+      map_properties :pbs_number, :salutation_value, :language,
                      :prefers_digital_correspondence, :grade_of_school, :entry_date, :leaving_date
+
+      # legacy property for backwards compatibility https://github.com/hitobito/hitobito/issues/1919
+      property :correspondence_language, item.language
 
       if context[:group].present?
         property :has_siblings_in_layer, item.siblings_in_context(context[:group]).any?

@@ -6,7 +6,7 @@
 module Pbs::Export::Tabular::People
   class HouseholdsFull < Export::Tabular::People::Households
     ADDITIONAL_PERSON_ATTRIBUTES =
-      %i[correspondence_language prefers_digital_correspondence kantonalverband_id id
+      %i[language prefers_digital_correspondence kantonalverband_id id
         layer_group_id company_name company].freeze
 
     def person_attributes

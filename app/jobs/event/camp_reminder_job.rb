@@ -32,7 +32,7 @@ class Event::CampReminderJob < RecurringJob
   def send_reminder(camp)
     recipients = fetch_recipients(camp)
     recipients.each do |person|
-      I18n.locale = person.correspondence_language.presence || I18n.default_locale
+      I18n.locale = person.language
       Event::CampMailer.remind(camp, person).deliver_now
     end
     camp.update_column(:camp_reminder_sent, true) if recipients.present?

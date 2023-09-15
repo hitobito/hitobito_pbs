@@ -10,7 +10,8 @@ module Pbs::MailingListSubscriberSerializer
 
   included do
     schema do
-      property :correspondence_language, item.correspondence_language
+      # TBD: keep this fields name?
+      property :correspondence_language, item.language
       property :kantonalverband_short_name, item.kantonalverband.short_name
     end
   end

@@ -14,12 +14,12 @@ describe Export::Tabular::People::ParticipationNdsRow do
   let(:row) { described_class.new(participation) }
 
   context 'with correspondence language' do
-    let(:person) { Fabricate(:person, correspondence_language: 'it') }
+    let(:person) { Fabricate(:person, language: 'it') }
     it { expect(row.fetch(:first_language)).to eq 'IT' }
   end
 
   context 'without correspondence language' do
-    let(:person) { Fabricate(:person, correspondence_language: nil) }
+    let(:person) { Fabricate(:person, language: nil) }
     it { expect(row.fetch(:first_language)).to eq 'DE' }
   end
 end

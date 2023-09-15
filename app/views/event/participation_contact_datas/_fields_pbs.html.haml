@@ -8,13 +8,6 @@
     = f.labeled_input_field :title
   - if entry.show_attr?(:salutation)
     = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: "" }, class: 'form-select form-select-sm'
-  - if entry.show_attr?(:correspondence_language)
-    = f.labeled_collection_select(:correspondence_language,
-                                  Settings.application.languages.to_hash,
-                                  :first,
-                                  :last,
-                                  { prompt: true },
-                                  class: 'form-select form-select-sm')
   - if entry.show_attr?(:grade_of_school)
     = f.labeled_input_field :grade_of_school, help_inline: t('people.fields_pbs.non_automatic_field')
 

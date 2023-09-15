@@ -9,11 +9,11 @@ module Pbs::Export::Tabular::People::ParticipationNdsRow
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :first_language, :correspondence_language
+    alias_method_chain :first_language, :language
   end
 
-  def first_language_with_correspondence_language
-    lang = entry.correspondence_language.presence
-    lang ? lang.upcase : 'DE'
+  # TBD: move to youth wagon? https://github.com/hitobito/hitobito_youth/blob/3322054e2d64db19f8b049773e61f68e7f614546/app/domain/export/tabular/people/participation_nds_row.rb#L70
+  def first_language_with_language
+    entry.language.presence&.upcase || 'DE'
   end
 end

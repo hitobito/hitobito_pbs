@@ -56,7 +56,7 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation << :correspondence_language <<
+    Person::PUBLIC_ATTRS << :title << :salutation << :language <<
         :prefers_digital_correspondence << :kantonalverband_id
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
@@ -70,12 +70,6 @@ module Pbs::Person
 
     validates :salutation,
               inclusion: { in: ->(_) { Salutation.available.keys },
-                           allow_blank: true }
-
-    validates :correspondence_language,
-              inclusion: { in: lambda do |_|
-                                 Settings.application.languages.to_hash.keys.collect(&:to_s)
-                               end,
                            allow_blank: true }
 
     validates :entry_date, :leaving_date,
