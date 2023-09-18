@@ -5,7 +5,7 @@ class AddAlumniProcessingTimestampsToRole < ActiveRecord::Migration[6.1]
 
     connection.execute <<~SQL
       UPDATE groups
-      SET alumni_invitation_processed_at = NOW(), alumni_reminder_processed_at = NOW()
+      SET alumni_invitation_processed_at = '1970-01-01', alumni_reminder_processed_at = '1970-01-01'
       WHERE deleted_at < NOW()
     SQL
   end

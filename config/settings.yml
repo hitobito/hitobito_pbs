@@ -70,3 +70,7 @@ groups:
     enabled: true
   statistics:
     enabled: false
+
+silverscouts:
+  invitation:
+    enabled: true
