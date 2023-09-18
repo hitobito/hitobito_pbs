@@ -23,7 +23,7 @@
     = f.labeled_input_field :bsv_days
 
   - entry.used?(:j_s_kind) do
-    = f.labeled(:j_s_kind) do
+    = f.labeled(:j_s_kind, class: 'row') do
       = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
       - Event::Camp::J_S_KINDS.each do |kind|
         = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
@@ -32,9 +32,9 @@
                                                :j_s_security_mountain,
                                                :j_s_security_water)
   - if j_s_security_attrs.present?
-    = f.labeled(:j_s_security) do
+    = f.labeled(:j_s_security, class: 'd-flex') do
       - j_s_security_attrs.each do |attr|
-        = f.boolean_field(attr, { caption: Event.human_attribute_name(attr) })
+        = f.boolean_field(attr, { caption: Event.human_attribute_name(attr), class: 'me-1 ' })
 
   = render 'expected_participants_fields', f: f
 
