@@ -12,6 +12,8 @@ module HostnamedGroups
     prepend_before_action :determine_group_by_hostname
   end
 
+  # Initialize @group by matching the current request hostname.
+  # This is used in LayoutHelper#header_logo to show a specific group logo depending on the hostname
   def determine_group_by_hostname
     @group ||= Group.where(hostname: request.host).first
   end
