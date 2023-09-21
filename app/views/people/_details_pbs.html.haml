@@ -11,9 +11,10 @@
   - siblings_in_context = entry.siblings_in_context(sibling_context)
   = labeled(t('people.fields_pbs.siblings_in_context', context: sibling_context)) do
     - if siblings_in_context.any?
-      = simple_list siblings_in_context do |sibling_role|
+      = t('global.yes')
+      = simple_list(siblings_in_context, class: 'unstyled mb-0') do |sibling_role|
         -  assoc_link(sibling_role.person)
     - else
-      = t('global.associations.no_entry')
+      = t('global.no')
 
 = render_attrs(entry, :entry_date, :leaving_date)
