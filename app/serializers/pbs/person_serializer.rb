@@ -13,7 +13,7 @@ module Pbs::PersonSerializer
       map_properties :pbs_number, :salutation_value, :language,
                      :prefers_digital_correspondence, :grade_of_school, :entry_date, :leaving_date
 
-      # legacy property for backwards compatibility https://github.com/hitobito/hitobito/issues/1919
+      # correspondence_language is deprecated and could be removed in the future
       property :correspondence_language, item.language
 
       if context[:group].present?

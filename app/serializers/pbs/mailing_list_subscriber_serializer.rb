@@ -10,8 +10,9 @@ module Pbs::MailingListSubscriberSerializer
 
   included do
     schema do
-      # TBD: keep this fields name?
+      # correspondence_language is deprecated and could be removed in the future
       property :correspondence_language, item.language
+      property :language, item.language
       property :kantonalverband_short_name, item.kantonalverband.short_name
     end
   end
