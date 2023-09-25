@@ -40,7 +40,7 @@ module Alumni
     end
 
     def feature_enabled?
-      FeatureGate.enabled?('silverscouts.invitation')
+      FeatureGate.enabled?('alumni.invitation')
     end
 
     def no_active_role_in_layer?

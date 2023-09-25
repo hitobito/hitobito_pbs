@@ -8,7 +8,10 @@
 
 module Alumni
   class Reminders < Invitations
-    self.time_range = -> { ..6.months.ago }
     self.type = :reminder
+
+    def time_range
+      ..parse_duration(:alumni, :reminder, :role_deleted_before_ago).ago
+    end
   end
 end
