@@ -8,12 +8,22 @@ describe Alumni::Invitations do
   end
 
   context '#time_range' do
+    after { Settings.reload! }
+
     it 'begins 6 months ago' do
-      expect(subject.time_range.call.begin).to eq 6.months.ago
+      expect(subject.time_range.begin).to eq 6.months.ago
     end
 
     it 'ends 3 months ago' do
-      expect(subject.time_range.call.end).to eq 3.months.ago
+      expect(subject.time_range.end).to eq 3.months.ago
+    end
+
+    it 'is configurable' do
+      Settings.alumni.invitation.role_deleted_after_ago = 'P6Y'
+      Settings.alumni.invitation.role_deleted_before_ago = 'P7D'
+
+      expect(subject.time_range.begin).to eq 6.years.ago
+      expect(subject.time_range.end).to eq 7.days.ago
     end
   end
 

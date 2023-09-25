@@ -8,7 +8,6 @@
 
 module Alumni
   class Invitations
-    class_attribute :time_range, default: -> { 6.months.ago..3.months.ago }
     class_attribute :type, default: :invitation
 
     def process
@@ -18,8 +17,24 @@ module Alumni
     def relevant_roles
       Role.
         with_deleted.
-        where(deleted_at: time_range.call, alumni_invitation_processed_at: nil).
+        where(deleted_at: time_range, alumni_invitation_processed_at: nil).
         includes(:person, :group)
+    end
+
+    def time_range
+      from = parse_duration(:alumni, :invitation, :role_deleted_after_ago)
+      to = parse_duration(:alumni, :invitation, :role_deleted_before_ago)
+      from.ago..to.ago
+    end
+
+    private
+
+    def parse_duration(*settings_path)
+      iso8601duration = Settings.dig(*settings_path)
+      ActiveSupport::Duration.parse(iso8601duration)
+    rescue ActiveSupport::Duration::ISO8601Parser::ParsingError, ArgumentError
+      raise "Value #{iso8601duration.inspect} at Settings.#{settings_path.join('')} " +
+              'is not a valid ISO8601 duration'
     end
   end
 end

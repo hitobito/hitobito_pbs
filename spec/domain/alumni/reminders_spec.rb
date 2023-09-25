@@ -8,12 +8,20 @@ describe Alumni::Reminders do
   end
 
   context '#time_range' do
+    after { Settings.reload! }
+
     it 'begins open ended' do
-      expect(subject.time_range.call.begin).to eq nil
+      expect(subject.time_range.begin).to eq nil
     end
 
     it 'ends 6 months ago' do
-      expect(subject.time_range.call.end).to eq 6.months.ago
+      expect(subject.time_range.end).to eq 6.months.ago
+    end
+
+    it 'is configurable' do
+      Settings.alumni.reminder.role_deleted_before_ago = 'PT30S'
+
+      expect(subject.time_range.end).to eq 30.seconds.ago
     end
   end
 
