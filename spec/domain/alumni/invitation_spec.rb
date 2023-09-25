@@ -47,13 +47,13 @@ describe Alumni::Invitation do
 
   context '#feature_enabled?' do
     it 'returns true if feature is enabled' do
-      allow(FeatureGate).to receive(:enabled?).with('silverscouts.invitation').and_return(true)
+      allow(FeatureGate).to receive(:enabled?).with('alumni.invitation').and_return(true)
 
       expect(subject.feature_enabled?).to eq true
     end
 
     it 'returns false if feature is disabled' do
-      allow(FeatureGate).to receive(:enabled?).with('silverscouts.invitation').and_return(false)
+      allow(FeatureGate).to receive(:enabled?).with('alumni.invitation').and_return(false)
 
       expect(subject.feature_enabled?).to eq false
     end
