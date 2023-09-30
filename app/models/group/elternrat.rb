@@ -56,6 +56,7 @@ class Group::Elternrat < Group
 
   class Selbstregistriert < ::Role
     self.permissions = []
+    self.basic_permissions_only = true
   end
 
   roles Praesidium,

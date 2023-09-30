@@ -53,6 +53,7 @@ class Group::Kommission < Group
 
   class Selbstregistriert < ::Role
     self.permissions = []
+    self.basic_permissions_only = true
   end
 
 end

@@ -53,5 +53,6 @@ class Group::Gremium < Group
 
   class Selbstregistriert < ::Role
     self.permissions = []
+    self.basic_permissions_only = true
   end
 end
