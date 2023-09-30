@@ -45,6 +45,10 @@ it:
         one: Comitato interno
         many: Gremi interni
         other: Gremi interni
+      group/erziehungsberechtigten_gremium:
+        one: Tutore legale
+        many: Tutore legale
+        other: Tutore legale
       group/internes_kantonales_gremium:
         one: Gremio interna
         other: Commissioni interne
@@ -916,7 +920,7 @@ it:
         many: Membri
         other: Membri
       group/elternrat/selbstregistriert:
-        one: Autoregistrazione
+        one: Autoregistrazionxe
         many: Autoregistrazione
         other: Autoregistrazione
       group/internes_gremium/leitung:
@@ -927,6 +931,14 @@ it:
         one: Membro
         many: Membri
         other: Membri
+      group/erziehungsberechtigten_gremium/mitglied:
+        one: Membro
+        many: Membri
+        other: Membri
+      group/erziehungsberechtigten_gremium/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/gremium/leitung:
         one: Formatore
         many: Responsabile
