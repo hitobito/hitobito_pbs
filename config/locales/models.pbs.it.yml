@@ -920,7 +920,7 @@ it:
         many: Membri
         other: Membri
       group/elternrat/selbstregistriert:
-        one: Autoregistrazionxe
+        one: Autoregistrazione
         many: Autoregistrazione
         other: Autoregistrazione
       group/internes_gremium/leitung:
