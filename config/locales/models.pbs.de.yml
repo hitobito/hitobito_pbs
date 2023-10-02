@@ -1182,7 +1182,7 @@ de:
         confirmation_name: Name der Kursart im Export-Tool
 
       event/participation:
-        additional_information: Bemerkungen (Allgemeines, Essgewohnheiten, usw.)
+        additional_information: Wie möchtest du dich im Anlass ernähren? Was sind deine Essgewohnheiten?
         bsv_days: BSV-Tage
         j_s_data_sharing_accepted: J+S Datenweitergabe
 
