@@ -245,10 +245,6 @@ fr:
         one: Responsable de l'équipe de crise
         many: Responsable de l'équipe de crise
         other: Responsable de l'équipe de crise
-      group/bund/verantwortung_ehrenamt:
-        one: Responsable gestion des bénévoles
-        many: Responsables gestion des bénévoles
-        other: Responsables gestion des bénévoles
       group/bund/verantwortung_lagermeldung:
         one: Responsable annonces de camp
         many: Responsables annonce de camp
@@ -437,10 +433,6 @@ fr:
         one: Responsable cellule de crise
         many: Responsables cellule de crise
         other: Responsables cellule de crise
-      group/kantonalverband/verantwortung_ehrenamt:
-        one: Responsable gestion des bénévoles
-        many: Responsables gestion des bénévoles
-        other: Responsables gestion des bénévoles
       group/kantonalverband/verantwortung_lagermeldung:
         one: Responsable annonce de camp
         many: Responsables annonce de camp
@@ -617,10 +609,6 @@ fr:
         one: Responsable cellule de crise
         many: Responsables cellule de crise
         other: Responsables cellule de crise
-      group/region/verantwortung_ehrenamt:
-        one: Responsable gestion des bénévoles
-        many: Responsables gestion des bénévoles
-        other: Responsables gestion des bénévoles
       group/region/verantwortung_lagermeldung:
         one: Responsable annonce de camp
         many: Responsables annonce de camp
