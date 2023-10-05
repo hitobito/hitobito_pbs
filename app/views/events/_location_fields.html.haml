@@ -17,7 +17,7 @@
     .canton-specific-help-texts
       - @canton_specific_help_texts.each do |help_text|
         - if help_text[:title].present?
-          .help-block{id: help_text[:id], style: 'clear: both'}
+          .help-block{id: help_text[:id], class: 'clear-both'}
             - if help_text[:url].blank?
               = help_text[:title]
             - else

@@ -8,7 +8,7 @@
     %h3= t('.title')
     = form_tag(approved_approvals_group_url(@group.id), class: 'form-inline', method: :get, remote: true) do
       = label_tag :course_kind_id, t('.course_kind')
-      = select_tag(:course_kind_id, options_from_collection_for_select(@approved_course_kinds, :id, :to_s, course_kind_id), prompt: t('.course_kind_all'), onchange: '$(this.form).submit();')
+      = select_tag(:course_kind_id, options_from_collection_for_select(@approved_course_kinds, :id, :to_s, course_kind_id), prompt: t('.course_kind_all'), onchange: '$(this.form).submit();', class: 'form-select form-select-sm ms-3')
 
     = render partial: 'table', locals: { approvals: @approved_approvals, approved: true }
 
