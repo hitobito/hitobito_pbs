@@ -15,13 +15,13 @@ describe Salutation do
   context '.available' do
     subject { Salutation.available }
 
-    it { expect(subject).to have(4).items }
+    it { expect(subject).to have(6).items }
   end
 
   context '#label' do
     subject { salutation.label }
 
-    it { expect(subject).to eq('Sehr geehrte*r Frau*Herr [Titel] [Nachname]') }
+    it { expect(subject).to eq('Sehr geehrte/r Frau/Herr [Titel] [Nachname]') }
   end
 
   context '#value' do
@@ -56,9 +56,19 @@ describe Salutation do
       it { expect(subject).to eq('Hallo Bundes') }
     end
 
+    context 'hallo pfadiname' do
+      before { person.salutation = 'hallo_pfadiname' }
+      it { expect(subject).to eq('Hallo Scout') }
+    end
+
     context 'lieber pfadiname' do
       before { person.salutation = 'lieber_pfadiname' }
       it { expect(subject).to eq('Lieber Scout') }
+    end
+
+    context 'hallo vorname' do
+      before { person.salutation = 'hallo_vorname' }
+      it { expect(subject).to eq('Hallo Bundes') }
     end
 
     context 'lieber vorname' do

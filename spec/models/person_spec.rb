@@ -113,7 +113,7 @@ describe Person do
 
   context '#salutation_label' do
     it 'is correct' do
-      expect(person.salutation_label).to eq('Sehr geehrte*r Frau*Herr [Titel] [Nachname]')
+      expect(person.salutation_label).to eq('Sehr geehrte/r Frau/Herr [Titel] [Nachname]')
     end
 
     it 'is a default without salutation' do
