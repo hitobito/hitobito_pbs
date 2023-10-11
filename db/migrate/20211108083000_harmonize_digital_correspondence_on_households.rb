@@ -9,6 +9,8 @@ class HarmonizeDigitalCorrespondenceOnHouseholds < ActiveRecord::Migration[6.0]
   def up
     Person.reset_column_information
 
+    return true if Person.none?
+
     MyHouseholdList.new(Person.all).households_in_batches do |households|
       households.map { |people| harmonize_flag(people) }
     end
