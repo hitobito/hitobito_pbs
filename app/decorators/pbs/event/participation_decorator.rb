@@ -17,7 +17,7 @@ module Pbs::Event::ParticipationDecorator
              enforce_utf8: false, target: '_blank') do
       inputs = [h.capture(&block)]
       course_confirmation_params.entries.each do |key, value|
-        inputs << h.hidden_field_tag(key, h.preserve(value))
+        inputs << h.hidden_field_tag(key, value)
       end
       safe_join(inputs)
     end

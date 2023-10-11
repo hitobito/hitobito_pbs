@@ -108,8 +108,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
     end
 
     it 'multiline values in hidden fields are escaped and not indented' do
-      expect(decorator.h).to receive(:preserve).at_least(:once) {|value| preserve(value)}
-      is_expected.to match(/value="Line 1&#x000A;Line 2"/)
+      is_expected.to match(/value="Line 1\nLine 2"/)
     end
 
   end
