@@ -188,9 +188,9 @@ module HitobitoPbs
       end
 
       if defined? Bullet
-        Bullet.add_whitelist type: :n_plus_one_query,
-                             class_name: 'Group::Kantonalverband',
-                             association: :kantonalverband_cantons
+        Bullet.add_safelist type: :n_plus_one_query,
+                            class_name: 'Group::Kantonalverband',
+                            association: :kantonalverband_cantons
       end
     end
 
