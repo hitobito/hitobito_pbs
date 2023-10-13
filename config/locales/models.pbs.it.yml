@@ -259,6 +259,10 @@ it:
         one: Responsabile team di crisi
         many: Responsabile team di crisi
         other: Responsabile team di crisi
+      group/bund/verantwortung_ehrenamt:
+        one: Responsabile del management dei volontari
+        many: Responsabile del management dei volontari
+        other: Responsabile del management dei volontari
       group/bund/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
         many: Responsabili annuncio campi
@@ -447,6 +451,10 @@ it:
         one: Responsabile della cellula di crisi
         many: Responsabili della cellula di crisi
         other: Responsabili della cellula di crisi
+      group/kantonalverband/verantwortung_ehrenamt:
+        one: Responsabile del management dei volontari
+        many: Responsabile del management dei volontari
+        other: Responsabile del management dei volontari
       group/kantonalverband/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
         many: Responsabili annuncio campi
@@ -623,6 +631,10 @@ it:
         one: Responsabile della cellula di crisi
         many: Responsabili della cellula di crisi
         other: Responsabili della cellula di crisi
+      group/region/verantwortung_ehrenamt:
+        one: Responsabile del management dei volontari
+        many: Responsabile del management dei volontari
+        other: Responsabile del management dei volontari
       group/region/verantwortung_lagermeldung:
         one: Responsabile annuncio campi
         many: Responsabili annuncio campi
