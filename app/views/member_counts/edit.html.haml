@@ -12,10 +12,10 @@
             method: :put) do |f|
   - MemberCount::COUNT_CATEGORIES.each do |col|
     = f.labeled(col) do
-      = f.input_field "#{col}_f", class: 'span1'
+      = f.input_field "#{col}_f", class: 'd-inline'
       = f.help_inline t('global.gender.female_short')
       &nbsp;
       &nbsp;
       &nbsp;
-      = f.input_field "#{col}_m", class: 'span1'
+      = f.input_field "#{col}_m", class: 'd-inline'
       = f.help_inline t('global.gender.male_short')

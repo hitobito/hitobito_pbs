@@ -17,7 +17,7 @@
         %td
           %strong= y.year || t('population.index.no_birthday_given')
         %td= age(y.year)
-        %td{style: 'padding-right: 1em;'}= y.count
-        %td{style: 'width: 100%'}
+        %td{class: 'pe-2'}= y.count
+        %td{class: 'w-100'}
           %div.birth_year{style: "width: #{(y.count_relative * 98).to_i}%"}
             &nbsp;
