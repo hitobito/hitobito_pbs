@@ -7,7 +7,7 @@
   - if entry.show_attr?(:title)
     = f.labeled_input_field :title
   - if entry.show_attr?(:salutation)
-    = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: true }, class: 'form-select form-select-sm'
+    = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: "" }, class: 'form-select form-select-sm'
   - if entry.show_attr?(:correspondence_language)
     = f.labeled_collection_select(:correspondence_language,
                                   Settings.application.languages.to_hash,
