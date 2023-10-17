@@ -60,6 +60,10 @@ csv:
 
 people:
   abos: true
+  cleanup_cutoff_duration:
+    regarding_current_sign_in_at: 24 # months
+    regarding_roles: 18 # months
+    regarding_event_participations: 10 # years
 
 messages:
   enable_writing: true
