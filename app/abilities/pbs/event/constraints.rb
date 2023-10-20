@@ -35,7 +35,7 @@ module Pbs::Event::Constraints
   def in_same_layer_or_course_in_below_abteilung
     in_same_layer ||
       (course_in_abteilung? &&
-        permission_in_layers?(course_group_ids_above_abteilung - [Group.root.id]))
+       permission_in_layers?(course_group_ids_above_abteilung - [Group.bund.id]))
   end
 
   private

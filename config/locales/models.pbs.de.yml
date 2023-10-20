@@ -91,9 +91,18 @@ de:
         one: Rover
         other: Rovers
         long: Regionale Rover
+      group/root:
+        one: Root
+        other: Root
       group/rover:
         one: Rover
         other: Rovers
+      group/silverscouts:
+        one: Silverscouts
+        other: Silverscouts
+      group/silverscouts/region:
+        one: Region
+        other: Regionen
       group/woelfe:
         one: Wölfe
         other: Wölfe
@@ -660,6 +669,32 @@ de:
       group/region/selbstregistriert:
         one: Selbstregistrierte*r
         other: Selbstregistrierte
+        description:
+
+      group/root/admin:
+        one: Admin
+        other: Admin
+
+      group/silverscouts/verantwortung:
+        one: Verantwortliche*r
+        other: Verantwortliche
+        description:
+      group/silverscouts/lesezugriff:
+        one: Lesezugriff
+        other: Lesezugriff
+        description:
+      group/silverscouts/power_user:
+        one: PowerUser
+        other: PowerUser
+        description:
+
+      group/silverscouts/region/leitung:
+        one: Leitung
+        other: Leitung
+        description:
+      group/silverscouts/region/mitglied:
+        one: Mitglied
+        other: Mitglieder
         description:
 
       group/abteilung/abteilungsleitung:
