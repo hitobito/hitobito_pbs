@@ -37,6 +37,9 @@ de:
         one: Gremium
         other: Gremien
         long: Bundesgremium
+      group/ehemalige:
+        one: Ehemalige
+        other: Ehemalige
       group/elternrat:
         one: Elternrat
         other: Elternräte
@@ -948,6 +951,13 @@ de:
         one: Selbstregistrierte*r
         other: Selbstregistrierte
         description:
+
+      group/ehemalige/mitglied:
+        one: Mitglied
+        other: Mitglied
+      group/ehemalige/leitung:
+        one: Leitung
+        other: Leitung
 
       event/camp:
         one: Lager

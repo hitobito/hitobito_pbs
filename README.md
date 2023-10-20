@@ -256,6 +256,10 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
       * Internes Gremium
         * Leitung: [:group_and_below_full]
         * Mitglied: [:group_read]
+    * Global
+      * Ehemalige
+        * Mitglied: []
+        * Leitung: [:group_full]
 
 (Output of rake app:hitobito:roles)
 <!-- roles:end -->
