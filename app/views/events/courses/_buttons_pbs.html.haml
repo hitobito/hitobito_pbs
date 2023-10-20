@@ -1,6 +1,6 @@
 = action_button(t('event.lists.advanced_bsv_export_button'),
-                '#',
+                nil,
                 :download,
                 title: t('event.lists.bsv_export_button'),
-                data: { toggle: 'popover',
-                        content: render('popover_bsv_export', advanced: true).to_str })
+                data: { bs_toggle: 'popover',
+                        bs_content: render('popover_bsv_export', advanced: true).to_str })
