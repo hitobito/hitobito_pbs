@@ -1259,6 +1259,7 @@ de:
         pbs_shortname: PBS Kürzel
         bank_account: Bank-/Postverbindung
         cantons: Kantone
+        hostname: Hostname
 
       group/abteilung:
         gender: Geschlecht
