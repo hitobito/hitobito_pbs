@@ -10,6 +10,7 @@ Fabricator(:pbs_course, from: :course) do
 end
 
 Fabricator(:pbs_camp, from: :event, class_name: :'Event::Camp') do
+  groups { [Group.all_types.detect { |t| t.event_types.include?(Event) }.first] }
 end
 
 Fabricator(:pbs_participation, from: :event_participation) do
