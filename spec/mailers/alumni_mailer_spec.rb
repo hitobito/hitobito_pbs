@@ -25,10 +25,10 @@ describe AlumniMailer do
 
   let(:silverscout_groups) do
     [
-      Fabricate.build(Group::Silverscouts::Region.name, id: 4, name: 'Bern',
-                                                        parent: groups(:silverscouts)),
-      Fabricate.build(Group::Silverscouts::Region.name, id: 5, name: 'Luzern',
-                                                        parent: groups(:silverscouts))
+      Fabricate.build(Group::SilverscoutsRegion.name, id: 4, name: 'Bern',
+                      parent: groups(:silverscouts)),
+      Fabricate.build(Group::SilverscoutsRegion.name, id: 5, name: 'Luzern',
+                      parent: groups(:silverscouts))
     ]
   end
 

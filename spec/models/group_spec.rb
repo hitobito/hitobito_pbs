@@ -50,8 +50,8 @@ describe Group do
   describe '#all_types' do
     subject { Group.all_types }
 
-    it 'must have silverscouts as last item' do
-      expect(subject.last).to eq(Group::Silverscouts)
+    it 'must have silverscouts region as last item' do
+      expect(subject.last).to eq(Group::SilverscoutsRegion)
     end
 
     it 'is in hierarchical order' do
@@ -81,7 +81,8 @@ describe Group do
          Group::Ausbildungskommission,
          Group::BundesGremium,
          Group::BundesKommission,
-         Group::Silverscouts].collect(&:name))
+         Group::Silverscouts,
+         Group::SilverscoutsRegion].collect(&:name))
     end
   end
 

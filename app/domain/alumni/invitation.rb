@@ -13,7 +13,7 @@ module Alumni
 
     ALUMNI_ROLES = [Group::Ehemalige::Mitglied, Group::Ehemalige::Leitung].freeze
 
-    SILVERSCOUT_GROUPS = [Group::Silverscouts, Group::Silverscouts::Region].freeze
+    SILVERSCOUT_GROUPS = [Group::Silverscouts, Group::SilverscoutsRegion].freeze
 
     attr_reader :role, :type, :alumni_groups
 

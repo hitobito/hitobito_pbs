@@ -15,10 +15,10 @@ describe Alumni::ApplicableGroups do
   context '#silverscout_groups' do
     def make_group(name, selfreg:, **opts)
       Fabricate(
-        Group::Silverscouts::Region.name.to_sym,
+        Group::SilverscoutsRegion.name.to_sym,
         name: name,
         parent: silverscouts,
-        self_registration_role_type: selfreg ? 'Group::Silverscouts::Region::Mitglied' : nil,
+        self_registration_role_type: selfreg ? 'Group::SilverscoutsRegion::Mitglied' : nil,
         **opts
       )
     end
@@ -49,7 +49,7 @@ describe Alumni::ApplicableGroups do
         Group::Ehemalige.name.to_sym,
         name: 'Zürich',
         parent: groups(:berchtold),
-        self_registration_role_type: 'Group::Silverscouts::Region::Mitglied'
+        self_registration_role_type: 'Group::SilverscoutsRegion::Mitglied'
       )
 
       expect(subject.silverscout_groups).to match_array [selfreg_group]
