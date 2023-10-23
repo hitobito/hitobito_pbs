@@ -17,7 +17,7 @@ describe Alumni::Invitation do
   let(:role) { create_role(Group::Pfadi::Mitleitung, groups(:pegasus), deleted_at: 4.months.ago) }
   let(:ehemalige_group) { Group::Ehemalige.create!(name: 'Ehemalige', parent: groups(:schekka)) }
   let(:silverscout_group) do
-    Group::Silverscouts::Region.create!(name: 'Silverscouts Bern', parent: groups(:silverscouts))
+    Group::SilverscoutsRegion.create!(name: 'Silverscouts Bern', parent: groups(:silverscouts))
   end
 
   let(:type) { :invitation }
@@ -128,7 +128,7 @@ describe Alumni::Invitation do
     end
 
     it 'returns false if role group is silverscout group' do
-      role = create_role(Group::Silverscouts::Region::Mitglied, silverscout_group,
+      role = create_role(Group::SilverscoutsRegion::Mitglied, silverscout_group,
                          deleted_at: 5.months.ago)
       expect(described_class.new(role, :invitation).applicable_role?).to eq false
     end
@@ -165,7 +165,7 @@ describe Alumni::Invitation do
     end
 
     it 'returns false if person has silverscout role' do
-      create_role(Group::Silverscouts::Region::Mitglied, silverscout_group)
+      create_role(Group::SilverscoutsRegion::Mitglied, silverscout_group)
       expect(subject.person_has_no_alumni_role?).to eq false
     end
 

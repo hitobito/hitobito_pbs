@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-class Group::Silverscouts::Region < ::Group
+class Group::SilverscoutsRegion < ::Group
   self.layer = true
 
   class Leitung < ::Role

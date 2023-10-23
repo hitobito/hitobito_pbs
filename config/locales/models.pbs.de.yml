@@ -104,7 +104,7 @@ de:
       group/silverscouts:
         one: Silverscouts
         other: Silverscouts
-      group/silverscouts/region:
+      group/silverscouts_region:
         one: Region
         other: Regionen
       group/woelfe:
@@ -692,11 +692,11 @@ de:
         other: PowerUser
         description:
 
-      group/silverscouts/region/leitung:
+      group/silverscouts_region/leitung:
         one: Leitung
         other: Leitung
         description:
-      group/silverscouts/region/mitglied:
+      group/silverscouts_region/mitglied:
         one: Mitglied
         other: Mitglieder
         description:

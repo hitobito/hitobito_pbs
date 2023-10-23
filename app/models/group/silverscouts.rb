@@ -22,6 +22,5 @@ class Group::Silverscouts < ::Group
 
   roles Verantwortung, Lesezugriff, PowerUser
 
-  require_relative 'silverscouts/region'
-  children Region
+  children SilverscoutsRegion
 end

@@ -14,7 +14,7 @@ module Alumni
     end
 
     def silverscout_groups
-      Group::Silverscouts::Region.
+      Group::SilverscoutsRegion.
         without_deleted.
         where.not(self_registration_role_type: nil)
     end
