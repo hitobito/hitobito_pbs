@@ -191,7 +191,7 @@ describe Event::ListsController do
 
   describe 'GET #bsv_export' do
     let(:rows) { response.body.delete_prefix(Export::Csv::UTF8_BOM).split("\r\n") }
-    let(:user) { people(:bulei) }
+    let(:user) { people(:root) }
     let(:kind) { event_kinds(:fut) }
     let(:person) do
       Fabricate(:person, address: 'test_address',
