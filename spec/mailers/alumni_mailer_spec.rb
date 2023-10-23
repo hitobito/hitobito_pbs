@@ -40,11 +40,11 @@ describe AlumniMailer do
     end
 
     it 'renders the receiver email' do
-      expect(mail.to_addresses.map(&:to_s)).to eq([person.email])
+      expect(mail.to.map(&:to_s)).to eq([person.email])
     end
 
     it 'renders the sender email' do
-      expect(mail.from_address.to_s).to eq Settings.email.sender
+      expect(mail.header[:from].to_s).to eq Settings.email.sender
     end
 
     it 'renders the body' do
@@ -71,15 +71,15 @@ describe AlumniMailer do
     let(:mail) { AlumniMailer.reminder(person, ex_members_groups, silverscout_groups) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq('Erinnerung Ehemalige Einladung zur Selbstregistrierung')
+      expect(mail.subject).to eq('Ehemalige Erinnerung zur Selbstregistrierung')
     end
 
     it 'renders the receiver email' do
-      expect(mail.to_addresses.map(&:to_s)).to eq([person.email])
+      expect(mail.to.map(&:to_s)).to eq([person.email])
     end
 
     it 'renders the sender email' do
-      expect(mail.from_address.to_s).to eq Settings.email.sender
+      expect(mail.header[:from].to_s).to eq Settings.email.sender
     end
 
     it 'renders the body' do

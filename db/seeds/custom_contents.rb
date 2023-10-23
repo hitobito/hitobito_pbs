@@ -97,6 +97,10 @@ CustomContent.seed_once(:key,
   { key: Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO,
     placeholders_required: '',
     placeholders_optional: 'max-number-of-geolocations' },
+
+  { key: 'views/devise/sessions/info',
+    placeholders_required: nil,
+    placeholders_optional: nil },
 )
 
 invitation_with_regional_groups_id =
