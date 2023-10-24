@@ -81,8 +81,8 @@ module Alumni
     end
 
     def send_invitation
-      AlumniMailer.send(type, role.person, alumni_groups.ex_members_groups,
-                        alumni_groups.silverscout_groups).
+      AlumniMailer.send(type, role.person, alumni_groups.ex_members_group_ids.presence,
+                        alumni_groups.silverscout_group_ids.presence).
         deliver_later
     end
   end

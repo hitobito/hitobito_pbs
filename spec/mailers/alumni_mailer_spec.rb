@@ -10,30 +10,30 @@ require 'spec_helper'
 describe AlumniMailer do
   let(:person) { Fabricate.build(:person, email: 'person@example.com') }
 
-  let(:ex_members_groups) do
+  let(:ex_members_group_ids) do
     [
       # parent is Group::Abteilung
-      Fabricate.build(Group::Ehemalige.name, id: 1, name: 'Ex-Members Group 1',
-                                             parent: groups(:schekka)),
+      Fabricate(Group::Ehemalige.name, name: 'Ex-Members Group 1',
+                parent: groups(:schekka)).id,
       # parent is Group::Region
-      Fabricate.build(Group::Ehemalige.name, id: 2, name: 'Ex-Members Group 2',
-                                             parent: groups(:bern)),
+      Fabricate(Group::Ehemalige.name, name: 'Ex-Members Group 2',
+                parent: groups(:bern)).id,
       # parent is Group::Kantonalverband
-      Fabricate.build(Group::Ehemalige.name, id: 3, name: 'Ex-Members Group 2', parent: groups(:be))
+      Fabricate(Group::Ehemalige.name, name: 'Ex-Members Group 2', parent: groups(:be)).id
     ]
   end
 
-  let(:silverscout_groups) do
+  let(:silverscout_group_ids) do
     [
-      Fabricate.build(Group::SilverscoutsRegion.name, id: 4, name: 'Bern',
-                      parent: groups(:silverscouts)),
-      Fabricate.build(Group::SilverscoutsRegion.name, id: 5, name: 'Luzern',
-                      parent: groups(:silverscouts))
+      Fabricate(Group::SilverscoutsRegion.name, name: 'Bern',
+                parent: groups(:silverscouts)).id,
+      Fabricate(Group::SilverscoutsRegion.name, name: 'Luzern',
+                parent: groups(:silverscouts)).id
     ]
   end
 
   context '#invitation' do
-    let(:mail) { AlumniMailer.invitation(person, ex_members_groups, silverscout_groups) }
+    let(:mail) { AlumniMailer.invitation(person, ex_members_group_ids, silverscout_group_ids) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Ehemalige Einladung zur Selbstregistrierung')
@@ -51,14 +51,16 @@ describe AlumniMailer do
       body = Capybara::Node::Simple.new(mail.body.encoded)
 
       expect(body).to have_content('Silverscouts Selbstregistrierung:')
-      silverscout_groups.each do |group|
+      silverscout_group_ids.each do |id|
+        group = Group.find(id)
         expect(body).to have_link(group.name,
                                   href: group_self_registration_url(group_id: group.id,
                                                                     target: '_blank'))
       end
 
       expect(body).to have_content('Ehemalige-Gruppen Selbstregistrierung:')
-      ex_members_groups.each do |group|
+      ex_members_group_ids.each do |id|
+        group = Group.find(id)
         expect(body).to have_link("#{group.parent.name}: #{group.name}",
                                   href: group_self_registration_url(group_id: group.id,
                                                                     target: '_blank'))
@@ -68,7 +70,7 @@ describe AlumniMailer do
   end
 
   context '#reminder' do
-    let(:mail) { AlumniMailer.reminder(person, ex_members_groups, silverscout_groups) }
+    let(:mail) { AlumniMailer.reminder(person, ex_members_group_ids, silverscout_group_ids) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq('Ehemalige Erinnerung zur Selbstregistrierung')
@@ -88,14 +90,16 @@ describe AlumniMailer do
       expect(body).to have_content('Erinnerung')
 
       expect(body).to have_content('Silverscouts Selbstregistrierung:')
-      silverscout_groups.each do |group|
+      silverscout_group_ids.each do |id|
+        group = Group.find(id)
         expect(body).to have_link(group.name,
                                   href: group_self_registration_url(group_id: group.id,
                                                                     target: '_blank'))
       end
 
       expect(body).to have_content('Ehemalige-Gruppen Selbstregistrierung:')
-      ex_members_groups.each do |group|
+      ex_members_group_ids.each do |id|
+        group = Group.find(id)
         expect(body).to have_link("#{group.parent.name}: #{group.name}",
                                   href: group_self_registration_url(group_id: group.id,
                                                                     target: '_blank'))

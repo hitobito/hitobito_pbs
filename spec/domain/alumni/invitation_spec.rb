@@ -197,16 +197,16 @@ describe Alumni::Invitation do
           end
 
           it 'sends email' do
-            ex_members_groups = [instance_double(Group), instance_double(Group)]
-            silverscout_groups = [instance_double(Group), instance_double(Group)]
+            ex_members_group_ids = [instance_double(Group), instance_double(Group)]
+            silverscout_group_ids = [instance_double(Group), instance_double(Group)]
             groups_finder = instance_double(Alumni::ApplicableGroups,
-                                            ex_members_groups: ex_members_groups, silverscout_groups: silverscout_groups)
+                                            ex_members_group_ids: ex_members_group_ids, silverscout_group_ids: silverscout_group_ids)
 
             mail = double('mail')
             expect(mail).to receive(:deliver_later)
 
-            expect(AlumniMailer).to receive(type).with(role.person, ex_members_groups,
-                                                       silverscout_groups).and_return(mail)
+            expect(AlumniMailer).to receive(type).with(role.person, ex_members_group_ids,
+                                                       silverscout_group_ids).and_return(mail)
 
             invitation = described_class.new(role, type, groups_finder)
             expect(invitation).to receive(:conditions_met?).and_return(true)
