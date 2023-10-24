@@ -17,10 +17,10 @@ class AlumniMailer < ApplicationMailer
   CONTENT_REMINDER_WITH_REGIONAL_GROUPS = 'alumni_reminder_with_regional_alumni_groups'
   CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS = 'alumni_reminder_without_regional_alumni_groups'
 
-  def invitation(person, ex_members_groups, silverscout_groups)
+  def invitation(person, ex_members_group_ids, silverscout_group_ids)
     @person = person
-    @ex_members_groups = ex_members_groups
-    @silverscout_groups = silverscout_groups
+    @ex_members_groups = Group.where(id: ex_members_group_ids)
+    @silverscout_groups = Group.where(id: silverscout_group_ids)
 
     key = if @ex_members_groups.present?
             CONTENT_INVITATION_WITH_REGIONAL_GROUPS
@@ -31,10 +31,10 @@ class AlumniMailer < ApplicationMailer
     custom_content_mail(@person.email, key, values_for_placeholders(key))
   end
 
-  def reminder(person, ex_members_groups, silverscout_groups)
+  def reminder(person, ex_members_group_ids, silverscout_group_ids)
     @person = person
-    @ex_members_groups = ex_members_groups
-    @silverscout_groups = silverscout_groups
+    @ex_members_groups = Group.where(id: ex_members_group_ids)
+    @silverscout_groups = Group.where(id: silverscout_group_ids)
 
     key = if @ex_members_groups.present?
             CONTENT_REMINDER_WITH_REGIONAL_GROUPS
