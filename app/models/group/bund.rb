@@ -174,6 +174,7 @@ class Group::Bund < Group
 
   class Selbstregistriert < ::Role
     self.permissions = []
+    self.basic_permissions_only = true
   end
 
   class Praesidium < ::Role
