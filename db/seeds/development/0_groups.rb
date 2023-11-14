@@ -188,4 +188,9 @@ Group::AbteilungsGremium.seed(:name, :parent_id,
    parent_id: abteilungen[2].id},
 )
 
+Group::ErziehungsberechtigtenGremium.seed(:name, :parent_id,
+  {name: 'Erziehungsberechtigte',
+   parent_id: abteilungen[5].id},
+)
+
 Group.rebuild!

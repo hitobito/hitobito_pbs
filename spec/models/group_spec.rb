@@ -73,6 +73,7 @@ describe Group do
          Group::Elternrat,
          Group::AbteilungsGremium,
          Group::InternesAbteilungsGremium,
+         Group::ErziehungsberechtigtenGremium, 
          Group::KantonalesGremium,
          Group::InternesKantonalesGremium,
          Group::KantonaleKommission,

@@ -44,6 +44,10 @@ de:
         one: Internes Gremium
         other: Interne Gremien
         long: Internes Abteilungsgremium
+      group/erziehungsberechtigten_gremium:
+        one: Erziehungsberechtigte
+        other: Erziehungsberechtigte
+        long: Erziehungsberechtigte
       group/internes_gremium:
         one: Internes Gremium
         other: Interne Gremien
@@ -921,6 +925,15 @@ de:
       group/internes_gremium/mitglied:
         one: Mitglied
         other: Mitglieder
+        description:
+
+      group/erziehungsberechtigten_gremium/mitglied:
+        one: Mitglied
+        other: Mitglieder
+        description:
+      group/erziehungsberechtigten_gremium/selbstregistriert:
+        one: Selbstregistrierte*r
+        other: Selbstregistrierte
         description:
 
       group/gremium/leitung:

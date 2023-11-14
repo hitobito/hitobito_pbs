@@ -40,7 +40,8 @@ class GroupHealthController < ApplicationController
                 'AND canton.type = "Group::Kantonalverband"'.freeze
 
   # exclude Group::InternesGremium groups
-  INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium]
+  INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium, 
+                                  Group::ErziehungsberechtigtenGremium]
   EXCLUDE_INTERNES_GREMIUM = "#{Group.quoted_table_name}.type NOT IN" \
     "(#{INTERNES_GREMIUM_GROUP_TYPES.map { |type| "'#{type.to_s}'" }.join(', ')})".freeze
 
