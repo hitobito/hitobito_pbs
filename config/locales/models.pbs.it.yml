@@ -45,10 +45,6 @@ it:
         one: Comitato interno
         many: Gremi interni
         other: Gremi interni
-      group/erziehungsberechtigten_gremium:
-        one: Tutore legale
-        many: Tutore legale
-        other: Tutore legale
       group/internes_kantonales_gremium:
         one: Gremio interna
         other: Commissioni interne
@@ -931,14 +927,6 @@ it:
         one: Membro
         many: Membri
         other: Membri
-      group/erziehungsberechtigten_gremium/mitglied:
-        one: Membro
-        many: Membri
-        other: Membri
-      group/erziehungsberechtigten_gremium/selbstregistriert:
-        one: Autoregistrazione
-        many: Autoregistrazione
-        other: Autoregistrazione
       group/gremium/leitung:
         one: Formatore
         many: Responsabile
@@ -1188,7 +1176,7 @@ it:
         can_have_confirmations: Attivare l'esportazione delle conferme dei costi
         confirmation_name: Nome del tipo di corso nel tool per l'esportazione
       event/participation:
-        additional_information: Come ti vuoi mangiare per l'occasione? Quali sono le tue abitudini alimentari?
+        additional_information: Note (generali, abitudini alimentari, ecc.)
         bsv_days: Numero di giorni UFAS
         j_s_data_sharing_accepted: Trasferimento dati G+S
       event/question:

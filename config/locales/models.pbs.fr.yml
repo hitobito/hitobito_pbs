@@ -42,13 +42,9 @@ fr:
         other: Comités internes
         long: Comité de groupe interne
       group/internes_gremium:
-        one: Comité interne
+        one: comité interne
         many: Comités internes
         other: Comités internes
-      group/erziehungsberechtigten_gremium:
-        one: Responsables légaux
-        many: Responsables légaux
-        other: Responsables légaux
       group/internes_kantonales_gremium:
         one: Comité interne
         other: Comités internes
@@ -917,14 +913,6 @@ fr:
         one: membre
         many: membres
         other: membres
-      group/erziehungsberechtigten_gremium/mitglied:
-        one: membre
-        many: membres
-        other: membres
-      group/erziehungsberechtigten_gremium/selbstregistriert:
-        one: auto-enregistré·e
-        many: auto-enregistré·e·s
-        other: auto-enregistré·e·s
       group/gremium/leitung:
         one: Responsable
         many: Responsables
@@ -1174,7 +1162,7 @@ fr:
         can_have_confirmations: Activer l'export des confirmations de cours
         confirmation_name: Nom du type du cours dans l'outil pour l'export
       event/participation:
-        additional_information: Comment souhaites-tu t'alimenter lors de cet événement? Quelles sont tes habitudes alimentaires?
+        additional_information: Remarques (remarques générales, habitudes alimentaires, etc.)
         bsv_days: Jours OFAS
         j_s_data_sharing_accepted: Transmission des données à J+S
       event/question:
