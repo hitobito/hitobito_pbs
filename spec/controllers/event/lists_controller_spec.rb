@@ -229,12 +229,12 @@ describe Event::ListsController do
                               "Kursort",
                               "Ausbildungstage",
                               "BSV Tage",
-                              "Berechtigte Teilnehmende (bis 30)",
-                              "Berechtigte Teilnehmende (bis 30) x Tage",
+                              "alle berechtigten Personen (bis 30)",
+                              "alle berechtigten Personen (bis 30) x Tage",
                               "Berechtigte Tage",
-                              "Kursleitende",
-                              "Teilnehmende Total (inkl. Kursleitende)",
-                              "Teilnehmende Total x Tage",
+                              "Leitungsteam inkl. Küche",
+                              "alle Personen unabhängig vom Alter",
+                              "alle Personen unabhängig vom Alter x Tage",
                               "Total Tage",
                               "Wohnkantone der TN",
                               "Sprachen",
@@ -268,7 +268,7 @@ describe Event::ListsController do
         #counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.
 
-        expect(values[9..19]).to eq(["5", "3", "0", "", "0", "3", "6", "1x0, 7x3", "21.0", "0", "0"])
+        expect(values[9..19]).to eq(["5", "3", "0", "", "0", "4", "6", "6x3", "18.0", "0", "0"])
 
         #advisor labels
         expect(values[20..29]).to eq([person.id.to_s, person.first_name, person.last_name,
