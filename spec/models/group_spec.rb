@@ -50,13 +50,14 @@ describe Group do
   describe '#all_types' do
     subject { Group.all_types }
 
-    it 'must have bundes kommission as last item' do
-      expect(subject.last).to eq(Group::BundesKommission)
+    it 'must have silverscouts region as last item' do
+      expect(subject.last).to eq(Group::SilverscoutsRegion)
     end
 
     it 'is in hierarchical order' do
       expect(subject.collect(&:name)).to eq(
-        [Group::Bund,
+        [Group::Root,
+         Group::Bund,
          Group::Kantonalverband,
          Group::Region,
          Group::RegionaleRover,
@@ -77,9 +78,12 @@ describe Group do
          Group::KantonalesGremium,
          Group::InternesKantonalesGremium,
          Group::KantonaleKommission,
+         Group::Ehemalige,
          Group::Ausbildungskommission,
          Group::BundesGremium,
-         Group::BundesKommission].collect(&:name))
+         Group::BundesKommission,
+         Group::Silverscouts,
+         Group::SilverscoutsRegion].collect(&:name))
     end
   end
 

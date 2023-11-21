@@ -50,9 +50,14 @@ module Pbs::Group
     self.superior_attributes = [:pbs_shortname]
 
     validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
+    validates :hostname, uniqueness: true, allow_blank: true
     has_many :crises
 
-    root_types Group::Bund
+    root_types Group::Root
+
+    def self.bund
+      Group::Bund.first
+    end
   end
 
   def active_crisis_acknowledgeable?(person)

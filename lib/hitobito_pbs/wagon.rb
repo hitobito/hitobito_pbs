@@ -119,6 +119,7 @@ module HitobitoPbs
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
                                            :leaving_date, :j_s_number, :correspondence_language,
                                            :prefers_digital_correspondence, :brother_and_sisters]
+      GroupsController.permitted_attrs += [:hostname]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
                                                  :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
@@ -137,6 +138,8 @@ module HitobitoPbs
       QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController
+
+      DeviseController.include HostnamedGroups
 
       ### sheets
       Sheet::Group.include Pbs::Sheet::Group

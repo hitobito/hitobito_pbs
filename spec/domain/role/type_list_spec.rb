@@ -20,8 +20,9 @@ describe Role::TypeList do
       ['Kantonalverband', ['Kantonalverband', 'Gremium', 'Internes Gremium', 'Kommission']],
       ['Region', ['Region', 'Rover', 'Gremium', 'Internes Gremium', 'Kommission']],
       ['Abteilung', ['Abteilung', 'Biber', 'Wölfe', 'Pfadi', 'Pio',
-                     'Rover', 'PTA', 'Elternrat', 'Gremium', 'Internes Gremium', 
+                     'Rover', 'PTA', 'Elternrat', 'Gremium', 'Internes Gremium',
                      'Erziehungsberechtigte']],
+      ['Global', ['Ehemalige']]
     ])
   end
 

@@ -6,6 +6,18 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 CustomContent.seed_once(:key,
+  { key: AlumniMailer::CONTENT_INVITATION_WITH_REGIONAL_GROUPS,
+    placeholders_required: 'person-name, SiScRegion-Links, AlumniGroup-Links' },
+
+  { key: AlumniMailer::CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS,
+    placeholders_required: 'person-name, SiScRegion-Links' },
+
+  { key: AlumniMailer::CONTENT_REMINDER_WITH_REGIONAL_GROUPS,
+    placeholders_required: 'person-name, SiScRegion-Links, AlumniGroup-Links' },
+
+  { key: AlumniMailer::CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS,
+    placeholders_required: 'person-name, SiScRegion-Links' },
+
   { key: GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP,
     placeholders_required: 'actuator-name, group-link',
     placeholders_optional: 'recipient-name-with-salutation, recipient-name' },
@@ -85,7 +97,20 @@ CustomContent.seed_once(:key,
   { key: Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO,
     placeholders_required: '',
     placeholders_optional: 'max-number-of-geolocations' },
+
+  { key: 'views/devise/sessions/info',
+    placeholders_required: nil,
+    placeholders_optional: nil },
 )
+
+invitation_with_regional_groups_id =
+  CustomContent.get(AlumniMailer::CONTENT_INVITATION_WITH_REGIONAL_GROUPS).id
+invitation_without_regional_groups_id =
+  CustomContent.get(AlumniMailer::CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS).id
+reminder_with_regional_groups_id =
+  CustomContent.get(AlumniMailer::CONTENT_REMINDER_WITH_REGIONAL_GROUPS).id
+reminder_without_regional_groups_id =
+  CustomContent.get(AlumniMailer::CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS).id
 
 group_membership_id = CustomContent.get(GroupMembershipMailer::CONTENT_GROUP_MEMBERSHIP).id
 
@@ -125,6 +150,32 @@ _id =
   CustomContent.get(Event::ParticipationMailer::CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST).id
 
 CustomContent::Translation.seed_once(:custom_content_id, :locale,
+  { custom_content_id: invitation_with_regional_groups_id,
+    locale: 'de',
+    label: 'Silverscouts/Ehemalige Einladungsmail',
+    subject: "Ehemalige Einladung zur Selbstregistrierung",
+    body: "Silverscouts Selbstregistrierung:<br/>{SiScRegion-Links}<br/><br/>" \
+        "Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}<br/><br/>" },
+
+  { custom_content_id: invitation_without_regional_groups_id,
+    locale: 'de',
+    label: 'Ehemalige Einladungsmail ohne Silverscouts',
+    subject: "Ehemalige Einladung zur Selbstregistrierung",
+    body: "Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}" },
+
+  { custom_content_id: reminder_with_regional_groups_id,
+    locale: 'de',
+    label: 'Silverscouts/Ehemalige Erinnerungsmail',
+    subject: "Ehemalige Erinnerung zur Selbstregistrierung",
+    body: "Erinnerung<br/><br/>Silverscouts Selbstregistrierung:<br/>{SiScRegion-Links}<br/><br/>" \
+        "Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}<br/><br/>" },
+
+  { custom_content_id: reminder_without_regional_groups_id,
+    locale: 'de',
+    label: 'Ehemalige Erinnerungsmail ohne Silverscouts',
+    subject: "Ehemalige Erinnerung zur Selbstregistrierung",
+    body: "Erinnerung<br/><br/>Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}" },
+
   { custom_content_id: group_membership_id,
     locale: 'de',
     label: 'Information bei neuer Gruppenzugehörigkeit',
@@ -577,4 +628,3 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
     { custom_content_id: other_id, locale: 'en', label: "#{event_type_label_en} third-party registration: consent to data transfer" }
   )
 end
-
