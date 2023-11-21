@@ -23,6 +23,10 @@ describe Alumni::Invitation do
   let(:type) { :invitation }
   subject { described_class.new(role, type) }
 
+  before do
+    allow(FeatureGate).to receive(:enabled?).with(:self_registration_reason).and_return(false)
+  end
+
   context '#conditions_met?' do
     conditions = [
       :feature_enabled?,
