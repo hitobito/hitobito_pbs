@@ -60,6 +60,9 @@ csv:
 
 people:
   abos: true
+  people_managers:
+    self_service_managed_creation:
+      enabled: false
 
 messages:
   enable_writing: true
