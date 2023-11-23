@@ -39,7 +39,9 @@ class InsertNewRootGroup < ActiveRecord::Migration[6.1]
     end
 
     say_with_time 'Rebuilding nested set...' do
+      Group.archival_validation = false
       Group.rebuild!(false)
+      Group.archival_validation = true
     end
   end
 
