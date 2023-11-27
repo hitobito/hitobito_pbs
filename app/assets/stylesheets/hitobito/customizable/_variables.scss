@@ -11,70 +11,70 @@
 // Grays
 // -------------------------
 $black:                 #474E5D !default;
-$grayDarker:            #797E89 !default;
-$grayDark:              #8b8b8b !default;
+$gray-darker:           #797E89 !default;
+$gray-dark:             #8b8b8b !default;
 $gray:                  #979CA6 !default;
-$grayLight:             #E8EBF0 !default;
-$grayLighter:           #F8F9FA !default;
+$gray-light:            #E8EBF0 !default;
+$gray-lighter:          #F8F9FA !default;
 $white:                 #fff !default;
 
 $blackberry:            #632949 !default;
-$lightBlackberry:       #8b426b !default;
-$darkBlackberry:        #521d3a !default;
-$pbsRed:                #d84e23 !default;
-$pbsLightGreen:         #b1c9a4 !default;
+$light-blackberry:      #8b426b !default;
+$dark-blackberry:       #521d3a !default;
+$pbs-red:               #d84e23 !default;
+$pbs-light-green:       #b1c9a4 !default;
 
 // Colors
 // ----------------------------
-$blue:                  $darkBlackberry !default;
-$blueDark:              darken($blue, 10%) !default;
-$green:                 $pbsLightGreen !default;
-$greenDark:             darken($green, 10%) !default;
+$blue:                  $dark-blackberry !default;
+$blue-dark:             darken($blue, 10%) !default;
+$green:                 $pbs-light-green !default;
+$green-dark:            darken($green, 10%) !default;
 
-$btnDangerBackground:   $pbsRed;
+$btn-danger-background: $pbs-red;
 
 $orange:                #DC795B;
-$orangeDark:            #C75B3B;
+$orange-dark:           #C75B3B;
 $purple:                $blackberry;
-$purpleDark:            $blackberry;
+$purple-dark:           $blackberry;
 
 $red:                   $orange !default;
 
-$textColor:             $black !default;
-$borderColor:           $grayLight !default;
+$text-color:            $black !default;
+$border-color:          $gray-light !default;
 
-$pageBackground:        $blackberry !default;
-$contentBackground:     $grayLight;
-$footerBackground:      $darkBlackberry;
-$bodyBackground:        $blue;
+$page-background:       $blackberry !default;
+$content-background:    $gray-light;
+$footer-background:     $dark-blackberry;
+$body-background:       $blue;
 
-$focusColor:            $purple;
-$shadowColor:           darken($pageBackground, 10%);
-$linkColor:             $darkBlackberry !default;
-$linkColorHover:        lighten($darkBlackberry, 20%) !default;
+$focus-color:           $purple;
+$shadow-color:          darken($page-background, 10%);
+$link-color:            $dark-blackberry !default;
+$link-color-hover:      lighten($dark-blackberry, 20%) !default;
 
-$footerColor:           $white;
-$footerColorHover:      $white;
+$footer-color:          $white;
+$footer-color-hover:    $white;
 
-$tableColorHover:       lighten(#925D97, 50%);
+$table-color-hover:     lighten(#925D97, 50%);
 
-$chartBars:             $pbsLightGreen;
+$chart-bars:            $pbs-light-green;
 
 // Typography
 // -------------------------
 
-$sansFontFamily:        'Source Sans Pro', sans-serif;
-$headingFontFamily:     'Source Sans Pro', sans-serif; //'Quicksand', $sansFontFamily !default;
-$baseFontFamily:        'Source Sans Pro', sans-serif; //'Varela Round', $sansFontFamily !default;
-$headingsFontWeight:    normal !default; // instead of browser default, bold
+$sans-font-family:      'Source Sans Pro', sans-serif;
+$heading-font-family:   'Source Sans Pro', sans-serif; //'Quicksand', $sans-font-family !default;
+$base-font-family:      'Source Sans Pro', sans-serif; //'Varela Round', $sans-font-family !default;
+$headings-font-weight:  normal !default; // instead of browser default, bold
 
 // Decoration
 // -------------------------
-$borderRadius:           6px;
+$border-radius:         6px;
 
 // Rhythm
 // -------------------------
-$vSpace:                24px;
+$v-space:               24px;
 
 
 // FLUID GRID
@@ -82,18 +82,18 @@ $vSpace:                24px;
 
 // Default
 // -------------------------
-$fluidGridColumnWidth:         6.382978723% !default;
-$fluidGridGutterWidth:         2.127659574% !default;
+$fluid-grid-column-width:        6.382978723% !default;
+$fluid-grid-gutter-width:        2.127659574% !default;
 
 // Portrait tablet to default desktop
 // -------------------------
-$fluidGridColumnWidthTablet:   5.801104972% !default;
-$fluidGridGutterWidthTablet:   2.762430939% !default;
+$fluid-grid-column-width-tablet:  5.801104972% !default;
+$fluid-grid-gutter-width-tablet:  2.762430939% !default;
 
 // Large desktop and up
 // -------------------------
-$fluidGridColumnWidthLarge:    5.982905983% !default;
-$fluidGridGutterWidthLarge:    2.564102564% !default;
+$fluid-grid-column-width-large:   5.982905983% !default;
+$fluid-grid-gutter-width-large:   2.564102564% !default;
 
 
 // RESPONSIVE DESIGN
@@ -101,7 +101,7 @@ $fluidGridGutterWidthLarge:    2.564102564% !default;
 
 // Media widths
 // -------------------------
-$mediaPhone:              480px !default;
-$mediaTablet:             768px !default;
-$mediaDesktop:            980px !default;
-$mediaLarge:              1200px !default; // and upper
+$media-phone:           480px !default;
+$media-tablet:          768px !default;
+$media-desktop:         980px !default;
+$media-large:           1200px !default; // and upper
