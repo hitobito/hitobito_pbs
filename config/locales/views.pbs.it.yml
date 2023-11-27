@@ -231,13 +231,13 @@ it:
       lu_title: Fai attenzione alle regole particolari per i campi nel Canton Lucerna ("Sardina" -> casi particolari per l'iscrizione al campo)
       lu_url: https://pfadi.swiss/media/files/bf/208814it-sardina_guida_di_campi_scout-20200424-coacc.pdf
       ti_title: Fai attenzione alle regole particolari per i campi nel Canton Ticino ("Sardina" -> casi particolari per l'iscrizione al campo)
-      ti_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
+      ti_url: https://heringit.scouts.ch
       sg_title: Fai attenzione alle regole particolari per i campi nel Canton San Gallo ("Sardina" -> casi particolari per l'iscrizione al campo)
-      sg_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
+      sg_url: https://heringit.scouts.ch
       tg_title: Fai attenzione alle regole particolari per i campi nel Canton Turgovia ("Sardina" -> casi particolari per l'iscrizione al campo)
-      tg_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
+      tg_url: https://heringit.scouts.ch
       vd_title: Fai attenzione alle regole particolari per i campi nel Canton Vaud ("Sardina" -> casi particolari per l'iscrizione al campo)
-      vd_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
+      vd_url: https://heringit.scouts.ch
   filter_navigation/events:
     canton: 'eseguito nel cantone di'
   filter_navigation/camps:
