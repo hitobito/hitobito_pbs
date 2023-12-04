@@ -66,7 +66,7 @@ describe Event::ParticipationsController, type: :controller  do
         get :show, params: { group_id: group.id, event_id: course.id, id: participation.id }
 
         expect(dom).to have_content 'Empfehlungen'
-        expect(dom).to have_css('.badge.badge-success')
+        expect(dom).to have_css('.badge.bg-success')
         expect(dom).to have_content '✓'
         expect(dom).to have_content 'all good'
       end
