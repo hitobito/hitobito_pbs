@@ -13,14 +13,14 @@
 
         = field_set_tag t('.search_for_supercamp'), id: :supercamp_search do
           = form_tag group_query_supercamps_path(camp_id: @camp_id), method: :get, remote: true do
-            = text_field :selected_supercamp, :q, name: :q
+            = text_field :selected_supercamp, :q, name: :q, class: 'form-control form-control-sm w-75 d-inline'
             .btn-group
-              = button_tag t('.search'), class: 'btn btn-secondary'
+              = button_tag t('.search'), class: 'btn btn-sm btn-primary d-inline mt-1'
           #supercamp-search-results
 
       .modal-footer
         .btn-group
-          = button_tag t('.submit'), id: 'supercamps-available-submit', class: 'btn btn-primary'
+          = button_tag t('.submit'), id: 'supercamps-available-submit', class: 'btn btn-sm btn-primary'
         = link_to(ti('button.cancel'), '#',
           class: 'link cancel',
           onclick: "event.preventDefault(); $('#supercamps-available').modal('hide')")

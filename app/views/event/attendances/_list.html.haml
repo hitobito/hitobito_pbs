@@ -22,9 +22,9 @@
                            min: 0,
                            step: 0.5,
                            size: 10,
-                           class: 'span2')
+                           class: 'form-control form-control-sm float-start w-25')
         - if p.bsv_days.nil?
-          %span.muted{ style: 'float:xleft;' }
+          %span.muted.float-start.mt-1.ms-2
             = t('.not_persisted')
-            %span{ style: 'color: red' }
+            %span.text-danger
               !

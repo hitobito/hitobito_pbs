@@ -65,7 +65,7 @@ describe Event::ParticipationContactDatasController, type: :controller do
 
       is_expected.to render_template(:edit)
 
-      expect(dom).to have_selector('.alert-error li', text: 'Anrede muss ausgefüllt werden')
+      expect(dom).to have_selector('.alert-danger li', text: 'Anrede muss ausgefüllt werden')
 
     end
 

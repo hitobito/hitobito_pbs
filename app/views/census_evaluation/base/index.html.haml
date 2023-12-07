@@ -9,9 +9,9 @@
 
 = render 'infos'
 
-#main.row-fluid
+#main.row
   -if @total
-    %article.span8
+    %article.col-8
       = render 'totals'
 
   -else

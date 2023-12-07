@@ -7,7 +7,7 @@
 #page {
   padding: 5px 10px 90px;
   margin: 0;
-  background: $pageBackground;
+  background: $page-background;
 
   @include responsive(mediaTablet) {
     margin: 0;
@@ -42,7 +42,7 @@ table.attendance {
 }
 
 table tr.grouping td {
-  background-color: $grayLight !important;
+  background-color: $gray-light !important;
 }
 
 .separated {
@@ -72,5 +72,5 @@ table tr.grouping td {
 }
 
 .birth_year {
-  background-color: $chartBars;
+  background-color: $chart-bars;
 }

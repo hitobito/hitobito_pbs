@@ -10,7 +10,7 @@
     - if info.gsub('&nbsp;', '').present?
       .control-group
         .controls
-          .help-inline{ :style => "padding-left: 0; margin-left: 0" }= info.html_safe
+          .help-inline.ps-0.ms-0= info.html_safe
 
   - entry.modifiable?(:website) do
     = f.labeled_input_field :website
@@ -44,7 +44,3 @@
 = field_set_tag do
   - entry.modifiable?(:group_health) do
     = f.labeled_input_field(:group_health, help: t('.group_health_info'))
-
-- if entry.parent.is_a?(Group::Root)
-  = field_set_tag do
-    = f.labeled_input_field :hostname
