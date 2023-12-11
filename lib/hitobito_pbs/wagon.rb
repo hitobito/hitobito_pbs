@@ -73,6 +73,8 @@ module HitobitoPbs
         Pbs::Person::AddRequest::Approver::Event
       )
 
+      People::Minimizer.prepend Pbs::People::Minimizer
+
       Salutation.prepend Pbs::Salutation
 
       TableDisplays::People::LayerGroupLabelColumn.prepend(
