@@ -20,9 +20,17 @@ module Pbs::PersonDecorator
       end
     end
 
+    def siblings_in_context(context)
+      family_member_finder.family_members_in_context(context, kind: :sibling)
+    end
+
   end
 
   private
+
+    def family_member_finder 
+      @family_member_finder ||= Person::FamilyMemberFinder.new(self)
+    end
 
     def layer_group_ids
       @layer_group_ids ||= current_user&.layer_group_ids ||

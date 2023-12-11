@@ -13,8 +13,12 @@ module Pbs::Export::PeopleExportJob
   end
 
   def exporter_with_detail
-    return Pbs::Export::Tabular::People::HouseholdsFull if  @options[:household_details]
+    return Pbs::Export::Tabular::People::HouseholdsFull if @options[:household_details]
     exporter_without_detail
   end
 
+  def data
+    return super unless exporter == ::Export::Tabular::People::PeopleFull
+    ::Export::Tabular::People::PeopleFull.export(@format, entries, group)
+  end
 end

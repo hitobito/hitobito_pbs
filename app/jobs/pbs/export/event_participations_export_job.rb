@@ -33,5 +33,10 @@ module Pbs::Export::EventParticipationsExportJob
       references(:people).
       distinct
   end
+  
+  def data
+    return super unless exporter == ::Export::Tabular::People::ParticipationsFull
+    ::Export::Tabular::People::ParticipationsFull.export(@format, entries, @filter.event)
+  end
 
 end

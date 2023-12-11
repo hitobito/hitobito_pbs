@@ -16,6 +16,10 @@ module Pbs::EventParticipationSerializer
           translated_label: number.translated_label
         }
       end)
+
+      property(:has_siblings_in_event, 
+               ::Person::FamilyMemberFinder.new(item.person)
+                 .family_members_in_context(item.event, kind: :sibling).any?)
     end
   end
 end
