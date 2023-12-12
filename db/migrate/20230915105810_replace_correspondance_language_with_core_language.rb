@@ -5,18 +5,18 @@ class ReplaceCorrespondanceLanguageWithCoreLanguage < ActiveRecord::Migration[6.
     it: [:ti]
   }.freeze
 
-  def change
+  def up
     Person.update_all("language = correspondence_language")
     remove_column :people, :correspondence_language, :string, limit: 5
 
     Person.where(language: nil).find_each do |person|
       person.update!(language: infer_person_language(person))
     end
-  end  
-  
+  end
+
   def infer_person_language(person)
     return person.language if person.language.present?
-    
+
     canton = person.find_kantonalverband&.kantonalverband_cantons&.first&.to_sym
     CANTONS_LANGUAGE.find { |language, cantons| cantons.include?(canton) }&.first || :de
   end
