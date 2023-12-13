@@ -319,7 +319,6 @@ it:
       no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
     fields_pbs:
       non_automatic_field: Questo non è un campo automatico e deve essere aggiornato manualmente.
-      in_abteilung: (in sezione)
     qualification_buttons_pbs:
       print_course_confirmation: Stampare la conferma del corso
     household_attrs_pbs:

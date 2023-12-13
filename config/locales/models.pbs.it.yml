@@ -1192,8 +1192,6 @@ it:
         leaving_date: Data d'uscita
         j_s_number: Numero personale G+S
         correspondence_language: Lingua di corrispondenza
-        brother_and_sisters: Fratelli
-        relations_to_tails: Fratelli
         kv: Associazione cantonale
         prefers_digital_correspondence: Si preferisce la corrispondenza digitale
       group:
