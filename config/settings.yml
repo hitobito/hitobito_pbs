@@ -67,6 +67,9 @@ people:
   people_managers:
     self_service_managed_creation:
       enabled: false
+  inactivity_block:
+    warn_after: <%= 18.months %>
+    block_after: <%= 19.months %>
 
 messages:
   enable_writing: true
