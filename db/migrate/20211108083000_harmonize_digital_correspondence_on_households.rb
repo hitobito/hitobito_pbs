@@ -87,7 +87,7 @@ class HarmonizeDigitalCorrespondenceOnHouseholds < ActiveRecord::Migration[6.0]
         batch_limit = remaining if remaining < batch_limit
       end
 
-      relation = relation.reorder('`member_count` DESC, id ASC').limit(batch_limit)
+      relation = relation.reorder('member_count DESC, id ASC').limit(batch_limit)
       # Retaining the results in the query cache would undermine the point of batching
       relation.skip_query_cache!
       batch_relation = relation
