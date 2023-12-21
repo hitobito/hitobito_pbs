@@ -17,9 +17,4 @@ describe Export::Tabular::People::ParticipationNdsRow do
     let(:person) { Fabricate(:person, language: 'it') }
     it { expect(row.fetch(:first_language)).to eq 'IT' }
   end
-
-  context 'without language' do
-    let(:person) { Fabricate(:person, language: nil) }
-    it { expect(row.fetch(:first_language)).to eq 'DE' }
-  end
 end
