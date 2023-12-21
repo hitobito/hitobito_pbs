@@ -31,8 +31,7 @@ module Pbs::People::Minimizer
     taggings_to_delete = @person.taggings
                                 .where.not(tag_id: excluded_subscription_tags.pluck(:tag_id))
 
-    SubscriptionTag.where(tag_id: taggings_to_delete.pluck(:tag_id)).destroy_all
-    taggings_to_delete.destroy_all
+    taggings_to_delete.delete_all
   end
 
   def minimize_person_attrs
