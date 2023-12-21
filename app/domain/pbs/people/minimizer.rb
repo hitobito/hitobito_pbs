@@ -40,7 +40,6 @@ module Pbs::People::Minimizer
       :town,
       :zip_code,
       :title,
-      :correspondence_language,
       :language,
       :salutation,
       :grade_of_school,

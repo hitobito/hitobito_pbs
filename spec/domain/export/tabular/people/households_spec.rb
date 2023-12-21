@@ -16,7 +16,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
   context 'header' do
     it 'includes name, address attributes and layer group columns' do
       expect(exporter.attributes).to eq [:salutation, :name, :address, :zip_code, :town,
-                                         :country, :layer_group, :correspondence_language,
+                                         :country, :layer_group, :language,
                                          :prefers_digital_correspondence, :kantonalverband_id,
                                          :id, :layer_group_id, :company_name, :company]
     end
@@ -35,7 +35,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
           nil,
           nil,
           "Pfadibewegung Schweiz",
-          nil,
+          "de",
           "nein",
           "CH",
           337180612,
@@ -68,7 +68,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
           nil,
           nil,
           "Pfadibewegung Schweiz",
-          nil,
+          "de",
           "ja",
           "CH",
           337180612,

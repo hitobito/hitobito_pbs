@@ -3,8 +3,7 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-= render_attrs(entry, :pbs_number, :salutation, :correspondence_language,
-                      :grade_of_school)
+= render_attrs(entry, :pbs_number, :salutation, :language, :grade_of_school)
 
 %dl.dl-horizontal
   - sibling_context = parent.try(:layer_group) || parent

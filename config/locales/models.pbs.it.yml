@@ -1191,7 +1191,6 @@ it:
         entry_date: Data d'entrata
         leaving_date: Data d'uscita
         j_s_number: Numero personale G+S
-        correspondence_language: Lingua di corrispondenza
         kv: Associazione cantonale
         prefers_digital_correspondence: Si preferisce la corrispondenza digitale
       group:

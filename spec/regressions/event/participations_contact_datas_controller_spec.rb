@@ -45,7 +45,6 @@ describe Event::ParticipationContactDatasController, type: :controller do
       end
 
       expect(dom).to have_selector("select#event_participation_contact_data_salutation")
-      expect(dom).to have_selector("select#event_participation_contact_data_correspondence_language")
 
     end
 
