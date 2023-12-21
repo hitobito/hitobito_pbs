@@ -14,8 +14,8 @@ module Pbs::PersonDecorator
       filtered_functions(visible_roles.to_a, :group, group)
     end
 
-    def roles_grouped(scope:)
-      visible_roles.each_with_object(Hash.new { |h, k| h[k] = [] }) do |role, memo|
+    def roles_grouped(scope: roles)
+      (scope & visible_roles).each_with_object(Hash.new { |h, k| h[k] = [] }) do |role, memo|
         memo[role.group] << role
       end
     end
@@ -28,7 +28,7 @@ module Pbs::PersonDecorator
 
   private
 
-    def family_member_finder 
+    def family_member_finder
       @family_member_finder ||= Person::FamilyMemberFinder.new(self)
     end
 
