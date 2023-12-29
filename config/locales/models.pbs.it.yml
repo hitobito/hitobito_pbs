@@ -33,6 +33,10 @@ it:
         one: Gremio MSS
         other: Gremi MSS
         long: Gremio federale
+      group/ehemalige:
+        one: Ex scouts
+        many: Ex scouts
+        other: Ex scouts
       group/elternrat:
         one: consiglio dei genitori
         many: Consigli dei genitori
@@ -41,6 +45,10 @@ it:
         one: Gremio interna
         other: Commissioni interne
         long: Gremio sezionale interna
+      group/erziehungsberechtigten_gremium:
+        one: Tutore legale
+        other: Tutore legale
+        long: Tutore legale
       group/internes_gremium:
         one: Comitato interno
         many: Gremi interni
@@ -103,10 +111,22 @@ it:
         one: Rover
         other: Rover
         long: Rover di zona
+      group/root:
+        one: Root
+        many: Root
+        other: Root
       group/rover:
         one: rover
         many: Rover
         other: Rover
+      group/silverscouts:
+        one: Silver Scouts
+        many: Silver Scouts
+        other: Silver Scouts
+      group/silverscouts_region:
+        one: Regione
+        many: Regioni
+        other: Regioni
       group/woelfe:
         one: 'lupo
 
@@ -675,6 +695,30 @@ it:
         one: Autoregistrazione
         many: Autoregistrazione
         other: Autoregistrazione
+      group/root/admin:
+        one: Admin
+        many: Admin
+        other: Admin
+      group/silverscouts/verantwortung:
+        one: Responsabile
+        many: Responsabili
+        other: Responsabili
+      group/silverscouts/lesezugriff:
+        one: Leggi l'accesso
+        many: Leggi l'accesso
+        other: Leggi l'accesso
+      group/silverscouts/power_user:
+        one: PowerUser
+        many: PowerUser
+        other: PowerUser
+      group/silverscouts_region/leitung:
+        one: Responsabile
+        many: Responsabile
+        other: Responsabile
+      group/silverscouts_region/mitglied:
+        one: Membro
+        many: Membri
+        other: Membri
       group/abteilung/abteilungsleitung:
         one: Capo sezione
         many: Capi sezione
@@ -927,6 +971,14 @@ it:
         one: Membro
         many: Membri
         other: Membri
+      group/erziehungsberechtigten_gremium/mitglied:
+        one: Membro
+        many: Membri
+        other: Membri
+      group/erziehungsberechtigten_gremium/selbstregistriert:
+        one: Autoregistrazione
+        many: Autoregistrazione
+        other: Autoregistrazione
       group/gremium/leitung:
         one: Formatore
         many: Responsabile
@@ -951,6 +1003,14 @@ it:
         one: Autoregistrazione
         many: Autoregistrazione
         other: Autoregistrazione
+      group/ehemalige/mitglied:
+        one: Membro
+        many: Membro
+        other: Membro
+      group/ehemalige/leitung:
+        one: Responsabile
+        many: Responsabile
+        other: Responsabile
       event/camp:
         one: Campo
         many: Campi
@@ -1176,8 +1236,10 @@ it:
         can_have_confirmations: Attivare l'esportazione delle conferme dei costi
         confirmation_name: Nome del tipo di corso nel tool per l'esportazione
       event/participation:
+        additional_information: Come vorresti mangiare in questa occasione? Quali sono le tue abitudini alimentari?
         bsv_days: Numero di giorni UFAS
         j_s_data_sharing_accepted: Trasferimento dati G+S
+        has_siblings_in_event: Fratelli nell'evento
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
       person:
@@ -1191,6 +1253,7 @@ it:
         entry_date: Data d'entrata
         leaving_date: Data d'uscita
         j_s_number: Numero personale G+S
+        has_siblings_in_layer: Fratelli nel livello
         kv: Associazione cantonale
         prefers_digital_correspondence: Si preferisce la corrispondenza digitale
       group:
@@ -1201,6 +1264,7 @@ it:
         pbs_shortname: Abbreviazione MSS
         bank_account: Coordinate bancarie/postali
         cantons: Cantoni
+        hostname: Hostname
       group/abteilung:
         gender: Sesso
         genders:

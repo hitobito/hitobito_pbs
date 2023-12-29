@@ -33,6 +33,10 @@ fr:
         one: Comité
         other: Commissions
         long: Comité fédéral
+      group/ehemalige:
+        one: Ancien·ne·s
+        many: Ancien·ne·s
+        other: Ancien·ne·s
       group/elternrat:
         one: Comité des parents
         many: Conseil des parents
@@ -41,6 +45,10 @@ fr:
         one: Comité interne
         other: Comités internes
         long: Comité de groupe interne
+      group/erziehungsberechtigten_gremium:
+        one: Tuteurs légaux
+        other: Tuteurs légaux
+        long: Tuteurs légaux
       group/internes_gremium:
         one: comité interne
         many: Comités internes
@@ -93,10 +101,22 @@ fr:
         one: Routier
         other: Routiers
         long: Routiers régionaux
+      group/root:
+        one: Root
+        many: Root
+        other: Root
       group/rover:
         one: Routier
         many: Routiers
         other: Routiers
+      group/silverscouts:
+        one: Silver Scouts
+        many: Silver Scouts
+        other: Silver Scouts
+      group/silverscouts_region:
+        one: Region
+        many: Regions
+        other: Regions
       group/woelfe:
         one: Louveteau·ette
         many: Louveteaux·ettes
@@ -661,6 +681,30 @@ fr:
         one: auto-enregistré·e
         many: auto-enregistré·e·s
         other: auto-enregistré·e·s
+      group/root/admin:
+        one: Admin
+        many: Admin
+        other: Admin
+      group/silverscouts/verantwortung:
+        one: Responsable
+        many: Responsables
+        other: Responsables
+      group/silverscouts/lesezugriff:
+        one: Accès en lecture
+        many: Accès en lecture
+        other: Accès en lecture
+      group/silverscouts/power_user:
+        one: PowerUser
+        many: PowerUser
+        other: PowerUser
+      group/silverscouts_region/leitung:
+        one: Responsable
+        many: Responsables
+        other: Responsables
+      group/silverscouts_region/mitglied:
+        one: membre
+        many: membres
+        other: membres
       group/abteilung/abteilungsleitung:
         one: Responsable de groupe
         many: Responsables de groupe
@@ -913,6 +957,14 @@ fr:
         one: membre
         many: membres
         other: membres
+      group/erziehungsberechtigten_gremium/mitglied:
+        one: membre
+        many: membres
+        other: membres
+      group/erziehungsberechtigten_gremium/selbstregistriert:
+        one: auto-enregistré·e
+        many: auto-enregistré·e·s
+        other: auto-enregistré·e·s
       group/gremium/leitung:
         one: Responsable
         many: Responsables
@@ -937,6 +989,14 @@ fr:
         one: auto-enregistré·e
         many: auto-enregistré·e·s
         other: auto-enregistré·e·s
+      group/ehemalige/mitglied:
+        one: membre
+        many: Membre
+        other: Membre
+      group/ehemalige/leitung:
+        one: Responsable
+        many: Responsables
+        other: Responsables
       event/camp:
         one: Camp
         many: Camps
@@ -1162,8 +1222,10 @@ fr:
         can_have_confirmations: Activer l'export des confirmations de cours
         confirmation_name: Nom du type du cours dans l'outil pour l'export
       event/participation:
+        additional_information: Comment souhaites-tu t'alimenter en cette occasion? Quelles sont tes habitudes alimentaires?
         bsv_days: Jours OFAS
         j_s_data_sharing_accepted: Transmission des données à J+S
+        has_siblings_in_event: Frères et sœurs dans cette événement
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
       person:
@@ -1177,6 +1239,7 @@ fr:
         entry_date: Membre depuis
         leaving_date: Date de départ
         j_s_number: N° personnel J+S
+        has_siblings_in_layer: Frères et sœurs au niveau
         kv: Assocation cantonale
         prefers_digital_correspondence: Préfère la correspondance numérique
       group:
@@ -1187,6 +1250,7 @@ fr:
         pbs_shortname: Abréviation MSdS
         bank_account: Référence bancaire  / postale
         cantons: Cantons
+        hostname: Hostname
       group/abteilung:
         gender: Sexe
         genders:
