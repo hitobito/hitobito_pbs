@@ -9,6 +9,7 @@ module Pbs::TokenAbility
   included do
     alias_method_chain :define_token_abilities, :group_health
     alias_method_chain :define_token_abilities, :census_evaluations
+    alias_method_chain :define_event_abilities, :camps
   end
 
   private
@@ -29,5 +30,13 @@ module Pbs::TokenAbility
 
   def define_census_evaluations_abilities
     can :census_evaluations, GroupHealthController
+  end
+
+  def define_event_abilities_with_camps
+    define_event_abilities_without_camps
+
+    can :'index_event/camps', Group do |g|
+      token_layer_and_below.include?(g)
+    end
   end
 end

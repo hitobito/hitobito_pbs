@@ -609,4 +609,60 @@ describe EventsController do
 
     end
   end
+
+  context 'camps' do
+
+    context 'GET index' do
+
+      let(:token) { service_tokens(:rejected_top_group_token) }
+      let(:group) { groups(:bund) }
+      let!(:camp) { Fabricate(:pbs_camp, groups: [group]) }
+      let!(:date) { Fabricate(:event_date, event: camp) }
+
+      context 'without token' do
+        it 'renders camps json with dates' do
+          get :index, params: { type: Event::Camp.name, group_id: group.id }, format: :json
+          json = JSON.parse(@response.body)
+
+          expect(json['events']).to be_nil
+          expect(json['error']).to eq('Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst.')
+        end
+      end
+
+      context 'not allowed' do
+        it 'renders camps json with dates' do
+          get :index, params: { type: Event::Camp.name, group_id: group.id, token: token.token }, format: :json
+          json = JSON.parse(@response.body)
+
+          expect(json['events']).to be_nil
+          expect(json['error']).to eq('Sie sind nicht berechtigt, diese Seite anzuzeigen')
+        end
+      end
+
+      context 'allowed' do
+
+        before do
+          token.update!(events: true, token: 'Accepted')
+        end
+
+        it 'renders camps json with dates' do
+          get :index, params: { type: Event::Camp.name, group_id: group.id, token: token.token }, format: :json
+          json = JSON.parse(@response.body)
+
+          event = json['events'].find { |e| e['id'] == camp.id.to_s }
+          expect(event['name']).to eq('Eventus')
+          expect(event['links']['dates'].size).to eq(2)
+          expect(event['links']['groups'].size).to eq(1)
+
+          expect(json['current_page']).to eq(1)
+          expect(json['total_pages']).to eq(1)
+          expect(json['prev_page_link']).to be_nil
+          expect(json['next_page_link']).to be_nil
+        end
+
+      end
+
+    end
+
+  end
 end
