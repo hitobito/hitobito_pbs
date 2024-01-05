@@ -82,7 +82,7 @@ module Pbs::EventsController
     if entry.valid?
       flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
     else
-      flash.now[:warn] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
+      flash.now[:warning] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
                         "<br />#{entry.errors.full_messages.to_sentence}"
     end
     entry.restore_attributes # restore the simulated change to camp_submitted_at
