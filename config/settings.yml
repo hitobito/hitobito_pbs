@@ -68,8 +68,8 @@ people:
     self_service_managed_creation:
       enabled: false
   inactivity_block:
-    warn_after: <%= 18.months %>
-    block_after: <%= 19.months %>
+    warn_after: P18M # must be an ISO 8601 duration string
+    block_after: P1M # must be an ISO 8601 duration string
 
 messages:
   enable_writing: true
@@ -84,8 +84,7 @@ groups:
 alumni:
   invitation:
     enabled: false
-    role_deleted_before_ago: P3M # must be a ISO 8601 duration string
-    role_deleted_after_ago: P6M # must be a ISO 8601 duration string
+    role_deleted_before_ago: P3M # must be an ISO 8601 duration string
+    role_deleted_after_ago: P6M # must be an ISO 8601 duration string
   reminder:
-    role_deleted_before_ago: P6M # must be a ISO 8601 duration string
-
+    role_deleted_before_ago: P6M # must be an ISO 8601 duration string
