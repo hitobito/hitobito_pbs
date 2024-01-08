@@ -136,7 +136,7 @@ describe EventsController do
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:warning]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
           expect(flash[:notice]).to be_blank
         end
 
@@ -144,7 +144,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
         end
 
@@ -153,7 +153,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -164,7 +164,7 @@ describe EventsController do
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:warning]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
           expect(flash[:notice]).to be_blank
         end
 
@@ -172,7 +172,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
         end
 
@@ -181,7 +181,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
       end
@@ -191,7 +191,7 @@ describe EventsController do
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:warning]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
           expect(flash[:notice]).to be_blank
         end
 
@@ -199,7 +199,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
         end
 
@@ -208,7 +208,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
       end
@@ -221,7 +221,7 @@ describe EventsController do
 
         it 'does not show failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -229,7 +229,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -238,7 +238,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
       end
@@ -253,7 +253,7 @@ describe EventsController do
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:warning]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
           expect(flash[:notice]).to be_blank
         end
 
@@ -261,7 +261,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
         end
 
@@ -270,7 +270,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -281,7 +281,7 @@ describe EventsController do
 
         it 'shows failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
+          expect(flash[:warning]).to match /Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/
           expect(flash[:notice]).to be_blank
         end
 
@@ -289,7 +289,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to eq 'Es sind alle Informationen zum Einreichen des Lagers vorhanden.'
         end
 
@@ -298,7 +298,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
       end
@@ -311,7 +311,7 @@ describe EventsController do
 
         it 'does not show failing validation' do
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -319,7 +319,7 @@ describe EventsController do
           fill_in_required_columns(event)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
 
@@ -328,7 +328,7 @@ describe EventsController do
           event.update(camp_submitted_at: Time.zone.now.to_date)
 
           get :show, params: { group_id: event.groups.first.id, id: event.id }
-          expect(flash[:warn]).to be_blank
+          expect(flash[:warning]).to be_blank
           expect(flash[:notice]).to be_blank
         end
       end

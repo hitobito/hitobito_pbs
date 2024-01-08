@@ -10,6 +10,6 @@
 - if entry.has_confirmation?
   .btn-group
     = entry.course_confirmation_form do
-      = button_tag(type: 'submit', class: 'btn') do
+      = button_tag(type: 'submit', class: 'btn btn-sm') do
         = icon(:print)
         = t('event/course.participations.actions_show_pbs.course_confirmation')
