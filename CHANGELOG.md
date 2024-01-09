@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 2.0
 
 *   Das Feld "Geschwister in der Abteilung" wird neu von eingetragenen Geschwistern abgeleitet und pro Ebene bzw. pro Anlass berechnet und angezeigt. (hitobito#2147)
 *   Die automatisierte Minimierung löscht nach Inaktivität einer Person gewisse Benutzerspezifische Daten (hitobito_pbs#300)
