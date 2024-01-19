@@ -58,6 +58,10 @@ module Pbs::Group
     def self.bund
       Group::Bund.first
     end
+
+    def self.silverscouts
+      Group::Silverscouts.first
+    end
   end
 
   def active_crisis_acknowledgeable?(person)

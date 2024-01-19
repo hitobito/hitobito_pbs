@@ -81,6 +81,13 @@ module Pbs::EventAbility
 
     alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
     alias_method_chain :if_globally_visible_or_participating, :pbs
+    alias_method_chain :if_layer_and_below_full_on_root, :pbs_root_groups
+  end
+
+  def if_layer_and_below_full_on_root_with_pbs_root_groups
+    if_layer_and_below_full_on_root_without_pbs_root_groups ||
+      contains_any?(user_context.permission_layer_ids(:layer_and_below_full),
+                    [Group.bund.id, Group.silverscouts.id])
   end
 
   def if_globally_visible_or_participating_with_pbs

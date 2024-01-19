@@ -398,4 +398,57 @@ describe EventAbility do
     end
   end
 
+  context :export_list do
+    context 'with layer_and_below_full on bund' do
+      let(:role) do
+        Fabricate(Group::Bund::Adressverwaltung.name.to_sym,
+                  group: Group.bund)
+      end
+
+      it 'may export_list' do
+        is_expected.to be_able_to(:export_list, Event::Course)
+      end
+    end
+
+    context 'with layer_and_below_full on silverscouts' do
+      let(:role) do
+        Fabricate(Group::Silverscouts::Verantwortung.name.to_sym,
+                  group: Group.silverscouts)
+      end
+
+      it 'may export_list' do
+        is_expected.to be_able_to(:export_list, Event::Course)
+      end
+    end
+
+    context 'with layer_and_below_full on root' do
+      let(:role) do
+        Fabricate(Group::Root::Admin.name.to_sym,
+                  group: Group.root)
+      end
+
+      it 'may export_list' do
+        is_expected.to be_able_to(:export_list, Event::Course)
+      end
+    end
+
+    context 'with layer_and_below_read on bund' do
+      let(:role) do
+        Fabricate(Group::Bund::Coach.name.to_sym,
+                  group: Group.bund)
+      end
+
+      it 'may not export_list' do
+        is_expected.to_not be_able_to(:export_list, Event::Course)
+      end
+    end
+
+    context 'with layer_and_below_full on kantonalverband' do
+      let(:role) { Fabricate(Group::Kantonalverband::Sekretariat.name.to_sym, group: groups(:be)) }
+
+      it 'may not export_list' do
+        is_expected.to_not be_able_to(:export_list, Event::Course)
+      end
+    end
+  end
 end
