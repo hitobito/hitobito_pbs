@@ -28,7 +28,7 @@ fr:
       group/bund:
         one: Niveau fédéral
         many: Niveau fédéral
-        other: Niveau fédéral
+        other: Association
       group/bundes_gremium:
         one: Comité
         other: Commissions
@@ -112,7 +112,7 @@ fr:
       group/silverscouts:
         one: Silver Scouts
         many: Silver Scouts
-        other: Silver Scouts
+        other: Réseau des ancien·ne·s
       group/silverscouts_region:
         one: Region
         many: Regions

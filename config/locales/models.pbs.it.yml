@@ -28,7 +28,7 @@ it:
       group/bund:
         one: Confederazione
         many: Confederazione
-        other: Confederazione
+        other: Associazione
       group/bundes_gremium:
         one: Gremio MSS
         other: Gremi MSS
@@ -122,7 +122,7 @@ it:
       group/silverscouts:
         one: Silver Scouts
         many: Silver Scouts
-        other: Silver Scouts
+        other: Rete di ex scouts
       group/silverscouts_region:
         one: Regione
         many: Regioni
