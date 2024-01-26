@@ -46,6 +46,10 @@ module Pbs::EventSerializer
         entity :coach, item.coach, ContactSerializer
       end
 
+      if item.used_attributes(:advisor_id).present?
+        entity :advisor, item.advisor, ContactSerializer
+      end
+
       if item.allow_sub_camps?
         entities :sub_camps, item.sub_camps, Pbs::EventLinkSerializer
       end
