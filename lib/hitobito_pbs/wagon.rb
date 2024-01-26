@@ -19,6 +19,10 @@ module HitobitoPbs
                                  #{config.root}/app/serializers ]
 
     config.to_prepare do # rubocop:disable Metrics/BlockLength
+      JobManager.wagon_jobs += [
+        AlumniInvitationsJob,
+        Event::CampReminderJob
+      ]
 
       ### models
       Group.include Pbs::Group
