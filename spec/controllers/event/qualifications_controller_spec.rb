@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -48,7 +48,7 @@ describe Event::QualificationsController do
               event_id: course.id,
               has_confirmations: 1
             }
-      end.to raise_exception
+      end.to raise_error CanCan::AccessDenied
       expect(course.reload.has_confirmations).to be_falsey
     end
 
