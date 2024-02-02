@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -13,11 +13,6 @@ describe Event::AssignedFromWaitingListJob do
   let(:event) { participation.event }
 
   subject { Event::AssignedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka)) }
-
-  before do
-    SeedFu.quiet = true
-    SeedFu.seed [Rails.root.join('db', 'seeds')]
-  end
 
   it 'sends email' do
     subject.perform

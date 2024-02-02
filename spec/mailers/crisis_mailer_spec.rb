@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -9,11 +9,6 @@ require 'spec_helper'
 
 describe CrisisMailer do
   include ActiveSupport::Testing::TimeHelpers
-
-  before do
-    SeedFu.quiet = true
-    SeedFu.seed [Rails.root.join('db', 'seeds')]
-  end
 
   let(:crisis) { crises(:schekka) }
   let(:date)   { '2019-05-08 09:57:00' }

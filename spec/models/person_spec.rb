@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -243,8 +243,6 @@ describe Person do
     let(:last_email)  { ActionMailer::Base.deliveries.last }
 
     before do
-      SeedFu.quiet = true
-      SeedFu.seed [Rails.root.join('db', 'seeds')]
       allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return('test@test.com')
       Fabricate(:black_list, first_name: 'dummy', last_name: 'example', phone_number: '079 123 45 60')
     end
