@@ -20,12 +20,29 @@ module Pbs::Event::Application
     approvals.find_by(approved: false, rejected: false)
   end
 
+  def current_status_label
+    if approvals.select(&:rejected).any?
+      I18n.t('event.applications.current_status_rejected')
+    elsif approvals_missing?
+      I18n.t('event.applications.current_status_approvals_missing')
+    elsif participation.active == false
+      I18n.t('event.applications.current_status_inactive')
+    end
+  end
+
   private
 
   def initialize_approval
     if participation.present?
       approver = Event::Approver.new(participation.reload)
       approver.request_approvals
+    end
+  end
+
+  def approvals_missing?
+    %w(abteilung region kantonalverband bund).any? do |layer|
+      event["requires_approval_#{layer}"] &&
+        approvals.select { |a| a.layer == layer && a.approved }.none?
     end
   end
 
