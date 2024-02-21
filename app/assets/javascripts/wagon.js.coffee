@@ -24,7 +24,7 @@ updateCantonSpecificHelpTextVisibility = ->
 $(document).on('change', 'select#event_canton', updateCantonSpecificHelpTextVisibility)
 
 # On document load, run all visibility updates once
-$(document).on 'turbolinks:load', ->
+$(document).on 'turbo:load', ->
   updateLocalScoutContactFieldsVisibility()
   updateCantonSpecificHelpTextVisibility()
 
@@ -33,6 +33,6 @@ removeSupercamp = ->
   console.log($(this), $(this).closest('.control-group'))
   $(this).closest('.control-group').hide()
 
-$(document).on('turbolinks:load', ->
+$(document).on('turbo:load', ->
   $('[data-remove-supercamp]').click(removeSupercamp)
 )
