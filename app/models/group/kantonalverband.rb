@@ -82,9 +82,23 @@ class Group::Kantonalverband < Group
   end
 
   def cantons=(list)
-    self.kantonalverband_cantons_attributes =
-      kantonalverband_cantons.collect { |c| { id: c.id, _destroy: true } } +
-      list.select(&:present?).collect { |c| { canton: c, kantonalverband: self } }
+    existing = kantonalverband_cantons.pluck(:id, :canton)
+    existing_cantons = existing.map(&:last)
+
+    deletions = existing.map do |id, canton|
+      next if list.include?(canton)
+
+      { id: id, _destroy: true }
+    end.compact
+
+    additions = list.map do |canton|
+      next if canton.blank?
+      next if existing_cantons.include?(canton)
+
+      { canton: canton, kantonalverband: self }
+    end.compact
+
+    self.kantonalverband_cantons_attributes = deletions + additions
   end
 
   def kantonalverband
