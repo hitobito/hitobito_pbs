@@ -13,6 +13,8 @@ module Pbs::Event::Course
   APPROVALS = %w(requires_approval_abteilung requires_approval_region
                  requires_approval_kantonalverband requires_approval_bund).freeze
 
+  COURSE_NUMBER_REGEX = /\APBS CH(?: [A-Z]{2})? [0-9]{3}-[0-9]{2}\z/.freeze
+
   included do
     include Pbs::Event::RestrictedRole
 
@@ -41,6 +43,14 @@ module Pbs::Event::Course
     validates :number, presence: true
     validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
     validate :assert_bsv_days_precision
+
+    validates :number, format: { with: COURSE_NUMBER_REGEX,
+      message: :must_adhere_to_format,
+      if: :validate_number? }
+
+    def validate_number?
+      (new_record? || number_changed? || kind_id_changed?) && kind.validate_course_number
+    end
 
     ### CALLBACKS
     after_initialize :become_campy

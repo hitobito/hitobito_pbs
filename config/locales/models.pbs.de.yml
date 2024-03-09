@@ -1238,6 +1238,7 @@ de:
         campy: Kurs als Lager anmelden
         can_have_confirmations: Export Kursbestätigungen aktivieren
         confirmation_name: Name der Kursart im Export-Tool
+        validate_course_number: Kursnummer validieren
 
       event/participation:
         additional_information: Wie möchtest du dich im Anlass ernähren? Was sind deine Essgewohnheiten?
@@ -1362,6 +1363,10 @@ de:
           attributes:
             base:
               cannot_remove_parent_id: 'Das übergeordnete Lager kann nicht mehr verlassen werden, da es nicht mehr im Status "Erstellt" ist'
+        event/course:
+          attributes:
+            number:
+              must_adhere_to_format: muss dem Format "PBS CH KV XXX-JJ" entsprechen
         person:
           attributes:
             prefers_digital_correspondence:
