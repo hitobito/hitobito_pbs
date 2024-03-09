@@ -236,11 +236,11 @@ describe Event::Course do
   context 'validations' do
     let(:kind_with_validation) { Fabricate(:event_kind, validate_course_number: true) }
     let(:kind_without_validation) { event_kinds(:lpk) }
+    VALID_NUMBERS = ['PBS CH 947-00', 'PBS CH XX 007-99', 'PBS CH AB 123-45'].freeze
+    INVALID_NUMBERS = ['PBS CH 000-FP', 'PBS XY XX 475-31', 'CH AB 123-45', 'PBS CH 123-456',
+                       'PBS CH AB 12-345', 'PBSCHAB123-45'].freeze
 
     context 'course number' do
-      VALID_NUMBERS = ['PBS CH 947-00', 'PBS CH XX 007-99', 'PBS CH AB 123-45'].freeze
-      INVALID_NUMBERS = ['PBS CH 000-FP', 'PBS XY XX 475-31', 'CH AB 123-45', 'PBS CH 123-456',
-                         'PBS CH AB 12-345', 'PBSCHAB123-45'].freeze
 
       subject { Fabricate(:course, groups: [groups(:be)], kind: kind_with_validation, number: 'PBS CH BE 123-24') }
 
@@ -271,13 +271,13 @@ describe Event::Course do
         end
 
         it 'is invalid for a number not matching the expected format' do
-          subject.number = '1234'
+          subject.number = INVALID_NUMBERS.first
           expect(subject.valid?).to be_falsey
           expect(subject.errors[:number]).to be_present
         end
 
         it 'is valid for a number matching the expected format' do
-          subject.number = 'PBS CH BE 123-24'
+          subject.number = VALID_NUMBERS.first
           expect(subject.valid?).to be_truthy
         end
 
@@ -294,7 +294,7 @@ describe Event::Course do
         end
 
         it 'is valid for a number not matching the expected format' do
-          subject.number = '1234'
+          subject.number = INVALID_NUMBERS.first
           expect(subject.valid?).to be_truthy
         end
 
@@ -313,7 +313,7 @@ describe Event::Course do
 
       it 'is valid for an event kind with validation enabled and a valid number' do
         subject.kind = kind_with_validation
-        subject.number = 'PBS CH BE 123-24'
+        subject.number = VALID_NUMBERS.first
         subject.validate!
         puts subject.errors.full_messages
         expect(subject.valid?).to be_truthy
@@ -321,14 +321,14 @@ describe Event::Course do
 
       it 'is invalid for an event kind with validation enabled and an invalid number' do
         subject.kind = kind_with_validation
-        subject.number = '1234'
+        subject.number = INVALID_NUMBERS.first
         expect(subject.valid?).to be_falsey
         expect(subject.errors[:number]).to be_present
       end
 
       it 'is valid for an event kind with validation disabled and an invalid number' do
         subject.kind = kind_without_validation
-        subject.number = '1234'
+        subject.number = INVALID_NUMBERS.first
         expect(subject.valid?).to be_truthy
       end
     end
