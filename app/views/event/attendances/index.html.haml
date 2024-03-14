@@ -9,12 +9,13 @@
 
 = form_tag(attendances_group_event_path(@group, @event), method: :patch) do
 
-  %table.table.table-striped.table-hover.attendance
-    = render 'list', entries: @leaders, caption: t('.leaders')
+  %div.table-responsive
+    %table.table.table-striped.table-hover.attendance
+      = render 'list', entries: @leaders, caption: t('.leaders')
 
-    = render 'list', entries: @cooks, caption: t('.cooks')
+      = render 'list', entries: @cooks, caption: t('.cooks')
 
-    = render 'list', entries: @participants, caption: t('.participants')
+      = render 'list', entries: @participants, caption: t('.participants')
 
   .btn-toolbar
     .btn-group
