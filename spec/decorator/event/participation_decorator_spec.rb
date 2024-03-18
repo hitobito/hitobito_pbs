@@ -75,7 +75,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
                  wohnort: 'Hitobitostadt',
                  geburtstag: '01.01.2001',
                  kursOrt: 'PBSikon',
-                 dauer: '11.05.2012',
+                 dauer: 'Fr 11.05.2012',
                  organisator: 'Pfadibewegung Schweiz' })
     end
 
