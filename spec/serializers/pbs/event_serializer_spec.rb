@@ -71,4 +71,15 @@ describe EventSerializer do
       expect(hash[:events].first[:links][:super_camp]).to eq super_camp.id
     end
   end
+
+  context 'course' do
+    let(:event)          { events(:top_course) }
+    let!(:advisor)       { people(:al_schekka) }
+
+    it 'includes advisor' do
+      hash = EventSerializer.new(event.decorate, controller: controller).to_hash
+      event = hash[:events].first
+      expect(event[:links]).to have_key :advisor
+    end
+  end
 end
