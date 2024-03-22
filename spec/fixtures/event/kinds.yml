@@ -3,9 +3,12 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
 
-lpk: {}
+lpk:
+  validate_course_number: false
 
-bkws: {}
+bkws:
+  validate_course_number: false
 
 fut:
   campy: true
+  validate_course_number: false
