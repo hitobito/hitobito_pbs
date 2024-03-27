@@ -53,7 +53,7 @@ module HitobitoPbs
       Event::ParticipantAssigner.include Pbs::Event::ParticipantAssigner
       Event::Filter.include Pbs::Event::Filter
       Events::Filter::Groups.include Pbs::Events::Filter::Groups
-      Event::Qualifier.include Pbs::Event::Qualifier
+      Event::Qualifier.prepend Pbs::Event::Qualifier
       Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
       Export::Tabular::People::ParticipationsFull.include(
