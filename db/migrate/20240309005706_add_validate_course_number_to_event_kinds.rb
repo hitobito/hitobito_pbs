@@ -6,5 +6,7 @@
 class AddValidateCourseNumberToEventKinds < ActiveRecord::Migration[6.1]
   def change
     add_column :event_kinds, :validate_course_number, :boolean, default: false, null: false
+    
+    Event::Kind.reset_column_information
   end
 end
