@@ -348,6 +348,12 @@
           "readable": true,
           "writable": false,
           "description": null
+        },
+        "advisor_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
         }
       },
       "extra_attributes": {
@@ -380,6 +386,21 @@
           ]
         },
         "state": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "number": {
           "type": "string",
           "operators": [
             "eq",
@@ -431,6 +452,17 @@
             "eq"
           ],
           "single": true
+        },
+        "advisor_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
         }
       },
       "relationships": {
@@ -443,6 +475,11 @@
           "type": "has_many",
           "description": null,
           "resource": "Event::DateResource"
+        },
+        "advisor": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "PersonResource"
         }
       },
       "stats": {
