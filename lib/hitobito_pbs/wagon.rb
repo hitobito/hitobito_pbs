@@ -147,6 +147,10 @@ module HitobitoPbs
 
       DeviseController.include HostnamedGroups
 
+      ### resources
+
+      EventResource.include Pbs::EventResource
+
       ### sheets
       Sheet::Group.include Pbs::Sheet::Group
       Sheet::Event.include Pbs::Sheet::Event
