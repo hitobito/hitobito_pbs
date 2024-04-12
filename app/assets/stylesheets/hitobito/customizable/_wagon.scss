@@ -74,3 +74,8 @@ table tr.grouping td {
 .birth_year {
   background-color: $chart-bars;
 }
+
+.turbo-progress-bar {
+  height: 4px !important;
+  background-color: desaturate(lighten($link-color, 50%), 20%) !important;
+}
