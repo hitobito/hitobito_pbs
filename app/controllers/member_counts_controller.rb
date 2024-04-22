@@ -9,6 +9,11 @@ class MemberCountsController < ApplicationController
 
   decorates :group
 
+  def edit
+    authorize!(:update_member_counts, abteilung)
+    member_count
+  end
+
   def create
     authorize!(:create_member_counts, abteilung)
 
@@ -22,11 +27,6 @@ class MemberCountsController < ApplicationController
     redirect_to census_abteilung_group_path(abteilung, year: year)
   end
 
-  def edit
-    authorize!(:update_member_counts, abteilung)
-    member_count
-  end
-
   def update
     authorize!(:update_member_counts, abteilung)
 
@@ -34,7 +34,7 @@ class MemberCountsController < ApplicationController
       redirect_to census_abteilung_group_path(abteilung, year: year),
                   notice: translate('updated_data_for_year', year: year)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 

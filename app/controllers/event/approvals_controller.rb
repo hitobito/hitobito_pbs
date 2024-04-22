@@ -12,12 +12,16 @@ class Event::ApprovalsController < CrudController
 
   decorates :group, :event, :participation
 
-  def new
-    redirect_to participation_path unless entry && (decision rescue nil)
-  end
-
   def index
     @approvals = entries.group_by(&:participation)
+  end
+
+  def new
+    redirect_to participation_path unless entry && begin
+      decision
+    rescue
+      nil
+    end
   end
 
   def create
@@ -26,7 +30,7 @@ class Event::ApprovalsController < CrudController
       redirect_to participation_path
     else
       @approval = approver.open_approval
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -75,7 +79,7 @@ class Event::ApprovalsController < CrudController
       joins(participation: :person).
       where(event_participations: { event_id: event.id, active: true }).
       includes(approver: [:phone_numbers, :roles, :groups],
-               participation: [:event, :application, person: :primary_group]).
+               participation: [:event, :application, { person: :primary_group }]).
       merge(Person.order_by_name).
       order_by_layer
   end
