@@ -21,8 +21,6 @@ module Pbs::Event::ParticipationsController
     alias_method_chain :send_confirmation_email, :current_user
     alias_method_chain :permitted_attrs, :state
 
-    alias_method_chain :directly_assign_place?, :pbs_courses
-
     self.permitted_attrs += [:j_s_data_sharing_accepted]
   end
 
@@ -78,11 +76,5 @@ module Pbs::Event::ParticipationsController
     attrs = permitted_attrs_without_state.dup
     attrs << :state if event.is_a?(Event::Camp)
     attrs
-  end
-
-  def directly_assign_place_with_pbs_courses?
-    return false if event.is_a?(Event::Course)
-
-    directly_assign_place_without_pbs_courses?
   end
 end
