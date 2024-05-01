@@ -21,7 +21,7 @@ describe 'event/participations/_form.html.haml' do
                                     path_args: [group, event, participation],
                                     model_class: Event::Participation)
 
-    allow(view).to receive_messages(entry: participation.decorate)
+    allow(view).to receive_messages(entry: participation.decorate, submit_label: 'Speichern')
     allow(controller).to receive_messages(current_user: participant)
     assign(:event, event.decorate)
     assign(:group, group)
