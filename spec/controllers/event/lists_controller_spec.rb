@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -194,7 +194,7 @@ describe Event::ListsController do
     let(:user) { people(:root) }
     let(:kind) { event_kinds(:fut) }
     let(:person) do
-      Fabricate(:person, address: 'test_address',
+      Fabricate(:person, street: 'test_street', housenumber: '23',
                          zip_code: '3128',
                          town: 'Foodorf',
                          country: 'CH')
@@ -272,7 +272,7 @@ describe Event::ListsController do
 
         #advisor labels
         expect(values[20..29]).to eq([person.id.to_s, person.first_name, person.last_name,
-                                      person.nickname, "test_address", "3128", "Foodorf", "CH",
+                                      person.nickname, "test_street 23", "3128", "Foodorf", "CH",
                                       person.email, person.salutation_value])
 
         expect(values.length).to eq(30)

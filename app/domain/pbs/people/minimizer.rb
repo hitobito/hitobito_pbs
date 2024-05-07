@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2023, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2023-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -34,9 +34,13 @@ module Pbs::People::Minimizer
     taggings_to_delete.delete_all
   end
 
-  def minimize_person_attrs
+  def minimize_person_attrs # rubocop:disable Metrics/MethodLength
     [
-      :address,
+      :address, # TODO: remove this when cleaning up structured addresses
+      :street,
+      :housenumber,
+      :address_care_of,
+      :postbox,
       :town,
       :zip_code,
       :title,
