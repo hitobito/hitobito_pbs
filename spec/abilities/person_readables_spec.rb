@@ -24,10 +24,10 @@ describe PersonReadables do
   it 'people are not accessible if person is creator of crisis on a different Abteilung' do
     crisis_creator.crises.create!(group: groups(:chaeib))
     expect(subject).not_to include(al_schekka)
-    expect(subject).not_to include(al_schekka)
+    expect(subject).not_to include(child)
   end
 
-  it 'people are not accessible if person is creator of crisis on this Abteilung' do
+  it 'people are accessible if person is creator of crisis on this Abteilung' do
     crises(:schekka).update(creator: crisis_creator)
     expect(subject).to include(al_schekka)
     expect(subject).to include(child)

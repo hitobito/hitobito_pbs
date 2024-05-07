@@ -91,7 +91,7 @@ module HitobitoPbs
       AbilityDsl::UserContext::LAYER_PERMISSIONS << :crisis_trigger
       GroupAbility.include Pbs::GroupAbility
       GroupAbility.prepend Pbs::ServiceToken::Constraints
-      PersonReadables.include Pbs::PersonReadables
+      PersonReadables.prepend Pbs::PersonReadables
       PersonAbility.include Pbs::PersonAbility
       EventAbility.include Pbs::EventAbility
       EventAbility.include Pbs::Event::Constraints
