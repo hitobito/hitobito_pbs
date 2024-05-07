@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 #  Copyright (c) 2023-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
@@ -27,8 +28,7 @@ describe People::Minimizer do
               leaving_date: Date.new(2023, 8, 7),
               j_s_number: '756.1234.5678.97',
               nationality_j_s: 'CH',
-              additional_information: 'Really like cats'
-             )
+              additional_information: 'Really like cats')
     Note.create!(author: p, text: Faker::Quote.famous_last_words, subject: p)
     Fabricate(:additional_email, contactable: p)
     Fabricate(:phone_number, contactable: p)
@@ -82,12 +82,16 @@ describe People::Minimizer do
     SubscriptionTag.create!(excluded: true,
                             tag: excluded_tag,
                             subscription: Subscription.create!(subscriber: person,
-                                                               mailing_list: Fabricate(:mailing_list, group: groups(:sunnewirbu))))
+                                                               mailing_list: Fabricate(
+                                                                 :mailing_list, group: groups(:sunnewirbu)
+                                                               )))
     included_tag = Fabricate(:tag)
     SubscriptionTag.create!(excluded: false,
                             tag: included_tag,
                             subscription: Subscription.create!(subscriber: person,
-                                                               mailing_list: Fabricate(:mailing_list, group: groups(:sunnewirbu))))
+                                                               mailing_list: Fabricate(
+                                                                 :mailing_list, group: groups(:sunnewirbu)
+                                                               )))
 
     random_tag = Fabricate(:tag)
 
