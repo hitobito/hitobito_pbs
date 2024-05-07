@@ -16,6 +16,7 @@ describe 'events/_attrs.html.haml' do
     assign(:group, event.groups.first)
     allow(view).to receive_messages(action_name: 'events', current_user: bulei, entry: event)
     allow(controller).to receive_messages(current_user: bulei)
+    allow(controller).to receive_messages(current_person: bulei)
   end
 
   let(:dom) { Capybara::Node::Simple.new(rendered) }
