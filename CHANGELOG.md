@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## unrelease
+
+*   LKB/Coach in Event-Resource der API aufgenommen (hitobito_pbs#325)
+
 ## Version 2.0
 
 *   Das Feld "Geschwister in der Abteilung" wird neu von eingetragenen Geschwistern abgeleitet und pro Ebene bzw. pro Anlass berechnet und angezeigt. (hitobito#2147)
