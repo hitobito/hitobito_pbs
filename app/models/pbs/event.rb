@@ -13,6 +13,9 @@ module Pbs::Event
   included do
     class_attribute :superior_attributes
     self.superior_attributes = []
+
+    # dummy accessors for event_resource (only courses do have advisor)
+    attr_accessor :advisor_id, :advisor
   end
 
   def camp_submitted?
