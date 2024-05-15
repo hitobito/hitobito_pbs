@@ -10,6 +10,7 @@ require 'spec_helper'
 describe EventResource, type: :resource do
   let!(:camp) { events(:tsueri_supercamp) }
   let!(:course) { events(:top_course) }
+  let(:person) { people(:bulei) }
 
   before do
     params[:include] = 'advisor'
