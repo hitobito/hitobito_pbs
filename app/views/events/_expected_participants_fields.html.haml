@@ -2,33 +2,33 @@
   = f.labeled(:expected_participants, t('activerecord.attributes.event.expected_participants'), nil, class: 'controls-row') do
     .row
       .col-1
-      .col-1= t('activerecord.attributes.event.expected_participants_wolf')
-      .col-1= t('activerecord.attributes.event.expected_participants_pfadi')
-      .col-1= t('activerecord.attributes.event.expected_participants_pio')
-      .col-1= t('activerecord.attributes.event.expected_participants_rover')
-      .col-1= t('activerecord.attributes.event.expected_participants_leitung')
-    .row
+      .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_wolf')
+      .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_pfadi')
+      .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_pio')
+      .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_rover')
+      .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_leitung')
+    .row.mb-1
       .col-1 F
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_wolf_f)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_pfadi_f)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_pio_f)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_rover_f)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_leitung_f)
     .row
       .col-1 M
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_wolf_m)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_pfadi_m)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_pio_m)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_rover_m)
-      .col-1
+      .col-2
         = f.string_field(:expected_participants_leitung_m)
     .row.help-block= t('.expected_participants_help_inline')
