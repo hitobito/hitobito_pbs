@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+
 #
-#  Copyright (c) 2023, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2023-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -12,7 +13,11 @@ describe People::Minimizer do
 
   let(:person) do
     p = Fabricate(Group::Pfadi::Pfadi.sti_name.to_sym, group: groups(:pegasus)).person
-    p.update!(address: 'Belpstrasse 37',
+    p.update!(address: "c/o Herr Blømblgårf\nBelpstrasse 37\nPostfach 42",
+              address_care_of: 'c/o Herr Blømblgårf',
+              street: 'Belpstrasse',
+              housenumber: '37',
+              postbox: 'Postfach 42',
               town: 'Bern',
               zip_code: '3007',
               title: 'Herr',
@@ -23,8 +28,7 @@ describe People::Minimizer do
               leaving_date: Date.new(2023, 8, 7),
               j_s_number: '756.1234.5678.97',
               nationality_j_s: 'CH',
-              additional_information: 'Really like cats'
-             )
+              additional_information: 'Really like cats')
     Note.create!(author: p, text: Faker::Quote.famous_last_words, subject: p)
     Fabricate(:additional_email, contactable: p)
     Fabricate(:phone_number, contactable: p)
@@ -78,12 +82,16 @@ describe People::Minimizer do
     SubscriptionTag.create!(excluded: true,
                             tag: excluded_tag,
                             subscription: Subscription.create!(subscriber: person,
-                                                               mailing_list: Fabricate(:mailing_list, group: groups(:sunnewirbu))))
+                                                               mailing_list: Fabricate(
+                                                                 :mailing_list, group: groups(:sunnewirbu)
+                                                               )))
     included_tag = Fabricate(:tag)
     SubscriptionTag.create!(excluded: false,
                             tag: included_tag,
                             subscription: Subscription.create!(subscriber: person,
-                                                               mailing_list: Fabricate(:mailing_list, group: groups(:sunnewirbu))))
+                                                               mailing_list: Fabricate(
+                                                                 :mailing_list, group: groups(:sunnewirbu)
+                                                               )))
 
     random_tag = Fabricate(:tag)
 
@@ -104,7 +112,11 @@ describe People::Minimizer do
 
   def nullify_attrs
     [
-      :address,
+      :address, # TODO: remove this when cleaning up structured addresses
+      :street,
+      :housenumber,
+      :address_care_of,
+      :postbox,
       :town,
       :zip_code,
       :title,
