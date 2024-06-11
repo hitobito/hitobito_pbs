@@ -101,6 +101,7 @@ module HitobitoPbs
       Event::ParticipationAbility.include Pbs::Event::ParticipationAbility
       Event::ParticipationAbility.include Pbs::Event::Constraints
       Event::RoleAbility.include Pbs::Event::Constraints
+      Household.prepend Pbs::Household
       QualificationAbility.include Pbs::QualificationAbility
       ServiceTokenAbility.prepend Pbs::ServiceToken::Constraints
       TokenAbility.include Pbs::TokenAbility
@@ -134,7 +135,6 @@ module HitobitoPbs
 
       Group::PersonAddRequestsController.prepend Pbs::Group::PersonAddRequestsController
       GroupsController.include Pbs::GroupsController
-      Person::HouseholdsController.include Pbs::Person::HouseholdsController
       PeopleController.include Pbs::PeopleController
       EventsController.include Pbs::EventsController
       Event::ApplicationMarketController.include Pbs::Event::ApplicationMarketController
