@@ -1,13 +1,13 @@
 - entry.used?(:expected_participants_wolf_f) do
   = f.labeled(:expected_participants, t('activerecord.attributes.event.expected_participants'), nil, class: 'controls-row') do
-    .row
+    .row.g-1
       .col-1
       .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_wolf')
       .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_pfadi')
       .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_pio')
       .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_rover')
       .col-2.d-flex.justify-content-center= t('activerecord.attributes.event.expected_participants_leitung')
-    .row.mb-1
+    .row.mb-1.g-1
       .col-1 F
       .col-2
         = f.string_field(:expected_participants_wolf_f)
@@ -19,7 +19,7 @@
         = f.string_field(:expected_participants_rover_f)
       .col-2
         = f.string_field(:expected_participants_leitung_f)
-    .row
+    .row.g-1
       .col-1 M
       .col-2
         = f.string_field(:expected_participants_wolf_m)
