@@ -24,9 +24,11 @@
 
   - entry.used?(:j_s_kind) do
     = f.labeled(:j_s_kind, class: 'row') do
-      = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
+      %div.d-flex.flex-row
+        = f.inline_radio_button(:j_s_kind, '', t('.j_s_kind_none'), false)
       - Event::Camp::J_S_KINDS.each do |kind|
-        = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
+        %div.d-flex.flex-row
+          = f.inline_radio_button(:j_s_kind, kind, t(".j_s_kind_#{kind}"), false)
 
   - j_s_security_attrs = entry.used_attributes(:j_s_security_snow,
                                                :j_s_security_mountain,
