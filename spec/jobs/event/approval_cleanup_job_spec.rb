@@ -12,23 +12,25 @@ describe Event::ApprovalCleanupJob do
 
   subject(:job) { described_class.new }
 
-  def create_approval(event_finish: 4.months.ago.change(hour: 18),
-                      event_start: event_finish.change(hour: 8))
+  def create_approval(event_finish: 4.months.ago, event_start: event_finish)
+    start = event_start&.change(hour: 8)
+    finish = event_finish&.change(hour: 18)
+
     application = Fabricate(:pbs_application)
     application.create_participation(
       event: application.priority_1,
       person: people(:al_schekka),
       active: true,
       state: 'assigned',
-      j_s_data_sharing_accepted_at: [event_start, event_finish, 1.year.ago].compact.first - 1.week
+      j_s_data_sharing_accepted_at: [start, finish, 1.year.ago].compact.first - 1.week
     )
 
     event = application.participation.event
     event.dates.clear
     event.dates << Fabricate(
       :event_date,
-      start_at: event_start,
-      finish_at: event_finish
+      start_at: start,
+      finish_at: finish
     )
     event.state = 'closed'
     event.save!
