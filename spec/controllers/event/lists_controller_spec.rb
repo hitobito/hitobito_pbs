@@ -263,7 +263,7 @@ describe Event::ListsController do
         values = rows.second.split(';')
         #main labels
         expect(values[0..8]).to eq(
-          ["", "", "LPK (Leitpfadikurs)", "Zürich, Bern", '""', "124", "11.11.2015", "12.11.2015", ""]
+          ["", "", "LPK (Leitpfadikurs)", "Bern, Zürich", '""', "124", "11.11.2015", "12.11.2015", ""]
         )
         #counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.
