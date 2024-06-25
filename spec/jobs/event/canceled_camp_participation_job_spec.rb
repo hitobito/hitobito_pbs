@@ -22,7 +22,7 @@ describe Event::CanceledCampParticipationJob do
       Fabricate(Event::Camp::Role::Leader.name, participation: l1)
       Fabricate(Event::Camp::Role::AssistantLeader.name, participation: Fabricate(:pbs_participation, event: event))
 
-      expect(camp_leaders).to eq([people(:bulei), l1.person])
+      expect(camp_leaders).to eq([l1.person, people(:bulei)])
     end
   end
 

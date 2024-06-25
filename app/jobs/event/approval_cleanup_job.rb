@@ -44,7 +44,7 @@ class Event::ApprovalCleanupJob < RecurringJob
               .select(:event_id).select("MAX(finish_at) AS finish_at, MAX(start_at) AS start_at")
               .joins(:event).where(events: {state: "closed"})
               .group(:event_id))
-      .where("IFNULL(finish_at, start_at) < ?", cutoff_date)
+      .where("COALESCE(finish_at, start_at) < ?", cutoff_date)
   end
 
   def approvals

@@ -1,0 +1,35 @@
+event_course_role_leader:
+  name: Event::Course::Role::Leader
+  order_weight: 1
+
+event_course_role_class_leader:
+  name: Event::Course::Role::ClassLeader
+  order_weight: 2
+
+event_role_speaker:
+  name: Event::Role::Speaker
+  order_weight: 3
+
+event_course_role_helper:
+  name: Event::Course::Role::Helper
+  order_weight: 4
+
+event_role_cook:
+  name: Event::Role::Cook
+  order_weight: 5
+
+event_course_role_participant:
+  name: Event::Course::Role::Participant
+  order_weight: 6
+
+event_camp_role_leader:
+  name: Event::Camp::Role::Leader
+  order_weight: 7
+
+event_camp_role_participant:
+  name: Event::Camp::Role::Participant
+  order_weight: 8
+
+event_camp_role_leader:
+  name: Event::Camp::Role::Leader
+  order_weight: 9

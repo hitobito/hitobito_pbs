@@ -38,11 +38,11 @@ module Pbs::Export::Tabular::Events
     end
 
     def kantonalverband
-      entry.groups.where(type: Group::Kantonalverband).join(", ") || nil
+      entry.groups.where(type: "Group::Kantonalverband").join(", ") || nil
     end
 
     def region
-      entry.groups.where(type: Group::Region).join(", ") || nil
+      entry.groups.where(type: "Group::Region").join(", ") || nil
     end
 
     def language_count_pbs
