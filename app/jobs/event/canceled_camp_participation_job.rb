@@ -29,11 +29,12 @@ class Event::CanceledCampParticipationJob < BaseJob
 
   def camp_leaders
     participation.event.people
-      .joins(event_participations: :roles)
-      .where(event_participations: {active: true})
-      .where(event_roles: {type: Event::Camp::Role::Leader.sti_name})
-      .distinct
-      .includes(:additional_emails)
+                 .joins(event_participations: :roles)
+                 .where(event_participations: { active: true })
+                 .where(event_roles: { type: Event::Camp::Role::Leader.sti_name })
+                 .distinct
+                 .includes(:additional_emails)
+                 .order(:id)
   end
 
   def participation

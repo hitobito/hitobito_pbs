@@ -29,7 +29,7 @@ class PopulationController < ApplicationController
   end
 
   def load_groups
-    group.self_and_descendants.without_deleted.order_by_type(group)
+    group.self_and_descendants.without_deleted.order_by_type
   end
 
   def load_people_by_group
@@ -47,11 +47,12 @@ class PopulationController < ApplicationController
 
   def load_people(group)
     @member_counter.members
-      .where(roles: {group_id: group})
-      .includes(:groups)
-      .preload_groups
-      .order_by_role
-      .order_by_name
+                   .where(roles: { group_id: group })
+                   .includes(:groups)
+                   .preload_groups
+                   .select("people.*")
+                   .order_by_role
+                   .order_by_name
   end
 
   def authorize

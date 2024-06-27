@@ -1,0 +1,111 @@
+root:
+  name: Group::Root
+  order_weight: 1
+
+bund:
+  name: Group::Bund
+  order_weight: 2
+
+kantonalverband:
+  name: Group::Kantonalverband
+  order_weight: 3
+
+region:
+  name: Group::Region
+  order_weight: 4
+
+regionale_rover:
+  name: Group::RegionaleRover
+  order_weight: 5
+
+regionales_gremium:
+  name: Group::RegionalesGremium
+  order_weight: 6
+
+internes_regionales_gremium:
+  name: Group::InternesRegionalesGremium
+  order_weight: 7
+
+regionale_kommission:
+  name: Group::RegionaleKommission
+  order_weight: 8
+
+abteilung:
+  name: Group::Abteilung
+  order_weight: 9
+
+biber:
+  name: Group::Biber
+  order_weight: 10
+
+woelfe:
+  name: Group::Woelfe
+  order_weight: 11
+
+pfadi:
+  name: Group::Pfadi
+  order_weight: 12
+
+pio:
+  name: Group::Pio
+  order_weight: 13
+
+abteilungs_rover:
+  name: Group::AbteilungsRover
+  order_weight: 14
+
+pta:
+  name: Group::Pta
+  order_weight: 15
+
+elternrat:
+  name: Group::Elternrat
+  order_weight: 16
+
+abteilungs_gremium:
+  name: Group::AbteilungsGremium
+  order_weight: 17
+
+internes_abteilungs_gremium:
+  name: Group::InternesAbteilungsGremium
+  order_weight: 18
+
+erziehungsberechtigten_gremium:
+  name: Group::ErziehungsberechtigtenGremium
+  order_weight: 19
+
+kantonales_gremium:
+  name: Group::KantonalesGremium
+  order_weight: 20
+
+internes_kantonales_gremium:
+  name: Group::InternesKantonalesGremium
+  order_weight: 21
+
+kantonale_kommission:
+  name: Group::KantonaleKommission
+  order_weight: 22
+
+ehemalige:
+  name: Group::Ehemalige
+  order_weight: 23
+
+ausbildungskommission:
+  name: Group::Ausbildungskommission
+  order_weight: 24
+
+bundes_gremium:
+  name: Group::BundesGremium
+  order_weight: 25
+
+bundes_kommission:
+  name: Group::BundesKommission
+  order_weight: 26
+
+silverscouts:
+  name: Group::Silverscouts
+  order_weight: 27
+
+silverscouts_region:
+  name: Group::SilverscoutsRegion
+  order_weight: 28

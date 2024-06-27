@@ -7,10 +7,10 @@ class CrisisMailer < ApplicationMailer
   CONTENT_CRISIS_ACKNOWLEDGED = "content_crisis_acknowledged".freeze
   CONTENT_CRISIS_TRIGGERED = "content_crisis_triggered".freeze
 
-  BUND_RECIPIENTS = [Group::Bund::VerantwortungKrisenteam,
-    Group::Bund::LeitungKernaufgabeKommunikation]
+  BUND_RECIPIENTS = [Group::Bund::VerantwortungKrisenteam.sti_name,
+                     Group::Bund::LeitungKernaufgabeKommunikation.sti_name]
 
-  BUND_CREATORS = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam]
+  BUND_CREATORS   = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam.sti_name]
 
   attr_reader :crisis
 
