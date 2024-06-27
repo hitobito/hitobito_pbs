@@ -86,7 +86,8 @@ class MemberCount < ActiveRecord::Base
     end
 
     def total_for_abteilung(year, abteilung)
-      totals_by(year, :abteilung_id, abteilung_id: abteilung.id).order("MIN(member_counts.id)").first
+      totals_by(year, :abteilung_id, abteilung_id: abteilung.id).order("MIN(member_counts.id)")
+                                                                .first
     end
 
     def totals(year)
