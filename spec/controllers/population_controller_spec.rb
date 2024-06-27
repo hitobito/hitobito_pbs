@@ -35,11 +35,11 @@ describe PopulationController do
 
       it do
         is_expected.to eq([abteilung,
-                   groups(:sunnewirbu),
+                   groups(:sunnewirbu),        
+                   groups(:baereried),
+                   groups(:medusa),
                    groups(:pegasus),
                    groups(:poseidon),
-                   groups(:medusa),
-                   groups(:baereried),
                    groups(:rovers),
                    groups(:elternrat),
                    groups(:fussballers)])
@@ -48,7 +48,7 @@ describe PopulationController do
 
     describe 'people by group' do
       subject { assigns(:people_by_group) }
-
+      
       it { expect(subject[abteilung].collect(&:to_s)).to contain_exactly(*[leader, people(:al_schekka), guide].collect(&:to_s)) }
       it { expect(subject[groups(:pegasus)].collect(&:to_s)).to contain_exactly(*[group_leader, child, people(:child)].collect(&:to_s)) }
       it { expect(subject[groups(:baereried)]).to be_nil } # no people in group - not displayed at all
