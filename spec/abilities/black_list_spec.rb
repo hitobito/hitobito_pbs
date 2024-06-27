@@ -30,8 +30,8 @@ describe Ability do
 
   describe 'other roles' do
     it 'cannot read BlackList' do
-      other_roles = Role.where.not(type: [Group::Bund::Geschaeftsleitung,
-                                           Group::Bund::LeitungKernaufgabeKommunikation])
+      other_roles = Role.where.not(type: ["Group::Bund::Geschaeftsleitung",
+                                           "Group::Bund::LeitungKernaufgabeKommunikation"])
 
       other_roles.each do |role|
         ability = Ability.new(role.person)

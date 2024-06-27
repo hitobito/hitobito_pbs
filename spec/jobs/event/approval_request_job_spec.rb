@@ -45,7 +45,7 @@ describe Event::ApprovalRequestJob do
 
     it 'sends mail to all approvers in layer' do
       # Make sure there are no seeded persons with approval permissions
-      approval_roles = [Group::Region::Regionalleitung, Group::Region::VerantwortungAusbildung]
+      approval_roles = ['Group::Region::Regionalleitung', 'Group::Region::VerantwortungAusbildung']
       groups(:schekka).people.where(roles: { type: approval_roles }).destroy_all
 
       leitung = Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern)).person

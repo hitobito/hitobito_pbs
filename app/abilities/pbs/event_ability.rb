@@ -147,7 +147,7 @@ module Pbs::EventAbility
   end
 
   def if_part_of_krisenteam
-    user.roles.where(type: CAMP_KRISENTEAM_ROLES, group: kantonalverbaende).exists?
+    user.roles.where(type: CAMP_KRISENTEAM_ROLES.map(&:to_s), group: kantonalverbaende).exists?
   end
 
   def kantonalverbaende

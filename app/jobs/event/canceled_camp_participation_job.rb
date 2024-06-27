@@ -36,7 +36,8 @@ class Event::CanceledCampParticipationJob < BaseJob
       where(event_participations: { active: true }).
       where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
       distinct.
-      includes(:additional_emails)
+      includes(:additional_emails).
+      order(:id)
   end
 
   def participation
