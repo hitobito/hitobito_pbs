@@ -77,6 +77,11 @@ de:
     coach_title: 8. Coach
 
   event:
+    applications:
+      current_status_rejected: Die Kursteilnahme wurde abgelehnt
+      current_status_approvals_missing: Es sind noch Kursfreigaben ausstehend
+      current_status_inactive: Die Zuteilung ist noch ausstehend
+
     attendances:
       index:
         info: Erfasse hier die Anzahl BSV-Tage für jede Person.

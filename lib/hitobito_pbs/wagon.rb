@@ -73,6 +73,7 @@ module HitobitoPbs
       Export::PeopleExportJob.include Pbs::Export::PeopleExportJob
       Export::EventParticipationsExportJob.prepend Pbs::Export::EventParticipationsExportJob
       Export::SubscriptionsJob.include Pbs::Export::SubscriptionsJob
+      Person::EventQueries.include Pbs::Person::EventQueries
 
       Person::AddRequest::Approver::Event.prepend(
         Pbs::Person::AddRequest::Approver::Event
