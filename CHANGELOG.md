@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 2.2
 
 *   LKB/Coach in Event-Resource der API aufgenommen (hitobito_pbs#325)
 *   Text-Informationen bei Kursempfehlungen werden nach 3 Monaten gelöscht (hitobito#1060)
