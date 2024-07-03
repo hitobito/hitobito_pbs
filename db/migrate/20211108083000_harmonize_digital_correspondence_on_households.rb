@@ -37,18 +37,16 @@ class HarmonizeDigitalCorrespondenceOnHouseholds < ActiveRecord::Migration[6.0]
     end
 
     def grouped_households
-      people = Person.quoted_table_name
-
       @people_scope.
         # remove previously added selects, very important to make this query scale
         unscope(:select, :includes).
         # group by household, but keep NULLs separate
-        select("IFNULL(#{people}.`household_key`, #{people}.`id`) as `key`").
+        select("COALESCE(#{people}.\"household_key\", \"people\".\"id\"::text) as \"key\"").
         group(:key).
         # Primary sorting criterion
-        select("COUNT(#{people}.`household_key`) as `member_count`").
+        select("COUNT(#{people}.\"household_key\") as \"member_count\"").
         # Secondary, unique sorting criterion
-        select("MIN(#{people}.`id`) as `id`")
+        select("MIN(#{people}.\"id\") as \"id\"")
     end
 
     def households_in_batches
