@@ -128,7 +128,7 @@ module HitobitoPbs
                                            :prefers_digital_correspondence]
       GroupsController.permitted_attrs += [:hostname]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
-                                                 :confirmation_name]
+                                                 :confirmation_name, :validate_course_number]
       QualificationKindsController.permitted_attrs += [:manual]
       ServiceTokensController.permitted_attrs += [:group_health, :census_evaluations]
 

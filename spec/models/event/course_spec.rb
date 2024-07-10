@@ -232,4 +232,105 @@ describe Event::Course do
       expect(event).to_not be_attr_used(:globally_visible)
     end
   end
+
+  context 'validations' do
+    let(:kind_with_validation) { Fabricate(:event_kind, validate_course_number: true) }
+    let(:kind_without_validation) { event_kinds(:lpk) }
+    VALID_NUMBERS = ['PBS CH 947-00', 'PBS CH XX 007-99', 'PBS CH AB 123-45'].freeze
+    INVALID_NUMBERS = ['PBS CH 000-FP', 'PBS XY XX 475-31', 'CH AB 123-45', 'PBS CH 123-456',
+                       'PBS CH AB 12-345', 'PBSCHAB123-45'].freeze
+
+    context 'course number' do
+
+      subject { Fabricate(:course, groups: [groups(:be)], kind: kind_with_validation, number: 'PBS CH BE 123-24') }
+
+      VALID_NUMBERS.each do |number|
+        it "'#{number}' is valid" do
+          subject.number = number
+          expect(subject.valid?).to be_truthy
+        end
+      end
+
+      INVALID_NUMBERS.each do |number|
+        it "'#{number}' is invalid" do
+          subject.number = number
+          expect(subject.valid?).to be_falsey
+          expect(subject.errors[:number]).to be_present
+        end
+      end
+    end
+
+    context 'when updating an existing event' do
+      subject { event }
+
+      context 'with event kind having validation enabled' do
+        before do
+          subject.kind = kind_with_validation
+          # fixture has an invalid course number, so we need to skip validations
+          subject.save(validate: false)
+        end
+
+        it 'is invalid for a number not matching the expected format' do
+          subject.number = INVALID_NUMBERS.first
+          expect(subject.valid?).to be_falsey
+          expect(subject.errors[:number]).to be_present
+        end
+
+        it 'is valid for a number matching the expected format' do
+          subject.number = VALID_NUMBERS.first
+          expect(subject.valid?).to be_truthy
+        end
+
+        it 'is valid when switching to an event kind with validation disabled' do
+          subject.kind = kind_without_validation
+          expect(subject.valid?).to be_truthy
+        end
+      end
+
+      context 'with event kind having validation disabled' do
+        before do
+          subject.kind = kind_without_validation
+          subject.save
+        end
+
+        it 'is valid for a number not matching the expected format' do
+          subject.number = INVALID_NUMBERS.first
+          expect(subject.valid?).to be_truthy
+        end
+
+        it 'is invalid when switching to an event kind with validation enabled' do
+          subject.kind = kind_with_validation
+          expect(subject.valid?).to be_falsey
+          expect(subject.errors[:number]).to be_present
+        end
+      end
+    end
+
+    context 'when creating a new event' do
+      subject { Event::Course.new(groups: [groups(:be)],
+                                  name: Faker::Lorem.word,
+                                  dates: [Event::Date.new(start_at: Time.zone.now)]) }
+
+      it 'is valid for an event kind with validation enabled and a valid number' do
+        subject.kind = kind_with_validation
+        subject.number = VALID_NUMBERS.first
+        subject.validate!
+        puts subject.errors.full_messages
+        expect(subject.valid?).to be_truthy
+      end
+
+      it 'is invalid for an event kind with validation enabled and an invalid number' do
+        subject.kind = kind_with_validation
+        subject.number = INVALID_NUMBERS.first
+        expect(subject.valid?).to be_falsey
+        expect(subject.errors[:number]).to be_present
+      end
+
+      it 'is valid for an event kind with validation disabled and an invalid number' do
+        subject.kind = kind_without_validation
+        subject.number = INVALID_NUMBERS.first
+        expect(subject.valid?).to be_truthy
+      end
+    end
+  end
 end
