@@ -16,7 +16,7 @@ module Export::Tabular::People
         :entry_date,
         :roles,
         :kantonalverband_id,
-        :kantonalverband_name,
+        :kantonalverband_name
       ]
     end
 
@@ -26,9 +26,9 @@ module Export::Tabular::People
 
     def attribute_label(attr)
       {
-        kantonalverband_id: 'Id des Kantonalverband',
-        kantonalverband_name: 'Name des Kantonalverband'
-      }.fetch(attr) { super(attr) }
+        kantonalverband_id: "Id des Kantonalverband",
+        kantonalverband_name: "Name des Kantonalverband"
+      }.fetch(attr) { super }
     end
   end
 end

@@ -4,7 +4,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class CrisesController < ApplicationController
-
   def create
     @crisis = Crisis.new(creator: current_user, group: group)
     authorize!(:create, @crisis)
@@ -26,7 +25,7 @@ class CrisesController < ApplicationController
       crisis.update(acknowledged: true)
       CrisisMailer.acknowledged(crisis, current_user).deliver_later
     else
-      flash[:alert] = t('.too_old')
+      flash[:alert] = t(".too_old")
     end
     redirect_to group
   end
@@ -36,5 +35,4 @@ class CrisesController < ApplicationController
   def group
     @group ||= Group.find(params[:group_id])
   end
-
 end

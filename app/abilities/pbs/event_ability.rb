@@ -9,15 +9,15 @@ module Pbs::EventAbility
   extend ActiveSupport::Concern
 
   CANTONAL_CAMP_LIST_ROLES = [Group::Kantonalverband::Kantonsleitung,
-                              Group::Kantonalverband::VerantwortungKrisenteam].freeze
+    Group::Kantonalverband::VerantwortungKrisenteam].freeze
 
   ABROAD_CAMP_LIST_ROLES = [Group::Bund::InternationalCommissionerIcWagggs,
-                            Group::Bund::InternationalCommissionerIcWosm].freeze
+    Group::Bund::InternationalCommissionerIcWosm].freeze
 
   CAMP_KRISENTEAM_ROLES = [Group::Kantonalverband::Kantonsleitung,
-                           Group::Kantonalverband::Sekretariat,
-                           Group::Kantonalverband::VerantwortungKrisenteam,
-                           Group::Kantonalverband::MitgliedKrisenteam].freeze
+    Group::Kantonalverband::Sekretariat,
+    Group::Kantonalverband::VerantwortungKrisenteam,
+    Group::Kantonalverband::MitgliedKrisenteam].freeze
 
   included do # rubocop:disable Metrics/BlockLength
     on(Event) do
@@ -27,22 +27,22 @@ module Pbs::EventAbility
       permission(:any).may(:create_camp_application).for_coached_events
       permission(:any).may(:show_details).if_participating_as_leader_role_of_supercamp
 
-      permission(:group_full).
-        may(:show_camp_application, :show_details).
-        in_same_group
-      permission(:group_and_below_full).
-        may(:show_camp_application, :show_details).
-        in_same_group_or_below
-      permission(:layer_full).
-        may(:show_camp_application, :show_details).
-        in_same_layer
-      permission(:layer_and_below_full).
-        may(:show_camp_application, :show_details).
-        in_same_layer_or_below
+      permission(:group_full)
+        .may(:show_camp_application, :show_details)
+        .in_same_group
+      permission(:group_and_below_full)
+        .may(:show_camp_application, :show_details)
+        .in_same_group_or_below
+      permission(:layer_full)
+        .may(:show_camp_application, :show_details)
+        .in_same_layer
+      permission(:layer_and_below_full)
+        .may(:show_camp_application, :show_details)
+        .in_same_layer_or_below
 
-      permission(:layer_and_below_full).
-        may(:create, :destroy, :application_market, :qualify).
-        in_same_layer_or_course_in_below_abteilung
+      permission(:layer_and_below_full)
+        .may(:create, :destroy, :application_market, :qualify)
+        .in_same_layer_or_course_in_below_abteilung
     end
 
     on(Event::Course) do
@@ -50,9 +50,9 @@ module Pbs::EventAbility
       permission(:any).may(:update).for_advised_courses
       permission(:any).may(:qualifications_read).for_advised_courses_or_assistenz_ausbildung
       permission(:any).may(:qualify).if_assistenz_ausbildung
-      permission(:any).
-        may(:index_approvals).
-        for_advised_or_participations_full_events
+      permission(:any)
+        .may(:index_approvals)
+        .for_advised_or_participations_full_events
 
       permission(:layer_full).may(:manage_attendances, :index_approvals).in_same_layer
 
@@ -87,7 +87,7 @@ module Pbs::EventAbility
   def if_layer_and_below_full_on_root_with_pbs_root_groups
     if_layer_and_below_full_on_root_without_pbs_root_groups ||
       contains_any?(user_context.permission_layer_ids(:layer_and_below_full),
-                    [Group.bund.id, Group.silverscouts.id])
+        [Group.bund.id, Group.silverscouts.id])
   end
 
   def if_globally_visible_or_participating_with_pbs
@@ -110,7 +110,7 @@ module Pbs::EventAbility
 
   def if_education_responsible
     role_type?(Group::Bund::AssistenzAusbildung,
-               Group::Bund::MitarbeiterGs)
+      Group::Bund::MitarbeiterGs)
   end
 
   def if_assistenz_ausbildung
@@ -171,15 +171,14 @@ module Pbs::EventAbility
 
   def participating_as_leader_role?
     Event.where(id: relevant_participating_event_ids)
-         .joins(participations: [:roles])
-         .where('event_participations.person_id = ?', user.id)
-         .where('event_roles.type != ?', Event::Camp::Role::Participant.sti_name)
-         .present?
+      .joins(participations: [:roles])
+      .where(event_participations: {person_id: user.id})
+      .where.not(event_roles: {type: Event::Camp::Role::Participant.sti_name})
+      .present?
   end
 
   def if_full_permission_in_course_layer_with_ausbildungskommission
     if_full_permission_in_course_layer_without_ausbildungskommission ||
       role_type?(Group::Ausbildungskommission::Mitglied)
   end
-
 end

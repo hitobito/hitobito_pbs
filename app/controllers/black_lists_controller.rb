@@ -4,9 +4,8 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class BlackListsController < SimpleCrudController
-
   self.permitted_attrs = [:first_name, :last_name, :pbs_number, :email,
-                          :phone_number, :reference_name, :reference_phone_number]
+    :phone_number, :reference_name, :reference_phone_number]
 
   def list_entries
     super.page(params[:page])

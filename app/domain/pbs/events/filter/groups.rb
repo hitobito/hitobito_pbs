@@ -15,5 +15,4 @@ module Pbs::Events::Filter::Groups
       group_ids.any? ? scope.with_group_id(group_ids) : scope
     end
   end
-
 end

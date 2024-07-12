@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,7 +40,6 @@ module Pbs::Export::Tabular::Events::List
   end
 
   def translated_prefix_with_advisor(prefix)
-    prefix == :advisor ? human_attribute(:advisor) : translated_prefix_without_advisor(prefix)
+    (prefix == :advisor) ? human_attribute(:advisor) : translated_prefix_without_advisor(prefix)
   end
-
 end

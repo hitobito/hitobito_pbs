@@ -1,17 +1,14 @@
-# encoding: utf-8
-
 #  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 module Event::Campy
-
   extend ActiveSupport::Concern
 
-  ABROAD_CANTON = 'zz'.freeze
+  ABROAD_CANTON = "zz".freeze
 
-  J_S_KINDS = %w(j_s_child j_s_youth j_s_mixed).freeze
+  J_S_KINDS = %w[j_s_child j_s_youth j_s_mixed].freeze
 
   CANTONS = Cantons.short_name_strings + [ABROAD_CANTON]
 
@@ -24,8 +21,8 @@ module Event::Campy
   ].freeze
 
   LEADER_CHECKPOINT_ATTRS = [:lagerreglement_applied,
-                             :kantonalverband_rules_applied,
-                             :j_s_rules_applied].freeze
+    :kantonalverband_rules_applied,
+    :j_s_rules_applied].freeze
 
   def self.extended(base)
     base.class_eval(&@_included_block)
@@ -33,24 +30,24 @@ module Event::Campy
 
   included do
     self.used_attributes += [:leader_id, :abteilungsleitung_id, :coach_id,
-                             :advisor_mountain_security_id, :advisor_snow_security_id,
-                             :advisor_water_security_id,
-                             :canton, :coordinates, :altitude, :emergency_phone,
-                             :landlord, :landlord_permission_obtained,
-                             :j_s_kind,
-                             :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
-                             :paper_application_required,
-                             :al_present, :al_visiting, :al_visiting_date,
-                             :coach_visiting, :coach_visiting_date, :coach_confirmed,
-                             :local_scout_contact_present, :local_scout_contact,
-                             :camp_submitted]
+      :advisor_mountain_security_id, :advisor_snow_security_id,
+      :advisor_water_security_id,
+      :canton, :coordinates, :altitude, :emergency_phone,
+      :landlord, :landlord_permission_obtained,
+      :j_s_kind,
+      :j_s_security_snow, :j_s_security_mountain, :j_s_security_water,
+      :paper_application_required,
+      :al_present, :al_visiting, :al_visiting_date,
+      :coach_visiting, :coach_visiting_date, :coach_confirmed,
+      :local_scout_contact_present, :local_scout_contact,
+      :camp_submitted]
 
     self.used_attributes += EXPECTED_PARTICIPANT_ATTRS
     self.used_attributes += LEADER_CHECKPOINT_ATTRS
 
     self.role_types += [Event::Camp::Role::LeaderMountainSecurity,
-                        Event::Camp::Role::LeaderSnowSecurity,
-                        Event::Camp::Role::LeaderWaterSecurity]
+      Event::Camp::Role::LeaderSnowSecurity,
+      Event::Camp::Role::LeaderWaterSecurity]
 
     restricted_role :leader, Event::Camp::Role::Leader
     restricted_role :abteilungsleitung, Event::Camp::Role::Abteilungsleitung
@@ -62,17 +59,17 @@ module Event::Campy
     ### VALIDATIONS
 
     validates(*EXPECTED_PARTICIPANT_ATTRS,
-              numericality: { greater_than_or_equal_to: 0, only_integer: true, allow_blank: true })
-    validates :j_s_kind, inclusion: { in: J_S_KINDS, allow_blank: true }
-    validates :canton, inclusion: { in: CANTONS, allow_blank: true }
+      numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_blank: true})
+    validates :j_s_kind, inclusion: {in: J_S_KINDS, allow_blank: true}
+    validates :canton, inclusion: {in: CANTONS, allow_blank: true}
 
     with_options if: :camp_submitted?, presence: true do
       validates :canton, :location, :altitude, :emergency_phone,
-                :landlord, :coach_id, :coach_confirmed,
-                :leader_id, :lagerreglement_applied, :kantonalverband_rules_applied,
-                :j_s_rules_applied, :coordinates,
-                # check if any of the expected attrs has an assigned value
-                :any_expected_participant_attr
+        :landlord, :coach_id, :coach_confirmed,
+        :leader_id, :lagerreglement_applied, :kantonalverband_rules_applied,
+        :j_s_rules_applied, :coordinates,
+        # check if any of the expected attrs has an assigned value
+        :any_expected_participant_attr
     end
 
     with_options presence: true do
@@ -86,7 +83,6 @@ module Event::Campy
 
     after_save :reset_checkpoint_attrs_if_leader_changed
     after_save :reset_coach_confirmed_if_changed
-
   end
 
   def abroad?
@@ -112,14 +108,14 @@ module Event::Campy
   end
 
   def total_expected_participants
-    %w(wolf pfadi pio rover).product(%w(f m)).map do |level, gender|
-      send("expected_participants_#{level}_#{gender}") || 0
+    %w[wolf pfadi pio rover].product(%w[f m]).map do |level, gender|
+      send(:"expected_participants_#{level}_#{gender}") || 0
     end.inject(&:+)
   end
 
   def total_expected_leading_participants
-    %w(leitung).product(%w(f m)).map do |level, gender|
-      send("expected_participants_#{level}_#{gender}") || 0
+    %w[leitung].product(%w[f m]).map do |level, gender|
+      send(:"expected_participants_#{level}_#{gender}") || 0
     end.inject(&:+)
   end
 
@@ -152,5 +148,4 @@ module Event::Campy
       send(a).present?
     end
   end
-
 end

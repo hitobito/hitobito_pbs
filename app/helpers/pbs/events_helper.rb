@@ -15,5 +15,4 @@ module Pbs::EventsHelper
       Group.course_offerers.where(id: current_user.groups_hierarchy_ids)
     end
   end
-
 end

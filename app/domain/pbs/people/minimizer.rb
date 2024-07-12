@@ -26,10 +26,10 @@ module Pbs::People::Minimizer
 
   def delete_taggings
     excluded_subscription_tags = SubscriptionTag.where(tag_id: @person.tag_ids,
-                                                       excluded: true)
+      excluded: true)
 
     taggings_to_delete = @person.taggings
-                                .where.not(tag_id: excluded_subscription_tags.pluck(:tag_id))
+      .where.not(tag_id: excluded_subscription_tags.pluck(:tag_id))
 
     taggings_to_delete.delete_all
   end

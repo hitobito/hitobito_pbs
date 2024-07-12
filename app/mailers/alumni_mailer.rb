@@ -6,16 +6,15 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class AlumniMailer < ApplicationMailer
-
   include ActionView::Helpers::TagHelper
   include ActionView::Context
   include Rails.application.routes.url_helpers
 
-  CONTENT_INVITATION_WITH_REGIONAL_GROUPS = 'alumni_invitation_with_regional_alumni_groups'
-  CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS = 'alumni_invitation_without_regional_alumni_groups'
+  CONTENT_INVITATION_WITH_REGIONAL_GROUPS = "alumni_invitation_with_regional_alumni_groups"
+  CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS = "alumni_invitation_without_regional_alumni_groups"
 
-  CONTENT_REMINDER_WITH_REGIONAL_GROUPS = 'alumni_reminder_with_regional_alumni_groups'
-  CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS = 'alumni_reminder_without_regional_alumni_groups'
+  CONTENT_REMINDER_WITH_REGIONAL_GROUPS = "alumni_reminder_with_regional_alumni_groups"
+  CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS = "alumni_reminder_without_regional_alumni_groups"
 
   def invitation(person, ex_members_group_ids, silverscout_group_ids)
     @person = person
@@ -23,10 +22,10 @@ class AlumniMailer < ApplicationMailer
     @silverscout_groups = Group.where(id: silverscout_group_ids)
 
     key = if @ex_members_groups.present?
-            CONTENT_INVITATION_WITH_REGIONAL_GROUPS
-          else
-            CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS
-          end
+      CONTENT_INVITATION_WITH_REGIONAL_GROUPS
+    else
+      CONTENT_INVITATION_WITHOUT_REGIONAL_GROUPS
+    end
 
     custom_content_mail(@person.email, key, values_for_placeholders(key))
   end
@@ -37,10 +36,10 @@ class AlumniMailer < ApplicationMailer
     @silverscout_groups = Group.where(id: silverscout_group_ids)
 
     key = if @ex_members_groups.present?
-            CONTENT_REMINDER_WITH_REGIONAL_GROUPS
-          else
-            CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS
-          end
+      CONTENT_REMINDER_WITH_REGIONAL_GROUPS
+    else
+      CONTENT_REMINDER_WITHOUT_REGIONAL_GROUPS
+    end
 
     custom_content_mail(@person.email, key, values_for_placeholders(key))
   end

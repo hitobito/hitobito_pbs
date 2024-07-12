@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2015 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -18,11 +16,11 @@ module Export::Pdf
       end
 
       def render_js
-        title('js_title')
+        title("js_title")
         labeled_camp_attr(:j_s_kind)
-        return unless @context.camp.j_s_kind.present?
+        return if @context.camp.j_s_kind.blank?
 
-        labeled_value(translate('js_security'), @context.js_security_value)
+        labeled_value(translate("js_security"), @context.js_security_value)
         move_down 6
         labeled_camp_attr(:advisor_mountain_security)
         labeled_camp_attr(:advisor_water_security)
@@ -30,7 +28,7 @@ module Export::Pdf
       end
 
       def render_state
-        title('state_title')
+        title("state_title")
         labeled_camp_attr(:updated_at)
         labeled_camp_attr(:state)
       end

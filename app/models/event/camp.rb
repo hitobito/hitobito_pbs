@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -94,10 +92,9 @@
 #
 
 class Event::Camp < Event
-
   # This statement is required because this class would not be loaded otherwise.
-  require_dependency 'event/camp/role/helper'
-  require_dependency 'event/camp/role/participant'
+  require_dependency "event/camp/role/helper"
+  require_dependency "event/camp/role/participant"
 
   include Pbs::Event::RestrictedRole
 
@@ -111,19 +108,19 @@ class Event::Camp < Event
   self.used_attributes -= [:contact_id, :applications_cancelable]
 
   self.role_types = [Event::Camp::Role::AssistantLeader,
-                     Event::Camp::Role::Helper,
-                     Event::Camp::Role::Participant]
+    Event::Camp::Role::Helper,
+    Event::Camp::Role::Participant]
 
   # include only after main role types are defined
   include Event::Campy
 
   # states are used for workflow
   # translations in config/locales
-  self.possible_states = %w(created confirmed assignment_closed canceled closed)
-  self.possible_participation_states  = %w(applied_electronically assigned canceled absent)
-  self.active_participation_states    = %w(applied_electronically assigned)
-  self.revoked_participation_states   = %w(canceled absent)
-  self.countable_participation_states = %w(applied_electronically assigned absent)
+  self.possible_states = %w[created confirmed assignment_closed canceled closed]
+  self.possible_participation_states = %w[applied_electronically assigned canceled absent]
+  self.active_participation_states = %w[applied_electronically assigned]
+  self.revoked_participation_states = %w[canceled absent]
+  self.countable_participation_states = %w[applied_electronically assigned absent]
 
   ### RELATIONS
 
@@ -132,10 +129,10 @@ class Event::Camp < Event
 
   belongs_to :super_camp, class_name: name, foreign_key: :parent_id
   has_many :sub_camps,
-           class_name: name,
-           foreign_key: :parent_id,
-           inverse_of: :super_camp,
-           dependent: :restrict_with_error
+    class_name: name,
+    foreign_key: :parent_id,
+    inverse_of: :super_camp,
+    dependent: :restrict_with_error
 
   ### SERIALIZED ATTRIBUTES
   serialize :contact_attrs_passed_on_to_supercamp, Array
@@ -143,7 +140,7 @@ class Event::Camp < Event
   ### VALIDATIONS
 
   validates :state, inclusion: possible_states
-  validate  :may_become_sub_camp, if: :parent_id_changed?
+  validate :may_become_sub_camp, if: :parent_id_changed?
   validate :assert_contact_attrs_passed_on_to_supercamp_valid, if: :parent_id
 
   ### CALLBACKS
@@ -159,7 +156,7 @@ class Event::Camp < Event
   # Define methods to query if a course is in the given state.
   # eg course.canceled?
   possible_states.each do |state|
-    define_method "#{state}?" do
+    define_method :"#{state}?" do
       self.state == state
     end
   end
@@ -178,11 +175,11 @@ class Event::Camp < Event
 
   def default_participation_state(participation, _for_someone_else = false)
     if participation.roles.blank? ||
-      participation.roles.any? { |role| role.kind != :participant } ||
-      !paper_application_required?
-      'assigned'
+        participation.roles.any? { |role| role.kind != :participant } ||
+        !paper_application_required?
+      "assigned"
     else
-      'applied_electronically'
+      "applied_electronically"
     end
   end
 
@@ -204,37 +201,37 @@ class Event::Camp < Event
 
   def send_assignment_infos
     [:coach,
-     :advisor_mountain_security,
-     :advisor_snow_security,
-     :advisor_water_security].each do |advisor_key|
+      :advisor_mountain_security,
+      :advisor_snow_security,
+      :advisor_water_security].each do |advisor_key|
       send_advisor_assignment_info(advisor_key)
     end
   end
 
   def send_advisor_assignment_info(advisor_key)
     person = send(advisor_key)
-    if person && person.email &&
-       person != Person.stamper &&
-       (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
-      Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper).
-        deliver_later
+    if person&.email &&
+        person != Person.stamper &&
+        (state_changed_from_created? || advisor_changed_except_in_created?(advisor_key))
+      Event::CampMailer.advisor_assigned(self, person, advisor_key.to_s, Person.stamper)
+        .deliver_later
     end
   end
 
   def state_changed_from_created?
     state_previously_changed? &&
-      (state_previous_change.first == 'created' || state_previous_change.first.nil?)
+      (state_previous_change.first == "created" || state_previous_change.first.nil?)
   end
 
   def advisor_changed_except_in_created?(advisor_key)
-    restricted_role_changes[advisor_key] && state != 'created' && state.present?
+    restricted_role_changes[advisor_key] && state != "created" && state.present?
   end
 
   def send_abteilungsleitung_assignment_info
     if abteilungsleitung && abteilungsleitung != Person.stamper &&
-       restricted_role_changes[:abteilungsleitung]
-      Event::CampMailer.advisor_assigned(self, abteilungsleitung, 'abteilungsleitung',
-                                         Person.stamper).deliver_later
+        restricted_role_changes[:abteilungsleitung]
+      Event::CampMailer.advisor_assigned(self, abteilungsleitung, "abteilungsleitung",
+        Person.stamper).deliver_later
     end
   end
 
@@ -244,7 +241,7 @@ class Event::Camp < Event
 
   def send_created_info(person)
     if person && person != Person.stamper &&
-      (state_changed_from_created? && state == 'confirmed')
+        (state_changed_from_created? && state == "confirmed")
       Event::CampMailer.camp_created(self, person, Person.stamper).deliver_later
     end
   end
@@ -252,8 +249,8 @@ class Event::Camp < Event
   def layer_leaders
     layer_group = groups.first.layer_group
     Person.joins(:roles)
-          .where(roles: { type: layer_leader_roles[layer_group.class.sti_name],
-                          group_id: layer_group.id })
+      .where(roles: {type: layer_leader_roles[layer_group.class.sti_name],
+                     group_id: layer_group.id})
   end
 
   def layer_leader_roles
@@ -268,11 +265,11 @@ class Event::Camp < Event
   def may_become_sub_camp
     if super_camp.present?
       if is_ancestor_of(super_camp.id) || !super_camp.allow_sub_camps ||
-         super_camp.state != 'created' || !super_camp.upcoming
+          super_camp.state != "created" || !super_camp.upcoming
         errors.add(:parent_id, :invalid)
       end
     else
-      unless Event::Camp.find(parent_id_was).state == 'created'
+      unless Event::Camp.find(parent_id_was).state == "created"
         errors.add(:base, :cannot_remove_parent_id)
         self.parent_id = parent_id_was
       end
@@ -280,7 +277,7 @@ class Event::Camp < Event
   end
 
   def is_ancestor_of(camp_id)
-    self.self_and_descendants.pluck(:id).include?(camp_id)
+    self_and_descendants.pluck(:id).include?(camp_id)
   end
 
   def assert_contact_attrs_passed_on_to_supercamp_valid
@@ -297,5 +294,4 @@ class Event::Camp < Event
   def assert_allow_sub_camps
     errors.add(:allow_sub_camps, :accepted) if sub_camps.any?
   end
-
 end

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2015 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -8,12 +6,11 @@
 module Export::Pdf
   class CampApplication
     class ViewModel
-
       attr_reader :camp, :camp_group
 
       delegate :t, :l, to: I18n
 
-      EXPECTED_PARTICIPANT_KEYS = %w(wolf pfadi pio rover leitung).freeze
+      EXPECTED_PARTICIPANT_KEYS = %w[wolf pfadi pio rover leitung].freeze
 
       def initialize(camp)
         @camp = camp
@@ -21,16 +18,16 @@ module Export::Pdf
       end
 
       def expected_participant_table_header
-        headers = ['']
-        headers += EXPECTED_PARTICIPANT_KEYS.collect do |h|
-          key = 'expected_participants_' + h
+        headers = [""]
+        headers + EXPECTED_PARTICIPANT_KEYS.collect do |h|
+          key = "expected_participants_" + h
           t_camp_attr(key)
         end
       end
 
       def expected_participant_table_row(gender)
         row = [gender.to_s.upcase]
-        row += EXPECTED_PARTICIPANT_KEYS.collect do |a|
+        row + EXPECTED_PARTICIPANT_KEYS.collect do |a|
           attr = "expected_participants_#{a}_#{gender}"
           @camp.send(attr.to_sym)
         end
@@ -52,31 +49,31 @@ module Export::Pdf
       end
 
       def kantonalverband
-        camp_group.layer_hierarchy.
-          detect { |g| g.is_a?(Group::Kantonalverband) }
+        camp_group.layer_hierarchy
+          .detect { |g| g.is_a?(Group::Kantonalverband) }
       end
 
       def camp_attr_value(attr)
         value = @camp.send(attr)
-        format_method = "format_#{attr}".to_sym
+        format_method = :"format_#{attr}"
         if respond_to?(format_method, include_private: true)
-          value = send(format_method, value)
+          send(format_method, value)
         elsif boolean?(value)
-          value = format_boolean(value)
+          format_boolean(value)
         else
           value.to_s
         end
       end
 
       def active_qualifications(person)
-        qualis = QualificationKind.joins(:qualifications).
-                where(qualifications: { person_id: person.id }).
-                merge(Qualification.active).
-                distinct.
-                list.
-                collect(&:to_s).
-                join("\n")
-        qualis.present? ? qualis : text_no_entry
+        qualis = QualificationKind.joins(:qualifications)
+          .where(qualifications: {person_id: person.id})
+          .merge(Qualification.active)
+          .distinct
+          .list
+          .collect(&:to_s)
+          .join("\n")
+        qualis.presence || text_no_entry
       end
 
       def t_camp_attr(key)
@@ -90,11 +87,11 @@ module Export::Pdf
 
       def camp_assistant_leaders
         camp.participations_for(Event::Camp::Role::AssistantLeader,
-                                Event::Course::Role::Leader,
-                                Event::Course::Role::ClassLeader,
-                                Event::Role::Speaker,
-                                Event::Course::Role::Helper).
-          collect(&:person) - [camp_leader]
+          Event::Course::Role::Leader,
+          Event::Course::Role::ClassLeader,
+          Event::Role::Speaker,
+          Event::Course::Role::Helper)
+          .collect(&:person) - [camp_leader]
       end
 
       def phone_number(person, label)
@@ -104,8 +101,8 @@ module Export::Pdf
       def js_security_value
         attrs = [:j_s_security_snow, :j_s_security_mountain, :j_s_security_water]
         human_names = attrs.select { |attr| camp.send(attr) }
-                          .map { |attr| Event.human_attribute_name(attr) }.join(', ')
-        human_names.present? ? human_names : t('events.fields_pbs.j_s_security_none')
+          .map { |attr| Event.human_attribute_name(attr) }.join(", ")
+        human_names.presence || t("events.fields_pbs.j_s_security_none")
       end
 
       private
@@ -118,7 +115,7 @@ module Export::Pdf
         if value.present?
           t("events.fields_pbs.j_s_kind_#{value}")
         else
-          t('events.fields_pbs.j_s_kind_none')
+          t("events.fields_pbs.j_s_kind_none")
         end
       end
 
@@ -132,7 +129,7 @@ module Export::Pdf
         person = @camp.updater.to_s
         return date if person.blank?
 
-        "#{date} #{t('export/pdf/camp_application.by')} #{person}"
+        "#{date} #{t("export/pdf/camp_application.by")} #{person}"
       end
 
       def format_coach_visiting(value)
@@ -162,7 +159,7 @@ module Export::Pdf
       end
 
       def format_boolean(value)
-        value ? t('global.yes') : t('global.no')
+        value ? t("global.yes") : t("global.no")
       end
 
       def boolean?(value)
@@ -170,7 +167,7 @@ module Export::Pdf
       end
 
       def text_no_entry
-        t('global.associations.no_entry')
+        t("global.associations.no_entry")
       end
 
       def camp_at_or_above_abteilung?
@@ -180,7 +177,6 @@ module Export::Pdf
       def camp_at_abteilung?
         camp_group.is_a?(Group::Abteilung)
       end
-
     end
   end
 end

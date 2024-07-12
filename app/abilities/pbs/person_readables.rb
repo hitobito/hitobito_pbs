@@ -11,7 +11,7 @@ module Pbs::PersonReadables
   def append_group_conditions(condition)
     user.crises.active.each do |crisis|
       group = crisis.group.layer_group
-      condition.or('groups.lft >= ? AND groups.rgt <= ?', group.lft, group.rgt)
+      condition.or("groups.lft >= ? AND groups.rgt <= ?", group.lft, group.rgt)
     end
     super
   end
@@ -19,5 +19,4 @@ module Pbs::PersonReadables
   def has_group_based_conditions?
     user.crises.active.any? || super
   end
-
 end

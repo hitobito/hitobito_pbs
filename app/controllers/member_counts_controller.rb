@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class MemberCountsController < ApplicationController
-
   decorates :group
 
   def edit
@@ -20,7 +17,7 @@ class MemberCountsController < ApplicationController
     year = MemberCounter.create_counts_for(abteilung)
     if year
       total = MemberCount.total_for_abteilung(year, abteilung).try(:total) || 0
-      flash[:notice] = translate('.created_data_for_year', total: total, year: year)
+      flash[:notice] = translate(".created_data_for_year", total: total, year: year)
     end
 
     year ||= Time.zone.today.year
@@ -32,9 +29,9 @@ class MemberCountsController < ApplicationController
 
     if member_count.update(permitted_params)
       redirect_to census_abteilung_group_path(abteilung, year: year),
-                  notice: translate('updated_data_for_year', year: year)
+        notice: translate("updated_data_for_year", year: year)
     else
-      render 'edit', status: :unprocessable_entity
+      render "edit", status: :unprocessable_entity
     end
   end
 
@@ -43,7 +40,7 @@ class MemberCountsController < ApplicationController
 
     member_count.destroy
     redirect_to census_abteilung_group_path(abteilung, year: year),
-                notice: translate('.deleted_data_for_year', year: year)
+      notice: translate(".deleted_data_for_year", year: year)
   end
 
   private
@@ -58,11 +55,10 @@ class MemberCountsController < ApplicationController
 
   def year
     @year ||= Census.current.try(:year) ||
-              raise(ActiveRecord::RecordNotFound, 'No current census found')
+      raise(ActiveRecord::RecordNotFound, "No current census found")
   end
 
   def permitted_params
     params.require(:member_count).permit(MemberCount::COUNT_COLUMNS)
   end
-
 end

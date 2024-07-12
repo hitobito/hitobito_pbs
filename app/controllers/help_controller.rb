@@ -4,9 +4,8 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class HelpController < ApplicationController
-
-  POWER_USER_ROLE_TYPES = %w(Group::Bund::PowerUser Group::Kantonalverband::PowerUser
-                             Group::Region::PowerUser Group::Abteilung::PowerUser).freeze
+  POWER_USER_ROLE_TYPES = %w[Group::Bund::PowerUser Group::Kantonalverband::PowerUser
+    Group::Region::PowerUser Group::Abteilung::PowerUser].freeze
 
   skip_authorization_check only: [:index]
 
@@ -38,5 +37,4 @@ class HelpController < ApplicationController
   def power_user_ids_for_group(group)
     group.roles.where(type: POWER_USER_ROLE_TYPES).pluck(:person_id)
   end
-
 end

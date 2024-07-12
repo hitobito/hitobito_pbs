@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -7,7 +5,6 @@
 
 module Pbs::EventDecorator
   extend ActiveSupport::Concern
-
 
   included do
     decorates_association :leader
@@ -24,7 +21,7 @@ module Pbs::EventDecorator
 
   def qualified_participants_count
     @qualified_participants_count ||= participations.includes(:roles).decorate
-                                        .select(&:has_confirmation?).count
+      .count(&:has_confirmation?)
   end
 
   def participations_for_attendence

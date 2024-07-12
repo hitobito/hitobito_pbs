@@ -41,8 +41,7 @@
 #
 
 class Group::Abteilung < Group
-
-  GENDERS = %w(m w).freeze
+  GENDERS = %w[m w].freeze
 
   GEOLOCATION_COUNT_LIMIT = 20
   GEOLOCATION_SWITZERLAND_NORTH_LIMIT = 47.811263
@@ -50,32 +49,32 @@ class Group::Abteilung < Group
   GEOLOCATION_SWITZERLAND_EAST_LIMIT = 10.523665
   GEOLOCATION_SWITZERLAND_WEST_LIMIT = 5.922318
 
-  CONTENT_GROUPFINDER_FIELDS_INFO = 'groupfinder_fields_info'.freeze
+  CONTENT_GROUPFINDER_FIELDS_INFO = "groupfinder_fields_info".freeze
 
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
   self.used_attributes += [:pta, :vkp, :group_health, :pbs_material_insurance, :gender,
-                           :try_out_day_at, :geolocations]
+    :try_out_day_at, :geolocations]
   self.superior_attributes += [:pta, :vkp, :pbs_material_insurance]
 
   children Group::Biber,
-           Group::Woelfe,
-           Group::Pfadi,
-           Group::Pio,
-           Group::AbteilungsRover,
-           Group::Pta,
-           Group::Elternrat,
-           Group::AbteilungsGremium,
-           Group::InternesAbteilungsGremium,
-           Group::ErziehungsberechtigtenGremium,
-           Group::Ehemalige
+    Group::Woelfe,
+    Group::Pfadi,
+    Group::Pio,
+    Group::AbteilungsRover,
+    Group::Pta,
+    Group::Elternrat,
+    Group::AbteilungsGremium,
+    Group::InternesAbteilungsGremium,
+    Group::ErziehungsberechtigtenGremium,
+    Group::Ehemalige
 
   has_many :member_counts # rubocop:disable Rails/HasManyOrHasOneDependent since groups are only soft-deleted
   has_many :geolocations, as: :geolocatable, dependent: :destroy
   accepts_nested_attributes_for :geolocations,
-                                allow_destroy: true,
-                                reject_if: proc { |c| c[:lat].blank? && c[:long].blank? }
+    allow_destroy: true,
+    reject_if: proc { |c| c[:lat].blank? && c[:long].blank? }
   # Can't use the limit parameter on  accepts_nested_attributes_for because it
   # still counts in the rejected records
   # Can't use validates :geolocations, length: { ... } because it counts in the
@@ -83,9 +82,9 @@ class Group::Abteilung < Group
   validate :assert_geolocation_count
   validate do
     is_valid = geolocations.all? do |geolocation|
-      GEOLOCATION_SWITZERLAND_SOUTH_LIMIT < geolocation.lat.to_f \
+      geolocation.lat.to_f > GEOLOCATION_SWITZERLAND_SOUTH_LIMIT \
       && geolocation.lat.to_f < GEOLOCATION_SWITZERLAND_NORTH_LIMIT \
-      && GEOLOCATION_SWITZERLAND_WEST_LIMIT < geolocation.long.to_f \
+      && geolocation.long.to_f > GEOLOCATION_SWITZERLAND_WEST_LIMIT \
       && geolocation.long.to_f < GEOLOCATION_SWITZERLAND_EAST_LIMIT
     end
     errors.add(:base, :geo_not_in_switzerland) if !is_valid
@@ -103,7 +102,7 @@ class Group::Abteilung < Group
   end
 
   def region
-    ancestors.where(type: Group::Region.sti_name).order('lft DESC').first
+    ancestors.where(type: Group::Region.sti_name).order("lft DESC").first
   end
 
   def census_groups(_year)
@@ -126,11 +125,10 @@ class Group::Abteilung < Group
   private
 
   def assert_geolocation_count
-    if geolocations.reject(&:marked_for_destruction?).size > GEOLOCATION_COUNT_LIMIT
+    if geolocations.count { |element| !element.marked_for_destruction? } > GEOLOCATION_COUNT_LIMIT
       errors.add(:geolocations, :too_many_geolocations, max: GEOLOCATION_COUNT_LIMIT)
     end
   end
-
 
   ### ROLES
 
@@ -264,40 +262,35 @@ class Group::Abteilung < Group
   end
 
   roles Abteilungsleitung,
-        AbteilungsleitungStv,
-        Sekretariat,
-        Adressverwaltung,
-        PowerUser,
-        Praesidium,
-        VizePraesidium,
-        PraesidiumApv,
-        PraesidiumElternrat,
-        Praeses,
-        Beisitz,
-        Materialwart,
-        Heimverwaltung,
-
-        StufenleitungBiber,
-        StufenleitungWoelfe,
-        StufenleitungPfadi,
-        StufenleitungPio,
-        StufenleitungRover,
-        StufenleitungPta,
-
-        Kassier,
-        Rechnungen,
-        Revisor,
-        Redaktor,
-        Webmaster,
-        Coach,
-
-        VerantwortungMaterialverkaufsstelle,
-        VerantwortungPfadiTrotzAllem,
-        VerantwortungPr,
-
-        Spezialfunktion,
-
-        Ehrenmitglied,
-        Passivmitglied,
-        Selbstregistriert
+    AbteilungsleitungStv,
+    Sekretariat,
+    Adressverwaltung,
+    PowerUser,
+    Praesidium,
+    VizePraesidium,
+    PraesidiumApv,
+    PraesidiumElternrat,
+    Praeses,
+    Beisitz,
+    Materialwart,
+    Heimverwaltung,
+    StufenleitungBiber,
+    StufenleitungWoelfe,
+    StufenleitungPfadi,
+    StufenleitungPio,
+    StufenleitungRover,
+    StufenleitungPta,
+    Kassier,
+    Rechnungen,
+    Revisor,
+    Redaktor,
+    Webmaster,
+    Coach,
+    VerantwortungMaterialverkaufsstelle,
+    VerantwortungPfadiTrotzAllem,
+    VerantwortungPr,
+    Spezialfunktion,
+    Ehrenmitglied,
+    Passivmitglied,
+    Selbstregistriert
 end

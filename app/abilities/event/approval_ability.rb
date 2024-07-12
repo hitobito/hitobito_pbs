@@ -1,20 +1,17 @@
-# encoding: utf-8
-
 #  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class Event::ApprovalAbility < AbilityDsl::Base
-
   on(Event::Approval) do
-    permission(:approve_applications).
-      may(:create).
-      for_new_approvals_in_same_layer
+    permission(:approve_applications)
+      .may(:create)
+      .for_new_approvals_in_same_layer
 
-    permission(:approve_applications).
-      may(:update).
-      for_existing_approvals_in_same_layer
+    permission(:approve_applications)
+      .may(:update)
+      .for_existing_approvals_in_same_layer
 
     general(:update).only_before_course_started
   end
@@ -48,5 +45,4 @@ class Event::ApprovalAbility < AbilityDsl::Base
   def layer_ids
     primary_group.layer_hierarchy.collect(&:id)
   end
-
 end

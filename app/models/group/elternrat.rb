@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,9 +40,8 @@
 #
 
 class Group::Elternrat < Group
-
   children Group::AbteilungsGremium,
-           Group::InternesAbteilungsGremium
+    Group::InternesAbteilungsGremium
 
   class Praesidium < ::Role
     self.permissions = [:group_full]
@@ -60,7 +57,7 @@ class Group::Elternrat < Group
   end
 
   roles Praesidium,
-        Mitglied,
-        Selbstregistriert
+    Mitglied,
+    Selbstregistriert
   self.default_role = Mitglied
 end

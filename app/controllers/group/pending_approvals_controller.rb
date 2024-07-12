@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class Group::PendingApprovalsController < ApplicationController
-
   decorates :group
 
   before_action :authorize_action
@@ -40,9 +37,9 @@ class Group::PendingApprovalsController < ApplicationController
 
   def load_pending_approvals
     @pending_approvals =
-      Event::Approval.pending(group).
-      includes(:participation, :approvee, event: :groups).
-      order('event_participations.created_at ASC')
+      Event::Approval.pending(group)
+        .includes(:participation, :approvee, event: :groups)
+        .order("event_participations.created_at ASC")
   end
 
   def approver_roles
@@ -51,23 +48,23 @@ class Group::PendingApprovalsController < ApplicationController
 
   def load_approved_approvals
     @approved_approvals ||=
-      approved_approvals.where(course_kind_id.present? && ['events.kind_id = ?', course_kind_id])
-                        .order(approved_at: :desc)
-                        .page(params[:page])
-                        .per(10)
+      approved_approvals.where(course_kind_id.present? && ["events.kind_id = ?", course_kind_id])
+        .order(approved_at: :desc)
+        .page(params[:page])
+        .per(10)
   end
 
   def load_approved_course_kinds
     @approved_course_kinds ||=
       Event::Kind.includes(:translations)
-                 .where(id: approved_approvals.distinct.pluck('events.kind_id'))
+        .where(id: approved_approvals.distinct.pluck("events.kind_id"))
   end
 
   def approved_approvals
     Event::Approval
       .includes(:participation, :approvee, event: :groups)
-      .joins(approvee: :primary_group, application: { participation: :event })
-      .where('groups.lft >= :lft AND groups.rgt <= :rgt', lft: group.lft, rgt: group.rgt)
+      .joins(approvee: :primary_group, application: {participation: :event})
+      .where("groups.lft >= :lft AND groups.rgt <= :rgt", lft: group.lft, rgt: group.rgt)
       .where(layer: group.class.name.demodulize.downcase, approved: true)
   end
 
@@ -78,5 +75,4 @@ class Group::PendingApprovalsController < ApplicationController
   def authorize_action
     authorize!(:index_pending_approvals, group)
   end
-
 end

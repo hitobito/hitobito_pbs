@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -7,11 +5,9 @@
 
 # Displays a list of all people in an Abteilung that are counted.
 class PopulationController < ApplicationController
-
   before_action :authorize
 
   decorates :groups, :people, :group
-
 
   def index
     @groups = load_groups
@@ -50,16 +46,15 @@ class PopulationController < ApplicationController
   end
 
   def load_people(group)
-    @member_counter.members.
-      where(roles: { group_id: group }).
-      includes(:groups).
-      preload_groups.
-      order_by_role.
-      order_by_name
+    @member_counter.members
+      .where(roles: {group_id: group})
+      .includes(:groups)
+      .preload_groups
+      .order_by_role
+      .order_by_name
   end
 
   def authorize
     authorize!(:show_population, group)
   end
-
 end

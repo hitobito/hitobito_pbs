@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -19,7 +17,7 @@ module Pbs
 
           def initialize_with_kv(list)
             if list.respond_to?(:klass)
-              incl = list.klass < Person ? :kantonalverband : { person: :kantonalverband }
+              incl = (list.klass < Person) ? :kantonalverband : {person: :kantonalverband}
               initialize_without_kv(list.includes(incl))
             else
               initialize_without_kv(list)
@@ -28,8 +26,8 @@ module Pbs
 
           def person_attributes_with_title
             person_attributes_without_title +
-            [:title, :salutation, :language, :prefers_digital_correspondence,
-             :kantonalverband_id, :id, :layer_group_id]
+              [:title, :salutation, :language, :prefers_digital_correspondence,
+                :kantonalverband_id, :id, :layer_group_id]
           end
         end
       end

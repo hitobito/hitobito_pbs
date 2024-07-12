@@ -22,8 +22,8 @@ class SubcampsController < ListController
 
   def list_entries
     case params[:filter]
-    when 'direct' then event.sub_camps
-    else               event.descendants # handles 'all' also
+    when "direct" then event.sub_camps
+    else event.descendants # handles 'all' also
     end.includes(:groups)
   end
 

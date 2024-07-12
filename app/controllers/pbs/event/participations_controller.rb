@@ -8,8 +8,8 @@
 module Pbs::Event::ParticipationsController
   extend ActiveSupport::Concern
 
-  CONTENT_KEY_JS_DATA_SHARING_INFO_SELF = 'pbs_js_data_sharing_info_self'
-  CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER = 'pbs_js_data_sharing_info_other'
+  CONTENT_KEY_JS_DATA_SHARING_INFO_SELF = "pbs_js_data_sharing_info_self"
+  CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER = "pbs_js_data_sharing_info_other"
 
   included do
     before_render_show :load_approvals
@@ -25,19 +25,19 @@ module Pbs::Event::ParticipationsController
   end
 
   def cancel_own
-    entry.update!(state: 'canceled')
+    entry.update!(state: "canceled")
     Event::CanceledCampParticipationJob.new(entry).enqueue!
     redirect_to group_event_path(group, event),
-                notice: t('event.participations.canceled_own_notice')
+      notice: t("event.participations.canceled_own_notice")
   end
 
   private
 
   def load_approvals
-    @approvals = Event::Approval.
-                 where(application_id: entry.application_id).
-                 includes(:approver).
-                 order_by_layer
+    @approvals = Event::Approval
+      .where(application_id: entry.application_id)
+      .includes(:approver)
+      .order_by_layer
   end
 
   def send_confirmation_email_with_current_user
@@ -52,23 +52,23 @@ module Pbs::Event::ParticipationsController
 
   def inform_about_email_sent_to_participant
     if new_record_for_someone_else? && !event.tentative_applications?
-      flash.now[:notice] = t('event.participations.inform_about_email_sent_to_participant')
+      flash.now[:notice] = t("event.participations.inform_about_email_sent_to_participant")
     end
   end
 
   def notice_with_mailto
-    flash[:notice] = t('event.participations.rejected_notice',
-                       participant: entry.person,
-                       mailto: rejected_mailto_link)
+    flash[:notice] = t("event.participations.rejected_notice",
+      participant: entry.person,
+      mailto: rejected_mailto_link)
   end
 
   def rejected_mailto_link
     to = Person.mailing_emails_for([entry.person])
     if to.present?
       cc = Person.mailing_emails_for(entry.event.organizers + entry.approvers)
-      view_context.mail_to(to.join(','),
-                           t('event.participations.rejected_email_link'),
-                           cc: cc.join(','))
+      view_context.mail_to(to.join(","),
+        t("event.participations.rejected_email_link"),
+        cc: cc.join(","))
     end
   end
 

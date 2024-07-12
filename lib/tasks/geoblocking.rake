@@ -6,29 +6,29 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 namespace :geoblocking do
-  desc 'Export list of blocked countries'
+  desc "Export list of blocked countries"
   task :nginx do # rubocop:disable Rails/RakeEnvironment
     # this could be a list of country-code, but this should
     # be easier to maintain
     countries = {
-      IN: 'India',
-      HK: 'Hong Kong',
-      SN: 'Senegal',
-      TR: 'Turkey',
-      CR: 'Costa Rica',
-      IS: 'Iceland',
+      IN: "India",
+      HK: "Hong Kong",
+      SN: "Senegal",
+      TR: "Turkey",
+      CR: "Costa Rica",
+      IS: "Iceland",
       LA: "Lao People's Democratic Republic (the)",
-      ZA: 'South Africa',
-      VN: 'Viet Nam',
-      JP: 'Japan',
-      MX: 'Mexico',
-      LB: 'Lebanon',
-      SG: 'Singapore',
-      AU: 'Australia',
-      EC: 'Ecuador',
-      RU: 'Russian Federation (the)',
-      BR: 'Brazil',
-      VE: 'Venezuela (Bolivarian Republic of)'
+      ZA: "South Africa",
+      VN: "Viet Nam",
+      JP: "Japan",
+      MX: "Mexico",
+      LB: "Lebanon",
+      SG: "Singapore",
+      AU: "Australia",
+      EC: "Ecuador",
+      RU: "Russian Federation (the)",
+      BR: "Brazil",
+      VE: "Venezuela (Bolivarian Republic of)"
     }.keys
 
     country_block_config = countries.map do |country|

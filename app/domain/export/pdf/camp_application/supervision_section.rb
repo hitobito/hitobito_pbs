@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2015 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -18,7 +16,7 @@ module Export::Pdf
       end
 
       def render_abteilungsleitung
-        title('abteilungsleitung_title')
+        title("abteilungsleitung_title")
         abteilungsleitung = @context.camp.abteilungsleitung
         labeled_person(abteilungsleitung, false) if abteilungsleitung
         move_down 9
@@ -27,7 +25,7 @@ module Export::Pdf
       end
 
       def render_coach
-        title('coach_title')
+        title("coach_title")
         coach = @context.camp.coach
         labeled_person(coach, false) if coach
         move_down 9

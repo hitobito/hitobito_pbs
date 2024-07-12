@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -11,25 +9,25 @@ module Pbs::Event::ApplicationAbility
   included do
     on(Event::Application) do
       # done in Event::Approvals
-      permission(:approve_applications).
-        may(:approve, :reject).
-        none
+      permission(:approve_applications)
+        .may(:approve, :reject)
+        .none
 
-      permission(:approve_applications).
-        may(:show_priorities, :show_approval).
-        for_approvals_in_hierarchy
+      permission(:approve_applications)
+        .may(:show_priorities, :show_approval)
+        .for_approvals_in_hierarchy
 
-      permission(:any).
-        may(:show_approval).
-        for_advised_or_participations_full_events
+      permission(:any)
+        .may(:show_approval)
+        .for_advised_or_participations_full_events
 
-      permission(:layer_full).
-        may(:show_approval).
-        in_same_layer_or_different_prio
+      permission(:layer_full)
+        .may(:show_approval)
+        .in_same_layer_or_different_prio
 
-      permission(:layer_and_below_full).
-        may(:show_approval).
-        in_same_layer_or_below_or_different_prio
+      permission(:layer_and_below_full)
+        .may(:show_approval)
+        .in_same_layer_or_below_or_different_prio
     end
   end
 
@@ -52,5 +50,4 @@ module Pbs::Event::ApplicationAbility
     participation.event.advisor_id == user.id ||
       for_participations_full_events
   end
-
 end

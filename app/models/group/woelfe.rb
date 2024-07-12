@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,12 +40,11 @@
 #
 
 class Group::Woelfe < Group
-
   self.event_types = [Event, Event::Camp]
 
   children Group::Woelfe,
-           Group::AbteilungsGremium,
-           Group::InternesAbteilungsGremium
+    Group::AbteilungsGremium,
+    Group::InternesAbteilungsGremium
 
   class Einheitsleitung < ::Role
     self.permissions = [:layer_and_below_read]
@@ -72,11 +69,10 @@ class Group::Woelfe < Group
   end
 
   roles Einheitsleitung,
-        Mitleitung,
-        Adressverwaltung,
-        Leitwolf,
-        Wolf
+    Mitleitung,
+    Adressverwaltung,
+    Leitwolf,
+    Wolf
 
   self.default_role = Wolf
-
 end

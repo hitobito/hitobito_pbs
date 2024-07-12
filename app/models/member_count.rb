@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -30,35 +28,33 @@
 #  pta_m              :integer
 #
 class MemberCount < ActiveRecord::Base
-
   COUNT_CATEGORIES = [:leiter, :biber, :woelfe, :pfadis, :pios, :rover, :pta].freeze
   COUNT_COLUMNS = COUNT_CATEGORIES.collect { |c| [:"#{c}_f", :"#{c}_m"] }.flatten
 
-  belongs_to :abteilung, class_name: 'Group::Abteilung'
-  belongs_to :region, class_name: 'Group::Region'
-  belongs_to :kantonalverband, class_name: 'Group::Kantonalverband'
+  belongs_to :abteilung, class_name: "Group::Abteilung"
+  belongs_to :region, class_name: "Group::Region"
+  belongs_to :kantonalverband, class_name: "Group::Kantonalverband"
 
   validates_by_schema
-  validates :year, uniqueness: { scope: :abteilung_id }
+  validates :year, uniqueness: {scope: :abteilung_id}
   validates(*COUNT_COLUMNS,
-            numericality: { greater_than_or_equal_to: 0, allow_nil: true })
-
+    numericality: {greater_than_or_equal_to: 0, allow_nil: true})
 
   def total
     f + m
   end
 
   def f
-    sum_columns(COUNT_CATEGORIES, 'f')
+    sum_columns(COUNT_CATEGORIES, "f")
   end
 
   def m
-    sum_columns(COUNT_CATEGORIES, 'm')
+    sum_columns(COUNT_CATEGORIES, "m")
   end
 
   COUNT_CATEGORIES.each do |c|
     define_method c do
-      send("#{c}_f").to_i + send("#{c}_m").to_i
+      send(:"#{c}_f").to_i + send(:"#{c}_m").to_i
     end
   end
 
@@ -66,20 +62,19 @@ class MemberCount < ActiveRecord::Base
 
   def sum_columns(columns, gender)
     columns.inject(0) do |sum, c|
-      sum + send("#{c}_#{gender}").to_i
+      sum + send(:"#{c}_#{gender}").to_i
     end
   end
 
   class << self
-
     def total_by_kantonalverbaende(year)
       totals_by(year, :kantonalverband_id)
     end
 
     def total_by_abteilungen(year, region)
       totals_by(year, :abteilung_id,
-                region_id: region.id,
-                kantonalverband_id: region.kantonalverband.id)
+        region_id: region.id,
+        kantonalverband_id: region.kantonalverband.id)
     end
 
     def total_by_regionen(year, state)
@@ -95,10 +90,10 @@ class MemberCount < ActiveRecord::Base
     end
 
     def totals(year)
-      columns = 'kantonalverband_id, ' \
-                'region_id, ' \
-                'abteilung_id, ' +
-                COUNT_COLUMNS.collect { |c| "SUM(#{c}) AS #{c}" }.join(',')
+      columns = "kantonalverband_id, " \
+                "region_id, " \
+                "abteilung_id, " +
+        COUNT_COLUMNS.collect { |c| "SUM(#{c}) AS #{c}" }.join(",")
 
       select(columns).where(year: year)
     end
@@ -106,7 +101,5 @@ class MemberCount < ActiveRecord::Base
     def totals_by(year, group_by, conditions = {})
       totals(year).where(conditions).group(group_by)
     end
-
   end
-
 end

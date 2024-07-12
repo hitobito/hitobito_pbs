@@ -14,19 +14,19 @@ module Alumni
     end
 
     def silverscout_group_ids
-      Group::SilverscoutsRegion.
-        without_deleted.
-        where.not(self_registration_role_type: nil).
-        pluck(:id)
+      Group::SilverscoutsRegion
+        .without_deleted
+        .where.not(self_registration_role_type: nil)
+        .pluck(:id)
     end
 
     def ex_members_group_ids
       ancestor_layers = role.group.layer_group.self_and_ancestors
-      Group::Ehemalige.
-        without_deleted.
-        where(layer_group_id: ancestor_layers).
-        where.not(self_registration_role_type: nil).
-        pluck(:id)
+      Group::Ehemalige
+        .without_deleted
+        .where(layer_group_id: ancestor_layers)
+        .where.not(self_registration_role_type: nil)
+        .pluck(:id)
     end
   end
 end

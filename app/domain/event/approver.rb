@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -7,7 +5,6 @@
 
 # Contains all the business logic for the approval process.
 class Event::Approver
-
   attr_reader :participation
 
   def initialize(participation)
@@ -69,7 +66,7 @@ class Event::Approver
   def unapproved_layers
     if open_approval
       approved_to = Event::Approval::LAYERS.find_index(open_approval.layer) + 1
-      Event::Approval::LAYERS[approved_to..-1]
+      Event::Approval::LAYERS[approved_to..]
     else
       Event::Approval::LAYERS
     end
@@ -85,9 +82,9 @@ class Event::Approver
 
   def update_approval(approved, attrs, user)
     attr = approved ? :approved : :rejected
-    open_approval.update({ attr => true,
-                           approver: user,
-                           approved_at: Time.zone.now }.merge(attrs))
+    open_approval.update({attr => true,
+                          :approver => user,
+                          :approved_at => Time.zone.now}.merge(attrs))
   end
 
   def approvers_for_layer(layer_name)
@@ -105,11 +102,11 @@ class Event::Approver
 
   def approvers_for_groups(groups)
     role_types = approver_role_types_of(groups.first.class)
-    Person.joins(:roles).
-      where(roles: { group_id: groups.collect(&:id),
+    Person.joins(:roles)
+      .where(roles: {group_id: groups.collect(&:id),
                      type: role_types.collect(&:sti_name),
-                     deleted_at: nil }).
-      distinct
+                     deleted_at: nil})
+      .distinct
   end
 
   def approver_role_types_of(layer_type)
@@ -155,11 +152,10 @@ class Event::Approver
   end
 
   def event_requires_approval_from?(layer_name)
-    participation.event.send("requires_approval_#{layer_name}?")
+    participation.event.send(:"requires_approval_#{layer_name}?")
   end
 
   def send_approval_request
     Event::ApprovalRequestJob.new(participation).enqueue!
   end
-
 end

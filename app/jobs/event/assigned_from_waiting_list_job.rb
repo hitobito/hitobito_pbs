@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class Event::AssignedFromWaitingListJob < BaseJob
-
   self.parameters = [:participation_id, :setter_id, :current_user_id, :locale]
 
   def initialize(participation, setter, current_user)
@@ -21,8 +18,8 @@ class Event::AssignedFromWaitingListJob < BaseJob
 
     set_locale
 
-    Event::ParticipationMailer.
-      assigned_from_waiting_list(participation, setter, current_user).deliver_now
+    Event::ParticipationMailer
+      .assigned_from_waiting_list(participation, setter, current_user).deliver_now
   end
 
   private
@@ -38,5 +35,4 @@ class Event::AssignedFromWaitingListJob < BaseJob
   def current_user
     @current_user ||= Person.find(@current_user_id)
   end
-
 end

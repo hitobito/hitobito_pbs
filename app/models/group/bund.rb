@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,14 +40,13 @@
 #
 
 class Group::Bund < Group
-
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
   children Group::Kantonalverband,
-           Group::Ausbildungskommission,
-           Group::BundesGremium,
-           Group::BundesKommission
+    Group::Ausbildungskommission,
+    Group::BundesGremium,
+    Group::BundesKommission
 
   ### INSTANCE METHODS
 
@@ -75,6 +72,7 @@ class Group::Bund < Group
     self.permissions = [:layer_and_below_full]
     self.two_factor_authentication_enforced = true
   end
+
   class PowerUser < Adressverwaltung; end
 
   class AssistenzAusbildung < ::Role
@@ -283,60 +281,52 @@ class Group::Bund < Group
   end
 
   roles MitarbeiterGs,
-        ItSupport,
-        Sekretariat,
-        Adressverwaltung,
-        PowerUser,
-        AssistenzAusbildung,
-        Praesidium,
-        VizePraesidium,
-        PraesidiumApv,
-        Geschaeftsleitung,
-        Mitarbeiter,
-        VertretungPbs,
-        Beisitz,
-
-        Kassier,
-        Rechnungen,
-        Revisor,
-        Redaktor,
-        Webmaster,
-        Mediensprecher,
-        Uebersetzer,
-        MitgliedKrisenteam,
-
-        Coach,
-        GrossanlassCoach,
-        Leitungskursbetreuung,
-
-        LeitungKernaufgabeAusbildung,
-        LeitungKernaufgabeKommunikation,
-        LeitungKernaufgabeProgramm,
-        LeitungKernaufgabeSupport,
-
-        VerantwortungBiberstufe,
-        VerantwortungWolfstufe,
-        VerantwortungPfadistufe,
-        VerantwortungPiostufe,
-        VerantwortungRoverstufe,
-        VerantwortungPfadiTrotzAllem,
-        VerantwortungIntegration,
-        VerantwortungLagermeldung,
-        VerantwortungPr,
-        VerantwortungPraeventionSexuellerAusbeutung,
-        VerantwortungKrisenteam,
-        VerantwortungEhrenamt,
-
-        InternationalCommissionerIcWagggs,
-        InternationalCommissionerIcWosm,
-        StvIcProgrammeWagggs,
-        StvIcProgrammeWosm,
-
-        Spezialfunktion,
-
-        Ehrenmitglied,
-        Passivmitglied,
-        Kontaktperson,
-        Selbstregistriert
-
+    ItSupport,
+    Sekretariat,
+    Adressverwaltung,
+    PowerUser,
+    AssistenzAusbildung,
+    Praesidium,
+    VizePraesidium,
+    PraesidiumApv,
+    Geschaeftsleitung,
+    Mitarbeiter,
+    VertretungPbs,
+    Beisitz,
+    Kassier,
+    Rechnungen,
+    Revisor,
+    Redaktor,
+    Webmaster,
+    Mediensprecher,
+    Uebersetzer,
+    MitgliedKrisenteam,
+    Coach,
+    GrossanlassCoach,
+    Leitungskursbetreuung,
+    LeitungKernaufgabeAusbildung,
+    LeitungKernaufgabeKommunikation,
+    LeitungKernaufgabeProgramm,
+    LeitungKernaufgabeSupport,
+    VerantwortungBiberstufe,
+    VerantwortungWolfstufe,
+    VerantwortungPfadistufe,
+    VerantwortungPiostufe,
+    VerantwortungRoverstufe,
+    VerantwortungPfadiTrotzAllem,
+    VerantwortungIntegration,
+    VerantwortungLagermeldung,
+    VerantwortungPr,
+    VerantwortungPraeventionSexuellerAusbeutung,
+    VerantwortungKrisenteam,
+    VerantwortungEhrenamt,
+    InternationalCommissionerIcWagggs,
+    InternationalCommissionerIcWosm,
+    StvIcProgrammeWagggs,
+    StvIcProgrammeWosm,
+    Spezialfunktion,
+    Ehrenmitglied,
+    Passivmitglied,
+    Kontaktperson,
+    Selbstregistriert
 end

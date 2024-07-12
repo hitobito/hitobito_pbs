@@ -4,14 +4,13 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class CrisisMailer < ApplicationMailer
-
-  CONTENT_CRISIS_ACKNOWLEDGED = 'content_crisis_acknowledged'.freeze
-  CONTENT_CRISIS_TRIGGERED = 'content_crisis_triggered'.freeze
+  CONTENT_CRISIS_ACKNOWLEDGED = "content_crisis_acknowledged".freeze
+  CONTENT_CRISIS_TRIGGERED = "content_crisis_triggered".freeze
 
   BUND_RECIPIENTS = [Group::Bund::VerantwortungKrisenteam,
-                     Group::Bund::LeitungKernaufgabeKommunikation]
+    Group::Bund::LeitungKernaufgabeKommunikation]
 
-  BUND_CREATORS   = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam]
+  BUND_CREATORS = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam]
 
   attr_reader :crisis
 
@@ -38,10 +37,10 @@ class CrisisMailer < ApplicationMailer
   end
 
   def bund_bund_recipients
-    Person.
-      joins(:roles).
-      where('roles.type IN (?)', BUND_RECIPIENTS).
-      pluck(:email)
+    Person
+      .joins(:roles)
+      .where(roles: {type: BUND_RECIPIENTS})
+      .pluck(:email)
   end
 
   def kanton_bund_recipients
@@ -49,8 +48,8 @@ class CrisisMailer < ApplicationMailer
 
     Person
       .joins(:roles)
-      .where('roles.type = ?', Group::Kantonalverband::VerantwortungKrisenteam.sti_name)
-      .where('roles.group_id = ?', kantonalverband.try(:id))
+      .where(roles: {type: Group::Kantonalverband::VerantwortungKrisenteam.sti_name})
+      .where(roles: {group_id: kantonalverband.try(:id)})
       .pluck(:email)
   end
 
@@ -67,7 +66,6 @@ class CrisisMailer < ApplicationMailer
   end
 
   def placeholder_date
-    Time.now.strftime('%d.%m.%Y %H:%M')
+    Time.zone.now.strftime("%d.%m.%Y %H:%M")
   end
-
 end

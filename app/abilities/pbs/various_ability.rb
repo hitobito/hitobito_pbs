@@ -46,5 +46,4 @@ module Pbs::VariousAbility
   def krisenteam_kanton
     !subject.group.is_a?(Group::Kantonalverband)
   end
-
 end

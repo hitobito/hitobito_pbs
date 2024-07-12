@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito_jubla and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -16,8 +14,7 @@ module Pbs::Export::Tabular::Events
       self.all_participant_roles = Event::Course.role_types.flatten - [Event::Course::Role::Advisor]
 
       delegate :id, :first_name, :last_name, :nickname,
-               :address, :zip_code, :town, :country, :email, :salutation_value, to: :advisor
-
+        :address, :zip_code, :town, :country, :email, :salutation_value, to: :advisor
 
       remove_method :training_days
     end
@@ -25,15 +22,15 @@ module Pbs::Export::Tabular::Events
     def last_event_date
       event_date = entry.dates.reorder(:finish_at).last
       end_date = event_date.finish_at || event_date.start_at
-      end_date.strftime('%d.%m.%Y')
+      end_date.strftime("%d.%m.%Y")
     end
 
     def training_days
-      Kernel.format('%g', entry.training_days) if entry.training_days
+      Kernel.format("%g", entry.training_days) if entry.training_days
     end
 
     def bsv_days
-      Kernel.format('%g', entry.bsv_days) if entry.bsv_days
+      Kernel.format("%g", entry.bsv_days) if entry.bsv_days
     end
 
     def kurs_kind
@@ -41,11 +38,11 @@ module Pbs::Export::Tabular::Events
     end
 
     def kantonalverband
-      entry.groups.where(type: Group::Kantonalverband).join(', ') || nil
+      entry.groups.where(type: Group::Kantonalverband).join(", ") || nil
     end
 
     def region
-      entry.groups.where(type: Group::Region).join(', ') || nil
+      entry.groups.where(type: Group::Region).join(", ") || nil
     end
 
     def language_count_pbs
@@ -56,7 +53,7 @@ module Pbs::Export::Tabular::Events
     end
 
     def advisor
-      @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes.except('picture') : {})
+      @advisor ||= Person.new(entry.advisor ? entry.advisor.attributes.except("picture") : {})
     end
 
     def bsv_eligible_participations_count
@@ -91,11 +88,11 @@ module Pbs::Export::Tabular::Events
 
     def bsv_eligible_participations
       @bsv_eligible_participations ||= active_participations.select do |participation|
-                                         person = participation.person
-                                         person.birthday? &&
-                                         info.send(:aged_under_30?, person) &&
-                                         info.send(:ch_resident?, person)
-                                       end
+        person = participation.person
+        person.birthday? &&
+          info.send(:aged_under_30?, person) &&
+          info.send(:ch_resident?, person)
+      end
     end
 
     def all_participants
@@ -103,28 +100,26 @@ module Pbs::Export::Tabular::Events
     end
 
     def active_participations
-      @active_participations ||= entry.participations.where(active: true).select {
-        |p| exclude_advisor(p)
+      @active_participations ||= entry.participations.where(active: true).select { |p|
+        exclude_advisor(p)
       }
     end
 
     def exclude_advisor(participation)
-      !(participation.roles.one? && participation.roles.first.class == Event::Course::Role::Advisor)
+      !(participation.roles.one? && participation.roles.first.instance_of?(Event::Course::Role::Advisor))
     end
 
     def attendance_groups_by_bsv_days_for(participations)
-      Hash[
-        participations.
-          group_by { |participation| participation.bsv_days || 0 }.
-          transform_values { |participation_group| participation_group.count }.
-          sort_by { |days, count| days.to_f }
-      ]
+      participations
+        .group_by { |participation| participation.bsv_days || 0 }
+        .transform_values { |participation_group| participation_group.count }
+        .sort_by { |days, count| days.to_f }.to_h
     end
 
     def format_attendances(attendance_groups)
       return nil if attendance_groups.none?
 
-      attendance_groups.collect { |days, count| "#{count}x#{sprintf('%g', days)}" }.join(', ')
+      attendance_groups.collect { |days, count| "#{count}x#{sprintf("%g", days)}" }.join(", ")
     end
   end
 end

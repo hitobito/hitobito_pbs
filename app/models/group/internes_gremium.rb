@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2020, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,7 +40,6 @@
 #
 
 class Group::InternesGremium < Group
-
   class Leitung < ::Role
     self.permissions = [:group_and_below_full]
     self.visible_from_above = false
@@ -52,5 +49,4 @@ class Group::InternesGremium < Group
     self.permissions = [:group_read]
     self.visible_from_above = false
   end
-
 end

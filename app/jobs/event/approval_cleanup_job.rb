@@ -41,16 +41,16 @@ class Event::ApprovalCleanupJob < RecurringJob
     Event::Date
       .select(:event_id, :finish_at, :start_at)
       .from(Event::Date
-              .select(:event_id).select('MAX(finish_at) AS finish_at, MAX(start_at) AS start_at')
-              .joins(:event).where(events: { state: 'closed' })
+              .select(:event_id).select("MAX(finish_at) AS finish_at, MAX(start_at) AS start_at")
+              .joins(:event).where(events: {state: "closed"})
               .group(:event_id))
-      .where('IFNULL(finish_at, start_at) < ?', cutoff_date)
+      .where("IFNULL(finish_at, start_at) < ?", cutoff_date)
   end
 
   def approvals
     Event::Approval.joins(participation: :event)
-                   .where(participations_of_old_events_condition)
-                   .where(approvals_with_comments_condition)
+      .where(participations_of_old_events_condition)
+      .where(approvals_with_comments_condition)
   end
 
   def participations_of_old_events_condition

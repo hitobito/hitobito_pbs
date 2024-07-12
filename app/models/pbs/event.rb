@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -8,7 +6,7 @@
 module Pbs::Event
   extend ActiveSupport::Concern
 
-  J_S_KINDS_DATA_SHARING_ACCEPTANCE = %w(j_s_child j_s_youth j_s_mixed).freeze
+  J_S_KINDS_DATA_SHARING_ACCEPTANCE = %w[j_s_child j_s_youth j_s_mixed].freeze
 
   included do
     class_attribute :superior_attributes
@@ -21,11 +19,11 @@ module Pbs::Event
   def camp_submitted?
     !camp_submitted_at.nil?
   end
-  alias :camp_submitted :camp_submitted?
+  alias_method :camp_submitted, :camp_submitted?
 
   def upcoming
     dates.any? do |date|
-      date.start_at.to_date.future? || (date.finish_at && date.finish_at.to_date.future?)
+      date.start_at.to_date.future? || date.finish_at&.to_date&.future?
     end
   end
 

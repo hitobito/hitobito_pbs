@@ -39,14 +39,14 @@ module Alumni
     end
 
     def feature_enabled?
-      FeatureGate.enabled?('alumni.invitation')
+      FeatureGate.enabled?("alumni.invitation")
     end
 
     def no_active_role_in_layer?
-      !Role.
-        joins(:group).
-        where(person_id: role.person_id, group: { layer_group_id: role.group.layer_group_id }).
-        exists?
+      !Role
+        .joins(:group)
+        .where(person_id: role.person_id, group: {layer_group_id: role.group.layer_group_id})
+        .exists?
     end
 
     def old_enough_if_in_age_group?
@@ -82,8 +82,8 @@ module Alumni
 
     def send_invitation
       AlumniMailer.send(type, role.person, alumni_groups.ex_members_group_ids.presence,
-                        alumni_groups.silverscout_group_ids.presence).
-        deliver_later
+        alumni_groups.silverscout_group_ids.presence)
+        .deliver_later
     end
   end
 end

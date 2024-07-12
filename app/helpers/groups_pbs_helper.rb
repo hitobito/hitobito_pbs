@@ -4,20 +4,19 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module GroupsPbsHelper
-
   def format_group_website(group)
     if group.website?
-      url = group.website.start_with?('http') ? group.website : "http://#{group.website}"
-      link_to(group.website, url, target: '_blank')
+      url = group.website.start_with?("http") ? group.website : "http://#{group.website}"
+      link_to(group.website, url, target: "_blank", rel: "noopener")
     end
   end
 
   def format_group_cantons(group)
-    group.cantons.collect { |c| Cantons.full_name(c) }.sort.join(', ')
+    group.cantons.collect { |c| Cantons.full_name(c) }.sort.join(", ")
   end
 
   def pending_approvals_tab(entry)
-    I18n.t('groups.tabs.approvals', count: entry.pending_approvals_count)
+    I18n.t("groups.tabs.approvals", count: entry.pending_approvals_count)
   end
 
   def format_approved_at(obj)
@@ -27,10 +26,9 @@ module GroupsPbsHelper
   def groupfinder_fields_info_text
     content = CustomContent.get(Group::Abteilung::CONTENT_GROUPFINDER_FIELDS_INFO)
     placeholders = {
-      'max-number-of-geolocations' => Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
+      "max-number-of-geolocations" => Group::Abteilung::GEOLOCATION_COUNT_LIMIT.to_s
     }
 
     content.body_with_values(placeholders).to_s
   end
-
 end

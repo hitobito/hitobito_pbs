@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,7 +40,6 @@
 #
 
 class Group::RegionaleKommission < Group::Kommission
-
   children Group::RegionaleKommission
 
   class Leitung < Group::Kommission::Leitung
@@ -54,5 +51,4 @@ class Group::RegionaleKommission < Group::Kommission
   roles Leitung, Mitglied
 
   self.default_role = Mitglied
-
 end

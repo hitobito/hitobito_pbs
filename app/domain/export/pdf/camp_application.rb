@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2015 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -15,13 +13,13 @@ module Export::Pdf
       @camp = camp
       @context = ViewModel.new(camp)
       @section_count = 0
-      @document = Prawn::Document.new(page_size: 'A4', 
-                                      page_layout: :portrait, 
-                                      margin: 2.cm)
+      @document = Prawn::Document.new(page_size: "A4",
+        page_layout: :portrait,
+        margin: 2.cm)
     end
 
     def title
-      @title ||= translate('title', camp: @camp.name)
+      @title ||= translate("title", camp: @camp.name)
     end
 
     def render
@@ -32,7 +30,7 @@ module Export::Pdf
     end
 
     def filename
-      title + '.pdf'
+      title + ".pdf"
     end
 
     private
@@ -55,20 +53,20 @@ module Export::Pdf
     end
 
     def render_logos
-      image_path = Wagons.find_wagon(__FILE__).root.join('app', 'assets', 'images')
-      image image_path.join('logo_pbs.png'), at: [0, bounds.top_left[1] + 40], fit: [200, 55]
+      image_path = Wagons.find_wagon(__FILE__).root.join("app", "assets", "images")
+      image image_path.join("logo_pbs.png"), at: [0, bounds.top_left[1] + 40], fit: [200, 55]
 
-      return unless @camp.j_s_kind.present?
+      return if @camp.j_s_kind.blank?
 
-      image image_path.join('logo_js.png'), 
+      image image_path.join("logo_js.png"),
         at: [bounds.top_right[0] - 40, bounds.top_left[1] + 40], fit: [200, 55]
     end
 
     def render_page_numbers
-      number_pages(I18n.t('event.participations.print.page_of_pages'),
-              at: [0, -20],
-              align: :right,
-              size: 9)
+      number_pages(I18n.t("event.participations.print.page_of_pages"),
+        at: [0, -20],
+        align: :right,
+        size: 9)
     end
 
     def render_title

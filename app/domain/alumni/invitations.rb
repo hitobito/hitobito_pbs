@@ -14,10 +14,10 @@ module Alumni
     end
 
     def relevant_roles
-      Role.
-        with_deleted.
-        where(deleted_at: time_range, alumni_invitation_processed_at: nil).
-        includes(:person, :group)
+      Role
+        .with_deleted
+        .where(deleted_at: time_range, alumni_invitation_processed_at: nil)
+        .includes(:person, :group)
     end
 
     def time_range
@@ -32,8 +32,8 @@ module Alumni
       iso8601duration = Settings.dig(*settings_path)
       ActiveSupport::Duration.parse(iso8601duration)
     rescue ActiveSupport::Duration::ISO8601Parser::ParsingError, ArgumentError
-      raise "Value #{iso8601duration.inspect} at Settings.#{settings_path.join('')} " +
-              'is not a valid ISO8601 duration'
+      raise "Value #{iso8601duration.inspect} at Settings.#{settings_path.join("")} " \
+        "is not a valid ISO8601 duration"
     end
   end
 end

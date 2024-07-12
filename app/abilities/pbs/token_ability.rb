@@ -35,7 +35,7 @@ module Pbs::TokenAbility
   def define_event_abilities_with_camps
     define_event_abilities_without_camps
 
-    can :'index_event/camps', Group do |g|
+    can :"index_event/camps", Group do |g|
       token_layer_and_below.include?(g)
     end
   end

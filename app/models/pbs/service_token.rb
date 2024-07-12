@@ -35,5 +35,4 @@ module Pbs::ServiceToken
   def below_top_layer?
     Group.find(layer_group_id).class != Group::Bund
   end
-
 end

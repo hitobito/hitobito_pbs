@@ -6,11 +6,9 @@
 #  https://github.com/hitobito/hitobito_die_mitte.
 
 module Pbs::Salutation
-
   def attributes
     super.tap do |attrs|
       attrs.merge!(nickname: person.nickname)
     end
   end
-
 end

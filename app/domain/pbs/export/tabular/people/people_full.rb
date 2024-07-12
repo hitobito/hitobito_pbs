@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -30,11 +28,10 @@ module Pbs
           private
 
           def row_for(entry, format = nil)
-            return super unless row_class == ::Export::Tabular::People::PersonRow && 
-                                               @group.present?
+            return super unless row_class == ::Export::Tabular::People::PersonRow &&
+              @group.present?
             row_class.new(entry, format, @group)
           end
-
         end
       end
     end

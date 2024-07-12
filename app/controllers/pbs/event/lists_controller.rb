@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -14,7 +12,7 @@ module Pbs::Event::ListsController
 
     skip_authorization_check only: :camps
     skip_authorize_resource only: [:camps, :all_camps, :kantonalverband_camps,
-                                   :camps_in_canton, :camps_abroad]
+      :camps_in_canton, :camps_abroad]
     alias_method_chain :render_bsv_export, :advanced
   end
 
@@ -38,7 +36,7 @@ module Pbs::Event::ListsController
   def all_camps
     authorize!(:list_all, Event::Camp)
 
-    @nav_left = 'camps'
+    @nav_left = "camps"
     render_camp_list(all_upcoming_camps)
   end
 
@@ -46,7 +44,7 @@ module Pbs::Event::ListsController
   def kantonalverband_camps
     authorize!(:list_cantonal, Event::Camp)
 
-    @nav_left = 'camps'
+    @nav_left = "camps"
     @group = Group::Kantonalverband.find(params[:group_id])
     render_camp_list(all_kantonalverband_camps)
   end
@@ -55,7 +53,7 @@ module Pbs::Event::ListsController
   def camps_in_canton
     authorize!(:list_cantonal, Event::Camp)
 
-    @nav_left = 'camps'
+    @nav_left = "camps"
     render_camp_list(all_camps_in_canton)
   end
 
@@ -63,7 +61,7 @@ module Pbs::Event::ListsController
   def camps_abroad
     authorize!(:list_abroad, Event::Camp)
 
-    @nav_left = 'camps'
+    @nav_left = "camps"
     render_camp_list(all_camps_abroad)
   end
 
@@ -72,7 +70,7 @@ module Pbs::Event::ListsController
   def render_bsv_export_with_advanced(courses_for_bsv_export)
     if params[:advanced]
       send_data(Export::Tabular::Events::AdvancedBsvList.csv(courses_for_bsv_export),
-                type: :csv, filename: 'advanced_bsv_export.csv')
+        type: :csv, filename: "advanced_bsv_export.csv")
     else
       render_bsv_export_without_advanced(courses_for_bsv_export)
     end
@@ -80,8 +78,8 @@ module Pbs::Event::ListsController
 
   def render_camp_list(camps)
     respond_to do |format|
-      format.html  { @camps = grouped(camps) }
-      format.csv   { render_camp_csv(camps) }
+      format.html { @camps = grouped(camps) }
+      format.csv { render_camp_csv(camps) }
     end
   end
 
@@ -90,38 +88,37 @@ module Pbs::Event::ListsController
   end
 
   def all_upcoming_camps
-    in_next_three_weeks(base_camp_query('canceled').upcoming)
+    in_next_three_weeks(base_camp_query("canceled").upcoming)
   end
 
   def all_kantonalverband_camps
-    base_camp_query.
-      joins(:groups).
-      where('groups.lft >= ? AND groups.rgt <= ?', @group.lft, @group.rgt).
-      in_year(year)
+    base_camp_query
+      .joins(:groups)
+      .where("groups.lft >= ? AND groups.rgt <= ?", @group.lft, @group.rgt)
+      .in_year(year)
   end
 
   def all_camps_in_canton
-    in_next_three_weeks(base_camp_query.
-      where(canton: params[:canton]).
-      upcoming)
+    in_next_three_weeks(base_camp_query
+      .where(canton: params[:canton])
+      .upcoming)
   end
 
   def all_camps_abroad
-    base_camp_query.
-      where(canton: Event::Camp::ABROAD_CANTON).
-      in_year(year)
+    base_camp_query
+      .where(canton: Event::Camp::ABROAD_CANTON)
+      .in_year(year)
   end
 
-  def base_camp_query(excluded_states = %w(created canceled))
+  def base_camp_query(excluded_states = %w[created canceled])
     Event::Camp.where.not(camp_submitted_at: nil)
-               .where.not(state: excluded_states)
-               .includes(:groups)
-               .list
+      .where.not(state: excluded_states)
+      .includes(:groups)
+      .list
   end
 
   def in_next_three_weeks(scope)
     timespan = Time.zone.now.midnight + 3.weeks
-    scope.where('event_dates.start_at <= ? OR event_dates.finish_at <= ?', timespan, timespan)
+    scope.where("event_dates.start_at <= ? OR event_dates.finish_at <= ?", timespan, timespan)
   end
-
 end

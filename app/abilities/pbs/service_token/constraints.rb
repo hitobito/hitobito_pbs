@@ -13,7 +13,6 @@ module Pbs::ServiceToken::Constraints
   end
 
   def only_it_support_in_bund
-    group && group.class == Group::Bund ? role_type?(Group::Bund::ItSupport) : true
+    group&.instance_of?(Group::Bund) ? role_type?(Group::Bund::ItSupport) : true
   end
-
 end

@@ -4,11 +4,10 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class BlackListMailer < ApplicationMailer
-
-  CONTENT_BLACK_LIST_HIT = 'black_list_hit'.freeze
-  CONTENT_BLACK_LIST_ATTR_HIT = 'black_list_attr_hit'.freeze
-  BLACK_LIST_ROLES = [ Group::Bund::Geschaeftsleitung,
-                       Group::Bund::LeitungKernaufgabeKommunikation ].freeze
+  CONTENT_BLACK_LIST_HIT = "black_list_hit".freeze
+  CONTENT_BLACK_LIST_ATTR_HIT = "black_list_attr_hit".freeze
+  BLACK_LIST_ROLES = [Group::Bund::Geschaeftsleitung,
+    Group::Bund::LeitungKernaufgabeKommunikation].freeze
 
   def hit(person, target = nil)
     return if recipients.blank?
@@ -23,10 +22,10 @@ class BlackListMailer < ApplicationMailer
   private
 
   def recipients
-    @recipients ||= Person.
-                      joins(:roles).
-                      where('roles.type IN (?)', BLACK_LIST_ROLES).
-                      pluck(:email)
+    @recipients ||= Person
+      .joins(:roles)
+      .where(roles: {type: BLACK_LIST_ROLES})
+      .pluck(:email)
   end
 
   def placeholder_black_list_person

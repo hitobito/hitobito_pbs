@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -14,7 +12,7 @@ module Pbs
 
           def initialize(entry, format = nil, group = nil)
             super(entry, format)
-            @group = group 
+            @group = group
           end
 
           def salutation
@@ -31,7 +29,7 @@ module Pbs
 
           def has_siblings_in_layer
             ::Person::FamilyMemberFinder.new(entry)
-                                        .family_members_in_context(@group, kind: :sibling)&.any?
+              .family_members_in_context(@group, kind: :sibling)&.any?
           end
         end
       end

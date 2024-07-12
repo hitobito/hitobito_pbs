@@ -5,7 +5,6 @@
 
 module Export::Tabular::People
   class WithQualificationRow < PersonRow
-
     def kantonalverband_id
       entry.kantonalverband.try(:id)
     end
@@ -16,8 +15,8 @@ module Export::Tabular::People
 
     def roles
       entry.roles.map do |role|
-        "#{role} / #{role.group.id} #{role.group.class.name.gsub('Group::', '')}"
-      end.join(', ')
+        "#{role} / #{role.group.id} #{role.group.class.name.gsub("Group::", "")}"
+      end.join(", ")
     end
 
     def find_qualification(label)

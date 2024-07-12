@@ -12,27 +12,26 @@ module Pbs::GroupsController
   end
 
   def pending_approvals
-    @approvals = Event::Approval.pending(entry).
-                 includes(:participation, :approvee, event: [:dates, :groups]).
-                 order('event_participations.created_at ASC')
+    @approvals = Event::Approval.pending(entry)
+      .includes(:participation, :approvee, event: [:dates, :groups])
+      .order("event_participations.created_at ASC")
   end
 
   private
 
   def permitted_attrs_with_pbs_fields
     attrs = permitted_attrs_without_pbs_fields
-    attrs << { cantons: [] } if entry.class.used_attributes.include?(:cantons)
+    attrs << {cantons: []} if entry.class.used_attributes.include?(:cantons)
     if entry.class.used_attributes.include?(:geolocations)
-      attrs << { geolocations_attributes: [:id, :lat, :long, :_destroy] }
+      attrs << {geolocations_attributes: [:id, :lat, :long, :_destroy]}
     end
     attrs
   end
 
   def set_crisis_flash
     if entry.active_crisis
-      flash.now[:alert] = I18n.t('groups.ongoing_crisis',
-                                 creator: entry.active_crisis.creator.full_name)
+      flash.now[:alert] = I18n.t("groups.ongoing_crisis",
+        creator: entry.active_crisis.creator.full_name)
     end
   end
-
 end

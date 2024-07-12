@@ -15,7 +15,7 @@ class SupercampsController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :handle_access_denied
   respond_to :js, only: [:available, :query]
 
-  EXCLUDED_SUPERCAMP_ATTRS = %w(
+  EXCLUDED_SUPERCAMP_ATTRS = %w[
     id type name state
     expected_participants_wolf_f expected_participants_wolf_m
     expected_participants_pfadi_f expected_participants_pfadi_m
@@ -28,11 +28,11 @@ class SupercampsController < ApplicationController
     coach coach_visiting coach_visiting_date
     advisor_mountain_security advisor_snow_security advisor_water_security
     lagerreglement_applied kantonalverband_rules_applied j_s_rules_applied
-  ).freeze
+  ].freeze
 
-  EXCLUDED_DATES_ATTRS = %w(id event_id).freeze
+  EXCLUDED_DATES_ATTRS = %w[id event_id].freeze
 
-  EXCLUDED_QUESTIONS_ATTRS = %w(id event_id).freeze
+  EXCLUDED_QUESTIONS_ATTRS = %w[id event_id].freeze
 
   def available
     supercamps_on_group_and_above
@@ -71,9 +71,9 @@ class SupercampsController < ApplicationController
 
   def matching_supercamps
     Event::Camp.upcoming
-               .left_joins(:translations)
-               .where('event_translations.name LIKE ?', "%#{params[:q]}%")
-               .where(allow_sub_camps: true, state: 'created').distinct
+      .left_joins(:translations)
+      .where("event_translations.name LIKE ?", "%#{params[:q]}%")
+      .where(allow_sub_camps: true, state: "created").distinct
   end
 
   def camp_id
@@ -82,7 +82,7 @@ class SupercampsController < ApplicationController
 
   def supercamp
     @supercamp ||= Event.includes(:dates, :application_questions, :admin_questions)
-                        .find(params[:supercamp_id])
+      .find(params[:supercamp_id])
   end
 
   def dates_attributes
@@ -122,11 +122,11 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-                                  .merge(supercamp_attributes_to_merge)
+      .merge(supercamp_attributes_to_merge)
   end
 
   def generated_name
-    supercamp.name + ': ' + group.display_name
+    supercamp.name + ": " + group.display_name
   end
 
   def appended_description
@@ -140,30 +140,29 @@ class SupercampsController < ApplicationController
     params[:event]
       .merge(supercamp_attrs)
       .merge(parent_id: params[:supercamp_id],
-             name: generated_name,
-             description: appended_description)
+        name: generated_name,
+        description: appended_description)
   end
 
   def authorize
     authorize!(:show, supercamp)
     unless supercamp.allow_sub_camps
-      raise CanCan::AccessDenied.new(I18n.t('supercamps.does_not_allow_sub_camps'),
-                                     :connect, supercamp)
+      raise CanCan::AccessDenied.new(I18n.t("supercamps.does_not_allow_sub_camps"),
+        :connect, supercamp)
     end
-    unless supercamp.state == 'created'
-      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_in_created_state'),
-                                     :connect, supercamp)
+    unless supercamp.state == "created"
+      raise CanCan::AccessDenied.new(I18n.t("supercamps.not_in_created_state"),
+        :connect, supercamp)
     end
     unless supercamp.upcoming
-      raise CanCan::AccessDenied.new(I18n.t('supercamps.not_upcoming'), :connect, supercamp)
+      raise CanCan::AccessDenied.new(I18n.t("supercamps.not_upcoming"), :connect, supercamp)
     end
-    if params[:event]['parent_id'].present?
-      raise CanCan::AccessDenied.new(I18n.t('supercamps.already_connected'), :connect, supercamp)
+    if params[:event]["parent_id"].present?
+      raise CanCan::AccessDenied.new(I18n.t("supercamps.already_connected"), :connect, supercamp)
     end
   end
 
   def handle_access_denied(err)
     redirect_back(fallback_location: group, alert: err.message)
   end
-
 end

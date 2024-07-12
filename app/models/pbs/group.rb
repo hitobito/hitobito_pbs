@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 
 # == Schema Information
 #
@@ -49,7 +46,7 @@ module Pbs::Group
     self.used_attributes += [:website, :bank_account, :pbs_shortname]
     self.superior_attributes = [:pbs_shortname]
 
-    validates :description, length: { allow_nil: true, maximum: 2**16 - 1 }
+    validates :description, length: {allow_nil: true, maximum: 2**16 - 1}
     validates :hostname, uniqueness: true, allow_blank: true
     has_many :crises
 

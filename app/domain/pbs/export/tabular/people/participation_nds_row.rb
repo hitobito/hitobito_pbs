@@ -14,6 +14,6 @@ module Pbs::Export::Tabular::People::ParticipationNdsRow
 
   def first_language_with_language
     lang = entry.language.presence
-    lang ? lang.upcase : 'DE'
+    lang ? lang.upcase : "DE"
   end
 end

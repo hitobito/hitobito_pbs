@@ -10,13 +10,13 @@ module HitobitoPbs
     include Wagons::Wagon
 
     # Set the required application version.
-    app_requirement '>= 0'
+    app_requirement ">= 0"
 
     # Add a load path for this specific wagon
     config.autoload_paths += %W[ #{config.root}/app/abilities
-                                 #{config.root}/app/domain
-                                 #{config.root}/app/jobs
-                                 #{config.root}/app/serializers ]
+      #{config.root}/app/domain
+      #{config.root}/app/jobs
+      #{config.root}/app/serializers ]
 
     config.to_prepare do # rubocop:disable Metrics/BlockLength
       JobManager.wagon_jobs += [
@@ -42,7 +42,7 @@ module HitobitoPbs
 
       Event.acts_as_nested_set(dependent: :nullify)
 
-      PeopleRelation.kind_opposites['sibling'] = 'sibling'
+      PeopleRelation.kind_opposites["sibling"] = "sibling"
       PhoneNumber.include Pbs::PhoneNumber
 
       Event::Role::Speaker.qualifiable = true # According to https://github.com/hitobito/hitobito_pbs/issues/233
@@ -107,7 +107,7 @@ module HitobitoPbs
       VariousAbility.include Pbs::VariousAbility
 
       ### decorators
-      EventDecorator.icons['Event::Camp'] = :campground
+      EventDecorator.icons["Event::Camp"] = :campground
       EventDecorator.include Pbs::EventDecorator
       GroupDecorator.include Pbs::GroupDecorator
       PersonDecorator.include Pbs::PersonDecorator
@@ -124,11 +124,11 @@ module HitobitoPbs
 
       ### controllers
       PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
-                                           :leaving_date, :j_s_number,
-                                           :prefers_digital_correspondence]
+        :leaving_date, :j_s_number,
+        :prefers_digital_correspondence]
       GroupsController.permitted_attrs += [:hostname]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
-                                                 :confirmation_name]
+        :confirmation_name]
       QualificationKindsController.permitted_attrs += [:manual]
       ServiceTokensController.permitted_attrs += [:group_health, :census_evaluations]
 
@@ -160,7 +160,7 @@ module HitobitoPbs
       EventsHelper.include Pbs::EventsHelper
       FilterNavigation::Events.include Pbs::FilterNavigation::Events
       admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
-      admin[:active_for] << 'black_lists'
+      admin[:active_for] << "black_lists"
       ContactAttrs::ControlBuilder.include Pbs::ContactAttrs::ControlBuilder
       Dropdown::PeopleExport.include Pbs::Dropdown::PeopleExport
 
@@ -180,10 +180,10 @@ module HitobitoPbs
         label: :camps,
         icon_name: :campground,
         url: :list_camps_path,
-        active_for: %w(list_all_camps
-                       list_camps_abroad
-                       list_kantonalverband_camps
-                       list_camps_in_canton),
+        active_for: %w[list_all_camps
+          list_camps_abroad
+          list_kantonalverband_camps
+          list_camps_in_canton],
         if: lambda do |_|
           can?(:list_all, Event::Camp) ||
             can?(:list_abroad, Event::Camp) ||
@@ -194,7 +194,7 @@ module HitobitoPbs
       NavigationHelper::MAIN.insert(
         index_admin,
         label: :help,
-        icon_name: :'info-circle',
+        icon_name: :"info-circle",
         url: :help_path
       )
 
@@ -204,27 +204,27 @@ module HitobitoPbs
 
       if defined? Bullet
         Bullet.add_safelist type: :n_plus_one_query,
-                            class_name: 'Group::Kantonalverband',
-                            association: :kantonalverband_cantons
+          class_name: "Group::Kantonalverband",
+          association: :kantonalverband_cantons
       end
     end
 
-    initializer 'pbs.add_settings' do |_app|
-      Settings.add_source!(File.join(paths['config'].existent, 'settings.yml'))
+    initializer "pbs.add_settings" do |_app|
+      Settings.add_source!(File.join(paths["config"].existent, "settings.yml"))
       Settings.reload!
     end
 
-    initializer 'pbs.add_inflections' do |_app|
+    initializer "pbs.add_inflections" do |_app|
       ActiveSupport::Inflector.inflections do |inflect|
-        inflect.irregular 'census', 'censuses'
+        inflect.irregular "census", "censuses"
       end
     end
 
     private
 
     def seed_fixtures
-      fixtures = root.join('db', 'seeds')
-      ENV['NO_ENV'] ? [fixtures] : [fixtures, File.join(fixtures, Rails.env)]
+      fixtures = root.join("db", "seeds")
+      ENV["NO_ENV"] ? [fixtures] : [fixtures, File.join(fixtures, Rails.env)]
     end
   end
 end

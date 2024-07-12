@@ -21,9 +21,9 @@ class Person::BlackListDetector
     bl = BlackList.arel_table
 
     BlackList.where(
-      bl[:first_name].eq(person.first_name).and(bl[:last_name].eq(person.last_name)).
-      or(bl[:email].eq(person.email)).
-      or(bl[:pbs_number].eq(person.pbs_number))
+      bl[:first_name].eq(person.first_name).and(bl[:last_name].eq(person.last_name))
+      .or(bl[:email].eq(person.email))
+      .or(bl[:pbs_number].eq(person.pbs_number))
     ).present?
   end
 
@@ -39,11 +39,10 @@ class Person::BlackListDetector
   def strip_numbers(numbers)
     numbers.map do |number|
       next if number.blank?
-      number.
-        gsub(/\D/, ''). # Remove all none digits
-        match(/\d{9}$/). # Take the last 9 digits
-        to_s.presence
+      number
+        .gsub(/\D/, "") # Remove all none digits
+        .match(/\d{9}$/) # Take the last 9 digits
+        .to_s.presence
     end.compact
   end
-
 end

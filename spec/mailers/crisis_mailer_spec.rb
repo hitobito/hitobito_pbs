@@ -11,7 +11,7 @@ describe CrisisMailer do
   include ActiveSupport::Testing::TimeHelpers
 
   let(:crisis) { crises(:schekka) }
-  let(:date)   { '2019-05-08 09:57:00' }
+  let(:date)   { '2019-05-08 09:57:00 UTC+2' }
   let(:link)   { %{<a href="http://test.host/groups/#{crisis.group.id}">#{crisis.group}</a>} }
 
   before do

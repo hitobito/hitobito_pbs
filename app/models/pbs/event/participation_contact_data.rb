@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -10,9 +8,8 @@ module Pbs::Event::ParticipationContactData
 
   included do
     Event::ParticipationContactData.contact_attrs << :title << :salutation <<
-     :grade_of_school << :entry_date << :leaving_date
+      :grade_of_school << :entry_date << :leaving_date
 
     delegate(*Event::ParticipationContactData.contact_attrs, to: :person)
   end
-
 end

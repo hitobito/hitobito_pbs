@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class Group::Ehemalige < ::Group
-
   class Mitglied < ::Role
   end
 

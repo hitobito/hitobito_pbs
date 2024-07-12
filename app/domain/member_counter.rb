@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class MemberCounter
-
   # Ordered mapping of which roles count in which field.
   # If a role from a field appearing first exists, this
   # one is counted, even if other roles exist as well.
@@ -15,34 +12,34 @@ class MemberCounter
   #
   # Roles not appearing here are not counted at all.
   ROLE_MAPPING =
-    { leiter: [Group::Abteilung::Abteilungsleitung,
-               Group::Abteilung::AbteilungsleitungStv,
-               Group::Abteilung::StufenleitungBiber,
-               Group::Abteilung::StufenleitungWoelfe,
-               Group::Abteilung::StufenleitungPfadi,
-               Group::Abteilung::StufenleitungPio,
-               Group::Abteilung::StufenleitungRover,
-               Group::Abteilung::StufenleitungPta,
-               Group::Biber::Einheitsleitung,
-               Group::Biber::Mitleitung,
-               Group::Woelfe::Einheitsleitung,
-               Group::Woelfe::Mitleitung,
-               Group::Pfadi::Einheitsleitung,
-               Group::Pfadi::Mitleitung,
-               Group::Pio::Einheitsleitung,
-               Group::Pio::Mitleitung,
-               Group::AbteilungsRover::Einheitsleitung,
-               Group::AbteilungsRover::Mitleitung,
-               Group::Pta::Einheitsleitung,
-               Group::Pta::Mitleitung],
-      pta:    [Group::Pta::Mitglied],
-      rover:  [Group::AbteilungsRover::Rover],
-      pios:   [Group::Pio::Pio],
-      pfadis: [Group::Pfadi::Leitpfadi,
-               Group::Pfadi::Pfadi],
-      woelfe: [Group::Woelfe::Leitwolf,
-               Group::Woelfe::Wolf],
-      biber:  [Group::Biber::Biber] }.freeze
+    {leiter: [Group::Abteilung::Abteilungsleitung,
+      Group::Abteilung::AbteilungsleitungStv,
+      Group::Abteilung::StufenleitungBiber,
+      Group::Abteilung::StufenleitungWoelfe,
+      Group::Abteilung::StufenleitungPfadi,
+      Group::Abteilung::StufenleitungPio,
+      Group::Abteilung::StufenleitungRover,
+      Group::Abteilung::StufenleitungPta,
+      Group::Biber::Einheitsleitung,
+      Group::Biber::Mitleitung,
+      Group::Woelfe::Einheitsleitung,
+      Group::Woelfe::Mitleitung,
+      Group::Pfadi::Einheitsleitung,
+      Group::Pfadi::Mitleitung,
+      Group::Pio::Einheitsleitung,
+      Group::Pio::Mitleitung,
+      Group::AbteilungsRover::Einheitsleitung,
+      Group::AbteilungsRover::Mitleitung,
+      Group::Pta::Einheitsleitung,
+      Group::Pta::Mitleitung],
+     pta: [Group::Pta::Mitglied],
+     rover: [Group::AbteilungsRover::Rover],
+     pios: [Group::Pio::Pio],
+     pfadis: [Group::Pfadi::Leitpfadi,
+       Group::Pfadi::Pfadi],
+     woelfe: [Group::Woelfe::Leitwolf,
+       Group::Woelfe::Wolf],
+     biber: [Group::Biber::Biber]}.freeze
 
   attr_reader :year, :abteilung
 
@@ -104,8 +101,8 @@ class MemberCounter
 
   def kantonalverband
     @kantonalverband ||= if abteilung.respond_to?(:kantonalverband)
-                           abteilung.kantonalverband
-                         end
+      abteilung.kantonalverband
+    end
   end
 
   def region
@@ -113,11 +110,11 @@ class MemberCounter
   end
 
   def members
-    Person.joins(:roles).
-      where(roles: { group_id: abteilung.self_and_descendants,
+    Person.joins(:roles)
+      .where(roles: {group_id: abteilung.self_and_descendants,
                      type: self.class.counted_roles.collect(&:sti_name),
-                     deleted_at: nil }).
-      distinct
+                     deleted_at: nil})
+      .distinct
   end
 
   private
@@ -164,7 +161,7 @@ class MemberCounter
   def count_field(person)
     ROLE_MAPPING.each do |field, roles|
       if (person.roles.collect(&:class) & roles).present?
-        return person.gender == 'm' ? :"#{field}_m" : :"#{field}_f"
+        return (person.gender == "m") ? :"#{field}_m" : :"#{field}_f"
       end
     end
     nil
@@ -173,7 +170,6 @@ class MemberCounter
   def increment(count, field)
     return unless field
     val = count.send(field)
-    count.send("#{field}=", val ? val + 1 : 1)
+    count.send(:"#{field}=", val ? val + 1 : 1)
   end
-
 end

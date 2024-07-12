@@ -13,13 +13,13 @@ class Person::FamilyMemberFinder
   def family_members_in_layer(group, kind: :sibling)
     Role.joins(person: :family_members)
       .where(group: group.groups_in_same_layer,
-             person: { family_members: { kind: kind, other: person } })
+        person: {family_members: {kind: kind, other: person}})
   end
 
   def family_members_in_event(event, kind: :sibling)
     Event::Participation.joins(person: :family_members)
-      .where(person: { family_members: { kind: kind, other: person } },
-             event: event)
+      .where(person: {family_members: {kind: kind, other: person}},
+        event: event)
   end
 
   def family_members_in_context(context, kind: :sibling)

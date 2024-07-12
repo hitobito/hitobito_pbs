@@ -18,7 +18,7 @@ module Pbs
         init_items_without_canton
 
         if canton? && camps?
-          filter_item('canton')
+          filter_item("canton")
         end
       end
 
@@ -29,7 +29,6 @@ module Pbs
       def camps?
         @template.params[:type] == ::Event::Camp.sti_name
       end
-
     end
   end
 end

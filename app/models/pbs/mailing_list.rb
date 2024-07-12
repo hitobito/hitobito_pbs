@@ -15,11 +15,11 @@ module Pbs::MailingList
 
     def assert_layer_suffix
       return unless mail_name_changed?
-      return unless mail_name.present?
+      return if mail_name.blank?
       return if layer_shortname.empty?
 
-      unless mail_name.to_s.downcase.end_with?('.' + layer_shortname)
-        errors.add(:mail_name, :must_end_with_layer_suffix, suffix: '.' + layer_shortname)
+      unless mail_name.to_s.downcase.end_with?("." + layer_shortname)
+        errors.add(:mail_name, :must_end_with_layer_suffix, suffix: "." + layer_shortname)
       end
     end
 

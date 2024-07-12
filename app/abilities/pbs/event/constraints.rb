@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2013, Jungwacht Blauring Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -29,7 +27,7 @@ module Pbs::Event::Constraints
 
   def in_same_layer_or_below_with_excluded_abteilungen_for_courses
     in_same_layer ||
-    permission_in_layers?(course_group_ids_above_abteilung)
+      permission_in_layers?(course_group_ids_above_abteilung)
   end
 
   def in_same_layer_or_course_in_below_abteilung
@@ -43,7 +41,7 @@ module Pbs::Event::Constraints
   # people in abteilungen are generally not allowed to edit anything related to courses.
   def course_in_abteilung?
     event.is_a?(Event::Course) &&
-    event.groups.any? { |g| g.is_a?(Group::Abteilung) }
+      event.groups.any? { |g| g.is_a?(Group::Abteilung) }
   end
 
   def course_group_ids_above_abteilung

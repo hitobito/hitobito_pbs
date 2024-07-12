@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -27,14 +25,13 @@ module Pbs::EventsController
 
     # Merge all hashes in permitted_attrs and move them to the end of the list, so we can more
     # easily inject new nested attrs
-    self.permitted_attrs = self.permitted_attrs.reduce([[], {}]) do |result, attr|
+    self.permitted_attrs = permitted_attrs.each_with_object([[], {}]) do |attr, result|
       result[0] << attr unless attr.is_a? Hash
       result[1].merge! attr if attr.is_a? Hash
-      result
     end.reduce(:<<)
 
-    self.permitted_attrs.last[:application_questions_attributes] << :pass_on_to_supercamp
-    self.permitted_attrs.last[:admin_questions_attributes] << :pass_on_to_supercamp
+    permitted_attrs.last[:application_questions_attributes] << :pass_on_to_supercamp
+    permitted_attrs.last[:admin_questions_attributes] << :pass_on_to_supercamp
   end
 
   def edit_with_assign_attributes
@@ -43,7 +40,7 @@ module Pbs::EventsController
   end
 
   def sort_expression_with_canton
-    return sort_expression_without_canton unless params[:sort] == 'canton'
+    return sort_expression_without_canton unless params[:sort] == "canton"
     sorted_keys = canton_labels_with_abroad.invert.sort.collect(&:second)
     expressions = sorted_keys.each_with_index.collect do |key, index|
       "WHEN events.canton = '#{key}' then #{index + 1}"
@@ -68,7 +65,7 @@ module Pbs::EventsController
     supercamp_contact_attrs = model_params.delete(:contact_attrs_passed_on_to_supercamp)
     return contact_attrs if supercamp_contact_attrs.blank?
     entry.contact_attrs_passed_on_to_supercamp =
-      supercamp_contact_attrs.reject { |_, v| v == '0' }.keys
+      supercamp_contact_attrs.reject { |_, v| v == "0" }.keys
 
     contact_attrs
   end
@@ -80,9 +77,9 @@ module Pbs::EventsController
 
     entry.camp_submitted_at = Time.zone.now.to_date
     if entry.valid?
-      flash.now[:notice] = "#{I18n.t('events.create_camp_application.flash.preview_success')}"
+      flash.now[:notice] = I18n.t("events.create_camp_application.flash.preview_success").to_s
     else
-      flash.now[:warning] = "#{I18n.t('events.create_camp_application.flash.preview')}" \
+      flash.now[:warning] = "#{I18n.t("events.create_camp_application.flash.preview")}" \
                         "<br />#{entry.errors.full_messages.to_sentence}"
     end
     entry.restore_attributes # restore the simulated change to camp_submitted_at
@@ -90,7 +87,7 @@ module Pbs::EventsController
 
   def show_camp_application
     pdf = Export::Pdf::CampApplication.new(entry)
-    send_data pdf.render, type: :pdf, disposition: 'inline', filename: pdf.filename
+    send_data pdf.render, type: :pdf, disposition: "inline", filename: pdf.filename
   end
 
   def create_camp_application
@@ -99,7 +96,7 @@ module Pbs::EventsController
       Event::CampMailer.submit_camp(entry).deliver_later
       set_success_notice
     else
-      flash[:alert] = "#{I18n.t('events.create_camp_application.flash.error')}" \
+      flash[:alert] = "#{I18n.t("events.create_camp_application.flash.error")}" \
                       "<br />#{entry.errors.full_messages.to_sentence}"
     end
     redirect_to path_args(entry)
@@ -119,8 +116,8 @@ module Pbs::EventsController
     @canton_specific_help_texts = Event::Camp::CANTONS.map do |canton_short_name|
       {
         id: canton_short_name,
-        url: I18n.t("events.canton_specific_help_text.#{canton_short_name}_url", default: ''),
-        title: I18n.t("events.canton_specific_help_text.#{canton_short_name}_title", default: '')
+        url: I18n.t("events.canton_specific_help_text.#{canton_short_name}_url", default: ""),
+        title: I18n.t("events.canton_specific_help_text.#{canton_short_name}_title", default: "")
       }
     end
   end
@@ -130,9 +127,7 @@ module Pbs::EventsController
     attrs += self.class.permitted_attrs
 
     attrs = check_superior_attrs(attrs)
-    attrs = check_coach_attrs(attrs)
-
-    attrs
+    check_coach_attrs(attrs)
   end
 
   def check_superior_attrs(attrs)
@@ -167,5 +162,4 @@ module Pbs::EventsController
     params[:event] ||= {}
     params[:event].merge!(flash[:event_with_merged_supercamp])
   end
-
 end

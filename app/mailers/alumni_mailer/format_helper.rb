@@ -24,7 +24,7 @@ class AlumniMailer::FormatHelper
   end
 
   def group_selfinscription_link(group, &block)
-    url = group_self_registration_url(group_id: group, target: '_blank')
+    url = group_self_registration_url(group_id: group, target: "_blank")
     label = block.call(group)
     link_to(label, url).html_safe
   end
@@ -32,6 +32,6 @@ class AlumniMailer::FormatHelper
   private
 
   # used for path helpers
-  def controller; end
-
+  def controller
+  end
 end

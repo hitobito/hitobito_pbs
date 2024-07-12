@@ -5,6 +5,5 @@
 
 module Sheet
   class BlackList < Sheet::Admin
-
   end
 end

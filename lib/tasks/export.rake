@@ -4,7 +4,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 namespace :export do
-  desc 'Export member_counts for year - default is current year'
+  desc "Export member_counts for year - default is current year"
   task :member_counts, [:year] => [:environment] do |_, args|
     args.with_defaults(year: Time.zone.now.year)
 
@@ -13,11 +13,11 @@ namespace :export do
     File.write("member_counts_#{args.year}.csv", csv)
   end
 
-  desc 'Export people with their qualifications'
+  desc "Export people with their qualifications"
   task :people_with_qualifications, [:limit] => [:environment] do |_, args|
     list = Person.includes(:primary_group, roles: :group, qualifications: :qualification_kind)
     list = list.limit(args.limit) if args.limit
     csv = Export::Tabular::People::WithQualifications.export(:csv, list)
-    File.write('people_with_qualifications.csv', csv)
+    File.write("people_with_qualifications.csv", csv)
   end
 end

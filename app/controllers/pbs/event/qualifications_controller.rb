@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -16,12 +14,12 @@ module Pbs::Event::QualificationsController
     entries.map(&:decorate).select(&:has_confirmation?).each do |participation|
       Event::Course::ConfirmationMailer.notify(Draper.undecorate(participation)).deliver_later
     end
-    flash.now.notice = t('.sent_to_qualified_participants')
-    render 'shared/update_flash'
+    flash.now.notice = t(".sent_to_qualified_participants")
+    render "shared/update_flash"
   end
 
   def has_confirmations
-    params[:has_confirmations] == '1'
+    params[:has_confirmations] == "1"
   end
 
   def update_with_course_confirmation_flag
@@ -30,5 +28,4 @@ module Pbs::Event::QualificationsController
     end
     update_without_course_confirmation_flag
   end
-
 end

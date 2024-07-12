@@ -1,4 +1,3 @@
-
 module Export::Pdf
   class CampApplication
     class SplitBox
@@ -17,15 +16,15 @@ module Export::Pdf
       def right(&block)
         @right = block
       end
-      
-      def render 
+
+      def render
         bounding_box([0, cursor], width: bounds.width) do
           bounding_box([0, bounds.top], width: children_width) do
-            @left.yield if @left
+            @left&.yield
           end
           lowest = cursor
           bounding_box([children_width + @gap, bounds.top], width: children_width) do
-            @right.yield if @right
+            @right&.yield
           end
           lowest = cursor if cursor < lowest
           move_cursor_to lowest
@@ -36,13 +35,11 @@ module Export::Pdf
         (bounds.width - @gap) / 2
       end
 
-      def self.render(*args, &block)
-        box = self.new(*args)
+      def self.render(*, &block)
+        box = new(*)
         yield(box)
         box.render
       end
     end
   end
 end
-
-

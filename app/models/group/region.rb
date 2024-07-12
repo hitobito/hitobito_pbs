@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -43,19 +41,18 @@
 #
 
 class Group::Region < Group
-
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
   self.used_attributes += [:group_health]
 
   children Group::Region,
-           Group::Abteilung,
-           Group::RegionaleRover,
-           Group::RegionalesGremium,
-           Group::InternesRegionalesGremium,
-           Group::RegionaleKommission,
-           Group::Ehemalige
+    Group::Abteilung,
+    Group::RegionaleRover,
+    Group::RegionalesGremium,
+    Group::InternesRegionalesGremium,
+    Group::RegionaleKommission,
+    Group::Ehemalige
 
   has_many :member_counts
 
@@ -277,52 +274,47 @@ class Group::Region < Group
   end
 
   roles Regionalleitung,
-        Sekretariat,
-        Adressverwaltung,
-        PowerUser,
-        Praesidium,
-        VizePraesidium,
-        PraesidiumApv,
-        Praeses,
-        Mitarbeiter,
-        Beisitz,
-
-        Kassier,
-        Rechnungen,
-        Revisor,
-        Redaktor,
-        Webmaster,
-        Mediensprecher,
-        MitgliedKrisenteam,
-
-        Coach,
-        Leitungskursbetreuung,
-
-        VerantwortungBiberstufe,
-        VerantwortungWolfstufe,
-        VerantwortungPfadistufe,
-        VerantwortungPiostufe,
-        VerantwortungRoverstufe,
-        VerantwortungPfadiTrotzAllem,
-        VerantwortungAbteilungen,
-        VerantwortungAnimationSpirituelle,
-        VerantwortungAusbildung,
-        VerantwortungBetreuung,
-        VerantwortungIntegration,
-        VerantwortungInternationales,
-        VerantwortungSuchtpraeventionsprogramm,
-        VerantwortungKrisenteam,
-        VerantwortungEhrenamt,
-        VerantwortungLagermeldung,
-        VerantwortungLagerplaetze,
-        VerantwortungMaterialverkaufsstelle,
-        VerantwortungPr,
-        VerantwortungPraeventionSexuellerAusbeutung,
-        VerantwortungProgramm,
-
-        Spezialfunktion,
-
-        Ehrenmitglied,
-        Passivmitglied,
-        Selbstregistriert
+    Sekretariat,
+    Adressverwaltung,
+    PowerUser,
+    Praesidium,
+    VizePraesidium,
+    PraesidiumApv,
+    Praeses,
+    Mitarbeiter,
+    Beisitz,
+    Kassier,
+    Rechnungen,
+    Revisor,
+    Redaktor,
+    Webmaster,
+    Mediensprecher,
+    MitgliedKrisenteam,
+    Coach,
+    Leitungskursbetreuung,
+    VerantwortungBiberstufe,
+    VerantwortungWolfstufe,
+    VerantwortungPfadistufe,
+    VerantwortungPiostufe,
+    VerantwortungRoverstufe,
+    VerantwortungPfadiTrotzAllem,
+    VerantwortungAbteilungen,
+    VerantwortungAnimationSpirituelle,
+    VerantwortungAusbildung,
+    VerantwortungBetreuung,
+    VerantwortungIntegration,
+    VerantwortungInternationales,
+    VerantwortungSuchtpraeventionsprogramm,
+    VerantwortungKrisenteam,
+    VerantwortungEhrenamt,
+    VerantwortungLagermeldung,
+    VerantwortungLagerplaetze,
+    VerantwortungMaterialverkaufsstelle,
+    VerantwortungPr,
+    VerantwortungPraeventionSexuellerAusbeutung,
+    VerantwortungProgramm,
+    Spezialfunktion,
+    Ehrenmitglied,
+    Passivmitglied,
+    Selbstregistriert
 end

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2017, 2019, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -11,22 +9,21 @@ module Pbs::Sheet::Event
   included do
     tabs.insert(
       -1,
-      Sheet::Tab.new('events.tabs.approvals',
-                     :group_event_approvals_path,
-                     if: (lambda do |view, _group, event|
-                       event.course_kind? && view.can?(:index_approvals, event)
-                     end)),
+      Sheet::Tab.new("events.tabs.approvals",
+        :group_event_approvals_path,
+        if: (lambda do |view, _group, event|
+          event.course_kind? && view.can?(:index_approvals, event)
+        end)),
       Sheet::Tab.new(:attendances_tab_label,
-                     :attendances_group_event_path,
-                     if: (lambda do |view, _group, event|
-                       event.course_kind? && view.can?(:manage_attendances, event)
-                     end)),
-      Sheet::Tab.new('events.tabs.sub_camps',
-                     :group_event_subcamps_path,
-                     if: (lambda do |_view, _group, event|
-                       event.allow_sub_camps
-                     end))
+        :attendances_group_event_path,
+        if: (lambda do |view, _group, event|
+          event.course_kind? && view.can?(:manage_attendances, event)
+        end)),
+      Sheet::Tab.new("events.tabs.sub_camps",
+        :group_event_subcamps_path,
+        if: (lambda do |_view, _group, event|
+          event.allow_sub_camps
+        end))
     )
   end
-
 end

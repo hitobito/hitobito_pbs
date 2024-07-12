@@ -1,12 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
 class Event::AttendancesController < ApplicationController
-
   before_action :authorize
 
   decorates :group, :event, :leaders, :participants, :cooks
@@ -26,9 +23,8 @@ class Event::AttendancesController < ApplicationController
       end
     end
     redirect_to attendances_group_event_path(group, event),
-                notice: I18n.t('event/attendances.update.flash.success')
+      notice: I18n.t("event/attendances.update.flash.success")
   end
-
 
   private
 

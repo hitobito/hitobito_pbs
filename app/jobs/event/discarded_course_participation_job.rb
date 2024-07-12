@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -7,16 +5,15 @@
 
 # Job that sends mails for canceled or rejected course participations
 class Event::DiscardedCourseParticipationJob < BaseJob
-
   ORGANIZER_ROLES = [Group::Abteilung::Abteilungsleitung,
-                     Group::Abteilung::AbteilungsleitungStv,
-                     Group::Region::Regionalleitung,
-                     Group::Region::VerantwortungAusbildung,
-                     Group::Kantonalverband::Kantonsleitung,
-                     Group::Kantonalverband::VerantwortungAusbildung].freeze
+    Group::Abteilung::AbteilungsleitungStv,
+    Group::Region::Regionalleitung,
+    Group::Region::VerantwortungAusbildung,
+    Group::Kantonalverband::Kantonsleitung,
+    Group::Kantonalverband::VerantwortungAusbildung].freeze
 
   ABTEILUNGSLEITUNGS_ROLES = [Group::Abteilung::Abteilungsleitung,
-                              Group::Abteilung::AbteilungsleitungStv].freeze
+    Group::Abteilung::AbteilungsleitungStv].freeze
 
   self.parameters = [:participation_id, :previous_state, :locale]
 
@@ -65,24 +62,24 @@ class Event::DiscardedCourseParticipationJob < BaseJob
 
   def kurs_leiter
     Person.joins(event_participations: :roles)
-          .where(event_participations: { event_id: participation.event_id },
-                 event_roles: { type: Event::Course::Role::Leader.sti_name })
+      .where(event_participations: {event_id: participation.event_id},
+        event_roles: {type: Event::Course::Role::Leader.sti_name})
   end
 
   def kurs_organisatoren
-    query = Person.where(roles: { group_id: participation.event.groups })
+    query = Person.where(roles: {group_id: participation.event.groups})
     filter_role_types(query, ORGANIZER_ROLES)
   end
 
   def application_approvers
     Person
-      .joins('INNER JOIN event_approvals appr ON appr.approver_id = people.id')
-      .joins('INNER JOIN event_participations p ON p.application_id = appr.application_id')
-      .where('p.id = ? AND appr.approved = ?', participation.id, true)
+      .joins("INNER JOIN event_approvals appr ON appr.approver_id = people.id")
+      .joins("INNER JOIN event_participations p ON p.application_id = appr.application_id")
+      .where("p.id = ? AND appr.approved = ?", participation.id, true)
   end
 
   def filter_role_types(query, types)
-    query.includes(:roles).where(roles: { type: types.collect(&:sti_name) })
+    query.includes(:roles).where(roles: {type: types.collect(&:sti_name)})
   end
 
   def participation
@@ -90,15 +87,14 @@ class Event::DiscardedCourseParticipationJob < BaseJob
   end
 
   def canceled?
-    participation.state == 'canceled'
+    participation.state == "canceled"
   end
 
   def rejected?
-    participation.state == 'rejected'
+    participation.state == "rejected"
   end
 
   def previously_applied?
-    @previous_state == 'applied'
+    @previous_state == "applied"
   end
-
 end

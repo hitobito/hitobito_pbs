@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -33,7 +31,8 @@ module Pbs::Event::ParticipationConfirmationJob
     end
   end
 
-  def send_approval_with_noop; end
+  def send_approval_with_noop
+  end
 
   def send_camp_leader_information
     return unless participation.event.is_a?(Event::Camp)
@@ -45,12 +44,11 @@ module Pbs::Event::ParticipationConfirmationJob
   end
 
   def camp_leaders
-    Person.
-      includes(:additional_emails).
-      joins(event_participations: :roles).
-      where(event_participations: { event_id: participation.event_id, active: true }).
-      where(event_roles: { type: Event::Camp::Role::Leader.sti_name }).
-      distinct
+    Person
+      .includes(:additional_emails)
+      .joins(event_participations: :roles)
+      .where(event_participations: {event_id: participation.event_id, active: true})
+      .where(event_roles: {type: Event::Camp::Role::Leader.sti_name})
+      .distinct
   end
-
 end

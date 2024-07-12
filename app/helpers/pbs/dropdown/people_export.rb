@@ -17,7 +17,6 @@ module Pbs
       def is_camp?(event)
         event.is_a?(::Event::Camp)
       end
-
     end
   end
 end

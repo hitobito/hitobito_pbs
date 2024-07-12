@@ -5,13 +5,11 @@
 
 module Export::Tabular::MemberCounts
   class List < Export::Tabular::Base
-
     self.model_class = MemberCount
     self.row_class = Export::Tabular::MemberCounts::Row
 
     def attributes
       model_class.column_names.collect(&:to_sym)
     end
-
   end
 end

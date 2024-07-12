@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -9,7 +7,7 @@ module Pbs::Event::Participation
   extend ActiveSupport::Concern
 
   included do
-    validates :bsv_days, numericality: { greater_than_or_equal_to: 0, allow_blank: true }
+    validates :bsv_days, numericality: {greater_than_or_equal_to: 0, allow_blank: true}
     validates :j_s_data_sharing_accepted, presence: true, if: :j_s_data_sharing_acceptance_required?
     validate :assert_bsv_days_precision
     validate :assert_bsv_days_set
@@ -19,7 +17,7 @@ module Pbs::Event::Participation
   end
 
   def approvers
-    Person.where(id: application && application.approvals.collect(&:approver_id))
+    Person.where(id: application&.approvals&.collect(&:approver_id))
   end
 
   def j_s_data_sharing_accepted
@@ -42,14 +40,14 @@ module Pbs::Event::Participation
 
   def assert_bsv_days_precision
     if bsv_days && bsv_days % 0.5 != 0
-      msg = I18n.t('activerecord.errors.messages.must_be_multiple_of', multiple: 0.5)
+      msg = I18n.t("activerecord.errors.messages.must_be_multiple_of", multiple: 0.5)
       errors.add(:bsv_days, msg)
     end
   end
 
   def assert_bsv_days_set
     if event.try(:bsv_days).present? && %w[attended].include?(state) && bsv_days.blank?
-      msg = I18n.t('activerecord.errors.messages.must_exist')
+      msg = I18n.t("activerecord.errors.messages.must_exist")
       errors.add(:bsv_days, msg)
     end
   end

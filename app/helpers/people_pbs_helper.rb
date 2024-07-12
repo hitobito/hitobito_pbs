@@ -6,9 +6,7 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module PeoplePbsHelper
-
   def format_person_salutation(person)
     person.salutation_value
   end
-
 end

@@ -1,10 +1,7 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
-
 
 # == Schema Information
 #
@@ -57,23 +54,22 @@ module Pbs::Person
 
   included do
     Person::PUBLIC_ATTRS << :title << :salutation << :language <<
-        :prefers_digital_correspondence << :kantonalverband_id
+      :prefers_digital_correspondence << :kantonalverband_id
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
     alias_method_chain :full_name, :title
 
     i18n_boolean_setter :prefers_digital_correspondence
 
-    belongs_to :kantonalverband, class_name: 'Group' # might also be Group::Bund
+    belongs_to :kantonalverband, class_name: "Group" # might also be Group::Bund
     has_many :crises, foreign_key: :creator_id
 
-
     validates :salutation,
-              inclusion: { in: ->(_) { Salutation.available.keys },
-                           allow_blank: true }
+      inclusion: {in: ->(_) { Salutation.available.keys },
+                  allow_blank: true}
 
     validates :entry_date, :leaving_date,
-              timeliness: { type: :date, allow_blank: true, before: Date.new(9999, 12, 31) }
+      timeliness: {type: :date, allow_blank: true, before: Date.new(9999, 12, 31)}
 
     validate :has_email_in_household, if: :prefers_digital_correspondence
 
@@ -130,16 +126,16 @@ module Pbs::Person
   end
 
   def set_pbs_number!
-    update_column(:pbs_number, format('%09d', id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-'))
+    update_column(:pbs_number, format("%09d", id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-'))
   end
 
   # Missing when core person is seeded and wagon migrations have not be run
   def pbs_number_column_available?
-    self.class.column_names.include?('pbs_number')
+    self.class.column_names.include?("pbs_number")
   end
 
   def blacklisted_attribute_changed?
-    %w(first_name last_name email).any? { |k| previous_changes.key?(k) } && black_listed?
+    %w[first_name last_name email].any? { |k| previous_changes.key?(k) } && black_listed?
   end
 
   def has_email_in_household

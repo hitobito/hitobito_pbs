@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -42,25 +40,22 @@
 #
 
 class Group::Kantonalverband < Group
-
   self.layer = true
   self.event_types = [Event, Event::Course, Event::Camp]
 
   self.used_attributes += [:cantons, :group_health]
 
   children Group::Region,
-           Group::Abteilung,
-           Group::KantonalesGremium,
-           Group::InternesKantonalesGremium,
-           Group::KantonaleKommission,
-           Group::Ehemalige
-
+    Group::Abteilung,
+    Group::KantonalesGremium,
+    Group::InternesKantonalesGremium,
+    Group::KantonaleKommission,
+    Group::Ehemalige
 
   has_many :member_counts
   has_many :kantonalverband_cantons, -> { order(:canton) }
 
   accepts_nested_attributes_for :kantonalverband_cantons, allow_destroy: true
-
 
   ### INSTANCE METHODS
 
@@ -88,14 +83,14 @@ class Group::Kantonalverband < Group
     deletions = existing.map do |id, canton|
       next if list.include?(canton)
 
-      { id: id, _destroy: true }
+      {id: id, _destroy: true}
     end.compact
 
     additions = list.map do |canton|
       next if canton.blank?
       next if existing_cantons.include?(canton)
 
-      { canton: canton, kantonalverband: self }
+      {canton: canton, kantonalverband: self}
     end.compact
 
     self.kantonalverband_cantons_attributes = deletions + additions
@@ -111,6 +106,7 @@ class Group::Kantonalverband < Group
     self.permissions = [:layer_and_below_full]
     self.two_factor_authentication_enforced = true
   end
+
   class PowerUser < Adressverwaltung; end
 
   class Beisitz < ::Role
@@ -311,54 +307,49 @@ class Group::Kantonalverband < Group
   end
 
   roles Kantonsleitung,
-        Sekretariat,
-        Adressverwaltung,
-        PowerUser,
-        Praesidium,
-        VizePraesidium,
-        PraesidiumApv,
-        Mitarbeiter,
-        Beisitz,
-
-        Kassier,
-        Rechnungen,
-        Revisor,
-        Redaktor,
-        Webmaster,
-        Mediensprecher,
-        Uebersetzer,
-        MitgliedKrisenteam,
-
-        Coach,
-        Leitungskursbetreuung,
-
-        VerantwortungBiberstufe,
-        VerantwortungWolfstufe,
-        VerantwortungPfadistufe,
-        VerantwortungPiostufe,
-        VerantwortungRoverstufe,
-        VerantwortungPfadiTrotzAllem,
-        VerantwortungAbteilungen,
-        VerantwortungAnimationSpirituelle,
-        VerantwortungAusbildung,
-        VerantwortungBetreuung,
-        VerantwortungIntegration,
-        VerantwortungInternationales,
-        VerantwortungSuchtpraeventionsprogramm,
-        VerantwortungKantonsarchiv,
-        VerantwortungKrisenteam,
-        VerantwortungEhrenamt,
-        VerantwortungLagermeldung,
-        VerantwortungLagerplaetze,
-        VerantwortungMaterialverkaufsstelle,
-        VerantwortungPr,
-        VerantwortungPraeventionSexuellerAusbeutung,
-        VerantwortungProgramm,
-        VerantwortungNachhaltigkeit,
-
-        Spezialfunktion,
-
-        Ehrenmitglied,
-        Passivmitglied,
-        Selbstregistriert
+    Sekretariat,
+    Adressverwaltung,
+    PowerUser,
+    Praesidium,
+    VizePraesidium,
+    PraesidiumApv,
+    Mitarbeiter,
+    Beisitz,
+    Kassier,
+    Rechnungen,
+    Revisor,
+    Redaktor,
+    Webmaster,
+    Mediensprecher,
+    Uebersetzer,
+    MitgliedKrisenteam,
+    Coach,
+    Leitungskursbetreuung,
+    VerantwortungBiberstufe,
+    VerantwortungWolfstufe,
+    VerantwortungPfadistufe,
+    VerantwortungPiostufe,
+    VerantwortungRoverstufe,
+    VerantwortungPfadiTrotzAllem,
+    VerantwortungAbteilungen,
+    VerantwortungAnimationSpirituelle,
+    VerantwortungAusbildung,
+    VerantwortungBetreuung,
+    VerantwortungIntegration,
+    VerantwortungInternationales,
+    VerantwortungSuchtpraeventionsprogramm,
+    VerantwortungKantonsarchiv,
+    VerantwortungKrisenteam,
+    VerantwortungEhrenamt,
+    VerantwortungLagermeldung,
+    VerantwortungLagerplaetze,
+    VerantwortungMaterialverkaufsstelle,
+    VerantwortungPr,
+    VerantwortungPraeventionSexuellerAusbeutung,
+    VerantwortungProgramm,
+    VerantwortungNachhaltigkeit,
+    Spezialfunktion,
+    Ehrenmitglied,
+    Passivmitglied,
+    Selbstregistriert
 end

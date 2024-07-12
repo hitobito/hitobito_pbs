@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -8,17 +6,17 @@
 module Pbs::Event::ParticipationMailer
   extend ActiveSupport::Concern
 
-  CONTENT_CONFIRMATION_OTHER = 'event_application_confirmation_other'.freeze
+  CONTENT_CONFIRMATION_OTHER = "event_application_confirmation_other".freeze
 
-  CONTENT_CANCELED_PARTICIPATION = 'event_participation_canceled'.freeze
+  CONTENT_CANCELED_PARTICIPATION = "event_participation_canceled".freeze
 
-  CONTENT_REJECTED_PARTICIPATION = 'event_participation_rejected'.freeze
+  CONTENT_REJECTED_PARTICIPATION = "event_participation_rejected".freeze
 
   CONTENT_PARTICIPATION_ASSIGNED_FROM_WAITING_LIST =
-    'event_participation_assigned_from_waiting_list'.freeze
+    "event_participation_assigned_from_waiting_list".freeze
 
   CONTENT_PARTICIPATION_REMOVED_FROM_WAITING_LIST =
-    'event_participation_removed_from_waiting_list'.freeze
+    "event_participation_removed_from_waiting_list".freeze
 
   def confirmation_other(participation)
     @participation = participation
@@ -75,11 +73,10 @@ module Pbs::Event::ParticipationMailer
   end
 
   def placeholder_recipient_names_with_salutation
-    @recipients.map(&:salutation_value).join(', ')
+    @recipients.map(&:salutation_value).join(", ")
   end
 
   def placeholder_waiting_list_setter
     @setter.greeting_name
   end
-
 end

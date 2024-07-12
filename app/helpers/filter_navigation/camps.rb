@@ -5,21 +5,20 @@
 
 module FilterNavigation
   class Camps < Base
-
     def initialize(template)
-      super(template)
+      super
       init_items
     end
 
     def active_label
-      label_for_filter(template.params.to_unsafe_h.fetch(:filter, 'all'))
+      label_for_filter(template.params.to_unsafe_h.fetch(:filter, "all"))
     end
 
     private
 
     def init_items
-      filter_item('all')
-      filter_item('direct')
+      filter_item("all")
+      filter_item("direct")
     end
 
     def filter_item(name)
@@ -33,6 +32,5 @@ module FilterNavigation
     def filter_path(name)
       template.url_for(template.params.to_unsafe_h.merge(filter: name, host_only: true))
     end
-
   end
 end
