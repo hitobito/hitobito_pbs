@@ -925,6 +925,18 @@
           "writable": false,
           "description": null
         },
+        "parent_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "layer_group_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
         "type": {
           "type": "string",
           "readable": true,
@@ -1017,6 +1029,10 @@
         "description": {
         },
         "layer": {
+        },
+        "parent_id": {
+        },
+        "layer_group_id": {
         },
         "type": {
         },
@@ -1121,6 +1137,28 @@
             "eq"
           ],
           "single": true
+        },
+        "parent_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "layer_group_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
         },
         "type": {
           "type": "string",
