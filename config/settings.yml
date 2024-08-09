@@ -3,7 +3,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-# Settings relevant for the jubla wagon
+# Settings relevant for the pbs wagon
 # Overrides settings from the main application
 application:
   name: MiData PBS/MSdS/MSS
@@ -70,6 +70,10 @@ people:
   inactivity_block:
     warn_after: P18M # must be an ISO 8601 duration string
     block_after: P1M # must be an ISO 8601 duration string
+  cleanup_job:
+    enabled: true
+  cleanup_cutoff_duration:
+    regarding_current_sign_in_at: 1 # months
 
 messages:
   enable_writing: true
