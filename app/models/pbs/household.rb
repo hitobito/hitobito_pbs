@@ -6,7 +6,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 module Pbs::Household
-
   def household_attrs
     super.merge(
       prefers_digital_correspondence: @reference_person.prefers_digital_correspondence
