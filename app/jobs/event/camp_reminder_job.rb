@@ -7,7 +7,7 @@ class Event::CampReminderJob < RecurringJob
   RUN_AT = 3 # 3 a.m.
   SPAN_NATIONAL = 6.weeks
   SPAN_ABROAD = 10.weeks
-  NOTIFIED_ROLES = ['Event::Camp::Role::Leader', 'Event::Camp::Role::Coach'].freeze
+  NOTIFIED_ROLES = ["Event::Camp::Role::Leader", "Event::Camp::Role::Coach"].freeze
 
   run_every 24.hours
 

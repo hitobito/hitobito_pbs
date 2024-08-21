@@ -8,9 +8,9 @@ class CrisisMailer < ApplicationMailer
   CONTENT_CRISIS_TRIGGERED = "content_crisis_triggered".freeze
 
   BUND_RECIPIENTS = [Group::Bund::VerantwortungKrisenteam.sti_name,
-                     Group::Bund::LeitungKernaufgabeKommunikation.sti_name]
+    Group::Bund::LeitungKernaufgabeKommunikation.sti_name]
 
-  BUND_CREATORS   = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam.sti_name]
+  BUND_CREATORS = BUND_RECIPIENTS + [Group::Bund::MitgliedKrisenteam.sti_name]
 
   attr_reader :crisis
 
