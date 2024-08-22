@@ -46,6 +46,9 @@ module Pbs::Group
     self.used_attributes += [:website, :bank_account, :pbs_shortname]
     self.superior_attributes = [:pbs_shortname]
 
+    Group::SEARCHABLE_ATTRS << :pbs_shortname << :description << :website << :bank_account
+    include PgSearchable
+
     validates :description, length: {allow_nil: true, maximum: 2**16 - 1}
     validates :hostname, uniqueness: true, allow_blank: true
     has_many :crises

@@ -57,6 +57,9 @@ module Pbs::Person
       :prefers_digital_correspondence << :kantonalverband_id
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
+    Person::SEARCHABLE_ATTRS << :title << :pbs_number
+    include PgSearchable
+
     alias_method_chain :full_name, :title
 
     i18n_boolean_setter :prefers_digital_correspondence
