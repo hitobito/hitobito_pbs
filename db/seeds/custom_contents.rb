@@ -159,7 +159,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
 
   { custom_content_id: invitation_without_regional_groups_id,
     locale: 'de',
-    label: 'Ehemalige Einladungsmail ohne Silverscouts',
+    label: 'Ehemalige Einladungsmail: Nur Silverscout-Gruppen',
     subject: "Ehemalige Einladung zur Selbstregistrierung",
     body: "Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}" },
 
@@ -172,7 +172,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
 
   { custom_content_id: reminder_without_regional_groups_id,
     locale: 'de',
-    label: 'Ehemalige Erinnerungsmail ohne Silverscouts',
+    label: 'Ehemalige Erinnerungsmail: Nur Silverscout-Gruppen',
     subject: "Ehemalige Erinnerung zur Selbstregistrierung",
     body: "Erinnerung<br/><br/>Ehemalige-Gruppen Selbstregistrierung:<br/>{AlumniGroup-Links}" },
 
