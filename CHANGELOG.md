@@ -4,6 +4,7 @@
 
 *   LKB/Coach in Event-Resource der API aufgenommen (hitobito_pbs#325)
 *   Text-Informationen bei Kursempfehlungen werden nach 3 Monaten gelöscht (hitobito#1060)
+*   "Ehemalige Einladungsmail ohne Silverscouts" in custom contents umbenannt zu "Ehemalige Einladungsmail: Nur Silverscout-Gruppen" (hitobito_pbs#334)
 
 ## Version 2.0
 
