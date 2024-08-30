@@ -10,7 +10,7 @@ class Event::ApprovalsController < CrudController
   decorates :group, :event, :participation
 
   def index
-    @approvals = entries.group_by(&:participation)
+    @approvals = entries.select("event_approvals.*").group_by(&:participation)
   end
 
   def new

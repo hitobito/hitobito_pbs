@@ -72,7 +72,7 @@ class SupercampsController < ApplicationController
   def matching_supercamps
     Event::Camp.upcoming
       .left_joins(:translations)
-      .where("event_translations.name LIKE ?", "%#{params[:q]}%")
+      .where("event_translations.name ILIKE ?", "%#{params[:q]}%")
       .where(allow_sub_camps: true, state: "created").distinct
   end
 

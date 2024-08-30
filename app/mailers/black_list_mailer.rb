@@ -24,7 +24,7 @@ class BlackListMailer < ApplicationMailer
   def recipients
     @recipients ||= Person
       .joins(:roles)
-      .where(roles: {type: BLACK_LIST_ROLES})
+      .where(roles: {type: BLACK_LIST_ROLES.map(&:sti_name)})
       .pluck(:email)
   end
 

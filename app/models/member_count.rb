@@ -82,17 +82,18 @@ class MemberCount < ActiveRecord::Base
     end
 
     def total_for_bund(year)
-      totals_by(year, :year).first
+      totals_by(year, :year).order("MIN(member_counts.id)").first
     end
 
     def total_for_abteilung(year, abteilung)
-      totals_by(year, :abteilung_id, abteilung_id: abteilung.id).first
+      totals_by(year, :abteilung_id, abteilung_id: abteilung.id).order("MIN(member_counts.id)")
+        .first
     end
 
     def totals(year)
-      columns = "kantonalverband_id, " \
-                "region_id, " \
-                "abteilung_id, " +
+      columns = "MIN(kantonalverband_id) AS kantonalverband_id, " \
+                "MIN(region_id) AS region_id, " \
+                "MIN(abteilung_id) AS abteilung_id, " +
         COUNT_COLUMNS.collect { |c| "SUM(#{c}) AS #{c}" }.join(",")
 
       select(columns).where(year: year)

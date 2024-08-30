@@ -96,6 +96,7 @@ module Pbs::Event::ListsController
       .joins(:groups)
       .where("groups.lft >= ? AND groups.rgt <= ?", @group.lft, @group.rgt)
       .in_year(year)
+      .list
   end
 
   def all_camps_in_canton
@@ -108,17 +109,17 @@ module Pbs::Event::ListsController
     base_camp_query
       .where(canton: Event::Camp::ABROAD_CANTON)
       .in_year(year)
+      .list
   end
 
   def base_camp_query(excluded_states = %w[created canceled])
     Event::Camp.where.not(camp_submitted_at: nil)
       .where.not(state: excluded_states)
       .includes(:groups)
-      .list
   end
 
   def in_next_three_weeks(scope)
     timespan = Time.zone.now.midnight + 3.weeks
-    scope.where("event_dates.start_at <= ? OR event_dates.finish_at <= ?", timespan, timespan)
+    scope.where("event_dates.start_at <= ? OR event_dates.finish_at <= ?", timespan, timespan).list
   end
 end

@@ -35,7 +35,7 @@ class GroupHealthController < ApplicationController
   CANTON_JOIN = "LEFT JOIN #{Group.quoted_table_name} AS canton " \
                 "ON #{Group.quoted_table_name}.lft >= canton.lft " \
                 "AND #{Group.quoted_table_name}.lft < canton.rgt " \
-                'AND canton.type = "Group::Kantonalverband"'.freeze
+                "AND canton.type = 'Group::Kantonalverband'".freeze
 
   # exclude Group::InternesGremium groups
   INTERNES_GREMIUM_GROUP_TYPES = [Group::InternesGremium, Group::InternesAbteilungsGremium,
@@ -77,6 +77,7 @@ class GroupHealthController < ApplicationController
     respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
                        "AS #{Group.quoted_table_name}")
                 .where(EXCLUDE_INTERNES_GREMIUM)
+                .order(:lft)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: GROUPS_FIELDS))
   end
