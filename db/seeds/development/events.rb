@@ -1,29 +1,26 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require Rails.root.join('db', 'seeds', 'support', 'event_seeder')
+require Rails.root.join("db", "seeds", "support", "event_seeder")
 
 srand(42)
 
 class PbsEventSeeder < EventSeeder
-
   def seed_event(group_id, type)
     values = event_values(group_id)
     case type
-      when :course then seed_course(values)
-      when :camp then seed_camp(values)
-      when :base then seed_base_event(values)
+    when :course then seed_course(values)
+    when :camp then seed_camp(values)
+    when :base then seed_base_event(values)
     end
   end
 
   def seed_course(values)
     event = super(values.merge(Hash[approvals]))
     event.reload
-    event.state = Event::Course.possible_states.shuffle.first
+    event.state = Event::Course.possible_states.sample
     event.save!
   end
 
@@ -59,19 +56,18 @@ class PbsEventSeeder < EventSeeder
   end
 
   def camp_group_ids
-    Group.where(type: camp_group_types).pluck(:id)
+    Group.where(type: camp_group_types.map(&:sti_name)).pluck(:id)
   end
 
   def camp_attributes(values)
-    kind = @@kinds.shuffle.first
+    kind = @@kinds.sample
     values.merge(name: "#{kind.try(:short_name)} #{values[:number]}".strip,
-                 kind_id: kind.try(:id),
-                 state: Event::Camp.possible_states.shuffle.first,
-                 signature: Event::Camp.used_attributes.include?(:signature),
-                 external_applications: Event::Camp.used_attributes.include?(:external_applications))
+      kind_id: kind.try(:id),
+      state: Event::Camp.possible_states.sample,
+      signature: Event::Camp.used_attributes.include?(:signature),
+      external_applications: Event::Camp.used_attributes.include?(:external_applications))
   end
 end
-
 
 seeder = PbsEventSeeder.new
 
@@ -94,4 +90,4 @@ seeder.camp_group_ids.each do |group_id|
   end
 end
 
-Event::Participation.update_all(state: 'assigned', active: true)
+Event::Participation.update_all(state: "assigned", active: true)
