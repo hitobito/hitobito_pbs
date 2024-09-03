@@ -105,7 +105,7 @@ class Event::Approver
     Person.joins(:roles)
       .where(roles: {group_id: groups.collect(&:id),
                      type: role_types.collect(&:sti_name),
-                     deleted_at: nil})
+                     end_on: (Date.today..nil)})
       .distinct
   end
 
