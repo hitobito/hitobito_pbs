@@ -15,15 +15,15 @@ module Alumni
 
     def relevant_roles
       Role
-        .with_deleted
-        .where(deleted_at: time_range, alumni_invitation_processed_at: nil)
+        .with_inactive
+        .where(end_on: date_range, alumni_invitation_processed_at: nil)
         .includes(:person, :group)
     end
 
-    def time_range
+    def date_range
       from = parse_duration(:alumni, :invitation, :role_deleted_after_ago)
       to = parse_duration(:alumni, :invitation, :role_deleted_before_ago)
-      from.ago..to.ago
+      (from.ago.to_date..to.ago.to_date)
     end
 
     private
