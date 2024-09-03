@@ -25,11 +25,6 @@ module Pbs::Role
     before_create :detect_group_membership_notification
     after_create :send_group_membership_notification
     after_create :send_black_list_mail, if: :person_blacklisted?
-
-    after_save :update_primary_group
-
-    alias_method_chain :set_first_primary_group, :kantonalverband
-    alias_method_chain :reset_primary_group, :kantonalverband
   end
 
   def detect_group_membership_notification
@@ -61,25 +56,8 @@ module Pbs::Role
     BlackListMailer.hit(person, group).deliver_now
   end
 
-  def update_primary_group
-    if soft_deleted_change?
-      reset_primary_group
-    end
-  end
-
-  def soft_deleted_change?
-    previous_changes.include?(:deleted_at) &&
-      previous_changes[:deleted_at].first.nil? &&
-      previous_changes[:deleted_at].last
-  end
-
-  def set_first_primary_group_with_kantonalverband
-    set_first_primary_group_without_kantonalverband
-    person.reload.reset_kantonalverband!
-  end
-
-  def reset_primary_group_with_kantonalverband
-    reset_primary_group_without_kantonalverband
+  def set_first_primary_group
+    super
     person.reload.reset_kantonalverband!
   end
 
