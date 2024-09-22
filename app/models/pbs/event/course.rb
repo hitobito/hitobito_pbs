@@ -12,6 +12,7 @@ module Pbs::Event::Course
 
   included do
     include Pbs::Event::RestrictedRole
+    Event::Course::LEADER_ROLES = [Event::Course::Role::Leader, Event::Course::Role::ClassLeader].map(&:sti_name)
 
     self.used_attributes += [:advisor_id, :express_fee, :bsv_days, :has_confirmations] +
       LANGUAGES.collect { |key| :"language_#{key}" } +
