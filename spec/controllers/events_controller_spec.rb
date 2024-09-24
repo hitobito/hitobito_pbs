@@ -562,11 +562,11 @@ describe EventsController do
   context 'update the pass_on_to_supercamp flag on questions' do
     let(:event) { events(:schekka_camp) }
     let(:group) { event.groups.first }
-    let!(:q1) { Fabricate(:question, id: 1, event: event, pass_on_to_supercamp: false) }
-    let!(:q2) { Fabricate(:question, id: 2, event: event, admin: true, pass_on_to_supercamp: false) }
+    let!(:q1) { Fabricate(:question, id: 1001, event: event, pass_on_to_supercamp: false) }
+    let!(:q2) { Fabricate(:question, id: 1002, event: event, admin: true, pass_on_to_supercamp: false) }
     before { sign_in(people(:al_schekka)) }
 
-    {application_questions: 1, admin_questions: 2}.each do |attr, qid|
+    {application_questions: 1001, admin_questions: 1002}.each do |attr, qid|
       it attr do
         put :update, params: { group_id: group.id, id: event.id, event: {
           (attr.to_s + '_attributes') => [ { id: qid, pass_on_to_supercamp: true } ]
