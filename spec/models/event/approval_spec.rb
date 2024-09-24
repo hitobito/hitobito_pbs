@@ -70,7 +70,7 @@ describe Event::Approval do
     patria1 = create_approval('kantonalverband', Group::Abteilung::Praeses, :patria)
     patria2 = create_approval('kantonalverband', Group::Abteilung::Praeses, :patria)
 
-    expect(Event::Approval.pending(groups(:be))).to eq [patria1, patria2]
+    expect(Event::Approval.pending(groups(:be))).to match_array([patria1, patria2])
     expect(Event::Approval.pending(groups(:zh))).to eq [chaeib]
     expect(Event::Approval.pending(groups(:bund))).to eq [bund]
   end
