@@ -7,6 +7,7 @@
 
 class InsertNewRootGroup < ActiveRecord::Migration[6.1]
   def up
+    Group.reset_column_information
     admin_layer = nil
 
     say_with_time 'Create new root-group' do
