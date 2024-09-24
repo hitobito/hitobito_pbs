@@ -71,9 +71,11 @@ people:
     warn_after: P18M # must be an ISO 8601 duration string
     block_after: P1M # must be an ISO 8601 duration string
   cleanup_job:
-    enabled: true
-  cleanup_cutoff_duration:
-    regarding_current_sign_in_at: 1 # months
+    enabled: false
+  # cleanup_job:
+  #   enabled: true
+  # cleanup_cutoff_duration:
+  #   regarding_current_sign_in_at: 1 # months
 
 messages:
   enable_writing: true
