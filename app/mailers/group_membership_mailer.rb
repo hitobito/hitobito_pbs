@@ -35,6 +35,6 @@ class GroupMembershipMailer < ApplicationMailer
     group_links = @group.with_layer.map do |g|
       link_to(g, group_url(g))
     end
-    group_links.join(" / ")
+    join_lines(group_links, " / ")
   end
 end
