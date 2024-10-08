@@ -51,7 +51,7 @@ namespace :people  do
     roles = Role.deleted.
       select('type, label, person_id, DATE(deleted_at) as deleted_at').
       distinct.
-      where(deleted_at: last_year_range, type: types)
+      where(end_on: last_year_range, type: types)
 
     def human_attrs(attrs, model_class)
       attrs.collect { |attr| model_class.human_attribute_name(attr) }
@@ -69,7 +69,7 @@ namespace :people  do
       roles.each do |role|
 
         person_values = values(person_attrs, role.person) do |model, attr|
-            
+
           value = model.send(attr)
           case attr
           when 'birthday' then value ? value.strftime('%Y-%m-%d') : nil
@@ -82,7 +82,7 @@ namespace :people  do
 
         role_values = values(role_attrs, role) do |model, attr|
           case attr
-          when 'deleted_at' then model.send(attr).strftime('%Y-%m-%d')
+          when 'deleted_at' then model.send(:end_on).strftime('%Y-%m-%d')
           when 'Rolle' then model.model_name.human
           else model.send(attr)
           end
