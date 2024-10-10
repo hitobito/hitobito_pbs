@@ -21,8 +21,8 @@ module Pbs
     end
 
     def event_participation_table_options(t, event)
-      if @event.is_a?(Event::Camp)
-        table.col(Event::Participation.human_attribute_name(:state)) 		 { |p| t("activerecord.attributes.event/camp.participation_states.#{p.state}") }
+      if event.is_a?(Event::Camp)
+        t.col(Event::Participation.human_attribute_name(:state)) 		 { |p| t("activerecord.attributes.event/camp.participation_states.#{p.state}") }
       end
     end
   end
