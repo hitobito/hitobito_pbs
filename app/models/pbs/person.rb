@@ -58,7 +58,6 @@ module Pbs::Person
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
     Person::SEARCHABLE_ATTRS << :title << :pbs_number
-    include PgSearchable
 
     alias_method_chain :full_name, :title
 
