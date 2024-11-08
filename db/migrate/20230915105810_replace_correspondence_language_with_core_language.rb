@@ -13,6 +13,7 @@ class ReplaceCorrespondenceLanguageWithCoreLanguage < ActiveRecord::Migration[6.
   }.freeze
 
   def up
+    Person.reset_column_information
     Person.where.not(correspondence_language: nil).update_all("language = correspondence_language")
     Person.where(correspondence_language: nil).find_each do |person|
       person.update_attribute(:language, infer_person_language(person))
