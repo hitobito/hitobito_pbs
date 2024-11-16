@@ -367,6 +367,12 @@
           ],
           "single": true
         },
+        "kind_category_id": {
+          "type": "integer",
+          "operators": [
+            "eq"
+          ]
+        },
         "advisor_id": {
           "type": "integer",
           "operators": [
@@ -415,6 +421,11 @@
           "description": null,
           "resource": "PersonResource"
         },
+        "kind": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "Event::KindResource"
+        },
         "dates": {
           "type": "has_many",
           "description": null,
@@ -424,11 +435,6 @@
           "type": "belongs_to",
           "description": null,
           "resource": "PersonResource"
-        },
-        "kind": {
-          "type": "belongs_to",
-          "description": null,
-          "resource": "Event::KindResource"
         },
         "leaders": {
           "type": "has_many",
@@ -843,6 +849,12 @@
           ],
           "single": true
         },
+        "kind_category_id": {
+          "type": "integer",
+          "operators": [
+            "eq"
+          ]
+        },
         "advisor_id": {
           "type": "integer",
           "operators": [
@@ -860,6 +872,11 @@
           "type": "belongs_to",
           "description": null,
           "resource": "PersonResource"
+        },
+        "kind": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "Event::KindResource"
         },
         "dates": {
           "type": "has_many",
@@ -2581,6 +2598,16 @@
     }
   ],
   "endpoints": {
+    "/api/event_kind_categories": {
+      "actions": {
+        "index": {
+          "resource": "Event::KindCategoryResource"
+        },
+        "show": {
+          "resource": "Event::KindCategoryResource"
+        }
+      }
+    },
     "/api/event_kinds": {
       "actions": {
         "index": {
