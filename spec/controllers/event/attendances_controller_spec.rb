@@ -43,6 +43,19 @@ describe Event::AttendancesController do
       expect(assigns(:participants)).to match_array([@p5, @p6])
     end
 
+    it 'loads correct bsv days for participation' do
+      course.update!(bsv_days: 10)
+      @p1.update!(bsv_days: 6)
+      @p2.update!(bsv_days: nil)
+      @p4.update!(bsv_days: 4)
+
+      get :index, params: { group_id: group.id, id: course.id }
+
+      expect(assigns(:leaders).find { _1.id == @p1.id }.bsv_days).to eq(6)
+      expect(assigns(:leaders).find { _1.id == @p2.id }.bsv_days).to be_nil
+      expect(assigns(:cooks).find { _1.id == @p4.id }.bsv_days).to eq(4)
+    end
+
   end
 
   context 'PATCH update' do
