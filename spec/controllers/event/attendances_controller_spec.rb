@@ -44,13 +44,16 @@ describe Event::AttendancesController do
     end
 
     it 'loads correct bsv days for participation' do
-      course.update(bsv_days: 10)
+      course.update!(bsv_days: 10)
       @p1.update!(bsv_days: 6)
+      @p2.update!(bsv_days: nil)
+      @p4.update!(bsv_days: 4)
 
       get :index, params: { group_id: group.id, id: course.id }
 
-      expect(assigns(:leaders).first.bsv_days).to eq(6)
-      expect(assigns(:cooks).first.bsv_days).to eq(5)
+      expect(assigns(:leaders).find { _1.id == @p1.id }.bsv_days).to eq(6)
+      expect(assigns(:leaders).find { _1.id == @p2.id }.bsv_days).to be_nil
+      expect(assigns(:cooks).find { _1.id == @p4.id }.bsv_days).to eq(4)
     end
 
   end
