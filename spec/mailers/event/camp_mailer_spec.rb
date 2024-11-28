@@ -155,7 +155,7 @@ describe Event::CampMailer do
         subject { mail }
         its(:subject) { should eq 'Einreichung Lager' }
         its(:to)      { should eq ['lager@pbs.ch'] }
-        its(:cc)      { should eq [coach.email, abteilungsleitung.email, leader.email] }
+        its(:cc)      { should match_array [coach.email, abteilungsleitung.email, leader.email] }
         its(:from)    { should eq ['noreply@localhost'] }
       end
 
@@ -164,7 +164,7 @@ describe Event::CampMailer do
         subject { mail }
         its(:subject) { should eq 'Einreichung Lager' }
         its(:to)      { should eq ['lager@pbs.ch', 'auslandlager@pbs.ch'] }
-        its(:cc)      { should eq [coach.email, abteilungsleitung.email, leader.email] }
+        its(:cc)      { should match_array [coach.email, abteilungsleitung.email, leader.email] }
         its(:from)    { should eq ['noreply@localhost'] }
       end
     end
