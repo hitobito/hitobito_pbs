@@ -215,7 +215,7 @@ describe EventsController do
 
       context 'as co-leader' do
         before do
-          Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, person: person, event: event)
+          Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, person: Fabricate(:person), event: event)
           event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_schekka).id)
         end
 

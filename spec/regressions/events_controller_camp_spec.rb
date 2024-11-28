@@ -169,7 +169,7 @@ describe EventsController, type: :controller do
             context key do
               it 'is marked as unassigned if advisor not set' do
                 camp.participations.destroy_all
-                assert_advisor(key, 'Niemand zugeordnet', true)
+                assert_advisor(key, 'Niemand zugeordnetKeine Leitenden erfasst', true)
               end
 
               it 'is marked as assigned if advisor set' do
