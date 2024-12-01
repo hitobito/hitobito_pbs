@@ -1093,26 +1093,38 @@ de:
             w: Hallo %{greeting_name}
             other: Hallo %{greeting_name}
         available:
+          hallo_vorname:
+            label: Hallo [Vorname]
+            value:
+              m: Hallo %{first_name}
+              w: Hallo %{first_name}
+              other: Hallo %{first_name}
+          lieber_vorname:
+            label: Liebe/r [Vorname]
+            value:
+              m: Lieber %{first_name}
+              w: Liebe %{first_name}
+              other: Liebe*r %{first_name}
           lieber_pfadiname:
-            label: Liebe*r [Pfadiname]
+            label: Liebe/r [Pfadiname]
             value:
               m: Lieber %{nickname}
               w: Liebe %{nickname}
               other: Liebe*r %{nickname}
-          lieber_vorname:
-            label: Liebe*r [Vorname]
+          hallo_pfadiname:
+            label: Hallo [Pfadiname]
             value:
-              m: Lieber %{first_name}
-              w: Liebe %{first_name}
-              other: Liebe(r) %{first_name}
+              m: Hallo %{nickname}
+              w: Hallo %{nickname}
+              other: Hallo %{nickname}
           lieber_titel_nachname:
-            label: Liebe*r Frau*Herr [Titel] [Nachname]
+            label: Liebe/r Frau/Herr [Titel] [Nachname]
             value:
               m: Lieber Herr %{title_last_name}
               w: Liebe Frau %{title_last_name}
               other: Liebe*r %{title_last_name}
           sehr_geehrter_titel_nachname:
-            label: Sehr geehrte*r Frau*Herr [Titel] [Nachname]
+            label: Sehr geehrte/r Frau/Herr [Titel] [Nachname]
             value:
               m: Sehr geehrter Herr %{title_last_name}
               w: Sehr geehrte Frau %{title_last_name}
