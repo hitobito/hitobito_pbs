@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2023, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2023-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -49,7 +49,7 @@ describe Alumni::ApplicableGroups do
         Group::Ehemalige.name.to_sym,
         name: 'Zürich',
         parent: groups(:berchtold),
-        self_registration_role_type: 'Group::SilverscoutsRegion::Mitglied'
+        self_registration_role_type: 'Group::Ehemalige::Mitglied'
       )
 
       expect(subject.silverscout_group_ids).to match_array [selfreg_group.id]

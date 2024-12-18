@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2018, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
@@ -57,7 +57,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
           prefers_digital_correspondence: leader.prefers_digital_correspondence)
       end
 
-      xit "is exported with the previous sort order" do
+      it "is exported" do
         expect(exporter.data_rows.to_a).to eq [[
           "Sehr geehrter Herr Dr. Leiter, sehr geehrte*r Schekka",
           "Bundes Leiter, AL Schekka",
@@ -71,25 +71,6 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
           "CH",
           337180612,
           334539080,
-          nil,
-          "nein"
-        ]]
-      end
-
-      it "is exported with the current sort order" do
-        expect(exporter.data_rows.to_a).to eq [[
-          "Liebe*r Torben, lieber Scout",
-          "AL Schekka, Bundes Leiter",
-          nil,
-          nil,
-          nil,
-          nil,
-          "Schekka",
-          "de",
-          "ja",
-          "BE",
-          630906753,
-          319329508,
           nil,
           "nein"
         ]]
