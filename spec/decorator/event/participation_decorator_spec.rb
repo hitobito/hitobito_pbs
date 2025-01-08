@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2025, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -78,6 +78,16 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
   end
 
   describe "#course_confirmation_params" do
+    it "has assumptions" do
+      expect(decorator.event.dates).to be_present
+      expect(decorator.event.dates).to have(1).item
+      expect(decorator.event.dates.first.duration).to be_a Duration
+      expect(decorator.event.dates.first.duration.instance_variable_get(:@date_format)).to eql :default
+
+      # result
+      expect(decorator.send(:course_confirmation_params).fetch(:dauer)).to eql("11.05.2012")
+    end
+
     it "returns the correct parameters" do
       expect(decorator.send(:course_confirmation_params))
         .to eq({name: "Doe",
@@ -86,7 +96,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
                 wohnort: "Hitobitostadt",
                 geburtstag: "01.01.2001",
                 kursOrt: "PBSikon",
-                dauer: "Fr 11.05.2012",
+                dauer: "11.05.2012",
                 organisator: "Pfadibewegung Schweiz"})
     end
 
