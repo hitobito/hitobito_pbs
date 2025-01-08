@@ -1151,22 +1151,22 @@ fr:
         landlord: Propriétaire / loueur·euse
         landlord_permission_obtained: Autorisation du / de la propriétaire
         paper_application_required: Inscription papier obligatoire
-        participants_can_apply: Inscription obligatoire
+        participants_can_apply: Inscription possible
         participants_can_cancel: Possibilité de se désinscrire
-        al_present: RG présent
-        al_visiting: Visite du RG
-        al_visiting_date: Date de visite du RG
-        coach_visiting: Visite du Coach
-        coach_visiting_date: Date de visite du Coach
+        al_present: RG présent·e
+        al_visiting: Visite du·de la RG
+        al_visiting_date: Date de visite du·de la RG
+        coach_visiting: Visite du·de la coach
+        coach_visiting_date: Date de visite du·de la coach
         local_scout_contact_present: Contact scout local
-        local_scout_contact: Informations de contact des scouts locaux
+        local_scout_contact: Informations de contacts scouts locaux
         updated_at: Actualisé pour la dernière fois
         any_expected_participant_attr: Nombre de participant·e·s attendu·e·s
         abteilungsleitung_id: responsable de groupe
         abteilungsleitung: responsable de groupe
         leader: Responsable de camp
         leader_id: Responsable de camp
-        coach_confirmed: coach confirmé
+        coach_confirmed: Coach confirmé·e
         advisor_mountain_security_id: Encadrement activité de sécurité Montagne
         advisor_mountain_security: Encadrement activité de sécurité Montagne
         advisor_water_security_id: Encadrement activité de sécurité Eau
@@ -1178,8 +1178,8 @@ fr:
         j_s_rules_applied: Prise en compte / respect des recommandations de camp J+S
       event/approval:
         comment: Commentaire
-        approvee: Participant
-        approver: Examinateur
+        approvee: Participant·e
+        approver: Examinateur·rice
         approved_at: Date
         current_occupation: Activité
         current_level: Branche
@@ -1192,26 +1192,26 @@ fr:
         states:
           created: Créé
           confirmed: Confirmé
-          assignment_closed: Participants saisis
+          assignment_closed: Participant·e·s saisi·e·s
           canceled: Annulé
           closed: Clôturé
         participation_states:
           applied_electronically: Inscription électronique
-          assigned: Inscrit
-          canceled: Désinscrit
-          absent: Ne s'est pas présenté
+          assigned: Inscrit·e
+          canceled: Désinscrit·e
+          absent: Ne s'est pas présenté·e
         coach_id: Coach
         coach: Coach
         advisor_unassigned: Attribué à personne
-        leader_unassigned: Pas de responsables saisis
+        leader_unassigned: Pas de responsables saisi·e·s
         allow_sub_camps: Permettre des sous-camps
         super_camp: Camp principal
       event/contact_attrs:
         pass_on_to_supercamp: Transmettre au sous-camp
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
-        advisor: CAF
-        advisor_id: CAF
+        advisor: CàF
+        advisor_id: CàF
         coach_id: CàF/Coach
         coach: CàF/Coach
         abteilungsleitung_or_ausbildungsverantwortlicher: Responsable de groupe/responsable formation
@@ -1266,7 +1266,7 @@ fr:
         group_health: Opt-in Healthcheck
       people_relation:
         kinds:
-          sibling: fratrie
+          sibling: Fratrie
       black_list:
         first_name: Prénom
         last_name: Nom de famille
@@ -1289,7 +1289,7 @@ fr:
         woelfe: Louveteaux·ettes
         woelfe_m: Louveteaux masc.
         woelfe_f: Louvettes fem.
-        pfadis: Éclaireur·euse·s
+        pfadis: Éclais
         pfadis_m: Eclaireurs masc.
         pfadis_f: Eclaireuses fém.
         pios: Picos
@@ -1311,8 +1311,8 @@ fr:
       label_format:
         nickname: Nom scout sur l'étiquette
       service_token:
-        group_health: Fin de l'export du Healthcheck
-        census_evaluations: Liste des effectifs - Point final de l'exportation
+        group_health: Endpoint export du Healthcheck
+        census_evaluations: Liste des effectifs - Endpoint exportation
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}
