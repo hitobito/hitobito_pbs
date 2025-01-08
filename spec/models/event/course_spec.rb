@@ -5,22 +5,21 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
-require_relative '../../support/fabrication.rb'
+require "spec_helper"
+require_relative "../../support/fabrication"
 
 describe Event::Course do
-
   let(:event) { Fabricate(:course, groups: [groups(:be)], kind: event_kinds(:lpk)) }
 
   subject do
     Fabricate(Event::Course::Role::Leader.name.to_sym,
-              participation: Fabricate(:pbs_participation, event: event))
+      participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::ClassLeader.name.to_sym,
-              participation: Fabricate(:pbs_participation, event: event))
+      participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::Participant.name.to_sym,
-              participation: Fabricate(:pbs_participation, event: event))
+      participation: Fabricate(:pbs_participation, event: event))
     Fabricate(Event::Course::Role::Participant.name.to_sym,
-              participation: Fabricate(:pbs_participation, event: event))
+      participation: Fabricate(:pbs_participation, event: event))
     event.reload
   end
 
@@ -44,62 +43,69 @@ describe Event::Course do
     end
   end
 
-  describe '.role_types' do
+  describe ".role_types" do
     subject { Event::Course.role_types }
 
     it { is_expected.to include(Event::Course::Role::Participant) }
     it { is_expected.not_to include(Event::Role::Participant) }
   end
 
-  context '#application_possible?' do
-    before { subject.state = 'application_open' }
+  context "#application_possible?" do
+    before { subject.state = "application_open" }
 
-    context 'without opening date' do
+    context "without opening date" do
       it { is_expected.to be_application_possible }
     end
 
-    context 'with opening date in the past' do
+    context "with opening date in the past" do
       before { subject.application_opening_at = Time.zone.now.to_date - 1 }
+
       it { is_expected.to be_application_possible }
 
-      context 'in other state' do
-        before { subject.state = 'application_closed' }
+      context "in other state" do
+        before { subject.state = "application_closed" }
+
         it { is_expected.not_to be_application_possible }
       end
     end
 
-    context 'with opening date today' do
+    context "with opening date today" do
       before { subject.application_opening_at = Time.zone.now.to_date }
+
       it { is_expected.to be_application_possible }
     end
 
-    context 'with opening date in the future' do
+    context "with opening date in the future" do
       before { subject.application_opening_at = Time.zone.now.to_date + 1 }
+
       it { is_expected.not_to be_application_possible }
     end
 
-    context 'with closing date in the past' do
+    context "with closing date in the past" do
       before { subject.application_closing_at = Time.zone.now.to_date - 1 }
+
       it { is_expected.not_to be_application_possible }
     end
 
-    context 'with closing date today' do
+    context "with closing date today" do
       before { subject.application_closing_at = Time.zone.now.to_date }
+
       it { is_expected.to be_application_possible }
     end
 
-    context 'in other state' do
-      before { subject.state = 'created' }
+    context "in other state" do
+      before { subject.state = "created" }
+
       it { is_expected.not_to be_application_possible }
     end
   end
 
-  describe '#requires_approval' do
-    it 'is false if no approval group is defined' do
+  describe "#requires_approval" do
+    it "is false if no approval group is defined" do
       expect(event.requires_approval).to be_falsy
     end
 
-    it 'is true if all approval groups are defined' do
+    it "is true if all approval groups are defined" do
       event.requires_approval_abteilung = true
       event.requires_approval_region = true
       event.requires_approval_kantonalverband = true
@@ -108,26 +114,26 @@ describe Event::Course do
       expect(event.requires_approval).to be_truthy
     end
 
-    %w(requires_approval_abteilung requires_approval_region requires_approval_kantonalverband
-       requires_approval_bund).each do |approval_attr|
+    %w[requires_approval_abteilung requires_approval_region requires_approval_kantonalverband
+      requires_approval_bund].each do |approval_attr|
       it "is true if .#{approval_attr} is true" do
-        event.send(approval_attr + '=', true)
+        event.send(approval_attr + "=", true)
         event.save!
         expect(event.requires_approval).to be_truthy
       end
     end
   end
 
-  context '#advisor' do
-    let(:person)  { Fabricate(:person) }
+  context "#advisor" do
+    let(:person) { Fabricate(:person) }
     let(:person1) { Fabricate(:person) }
 
-    let(:event)   { Fabricate(:pbs_course, advisor_id: person.id).reload }
+    let(:event) { Fabricate(:pbs_course, advisor_id: person.id).reload }
 
     subject { event }
 
-    its(:advisor) { should == person }
-    its(:advisor_id) { should == person.id }
+    its(:advisor) { is_expected.to == person }
+    its(:advisor_id) { is_expected.to == person.id }
 
     it "shouldn't change the advisor if the same is already set" do
       subject.advisor_id = person.id
@@ -135,34 +141,34 @@ describe Event::Course do
       expect(subject.advisor).to eq person
     end
 
-    it 'should update the advisor if another person is assigned' do
+    it "should update the advisor if another person is assigned" do
       event.advisor_id = person1.id
       expect(event.save).to be_truthy
       expect(event.advisor).to eq person1
     end
 
     it "shouldn't try to add advisor if id is empty" do
-      event = Fabricate(:pbs_course, advisor_id: '')
+      event = Fabricate(:pbs_course, advisor_id: "")
       expect(event.advisor).to be nil
     end
 
-    it 'removes existing advisor if id is set blank' do
+    it "removes existing advisor if id is set blank" do
       subject.advisor_id = person.id
       subject.save!
 
-      subject.advisor_id = ''
+      subject.advisor_id = ""
       expect { subject.save! }.to change { Event::Role.count }.by(-1)
     end
 
-    it 'removes existing advisor participation if id is set blank' do
+    it "removes existing advisor participation if id is set blank" do
       subject.advisor_id = person.id
       subject.save!
 
-      subject.advisor_id = ''
+      subject.advisor_id = ""
       expect { subject.save! }.to change { Event::Participation.count }.by(-1)
     end
 
-    it 'removes existing and creates new advisor on reassignment' do
+    it "removes existing and creates new advisor on reassignment" do
       subject.advisor_id = person.id
       subject.save!
 
@@ -172,63 +178,62 @@ describe Event::Course do
       expect(Event.find(subject.id).advisor_id).to eq(new_advisor.id)
       expect(subject.participations.where(person_id: person.id)).not_to be_exists
     end
-
   end
 
-  context '#organizers' do
+  context "#organizers" do
     def person(name, role)
       group = groups(name)
       Fabricate("#{group.class.name}::#{role}", group: group).person
     end
 
     before do
-      @be_adressverwaltung = person(:be, 'Adressverwaltung')
-      @be_verantwortung_ausbildung = person(:be, 'VerantwortungAusbildung')
+      @be_adressverwaltung = person(:be, "Adressverwaltung")
+      @be_verantwortung_ausbildung = person(:be, "VerantwortungAusbildung")
 
-      @zh_adressverwaltung = person(:zh, 'Adressverwaltung')
-      @zh_verantwortung_ausbildung = person(:zh, 'VerantwortungAusbildung')
+      @zh_adressverwaltung = person(:zh, "Adressverwaltung")
+      @zh_verantwortung_ausbildung = person(:zh, "VerantwortungAusbildung")
     end
 
-    it 'includes people with layer_full or layer_and_below_full from organising group' do
+    it "includes people with layer_full or layer_and_below_full from organising group" do
       expect(event.organizers).to have(2).items
       expect(event.organizers).to include(@be_adressverwaltung, @be_verantwortung_ausbildung)
     end
 
-    it 'includes people from all organising event groups' do
+    it "includes people from all organising event groups" do
       event.groups << groups(:zh)
       expect(event.organizers).to have(4).items
       expect(event.organizers).to include(@be_adressverwaltung, @be_verantwortung_ausbildung,
-                                          @zh_adressverwaltung, @zh_verantwortung_ausbildung)
+        @zh_adressverwaltung, @zh_verantwortung_ausbildung)
     end
   end
 
-  context '#bsv_days' do
-    it 'is valid when empty' do
+  context "#bsv_days" do
+    it "is valid when empty" do
       expect(event).to be_valid
     end
 
-    it 'is valid when multiple of 0.5' do
+    it "is valid when multiple of 0.5" do
       event.bsv_days = 3.5
       expect(event).to be_valid
     end
 
-    it 'is not valid when negative' do
+    it "is not valid when negative" do
       event.bsv_days = -1
       expect(event).not_to be_valid
     end
 
-    it 'is not valid when not multiple of 0.5' do
+    it "is not valid when not multiple of 0.5" do
       event.bsv_days = 2.25
       expect(event).not_to be_valid
     end
   end
 
-  context 'globally visible' do
-    it 'is true by default' do
+  context "globally visible" do
+    it "is true by default" do
       expect(event).to be_globally_visible
     end
 
-    it 'is not editable' do
+    it "is not editable" do
       expect(event).to_not be_attr_used(:globally_visible)
     end
   end

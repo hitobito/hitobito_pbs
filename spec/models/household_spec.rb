@@ -5,14 +5,13 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Household do
-
   let(:main) { Fabricate(:person_with_address, prefers_digital_correspondence: true) }
   let(:other) { Fabricate(:person_with_address, prefers_digital_correspondence: false) }
 
-  it 'sets pbs attributes when updating household' do
+  it "sets pbs attributes when updating household" do
     household = described_class.new(main)
     household.add(other)
     expect(household.save).to eq true

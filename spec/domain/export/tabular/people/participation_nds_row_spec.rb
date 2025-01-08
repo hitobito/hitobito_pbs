@@ -5,16 +5,16 @@
 # or later. See the COPYING file at the top-level directory or at
 # https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Export::Tabular::People::ParticipationNdsRow do
-
   let(:participation) { Fabricate(:pbs_participation, person: person, event: events(:top_course)) }
 
   let(:row) { described_class.new(participation) }
 
-  context 'with language' do
-    let(:person) { Fabricate(:person, language: 'it') }
-    it { expect(row.fetch(:first_language)).to eq 'IT' }
+  context "with language" do
+    let(:person) { Fabricate(:person, language: "it") }
+
+    it { expect(row.fetch(:first_language)).to eq "IT" }
   end
 end

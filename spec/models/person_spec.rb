@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -52,133 +50,129 @@
 #  locked_at               :datetime
 #
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Person do
-
   let(:person) { people(:bulei) }
 
-  context 'validation' do
-    it 'succeeds for available' do
+  context "validation" do
+    it "succeeds for available" do
       person.salutation = Salutation.available.keys.sample
       expect(person).to be_valid
     end
 
-    it 'succeeds for empty' do
-      person.salutation = ' '
+    it "succeeds for empty" do
+      person.salutation = " "
       expect(person).to be_valid
     end
 
-    it 'fails for non-available' do
-      person.salutation = 'ahoi'
+    it "fails for non-available" do
+      person.salutation = "ahoi"
       expect(person).to have(1).error_on(:salutation)
     end
 
-    context 'prefers_digital_correspondence' do
-      it 'succeeds when preferring physical correspondence and having an email address' do
+    context "prefers_digital_correspondence" do
+      it "succeeds when preferring physical correspondence and having an email address" do
         person.prefers_digital_correspondence = false
         expect(person).to be_valid
       end
 
-      it 'succeeds when preferring physical correspondence and not having an email address' do
+      it "succeeds when preferring physical correspondence and not having an email address" do
         person.email = nil
         person.prefers_digital_correspondence = false
         expect(person).to be_valid
       end
 
-      it 'succeeds when preferring digital correspondence and having an email address' do
+      it "succeeds when preferring digital correspondence and having an email address" do
         person.prefers_digital_correspondence = true
         expect(person).to be_valid
       end
 
-      it 'fails when preferring digital correspondence and not having an email address' do
+      it "fails when preferring digital correspondence and not having an email address" do
         person.email = nil
         person.prefers_digital_correspondence = true
         expect(person).to have(1).error_on(:prefers_digital_correspondence)
       end
     end
-
   end
 
-  context '#salutation_value' do
-    it 'is correct' do
-      expect(person.salutation_value).to eq('Sehr geehrter Herr Dr. Leiter')
+  context "#salutation_value" do
+    it "is correct" do
+      expect(person.salutation_value).to eq("Sehr geehrter Herr Dr. Leiter")
     end
 
-    it 'is a default without salutation' do
+    it "is a default without salutation" do
       person.salutation = nil
-      expect(person.salutation_value).to eq('Hallo Bundes')
+      expect(person.salutation_value).to eq("Hallo Bundes")
     end
   end
 
-  context '#salutation_label' do
-    it 'is correct' do
-      expect(person.salutation_label).to eq('Sehr geehrte*r Frau*Herr [Titel] [Nachname]')
+  context "#salutation_label" do
+    it "is correct" do
+      expect(person.salutation_label).to eq("Sehr geehrte*r Frau*Herr [Titel] [Nachname]")
     end
 
-    it 'is a default without salutation' do
+    it "is a default without salutation" do
       person.salutation = nil
-      expect(person.salutation_label).to eq('Hallo [Name]')
+      expect(person.salutation_label).to eq("Hallo [Name]")
     end
   end
 
-  context '#pbs_number' do
-    it 'handles short numbers' do
+  context "#pbs_number" do
+    it "handles short numbers" do
       person = Fabricate(:person, id: 15)
-      expect(person.pbs_number).to eq('000-000-015')
+      expect(person.pbs_number).to eq("000-000-015")
     end
 
-    it 'handles long numbers' do
+    it "handles long numbers" do
       person = Fabricate(:person, id: 123_456_789)
-      expect(person.pbs_number).to eq('123-456-789')
+      expect(person.pbs_number).to eq("123-456-789")
     end
-
   end
 
-  context '#kantonalverband' do
-    context 'unique' do
+  context "#kantonalverband" do
+    context "unique" do
       before { person.reset_kantonalverband! }
 
-      context 'bund' do
-        it 'is CH' do
+      context "bund" do
+        it "is CH" do
           expect(person.kantonalverband).to eq(groups(:bund))
         end
       end
 
-      context 'in kantonalverband' do
+      context "in kantonalverband" do
         let(:person) { Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person }
 
-        it 'is BE' do
+        it "is BE" do
           expect(person.kantonalverband).to eq(groups(:be))
         end
       end
 
-      context 'in kantonalverband layer' do
+      context "in kantonalverband layer" do
         let(:person) { Fabricate(Group::KantonalesGremium::Mitglied.name, group: groups(:fg_football)).person }
 
-        it 'is BE' do
+        it "is BE" do
           expect(person.kantonalverband).to eq(groups(:be))
         end
 
-        it 'is BE even if primary group is nil' do
+        it "is BE even if primary group is nil" do
           person.update!(primary_group: nil)
           expect(person.kantonalverband).to eq(groups(:be))
         end
       end
 
-      context 'in abteilung' do
+      context "in abteilung" do
         let(:person) { people(:al_schekka) }
 
-        it 'is BE' do
+        it "is BE" do
           expect(person.kantonalverband).to eq(groups(:be))
         end
       end
     end
 
-    context 'several' do
-      context 'one bund, one kv' do
-
-        it 'uses bund if primary group is there' do
+    context "several" do
+      context "one bund, one kv" do
+        it "uses bund if primary group is there" do
           group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
           person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
           Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
@@ -189,7 +183,7 @@ describe Person do
           expect(person.kantonalverband).to eq(groups(:bund))
         end
 
-        it 'changes kantonalverband if primary group changes' do
+        it "changes kantonalverband if primary group changes" do
           group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
           person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
           Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
@@ -199,12 +193,10 @@ describe Person do
 
           expect(person.reload.kantonalverband).to eq(groups(:zh))
         end
-
       end
 
-      context 'two kv' do
-
-        it 'uses primary group' do
+      context "two kv" do
+        it "uses primary group" do
           person = Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person
           Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
 
@@ -214,7 +206,7 @@ describe Person do
           expect(person.kantonalverband).to eq(groups(:be))
         end
 
-        it 'is nil if primary group is nil' do
+        it "is nil if primary group is nil" do
           person = Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be)).person
           Fabricate(Group::Kantonalverband::Coach.name, group: groups(:zh), person: person)
 
@@ -223,7 +215,7 @@ describe Person do
           expect(person.kantonalverband).to be_nil
         end
 
-        it 'changes kantonalverband if primary group changes' do
+        it "changes kantonalverband if primary group changes" do
           group = Fabricate(Group::BundesGremium.name, parent: groups(:bund))
           person = Fabricate(Group::BundesGremium::Leitung.name, group: group).person
           Fabricate(Group::Kantonalverband::Coach.name, group: groups(:be), person: person)
@@ -234,42 +226,40 @@ describe Person do
 
           expect(person.reload.kantonalverband).to eq(groups(:zh))
         end
-
       end
     end
   end
 
-  context 'notifies if relevant attribute changes' do
-    let(:last_email)  { ActionMailer::Base.deliveries.last }
+  context "notifies if relevant attribute changes" do
+    let(:last_email) { ActionMailer::Base.deliveries.last }
 
     before do
-      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return('test@test.com')
-      Fabricate(:black_list, first_name: 'dummy', last_name: 'example', phone_number: '079 123 45 60')
+      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return("test@test.com")
+      Fabricate(:black_list, first_name: "dummy", last_name: "example", phone_number: "079 123 45 60")
     end
 
-    it 'triggers blacklist when changing name attributes' do
+    it "triggers blacklist when changing name attributes" do
       expect do
-        person.update(first_name: 'dummy', last_name: 'example')
+        person.update(first_name: "dummy", last_name: "example")
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
       expect(last_email.body).to include(person.full_name)
     end
 
-    it 'triggers blacklist when phone_number' do
+    it "triggers blacklist when phone_number" do
       expect do
-        person.update(phone_numbers_attributes: { '0' => { number: '079 123 45 60', label: 'privat' } })
+        person.update(phone_numbers_attributes: {"0" => {number: "079 123 45 60", label: "privat"}})
         expect(person.phone_numbers).to have(1).item
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
       expect(last_email.body).to include(person.full_name)
     end
 
-    it 'is not triggered on subsequent attribute changes' do
-      person.update(first_name: 'dummy', last_name: 'example')
+    it "is not triggered on subsequent attribute changes" do
+      person.update(first_name: "dummy", last_name: "example")
       expect do
-        person.update(gender: 'w')
+        person.update(gender: "w")
       end.not_to change { ActionMailer::Base.deliveries.count }
     end
   end
-
 end

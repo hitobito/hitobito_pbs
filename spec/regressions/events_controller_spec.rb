@@ -1,14 +1,11 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
-require_relative '../support/fabrication.rb'
-describe EventsController, type: :controller  do
-
+require "spec_helper"
+require_relative "../support/fabrication"
+describe EventsController, type: :controller do
   render_views
 
   let(:dom) { Capybara::Node::Simple.new(response.body) }
@@ -24,82 +21,81 @@ describe EventsController, type: :controller  do
 
   it "MitarbeiterGS may edit training_days and express_fee" do
     sign_in(bulei)
-    get :edit, params: { group_id: group.id, id: course.id }
+    get :edit, params: {group_id: group.id, id: course.id}
 
-    expect(dom).to have_content('Expressgebühr')
-    expect(dom).to have_content('Ausbildungstage')
+    expect(dom).to have_content("Expressgebühr")
+    expect(dom).to have_content("Ausbildungstage")
   end
 
   it "AssistenzAusbildung may edit training_days and express_fee" do
     sign_in(assistenz.person)
-    get :edit, params: { group_id: bund.id, id: course_bund.id }
+    get :edit, params: {group_id: bund.id, id: course_bund.id}
 
-    expect(dom).to have_content('Expressgebühr')
-    expect(dom).to have_content('Ausbildungstage')
+    expect(dom).to have_content("Expressgebühr")
+    expect(dom).to have_content("Ausbildungstage")
   end
 
   it "Sekretariat may not edit training_days and express_fee" do
     sign_in(sekretar.person)
-    get :edit, params: { group_id: group.id, id: course.id }
+    get :edit, params: {group_id: group.id, id: course.id}
 
-    expect(dom).not_to have_content('Expressgebühr')
-    expect(dom).not_to have_content('Ausbildungstage')
+    expect(dom).not_to have_content("Expressgebühr")
+    expect(dom).not_to have_content("Ausbildungstage")
   end
 
   it "Sekretariat may not update training_days and express_fee" do
     sign_in(sekretar.person)
-    course.update!(express_fee: '424', training_days: 42)
-    post :update, params: { group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 } }
+    course.update!(express_fee: "424", training_days: 42)
+    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33}}
 
     course.reload
-    expect(course.express_fee).to eq('424')
+    expect(course.express_fee).to eq("424")
     expect(course.training_days).to eq(42)
   end
 
   it "MitarbeiterGs may update training_days and express_fee" do
     sign_in(mitarbeiter_gs.person)
-    post :update, params: { group_id: group.id, id: course.id, event: { express_fee: 909, training_days: 33 } }
+    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33}}
 
     course.reload
-    expect(course.express_fee).to eq('909')
+    expect(course.express_fee).to eq("909")
     expect(course.training_days).to eq(33)
   end
 
   it "AssistenzAusbildung may update training_days and express_fee" do
     sign_in(assistenz.person)
-    post :update, params: { group_id: bund.id, id: course_bund.id, event: { express_fee: 909, training_days: 33 } }
+    post :update, params: {group_id: bund.id, id: course_bund.id, event: {express_fee: 909, training_days: 33}}
 
     course_bund.reload
-    expect(course_bund.express_fee).to eq('909')
+    expect(course_bund.express_fee).to eq("909")
     expect(course_bund.training_days).to eq(33)
   end
 
   it "shows 'Informieren' Button when course state is canceled" do
     sign_in(bulei)
-    course.update!(state: 'canceled')
-    get :show, params: { group_id: group.id, id: course.id }
-    link = dom.find_link 'Informieren'
-    expect(link[:href]).to eq 'mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com'
+    course.update!(state: "canceled")
+    get :show, params: {group_id: group.id, id: course.id}
+    link = dom.find_link "Informieren"
+    expect(link[:href]).to eq "mailto:bulei@hitobito.example.com, al.schekka@hitobito.example.com"
   end
 
   it "shows advisor (LKB) if present" do
     sign_in(bulei)
     lkb = people(:al_schekka)
     course.update!(advisor_id: lkb.id)
-    get :show, params: { group_id: group.id, id: course.id }
+    get :show, params: {group_id: group.id, id: course.id}
 
-    expect(dom).to have_content('Betreuung')
-    expect(dom).to have_content('LKB')
+    expect(dom).to have_content("Betreuung")
+    expect(dom).to have_content("LKB")
     expect(dom).to have_link lkb.to_s
   end
 
   it "advisor (LKB) not shown if none assigned" do
     sign_in(bulei)
 
-    get :show, params: { group_id: group.id, id: course.id }
+    get :show, params: {group_id: group.id, id: course.id}
 
-    expect(dom).not_to have_content('Betreuung')
-    expect(dom).not_to have_content('LKB')
+    expect(dom).not_to have_content("Betreuung")
+    expect(dom).not_to have_content("LKB")
   end
-
 end

@@ -1,12 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'people/_form.html.haml' do
+describe "people/_form.html.haml" do
   let(:group) { person.primary_group }
   let(:person) do
     people(:bulei)
   end
   let(:stubs) {
-    { path_args: [group, person], model_class: Person, entry: person }
+    {path_args: [group, person], model_class: Person, entry: person}
   }
 
   before do
@@ -25,5 +25,4 @@ describe 'people/_form.html.haml' do
       expect(dom).to have_css("input[name='person[prefers_digital_correspondence]']")
     end
   end
-
 end

@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe EventResource, type: :resource do
   let!(:camp) { events(:tsueri_supercamp) }
@@ -13,13 +13,13 @@ describe EventResource, type: :resource do
   let(:person) { people(:bulei) }
 
   before do
-    params[:include] = 'advisor'
+    params[:include] = "advisor"
     course.update!(advisor_id: person.id)
   end
 
-  describe 'advisor' do
-    it 'is null for camps' do
-      params[:filter] = { id: { eq: camp.id } }
+  describe "advisor" do
+    it "is null for camps" do
+      params[:filter] = {id: {eq: camp.id}}
       render
 
       advisor_data = d[0].sideload(:advisor)
@@ -29,8 +29,8 @@ describe EventResource, type: :resource do
       expect(advisor_data).to be_nil
     end
 
-    it 'works for courses' do
-      params[:filter] = { id: { eq: course.id } }
+    it "works for courses" do
+      params[:filter] = {id: {eq: course.id}}
       render
 
       advisor_data = d[0].sideload(:advisor)

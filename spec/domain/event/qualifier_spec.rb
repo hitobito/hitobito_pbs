@@ -1,7 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Event::Qualifier do
-
   let(:course) { events(:bund_course) }
 
   let(:participation) do
@@ -10,13 +9,12 @@ describe Event::Qualifier do
     participation.reload
   end
 
-  let(:participant)      { participation.person }
+  let(:participant) { participation.person }
 
   let(:participant_qualifier) { Event::Qualifier.for(participation) }
-  let(:quali_date)       { Date.new(2012, 10, 20) }
+  let(:quali_date) { Date.new(2012, 10, 20) }
 
-  context '#issue' do
-
+  context "#issue" do
     it "saves the participation on the qualification" do
       participant_qualifier.issue
       participant.reload.qualifications.each do |qualification|
@@ -24,7 +22,5 @@ describe Event::Qualifier do
         expect(qualification.event_participation.person).to eq(participant)
       end
     end
-
   end
-
 end

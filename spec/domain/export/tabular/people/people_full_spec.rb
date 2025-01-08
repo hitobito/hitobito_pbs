@@ -14,34 +14,33 @@ describe Export::Tabular::People::PeopleFull do
 
   subject { people_list }
 
-  context 'attributes include' do
-    it 'id' do
+  context "attributes include" do
+    it "id" do
       expect(subject.attributes).to include(:id)
     end
 
-    it 'layer-group id' do
+    it "layer-group id" do
       expect(subject.attributes).to include(:layer_group_id)
     end
 
-    it 'layer-group (name)' do
+    it "layer-group (name)" do
       expect(subject.attributes).to include(:layer_group)
     end
 
-    it 'tags' do
+    it "tags" do
       expect(subject.attributes).to include(:tags)
     end
 
-    it 'prefers_digital_correspondence' do
+    it "prefers_digital_correspondence" do
       expect(subject.attributes).to include(:prefers_digital_correspondence)
     end
 
-    it 'kantonalverband_id' do
+    it "kantonalverband_id" do
       expect(subject.attributes).to include(:kantonalverband_id)
     end
 
-    it 'pbs_number' do
+    it "pbs_number" do
       expect(subject.attributes).to include(:pbs_number)
     end
   end
-
 end
