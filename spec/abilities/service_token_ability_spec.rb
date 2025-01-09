@@ -23,7 +23,7 @@ describe ServiceTokenAbility do
     ]
 
     restricted_roles.each do |r|
-      context "#{r}" do
+      context r.to_s do
         let(:role) { Fabricate("Group::Bund::" + r, group: groups(:bund)) }
 
         it "may not create service token in bund" do

@@ -6,8 +6,10 @@
 # https://github.com/hitobito/hitobito_pbs.
 
 require "spec_helper"
-migration_file_name = Dir[Rails.root.join("..", "hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb"),
-                          Rails.root.join("hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb")].first
+migration_file_name = Dir[
+  Rails.root.join("..", "hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb"),
+  Rails.root.join("hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb")
+].first
 require migration_file_name
 
 describe ProlongJSQualifications2021 do

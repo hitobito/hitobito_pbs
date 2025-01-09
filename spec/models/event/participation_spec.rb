@@ -99,7 +99,7 @@ describe Event::Participation do
     before { event.refresh_participant_counts! } # to create existing participatiots
 
     def create_participant(state)
-      participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Date.today)
+      participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Time.zone.today)
       participation.roles.create!(type: event.participant_types.first.name)
     end
 

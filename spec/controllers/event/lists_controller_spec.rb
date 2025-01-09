@@ -9,7 +9,7 @@ describe Event::ListsController do
   include ActiveSupport::Testing::TimeHelpers
 
   before do
-    travel_to(Time.local(2015, 0o7, 15))
+    travel_to(Time.zone.local(2015, 7, 15))
     sign_in(user)
   end
 
@@ -252,8 +252,9 @@ describe Event::ListsController do
           },
           advanced: true
         }
-        headers = rows.first.split(";")
+        # the first row contains the headers, data from the second row on
         values = rows.second.split(";")
+
         # main labels
         expect(values[0..8]).to eq(
           ["", "", "LPK (Leitpfadikurs)", "Bern, Zürich", '""', "124", "11.11.2015", "12.11.2015", ""]

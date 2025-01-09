@@ -117,12 +117,12 @@ describe Event::ParticipationsController do
             group_id: group.id,
             event_id: course.id,
             id: participation.id,
-            event_participation: {canceled_at: Date.today}
+            event_participation: {canceled_at: Time.zone.today}
           }
       end.to change { Delayed::Job.count }.by(1)
       expect(flash[:notice]).to be_present
       participation.reload
-      expect(participation.canceled_at).to eq Date.today
+      expect(participation.canceled_at).to eq Time.zone.today
       expect(participation.state).to eq "canceled"
       expect(participation.active).to eq false
       expect(Delayed::Job.last.payload_object.instance_variable_get(:@previous_state))
@@ -130,14 +130,14 @@ describe Event::ParticipationsController do
     end
 
     it "does nothing if participation is already canceled" do
-      participation.update!(state: "canceled", canceled_at: Date.today)
+      participation.update!(state: "canceled", canceled_at: Time.zone.today)
       expect do
         post :cancel,
           params: {
             group_id: group.id,
             event_id: course.id,
             id: participation.id,
-            event_participation: {canceled_at: Date.today}
+            event_participation: {canceled_at: Time.zone.today}
           }
       end.to change { Delayed::Job.count }.by(0)
     end

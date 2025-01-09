@@ -37,6 +37,6 @@ describe PeopleSerializer do
       expect(person[:links]).to have_key(:roles)
     end
 
-    expect(linked_roles.map { |role| role[:role_class] }).to include(Group::Woelfe::Wolf.name)
+    expect(linked_roles.pluck(:role_class)).to include(Group::Woelfe::Wolf.name)
   end
 end

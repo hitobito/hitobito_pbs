@@ -28,18 +28,18 @@ describe GroupMembershipJob do
   end
 
   context "with locale" do
-    after { I18n.locale = I18n.default_locale }
-
     subject do
-      I18n.locale = :fr
-      GroupMembershipJob.new(recipient, actuator, group)
+      I18n.with_locale(:fr) do
+        GroupMembershipJob.new(recipient, actuator, group)
+      end
     end
 
     it "sends localized email" do
-      I18n.locale = :de
-      subject.perform
-      expect(last_email).to be_present
-      expect(last_email.body).to match(/Salut #{recipient.greeting_name}.*#{group}/)
+      I18n.with_locale(:de) do
+        subject.perform
+        expect(last_email).to be_present
+        expect(last_email.body).to match(/Salut #{recipient.greeting_name}.*#{group}/)
+      end
     end
   end
 end

@@ -8,7 +8,7 @@ require "spec_helper"
 describe EventsController do
   context "event_course" do
     let(:group) { groups(:bund) }
-    let(:date) { {label: "foo", start_at_date: Date.today, finish_at_date: Date.today} }
+    let(:date) { {label: "foo", start_at_date: Time.zone.today, finish_at_date: Time.zone.today} }
     let(:event) { assigns(:event) }
 
     let(:event_attrs) {

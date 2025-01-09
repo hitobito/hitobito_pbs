@@ -36,7 +36,7 @@ describe Event::Course do
       end
     end
 
-    Event::Course.possible_states[2..-1].each do |state|
+    Event::Course.possible_states[2..].each do |state|
       it "is false for state #{state} when tentative_applications flag is set" do
         expect(Event::Course.new(state: state, tentative_applications: true)).not_to be_tentative_application_possible
       end

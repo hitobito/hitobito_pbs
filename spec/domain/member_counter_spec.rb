@@ -12,7 +12,7 @@ describe MemberCounter do
     woelfe = groups(:sunnewirbu)
     pfadi1 = groups(:pegasus)
     pfadi2 = groups(:baereried)
-    leader = Fabricate(Group::Abteilung::StufenleitungPfadi.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1985-01-01"))
+    Fabricate(Group::Abteilung::StufenleitungPfadi.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1985-01-01"))
     rover = Fabricate(Group::AbteilungsRover::Rover.name, group: groups(:rovers), person: Fabricate(:person, gender: "m", birthday: "1989-01-01"))
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi1, person: Fabricate(:person, gender: "w", birthday: "1988-01-01"))
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi2, person: rover.person)
@@ -110,12 +110,12 @@ describe MemberCounter do
     end
 
     it "counts correct amount of members per year" do
-      expect(subject.select { |y| y.year == 1999 }[0].count).to eq(3)
-      expect(subject.select { |y| y.year == 1988 }[0].count).to eq(1)
+      expect(subject.find { |y| y.year == 1999 }.count).to eq(3)
+      expect(subject.find { |y| y.year == 1988 }.count).to eq(1)
     end
 
     it "counts nil birthdays" do
-      expect(subject.select { |y| y.year.nil? }[0].count).to eq(2)
+      expect(subject.find { |y| y.year.nil? }.count).to eq(2)
     end
 
     it "works with only nil birthdays" do
@@ -129,13 +129,13 @@ describe MemberCounter do
     end
 
     it "doesn't show counted nils if there are none" do
-      Person.where("birthday IS NULL").delete_all
+      Person.where(birthday: nil).delete_all
       expect(subject.select { |y| y.year.nil? }).to be_empty
     end
 
     it "gives count relative to maximum count" do
-      expect(subject.select { |y| y.year == 1999 }[0].count_relative).to eq(1)
-      expect(subject.select { |y| y.year == 1988 }[0].count_relative).to eq(1.0 / 3)
+      expect(subject.find { |y| y.year == 1999 }.count_relative).to eq(1)
+      expect(subject.find { |y| y.year == 1988 }.count_relative).to eq(1.0 / 3)
     end
   end
 end
