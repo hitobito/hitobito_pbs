@@ -32,6 +32,7 @@ module HitobitoPbs
       Qualification.include Pbs::Qualification
       Event.include Pbs::Event
       Event::Kind.include Pbs::Event::Kind
+      Event::Date.prepend Pbs::Event::Date
       Event::Course.include Pbs::Event::Course
       Event::Participation.include Pbs::Event::Participation
       Event::ParticipationContactData.include Pbs::Event::ParticipationContactData
