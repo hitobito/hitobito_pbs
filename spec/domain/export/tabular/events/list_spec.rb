@@ -15,7 +15,7 @@ describe Export::Tabular::Events::List do
     subject { list }
 
     its(:attributes) do
-      is_expected.to == [:name, :group_names, :number, :kind, :description, :state, :location,
+      is_expected.to eql [:name, :group_names, :number, :kind, :description, :state, :location,
         :date_0_label, :date_0_location, :date_0_duration,
         :date_1_label, :date_1_location, :date_1_duration,
         :date_2_label, :date_2_location, :date_2_duration,
@@ -33,7 +33,7 @@ describe Export::Tabular::Events::List do
     end
 
     its(:labels) do
-      is_expected.to == ["Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
+      is_expected.to eql ["Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
         "Datum 1 Bezeichnung", "Datum 1 Ort", "Datum 1 Zeitraum",
         "Datum 2 Bezeichnung", "Datum 2 Ort", "Datum 2 Zeitraum",
         "Datum 3 Bezeichnung", "Datum 3 Ort", "Datum 3 Zeitraum",

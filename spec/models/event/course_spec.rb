@@ -132,8 +132,8 @@ describe Event::Course do
 
     subject { event }
 
-    its(:advisor) { is_expected.to == person }
-    its(:advisor_id) { is_expected.to == person.id }
+    its(:advisor) { is_expected.to eql(person) }
+    its(:advisor_id) { is_expected.to eql(person.id) }
 
     it "shouldn't change the advisor if the same is already set" do
       subject.advisor_id = person.id

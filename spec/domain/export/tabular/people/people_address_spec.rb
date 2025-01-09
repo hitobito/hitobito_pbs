@@ -20,7 +20,7 @@ describe Export::Tabular::People::PeopleAddress do
   subject { csv }
 
   context "export" do
-    its(:headers) { is_expected.to == simple_headers }
+    its(:headers) { is_expected.to eql simple_headers }
 
     context "first row" do
       subject { csv[0] }

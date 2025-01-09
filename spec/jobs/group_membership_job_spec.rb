@@ -13,10 +13,12 @@ describe GroupMembershipJob do
   subject { GroupMembershipJob.new(recipient, actuator, group) }
 
   its(:parameters) do
-    is_expected.to == {recipient_id: recipient.id,
-                actuator_id: actuator.id,
-                group_id: group.id,
-                locale: I18n.locale.to_s}
+    is_expected.to eql({
+      recipient_id: recipient.id,
+      actuator_id: actuator.id,
+      group_id: group.id,
+      locale: I18n.locale.to_s
+    })
   end
 
   it "sends email" do

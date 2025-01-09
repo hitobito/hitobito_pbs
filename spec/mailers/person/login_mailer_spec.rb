@@ -24,9 +24,9 @@ describe Person::LoginMailer do
 
   subject { mail }
 
-  its(:to) { is_expected.to == [recipient.email] }
-  its(:reply_to) { is_expected.to == [sender.email] }
-  its(:subject) { is_expected.to == "Willkommen bei #{Settings.application.name}" }
+  its(:to) { is_expected.to eql [recipient.email] }
+  its(:reply_to) { is_expected.to eql [sender.email] }
+  its(:subject) { is_expected.to eql "Willkommen bei #{Settings.application.name}" }
 
   it "sends a mail with a html-body with interpolated placeholders" do
     body = subject.body.raw_source

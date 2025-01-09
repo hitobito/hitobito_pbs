@@ -39,7 +39,7 @@ describe Person::AddRequestMailer do
 
     subject { mail }
 
-    its(:body) { is_expected.to =~ /Liebe\*r Torben/ }
+    its(:body) { is_expected.to match(/Liebe\*r Torben/) }
   end
 
   context "ask responsibles to add person" do
@@ -69,7 +69,7 @@ describe Person::AddRequestMailer do
     subject { mail }
 
     its(:body) do
-      is_expected.to =~ /#{Regexp.escape(leader.salutation_value)}, #{Regexp.escape(leader2.salutation_value)}/
+      is_expected.to match(/#{Regexp.escape(leader.salutation_value)}, #{Regexp.escape(leader2.salutation_value)}/)
     end
   end
 
@@ -93,7 +93,7 @@ describe Person::AddRequestMailer do
 
       subject { mail }
 
-      its(:body) { is_expected.to =~ /#{Regexp.escape(requester.salutation_value)}/ }
+      its(:body) { is_expected.to match(/#{Regexp.escape(requester.salutation_value)}/) }
     end
 
     context "by person" do
@@ -101,7 +101,7 @@ describe Person::AddRequestMailer do
 
       subject { mail }
 
-      its(:body) { is_expected.to =~ /#{Regexp.escape(requester.salutation_value)}/ }
+      its(:body) { is_expected.to match(/#{Regexp.escape(requester.salutation_value)}/) }
     end
   end
 
@@ -124,6 +124,6 @@ describe Person::AddRequestMailer do
 
     subject { mail }
 
-    its(:body) { is_expected.to =~ /#{Regexp.escape(requester.salutation_value)}/ }
+    its(:body) { is_expected.to match(/#{Regexp.escape(requester.salutation_value)}/) }
   end
 end

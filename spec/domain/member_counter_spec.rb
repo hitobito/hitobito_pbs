@@ -41,9 +41,9 @@ describe MemberCounter do
 
     it { is_expected.not_to be_exists }
 
-    its(:kantonalverband) { is_expected.to == groups(:be) }
+    its(:kantonalverband) { is_expected.to eql(groups(:be)) }
 
-    its(:region) { is_expected.to == groups(:bern) }
+    its(:region) { is_expected.to eql(groups(:bern)) }
 
     its(:members) { is_expected.to have(9).items }
 

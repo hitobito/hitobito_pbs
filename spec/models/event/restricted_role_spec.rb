@@ -13,8 +13,8 @@ describe Event::RestrictedRole do
 
   subject { event }
 
-  its(:abteilungsleitung) { is_expected.to == person }
-  its(:abteilungsleitung_id) { is_expected.to == person.id }
+  its(:abteilungsleitung) { is_expected.to eql person }
+  its(:abteilungsleitung_id) { is_expected.to eql person.id }
 
   it "shouldn't change the al if the same is already set" do
     subject.abteilungsleitung_id = person.id
