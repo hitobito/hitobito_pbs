@@ -8,7 +8,7 @@
 class AlumniInvitationsJob < RecurringJob
   run_every 1.day
 
-  def perform
+  def perform_internal
     Alumni::Invitations.new.process
     Alumni::Reminders.new.process
   end
