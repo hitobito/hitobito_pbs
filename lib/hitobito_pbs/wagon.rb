@@ -152,6 +152,10 @@ module HitobitoPbs
       ### resources
 
       EventResource.include Pbs::EventResource
+      Person::NameResource.course_leader_roles = [
+        Event::Course::Role::Leader,
+        Event::Course::Role::ClassLeader
+      ]
 
       ### sheets
       Sheet::Group.include Pbs::Sheet::Group
