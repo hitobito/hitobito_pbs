@@ -13,13 +13,15 @@ describe JobManager do
   end
 
   it "knows about jobs of the wagon" do
-    expect(jobs).to have(3).items
+    expect(jobs).to have(5).items
   end
 
   %w[
     AlumniInvitationsJob
     Event::ApprovalCleanupJob
     Event::CampReminderJob
+    Person::InactivityBlockJob
+    Person::InactivityBlockWarningJob
   ].each do |job_class|
     it "has #{job_class} in the list of jobs" do
       expect(jobs).to include(job_class)
