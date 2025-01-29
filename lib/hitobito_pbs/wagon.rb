@@ -22,7 +22,9 @@ module HitobitoPbs
       JobManager.wagon_jobs += [
         AlumniInvitationsJob,
         Event::ApprovalCleanupJob,
-        Event::CampReminderJob
+        Event::CampReminderJob,
+        Person::InactivityBlockJob,
+        Person::InactivityBlockWarningJob
       ]
 
       ### models
