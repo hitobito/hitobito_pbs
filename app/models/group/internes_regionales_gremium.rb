@@ -49,5 +49,5 @@ class Group::InternesRegionalesGremium < Group::InternesGremium
   end
 
   roles Leitung, Mitglied
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
 end

@@ -68,5 +68,5 @@ class Group::Pta < Group
     Adressverwaltung,
     Mitglied
 
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
 end
