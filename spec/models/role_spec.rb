@@ -125,6 +125,7 @@ describe Role do
 
   context "primary group (regression for #7766)" do
     let(:person) { role.person }
+
     before { person.update_column :primary_group_id, role.group.id }
 
     it "should be reset if primary role is removed by setting end_on" do

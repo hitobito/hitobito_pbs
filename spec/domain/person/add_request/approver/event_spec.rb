@@ -1,11 +1,9 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Person::AddRequest::Approver::Event do
   let(:person) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:kcbr)).person }
@@ -15,19 +13,20 @@ describe Person::AddRequest::Approver::Event do
 
   subject { Person::AddRequest::Approver.for(request, user) }
 
-  context 'Camp' do
-    let(:event) { events(:tsueri_supercamp).tap {|e| e.update!(j_s_kind: 'j_s_child') } }
+  context "Camp" do
+    let(:event) { events(:tsueri_supercamp).tap { |e| e.update!(j_s_kind: "j_s_child") } }
 
     let(:request) do
       Person::AddRequest::Event.create!(
         person: person,
         requester: requester,
         body: event,
-        role_type: Event::Camp::Role::Participant.sti_name)
+        role_type: Event::Camp::Role::Participant.sti_name
+      )
     end
 
-    context '#approve' do
-      it 'creates a new participation' do
+    context "#approve" do
+      it "creates a new participation" do
         expect(event).to be_j_s_data_sharing_acceptance_required
 
         expect do

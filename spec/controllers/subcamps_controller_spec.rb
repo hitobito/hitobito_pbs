@@ -3,10 +3,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe SubcampsController, type: :controller do
-
   let(:supercamp) { events(:bund_supercamp) }
 
   before do
@@ -17,9 +16,8 @@ RSpec.describe SubcampsController, type: :controller do
     render_views
 
     it "returns http success" do
-      get :index, params: { group_id: supercamp.groups.first, event_id: supercamp }
+      get :index, params: {group_id: supercamp.groups.first, event_id: supercamp}
       expect(response).to have_http_status(:success)
     end
   end
-
 end

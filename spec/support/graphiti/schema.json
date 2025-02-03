@@ -551,6 +551,12 @@
           "readable": true,
           "writable": false,
           "description": null
+        },
+        "order": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
         }
       },
       "extra_attributes": {

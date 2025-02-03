@@ -15,12 +15,12 @@ module Pbs
             alias_method_chain :person_attributes, :title
           end
 
-          def initialize_with_kv(list)
+          def initialize_with_kv(list, ability = nil)
             if list.respond_to?(:klass)
               incl = (list.klass < Person) ? :kantonalverband : {person: :kantonalverband}
-              initialize_without_kv(list.includes(incl))
+              initialize_without_kv(list.includes(incl), ability)
             else
-              initialize_without_kv(list)
+              initialize_without_kv(list, ability)
             end
           end
 

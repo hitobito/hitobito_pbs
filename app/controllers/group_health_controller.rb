@@ -65,7 +65,7 @@ class GroupHealthController < ApplicationController
   end
 
   def roles
-    respond(Role.with_deleted
+    respond(Role.with_inactive
                 .joins(:group)
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .joins(GROUP_HEALTH_JOIN).distinct

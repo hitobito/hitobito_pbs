@@ -5,10 +5,10 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_jubla.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Events::Filter::Groups do
-  let(:params) { { } }
+  let(:params) { {} }
 
   let(:scope) { Events::FilteredList.new(person, {}, {}).base_scope.distinct }
 
@@ -19,9 +19,9 @@ describe Events::Filter::Groups do
 
   let(:person) { people(:bulei) }
 
-  context 'generally, it' do
-    it 'produces a scope that does not include globally_visible' do
-      expect(where_condition).to_not match('`events`.`globally_visible`')
+  context "generally, it" do
+    it "produces a scope that does not include globally_visible" do
+      expect(where_condition).to_not match("`events`.`globally_visible`")
 
       expect(where_condition).to_not match(
         /OR .*`events`.`globally_visible` = TRUE/
