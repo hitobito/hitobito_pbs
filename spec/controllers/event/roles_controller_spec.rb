@@ -7,8 +7,6 @@
 
 require 'spec_helper'
 
-require 'event/roles_controller'
-
 describe Event::RolesController do
 
   let(:group) { event.groups.first }
