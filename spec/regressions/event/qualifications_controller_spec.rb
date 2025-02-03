@@ -4,7 +4,6 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 require "spec_helper"
-require "event/qualifications_controller"
 
 describe Event::QualificationsController, type: :controller do
   render_views
