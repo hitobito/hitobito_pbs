@@ -1,20 +1,17 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2015, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Event::ParticipationAbility do
-
   subject { Ability.new(role.person.reload) }
 
-  context 'in abteilung' do
+  context "in abteilung" do
     let(:group) { groups(:schekka) }
 
-    context 'abteilungsleitung' do
+    context "abteilungsleitung" do
       let(:role) { Fabricate(Group::Abteilung::Abteilungsleitung.name, group: group) }
 
       it "is allowed to manage event participation" do
@@ -47,7 +44,7 @@ describe Event::ParticipationAbility do
         is_expected.not_to be_able_to(:destroy, role)
       end
 
-      it 'is allowed to show course participation from same layer' do
+      it "is allowed to show course participation from same layer" do
         event = Fabricate(:pbs_course, groups: [group])
         person = Fabricate(Group::Pfadi::Pfadi.name, group: groups(:pegasus)).person
         participation = Fabricate(:pbs_participation, event: event, person: person, application: Fabricate(:pbs_application))
@@ -58,7 +55,7 @@ describe Event::ParticipationAbility do
       end
     end
 
-    context 'as regionalleitung' do
+    context "as regionalleitung" do
       let(:role) { Fabricate(Group::Region::Regionalleitung.name, group: groups(:bern)) }
 
       it "is allowed to manage event participation" do
@@ -91,56 +88,55 @@ describe Event::ParticipationAbility do
         is_expected.to be_able_to(:destroy, role)
       end
     end
-
   end
 
-  context 'cancel_own' do
+  context "cancel_own" do
     let(:role) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:baereried)) }
     let(:event) { events(:schekka_camp) }
     let(:person) { role.person }
     let(:participation) { Fabricate(:pbs_participation, event: event, person: person) }
 
-    it 'is allowed to cancel if state is confirmed' do
-      event.update!(participants_can_cancel: true, state: 'confirmed')
+    it "is allowed to cancel if state is confirmed" do
+      event.update!(participants_can_cancel: true, state: "confirmed")
       is_expected.to be_able_to(:cancel_own, participation)
     end
 
-    it 'is not allowed to cancel if state is assignment closed' do
-      event.update!(participants_can_cancel: true, state: 'assignment_closed')
+    it "is not allowed to cancel if state is assignment closed" do
+      event.update!(participants_can_cancel: true, state: "assignment_closed")
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 
-    it 'is not allowed to cancel if can_cancel is false' do
-      event.update!(participants_can_cancel: false, state: 'confirmed')
+    it "is not allowed to cancel if can_cancel is false" do
+      event.update!(participants_can_cancel: false, state: "confirmed")
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 
-    it 'is not allowed to cancel if already canceled' do
-      event.update!(participants_can_cancel: true, state: 'confirmed')
-      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: 'canceled')
+    it "is not allowed to cancel if already canceled" do
+      event.update!(participants_can_cancel: true, state: "confirmed")
+      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: "canceled")
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 
-    it 'is not allowed to cancel if already canceled' do
-      event.update!(participants_can_cancel: true, state: 'confirmed')
-      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: 'canceled')
+    it "is not allowed to cancel if already canceled" do
+      event.update!(participants_can_cancel: true, state: "confirmed")
+      participation = Fabricate(:pbs_participation, event: event, person: role.person, state: "canceled")
       is_expected.not_to be_able_to(:cancel_own, participation)
     end
 
-    context 'simple event' do
+    context "simple event" do
       let(:event) { Fabricate(:event) }
 
-      it 'is not allowed to cancel if simple event' do
+      it "is not allowed to cancel if simple event" do
         is_expected.not_to be_able_to(:cancel_own, participation)
       end
     end
 
-    context 'other participation' do
+    context "other participation" do
       let(:role) { Fabricate(Group::Abteilung::Abteilungsleitung.name, group: groups(:schekka)) }
       let(:person) { Fabricate(Group::Pfadi::Pfadi.name, group: groups(:baereried)).person }
 
-      it 'is not allowed to cancel if simple event' do
-        event.update!(participants_can_cancel: true, state: 'confirmed')
+      it "is not allowed to cancel if simple event" do
+        event.update!(participants_can_cancel: true, state: "confirmed")
         is_expected.not_to be_able_to(:cancel_own, participation)
       end
     end

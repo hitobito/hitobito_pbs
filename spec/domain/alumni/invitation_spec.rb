@@ -20,6 +20,7 @@ describe Alumni::Invitation do
   end
 
   let(:type) { :invitation }
+
   subject { described_class.new(role, type) }
 
   before do

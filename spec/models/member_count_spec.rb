@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 #  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
@@ -30,21 +28,19 @@
 #  pta_m              :integer
 #
 
-require 'spec_helper'
+require "spec_helper"
 
 describe MemberCount do
-
-  let(:be)   { groups(:be) }
-  let(:zh)   { groups(:zh) }
-  let(:schekka)   { groups(:schekka) }
+  let(:be) { groups(:be) }
+  let(:zh) { groups(:zh) }
+  let(:schekka) { groups(:schekka) }
   let(:berchtold) { groups(:berchtold) }
-  let(:chaeib)    { groups(:chaeib) }
+  let(:chaeib) { groups(:chaeib) }
 
-  describe '.total_by_abteilungen' do
-
+  describe ".total_by_abteilungen" do
     subject { MemberCount.total_by_regionen(2012, be).to_a }
 
-    it 'counts totals' do
+    it "counts totals" do
       is_expected.to have(2).items
 
       schekka_count = subject.detect { |c| c.abteilung_id == schekka.id }
@@ -55,27 +51,26 @@ describe MemberCount do
     end
   end
 
-  describe '.total_for_abteilungen' do
+  describe ".total_for_abteilungen" do
     subject { MemberCount.total_for_abteilung(2012, schekka) }
 
-    it 'counts totals' do
+    it "counts totals" do
       assert_member_counts(subject, 2, 3, 4, 3)
     end
   end
 
-  describe '.total_for_bund' do
+  describe ".total_for_bund" do
     subject { MemberCount.total_for_bund(2012) }
 
-    it 'counts totals' do
+    it "counts totals" do
       assert_member_counts(subject, 4, 7, 9, 8)
     end
   end
 
-  describe '.total_by_kantonalverbands' do
-
+  describe ".total_by_kantonalverbands" do
     subject { MemberCount.total_by_kantonalverbaende(2012).to_a }
 
-    it 'counts totals' do
+    it "counts totals" do
       is_expected.to have(2).items
 
       be_count = subject.detect { |c| c.kantonalverband_id == be.id }
@@ -92,5 +87,4 @@ describe MemberCount do
     expect(count.pfadis_f).to eq(pfadis_f)
     expect(count.pfadis_m).to eq(pfadis_m)
   end
-
 end

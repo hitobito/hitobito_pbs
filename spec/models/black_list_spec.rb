@@ -19,21 +19,19 @@
 #  updated_at             :datetime         not null
 #
 
-require 'spec_helper'
+require "spec_helper"
 
 describe BlackList do
-
-  describe 'to_s' do
+  describe "to_s" do
     subject { Fabricate(:black_list).to_s }
 
-    it { is_expected.to eq('Schwarze Liste') }
+    it { is_expected.to eq("Schwarze Liste") }
   end
 
-  it 'validates pbs_number' do
-    subject.pbs_number = '123'
+  it "validates pbs_number" do
+    subject.pbs_number = "123"
     expect(subject).to have(1).error_on(:pbs_number)
-    subject.pbs_number = '123-123-123'
+    subject.pbs_number = "123-123-123"
     expect(subject).not_to have(1).error_on(:pbs_number)
   end
-
 end

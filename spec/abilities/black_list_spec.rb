@@ -3,35 +3,34 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Ability do
-
   let(:user) { role.person }
   let(:abteilung) { groups(:schekka) }
 
   subject { Ability.new(user) }
 
-  describe 'Geschaeftsleitung' do
+  describe "Geschaeftsleitung" do
     let(:role) { Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)) }
 
-    it 'may manage BlackList' do
+    it "may manage BlackList" do
       is_expected.to be_able_to(:manage, BlackList)
     end
   end
 
-  describe 'Leitung Kernaufgabe Kommunikation' do
+  describe "Leitung Kernaufgabe Kommunikation" do
     let(:role) { Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: groups(:bund)) }
 
-    it 'may manage BlackList' do
+    it "may manage BlackList" do
       is_expected.to be_able_to(:manage, BlackList)
     end
   end
 
-  describe 'other roles' do
-    it 'cannot read BlackList' do
+  describe "other roles" do
+    it "cannot read BlackList" do
       other_roles = Role.where.not(type: ["Group::Bund::Geschaeftsleitung",
-                                           "Group::Bund::LeitungKernaufgabeKommunikation"])
+        "Group::Bund::LeitungKernaufgabeKommunikation"])
 
       other_roles.each do |role|
         ability = Ability.new(role.person)
@@ -40,5 +39,4 @@ describe Ability do
       end
     end
   end
-
 end

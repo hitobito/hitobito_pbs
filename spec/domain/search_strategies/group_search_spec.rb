@@ -8,7 +8,7 @@ require "spec_helper"
 describe SearchStrategies::GroupSearch do
   before do
     groups(:bund).update!(pbs_shortname: "shortname", description: "description", website: "lemurenshop",
-                          bank_account: "account")
+      bank_account: "account")
   end
 
   describe "#search_fulltext" do
