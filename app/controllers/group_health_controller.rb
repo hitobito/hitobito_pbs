@@ -13,7 +13,7 @@ class GroupHealthController < ApplicationController
   CAMP_STATES = %w[created confirmed assignment_closed canceled closed].freeze
   PERSON_FIELDS = %i[id pbs_number first_name last_name nickname address town zip_code country
     gender birthday entry_date leaving_date primary_group_id].freeze
-  ROLES_FIELDS = %i[id person_id group_id type created_at deleted_at].freeze
+  ROLES_FIELDS = %i[id person_id group_id type created_at start_on end_on].freeze
   GROUPS_FIELDS = %i[id parent_id type name created_at deleted_at canton_id canton_name].freeze
   COURSES_FIELDS = %i[id name kind_id].freeze
   CAMPS_FIELDS = %i[id name location j_s_kind state].freeze
