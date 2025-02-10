@@ -77,6 +77,8 @@ de:
     coach_title: 8. Coach
 
   event:
+    application_market:
+      j_s_data_sharing_not_accepted: Diese Person hat bei der Anmledung für den anderen Kurs die J+S Datenweitergabe nicht akzeptiert, dieser ist für diesen Kurs Pflicht, die Anmeldung ist daher leider nicht möglich.
     attendances:
       index:
         info: Erfasse hier die Anzahl BSV-Tage für jede Person.

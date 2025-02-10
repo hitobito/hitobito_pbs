@@ -9,6 +9,14 @@ module Pbs::Event::ApplicationMarketController
   included do
     alias_method_chain :put_on_waiting_list, :setter
     alias_method_chain :remove_from_waiting_list, :setter
+
+    def assigner_add_participant
+      if event.j_s_data_sharing_acceptance_required? && participation.j_s_data_sharing_accepted_at.nil?
+        render "j_s_data_sharing_not_accepted_error", status: :unprocessable_entity
+      else
+        assigner.add_participant
+      end
+    end
   end
 
   def remove_from_waiting_list_with_setter
