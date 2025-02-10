@@ -444,6 +444,20 @@ describe GroupHealthController do
     end
   end
 
+  describe "model fields" do
+    it "every field should exist" do
+      expect(GroupHealthController::PERSON_FIELDS).to all(be_in(Person.column_names.map(&:to_sym)))
+      expect(GroupHealthController::ROLES_FIELDS).to all(be_in(Role.column_names.map(&:to_sym)))
+      expect(GroupHealthController::GROUPS_FIELDS.reject { |field| field == :canton_id || field == :canton_name }).to all(be_in(Group.column_names.map(&:to_sym)))
+      expect(GroupHealthController::COURSES_FIELDS.reject { |field| field == :name }).to all(be_in(Event::Course.column_names.map(&:to_sym)))
+      expect(GroupHealthController::CAMPS_FIELDS.reject { |field| field == :name }).to all(be_in(Event::Camp.column_names.map(&:to_sym)))
+      expect(GroupHealthController::EVENT_DATES_FIELDS).to all(be_in(Event::Date.column_names.map(&:to_sym)))
+      expect(GroupHealthController::PARTICIPATIONS_FIELDS).to all(be_in(Event::Participation.column_names.map(&:to_sym)))
+      expect(GroupHealthController::PARTICIPATIONS_ROLES_FIELDS).to all(be_in(Event::Role.column_names.map(&:to_sym)))
+      expect(GroupHealthController::EVENT_KINDS_FIELDS).to all(be_in(Event::Kind.column_names.map(&:to_sym)))
+    end
+  end
+
   def evaluations_by_group_type(type)
     json = JSON.parse(response.body)
     json["census_evaluations"]["groups"].select { |g| g["group_type"] == type.sti_name }
