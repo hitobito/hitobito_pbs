@@ -12,7 +12,7 @@ module Pbs::Event::ApplicationMarketController
 
     def assigner_add_participant
       if event.j_s_data_sharing_acceptance_required? && participation.j_s_data_sharing_accepted_at.nil?
-        render "j_s_data_sharing_not_accepted_error", status: :unprocessable_entity
+        render "j_s_data_sharing_not_accepted_error"
       else
         assigner.add_participant
       end
