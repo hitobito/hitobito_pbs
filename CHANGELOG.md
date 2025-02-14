@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 2.4
 
 *   Das Hinzufügen eines Teilnehmenden via nationale Warteliste, prüft neu korrekt auf die J+S Datenfreigabe und gibt eine sprechende Fehlermeldung (hitobito_pbs#367)
 
