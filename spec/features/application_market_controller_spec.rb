@@ -10,16 +10,11 @@ describe Event::ApplicationMarketController, js: true do
 
   let(:group) { event.groups.first }
 
-  let(:appl_waiting) do
+  let!(:appl_waiting) do
     Fabricate(:event_participation,
       application: Fabricate(:event_application, waiting_list: true, priority_1: event, priority_2: nil),
       event: Fabricate(:course, kind: event_kinds(:lpk)),
       person: people(:al_schekka))
-  end
-
-  before do
-    # init required data
-    appl_waiting
   end
 
   it "displays custom error alert when person from national waiting list did not accept J&S data sharing" do
