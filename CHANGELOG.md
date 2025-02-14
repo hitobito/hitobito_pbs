@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## unreleased
+
+*   Das Hinzufügen eines Teilnehmenden via nationale Warteliste, prüft neu korrekt auf die J+S Datenfreigabe und gibt eine sprechende Fehlermeldung (hitobito_pbs#367)
+
 ## Version 2.2
 
 *   LKB/Coach in Event-Resource der API aufgenommen (hitobito_pbs#325)
