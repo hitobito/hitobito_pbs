@@ -53,5 +53,5 @@ class Group::ErziehungsberechtigtenGremium < Group::InternesGremium
   end
 
   roles Mitglied, Selbstregistriert
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
 end

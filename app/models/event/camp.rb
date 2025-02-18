@@ -135,7 +135,7 @@ class Event::Camp < Event
     dependent: :restrict_with_error
 
   ### SERIALIZED ATTRIBUTES
-  serialize :contact_attrs_passed_on_to_supercamp, Array
+  serialize :contact_attrs_passed_on_to_supercamp, type: Array, coder: YAML
 
   ### VALIDATIONS
 

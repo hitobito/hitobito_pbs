@@ -59,5 +59,5 @@ class Group::Rover < Group
     self.visible_from_above = false
   end
 
-  self.default_role = Rover
+  self.standard_role = Rover
 end

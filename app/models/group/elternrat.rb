@@ -59,5 +59,5 @@ class Group::Elternrat < Group
   roles Praesidium,
     Mitglied,
     Selbstregistriert
-  self.default_role = Mitglied
+  self.standard_role = Mitglied
 end

@@ -49,10 +49,10 @@ describe Person::FamilyMemberFinder do
     let(:layer) { Fabricate(Group::Abteilung.name) }
 
     let(:person_group) { Fabricate(Group::Pfadi.name, parent: layer) }
-    let!(:person_role) { Fabricate(person_group.default_role.name, person: person, group: person_group) }
+    let!(:person_role) { Fabricate(person_group.standard_role.name, person: person, group: person_group) }
 
     let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: layer) }
-    let!(:sibling_role) { Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group) }
+    let!(:sibling_role) { Fabricate(sibling_group.standard_role.name, person: sibling, group: sibling_group) }
 
     subject do
       service.family_members_in_layer(person_group, kind: :sibling)
@@ -82,7 +82,7 @@ describe Person::FamilyMemberFinder do
 
     context "with siblings with deleted role in same group" do
       let!(:sibling_role) do
-        Fabricate(sibling_group.default_role.name, person: sibling, group: sibling_group,
+        Fabricate(sibling_group.standard_role.name, person: sibling, group: sibling_group,
           created_at: 2.months.ago, end_on: 1.month.ago)
       end
 
