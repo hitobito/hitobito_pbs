@@ -82,7 +82,7 @@ describe Event::ApprovalsController do
     it "lists grouped approvals" do
       get :index, params: {group_id: group.id, event_id: course.id}
 
-      list = [@p1, @p2, @p3].sort_by { |p| p.person.last_name }
+      list = [@p1, @p2, @p3].sort_by { |p| [p.person.last_name, p.person.first_name].compact_blank.join(" ") }
 
       expect(assigns(:approvals).keys).to eq(list)
 
