@@ -25,6 +25,8 @@ describe Event::ApplicationMarketController, js: true do
     click_button("Aktualisieren")
     expect(page).to have_text("Schekka AL")
     find(".fa-arrow-left").click
+    expect(page).to have_text "Bestätigen ohne E-Mail"
+    click_on "Bestätigen ohne E-Mail"
     sleep(3)
     alert_text = page.driver.browser.switch_to.alert.text
     expect(alert_text).to include(
