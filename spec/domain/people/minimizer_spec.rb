@@ -13,8 +13,7 @@ describe People::Minimizer do
 
   let(:person) do
     p = Fabricate(Group::Pfadi::Pfadi.sti_name.to_sym, group: groups(:pegasus)).person
-    p.update!(address: "c/o Herr Blømblgårf\nBelpstrasse 37\nPostfach 42",
-      address_care_of: "c/o Herr Blømblgårf",
+    p.update!(address_care_of: "c/o Herr Blømblgårf",
       street: "Belpstrasse",
       housenumber: "37",
       postbox: "Postfach 42",
@@ -112,7 +111,6 @@ describe People::Minimizer do
 
   def nullify_attrs
     [
-      :address, # TODO: remove this when cleaning up structured addresses
       :street,
       :housenumber,
       :address_care_of,
