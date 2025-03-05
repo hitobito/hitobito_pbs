@@ -1765,6 +1765,30 @@
         "address": {
           "type": "string",
           "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "address_care_of": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "street": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "housenumber": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "postbox": {
+          "type": "string",
+          "readable": true,
           "writable": true,
           "description": null
         },
@@ -1829,6 +1853,14 @@
         "email": {
         },
         "address": {
+        },
+        "address_care_of": {
+        },
+        "street": {
+        },
+        "housenumber": {
+        },
+        "postbox": {
         },
         "zip_code": {
         },
@@ -1940,6 +1972,66 @@
           ]
         },
         "address": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "address_care_of": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "street": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "housenumber": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "postbox": {
           "type": "string",
           "operators": [
             "eq",

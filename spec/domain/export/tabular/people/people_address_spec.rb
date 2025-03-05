@@ -8,10 +8,9 @@ require "csv"
 
 describe Export::Tabular::People::PeopleAddress do
   let(:person) { people(:bulei) }
-  let(:ability) { Ability.new(person) }
-
   let(:simple_headers) do
-    %w[Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail Adresse PLZ Ort Land
+    %w[Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail
+      zusätzliche\ Adresszeile Strasse Hausnummer Postfach PLZ Ort Land
       Hauptebene Rollen Titel Anrede Sprache Digitale\ Korrespondenz\ bevorzugt
       Kantonalverband Id] << "Id der Hauptebene"
   end
@@ -22,11 +21,7 @@ describe Export::Tabular::People::PeopleAddress do
   subject { csv }
 
   context "export" do
-    its(:headers) { is_expected.to eql simple_headers }
-
-    it "accepts ability in constructor" do
-      expect(Export::Tabular::People::PeopleAddress.csv(list, ability)).to be_present
-    end
+    its(:headers) { is_expected.to eq simple_headers }
 
     context "first row" do
       subject { csv[0] }
@@ -50,10 +45,6 @@ describe Export::Tabular::People::PeopleAddress do
     end
 
     its(:headers) { is_expected.to include("Titel") }
-
-    it "accepts ability in constructor" do
-      expect(Export::Tabular::People::PeopleFull.csv(list, ability)).to be_present
-    end
 
     context "first row" do
       subject { csv[0] }
