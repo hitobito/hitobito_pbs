@@ -22,7 +22,9 @@ module HitobitoPbs
       JobManager.wagon_jobs += [
         AlumniInvitationsJob,
         Event::ApprovalCleanupJob,
-        Event::CampReminderJob
+        Event::CampReminderJob,
+        Person::InactivityBlockJob,
+        Person::InactivityBlockWarningJob
       ]
 
       ### models
@@ -152,6 +154,10 @@ module HitobitoPbs
       ### resources
 
       EventResource.include Pbs::EventResource
+      Person::NameResource.course_leader_roles = [
+        Event::Course::Role::Leader,
+        Event::Course::Role::ClassLeader
+      ]
 
       ### sheets
       Sheet::Group.include Pbs::Sheet::Group

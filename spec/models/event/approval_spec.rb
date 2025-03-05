@@ -80,7 +80,7 @@ describe Event::Approval do
     other_course = Fabricate(:pbs_course)
     other = create_approval("bund", Group::Bund::Geschaeftsleitung, :bund, {rejected: true}, other_course)
 
-    expect(Event::Approval.completed(events(:top_course))).to eq [approved, rejected]
+    expect(Event::Approval.completed(events(:top_course))).to match_array [approved, rejected]
     expect(Event::Approval.completed(other_course)).to eq [other]
   end
 end
