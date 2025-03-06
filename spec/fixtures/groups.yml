@@ -15,7 +15,7 @@
 #  short_name                  :string(31)
 #  type                        :string(255)      not null
 #  email                       :string(255)
-#  address                     :string(1024)
+#  street                     :string(1024)
 #  zip_code                    :integer
 #  town                        :string(255)
 #  country                     :string(255)
@@ -58,7 +58,8 @@ bund:
   short_name: PBS
   type: Group::Bund
   email: aaron_ziegler@example.net
-  address: Ophovener Str. 79a
+  street: Ophovener Str.
+  housenumber: 79a
   zip_code: 2843
   town: Neu Carlscheid
   country:
@@ -73,7 +74,8 @@ be:
   short_name: BE
   type: Group::Kantonalverband
   email: bern@be.ch
-  address: Klostergasse 3
+  street: Klostergasse
+  housenumber: 3
   zip_code: 3333
   town: Bern
   country: CH
@@ -88,7 +90,8 @@ zh:
   short_name: ZH
   type: Group::Kantonalverband
   email: zuerich@zh.ch
-  address: Tellgasse 3
+  street: Tellgasse
+  housenumber: 3
   zip_code: 8888
   town: Zürich
   country: CH
@@ -103,7 +106,8 @@ vd:
   short_name: VD
   type: Group::Kantonalverband
   email: vd@scout.ch
-  address: Nordostgasse 3
+  street: Nordostgasse
+  housenumber: 3
   zip_code: 2000
   town: Lausanne
   country: CH
@@ -135,7 +139,8 @@ bern:
   short_name: NJ
   type: Group::Region
   email: tanja.schwarzer@example.net
-  address: Am Gierlichshof 36c
+  street: Am Gierlichshof
+  housenumber: 36c
   zip_code: 9924
   town: Ivanstadt
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:bern) %>
@@ -148,7 +153,8 @@ oberland:
   short_name: DN
   type: Group::Region
   email: selma_thimm@example.com
-  address: Am Arenzberg 41c
+  street: Am Arenzberg
+  housenumber: 41c
   zip_code: 6255
   town: Janoburg
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:oberland) %>
@@ -161,7 +167,8 @@ zuerich:
   short_name: BJ
   type: Group::Region
   email: luka@example.org
-  address: Grunder Wiesen 57
+  street: Grunder Wiesen
+  housenumber: 57
   zip_code: 4908
   town: Schindzielorzstadt
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:zuerich) %>
@@ -174,7 +181,8 @@ kyburg:
   short_name: BJ
   type: Group::Region
   email: oscar_winkler@example.com
-  address: An St. Remigius 81c
+  street: An St. Remigius
+  housenumber: 81c
   zip_code: 1767
   town: Colleendorf
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:kyburg) %>
@@ -187,7 +195,8 @@ patria:
   short_name: SG
   type: Group::Abteilung
   email: lennox.wolfarth@example.com
-  address: Dornierstr. 88
+  street: Dornierstr.
+  housenumber: 88
   zip_code: 4193
   town: Neu Joliestadt
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:patria) %>
@@ -200,7 +209,8 @@ schekka:
   short_name: RA
   type: Group::Abteilung
   email: anneke@example.com
-  address: Imbach 73
+  street: Imbach
+  housenumber: 73
   zip_code: 9861
   town: Pompscheid
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
@@ -213,7 +223,8 @@ schweizerstern:
   short_name: RN
   type: Group::Abteilung
   email: diego.siener@example.com
-  address: Hemmelrather Weg 73a
+  street: Hemmelrather Weg
+  housenumber: 73a
   zip_code: 1805
   town: Neu Estelle
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schweizerstern) %>
@@ -226,7 +237,8 @@ chaeib:
   short_name: PZ
   type: Group::Abteilung
   email: tore_gutowicz@example.org
-  address: Im Buchenhain 24c
+  street: Im Buchenhain
+  housenumber: 24c
   zip_code: 5142
   town: Leilastadt
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:chaeib) %>
@@ -239,7 +251,8 @@ kcbr:
   short_name: PP
   type: Group::Pfadi
   email: kcbr@example.org
-  address: Im Buchenhain 24c
+  street: Im Buchenhain
+  housenumber: 24c
   zip_code: 5142
   town: Hohltown
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:chaeib) %>
@@ -253,7 +266,8 @@ berchtold:
   short_name: OP
   type: Group::Abteilung
   email: elina@example.com
-  address: Windthorststr. 560
+  street: Windthorststr.
+  housenumber: 560
   zip_code: 3289
   town: Reiberland
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:berchtold) %>

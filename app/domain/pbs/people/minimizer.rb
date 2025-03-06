@@ -36,7 +36,6 @@ module Pbs::People::Minimizer
 
   def minimize_person_attrs # rubocop:disable Metrics/MethodLength
     [
-      :address, # TODO: remove this when cleaning up structured addresses
       :street,
       :housenumber,
       :address_care_of,

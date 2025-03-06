@@ -51,7 +51,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
         leader.update(household_key: "1234-1234-1234-1234",
           prefers_digital_correspondence: true)
         member.update(household_key: leader.household_key,
-          address: leader.address,
+          street: leader.address,
           zip_code: leader.zip_code,
           town: leader.town,
           prefers_digital_correspondence: leader.prefers_digital_correspondence)
