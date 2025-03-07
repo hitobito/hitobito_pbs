@@ -19,7 +19,7 @@ module Pbs
         return if @event.persisted? || @event.event.type != "Event::Camp"
 
         @event.event.required_contact_attrs += %w[address zip_code town country gender birthday
-          nationality_j_s ahv_number language]
+          nationality_j_s language]
       end
 
       def radio_buttons_with_supercamp_flag(*args)
