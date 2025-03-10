@@ -134,14 +134,17 @@ class Group::Abteilung < Group
 
   class Abteilungsleitung < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class AbteilungsleitungStv < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class Adressverwaltung < ::Role
     self.permissions = [:layer_full]
+    self.two_factor_authentication_enforced = true
   end
 
   class PowerUser < Adressverwaltung; end
@@ -152,6 +155,7 @@ class Group::Abteilung < Group
 
   class Coach < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Ehrenmitglied < ::Role
@@ -165,10 +169,12 @@ class Group::Abteilung < Group
 
   class Kassier < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Rechnungen < ::Role
     self.permissions = [:layer_and_below_read, :finance, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Materialwart < ::Role
@@ -203,6 +209,7 @@ class Group::Abteilung < Group
 
   class Redaktor < ::Role
     self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Revisor < ::Role
@@ -211,6 +218,7 @@ class Group::Abteilung < Group
 
   class Sekretariat < ::Role
     self.permissions = [:layer_and_below_full, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Spezialfunktion < ::Role
@@ -219,26 +227,32 @@ class Group::Abteilung < Group
 
   class StufenleitungBiber < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class StufenleitungWoelfe < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class StufenleitungPfadi < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class StufenleitungPio < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class StufenleitungRover < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class StufenleitungPta < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class VerantwortungMaterialverkaufsstelle < ::Role
