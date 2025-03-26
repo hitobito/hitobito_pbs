@@ -11,8 +11,8 @@
   = labeled(t('people.fields_pbs.siblings_in_context', context: sibling_context)) do
     - if siblings_in_context.any?
       = t('global.yes')
-      = simple_list(siblings_in_context, class: 'unstyled mb-0') do |sibling_role|
-        -  assoc_link(sibling_role.person)
+      = simple_list(siblings_in_context, class: 'unstyled mb-0') do |sibling|
+        -  assoc_link(sibling)
     - else
       = t('global.no')
 
