@@ -45,7 +45,6 @@ module HitobitoPbs
 
       Event.acts_as_nested_set(dependent: :nullify)
 
-      PeopleRelation.kind_opposites["sibling"] = "sibling"
       PhoneNumber.include Pbs::PhoneNumber
 
       Event::Role::Speaker.qualifiable = true # According to https://github.com/hitobito/hitobito_pbs/issues/233
