@@ -70,12 +70,6 @@ people:
   inactivity_block:
     warn_after: P18M # must be an ISO 8601 duration string
     block_after: P1M # must be an ISO 8601 duration string
-  cleanup_job:
-    enabled: true
-  cleanup_cutoff_duration:
-    regarding_current_sign_in_at: 24 # months
-    regarding_roles: 18 # months
-    regarding_event_participations: 120 # months, ie. 10 years
 
 messages:
   enable_writing: true
