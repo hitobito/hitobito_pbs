@@ -20,6 +20,7 @@
         = number_field_tag("bsv_days[#{p.id}]",
                            p.bsv_days || @event.bsv_days,
                            min: 0,
+                           max: @event.bsv_days,
                            step: 0.5,
                            size: 10,
                            class: 'form-control form-control-sm float-start w-25')
