@@ -50,6 +50,8 @@ describe CrisisMailer do
       subject { mail.body }
 
       it "renders placeholders" do
+        @leiter.roles.first.update!(start_on: Time.zone.parse(date) - 1.day)
+
         travel_to date do
           is_expected.to match(/Alan Helpful hat am 08.05.2019 09:57/)
           is_expected.to match(/eine Krise in der Gruppe #{link} eingeleitet/)
@@ -76,6 +78,8 @@ describe CrisisMailer do
       subject { mail.body }
 
       it "renders placeholders" do
+        @leiter.roles.first.update!(start_on: Time.zone.parse(date) - 1.day)
+
         travel_to date do
           is_expected.to match(/Die von Alan Helpful am 08.05.2019 09:57/)
           is_expected.to match(/in der Gruppe #{link} eingeleitet Krise/)

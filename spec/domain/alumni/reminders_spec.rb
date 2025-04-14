@@ -41,7 +41,7 @@ describe Alumni::Reminders do
       Fabricate(
         "Group::Pfadi::Pfadi",
         group: groups(:pegasus),
-        created_at: 10.years.ago,
+        start_on: 10.years.ago,
         end_on: end_on,
         alumni_reminder_processed_at: alumni_reminder_processed_at
       )

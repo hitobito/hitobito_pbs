@@ -9,7 +9,7 @@ require "spec_helper"
 
 describe Alumni::Invitation do
   def create_role(type, group, end_on: nil)
-    type.create!(group: group, person: person, created_at: 1.year.ago, end_on: end_on)
+    type.create!(group: group, person: person, start_on: 1.year.ago, end_on: end_on)
   end
 
   let(:person) { Fabricate(:person) }
