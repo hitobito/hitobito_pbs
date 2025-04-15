@@ -13,6 +13,9 @@ class RevertEmailCollationChange < ActiveRecord::Migration[7.1]
         execute "ALTER TABLE #{table} ALTER COLUMN #{column} SET DATA TYPE varchar;"
       end
     end
+    say_with_time "drop the collation" do
+      execute "DROP COLLATION case_insensitive_emails;"
+    end
   end
 
   private
