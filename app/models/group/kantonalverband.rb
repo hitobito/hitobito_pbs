@@ -159,6 +159,7 @@ class Group::Kantonalverband < Group
 
   class Krisenverantworlicher < ::Role
     self.permissions = [:group_read, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class Passivmitglied < ::Role

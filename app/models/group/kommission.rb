@@ -42,10 +42,12 @@
 class Group::Kommission < Group
   class Leitung < ::Role
     self.permissions = [:group_and_below_full, :layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class Mitglied < ::Role
     self.permissions = [:layer_and_below_read]
+    self.two_factor_authentication_enforced = true
   end
 
   class Selbstregistriert < ::Role

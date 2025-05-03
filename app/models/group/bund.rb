@@ -77,6 +77,7 @@ class Group::Bund < Group
 
   class AssistenzAusbildung < ::Role
     self.permissions = [:layer_full]
+    self.two_factor_authentication_enforced = true
   end
 
   class Beisitz < ::Role
@@ -127,10 +128,12 @@ class Group::Bund < Group
 
   class LeitungKernaufgabeAusbildung < ::Role
     self.permissions = [:layer_full, :group_read, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class LeitungKernaufgabeKommunikation < ::Role
     self.permissions = [:group_read, :crisis_trigger]
+    self.two_factor_authentication_enforced = true
   end
 
   class LeitungKernaufgabeProgramm < ::Role
