@@ -15,6 +15,7 @@ describe EventsController do
       {group_ids: [group.id], name: "foo",
        kind_id: Event::Kind.where(short_name: "LPK").first.id,
        number: 234,
+       visible_contact_attributes: {name: "1"},
        dates_attributes: [date], type: "Event::Course"}
     }
 
@@ -48,7 +49,7 @@ describe EventsController do
       put :update, params: {
         group_id: event.groups.first.id,
         id: event.id,
-        event: {coach_confirmed: true}
+        event: {coach_confirmed: true, visible_contact_attributes: {name: "1"}}
       }
       expect(assigns(:event)).to be_valid
       expect(assigns(:event).coach_confirmed).to be_truthy
@@ -58,7 +59,7 @@ describe EventsController do
       put :update, params: {
         group_id: event.groups.first.id,
         id: event.id,
-        event: {coach_confirmed: true}
+        event: {coach_confirmed: true, visible_contact_attributes: {name: "1"}}
       }
       expect(assigns(:event)).to be_valid
       expect(assigns(:event).coach_confirmed).to be_falsey
@@ -73,7 +74,7 @@ describe EventsController do
         put :update, params: {
           group_id: event.groups.first.id,
           id: event.id,
-          event: {coach_confirmed: true}
+          event: {coach_confirmed: true, visible_contact_attributes: {name: "1"}}
         }
         expect(assigns(:event)).to be_valid
         expect(assigns(:event).coach_confirmed).to be_truthy
@@ -86,7 +87,7 @@ describe EventsController do
         put :update, params: {
           group_id: event.groups.first.id,
           id: event.id,
-          event: {coach_confirmed: true}
+          event: {coach_confirmed: true, visible_contact_attributes: {name: "1"}}
         }
         expect(assigns(:event)).to be_valid
         expect(assigns(:event).coach_confirmed).to be_falsey
@@ -97,7 +98,7 @@ describe EventsController do
           put :update, params: {
             group_id: event.groups.first.id,
             id: event.id,
-            event: {coach_confirmed: true}
+            event: {coach_confirmed: true, visible_contact_attributes: {name: "1"}}
           }
         end.to raise_error(CanCan::AccessDenied)
       end
@@ -511,7 +512,7 @@ describe EventsController do
       Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
         values[attr.to_s] = "1"
       end
-      values
+      values.merge!({visible_contact_attributes: {name: "1"}})
     end
   end
 
@@ -557,6 +558,7 @@ describe EventsController do
     {application_questions: 1001, admin_questions: 1002}.each do |attr, qid|
       it attr do
         put :update, params: {group_id: group.id, id: event.id, event: {
+          :visible_contact_attributes => {name: "1"},
           (attr.to_s + "_attributes") => [{id: qid, pass_on_to_supercamp: true}]
         }}
         expect(event.reload.send(attr)[0].pass_on_to_supercamp).to be_truthy
@@ -571,7 +573,7 @@ describe EventsController do
     before { sign_in(people(:al_schekka)) }
 
     it "assigns contact_attributes_passed_on_to_supercamp" do
-      put :update, params: {group_id: group.id, id: event.id, event: {contact_attrs_passed_on_to_supercamp: {
+      put :update, params: {group_id: group.id, id: event.id, event: {visible_contact_attributes: {name: "1"}, contact_attrs_passed_on_to_supercamp: {
         first_name: "1", nickname: "1", address: "1", social_accounts: "1"
       }}}
 
@@ -585,7 +587,7 @@ describe EventsController do
       event.update!({contact_attrs_passed_on_to_supercamp:
                         ["first_name", "social_accounts", "address", "nickname"]})
 
-      put :update, params: {group_id: group.id, id: event.id, event: {contact_attrs_passed_on_to_supercamp: {nickname: "1"}}}
+      put :update, params: {group_id: group.id, id: event.id, event: {visible_contact_attributes: {name: "1"}, contact_attrs_passed_on_to_supercamp: {nickname: "1"}}}
 
       expect(event.reload.contact_attrs_passed_on_to_supercamp).not_to include("first_name")
       expect(event.contact_attrs_passed_on_to_supercamp).to include("nickname")

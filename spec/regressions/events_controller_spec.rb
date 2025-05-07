@@ -46,7 +46,7 @@ describe EventsController, type: :controller do
   it "Sekretariat may not update training_days and express_fee" do
     sign_in(sekretar.person)
     course.update!(express_fee: "424", training_days: 42)
-    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33}}
+    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33, visible_contact_attributes: {name: "1"}}}
 
     course.reload
     expect(course.express_fee).to eq("424")
@@ -55,7 +55,7 @@ describe EventsController, type: :controller do
 
   it "MitarbeiterGs may update training_days and express_fee" do
     sign_in(mitarbeiter_gs.person)
-    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33}}
+    post :update, params: {group_id: group.id, id: course.id, event: {express_fee: 909, training_days: 33, visible_contact_attributes: {name: "1"}}}
 
     course.reload
     expect(course.express_fee).to eq("909")
@@ -64,7 +64,7 @@ describe EventsController, type: :controller do
 
   it "AssistenzAusbildung may update training_days and express_fee" do
     sign_in(assistenz.person)
-    post :update, params: {group_id: bund.id, id: course_bund.id, event: {express_fee: 909, training_days: 33}}
+    post :update, params: {group_id: bund.id, id: course_bund.id, event: {express_fee: 909, training_days: 33, visible_contact_attributes: {name: "1"}}}
 
     course_bund.reload
     expect(course_bund.express_fee).to eq("909")
