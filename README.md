@@ -15,7 +15,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
         * Adressverwalter*in: 2FA [:layer_and_below_full]
         * PowerUser: 2FA [:layer_and_below_full]
-        * Assistenz Ausbildung: [:layer_full]
+        * Assistenz Ausbildung: 2FA [:layer_full]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
         * Präsident*in APV: [:group_read]
@@ -34,8 +34,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Coach: 2FA [:layer_and_below_read, :contact_data]
         * Grossanlass Coach: 2FA [:layer_and_below_read, :contact_data]
         * Leiterkursbetreuer*in: [:group_read, :contact_data]
-        * Leiter*in Kernaufgabe Ausbildung: [:layer_full, :group_read, :contact_data, :approve_applications]
-        * Leiter*in Kernaufgabe Kommunikation: [:group_read, :crisis_trigger]
+        * Leiter*in Kernaufgabe Ausbildung: 2FA [:layer_full, :group_read, :contact_data, :approve_applications]
+        * Leiter*in Kernaufgabe Kommunikation: 2FA [:group_read, :crisis_trigger]
         * Leiter*in Kernaufgabe Programm: [:group_read, :contact_data]
         * Leiter*in Kernaufgabe Support: [:group_read, :contact_data]
         * Verantwortlicher Biberstufe: [:group_read, :contact_data]
@@ -48,7 +48,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r Lagermeldung: [:group_read, :contact_data]
         * Verantwortliche*r PR: [:group_read, :contact_data]
         * Verantwortliche*r Prävention: [:group_read, :contact_data]
-        * Verantwortliche*r Krisenteam: [:group_read, :contact_data, :crisis_trigger]
+        * Verantwortliche*r Krisenteam: 2FA [:group_read, :contact_data, :crisis_trigger]
         * International Commissioner IC WAGGGS: [:group_read, :contact_data]
         * International Commissioner IC WOSM: [:group_read, :contact_data]
         * Stv IC Programme WAGGGS: [:group_read, :contact_data]
@@ -121,8 +121,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Leitung: [:group_and_below_full]
         * Mitglied: [:group_read]
       * Kommission
-        * Leiter*in: [:group_and_below_full, :layer_and_below_read]
-        * Mitglied: [:layer_and_below_read]
+        * Leiter*in: 2FA [:group_and_below_full, :layer_and_below_read]
+        * Mitglied: 2FA [:layer_and_below_read]
     * Region
       * Region
         * Regionsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
@@ -169,8 +169,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Passivmitglied: []
         * Selbstregistrierte*r: []
       * Rover
-        * Einheitsleiter*in: [:layer_and_below_read]
-        * Mitleiter*in: [:layer_and_below_read]
+        * Einheitsleiter*in: 2FA [:layer_and_below_read]
+        * Mitleiter*in: 2FA [:layer_and_below_read]
         * Adressverwalter*in: [:group_and_below_full]
         * Rover: []
       * Gremium
@@ -180,15 +180,15 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Leitung: [:group_and_below_full]
         * Mitglied: [:group_read]
       * Kommission
-        * Leiter*in: [:group_and_below_full, :layer_and_below_read]
-        * Mitglied: [:layer_and_below_read]
+        * Leiter*in: 2FA [:group_and_below_full, :layer_and_below_read]
+        * Mitglied: 2FA [:layer_and_below_read]
     * Abteilung
       * Abteilung
-        * Abteilungsleiter*in: [:layer_and_below_full, :contact_data, :approve_applications]
-        * Abteilungsleiter*in Stv: [:layer_and_below_full, :contact_data, :approve_applications]
-        * Sekretariat: [:layer_and_below_full, :contact_data]
-        * Adressverwalter*in: [:layer_full]
-        * PowerUser: [:layer_full]
+        * Abteilungsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
+        * Abteilungsleiter*in Stv: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
+        * Adressverwalter*in: 2FA [:layer_full]
+        * PowerUser: 2FA [:layer_full]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
         * Präsident*in APV: [:group_read]
