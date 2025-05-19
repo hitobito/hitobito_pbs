@@ -1,3 +1,11 @@
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
 fr:
   activerecord:
     models:
@@ -849,6 +857,8 @@ fr:
         one: Castor
         other: Castor
         long: Castor
+        description:
+
       group/woelfe/einheitsleitung:
         one: Responsable d'unité
         many: Responsables d'unité
@@ -865,10 +875,13 @@ fr:
         one: Responsable de sizaine
         other: Responsables de sizaine
         long: Responsable de sizaine
+        description:
       group/woelfe/wolf:
         one: Louveteau·ette
         other: Louveteaux·ettes
         long: Louveteau·ette
+        description:
+
       group/pfadi/einheitsleitung:
         one: Responsables d'unité
         many: Responsables d'unité
@@ -889,6 +902,7 @@ fr:
         one: Éclaireur·euse
         other: Éclaireur·euse·s
         long: Éclaireur·euse
+
       group/pio/einheitsleitung:
         one: Responsable d'unité
         many: Responsables d'unité
@@ -905,6 +919,7 @@ fr:
         one: Pico
         other: Picos
         long: Pico
+
       group/rover/einheitsleitung:
         one: Responsable d'unité
         many: Responsables d'unité
@@ -921,6 +936,7 @@ fr:
         one: Routier
         other: Routiers
         long: Routier
+
       group/pta/einheitsleitung:
         one: Responsable d'unité
         many: Responsables d'unité
@@ -1107,9 +1123,11 @@ fr:
               m: Cher Monsieur %{title_last_name}
               w: Chère Madame %{title_last_name}
               other: Cher·Chère %{title_last_name}
+
     attributes:
       cantons:
         zz: International
+
       event:
         bsv_days: Nombre de jours OFAS
         camp_days: Nombre de jours de camp
@@ -1176,6 +1194,7 @@ fr:
         lagerreglement_applied: Prise en compte / respect du règlement de camp
         kantonalverband_rules_applied: Prise en compte / respect des recommandations de l'association cantonale
         j_s_rules_applied: Prise en compte / respect des recommandations de camp J+S
+
       event/approval:
         comment: Commentaire
         approvee: Participant·e
@@ -1186,6 +1205,7 @@ fr:
         occupation_assessment: Évaluation
         strong_points: Forces
         weak_points: Points à encourager
+
       event/camp:
         state: Statut de camp
         state_translated: Statut
@@ -1206,8 +1226,10 @@ fr:
         leader_unassigned: Pas de responsables saisi·e·s
         allow_sub_camps: Permettre des sous-camps
         super_camp: Camp principal
+
       event/contact_attrs:
         pass_on_to_supercamp: Transmettre au sous-camp
+
       event/course:
         requires_approval: Recommandation de l'inscription nécessaire par
         advisor: CàF
@@ -1216,18 +1238,22 @@ fr:
         coach: CàF/Coach
         abteilungsleitung_or_ausbildungsverantwortlicher: Responsable de groupe/responsable formation
         al_or_av: RG/RF
+
       event/kind:
         documents_text: Formulaire supplémentaire
         campy: Inscrire un cours en tant que camp
         can_have_confirmations: Activer l'export des confirmations de cours
         confirmation_name: Nom du type du cours dans l'outil pour l'export
+
       event/participation:
         additional_information: Comment souhaites-tu t'alimenter en cette occasion ? Quelles sont tes habitudes alimentaires ?
         bsv_days: Jours OFAS
         j_s_data_sharing_accepted: Transmission des données à J+S
         has_siblings_in_event: Frères et sœurs dans cette événement
+
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
+
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem
@@ -1242,6 +1268,7 @@ fr:
         has_siblings_in_layer: Frères et sœurs au niveau
         kv: Assocation cantonale
         prefers_digital_correspondence: Préfère la correspondance numérique
+
       group:
         pta: SMT
         vkp: ASC
@@ -1251,6 +1278,7 @@ fr:
         bank_account: Référence bancaire  / postale
         cantons: Cantons
         hostname: Hostname
+
       group/abteilung:
         gender: Sexe
         genders:
@@ -1260,13 +1288,17 @@ fr:
         try_out_day_at: Journée découverte
         geolocations: Lieux de rendez-vous
         group_health: Opt-in Healthcheck
+
       group/region:
         group_health: Opt-in Healthcheck
+
       group/kantonalverband:
         group_health: Opt-in Healthcheck
+
       people_relation:
         kinds:
           sibling: Fratrie
+
       black_list:
         first_name: Prénom
         last_name: Nom de famille
@@ -1275,10 +1307,12 @@ fr:
         phone_number: Numéro de téléphone
         reference_name: Nom de référence
         reference_phone_number: Numéro de téléphone de référence
+
       census:
         year: Année
         start_at: A partir de
         finish_at: Jour fixé
+
       member_count:
         leiter: Responsables
         leiter_m: Responsables masc.
@@ -1301,18 +1335,23 @@ fr:
         pta: SMT
         pta_m: SMT masc.
         pta_f: SMT fém.
+
       role:
         class:
           permission:
             description:
               crisis_trigger: Déclencher et confirmer des crises
+
       qualification_kind:
         manual: Entrer manuellement
+
       label_format:
         nickname: Nom scout sur l'étiquette
+
       service_token:
         group_health: Endpoint export du Healthcheck
         census_evaluations: Liste des effectifs - Endpoint exportation
+
     errors:
       messages:
         must_be_multiple_of: doit être un multiple de %{multiple}

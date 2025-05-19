@@ -1,17 +1,26 @@
+#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
 fr:
   censuses:
     form:
       title: Saisir une nouvelle déclaration des effectifs
       frozen_once_gathered: Une fois saisie, la déclaration des effectifs ne peut plus être modifiée.
+
   census_evaluation:
     total: Total
     base:
       index:
         no_data_for_this_year: Il n'y a pas de données disponibles pour cette année.
       infos:
-        census_evaluation: Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
-        census_evaluation_active: Les déclarations des effectifs actuels pour l'année %{year} peuvent être saisies dès le %{start_at}.
-        census_evaluation_reference_date: La date limite est le %{finish_at}
+        census_evaluation:
+          Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
+        census_evaluation_active:
+          Les déclarations des effectifs actuels pour l'année %{year} peuvent être saisies dès le %{start_at}.
+        census_evaluation_reference_date:
+          La date limite est le %{finish_at}
     abteilung:
       actions_index:
         create_population_data: Créer la liste des effectifs actuels
@@ -23,17 +32,22 @@ fr:
     kantonalverband:
       total_actions:
         remind: Rappel
+
   census_evaluation/kantonalverband:
     email_sent: Un courriel de rappel a été envoyé à %{abteilung}
+
   crises:
     update:
-      too_old: La crise est trop ancienne pour être confirmée
+      too_old:  La crise est trop ancienne pour être confirmée
+
   devise:
     sessions:
       new:
         usage_advise: Les données de la base de données de membres ne peuvent être utilisées qu'en lien avec des activités scoutes. Par exemple, il est interdit de les transmettre à des tiers ou à d'autres organisations. Le traitement et l'utilisation des données sont soumises aux règles de la bonne foi et doivent être proportionnés.
+
   dropdown/event/camp_participant_status:
     change_state: Changer le statut
+
   export/pdf/camp_application:
     title: Annonce de camp %{camp}
     by: par
@@ -61,7 +75,10 @@ fr:
   export/pdf/camp_application/supervision_section:
     abteilungsleitung_title: 7. Maîtrise de groupe
     coach_title: 8. Coach
+
   event:
+    application_market:
+      j_s_data_sharing_not_accepted: Diese Person hat bei der Anmledung für den anderen Kurs die J+S Datenweitergabe nicht akzeptiert, dieser ist für diesen Kurs Pflicht, die Anmeldung ist daher leider nicht möglich.
     attendances:
       index:
         info: Saisis le nombre de journées OFAS pour chaque personne.
@@ -90,6 +107,7 @@ fr:
         explanation: 'Ici s''affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins à l''étranger. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n''ont pas été annulés sont pris en compte.'
       advanced_bsv_export_button: Export étendu OFAS/CàF
     hierarchy: Hiérarchie du camp
+
     participations:
       canceled_own_notice: Tu as été désinscrit de cette activité
       rejected_notice: "%{participant} a été refusé. %{mailto}"
@@ -117,6 +135,7 @@ fr:
           many: Envoyer une notification à %{count} personnes
           other: Envoyer une notification à %{count} personnes
         button_explanation: Envoie un e-mail à tous les participants qualifiés, qui contient un lien vers le cours où ils peuvent télécharger leur confirmation de cours en PDF.
+
     approvals:
       form:
         approval_stored: La recommandation a été enregistrée et peut être consultée par l'organisateur·trice du cours, la·le chef·fe de cours (personne) et d'autres instances de recommandation.
@@ -130,12 +149,15 @@ fr:
         title_reject: Refuser la recommandation pour %{participant}
         title_update_approved: Mettre à jour la confirmation pour %{participant}
         title_update_rejected: Mettre à jour le refus pour %{participant}
+
   event/attendances:
     update:
       flash:
         success: Les présences ont été mises à jour.
+
   event/approvals:
     rejected_inform_participant: Prière d'informer %{participant} et les responsables de groupe personnellement.
+
   event/camp:
     al_present_info:
       'true': Présent au camp
@@ -148,11 +170,13 @@ fr:
       'true': Confirmé
       'false': Pas confirmé
     checkpoint_field_caption: Ne peut être confirmé que par la·le responsable de camp
+
   event/course:
     has_confirmations: Créer une confirmation de cours pour les participants
     participations:
       actions_show_pbs:
         course_confirmation: Confirmation de cours
+
   events:
     courses:
       group_filter:
@@ -238,11 +262,14 @@ fr:
       tg_url: http://sardine.scouts.ch
       vd_title: Observe la réglementation spéciale pour les camps dans le canton de Vaud ("Sardine" -> Cas particuliers de l'annonce de camp)
       vd_url: http://sardine.scouts.ch
+
   filter_navigation/events:
     canton: 'Réalisé dans le canton de'
+
   filter_navigation/camps:
     all: Tous les sous-camps
     direct: Que les sous-camps directes
+
   group:
     educations:
       index:
@@ -264,6 +291,7 @@ fr:
         geolocation_fields:
           lat: Lat
           long: Long
+
   groups:
     fields_pbs:
       group_health_info: Si cette boîte est cochée, les données du groupe seront transmises tous les soirs à l'application HealthCheck (https://hc.scout.ch). Les personnes autorisées ont la possibilité d'y consulter des statistiques étendues. Les statistiques sont disponibles au plus tôt le lendemain du jour où la boîte à cocher a été sélectionnée.
@@ -278,6 +306,7 @@ fr:
       confirm_crisis: Es-tu sûre de vouloir déclencher une crise sur ce groupe? Les responsables de l'équipe de crise seront informés de ton action. S'il-te-plaît fais attention à la protection des données.
     form:
       hint_external_registration: Il n'est pas possible de sélectionner des rôles qui permettent de voir d'autres personnes.
+
   help:
     index:
       title: Aide
@@ -305,15 +334,18 @@ fr:
           url: http://ticketfr.scouts.ch
           title: "Ticket: Fil conducteur pour l’annonce de participants aux cours"
           description: "Le Ticket décrit le processus d'inscription des participants par la MiData (banque nationale de données des membres du MSdS)"
+
   member_counts:
     created_data_for_year: Les données de %{total} membres au total ont été créées avec succès pour l'année %{year}.
     updated_data_for_year: Les effectifs pour l'année %{year} ont été sauvegardés avec succès.
     deleted_data_for_year: Les effectifs pour l'année %{year} ont été effacés avec succès.
     edit:
       title: Editer les effectifs %{year}
+
   navigation:
     camps: Camp
     help: Aide
+
   people:
     fields:
       no_sensitive_information: Ne pas saisir de données personnelles sensibles dans ce champ.
@@ -324,6 +356,7 @@ fr:
       print_course_confirmation: Imprimer la confirmation du cours
     household_attrs_pbs:
       prefers_digital_correspondence: Préfère la correspondance numérique
+
   population:
     index:
       confirm_census_data: Confirmer les effectifs
@@ -336,13 +369,16 @@ fr:
       no_census_data_requested: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
       please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
       missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
+
   qualification_kinds:
     fields_pbs:
       manual_help: Type de qualification est librement déterminable. Sinon, ils ne peuvent être affectées dans un cours.
+
   roles:
     fields_pbs:
       notification: notification
       notification_hint: Les personnes existantes vont être informées par e-mail, du moment que tu peux accéder à plus de données personnelles.
+
   supercamps:
     available:
       select_supercamp: Choisir le camp principal
@@ -356,9 +392,11 @@ fr:
     not_in_created_state: Le camp principal choisi n'a pas le statut "Créé"
     not_upcoming: Le camp supérieur sélectionné est déjà terminé
     already_connected: Le camp est déjà rattaché à un autre camp supérieur
+
   black_lists:
     form:
       pbs_number_format: Exemple 123-123-123
+
     global:
       link:
         add: Ajouter une personne
@@ -366,8 +404,10 @@ fr:
       title: Ajouter une personne
     edit:
       title: Modifier l'entrée
+
   global:
     title_event/camp: camp
+
   dropdown/people_export:
     nds_course: Cours BDNS (seulement participants)
     nds_camp: Camp BDNS (seulement participants)

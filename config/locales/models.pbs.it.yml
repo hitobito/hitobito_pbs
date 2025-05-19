@@ -1,3 +1,11 @@
+#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  hitobito_pbs and licensed under the Affero General Public License version 3
+#  or later. See the COPYING file at the top-level directory or at
+#  https://github.com/hitobito/hitobito_pbs.
+
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
 it:
   activerecord:
     models:
@@ -863,6 +871,8 @@ it:
         one: Castoro
         other: Castori
         long: Castoro
+        description:
+
       group/woelfe/einheitsleitung:
         one: Capo muta
         many: Capi muta
@@ -879,10 +889,13 @@ it:
         one: Capo sestena
         other: Capi sestena
         long: Capo sestena
+        description:
       group/woelfe/wolf:
         one: Lupetto
         other: Lupetti
         long: Lupetto
+        description:
+
       group/pfadi/einheitsleitung:
         one: Capo reparto
         many: Capi reparto
@@ -903,6 +916,7 @@ it:
         one: Esploratore
         other: Esploratori
         long: Esploratore
+
       group/pio/einheitsleitung:
         one: Capo posto
         many: Capi posto
@@ -919,6 +933,7 @@ it:
         one: Pioniere
         other: Pionieri
         long: Pioniere
+
       group/rover/einheitsleitung:
         one: Capo clan
         many: Capi clan
@@ -935,6 +950,7 @@ it:
         one: Rover
         other: Rover
         long: Rover
+
       group/pta/einheitsleitung:
         one: Capo unità SOC
         many: Capi unità SOC
@@ -1121,9 +1137,11 @@ it:
               m: Egregio Signor %{title_last_name}
               w: Gentile Signora %{title_last_name}
               other: Gentile Signora, Egregio Signore %{title_last_name}
+
     attributes:
       cantons:
         zz: Estero
+
       event:
         bsv_days: Numero di giorni UFAS
         camp_days: Numero di giorni di campo
@@ -1190,6 +1208,7 @@ it:
         lagerreglement_applied: Regolamento del campo considerato/rispettato
         kantonalverband_rules_applied: Prescrizioni associazione cantonale considerate/rispettate
         j_s_rules_applied: Prescrizioni campi G+S considerate/rispettate
+
       event/approval:
         comment: Commento
         approvee: Partecipante
@@ -1200,6 +1219,7 @@ it:
         occupation_assessment: Valutazione
         strong_points: Qualità
         weak_points: Punti da incentivare
+
       event/camp:
         state: Stato del campo
         state_translated: Stato
@@ -1220,8 +1240,10 @@ it:
         leader_unassigned: Nessun animatore registrato
         allow_sub_camps: Permettere il campo inferiore
         super_camp: Campo superiore
+
       event/contact_attrs:
         pass_on_to_supercamp: Inoltrre al campo superiore
+
       event/course:
         requires_approval: Raccomandazione necessaria
         advisor: CaF
@@ -1230,18 +1252,22 @@ it:
         coach: CAF/coach
         abteilungsleitung_or_ausbildungsverantwortlicher: Direzione della sezione/responsabile della formazione
         al_or_av: CSZ/RespForm
+
       event/kind:
         documents_text: Formulari aggiuntivi
         campy: Annunciare il corso come campo
         can_have_confirmations: Attivare l'esportazione delle conferme dei costi
         confirmation_name: Nome del tipo di corso nel tool per l'esportazione
+
       event/participation:
         additional_information: Come vorresti mangiare in questa occasione? Quali sono le tue abitudini alimentari?
         bsv_days: Numero di giorni UFAS
         j_s_data_sharing_accepted: Trasferimento dati G+S
         has_siblings_in_event: Fratelli nell'evento
+
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
+
       person:
         layer_group_id: Id del livello principale
         nickname: Totem
@@ -1256,6 +1282,7 @@ it:
         has_siblings_in_layer: Fratelli nel livello
         kv: Associazione cantonale
         prefers_digital_correspondence: Si preferisce la corrispondenza digitale
+
       group:
         pta: Scout a ogni costo
         vkp: Federazione scout cattolici VKP
@@ -1265,6 +1292,7 @@ it:
         bank_account: Coordinate bancarie/postali
         cantons: Cantoni
         hostname: Hostname
+
       group/abteilung:
         gender: Sesso
         genders:
@@ -1274,13 +1302,17 @@ it:
         try_out_day_at: Giornata di prova
         geolocations: Punti d'incontro
         group_health: Opt-In HealthCheck
+
       group/region:
         group_health: Opt-In HealthCheck
+
       group/kantonalverband:
         group_health: Opt-In HealthCheck
+
       people_relation:
         kinds:
           sibling: Fratelli
+
       black_list:
         first_name: Nome
         last_name: Cognome
@@ -1289,10 +1321,12 @@ it:
         phone_number: Numero di telefono
         reference_name: Nome di riferimento
         reference_phone_number: No di tel. di riferimento
+
       census:
         year: Anno
         start_at: Da
         finish_at: Al
+
       member_count:
         leiter: Responsabile
         leiter_m: Responsabile M
@@ -1315,18 +1349,23 @@ it:
         pta: SOC
         pta_m: SOC M
         pta_f: SOC F
+
       role:
         class:
           permission:
             description:
               crisis_trigger: Iniziare e terminare una crisi.
+
       qualification_kind:
         manual: Inserire manualmente
+
       label_format:
         nickname: Nome scout sull'etichetta
+
       service_token:
         group_health: HealthCheck Export-punto finale
         census_evaluations: Punto finale dell'esportazione dei censimento dei membri
+
     errors:
       messages:
         must_be_multiple_of: dev'essere un multiplo di %{multiple} .
