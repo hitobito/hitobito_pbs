@@ -45,9 +45,11 @@ class Group::RegionaleRover < Group::Rover
     Group::InternesRegionalesGremium
 
   class Einheitsleitung < Group::Rover::Einheitsleitung
+    self.two_factor_authentication_enforced = true
   end
 
   class Mitleitung < Group::Rover::Mitleitung
+    self.two_factor_authentication_enforced = true
   end
 
   class Adressverwaltung < Group::Rover::Adressverwaltung
