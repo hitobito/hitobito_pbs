@@ -271,6 +271,10 @@ de:
         one: Verantwortliche*r Prävention
         other: Verantwortliche Prävention
         description:
+      group/bund/verantwortung_it:
+        one: Verantwortliche*r IT
+        other: Verantwortliche IT
+        description:
       group/bund/international_commissioner_ic_wagggs:
         one: International Commissioner IC WAGGGS
         other: International Commissioners IC WAGGGS
@@ -472,6 +476,10 @@ de:
         one: Verantwortliche*r Prävention
         other: Verantwortliche Prävention
         description:
+      group/kantonalverband/verantwortung_it:
+        one: Verantwortliche*r IT
+        other: Verantwortliche*r IT
+        description:
       group/kantonalverband/verantwortung_programm:
         one: Verantwortliche*r Programm
         other: Verantwortliche Programm
@@ -653,6 +661,10 @@ de:
       group/region/verantwortung_praevention_sexueller_ausbeutung:
         one: Verantwortliche*r Prävention
         other: Verantwortliche Prävention
+        description:
+      group/region/verantwortung_it:
+        one: Verantwortliche*r IT
+        other: Verantwortliche*r IT
         description:
       group/region/verantwortung_programm:
         one: Verantwortliche*r Programm
