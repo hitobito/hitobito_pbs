@@ -478,7 +478,7 @@ de:
         description:
       group/kantonalverband/verantwortung_it:
         one: Verantwortliche*r IT
-        other: Verantwortliche*r IT
+        other: Verantwortliche IT
         description:
       group/kantonalverband/verantwortung_programm:
         one: Verantwortliche*r Programm
@@ -664,7 +664,7 @@ de:
         description:
       group/region/verantwortung_it:
         one: Verantwortliche*r IT
-        other: Verantwortliche*r IT
+        other: Verantwortliche IT
         description:
       group/region/verantwortung_programm:
         one: Verantwortliche*r Programm
