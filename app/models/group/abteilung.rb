@@ -134,14 +134,17 @@ class Group::Abteilung < Group
 
   class Abteilungsleitung < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class AbteilungsleitungStv < ::Role
     self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.two_factor_authentication_enforced = true
   end
 
   class Adressverwaltung < ::Role
     self.permissions = [:layer_full]
+    self.two_factor_authentication_enforced = true
   end
 
   class PowerUser < Adressverwaltung; end
@@ -211,6 +214,7 @@ class Group::Abteilung < Group
 
   class Sekretariat < ::Role
     self.permissions = [:layer_and_below_full, :contact_data]
+    self.two_factor_authentication_enforced = true
   end
 
   class Spezialfunktion < ::Role
