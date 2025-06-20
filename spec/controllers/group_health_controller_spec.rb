@@ -93,6 +93,7 @@ describe GroupHealthController do
           json = JSON.parse(response.body)
           group = json["groups"].first
           expect(group["name"]).to eq(groups(:bund).name)
+          expect(group["canton_id"]).to be_nil
         end
       end
 
@@ -224,6 +225,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:schekka).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do
@@ -304,6 +308,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:be).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do
@@ -383,6 +390,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:bern).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do

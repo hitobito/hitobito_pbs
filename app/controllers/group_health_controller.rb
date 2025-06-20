@@ -78,6 +78,7 @@ class GroupHealthController < ApplicationController
   def groups
     respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
                        "AS #{Group.quoted_table_name}")
+                .select(GROUPS_FIELDS)
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .order(:lft)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
@@ -131,6 +132,7 @@ class GroupHealthController < ApplicationController
 
   def qualification_kinds
     respond(QualificationKind.includes(:translations)
+                .select(QUALIFICATION_KINDS_FIELDS)
                 .as_json(only: QUALIFICATION_KINDS_FIELDS,
                   include: {translations: {only: TRANSLATIONS_FIELDS}})
                 .map { |item| set_translations(item, "label") })
@@ -138,6 +140,7 @@ class GroupHealthController < ApplicationController
 
   def event_kinds
     respond(Event::Kind.includes(:translations, :event_kind_qualification_kinds)
+                .select(EVENT_KINDS_FIELDS)
                 .as_json(only: EVENT_KINDS_FIELDS,
                   include: {translations: {only: TRANSLATIONS_FIELDS},
                             event_kind_qualification_kinds: {only: EKQK_FIELDS}})
