@@ -58,6 +58,7 @@ class GroupHealthController < ApplicationController
       respond(Person.joins(roles: :group)
                   .joins(GROUP_HEALTH_JOIN).distinct
                   .where(EXCLUDE_INTERNES_GREMIUM)
+                  .order(:id)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                   .as_json(only: PERSON_FIELDS)
                   .map { |item| set_name(item) })
@@ -69,6 +70,7 @@ class GroupHealthController < ApplicationController
                 .joins(:group)
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: ROLES_FIELDS))
   end
@@ -87,6 +89,7 @@ class GroupHealthController < ApplicationController
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: COURSES_FIELDS,
                   include: {dates: {only: EVENT_DATES_FIELDS},
@@ -98,6 +101,7 @@ class GroupHealthController < ApplicationController
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: CAMPS_FIELDS,
                   include: {dates: {only: EVENT_DATES_FIELDS},
@@ -109,8 +113,9 @@ class GroupHealthController < ApplicationController
     respond(Event::Participation.joins(person: [{roles: :group}])
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
-                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .includes(:roles)
+                .order(:id)
+                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: PARTICIPATIONS_FIELDS,
                   include: {roles: {only: PARTICIPATIONS_ROLES_FIELDS}}))
   end
@@ -119,6 +124,7 @@ class GroupHealthController < ApplicationController
     respond(Qualification.joins(person: [{roles: :group}])
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json)
   end
