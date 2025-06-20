@@ -243,7 +243,10 @@ describe GroupHealthController do
           it "does only export people with roles in a group having opted in" do
             get :people, format: :json
             json = JSON.parse(response.body)
-            expect(json["people"].size).to eq(2)
+            people = json["people"]
+            expect(people.size).to eq(2)
+            person = people.first
+            expect(person.keys).to match_array(%w[id pbs_number town zip_code country gender birthday entry_date leaving_date primary_group_id name address])
           end
 
           it "does only export camps with participants having roles in a group having opted in" do

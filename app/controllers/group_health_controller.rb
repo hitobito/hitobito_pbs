@@ -11,8 +11,8 @@ class GroupHealthController < ApplicationController
   CENSUS_EVALUTATIONS_GROUP_TYPES = [Group::Abteilung, Group::Kantonalverband, Group::Region].freeze
   J_S_KINDS = %w[j_s_kind_none j_s_kind_j_s_child j_s_kind_j_s_youth j_s_kind_j_s_mixed].freeze
   CAMP_STATES = %w[created confirmed assignment_closed canceled closed].freeze
-  PERSON_FIELDS = %i[id pbs_number first_name last_name nickname address town zip_code country
-    gender birthday entry_date leaving_date primary_group_id].freeze
+  PERSON_FIELDS = %i[id pbs_number first_name last_name nickname street housenumber town zip_code
+    country gender birthday entry_date leaving_date primary_group_id].freeze
   ROLES_FIELDS = %i[id person_id group_id type created_at start_on end_on].freeze
   GROUPS_FIELDS = %i[id parent_id type name created_at deleted_at canton_id canton_name].freeze
   COURSES_FIELDS = %i[id name kind_id].freeze
@@ -61,7 +61,8 @@ class GroupHealthController < ApplicationController
                   .order(:id)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                   .as_json(only: PERSON_FIELDS)
-                  .map { |item| set_name(item) })
+                  .map { |item| set_name(item) }
+                  .map { |item| set_address(item) })
     }
   end
 
@@ -206,6 +207,11 @@ class GroupHealthController < ApplicationController
       .merge(name: computed_name(person))
   end
 
+  def set_address(person)
+    person.except("street", "housenumber")
+      .merge(address: computed_address(person))
+  end
+
   def census_data(total, group)
     return unless total
 
@@ -233,6 +239,13 @@ class GroupHealthController < ApplicationController
   def computed_name(person)
     return person["nickname"] unless person["nickname"].blank?
     [person["first_name"], abbreviate(person["last_name"])].join(" ")
+  end
+
+  def computed_address(person)
+    parts = [person["street"], person["housenumber"]].compact
+    return nil if parts.blank?
+
+    parts.join(" ")
   end
 
   def abbreviate(name)
