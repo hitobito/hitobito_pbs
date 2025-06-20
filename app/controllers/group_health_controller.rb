@@ -11,8 +11,8 @@ class GroupHealthController < ApplicationController
   CENSUS_EVALUTATIONS_GROUP_TYPES = [Group::Abteilung, Group::Kantonalverband, Group::Region].freeze
   J_S_KINDS = %w[j_s_kind_none j_s_kind_j_s_child j_s_kind_j_s_youth j_s_kind_j_s_mixed].freeze
   CAMP_STATES = %w[created confirmed assignment_closed canceled closed].freeze
-  PERSON_FIELDS = %i[id pbs_number first_name last_name nickname address town zip_code country
-    gender birthday entry_date leaving_date primary_group_id].freeze
+  PERSON_FIELDS = %i[id pbs_number first_name last_name nickname street housenumber town zip_code
+    country gender birthday entry_date leaving_date primary_group_id].freeze
   ROLES_FIELDS = %i[id person_id group_id type created_at start_on end_on].freeze
   GROUPS_FIELDS = %i[id parent_id type name created_at deleted_at canton_id canton_name].freeze
   COURSES_FIELDS = %i[id name kind_id].freeze
@@ -58,9 +58,11 @@ class GroupHealthController < ApplicationController
       respond(Person.joins(roles: :group)
                   .joins(GROUP_HEALTH_JOIN).distinct
                   .where(EXCLUDE_INTERNES_GREMIUM)
+                  .order(:id)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                   .as_json(only: PERSON_FIELDS)
-                  .map { |item| set_name(item) })
+                  .map { |item| set_name(item) }
+                  .map { |item| set_address(item) })
     }
   end
 
@@ -69,6 +71,7 @@ class GroupHealthController < ApplicationController
                 .joins(:group)
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .joins(GROUP_HEALTH_JOIN).distinct
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: ROLES_FIELDS))
   end
@@ -76,6 +79,7 @@ class GroupHealthController < ApplicationController
   def groups
     respond(Group.from("((#{bund}) UNION (#{cantons}) UNION (#{abt_and_below})) " \
                        "AS #{Group.quoted_table_name}")
+                .select(GROUPS_FIELDS)
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .order(:lft)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
@@ -87,6 +91,7 @@ class GroupHealthController < ApplicationController
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: COURSES_FIELDS,
                   include: {dates: {only: EVENT_DATES_FIELDS},
@@ -98,6 +103,7 @@ class GroupHealthController < ApplicationController
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:dates, :groups)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: CAMPS_FIELDS,
                   include: {dates: {only: EVENT_DATES_FIELDS},
@@ -109,8 +115,9 @@ class GroupHealthController < ApplicationController
     respond(Event::Participation.joins(person: [{roles: :group}])
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
-                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .includes(:roles)
+                .order(:id)
+                .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json(only: PARTICIPATIONS_FIELDS,
                   include: {roles: {only: PARTICIPATIONS_ROLES_FIELDS}}))
   end
@@ -119,12 +126,14 @@ class GroupHealthController < ApplicationController
     respond(Qualification.joins(person: [{roles: :group}])
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
+                .order(:id)
                 .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
                 .as_json)
   end
 
   def qualification_kinds
     respond(QualificationKind.includes(:translations)
+                .select(QUALIFICATION_KINDS_FIELDS)
                 .as_json(only: QUALIFICATION_KINDS_FIELDS,
                   include: {translations: {only: TRANSLATIONS_FIELDS}})
                 .map { |item| set_translations(item, "label") })
@@ -132,6 +141,7 @@ class GroupHealthController < ApplicationController
 
   def event_kinds
     respond(Event::Kind.includes(:translations, :event_kind_qualification_kinds)
+                .select(EVENT_KINDS_FIELDS)
                 .as_json(only: EVENT_KINDS_FIELDS,
                   include: {translations: {only: TRANSLATIONS_FIELDS},
                             event_kind_qualification_kinds: {only: EKQK_FIELDS}})
@@ -197,6 +207,11 @@ class GroupHealthController < ApplicationController
       .merge(name: computed_name(person))
   end
 
+  def set_address(person)
+    person.except("street", "housenumber")
+      .merge(address: computed_address(person))
+  end
+
   def census_data(total, group)
     return unless total
 
@@ -224,6 +239,13 @@ class GroupHealthController < ApplicationController
   def computed_name(person)
     return person["nickname"] unless person["nickname"].blank?
     [person["first_name"], abbreviate(person["last_name"])].join(" ")
+  end
+
+  def computed_address(person)
+    parts = [person["street"], person["housenumber"]].compact
+    return nil if parts.blank?
+
+    parts.join(" ")
   end
 
   def abbreviate(name)

@@ -93,6 +93,7 @@ describe GroupHealthController do
           json = JSON.parse(response.body)
           group = json["groups"].first
           expect(group["name"]).to eq(groups(:bund).name)
+          expect(group["canton_id"]).to be_nil
         end
       end
 
@@ -224,6 +225,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:schekka).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do
@@ -239,7 +243,10 @@ describe GroupHealthController do
           it "does only export people with roles in a group having opted in" do
             get :people, format: :json
             json = JSON.parse(response.body)
-            expect(json["people"].size).to eq(2)
+            people = json["people"]
+            expect(people.size).to eq(2)
+            person = people.first
+            expect(person.keys).to match_array(%w[id pbs_number town zip_code country gender birthday entry_date leaving_date primary_group_id name address])
           end
 
           it "does only export camps with participants having roles in a group having opted in" do
@@ -304,6 +311,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:be).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do
@@ -383,6 +393,9 @@ describe GroupHealthController do
             json = JSON.parse(response.body)
             groups = json["groups"].select { |g| g["name"] == groups(:bern).name }
             expect(groups.size).to eq(1)
+            group = groups.first
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
           it "does not export internes Gremium" do
