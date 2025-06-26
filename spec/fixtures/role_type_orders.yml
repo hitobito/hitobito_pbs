@@ -945,3 +945,15 @@ silverscouts_region_leitung:
 silverscouts_region_mitglied:
   name: Group::SilverscoutsRegion::Mitglied
   order_weight: 237
+
+bundes_verantwortung_it:
+  name: Group::Bund::VerantwortungIT
+  order_weight: 238
+
+kantonalverband_verantwortung_it:
+  name: Group::Kantonalverband::VerantwortungIT
+  order_weight: 239
+
+region_verantwortung_it:
+  name: Group::Region::VerantwortungIT
+  order_weight: 240
