@@ -13,9 +13,10 @@ module Export::Pdf
       @camp = camp
       @context = ViewModel.new(camp)
       @section_count = 0
-      @document = Prawn::Document.new(page_size: "A4",
+      @document = Export::Pdf::Document.new(page_size: "A4",
         page_layout: :portrait,
-        margin: 2.cm)
+        margin: 2.cm).pdf
+      @document.font("Helvetica")
     end
 
     def title
