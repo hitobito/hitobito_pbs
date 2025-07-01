@@ -25,7 +25,7 @@ module Pbs::Export::EventParticipationsExportJob
   end
 
   def unfiltered_participants
-    @filter.event.participants_scope
+    event.participants_scope
       .includes(::Event::ParticipationFilter.load_entries_includes)
       .references(:people)
       .distinct
@@ -33,6 +33,6 @@ module Pbs::Export::EventParticipationsExportJob
 
   def data
     return super unless exporter == ::Export::Tabular::People::ParticipationsFull
-    ::Export::Tabular::People::ParticipationsFull.export(@format, entries, @filter.event)
+    ::Export::Tabular::People::ParticipationsFull.export(@format, entries, event)
   end
 end
