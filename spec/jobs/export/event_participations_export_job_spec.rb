@@ -46,7 +46,7 @@ describe Export::EventParticipationsExportJob do
       it "call to data succeeds for non nds course " do
         params[:nds_course] = false
         params[:details] = true
-        expect(job.data).to have(2).line
+        expect(job.data).to have(3).lines
       end
     end
   end
