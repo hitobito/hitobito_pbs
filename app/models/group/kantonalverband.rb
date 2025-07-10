@@ -283,6 +283,10 @@ class Group::Kantonalverband < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungIT < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   class VerantwortungProgramm < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -347,6 +351,7 @@ class Group::Kantonalverband < Group
     VerantwortungMaterialverkaufsstelle,
     VerantwortungPr,
     VerantwortungPraeventionSexuellerAusbeutung,
+    VerantwortungIT,
     VerantwortungProgramm,
     VerantwortungNachhaltigkeit,
     Spezialfunktion,
