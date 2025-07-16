@@ -263,6 +263,10 @@ class Group::Bund < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungIT < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   class VerantwortungRoverstufe < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -321,6 +325,7 @@ class Group::Bund < Group
     VerantwortungLagermeldung,
     VerantwortungPr,
     VerantwortungPraeventionSexuellerAusbeutung,
+    VerantwortungIT,
     VerantwortungKrisenteam,
     VerantwortungEhrenamt,
     InternationalCommissionerIcWagggs,
