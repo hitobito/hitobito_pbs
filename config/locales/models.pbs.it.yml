@@ -303,6 +303,10 @@ it:
         one: Responsabile della prevenzione
         many: Responsabili della prevenzione
         other: Responsabili della prevenzione
+      group/bund/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/bund/international_commissioner_ic_wagggs:
         one: Commissario internazionale WAGGGS
         many: Commissarii internazionale WAGGGS
@@ -503,6 +507,10 @@ it:
         one: Responsabile della prevenzione
         many: Responsabili della prevenzione
         other: Responsabili della prevenzione
+      group/kantonalverband/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/kantonalverband/verantwortung_programm:
         one: Responsabile del programma
         many: Responsabili del programma
@@ -683,6 +691,10 @@ it:
         one: Responsabile della prevenzione
         many: Responsabili della prevenzione
         other: Responsabili della prevenzione
+      group/region/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/region/verantwortung_programm:
         one: Responsabile del programma
         many: Responsabili del programma
