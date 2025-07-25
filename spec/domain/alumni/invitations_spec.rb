@@ -39,13 +39,14 @@ describe Alumni::Invitations do
   end
 
   context "#relevant_roles" do
-    def make_role(end_on: nil, alumni_invitation_processed_at: nil)
+    def make_role(end_on: nil, alumni_invitation_processed_at: nil, archived_at: nil)
       Fabricate(
         "Group::Pfadi::Pfadi",
         group: groups(:pegasus),
         created_at: 1.year.ago,
-        end_on: end_on,
-        alumni_invitation_processed_at: alumni_invitation_processed_at
+        end_on:,
+        archived_at:,
+        alumni_invitation_processed_at:
       )
     end
 
@@ -78,6 +79,13 @@ describe Alumni::Invitations do
     it "excludes roles with alumni_invitation_processed_at set" do
       processed_role = make_role(end_on: 4.months.ago,
         alumni_invitation_processed_at: 1.second.ago)
+
+      expect(subject.relevant_roles).not_to include(processed_role)
+    end
+
+    it "excludes roles with archived_at set" do
+      processed_role = make_role(end_on: 4.months.ago,
+        archived_at: 1.second.ago)
 
       expect(subject.relevant_roles).not_to include(processed_role)
     end
