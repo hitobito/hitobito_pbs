@@ -16,6 +16,7 @@ module Alumni
     def relevant_roles
       Role
         .with_inactive
+        .without_archived
         .where(end_on: date_range, alumni_invitation_processed_at: nil)
         .includes(:person, :group)
     end
