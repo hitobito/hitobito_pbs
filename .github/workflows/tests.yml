@@ -1,10 +1,6 @@
 name: 'Lint and test'
 
 on:
-  push:
-    paths-ignore:
-      - 'doc/**'
-      - '**.md'
   pull_request:
     paths-ignore:
       - 'doc/**'
