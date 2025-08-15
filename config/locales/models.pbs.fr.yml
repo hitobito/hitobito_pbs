@@ -290,9 +290,9 @@ fr:
         many: Responsables prévention
         other: Responsables prévention
       group/bund/verantwortung_it:
-        one: Responsable IT
-        many: Responsables IT
-        other: Responsables IT
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/bund/international_commissioner_ic_wagggs:
         one: Commissaire internationale AMGE
         many: Commissaires internationale AMGE
@@ -494,9 +494,9 @@ fr:
         many: Responsables prévention
         other: Responsables prévention
       group/kantonalverband/verantwortung_it:
-        one: Responsable IT
-        many: Responsables IT
-        other: Responsables IT
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/kantonalverband/verantwortung_programm:
         one: Responsable du programme
         many: Responsables du programme
@@ -678,9 +678,9 @@ fr:
         many: Responsables prévention
         other: Responsables prévention
       group/region/verantwortung_it:
-        one: Responsable IT
-        many: Responsables IT
-        other: Responsables IT
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/region/verantwortung_programm:
         one: Responsable du programme
         many: Responsables du programme
