@@ -103,7 +103,7 @@ class SupercampsController < ApplicationController
 
   def required_contact_attrs
     all_required_attrs = supercamp.required_contact_attrs +
-      Event::ParticipationContactData.mandatory_contact_attrs
+      Event.mandatory_contact_attrs
 
     all_required_attrs.index_with do |_attr|
       :required

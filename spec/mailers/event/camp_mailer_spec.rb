@@ -35,7 +35,7 @@ describe Event::CampMailer do
     role = Fabricate(:event_role, type: Event::Camp::Role::Leader.sti_name)
     Fabricate(:pbs_participation, event: camp, roles: [role], active: true).person
   end
-  let(:participation) { Fabricate(:pbs_participation, person: other_person, event: camp) }
+  let(:participation) { Fabricate(:pbs_participation, participant: other_person, event: camp) }
 
   before do
     camp.update(coach_id: coach.id)

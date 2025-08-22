@@ -25,10 +25,7 @@ module Pbs::Export::EventParticipationsExportJob
   end
 
   def unfiltered_participants
-    event.participants_scope
-      .includes(::Event::ParticipationFilter.load_entries_includes)
-      .references(:people)
-      .distinct
+    ::Event::ParticipationFilter.new(event, user, filter: "participants").list_entries
   end
 
   def data

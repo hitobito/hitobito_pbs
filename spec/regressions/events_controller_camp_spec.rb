@@ -193,9 +193,9 @@ describe EventsController, type: :controller do
     end
 
     before do
-      child_participation = Fabricate(:pbs_participation, event: camp, person: child)
+      child_participation = Fabricate(:pbs_participation, event: camp, participant: child)
       Fabricate(Event::Camp::Role::Participant.name, participation: child_participation)
-      leader_participation = Fabricate(:pbs_participation, event: camp, person: camp_leader)
+      leader_participation = Fabricate(:pbs_participation, event: camp, participant: camp_leader)
       Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
 
       update_camp_attrs
@@ -282,7 +282,7 @@ describe EventsController, type: :controller do
 
     context "for camps from own canton" do
       before do
-        leader_participation = Fabricate(:pbs_participation, event: camp, person: camp_leader)
+        leader_participation = Fabricate(:pbs_participation, event: camp, participant: camp_leader)
         Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
       end
 
@@ -300,7 +300,7 @@ describe EventsController, type: :controller do
 
     context "for camp of other cantons" do
       before do
-        leader_participation = Fabricate(:pbs_participation, event: outside_camp, person: camp_leader)
+        leader_participation = Fabricate(:pbs_participation, event: outside_camp, participant: camp_leader)
         Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
       end
 
