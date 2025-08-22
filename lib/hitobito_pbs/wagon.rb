@@ -69,7 +69,7 @@ module HitobitoPbs
         Pbs::Export::Tabular::People::ParticipationNdsRow
       )
       Export::Tabular::People::PersonRow.include Pbs::Export::Tabular::People::PersonRow
-      Export::Tabular::People::PeopleAddress.include Pbs::Export::Tabular::People::PeopleAddress
+      Export::Tabular::People::PeopleAddress.prepend Pbs::Export::Tabular::People::PeopleAddress
       Export::Tabular::People::PeopleFull.include Pbs::Export::Tabular::People::PeopleFull
       Export::Tabular::Events::BsvRow.include Pbs::Export::Tabular::Events::BsvRow
       Export::PeopleExportJob.include Pbs::Export::PeopleExportJob

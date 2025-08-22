@@ -19,7 +19,7 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
   let(:state) { "assigned" }
   let(:qualified) { true }
   let(:participation) {
-    Fabricate(:pbs_participation, state: state, person: person, event: event,
+    Fabricate(:pbs_participation, state: state, participant: person, event: event,
       roles: participation_roles, qualified: qualified)
   }
   let(:decorator) { Event::ParticipationDecorator.new(participation) }

@@ -76,7 +76,7 @@ describe Event::RestrictedRole do
     subject.abteilungsleitung_id = new_al.id
     expect { subject.save! }.not_to change { Event::Role.count }
     expect(Event.find(subject.id).abteilungsleitung_id).to eq(new_al.id)
-    expect(subject.participations.where(person_id: person.id)).not_to be_exists
+    expect(subject.participations.where(participant_id: person.id, participant_type: Person.sti_name)).not_to be_exists
   end
 
   it "adds answers to new participation" do
@@ -92,7 +92,7 @@ describe Event::RestrictedRole do
     event.update!(abteilungsleitung_id: "")
     Fabricate(:event_question, event: event)
     event.reload
-    p = Fabricate(:pbs_participation, event: event, person: person)
+    p = Fabricate(:pbs_participation, event: event, participant: person)
     p.init_answers
     p.save!
     Fabricate(Event::Camp::Role::Helper.name, participation: p)

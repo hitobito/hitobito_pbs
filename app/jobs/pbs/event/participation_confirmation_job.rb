@@ -23,7 +23,7 @@ module Pbs::Event::ParticipationConfirmationJob
   end
 
   def send_confirmation_with_current_user
-    if participation.person_id == current_user_id
+    if participation.participant_id == current_user_id && participation.participant_type == Person.sti_name
       send_confirmation_without_current_user
       send_camp_leader_information
     elsif participation.person.email.present?

@@ -17,7 +17,7 @@ describe Event::ApprovalsController do
       requires_approval_abteilung: true)
   end
   let(:participation) do
-    Fabricate(:pbs_participation, event: course, person: participant, application: application)
+    Fabricate(:pbs_participation, event: course, participant: participant, application: application)
   end
   let(:application) { Fabricate(:pbs_application, priority_1: course) }
   let(:course_start_date) { Fabricate(:event_date, event: course, start_at: 10.days.from_now) }

@@ -53,7 +53,8 @@ class Event::CampReminderJob < RecurringJob
   end
 
   def with_notified_roles(camps)
-    camps.includes(participations: [:roles, :person])
+    camps.includes(participations: [:roles])
+      .merge(Event::Participation.with_person_participants)
       .references(participations: :roles)
       .where(event_roles: {type: NOTIFIED_ROLES})
   end

@@ -3,14 +3,15 @@
 -#  or later. See the COPYING file at the top-level directory or at
 -#  https://github.com/hitobito/hitobito_pbs.
 
-= field_set_tag do
-  - if entry.show_attr?(:title)
-    = f.labeled_input_field :title
-  - if entry.show_attr?(:salutation)
-    = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: "" }, class: 'form-select form-select-sm'
-  - if entry.show_attr?(:grade_of_school)
-    = f.labeled_input_field :grade_of_school, help_inline: t('people.fields_pbs.non_automatic_field')
+- if entry.is_a?(Event::ParticipationContactData)
+  = field_set_tag do
+    - if event.show_contact_attr?(:title)
+      = f.labeled_input_field :title
+    - if event.show_contact_attr?(:salutation)
+      = f.labeled_collection_select :salutation, Salutation.available, :first, :last, { include_blank: "" }, class: 'form-select form-select-sm'
+    - if event.show_contact_attr?(:grade_of_school)
+      = f.labeled_input_field :grade_of_school, help_inline: t('people.fields_pbs.non_automatic_field')
 
-= field_set_tag do
-  - [:entry_date, :leaving_date].each do |a|
-    = f.labeled_input_field(a) if entry.show_attr?(a)
+  = field_set_tag do
+    - [:entry_date, :leaving_date].each do |a|
+      = f.labeled_input_field(a) if event.show_contact_attr?(a)

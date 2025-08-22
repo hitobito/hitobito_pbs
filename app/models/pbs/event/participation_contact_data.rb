@@ -7,9 +7,8 @@ module Pbs::Event::ParticipationContactData
   extend ActiveSupport::Concern
 
   included do
-    Event::ParticipationContactData.contact_attrs << :title << :salutation <<
+    Event.possible_contact_attrs << :title << :salutation <<
       :grade_of_school << :entry_date << :leaving_date
-
-    delegate(*Event::ParticipationContactData.contact_attrs, to: :person)
+    delegate(*Event.possible_contact_attrs, to: :person)
   end
 end

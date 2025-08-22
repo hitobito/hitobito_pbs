@@ -29,7 +29,3 @@ event_camp_role_leader:
 event_camp_role_participant:
   name: Event::Camp::Role::Participant
   order_weight: 8
-
-event_camp_role_leader:
-  name: Event::Camp::Role::Leader
-  order_weight: 9
