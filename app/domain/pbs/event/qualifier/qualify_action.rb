@@ -19,6 +19,6 @@ module Pbs::Event::Qualifier::QualifyAction
   end
 
   def participation
-    @participation ||= ::Event::Participation.find_by(event: @event, person: @person)
+    @participation ||= ::Event::Participation.find_by(event: @event, participant: @person, participant_type: Person.sti_name)
   end
 end

@@ -14,9 +14,9 @@ describe Person::FamilyMemberFinder do
 
   describe "#family_members_in_event" do
     let(:person_event) { Fabricate(:event) }
-    let!(:person_participation) { Fabricate(:event_participation, person: person, event: person_event) }
+    let!(:person_participation) { Fabricate(:event_participation, participant: person, event: person_event) }
     let(:sibling_event) { Fabricate(:event) }
-    let!(:sibling_participation) { Fabricate(:event_participation, person: sibling, event: sibling_event) }
+    let!(:sibling_participation) { Fabricate(:event_participation, participant: sibling, event: sibling_event) }
 
     subject do
       service.family_members_in_event(person_event, kind: :sibling)
@@ -35,11 +35,11 @@ describe Person::FamilyMemberFinder do
     context "with siblings in same event" do
       let(:sibling_event) { person_event }
 
-      it { is_expected.to contain_exactly(sibling_participation) }
+      it { is_expected.to contain_exactly(sibling_participation.participant) }
     end
 
     context "with siblings with deleted role in same group" do
-      let!(:sibling_participation) { Fabricate(:event_participation, person: sibling, event: sibling_event, active: false) }
+      let!(:sibling_participation) { Fabricate(:event_participation, participant: sibling, event: sibling_event, active: false) }
 
       it { is_expected.to be_empty }
     end
@@ -73,11 +73,11 @@ describe Person::FamilyMemberFinder do
     context "with siblings in same group" do
       let(:sibling_group) { person_group }
 
-      it { is_expected.to contain_exactly(sibling_role) }
+      it { is_expected.to contain_exactly(sibling_role.person) }
     end
 
     context "with siblings in same layer" do
-      it { is_expected.to contain_exactly(sibling_role) }
+      it { is_expected.to contain_exactly(sibling_role.person) }
     end
 
     context "with siblings with deleted role in same group" do

@@ -8,7 +8,7 @@ require "spec_helper"
 describe Group::PendingApprovalsController do
   let(:course) { events(:top_course) }
   let(:person) { people(:child) }
-  let(:participation) { Fabricate(:pbs_participation, event: course, person: person) }
+  let(:participation) { Fabricate(:pbs_participation, event: course, participant: person) }
   let(:other_participation) { event_participations(:top_participant) }
 
   def create_application_and_approval(participation)
@@ -81,7 +81,7 @@ describe Group::PendingApprovalsController do
         strong_points: "strong",
         weak_points: "weak")
 
-      p = Fabricate(:pbs_participation, person: people(:al_schekka))
+      p = Fabricate(:pbs_participation, participant: people(:al_schekka))
       @rejected_approval = create_application_and_approval(p)
       @rejected_approval.update!(rejected: true,
         comment: "yup",

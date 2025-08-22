@@ -190,7 +190,7 @@ describe EventAbility do
       it "is possible for leader" do
         event = Fabricate(:pbs_camp, groups: [group])
         Fabricate(Event::Camp::Role::Leader.name,
-          participation: Fabricate(:pbs_participation, event: event, person: role.person))
+          participation: Fabricate(:pbs_participation, event: event, participant: role.person))
         is_expected.to be_able_to(:update, event)
         is_expected.to be_able_to(:show_camp_application, event)
       end
@@ -201,7 +201,7 @@ describe EventAbility do
         subcamp.move_to_child_of(event)
 
         Fabricate(Event::Camp::Role::Leader.name,
-          participation: Fabricate(:pbs_participation, event: event, person: role.person))
+          participation: Fabricate(:pbs_participation, event: event, participant: role.person))
         is_expected.to be_able_to(:show_details, subcamp)
         is_expected.to be_able_to(:index_participations, subcamp)
 
@@ -212,7 +212,7 @@ describe EventAbility do
       it "is not possible for anyone" do
         event = Fabricate(:pbs_camp, groups: [group])
         Fabricate(Event::Camp::Role::Helper.name,
-          participation: Fabricate(:pbs_participation, event: event, person: role.person))
+          participation: Fabricate(:pbs_participation, event: event, participant: role.person))
         is_expected.not_to be_able_to(:update, event)
         is_expected.not_to be_able_to(:show_camp_application, event)
       end
@@ -229,7 +229,7 @@ describe EventAbility do
       it "is not possible for leaders" do
         event = Fabricate(:pbs_camp, groups: [group])
         Fabricate(Event::Camp::Role::Helper.name,
-          participation: Fabricate(:pbs_participation, event: event, person: role.person))
+          participation: Fabricate(:pbs_participation, event: event, participant: role.person))
         is_expected.not_to be_able_to(:create_camp_application, event)
       end
 

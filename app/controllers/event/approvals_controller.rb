@@ -73,10 +73,12 @@ class Event::ApprovalsController < CrudController
 
   def list_entries
     Event::Approval
-      .joins(participation: :person)
+      .joins(:participation)
+      .merge(Event::Participation.with_person_participants)
       .where(event_participations: {event_id: event.id, active: true})
       .includes(approver: [:phone_numbers, :roles, :groups],
-        participation: [:event, :application, {person: :primary_group}])
+        participation: [:event, :application])
+      .merge(Person.includes(:primary_group))
       .merge(Person.order_by_name)
       .order_by_layer
   end

@@ -172,7 +172,7 @@ module Pbs::EventAbility
   def participating_as_leader_role?
     Event.where(id: relevant_participating_event_ids)
       .joins(participations: [:roles])
-      .where(event_participations: {person_id: user.id})
+      .where(event_participations: {participant_id: user.id, participant_type: Person.sti_name})
       .where.not(event_roles: {type: Event::Camp::Role::Participant.sti_name})
       .present?
   end

@@ -357,7 +357,7 @@ describe Event::ListsController do
 
   def create_participation(course, role)
     person = Fabricate(:person, birthday: Date.new(1995, 1, 1), zip_code: 3012)
-    participation = Fabricate(:pbs_participation, event: course, person: person, bsv_days: 3)
+    participation = Fabricate(:pbs_participation, event: course, participant: person, bsv_days: 3)
     Fabricate(role.to_sym, participation: participation)
   end
 end

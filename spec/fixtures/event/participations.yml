@@ -8,49 +8,56 @@
 
 top_leader:
   event: top_course
-  person: bulei
+  participant: bulei
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 top_participant:
   event: top_course
-  person: al_schekka
+  participant: al_schekka
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 schekka_camp_leader:
   event: schekka_camp
-  person: bulei
+  participant: bulei
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 schekka_camp_participant:
   event: schekka_camp
-  person: al_schekka
+  participant: al_schekka
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 schekka_supercamp_leader:
   event: schekka_supercamp
-  person: bulei
+  participant: bulei
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 be_camp_participant:
   event: be_camp
-  person: be_crisis_member
+  participant: be_crisis_member
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
 
 bern_camp_participant:
   event: bern_camp
-  person: rl_bern
+  participant: rl_bern
+  participant_type: Person
   active: true
   state: assigned
   j_s_data_sharing_accepted_at: <%=  Time.zone.now %>
