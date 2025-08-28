@@ -105,7 +105,7 @@ class Event::Camp < Event
     :total_expected_leading_participants, :total_expected_participants
   ]
 
-  self.used_attributes -= [:contact_id, :applications_cancelable]
+  self.used_attributes -= [:contact_id, :applications_cancelable, :guest_limit]
 
   self.role_types = [Event::Camp::Role::AssistantLeader,
     Event::Camp::Role::Helper,

@@ -176,7 +176,7 @@ describe Event::Course do
       subject.advisor_id = new_advisor.id
       expect { subject.save! }.not_to change { Event::Role.count }
       expect(Event.find(subject.id).advisor_id).to eq(new_advisor.id)
-      expect(subject.participations.where(person_id: person.id)).not_to be_exists
+      expect(subject.participations.where(participant_id: person.id, participant_type: Person.sti_name)).not_to be_exists
     end
   end
 

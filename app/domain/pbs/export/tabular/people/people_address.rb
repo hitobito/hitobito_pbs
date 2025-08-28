@@ -10,22 +10,21 @@ module Pbs
         module PeopleAddress
           extend ActiveSupport::Concern
 
-          included do
-            alias_method_chain :initialize, :kv
-            alias_method_chain :person_attributes, :title
-          end
-
-          def initialize_with_kv(list, ability = nil)
-            if list.respond_to?(:klass)
-              incl = (list.klass < Person) ? :kantonalverband : {person: :kantonalverband}
-              initialize_without_kv(list.includes(incl), ability)
+          def initialize(list, ability = nil)
+            if list.respond_to?(:klass) && list.klass < Person
+              super(list.includes(:kantonalverband), ability)
+            elsif list.respond_to?(:klass) && list.klass < Event::Participation
+              preloaded_list = list.tap do |l|
+                ::Event::Participation::PreloadParticipations.preload(l, participant: :kantonalverband)
+              end
+              super(preloaded_list, ability)
             else
-              initialize_without_kv(list, ability)
+              super
             end
           end
 
-          def person_attributes_with_title
-            person_attributes_without_title +
+          def person_attributes
+            super +
               [:title, :salutation, :language, :prefers_digital_correspondence,
                 :kantonalverband_id, :id, :layer_group_id]
           end

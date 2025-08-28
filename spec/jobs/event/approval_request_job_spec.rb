@@ -16,7 +16,7 @@ describe Event::ApprovalRequestJob do
   end
   let(:participation) do
     Fabricate(:pbs_participation,
-      person: person,
+      participant: person,
       event: course,
       application: application)
   end

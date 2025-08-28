@@ -18,7 +18,7 @@ module Pbs::PersonDecorator
     end
 
     def siblings_in_context(context)
-      family_member_finder.family_members_in_context(context, kind: :sibling).map(&:person).uniq
+      family_member_finder.family_members_in_context(context, kind: :sibling).uniq
     end
   end
 
