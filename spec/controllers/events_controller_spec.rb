@@ -81,7 +81,7 @@ describe EventsController do
       end
 
       it "prevents non-coaches from editing coach_confirmed" do
-        event.participations.create!(person: people(:al_schekka),
+        event.participations.create!(participant: people(:al_schekka),
           roles: [Event::Course::Role::Leader.new],
           j_s_data_sharing_accepted_at: Time.zone.now)
         put :update, params: {
@@ -214,7 +214,8 @@ describe EventsController do
 
       context "as co-leader" do
         before do
-          Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, person: Fabricate(:person), event: event)
+          participation = Fabricate(:event_participation, participant: Fabricate(:person), event: event)
+          Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, participation: participation)
           event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_schekka).id)
         end
 
@@ -302,7 +303,8 @@ describe EventsController do
 
       context "as co-leader" do
         before do
-          Fabricate(Event::Course::Role::ClassLeader.name.to_sym, person: person, event: event)
+          participation = Fabricate(:event_participation, participant: person, event: event)
+          Fabricate(Event::Course::Role::ClassLeader.name.to_sym, participation: participation)
           event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_schekka).id)
         end
 

@@ -24,7 +24,7 @@ class ProlongJSQualifications2021 < ActiveRecord::Migration[6.0]
 
   def up
     js_quali_courses_2021.find_each do |c|
-      participant_ids = c.participations.where(qualified: true).collect(&:person_id)
+      participant_ids = c.participations.where(qualified: true, participant_type: Person.sti_name).collect(&:participant_id)
       qualis = Qualification.where(person_id: participant_ids,
                                    qualification_kind_id:
                                    qualification_kind_ids,
