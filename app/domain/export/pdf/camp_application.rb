@@ -16,7 +16,6 @@ module Export::Pdf
       @document = Export::Pdf::Document.new(page_size: "A4",
         page_layout: :portrait,
         margin: 2.cm).pdf
-      @document.font("Helvetica")
     end
 
     def title
