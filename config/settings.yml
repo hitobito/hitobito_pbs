@@ -62,8 +62,6 @@ csv:
 
 people:
   abos: true
-  manual_deletion:
-    enabled: true
   people_managers:
     self_service_managed_creation:
       enabled: false
