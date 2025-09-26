@@ -221,7 +221,7 @@ describe Event::Course do
       if advisor_attributes.include?(attr)
         camp.coach_confirmed = false
         person_id = camp.send(attr)
-        camp.participations.find_by(person_id: person_id).destroy!
+        camp.participations.find_by(participant_id: person_id, participant_type: Person.sti_name).destroy!
       else
         value = camp.send(attr)
         new_value = value.is_a?(TrueClass) ? false : nil

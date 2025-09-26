@@ -35,7 +35,7 @@ class Event::Approval < ActiveRecord::Base
 
   has_one :participation, through: :application
   has_one :event, through: :participation
-  has_one :approvee, through: :participation, source: :person
+  has_one :approvee, through: :participation, source: :participant, source_type: Person.sti_name
 
   ### VALIDATIONS
 

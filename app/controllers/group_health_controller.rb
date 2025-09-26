@@ -112,7 +112,9 @@ class GroupHealthController < ApplicationController
   end
 
   def participations
-    respond(Event::Participation.joins(person: [{roles: :group}])
+    respond(Event::Participation
+                .with_person_participants
+                .merge(Person.joins([{roles: :group}]))
                 .joins(GROUP_HEALTH_JOIN).distinct
                 .where(EXCLUDE_INTERNES_GREMIUM)
                 .includes(:roles)

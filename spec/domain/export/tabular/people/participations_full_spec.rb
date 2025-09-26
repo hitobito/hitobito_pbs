@@ -8,8 +8,8 @@ require "csv"
 
 describe Export::Tabular::People::ParticipationsFull do
   let(:person) { people(:child) }
-  let(:participation) { Fabricate(:pbs_participation, person: person, event: events(:top_course), bsv_days: 4.5) }
-  let(:list) { [participation] }
+  let(:participation) { Fabricate(:pbs_participation, participant: person, event: events(:top_course), bsv_days: 4.5) }
+  let(:list) { Event::Participation.where(id: participation.id) }
   let(:people_list) { Export::Tabular::People::ParticipationsFull.new(list) }
 
   subject { people_list.attribute_labels }

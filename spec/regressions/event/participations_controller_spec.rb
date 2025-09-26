@@ -21,7 +21,7 @@ describe Event::ParticipationsController, type: :controller do
   let(:participation) do
     Fabricate(:pbs_participation,
       event: course,
-      person: participant,
+      participant: participant,
       application: Fabricate(:pbs_application, priority_1: course))
   end
 
