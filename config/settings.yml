@@ -68,6 +68,8 @@ people:
   inactivity_block:
     warn_after: P18M # must be an ISO 8601 duration string
     block_after: P1M # must be an ISO 8601 duration string
+  minimization:
+    enabled: true
 
 messages:
   enable_writing: true
