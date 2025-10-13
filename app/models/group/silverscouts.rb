@@ -9,7 +9,7 @@ class Group::Silverscouts < ::Group
   self.layer = true
 
   class Verantwortung < ::Role
-    self.permissions = [:layer_and_below_full]
+    self.permissions = [:layer_and_below_full, :manual_deletion]
   end
 
   class Lesezugriff < ::Role

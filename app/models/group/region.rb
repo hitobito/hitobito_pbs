@@ -77,7 +77,7 @@ class Group::Region < Group
   ### ROLES
 
   class Adressverwaltung < ::Role
-    self.permissions = [:layer_and_below_full]
+    self.permissions = [:layer_and_below_full, :manual_deletion]
     self.two_factor_authentication_enforced = true
   end
 
@@ -159,7 +159,7 @@ class Group::Region < Group
   end
 
   class Regionalleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
     self.two_factor_authentication_enforced = true
   end
 
@@ -168,7 +168,7 @@ class Group::Region < Group
   end
 
   class Sekretariat < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data]
+    self.permissions = [:layer_and_below_full, :contact_data, :manual_deletion]
     self.two_factor_authentication_enforced = true
   end
 

@@ -62,14 +62,14 @@ csv:
 
 people:
   abos: true
-  manual_deletion:
-    enabled: true
   people_managers:
     self_service_managed_creation:
       enabled: false
   inactivity_block:
     warn_after: P18M # must be an ISO 8601 duration string
     block_after: P1M # must be an ISO 8601 duration string
+  minimization:
+    enabled: true
 
 messages:
   enable_writing: true

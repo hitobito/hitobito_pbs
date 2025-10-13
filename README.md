@@ -7,14 +7,14 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 <!-- roles:start -->
     * Root
       * Root
-        * Admin: 2FA [:layer_and_below_full]
+        * Admin: 2FA [:layer_and_below_full, :admin]
     * Bund
       * Bund
         * Mitarbeiter*in GS: 2FA [:layer_and_below_full, :contact_data, :admin]
         * IT Support: 2FA [:layer_and_below_full, :contact_data, :admin, :impersonation]
-        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
-        * Adressverwalter*in: 2FA [:layer_and_below_full]
-        * PowerUser: 2FA [:layer_and_below_full]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
+        * Adressverwalter*in: 2FA [:layer_and_below_full, :manual_deletion]
+        * PowerUser: 2FA [:layer_and_below_full, :manual_deletion]
         * Assistenz Ausbildung: 2FA [:layer_full]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
@@ -69,10 +69,10 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Mitglied: [:layer_read]
     * Kantonalverband
       * Kantonalverband
-        * Kantonsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
-        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
-        * Adressverwalter*in: 2FA [:layer_and_below_full]
-        * PowerUser: 2FA [:layer_and_below_full]
+        * Kantonsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
+        * Adressverwalter*in: 2FA [:layer_and_below_full, :manual_deletion]
+        * PowerUser: 2FA [:layer_and_below_full, :manual_deletion]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
         * Präsident*in APV: [:group_read]
@@ -127,10 +127,10 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Mitglied: 2FA [:layer_and_below_read]
     * Region
       * Region
-        * Regionsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
-        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
-        * Adressverwalter*in: 2FA [:layer_and_below_full]
-        * PowerUser: 2FA [:layer_and_below_full]
+        * Regionsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
+        * Adressverwalter*in: 2FA [:layer_and_below_full, :manual_deletion]
+        * PowerUser: 2FA [:layer_and_below_full, :manual_deletion]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
         * Präsident*in APV: [:group_read]
@@ -187,9 +187,9 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Mitglied: 2FA [:layer_and_below_read]
     * Abteilung
       * Abteilung
-        * Abteilungsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
-        * Abteilungsleiter*in Stv: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
-        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
+        * Abteilungsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
+        * Abteilungsleiter*in Stv: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
         * Adressverwalter*in: 2FA [:layer_full]
         * PowerUser: 2FA [:layer_full]
         * Präsident*in: [:group_read, :contact_data]
