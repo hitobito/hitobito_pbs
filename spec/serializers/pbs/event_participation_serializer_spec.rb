@@ -15,7 +15,8 @@ describe EventParticipationSerializer do
   subject { hash[:event_participations].first }
 
   it "includes phone numbers" do
-    participation.person.phone_numbers.create(number: number, public: true, translated_label: "Natel")
+    participation.person.phone_numbers.create(number: number, public: true,
+      translated_label: "Natel")
 
     expect(subject[:phone_numbers]).to eq([{"number" => number, "translated_label" => "Natel"}])
   end

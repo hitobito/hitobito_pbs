@@ -10,13 +10,19 @@ describe Person::FamilyMemberFinder do
   let(:person) { Fabricate(:person) }
   let(:sibling) { Fabricate(:person) }
 
-  let!(:sibling_relation) { Fabricate(:family_member, person: person, other: sibling, kind: :sibling) }
+  let!(:sibling_relation) {
+    Fabricate(:family_member, person: person, other: sibling, kind: :sibling)
+  }
 
   describe "#family_members_in_event" do
     let(:person_event) { Fabricate(:event) }
-    let!(:person_participation) { Fabricate(:event_participation, participant: person, event: person_event) }
+    let!(:person_participation) {
+      Fabricate(:event_participation, participant: person, event: person_event)
+    }
     let(:sibling_event) { Fabricate(:event) }
-    let!(:sibling_participation) { Fabricate(:event_participation, participant: sibling, event: sibling_event) }
+    let!(:sibling_participation) {
+      Fabricate(:event_participation, participant: sibling, event: sibling_event)
+    }
 
     subject do
       service.family_members_in_event(person_event, kind: :sibling)
@@ -39,7 +45,9 @@ describe Person::FamilyMemberFinder do
     end
 
     context "with siblings with deleted role in same group" do
-      let!(:sibling_participation) { Fabricate(:event_participation, participant: sibling, event: sibling_event, active: false) }
+      let!(:sibling_participation) {
+        Fabricate(:event_participation, participant: sibling, event: sibling_event, active: false)
+      }
 
       it { is_expected.to be_empty }
     end
@@ -49,10 +57,14 @@ describe Person::FamilyMemberFinder do
     let(:layer) { Fabricate(Group::Abteilung.name) }
 
     let(:person_group) { Fabricate(Group::Pfadi.name, parent: layer) }
-    let!(:person_role) { Fabricate(person_group.standard_role.name, person: person, group: person_group) }
+    let!(:person_role) {
+      Fabricate(person_group.standard_role.name, person: person, group: person_group)
+    }
 
     let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: layer) }
-    let!(:sibling_role) { Fabricate(sibling_group.standard_role.name, person: sibling, group: sibling_group) }
+    let!(:sibling_role) {
+      Fabricate(sibling_group.standard_role.name, person: sibling, group: sibling_group)
+    }
 
     subject do
       service.family_members_in_layer(person_group, kind: :sibling)
@@ -65,7 +77,9 @@ describe Person::FamilyMemberFinder do
     end
 
     context "with siblings in different groups" do
-      let(:sibling_group) { Fabricate(Group::Woelfe.name, parent: Fabricate(Group::Abteilung.name)) }
+      let(:sibling_group) {
+        Fabricate(Group::Woelfe.name, parent: Fabricate(Group::Abteilung.name))
+      }
 
       it { is_expected.to be_empty }
     end

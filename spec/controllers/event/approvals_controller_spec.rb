@@ -82,7 +82,9 @@ describe Event::ApprovalsController do
     it "lists grouped approvals" do
       get :index, params: {group_id: group.id, event_id: course.id}
 
-      list = [@p1, @p2, @p3].sort_by { |p| [p.person.last_name, p.person.first_name].compact_blank.join(" ") }
+      list = [@p1, @p2, @p3].sort_by { |p|
+        [p.person.last_name, p.person.first_name].compact_blank.join(" ")
+      }
 
       expect(assigns(:approvals).keys).to eq(list)
 
@@ -133,7 +135,8 @@ describe Event::ApprovalsController do
 
       it "redirects to participation if no approval exists" do
         application.approvals.destroy_all
-        get :new, params: {group_id: group.id, event_id: course.id, participation_id: participation.id}
+        get :new,
+          params: {group_id: group.id, event_id: course.id, participation_id: participation.id}
         expect(response).to redirect_to [group, course, participation]
       end
 
@@ -153,11 +156,15 @@ describe Event::ApprovalsController do
     end
 
     def new_approve
-      get :new, params: {group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :approve}
+      get :new,
+        params: {group_id: group.id, event_id: course.id, participation_id: participation.id,
+                 decision: :approve}
     end
 
     def new_reject
-      get :new, params: {group_id: group.id, event_id: course.id, participation_id: participation.id, decision: :reject}
+      get :new,
+        params: {group_id: group.id, event_id: course.id, participation_id: participation.id,
+                 decision: :reject}
     end
   end
 
@@ -188,7 +195,9 @@ describe Event::ApprovalsController do
       describe "approve" do
         before { approve }
 
-        it { is_expected.to redirect_to(group_event_participation_path(group, course, participation)) }
+        it {
+          is_expected.to redirect_to(group_event_participation_path(group, course, participation))
+        }
 
         it "sets flash" do
           expect(flash[:notice]).to match(/freigegeben/)
@@ -230,7 +239,9 @@ describe Event::ApprovalsController do
       describe "reject" do
         before { reject }
 
-        it { is_expected.to redirect_to(group_event_participation_path(group, course, participation)) }
+        it {
+          is_expected.to redirect_to(group_event_participation_path(group, course, participation))
+        }
 
         it "sets flash" do
           expect(flash[:notice].first).to match(/abgelehnt/)
@@ -320,7 +331,9 @@ describe Event::ApprovalsController do
     end
 
     def edit_approval
-      get :edit, params: {group_id: group.id, event_id: course.id, participation_id: participation.id, id: approval.id}
+      get :edit,
+        params: {group_id: group.id, event_id: course.id, participation_id: participation.id,
+                 id: approval.id}
     end
 
     def approve_application!

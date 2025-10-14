@@ -92,7 +92,8 @@ describe Event::ApprovalAbility do
 
     it "may not approve or reject in same layer outside of group" do
       create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
-      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh), "kantonalverband")
+      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh),
+        "kantonalverband")
 
       is_expected.not_to be_able_to(:create, approval)
     end
@@ -167,7 +168,8 @@ describe Event::ApprovalAbility do
 
     it "may not edit in same layer outside of group" do
       create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
-      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh), "kantonalverband")
+      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh),
+        "kantonalverband")
 
       approve_application!
       is_expected.not_to be_able_to(:update, approval)

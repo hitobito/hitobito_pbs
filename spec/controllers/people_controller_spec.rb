@@ -18,7 +18,8 @@ describe PeopleController do
         al.update!({kantonalverband: nil})
         Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: schekka, person: al)
 
-        put :primary_group, params: {group_id: berchtold, id: al.id, primary_group_id: schekka.id}, format: :js
+        put :primary_group, params: {group_id: berchtold, id: al.id, primary_group_id: schekka.id},
+          format: :js
 
         expect(al.reload.primary_group_id).to eq(schekka.id)
         expect(al.kantonalverband_id).to eq(groups(:be).id)

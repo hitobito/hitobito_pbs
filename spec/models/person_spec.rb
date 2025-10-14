@@ -149,7 +149,9 @@ describe Person do
       end
 
       context "in kantonalverband layer" do
-        let(:person) { Fabricate(Group::KantonalesGremium::Mitglied.name, group: groups(:fg_football)).person }
+        let(:person) {
+          Fabricate(Group::KantonalesGremium::Mitglied.name, group: groups(:fg_football)).person
+        }
 
         it "is BE" do
           expect(person.kantonalverband).to eq(groups(:be))
@@ -235,7 +237,8 @@ describe Person do
 
     before do
       allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return("test@test.com")
-      Fabricate(:black_list, first_name: "dummy", last_name: "example", phone_number: "079 123 45 60")
+      Fabricate(:black_list, first_name: "dummy", last_name: "example",
+        phone_number: "079 123 45 60")
     end
 
     it "triggers blacklist when changing name attributes" do

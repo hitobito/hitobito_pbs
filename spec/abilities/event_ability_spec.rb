@@ -94,15 +94,19 @@ describe EventAbility do
         end
 
         it "with regionalleitung role in other region is not allowed to create/update course" do
-          Fabricate(Group::Region::Regionalleitung.name, group: groups(:oberland), person: role.person)
+          Fabricate(Group::Region::Regionalleitung.name, group: groups(:oberland),
+            person: role.person)
 
           event = Fabricate(:pbs_course, groups: [group])
           is_expected.not_to be_able_to(:create, event)
           is_expected.not_to be_able_to(:update, event)
         end
 
+        # rubocop:todo Layout/LineLength
         it "with regionalleitung role in other region is allowed to create/update course in other region" do
-          Fabricate(Group::Region::Regionalleitung.name, group: groups(:oberland), person: role.person)
+          # rubocop:enable Layout/LineLength
+          Fabricate(Group::Region::Regionalleitung.name, group: groups(:oberland),
+            person: role.person)
 
           event = Fabricate(:pbs_course, groups: [groups(:berchtold)])
           is_expected.to be_able_to(:create, event)

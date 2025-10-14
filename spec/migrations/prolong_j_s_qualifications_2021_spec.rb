@@ -7,8 +7,10 @@
 
 require "spec_helper"
 migration_file_name = Dir[
-  Rails.root.join("..", "hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb"),
-  Rails.root.join("hitobito_pbs", "db", "migrate", "20211109094956_prolong_j_s_qualifications_2021.rb")
+  Rails.root.join("..", "hitobito_pbs", "db", "migrate",
+    "20211109094956_prolong_j_s_qualifications_2021.rb"),
+  Rails.root.join("hitobito_pbs", "db", "migrate",
+    "20211109094956_prolong_j_s_qualifications_2021.rb")
 ].first
 require migration_file_name
 
@@ -37,7 +39,10 @@ describe ProlongJSQualifications2021 do
       role: "participant")
   end
 
-  let!(:event_kind_js) { Event::Kind.create!(label: "JS", event_kind_qualification_kinds: [ek_qk_js_leiter, ek_qk_js_coach]) }
+  let!(:event_kind_js) {
+    Event::Kind.create!(label: "JS",
+      event_kind_qualification_kinds: [ek_qk_js_leiter, ek_qk_js_coach])
+  }
 
   let!(:js_course_2021) { create_js_course(2021) }
   let!(:js_course_2020) { create_js_course(2020) }
@@ -82,7 +87,9 @@ describe ProlongJSQualifications2021 do
   def create_js_course(year)
     course = Fabricate(:course, kind: event_kind_js, dates: event_dates(year))
     12.times do
+      # rubocop:todo Layout/LineLength
       participation = Fabricate(:pbs_participation, event: course, qualified: true, state: :assigned,
+        # rubocop:enable Layout/LineLength
         roles: [Event::Course::Role::Participant.new])
       Event::Qualifier.for(participation).issue
     end

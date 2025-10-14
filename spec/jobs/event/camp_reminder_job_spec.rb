@@ -19,13 +19,16 @@ describe Event::CampReminderJob do
   it "contains all upcoming camps" do
     now = Time.zone.now
     at_span = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
-    at_span.dates = [Fabricate(:event_date, event: at_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
+    at_span.dates = [Fabricate(:event_date, event: at_span,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
     early = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
     early.dates = [Fabricate(:event_date, event: early, start_at: now + 1.week)]
     abroad = Fabricate(:pbs_camp, canton: Event::Camp::ABROAD_CANTON, state: "confirmed")
-    abroad.dates = [Fabricate(:event_date, event: abroad, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.week)]
+    abroad.dates = [Fabricate(:event_date, event: abroad,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.week)]
     after_span = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
-    after_span.dates = [Fabricate(:event_date, event: after_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
+    after_span.dates = [Fabricate(:event_date, event: after_span,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
     submitted = fabricate_pbs_camp(canton: "be", state: "confirmed", camp_submitted_at: yesterday)
     submitted.dates = [Fabricate(:event_date, event: submitted, start_at: now + 1.week)]
     created = Fabricate(:pbs_camp, canton: "be", state: "created")
@@ -39,24 +42,33 @@ describe Event::CampReminderJob do
   it "sends reminder for all leaders and coaches" do
     now = Time.zone.now
     at_span = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
-    at_span.dates = [Fabricate(:event_date, event: at_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
-    l1 = Fabricate(:pbs_participation, event: at_span, roles: [Fabricate(Event::Camp::Role::Leader.name)])
-    l2 = Fabricate(:pbs_participation, event: at_span, roles: [Fabricate(Event::Camp::Role::Leader.name)])
-    Fabricate(:pbs_participation, event: at_span, roles: [Fabricate(Event::Camp::Role::AssistantLeader.name)])
+    at_span.dates = [Fabricate(:event_date, event: at_span,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
+    l1 = Fabricate(:pbs_participation, event: at_span,
+      roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    l2 = Fabricate(:pbs_participation, event: at_span,
+      roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    Fabricate(:pbs_participation, event: at_span,
+      roles: [Fabricate(Event::Camp::Role::AssistantLeader.name)])
 
     abroad = Fabricate(:pbs_camp, canton: Event::Camp::ABROAD_CANTON, state: "confirmed")
-    abroad.dates = [Fabricate(:event_date, event: abroad, start_at: now + Event::CampReminderJob::SPAN_ABROAD)]
-    c1 = Fabricate(:pbs_participation, event: abroad, roles: [Fabricate(Event::Camp::Role::Coach.name)])
-    Fabricate(:pbs_participation, event: abroad, roles: [Fabricate(Event::Camp::Role::Participant.name)])
+    abroad.dates = [Fabricate(:event_date, event: abroad,
+      start_at: now + Event::CampReminderJob::SPAN_ABROAD)]
+    c1 = Fabricate(:pbs_participation, event: abroad,
+      roles: [Fabricate(Event::Camp::Role::Coach.name)])
+    Fabricate(:pbs_participation, event: abroad,
+      roles: [Fabricate(Event::Camp::Role::Participant.name)])
 
     no_email = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
     no_email.dates = [Fabricate(:event_date, event: no_email, start_at: now + 1.week)]
-    l3 = Fabricate(:pbs_participation, event: no_email, roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    l3 = Fabricate(:pbs_participation, event: no_email,
+      roles: [Fabricate(Event::Camp::Role::Leader.name)])
     l3.person.update!(email: nil)
 
     no_roles = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
     no_roles.dates = [Fabricate(:event_date, event: no_roles, start_at: now + 1.week)]
-    Fabricate(:pbs_participation, event: no_roles, roles: [Fabricate(Event::Camp::Role::Participant.name)])
+    Fabricate(:pbs_participation, event: no_roles,
+      roles: [Fabricate(Event::Camp::Role::Participant.name)])
 
     mail = double("mail")
     expect(mail).to receive(:deliver_now).at_least(:once)
@@ -79,16 +91,21 @@ describe Event::CampReminderJob do
 
     now = Time.zone.now
     at_span = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
-    at_span.dates = [Fabricate(:event_date, event: at_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
-    Fabricate(:pbs_participation, event: at_span, roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    at_span.dates = [Fabricate(:event_date, event: at_span,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL)]
+    Fabricate(:pbs_participation, event: at_span,
+      roles: [Fabricate(Event::Camp::Role::Leader.name)])
 
     abroad = Fabricate(:pbs_camp, canton: Event::Camp::ABROAD_CANTON, state: "confirmed")
-    abroad.dates = [Fabricate(:event_date, event: abroad, start_at: now + Event::CampReminderJob::SPAN_ABROAD)]
+    abroad.dates = [Fabricate(:event_date, event: abroad,
+      start_at: now + Event::CampReminderJob::SPAN_ABROAD)]
     Fabricate(:pbs_participation, event: abroad, roles: [Fabricate(Event::Camp::Role::Coach.name)])
 
     after_span = Fabricate(:pbs_camp, canton: "be", state: "confirmed")
-    after_span.dates = [Fabricate(:event_date, event: after_span, start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
-    Fabricate(:pbs_participation, event: after_span, roles: [Fabricate(Event::Camp::Role::Leader.name)])
+    after_span.dates = [Fabricate(:event_date, event: after_span,
+      start_at: now + Event::CampReminderJob::SPAN_NATIONAL + 1.day)]
+    Fabricate(:pbs_participation, event: after_span,
+      roles: [Fabricate(Event::Camp::Role::Leader.name)])
 
     job.perform_internal
 

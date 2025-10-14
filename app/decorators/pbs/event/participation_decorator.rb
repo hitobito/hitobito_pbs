@@ -32,7 +32,7 @@ module Pbs::Event::ParticipationDecorator
     roles.map(&:class).any?(&:participant?)
   end
 
-  def course_confirmation_params
+  def course_confirmation_params # rubocop:todo Metrics/AbcSize
     {
       name: person.last_name,
       vorname: person.first_name,

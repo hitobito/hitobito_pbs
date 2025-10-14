@@ -25,10 +25,21 @@ describe Geolocation do
   end
 
   it "has a valid WGS84 format" do
-    expect { Fabricate(:geolocation, lat: "abc", long: "abc") }.to raise_error(ActiveRecord::RecordInvalid)
-    expect { Fabricate(:geolocation, lat: "47.0", long: "200.0") }.to raise_error(ActiveRecord::RecordInvalid)
-    expect { Fabricate(:geolocation, lat: "99.0", long: "5.5") }.to raise_error(ActiveRecord::RecordInvalid)
-    expect { Fabricate(:geolocation, lat: "47", long: "8.0") }.to raise_error(ActiveRecord::RecordInvalid)
-    expect { Fabricate(:geolocation, lat: "45.1234567", long: "123.33") }.to raise_error(ActiveRecord::RecordInvalid)
+    expect {
+      Fabricate(:geolocation, lat: "abc", long: "abc")
+    }.to raise_error(ActiveRecord::RecordInvalid)
+    expect {
+      Fabricate(:geolocation, lat: "47.0", long: "200.0")
+    }.to raise_error(ActiveRecord::RecordInvalid)
+    expect {
+      Fabricate(:geolocation, lat: "99.0", long: "5.5")
+    }.to raise_error(ActiveRecord::RecordInvalid)
+    expect {
+      Fabricate(:geolocation, lat: "47", long: "8.0")
+    }.to raise_error(ActiveRecord::RecordInvalid)
+    expect {
+      Fabricate(:geolocation, lat: "45.1234567",
+        long: "123.33")
+    }.to raise_error(ActiveRecord::RecordInvalid)
   end
 end

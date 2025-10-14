@@ -44,9 +44,12 @@ describe Event::ParticipationConfirmationJob do
 
     context "with leaders" do
       before do
-        @l1 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: event))
-        @l2 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: event))
-        Fabricate(Event::Camp::Role::AssistantLeader.name, participation: Fabricate(:pbs_participation, event: event))
+        @l1 = Fabricate(Event::Camp::Role::Leader.name,
+          participation: Fabricate(:pbs_participation, event: event))
+        @l2 = Fabricate(Event::Camp::Role::Leader.name,
+          participation: Fabricate(:pbs_participation, event: event))
+        Fabricate(Event::Camp::Role::AssistantLeader.name,
+          participation: Fabricate(:pbs_participation, event: event))
       end
 
       it "sends confirmation and information email" do
@@ -85,8 +88,10 @@ describe Event::ParticipationConfirmationJob do
 
       it "does not get confused when participation is leader in another camp" do
         other = Fabricate(:pbs_camp, groups: [groups(:schekka)])
-        l3 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: other))
-        Fabricate(Event::Camp::Role::Participant.name, participation: Fabricate(:pbs_participation, event: event, person: l3.person))
+        l3 = Fabricate(Event::Camp::Role::Leader.name,
+          participation: Fabricate(:pbs_participation, event: other))
+        Fabricate(Event::Camp::Role::Participant.name,
+          participation: Fabricate(:pbs_participation, event: event, person: l3.person))
 
         expect(Event::ParticipationMailer).to receive(:confirmation).and_return(mailer)
         expect(Event::CampMailer).to receive(:participant_applied_info).with(

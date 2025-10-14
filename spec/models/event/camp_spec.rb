@@ -258,22 +258,27 @@ describe Event::Camp do
     it "is sent to assigned if state changed from nil to assignment_closed" do
       subject.update!(state: nil)
       mail = double("mail", deliver_later: nil)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold), "coach", nil).and_return(mail)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei), "advisor_snow_security", nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold),
+        "coach", nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei),
+        "advisor_snow_security", nil).and_return(mail)
       subject.update!(location: "Bern", state: "assignment_closed")
     end
 
     it "is sent to assigned if state changed from created to confirmed" do
       subject.update!(state: "created")
       mail = double("mail", deliver_later: nil)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold), "coach", nil).and_return(mail)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei), "advisor_snow_security", nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_berchtold),
+        "coach", nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:bulei),
+        "advisor_snow_security", nil).and_return(mail)
       subject.update!(location: "Bern", state: "confirmed")
     end
 
     it "is sent to freshly assigned" do
       mail = double("mail", deliver_later: nil)
-      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka), "coach", nil).and_return(mail)
+      expect(Event::CampMailer).to receive(:advisor_assigned).with(subject, people(:al_schekka),
+        "coach", nil).and_return(mail)
       subject.update!(location: "Bern",
         coach_id: people(:al_schekka).id,
         advisor_snow_security_id: nil)
@@ -338,7 +343,9 @@ describe Event::Camp do
       {from: :assignment_closed, to: :canceled},
       {from: :canceled, to: :closed},
       {from: :confirmed, to: :created}].each do |state_change|
+      # rubocop:todo Layout/LineLength
       it "is not sent if abteilungsleitung did not change and state changed from #{state_change[:from]} to #{state_change[:to]}" do
+        # rubocop:enable Layout/LineLength
         subject.update!(state: state_change[:from],
           abteilungsleitung_id: people(:al_berchtold).id)
 
@@ -346,7 +353,9 @@ describe Event::Camp do
         subject.update!(location: "Bern", state: state_change[:to])
       end
 
+      # rubocop:todo Layout/LineLength
       it "is sent if abteilungsleitung changed and state changed from #{state_change[:from]} to #{state_change[:to]}" do
+        # rubocop:enable Layout/LineLength
         subject.update!(state: state_change[:from])
 
         mail = double("mail", deliver_later: nil)
@@ -435,7 +444,8 @@ describe Event::Camp do
 
           it "is sent to #{entry[:role_type].name.demodulize.downcase}" do
             mail = double("mail", deliver_later: nil)
-            expect(Event::CampMailer).to receive(:camp_created).with(subject, leader, nil).and_return(mail)
+            expect(Event::CampMailer).to receive(:camp_created).with(subject, leader,
+              nil).and_return(mail)
             subject.update!(location: "Bern", state: "confirmed")
           end
         end
@@ -447,7 +457,8 @@ describe Event::Camp do
         Role.create(group: group, person: leader, type: Group::Abteilung::Adressverwaltung.sti_name)
         subject.update!(groups: [group])
         mail = double("mail", deliver_later: nil)
-        expect(Event::CampMailer).to receive(:camp_created).with(subject, leader, nil).and_return(mail).once
+        expect(Event::CampMailer).to receive(:camp_created).with(subject, leader,
+          nil).and_return(mail).once
         subject.update!(location: "Bern", state: "confirmed")
       end
     end
@@ -591,7 +602,8 @@ describe Event::Camp do
       if advisor_attributes.include?(attr)
         camp.coach_confirmed = false
         person_id = camp.send(attr)
-        camp.participations.find_by(participant_id: person_id, participant_type: Person.sti_name).destroy!
+        camp.participations.find_by(participant_id: person_id,
+          participant_type: Person.sti_name).destroy!
       else
         value = camp.send(attr)
         new_value = value.is_a?(TrueClass) ? false : nil

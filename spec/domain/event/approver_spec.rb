@@ -226,8 +226,10 @@ describe Event::Approver do
   describe "#current_approvers" do
     before do
       @rl = people(:rl_bern)
-      @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
-      @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern)).person
+      @va1 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym,
+        group: groups(:bern)).person
+      @va2 = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym,
+        group: groups(:bern)).person
 
       course.update!(requires_approval_region: true)
       create_application
@@ -259,7 +261,8 @@ describe Event::Approver do
       before do
         groups(:bern).update!(parent: corps)
 
-        @va_corps = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: corps).person
+        @va_corps = Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym,
+          group: corps).person
         @rl_corps = Fabricate(Group::Region::Regionalleitung.sti_name.to_sym, group: corps).person
       end
 
@@ -282,7 +285,8 @@ describe Event::Approver do
       it "does not contain person with approver role in other group" do
         groups(:bern).update!(application_approver_role: Group::Region::Regionalleitung.name)
         corps.update!(application_approver_role: Group::Region::VerantwortungAusbildung.name)
-        Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern), person: @rl_corps)
+        Fabricate(Group::Region::VerantwortungAusbildung.sti_name.to_sym, group: groups(:bern),
+          person: @rl_corps)
         person.reload
 
         expect(approver.current_approvers).to match_array([@rl, @va_corps])

@@ -23,22 +23,30 @@ describe Event::ListsController do
 
       before do
         now = Time.zone.now
-        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "closed")
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "closed")
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @upcoming = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed")
+        @upcoming = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed")
         @upcoming.dates = [Fabricate(:event_date, start_at: now + 10.days, finish_at: nil),
           Fabricate(:event_date, start_at: now + 12.days, finish_at: nil)]
-        @upcoming2 = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "created")
+        @upcoming2 = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "created")
+        # rubocop:todo Layout/LineLength
         @upcoming2.dates = [Fabricate(:event_date, start_at: now + 18.days, finish_at: now + 30.days),
+          # rubocop:enable Layout/LineLength
           Fabricate(:event_date, start_at: now + 50.days, finish_at: now + 55.days)]
         past = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: nil, state: "confirmed")
         past.dates = [Fabricate(:event_date, start_at: now - 5.days, finish_at: nil)]
-        canceled = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "canceled")
+        canceled = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "canceled")
         canceled.dates = [Fabricate(:event_date, start_at: now + 5.days, finish_at: nil)]
-        unsubmitted = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: nil, state: "confirmed")
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: nil,
+          state: "confirmed")
         unsubmitted.dates = [Fabricate(:event_date, start_at: now + 5.days, finish_at: nil)]
-        future = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed")
+        future = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed")
         future.dates = [Fabricate(:event_date, start_at: now + 50.days, finish_at: nil)]
       end
 
@@ -67,26 +75,37 @@ describe Event::ListsController do
 
   describe "GET kantonalverband_camps" do
     context "as kantonsleitung" do
-      let(:user) { Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be)).person }
+      let(:user) {
+        Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:be)).person
+      }
 
       before do
         now = Time.zone.now
-        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "closed")
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "closed")
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday, state: "confirmed")
-        @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1), finish_at: Date.new(now.year, 3, 10))]
-        @late = fabricate_pbs_camp(groups: [groups(:bern)], camp_submitted_at: yesterday, state: "confirmed")
+        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday,
+          state: "confirmed")
+        @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1),
+          finish_at: Date.new(now.year, 3, 10))]
+        @late = fabricate_pbs_camp(groups: [groups(:bern)], camp_submitted_at: yesterday,
+          state: "confirmed")
         @late.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 12, 1))]
-        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "created")
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "created")
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "canceled")
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "canceled")
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil, state: "confirmed")
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil,
+          state: "confirmed")
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday, state: "confirmed")
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday,
+          state: "confirmed")
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed")
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed")
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -96,7 +115,9 @@ describe Event::ListsController do
       end
 
       it "via list_camps" do
+        # rubocop:todo Layout/LineLength
         expect(get(:camps)).to redirect_to(list_kantonalverband_camps_path(group_id: groups(:be).id))
+        # rubocop:enable Layout/LineLength
       end
     end
 
@@ -104,34 +125,48 @@ describe Event::ListsController do
       let(:user) { people(:bulei) }
 
       it "is not allowed" do
-        expect { get :kantonalverband_camps, params: {group_id: groups(:be).id} }.to raise_error(CanCan::AccessDenied)
+        expect {
+          get :kantonalverband_camps,
+            params: {group_id: groups(:be).id}
+        }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
 
   describe "GET camps_in_canton" do
     context "as krisenverantwortung" do
-      let(:user) { Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be)).person }
+      let(:user) {
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be)).person
+      }
 
       before do
         now = Time.zone.now
         groups(:be).update!(cantons: %w[be fr])
 
-        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "closed", canton: "be")
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "closed", canton: "be")
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @upcoming = fabricate_pbs_camp(groups: [groups(:chaeib)], camp_submitted_at: yesterday, state: "confirmed", canton: "be")
+        @upcoming = fabricate_pbs_camp(groups: [groups(:chaeib)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "be")
+        # rubocop:todo Layout/LineLength
         @upcoming.dates = [Fabricate(:event_date, start_at: now + 18.days, finish_at: now + 30.days),
+          # rubocop:enable Layout/LineLength
           Fabricate(:event_date, start_at: now + 50.days, finish_at: now + 55.days)]
-        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "created", canton: "be")
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "created", canton: "be")
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "canceled", canton: "be")
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "canceled", canton: "be")
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil, state: "confirmed", canton: "be")
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil,
+          state: "confirmed", canton: "be")
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday, state: "confirmed", canton: "be")
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "be")
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed", canton: "zh")
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "zh")
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -141,33 +176,46 @@ describe Event::ListsController do
       end
 
       it "via list_camps" do
+        # rubocop:todo Layout/LineLength
         expect(get(:camps)).to redirect_to(list_kantonalverband_camps_path(group_id: groups(:be).id))
+        # rubocop:enable Layout/LineLength
       end
     end
   end
 
   describe "GET camps_abroad" do
     context "as ko int" do
-      let(:user) { Fabricate(Group::Bund::InternationalCommissionerIcWagggs.name, group: groups(:bund)).person }
+      let(:user) {
+        Fabricate(Group::Bund::InternationalCommissionerIcWagggs.name, group: groups(:bund)).person
+      }
 
       before do
         now = Time.zone.now
-        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "closed", canton: "zz")
+        @current = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "closed", canton: "zz")
         @current.dates = [Fabricate(:event_date, start_at: now - 15.days, finish_at: now - 10.days),
           Fabricate(:event_date, start_at: now - 5.days, finish_at: now + 5.days)]
-        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday, state: "confirmed", canton: "zz")
-        @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1), finish_at: Date.new(now.year, 3, 10))]
-        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "created", canton: "zz")
+        @early = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "zz")
+        @early.dates = [Fabricate(:event_date, start_at: Date.new(now.year, 3, 1),
+          finish_at: Date.new(now.year, 3, 10))]
+        created = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "created", canton: "zz")
         created.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday, state: "canceled", canton: "zz")
+        canceled = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: yesterday,
+          state: "canceled", canton: "zz")
         canceled.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil, state: "confirmed", canton: "zz")
+        unsubmitted = fabricate_pbs_camp(groups: [groups(:schekka)], camp_submitted_at: nil,
+          state: "confirmed", canton: "zz")
         unsubmitted.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday, state: "confirmed", canton: "zz")
+        future = fabricate_pbs_camp(groups: [groups(:be)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "zz")
         future.dates = [Fabricate(:event_date, start_at: now + 1.year, finish_at: nil)]
-        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed", canton: "be")
+        other = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed", canton: "be")
         other.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
-        empty = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday, state: "confirmed")
+        empty = fabricate_pbs_camp(groups: [groups(:zh)], camp_submitted_at: yesterday,
+          state: "confirmed")
         empty.dates = [Fabricate(:event_date, start_at: now, finish_at: nil)]
       end
 
@@ -257,7 +305,8 @@ describe Event::ListsController do
 
         # main labels
         expect(values[0..8]).to eq(
-          ["", "", "LPK (Leitpfadikurs)", "Bern, Zürich", '""', "124", "11.11.2015", "12.11.2015", ""]
+          ["", "", "LPK (Leitpfadikurs)", "Bern, Zürich", '""', "124", "11.11.2015", "12.11.2015",
+            ""]
         )
         # counts -> participant_, canton_ & language_count are incorrectly 0 here
         #          as person.canton is not easily setable in test here.

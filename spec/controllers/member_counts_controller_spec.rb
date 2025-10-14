@@ -39,7 +39,10 @@ describe MemberCountsController do
       it "restricts access" do
         leiter = Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: abteilung).person
         sign_in(leiter)
-        expect { put :update, params: {group_id: abteilung.id, year: 2012, member_count: {}} }.to raise_error(CanCan::AccessDenied)
+        expect {
+          put :update,
+            params: {group_id: abteilung.id, year: 2012, member_count: {}}
+        }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
@@ -68,7 +71,9 @@ describe MemberCountsController do
         group: groups(:pegasus),
         person: Fabricate(:person, gender: "m", birthday: Date.new(2000, 12, 31)))
       censuses(:two_o_12).destroy
-      expect { post :create, params: {group_id: abteilung.id} }.to change { MemberCount.count }.by(1)
+      expect { post :create, params: {group_id: abteilung.id} }.to change {
+        MemberCount.count
+      }.by(1)
 
       counts = MemberCount.where(abteilung_id: abteilung.id, year: 2011)
       expect(counts.size).to eq(1)
@@ -92,14 +97,18 @@ describe MemberCountsController do
       it "restricts access" do
         guide = Fabricate(Group::Pfadi::Einheitsleitung.name.to_sym, group: groups(:pegasus)).person
         sign_in(guide)
-        expect { post :create, params: {group_id: abteilung.id} }.to raise_error(CanCan::AccessDenied)
+        expect {
+          post :create, params: {group_id: abteilung.id}
+        }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
 
   describe "DELETE destroy" do
     it "removes member count" do
-      expect { delete :destroy, params: {group_id: abteilung.id} }.to change { MemberCount.count }.by(-1)
+      expect { delete :destroy, params: {group_id: abteilung.id} }.to change {
+        MemberCount.count
+      }.by(-1)
     end
 
     it "handles request with redirect" do

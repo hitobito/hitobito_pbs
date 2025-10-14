@@ -43,7 +43,8 @@ describe QualificationsController do
   end
 
   it "can destroy manual qualification kind" do
-    quali = Fabricate(:qualification, qualification_kind: qualification_kinds(:alpk), person: person)
+    quali = Fabricate(:qualification, qualification_kind: qualification_kinds(:alpk),
+      person: person)
     expect do
       delete :destroy,
         params: {

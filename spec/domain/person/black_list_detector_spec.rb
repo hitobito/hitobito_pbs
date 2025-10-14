@@ -57,7 +57,8 @@ describe Person::BlackListDetector do
 
   context "strip phone numbers" do
     it "removes all none digits and takes the last 9 chars" do
-      numbers = detector.send(:strip_numbers, ["+a1b2b3 45 67 89+", "+32 98 765 43 21", "wrong-format"])
+      numbers = detector.send(:strip_numbers,
+        ["+a1b2b3 45 67 89+", "+32 98 765 43 21", "wrong-format"])
       expect(numbers).to include("123456789")
       expect(numbers).to include("987654321")
       expect(numbers).not_to include("wrong-format")

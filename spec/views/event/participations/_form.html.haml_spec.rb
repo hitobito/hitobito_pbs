@@ -17,7 +17,8 @@ describe "event/participations/_form.html.haml" do
       path_args: [group, event, participation],
       model_class: Event::Participation)
 
-    allow(view).to receive_messages(entry: participation.decorate, submit_label: "Speichern", add_another: false, add_another_label: "")
+    allow(view).to receive_messages(entry: participation.decorate, submit_label: "Speichern",
+      add_another: false, add_another_label: "")
     allow(controller).to receive_messages(current_user: participant)
     assign(:event, event.decorate)
     assign(:group, group)
@@ -44,7 +45,8 @@ describe "event/participations/_form.html.haml" do
       participation.update(j_s_data_sharing_accepted_at: Time.zone.now)
       expect(participation.j_s_data_sharing_acceptance_required?).to eq true
       render
-      expect(dom).to have_checked_field :event_participation_j_s_data_sharing_accepted, disabled: true
+      expect(dom).to have_checked_field :event_participation_j_s_data_sharing_accepted,
+        disabled: true
     end
 
     it "is not included when participation.j_s_data_sharing_acceptance_required? is false" do

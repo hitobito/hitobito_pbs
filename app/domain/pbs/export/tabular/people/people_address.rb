@@ -15,7 +15,8 @@ module Pbs
               super(list.includes(:kantonalverband), ability)
             elsif list.respond_to?(:klass) && list.klass < Event::Participation
               preloaded_list = list.tap do |l|
-                ::Event::Participation::PreloadParticipations.preload(l, participant: :kantonalverband)
+                ::Event::Participation::PreloadParticipations.preload(l,
+                  participant: :kantonalverband)
               end
               super(preloaded_list, ability)
             else

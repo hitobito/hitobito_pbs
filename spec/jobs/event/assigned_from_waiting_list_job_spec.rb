@@ -9,12 +9,16 @@ describe Event::AssignedFromWaitingListJob do
   let(:participation) { Fabricate(:pbs_participation) }
   let(:event) { participation.event }
 
-  subject { Event::AssignedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka)) }
+  subject {
+    Event::AssignedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka))
+  }
 
   it "sends email" do
     subject.perform
     expect(last_email).to be_present
     expect(last_email.body).to match(/Hallo #{people(:bulei).greeting_name}/)
+    # rubocop:todo Layout/LineLength
     expect(last_email.body).to match(/wurde von #{people(:al_schekka)} von der Warteliste in den Kurs #{event} übernommen/)
+    # rubocop:enable Layout/LineLength
   end
 end

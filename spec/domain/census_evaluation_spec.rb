@@ -59,7 +59,9 @@ shared_examples "sub_groups" do
   context "when deleting group" do
     context "deleting group only" do
       let(:current_census_groups) { subgroups }
-      let(:past_census_groups) { subgroups - [group_without_count] } # group included as it has count
+      let(:past_census_groups) {
+        subgroups - [group_without_count]
+      } # group included as it has count
       let(:future_census_groups) { subgroups - [group_to_delete] }
 
       before { delete_group_and_children }
@@ -69,7 +71,9 @@ shared_examples "sub_groups" do
 
     context "deleting group and member count" do
       let(:current_census_groups) { subgroups - [group_to_delete] }
-      let(:past_census_groups) { subgroups - [group_to_delete, group_without_count] } # dummy has no count
+      let(:past_census_groups) {
+        subgroups - [group_to_delete, group_without_count]
+      } # dummy has no count
       let(:future_census_groups) { subgroups - [group_to_delete] }
 
       before do
@@ -193,7 +197,9 @@ describe CensusEvaluation do
 
               include_examples "sub_groups_examples" do
                 let(:current_census_groups) { [] }
-                let(:past_census_groups) { [] } # empty for spec implementation reasons, tested in example below
+                let(:past_census_groups) {
+                  []
+                } # empty for spec implementation reasons, tested in example below
                 let(:future_census_groups) { [] }
               end
             end

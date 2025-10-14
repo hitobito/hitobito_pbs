@@ -10,7 +10,9 @@ describe Event::Participation do
 
   context "validations" do
     context "presence of j_s_data_sharing_accepted" do
-      let(:participation) { Fabricate.build(:pbs_participation, j_s_data_sharing_accepted_at: nil, event: event) }
+      let(:participation) {
+        Fabricate.build(:pbs_participation, j_s_data_sharing_accepted_at: nil, event: event)
+      }
 
       [Event::Camp, Event::Campy, Event::Course].each do |js_event|
         %w[j_s_child j_s_youth j_s_mixed].each do |j_s_kind|
@@ -65,11 +67,13 @@ describe Event::Participation do
 
   context "#j_s_data_sharing_accepted" do
     it "is false if j_s_data_sharing_accepted_at is nil" do
-      expect(Fabricate(:pbs_participation, j_s_data_sharing_accepted_at: nil).j_s_data_sharing_accepted).to eq false
+      expect(Fabricate(:pbs_participation,
+        j_s_data_sharing_accepted_at: nil).j_s_data_sharing_accepted).to eq false
     end
 
     it "is true if j_s_data_sharing_accepted is set" do
-      expect(Fabricate(:pbs_participation, j_s_data_sharing_accepted_at: Time.zone.now).j_s_data_sharing_accepted).to eq true
+      expect(Fabricate(:pbs_participation,
+        j_s_data_sharing_accepted_at: Time.zone.now).j_s_data_sharing_accepted).to eq true
     end
   end
 
@@ -77,21 +81,29 @@ describe Event::Participation do
     context "with argument `true`" do
       it "sets j_s_data_sharing_accepted_at" do
         participation = Fabricate(:pbs_participation, j_s_data_sharing_accepted_at: nil)
-        expect { participation.j_s_data_sharing_accepted = true }.to change { participation.j_s_data_sharing_accepted_at }.from(nil)
+        expect { participation.j_s_data_sharing_accepted = true }.to change {
+          participation.j_s_data_sharing_accepted_at
+        }.from(nil)
       end
 
       it "does not change j_s_data_sharing_accepted_at if it is already set" do
         participation = Fabricate(:pbs_participation, j_s_data_sharing_accepted_at: 1.year.ago)
-        expect { participation.j_s_data_sharing_accepted = true }.not_to change { participation.j_s_data_sharing_accepted_at }
+        expect { participation.j_s_data_sharing_accepted = true }.not_to change {
+          participation.j_s_data_sharing_accepted_at
+        }
       end
     end
 
     it "with argument `false` does not change j_s_data_sharing_accepted_at" do
       participation = Fabricate(:pbs_participation, j_s_data_sharing_accepted_at: nil)
-      expect { participation.j_s_data_sharing_accepted = false }.not_to change { participation.j_s_data_sharing_accepted_at }.from(nil)
+      expect { participation.j_s_data_sharing_accepted = false }.not_to change {
+        participation.j_s_data_sharing_accepted_at
+      }.from(nil)
 
       participation.j_s_data_sharing_accepted_at = Time.zone.now
-      expect { participation.j_s_data_sharing_accepted = false }.not_to change { participation.j_s_data_sharing_accepted_at }
+      expect { participation.j_s_data_sharing_accepted = false }.not_to change {
+        participation.j_s_data_sharing_accepted_at
+      }
     end
   end
 
@@ -99,7 +111,8 @@ describe Event::Participation do
     before { event.refresh_participant_counts! } # to create existing participatiots
 
     def create_participant(state)
-      participation = Fabricate(:pbs_participation, event: event, state: state, canceled_at: Time.zone.today)
+      participation = Fabricate(:pbs_participation, event: event, state: state,
+        canceled_at: Time.zone.today)
       participation.roles.create!(type: event.participant_types.first.name)
     end
 
@@ -207,7 +220,8 @@ describe Event::Participation do
       Fabricate(:black_list, first_name: "foo", last_name: "bar")
 
       expect do
-        Event::Participation.create(event: event, person: person, j_s_data_sharing_accepted_at: Time.zone.now)
+        Event::Participation.create(event: event, person: person,
+          j_s_data_sharing_accepted_at: Time.zone.now)
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
       expect(last_email.body).to include(person.full_name)

@@ -77,7 +77,9 @@ describe EventsController, type: :controller do
 
             text = bulei.to_s
             text += "\nNicht bestätigt\nBesucht das Lager nicht\n" if key == "coach"
+            # rubocop:todo Layout/LineLength
             text += "\nNicht im Lager anwesend\nBesucht das Lager nicht\n" if key == "abteilungsleitung"
+            # rubocop:enable Layout/LineLength
             assert_advisor(key, text, false)
           end
         end
@@ -300,7 +302,8 @@ describe EventsController, type: :controller do
 
     context "for camp of other cantons" do
       before do
-        leader_participation = Fabricate(:pbs_participation, event: outside_camp, participant: camp_leader)
+        leader_participation = Fabricate(:pbs_participation, event: outside_camp,
+          participant: camp_leader)
         Fabricate(Event::Camp::Role::Leader.name, participation: leader_participation)
       end
 
@@ -340,7 +343,9 @@ describe EventsController, type: :controller do
       expect(dom).to have_selector("input#event_lagerreglement_applied")
       expect(dom).not_to have_selector("input#event_j_s_rules_applied[disabled=disabled]")
       expect(dom).to have_selector("input#event_j_s_rules_applied")
+      # rubocop:todo Layout/LineLength
       expect(dom).not_to have_selector("input#event_kantonalverband_rules_applied[disabled=disabled]")
+      # rubocop:enable Layout/LineLength
       expect(dom).to have_selector("input#event_kantonalverband_rules_applied")
     end
 
@@ -348,8 +353,10 @@ describe EventsController, type: :controller do
       get :show, params: {group_id: group.id, id: camp.id}
 
       expect(dom).to have_selector("span", text: "Lagerreglement berücksichtigt/eingehalten: nein")
-      expect(dom).to have_selector("span", text: "Vorschriften Kantonalverband berücksichtigt/eingehalten: nein")
-      expect(dom).to have_selector("span", text: "J+S-Lager Vorschriften berücksichtigt/eingehalten: nein")
+      expect(dom).to have_selector("span",
+        text: "Vorschriften Kantonalverband berücksichtigt/eingehalten: nein")
+      expect(dom).to have_selector("span",
+        text: "J+S-Lager Vorschriften berücksichtigt/eingehalten: nein")
     end
   end
 

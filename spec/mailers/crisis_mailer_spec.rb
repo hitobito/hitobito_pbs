@@ -13,9 +13,12 @@ describe CrisisMailer do
   let(:link) { %(<a href="http://test.host/groups/#{crisis.group.id}">#{crisis.group}</a>) }
 
   before do
-    @leiter = Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: groups(:bund)).person
-    @verantwortlich = Fabricate(Group::Bund::VerantwortungKrisenteam.name.to_sym, group: groups(:bund)).person
-    @kanton_verantwortlich = Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name.to_sym, group: groups(:be)).person
+    @leiter = Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym,
+      group: groups(:bund)).person
+    @verantwortlich = Fabricate(Group::Bund::VerantwortungKrisenteam.name.to_sym,
+      group: groups(:bund)).person
+    @kanton_verantwortlich = Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name.to_sym,
+      group: groups(:be)).person
   end
 
   context "triggered" do
@@ -37,11 +40,13 @@ describe CrisisMailer do
       end
 
       it "notifies bund and kanton when created by bund" do
-        mitglied = Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person
+        mitglied = Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym,
+          group: groups(:bund)).person
 
         [mitglied, @leiter, @verantwortlich].each do |creator|
           crisis.update(creator: creator)
-          expect(subject).to match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email]
+          expect(subject).to match_array [@leiter.email, @verantwortlich.email,
+            @kanton_verantwortlich.email]
         end
       end
     end
@@ -70,7 +75,10 @@ describe CrisisMailer do
       subject { mail }
 
       its(:subject) { is_expected.to eq "Krise wurde quittiert" }
-      its(:to) { is_expected.to match_array [@leiter.email, @verantwortlich.email, @kanton_verantwortlich.email] }
+      its(:to) {
+        is_expected.to match_array [@leiter.email, @verantwortlich.email,
+          @kanton_verantwortlich.email]
+      }
       its(:from) { is_expected.to eq ["noreply@localhost"] }
     end
 

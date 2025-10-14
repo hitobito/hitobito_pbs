@@ -42,11 +42,15 @@ describe Event::DiscardedCourseParticipationJob do
       context "with organizers" do
         before do
           @bund = Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)).person
-          @kanton1 = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
-          @kanton2 = Fabricate(Group::Kantonalverband::VerantwortungAusbildung.name.to_sym, group: groups(:be)).person
-          @region = Fabricate(Group::Region::VerantwortungAusbildung.name.to_sym, group: groups(:bern)).person
+          @kanton1 = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym,
+            group: groups(:be)).person
+          @kanton2 = Fabricate(Group::Kantonalverband::VerantwortungAusbildung.name.to_sym,
+            group: groups(:be)).person
+          @region = Fabricate(Group::Region::VerantwortungAusbildung.name.to_sym,
+            group: groups(:bern)).person
 
-          participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person)
+          participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym,
+            group: groups(:bern)).person)
         end
 
         it "contains and kursleitung and organizer" do
@@ -59,13 +63,17 @@ describe Event::DiscardedCourseParticipationJob do
       context "with application approvers" do
         before do
           @bund = Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)).person
-          @kanton = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
-          @region = Fabricate(Group::Region::Regionalleitung.name.to_sym, group: groups(:bern)).person
+          @kanton = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym,
+            group: groups(:be)).person
+          @region = Fabricate(Group::Region::Regionalleitung.name.to_sym,
+            group: groups(:bern)).person
 
           event.update!(requires_approval_region: true,
             requires_approval_kantonalverband: true,
             requires_approval_bund: true)
+          # rubocop:todo Layout/LineLength
           participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
+            # rubocop:enable Layout/LineLength
             application: Event::Application.new(priority_1: event))
           participation.application.approvals.first.update!(approved: true,
             approver: @region,
@@ -95,7 +103,8 @@ describe Event::DiscardedCourseParticipationJob do
           let(:previous_state) { "applied" }
 
           before do
-            @organizer = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
+            @organizer = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym,
+              group: groups(:be)).person
           end
 
           it "does not send mails to kursleitung" do
@@ -116,13 +125,16 @@ describe Event::DiscardedCourseParticipationJob do
     describe "#perform" do
       before do
         @bund = Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)).person
-        @kanton = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
+        @kanton = Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym,
+          group: groups(:be)).person
         @region = Fabricate(Group::Region::Regionalleitung.name.to_sym, group: groups(:bern)).person
 
         event.update!(requires_approval_region: true,
           requires_approval_kantonalverband: true,
           requires_approval_bund: true)
+        # rubocop:todo Layout/LineLength
         participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
+          # rubocop:enable Layout/LineLength
           application: Event::Application.new(priority_1: event))
         participation.application.approvals.first.update!(
           approved: true,

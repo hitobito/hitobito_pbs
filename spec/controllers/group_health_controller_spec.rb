@@ -115,7 +115,9 @@ describe GroupHealthController do
             get :census_evaluations, format: :json
             abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
             expect(abteilung_evaluations.size).to eq(3)
-            abteilung_evaluation = abteilung_evaluations.find { |a| a["abteilung_id"] == groups(:schekka).id }
+            abteilung_evaluation = abteilung_evaluations.find { |a|
+              a["abteilung_id"] == groups(:schekka).id
+            }
             expect(abteilung_evaluation).to be_present
             expect(abteilung_evaluation["kantonalverband_id"]).to eq(groups(:be).id)
             expect(abteilung_evaluation["region_id"]).to eq(groups(:bern).id)
@@ -150,7 +152,9 @@ describe GroupHealthController do
             get :census_evaluations, format: :json
             kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
             expect(kantonalverband_evaluations.size).to eq(2)
-            kantonalverband_evaluation = kantonalverband_evaluations.find { |a| a["kantonalverband_id"] == groups(:be).id }
+            kantonalverband_evaluation = kantonalverband_evaluations.find { |a|
+              a["kantonalverband_id"] == groups(:be).id
+            }
             expect(kantonalverband_evaluation["kantonalverband_id"]).to eq(groups(:be).id)
             expect(kantonalverband_evaluation["region_id"]).to eq(groups(:bern).id)
             expect(kantonalverband_evaluation["abteilung_id"]).to eq(groups(:schekka).id)
@@ -226,7 +230,8 @@ describe GroupHealthController do
             groups = json["groups"].select { |g| g["name"] == groups(:schekka).name }
             expect(groups.size).to eq(1)
             group = groups.first
-            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at
+              canton_id canton_name])
             expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
@@ -246,7 +251,8 @@ describe GroupHealthController do
             people = json["people"]
             expect(people.size).to eq(2)
             person = people.first
-            expect(person.keys).to match_array(%w[id pbs_number town zip_code country gender birthday entry_date leaving_date primary_group_id name address])
+            expect(person.keys).to match_array(%w[id pbs_number town zip_code country gender
+              birthday entry_date leaving_date primary_group_id name address])
           end
 
           it "does only export camps with participants having roles in a group having opted in" do
@@ -271,7 +277,9 @@ describe GroupHealthController do
             get :census_evaluations, format: :json
             abteilung_evaluations = evaluations_by_group_type(Group::Abteilung)
             expect(abteilung_evaluations.size).to eq(3)
-            abteilung_evaluation = abteilung_evaluations.find { |a| a["abteilung_id"] == groups(:schekka).id }
+            abteilung_evaluation = abteilung_evaluations.find { |a|
+              a["abteilung_id"] == groups(:schekka).id
+            }
             expect(abteilung_evaluation).to be_present
             expect(abteilung_evaluation["kantonalverband_id"]).to eq(groups(:be).id)
             expect(abteilung_evaluation["region_id"]).to eq(groups(:bern).id)
@@ -312,7 +320,8 @@ describe GroupHealthController do
             groups = json["groups"].select { |g| g["name"] == groups(:be).name }
             expect(groups.size).to eq(1)
             group = groups.first
-            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at
+              canton_id canton_name])
             expect(group["canton_id"]).to eq(groups(:be).id)
           end
 
@@ -354,7 +363,9 @@ describe GroupHealthController do
             get :census_evaluations, format: :json
             kantonalverband_evaluations = evaluations_by_group_type(Group::Kantonalverband)
             expect(kantonalverband_evaluations.size).to eq(2)
-            kantonalverband_evaluation = kantonalverband_evaluations.find { |a| a["kantonalverband_id"] == groups(:be).id }
+            kantonalverband_evaluation = kantonalverband_evaluations.find { |a|
+              a["kantonalverband_id"] == groups(:be).id
+            }
             expect(kantonalverband_evaluation["kantonalverband_id"]).to eq(groups(:be).id)
             expect(kantonalverband_evaluation["region_id"]).to eq(groups(:bern).id)
             expect(kantonalverband_evaluation["abteilung_id"]).to eq(groups(:schekka).id)
@@ -394,7 +405,8 @@ describe GroupHealthController do
             groups = json["groups"].select { |g| g["name"] == groups(:bern).name }
             expect(groups.size).to eq(1)
             group = groups.first
-            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at canton_id canton_name])
+            expect(group.keys).to match_array(%w[id parent_id type name created_at deleted_at
+              canton_id canton_name])
             expect(group["canton_id"]).to eq(groups(:be).id)
           end
 

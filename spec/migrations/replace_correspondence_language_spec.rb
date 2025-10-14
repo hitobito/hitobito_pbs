@@ -7,8 +7,10 @@
 
 require "spec_helper"
 migration_file_name = Dir[
-  Rails.root.join("..", "hitobito_pbs", "db", "migrate", "20230915105810_replace_correspondence_language_with_core_language.rb"),
-  Rails.root.join("hitobito_pbs", "db", "migrate", "20230915105810_replace_correspondence_language_with_core_language.rb")
+  Rails.root.join("..", "hitobito_pbs", "db", "migrate",
+    "20230915105810_replace_correspondence_language_with_core_language.rb"),
+  Rails.root.join("hitobito_pbs", "db", "migrate",
+    "20230915105810_replace_correspondence_language_with_core_language.rb")
 ].first
 require migration_file_name
 

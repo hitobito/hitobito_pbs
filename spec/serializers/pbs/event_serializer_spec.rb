@@ -48,7 +48,8 @@ describe EventSerializer do
     before { sub_camp.update(parent_id: super_camp.id) }
 
     it "includes sub_camps via link in super_camp" do
-      expect(controller).to receive(:group_event_url).with(sub_camp.groups.first, sub_camp, format: :json)
+      expect(controller).to receive(:group_event_url).with(sub_camp.groups.first, sub_camp,
+        format: :json)
 
       hash = EventSerializer.new(super_camp.decorate, controller: controller).to_hash
       event = hash[:events].first
@@ -59,7 +60,8 @@ describe EventSerializer do
     end
 
     it "includes super_camp via link in sub_camp" do
-      expect(controller).to receive(:group_event_url).with(super_camp.groups.first, super_camp, format: :json)
+      expect(controller).to receive(:group_event_url).with(super_camp.groups.first, super_camp,
+        format: :json)
 
       hash = EventSerializer.new(sub_camp.decorate, controller: controller).to_hash
       event = hash[:events].first

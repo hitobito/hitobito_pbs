@@ -25,8 +25,12 @@ describe RolesController do
       end
 
       it "redirects" do
-        expect { post :create, params: {group_id: group.id, role: role_params} }.to change { Role.count }.by(1)
+        expect { post :create, params: {group_id: group.id, role: role_params} }.to change {
+          Role.count
+        }.by(1)
+        # rubocop:todo Layout/LineLength
         expect(flash[:notice]).to eq "Rolle <i>Mitarbeiter*in GS</i> für <i>AL Schekka / Torben</i> in <i>Pfadibewegung Schweiz</i> wurde erfolgreich erstellt."
+        # rubocop:enable Layout/LineLength
         is_expected.to redirect_to(group_people_path(group.id))
       end
     end
@@ -86,7 +90,8 @@ describe RolesController do
       end
 
       it "is not sent on role destruction" do
-        role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group, person: person)
+        role = Fabricate(Group::Abteilung::Sekretariat.name.to_sym, group: home_group,
+          person: person)
 
         expect { delete :destroy, params: {group_id: home_group.id, id: role.id} }
           .not_to change { Delayed::Job.count }

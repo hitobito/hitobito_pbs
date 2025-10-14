@@ -24,7 +24,9 @@ describe Event::CampMailer do
     coach.update(first_name: "Heftige", last_name: "Boe")
     coach
   end
-  let(:abteilungsleitung) { Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person }
+  let(:abteilungsleitung) {
+    Fabricate(Group::Woelfe::Wolf.name.to_sym, group: groups(:sunnewirbu)).person
+  }
   let(:other_person) do
     other_person = Fabricate(Group::Woelfe::Wolf.name.to_sym,
       group: groups(:sunnewirbu)).person
@@ -79,14 +81,19 @@ describe Event::CampMailer do
         subject { mail.body }
 
         it "renders placeholders" do
+          # rubocop:todo Layout/LineLength
           is_expected.to match(/Wirbel Sturm.*hat im Lager "Wirbelcamp" Heftige Boe.*als Coach definiert/)
+          # rubocop:enable Layout/LineLength
           is_expected.to match(camp_url)
         end
       end
     end
 
     context "advisor" do
-      let(:mail) { Event::CampMailer.advisor_assigned(camp, other_person, "advisor_mountain_security", actuator_id) }
+      let(:mail) {
+        Event::CampMailer.advisor_assigned(camp, other_person, "advisor_mountain_security",
+          actuator_id)
+      }
 
       context "headers" do
         subject { mail }
@@ -100,14 +107,18 @@ describe Event::CampMailer do
         subject { mail.body }
 
         it "renders placeholders" do
+          # rubocop:todo Layout/LineLength
           is_expected.to match(/Wirbel Sturm.* hat im Lager "Wirbelcamp" Wind Hose.*als Sicherheitsbereich Betreuung definiert/)
+          # rubocop:enable Layout/LineLength
           is_expected.to match(camp_url)
         end
       end
     end
 
     context "abteilungsleitung" do
-      let(:mail) { Event::CampMailer.advisor_assigned(camp, other_person, "abteilungsleitung", actuator_id) }
+      let(:mail) {
+        Event::CampMailer.advisor_assigned(camp, other_person, "abteilungsleitung", actuator_id)
+      }
 
       context "headers" do
         subject { mail }
@@ -121,7 +132,9 @@ describe Event::CampMailer do
         subject { mail.body }
 
         it "renders placeholders" do
+          # rubocop:todo Layout/LineLength
           is_expected.to match(/Wirbel Sturm.*hat im Lager "Wirbelcamp" Wind Hose.*als Abteilungsleitung definiert/)
+          # rubocop:enable Layout/LineLength
           is_expected.to match(camp_url)
         end
       end
@@ -178,7 +191,9 @@ describe Event::CampMailer do
       subject { mail.body }
 
       it "renders placeholders" do
+        # rubocop:todo Layout/LineLength
         is_expected.to match(/Heftige Boe.*reicht das Lager "Wirbelcamp" ein.*PDF:.*http.*\/camp_application/)
+        # rubocop:enable Layout/LineLength
         is_expected.to match(camp_url)
       end
     end

@@ -33,7 +33,9 @@ describe BlackListMailer do
 
       it "renders placeholders" do
         expect(subject).to match(%r{Die Person <a href="#{person_url}">AL Schekka</a>})
+        # rubocop:todo Layout/LineLength
         expect(subject).to match(%r{wurde bei <a href="#{url(send(target))}">#{send(target)}</a> hinzugefügt})
+        # rubocop:enable Layout/LineLength
       end
     end
 
@@ -58,7 +60,9 @@ describe BlackListMailer do
       subject { BlackListMailer.hit(person).body }
 
       it "renders placeholders" do
+        # rubocop:todo Layout/LineLength
         expect(subject).to match(%r{Die Person <a href="#{person_url}">AL Schekka</a> wurde aktualisiert})
+        # rubocop:enable Layout/LineLength
       end
     end
   end

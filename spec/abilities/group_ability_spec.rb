@@ -49,7 +49,9 @@ describe GroupAbility do
   end
 
   context "ausbildungsveranwortlicher" do
-    let(:role) { Fabricate(Group::Kantonalverband::VerantwortungAusbildung.name.to_sym, group: groups(:be)) }
+    let(:role) {
+      Fabricate(Group::Kantonalverband::VerantwortungAusbildung.name.to_sym, group: groups(:be))
+    }
 
     context "in own kanton" do
       it "may see pending approvals" do

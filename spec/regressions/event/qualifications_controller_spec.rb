@@ -44,8 +44,12 @@ describe Event::QualificationsController, type: :controller do
   # nav = page.find('.nav-left')
   # expect(nav.find_link('Top')[:href]).to eq group_people_path(groups(:top_layer), returning: true)
   # expect(nav.find_link('TopGroup')[:href]).to eq group_people_path(top_group, returning: true)
+  # rubocop:todo Layout/LineLength
   # expect(nav.find_link('Bottom One')[:href]).to eq group_people_path(groups(:bottom_layer_one), returning: true)
+  # rubocop:enable Layout/LineLength
+  # rubocop:todo Layout/LineLength
   # expect(nav.find_link('Bottom Two')[:href]).to eq group_people_path(groups(:bottom_layer_two), returning: true)
+  # rubocop:enable Layout/LineLength
   # end
   # end
   # end

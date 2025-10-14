@@ -15,7 +15,9 @@ describe Export::Tabular::People::PeopleAddress do
       Kantonalverband Id] << "Id der Hauptebene"
   end
   let(:list) { Person.where(id: person) }
-  let(:data) { Export::Tabular::People::PeopleAddress.csv(list).delete_prefix(Export::Csv::UTF8_BOM) }
+  let(:data) {
+    Export::Tabular::People::PeopleAddress.csv(list).delete_prefix(Export::Csv::UTF8_BOM)
+  }
   let(:csv) { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
   subject { csv }

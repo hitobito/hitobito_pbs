@@ -95,7 +95,9 @@ describe Group do
       end
 
       it "removes cantons by assigning an empty list" do
-        expect { group.update!(cantons: %w[ge zh be]) }.to change { KantonalverbandCanton.count }.by(3)
+        expect { group.update!(cantons: %w[ge zh be]) }.to change {
+          KantonalverbandCanton.count
+        }.by(3)
         expect { group.update!(cantons: []) }.to change { KantonalverbandCanton.count }.by(-3)
         expect(group.reload.cantons).to eq []
       end
@@ -115,13 +117,17 @@ describe Group do
         limit = Group::Abteilung::GEOLOCATION_COUNT_LIMIT
         (limit + 1).times { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: group) }
         expect(group.reload).to have(1).error_on(:geolocations)
+        # rubocop:todo Layout/LineLength
         expect(group.errors.full_messages.to_sentence).to match(/Treffpunkte dürfen nicht mehr als #{limit} sein/)
+        # rubocop:enable Layout/LineLength
       end
 
       it "cannot have geolocations outide of Switzerland" do
         Fabricate(:geolocation, lat: "47.0", long: "12.0", geolocatable: group)
         expect(group.reload).to have(1).error_on(:base)
+        # rubocop:todo Layout/LineLength
         expect(group.errors.full_messages.to_sentence).to match(/Diese Koordinaten liegen nicht in der Schweiz./)
+        # rubocop:enable Layout/LineLength
       end
 
       it "can have group finder fields" do

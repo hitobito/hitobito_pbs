@@ -28,7 +28,7 @@ module Pbs::PersonDecorator
     @family_member_finder ||= Person::FamilyMemberFinder.new(self)
   end
 
-  def layer_group_ids
+  def layer_group_ids # rubocop:todo Metrics/CyclomaticComplexity
     @layer_group_ids ||= current_user&.layer_group_ids ||
       [current_service_token&.layer_group_id].compact.presence ||
       Person.find(current_oauth_token.resource_owner_id)&.layer_group_ids

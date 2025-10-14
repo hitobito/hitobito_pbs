@@ -47,7 +47,7 @@ module Export::Pdf
         labeled_value(label, value, options)
       end
 
-      def labeled_person(person, details = true)
+      def labeled_person(person, details = true) # rubocop:todo Metrics/AbcSize
         labeled_value(Person.human_attribute_name(:name), person)
         labeled_value(Person.human_attribute_name(:address), person.address)
         labeled_value(Person.human_attribute_name(:town), [person.zip_code,

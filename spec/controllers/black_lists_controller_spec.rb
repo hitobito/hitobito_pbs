@@ -1,7 +1,9 @@
 require "spec_helper"
 
 describe BlackListsController do
-  let(:person) { Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)).person }
+  let(:person) {
+    Fabricate(Group::Bund::Geschaeftsleitung.name.to_sym, group: groups(:bund)).person
+  }
 
   before { sign_in(person) }
 

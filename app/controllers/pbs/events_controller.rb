@@ -70,7 +70,7 @@ module Pbs::EventsController
     contact_attrs
   end
 
-  def preview_camp_application_validation
+  def preview_camp_application_validation # rubocop:todo Metrics/AbcSize
     return unless entry.is_a?(Event::Campy)
     return unless [entry.leader, entry.coach, entry.abteilungsleitung].include? current_person
     return if entry.camp_submitted?
@@ -90,7 +90,7 @@ module Pbs::EventsController
     send_data pdf.render, type: :pdf, disposition: "inline", filename: pdf.filename
   end
 
-  def create_camp_application
+  def create_camp_application # rubocop:todo Metrics/AbcSize
     entry.camp_submitted_at = Time.zone.now.to_date
     if entry.save
       Event::CampMailer.submit_camp(entry).deliver_later

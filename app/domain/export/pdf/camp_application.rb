@@ -52,7 +52,7 @@ module Export::Pdf
       start_new_page && move_cursor_to(bounds.top) if cursor < value
     end
 
-    def render_logos
+    def render_logos # rubocop:todo Metrics/AbcSize
       image_path = Wagons.find_wagon(__FILE__).root.join("app", "assets", "images")
       image image_path.join("logo_pbs.png"), at: [0, bounds.top_left[1] + 40], fit: [200, 55]
 

@@ -27,8 +27,10 @@ describe EventsPbsHelper do
     context "as kantonsleitung" do
       let(:current_user) do
         person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:zh)).person
-        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be), person: person)
-        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh), person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be),
+          person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh),
+          person: person)
         person
       end
 
@@ -48,8 +50,10 @@ describe EventsPbsHelper do
     context "as kantonsleitung" do
       let(:current_user) do
         person = Fabricate(Group::Kantonalverband::Kantonsleitung.name, group: groups(:zh)).person
-        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be), person: person)
-        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh), person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:be),
+          person: person)
+        Fabricate(Group::Kantonalverband::VerantwortungKrisenteam.name, group: groups(:zh),
+          person: person)
         person
       end
 
@@ -79,18 +83,21 @@ describe EventsPbsHelper do
     before { subject.update(al_visiting: true) }
 
     it "shows value without date if date missing" do
-      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq("Besucht das Lager")
+      expect(camp_visiting_info(subject.al_visiting,
+        subject.al_visiting_date)).to eq("Besucht das Lager")
     end
 
     it "shows date if date present" do
       subject.update(al_visiting_date: Date.parse("15.05.2011"))
-      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq("Besucht das Lager am 15.05.2011")
+      expect(camp_visiting_info(subject.al_visiting,
+        subject.al_visiting_date)).to eq("Besucht das Lager am 15.05.2011")
     end
 
     it "shows no date if al not visiting" do
       subject.update(al_visiting: false)
       subject.update(al_visiting_date: Date.parse("15.05.2011"))
-      expect(camp_visiting_info(subject.al_visiting, subject.al_visiting_date)).to eq("Besucht das Lager nicht")
+      expect(camp_visiting_info(subject.al_visiting,
+        subject.al_visiting_date)).to eq("Besucht das Lager nicht")
     end
   end
 

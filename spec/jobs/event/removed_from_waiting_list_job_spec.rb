@@ -8,7 +8,9 @@ require "spec_helper"
 describe Event::RemovedFromWaitingListJob do
   let(:participation) { Fabricate(:pbs_participation) }
 
-  subject { Event::RemovedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka)) }
+  subject {
+    Event::RemovedFromWaitingListJob.new(participation, people(:bulei), people(:al_schekka))
+  }
 
   it "sends email" do
     subject.perform

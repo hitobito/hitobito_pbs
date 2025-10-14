@@ -8,7 +8,9 @@
 require "spec_helper"
 
 describe Export::Tabular::People::ParticipationNdsRow do
-  let(:participation) { Fabricate(:pbs_participation, participant: person, event: events(:top_course)) }
+  let(:participation) {
+    Fabricate(:pbs_participation, participant: person, event: events(:top_course))
+  }
 
   let(:row) { described_class.new(participation) }
 
