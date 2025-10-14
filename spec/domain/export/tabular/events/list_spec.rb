@@ -33,7 +33,9 @@ describe Export::Tabular::Events::List do
     end
 
     its(:labels) do
+      # rubocop:todo Layout/LineLength
       is_expected.to eql ["Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
+        # rubocop:enable Layout/LineLength
         "Datum 1 Bezeichnung", "Datum 1 Ort", "Datum 1 Zeitraum",
         "Datum 2 Bezeichnung", "Datum 2 Ort", "Datum 2 Zeitraum",
         "Datum 3 Bezeichnung", "Datum 3 Ort", "Datum 3 Zeitraum",

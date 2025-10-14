@@ -9,8 +9,12 @@ describe PopulationController do
   let(:abteilung) { groups(:schekka) }
   let(:pegasus) { groups(:pegasus) }
 
-  let!(:leader) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: abteilung).person }
-  let!(:guide) { Fabricate(Group::Abteilung::StufenleitungWoelfe.name.to_sym, group: abteilung).person }
+  let!(:leader) {
+    Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: abteilung).person
+  }
+  let!(:guide) {
+    Fabricate(Group::Abteilung::StufenleitungWoelfe.name.to_sym, group: abteilung).person
+  }
   let!(:webmaster) { Fabricate(Group::Abteilung::Webmaster.name.to_sym, group: abteilung).person }
   let!(:deleted) do
     Fabricate(Group::Abteilung::AbteilungsleitungStv.name.to_sym,
@@ -18,7 +22,9 @@ describe PopulationController do
       created_at: 2.years.ago,
       end_on: 1.year.ago)
   end
-  let!(:group_leader) { Fabricate(Group::Pfadi::Mitleitung.name.to_sym, group: pegasus, person: guide).person }
+  let!(:group_leader) {
+    Fabricate(Group::Pfadi::Mitleitung.name.to_sym, group: pegasus, person: guide).person
+  }
   let!(:child) { Fabricate(Group::Pfadi::Pfadi.name.to_sym, group: pegasus).person }
 
   before { sign_in(leader) }
@@ -45,9 +51,17 @@ describe PopulationController do
     describe "people by group" do
       subject { assigns(:people_by_group) }
 
-      it { expect(subject[abteilung].collect(&:to_s)).to contain_exactly(*[leader, people(:al_schekka), guide].collect(&:to_s)) }
-      it { expect(subject[groups(:pegasus)].collect(&:to_s)).to contain_exactly(*[group_leader, child, people(:child)].collect(&:to_s)) }
-      it { expect(subject[groups(:baereried)]).to be_nil } # no people in group - not displayed at all
+      it {
+        expect(subject[abteilung].collect(&:to_s)).to contain_exactly(*[leader, people(:al_schekka),
+          guide].collect(&:to_s))
+      }
+      it {
+        expect(subject[groups(:pegasus)].collect(&:to_s)).to contain_exactly(*[group_leader, child,
+          people(:child)].collect(&:to_s))
+      }
+      it {
+        expect(subject[groups(:baereried)]).to be_nil
+      } # no people in group - not displayed at all
     end
 
     describe "complete" do

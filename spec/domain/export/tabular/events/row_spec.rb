@@ -57,7 +57,8 @@ describe Export::Tabular::Events::Row do
       it "returns nil even if other Leader Participations exists" do
         event_participations(:schekka_camp_leader).destroy!
         participation = Fabricate(:pbs_participation, event: event)
-        role = Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, participation: participation)
+        role = Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym,
+          participation: participation)
         expect(role.class).to be_leader
         expect(subject).to be_nil
       end

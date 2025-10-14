@@ -262,7 +262,8 @@ class Event::Camp < Event
     }
   end
 
-  def may_become_sub_camp
+  # rubocop:todo Metrics/AbcSize
+  def may_become_sub_camp # rubocop:todo Metrics/CyclomaticComplexity # rubocop:todo Metrics/AbcSize
     if super_camp.present?
       if is_ancestor_of(super_camp.id) || !super_camp.allow_sub_camps ||
           super_camp.state != "created" || !super_camp.upcoming
@@ -275,6 +276,7 @@ class Event::Camp < Event
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def is_ancestor_of(camp_id)
     self_and_descendants.pluck(:id).include?(camp_id)

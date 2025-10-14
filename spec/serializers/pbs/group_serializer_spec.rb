@@ -30,8 +30,10 @@ describe Pbs::GroupSerializer do
     expect(links[:geolocations]).to contain_exactly(g1.id.to_s, g2.id.to_s)
     linked = hash[:linked]
     expect(linked["geolocations"].size).to eq(2)
-    expect(linked["geolocations"]).to include(include({id: g1.id.to_s, lat: g1.lat.to_s, long: g1.long.to_s}))
-    expect(linked["geolocations"]).to include(include({id: g2.id.to_s, lat: g2.lat.to_s, long: g2.long.to_s}))
+    expect(linked["geolocations"]).to include(include({id: g1.id.to_s, lat: g1.lat.to_s,
+long: g1.long.to_s}))
+    expect(linked["geolocations"]).to include(include({id: g2.id.to_s, lat: g2.lat.to_s,
+long: g2.long.to_s}))
   end
 
   it "does not include group finder fields in group types other than Abteilung" do

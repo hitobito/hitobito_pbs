@@ -26,16 +26,24 @@ CustomContent.seed_once(:key,
    placeholders_optional: "recipient-name-with-salutation, recipient-name, event-name"},
   {key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_PERSON,
    placeholders_required: "request-body, answer-request-url",
+   # rubocop:todo Layout/LineLength
    placeholders_optional: "recipient-name-with-salutation, recipient-name, requester-name, requester-roles"},
+  # rubocop:enable Layout/LineLength
   {key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_RESPONSIBLES,
    placeholders_required: "person-name, request-body, answer-request-url",
+   # rubocop:todo Layout/LineLength
    placeholders_optional: "recipient-names-with-salutation, recipient-names, requester-name, requester-roles"},
+  # rubocop:enable Layout/LineLength
   {key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_APPROVED,
    placeholders_required: "person-name, request-body",
+   # rubocop:todo Layout/LineLength
    placeholders_optional: "recipient-name-with-salutation, recipient-name, approver-name, approver-roles"},
+  # rubocop:enable Layout/LineLength
   {key: Person::AddRequestMailer::CONTENT_ADD_REQUEST_REJECTED,
    placeholders_required: "person-name, request-body",
+   # rubocop:todo Layout/LineLength
    placeholders_optional: "recipient-name-with-salutation, recipient-name, rejecter-name, rejecter-roles"})
+# rubocop:enable Layout/LineLength
 
 SeedFu.seed [
   Rails.root.join("db", "seeds"),

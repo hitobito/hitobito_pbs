@@ -11,7 +11,7 @@ module Pbs::Export::EventParticipationsExportJob
     super
   end
 
-  def entries
+  def entries # rubocop:todo Metrics/CyclomaticComplexity
     filtered = super
     if @options[:nds_course] && ability.can?(:show_details, filtered.first)
       unfiltered_participants

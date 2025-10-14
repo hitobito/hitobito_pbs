@@ -106,7 +106,9 @@ module Pbs::Export::Tabular::Events
     end
 
     def exclude_advisor(participation)
+      # rubocop:todo Layout/LineLength
       !(participation.roles.one? && participation.roles.first.instance_of?(Event::Course::Role::Advisor))
+      # rubocop:enable Layout/LineLength
     end
 
     def attendance_groups_by_bsv_days_for(participations)

@@ -52,7 +52,9 @@ describe Person::AddRequestMailer do
     let(:mail) { Person::AddRequestMailer.ask_responsibles(request, responsibles) }
 
     before :all do
+      # rubocop:todo Layout/LineLength
       template = CustomContent.find_or_create_by key: described_class::CONTENT_ADD_REQUEST_RESPONSIBLES
+      # rubocop:enable Layout/LineLength
       template.update!(
         label: "Anfrage Personendaten: E-Mail Freigabe durch Verantwortliche",
         subject: "Freigabe Personendaten",
@@ -69,7 +71,9 @@ describe Person::AddRequestMailer do
     subject { mail }
 
     its(:body) do
+      # rubocop:todo Layout/LineLength
       is_expected.to match(/#{Regexp.escape(leader.salutation_value)}, #{Regexp.escape(leader2.salutation_value)}/)
+      # rubocop:enable Layout/LineLength
     end
   end
 
@@ -79,7 +83,9 @@ describe Person::AddRequestMailer do
       let(:mail) { Person::AddRequestMailer.approved(person, group, requester, leader) }
 
       before :all do
+        # rubocop:todo Layout/LineLength
         template = CustomContent.find_or_create_by key: described_class::CONTENT_ADD_REQUEST_APPROVED
+        # rubocop:enable Layout/LineLength
         template.update!(
           label: "Anfrage Personendaten: E-Mail Freigabe akzeptiert",
           subject: "Freigabe der Personendaten akzeptiert",

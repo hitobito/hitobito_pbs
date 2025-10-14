@@ -48,7 +48,8 @@ describe SupercampsController do
       end
 
       it "excludes past camps" do
-        supercamp_schekka.dates.first.update(start_at: DateTime.now - 1.year, finish_at: DateTime.now - 1.year + 2.days)
+        supercamp_schekka.dates.first.update(start_at: DateTime.now - 1.year,
+          finish_at: DateTime.now - 1.year + 2.days)
         get :available, params: {group_id: group.id, camp_id: camp.id}, format: :js, xhr: true
         is_expected.not_to include("Schekka Super")
       end
@@ -70,7 +71,8 @@ describe SupercampsController do
       end
 
       it "query excludes itself" do
-        get :query, params: {group_id: group.id, camp_id: camp.id, q: "lager"}, format: :js, xhr: true
+        get :query, params: {group_id: group.id, camp_id: camp.id, q: "lager"}, format: :js,
+          xhr: true
         is_expected.not_to include("Sommerlager")
       end
 
@@ -119,9 +121,12 @@ describe SupercampsController do
 
           request.env["HTTP_REFERER"] = "/" + form.to_s
           if form == :create
-            post :connect, params: {group_id: group.id, supercamp_id: supercamp.id, event: event_form_data}
+            post :connect,
+              params: {group_id: group.id, supercamp_id: supercamp.id, event: event_form_data}
           else
-            patch :connect, params: {group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id, event: event_form_data}
+            patch :connect,
+              params: {group_id: group.id, supercamp_id: supercamp.id, camp_id: camp.id,
+                       event: event_form_data}
           end
         end
 
@@ -138,7 +143,9 @@ describe SupercampsController do
             let(:supercamp_state) { "confirmed" }
 
             it do
+              # rubocop:todo Layout/LineLength
               expect(flash[:alert]).to eq('Das gewählte übergeordnete Lager ist nicht im Status "Erstellt"')
+              # rubocop:enable Layout/LineLength
             end
           end
 
@@ -154,7 +161,9 @@ describe SupercampsController do
             let(:parent_id) { supercamp.id }
 
             it do
+              # rubocop:todo Layout/LineLength
               expect(flash[:alert]).to eq("Das Lager ist bereits an ein anderes übergeordnetes Lager angeschlossen")
+              # rubocop:enable Layout/LineLength
             end
           end
         end
@@ -169,7 +178,9 @@ describe SupercampsController do
           end
 
           it "description is calculated" do
+            # rubocop:todo Layout/LineLength
             expect(result[:description]).to eq((supercamp.description.to_s + "\n\n" + camp.description.to_s).strip)
+            # rubocop:enable Layout/LineLength
           end
 
           it "parent_id is correct" do
@@ -207,13 +218,19 @@ describe SupercampsController do
           end
 
           it "contact_attrs_passed_on_to_supercamp from supercamp's required_contact attrs" do
+            # rubocop:todo Layout/LineLength
             expect(result[:contact_attrs_passed_on_to_supercamp]).to eq(expected_required_contact_attrs)
+            # rubocop:enable Layout/LineLength
           end
 
           [
             :state, :lagerreglement_applied, :kantonalverband_rules_applied, :j_s_rules_applied,
+            # rubocop:todo Layout/LineLength
             :leader_id, :abteilungsleitung_id, :al_present, :al_visiting, :al_visiting_date, :coach_id,
+            # rubocop:enable Layout/LineLength
+            # rubocop:todo Layout/LineLength
             :coach_visiting, :coach_visiting_date, :advisor_mountain_security, :advisor_snow_security,
+            # rubocop:enable Layout/LineLength
             :advisor_water_security
           ].each do |attr|
             it attr.to_s + " from subcamp" do
@@ -226,7 +243,9 @@ describe SupercampsController do
             :landlord_permission_obtained, :local_scout_contact_present, :local_scout_contact,
             :j_s_kind, :j_s_security_mountain, :j_s_security_snow, :j_s_security_water,
             :application_opening_at, :application_closing_at, :application_conditions, :maximum,
+            # rubocop:todo Layout/LineLength
             :external_applications, :signature, :signature_confirmation, :signature_confirmation_text,
+            # rubocop:enable Layout/LineLength
             :paper_application_required, :participants_can_apply, :participants_can_cancel
           ].each do |attr|
             it attr.to_s + " from supercamp" do

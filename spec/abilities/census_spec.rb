@@ -92,7 +92,9 @@ describe Ability do
     end
 
     context "for other kantonalverband" do
-      let(:role) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:zh)) }
+      let(:role) {
+        Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:zh))
+      }
 
       it "may not update member counts" do
         is_expected.not_to be_able_to(:update_member_counts, abteilung)
@@ -117,7 +119,9 @@ describe Ability do
   end
 
   describe "Abteilungsleitung" do
-    let(:role) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:schekka)) }
+    let(:role) {
+      Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:schekka))
+    }
 
     it "may not update member counts" do
       is_expected.not_to be_able_to(:update_member_counts, abteilung)

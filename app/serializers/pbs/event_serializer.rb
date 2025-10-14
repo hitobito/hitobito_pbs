@@ -6,8 +6,8 @@
 module Pbs::EventSerializer
   extend ActiveSupport::Concern
 
-  included do
-    extension(:public) do |_|
+  included do # rubocop:todo Metrics/BlockLength
+    extension(:public) do |_| # rubocop:todo Metrics/BlockLength
       used_attributes = item.used_attributes(:applicant_count,
         :expected_participants_wolf_f,
         :expected_participants_wolf_m,

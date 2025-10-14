@@ -34,7 +34,9 @@ describe Export::Tabular::Events::List do
     end
 
     its(:labels) do
+      # rubocop:todo Layout/LineLength
       is_expected.to eql ["Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
+        # rubocop:enable Layout/LineLength
         "Datum 1 Bezeichnung", "Datum 1 Ort", "Datum 1 Zeitraum",
         "Datum 2 Bezeichnung", "Datum 2 Ort", "Datum 2 Zeitraum",
         "Datum 3 Bezeichnung", "Datum 3 Ort", "Datum 3 Zeitraum",
@@ -67,12 +69,18 @@ describe Export::Tabular::Events::List do
         language_it: true,
         advisor_id: people(:bulei).id)
     end
-    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n") }
+    let(:csv) {
+      Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")
+    }
 
     context "headers" do
       subject { csv.first }
 
-      it { is_expected.to match(/^Name;Organisatoren;Kursnummer;Kursart;.*;LKB Name;.*;Anzahl Abgelehnte$/) }
+      it {
+        # rubocop:todo Layout/LineLength
+        is_expected.to match(/^Name;Organisatoren;Kursnummer;Kursart;.*;LKB Name;.*;Anzahl Abgelehnte$/)
+        # rubocop:enable Layout/LineLength
+      }
     end
 
     context "first row" do
@@ -131,7 +139,9 @@ describe Export::Tabular::Events::List do
       its([29]) { is_expected.to eq "" } # advisor address
 
       it "has same headers" do
+        # rubocop:todo Layout/LineLength
         expect(csv.first).to match(/^Name;Organisatoren;Kursnummer;Kursart;.*;LKB Name;.*;Anzahl Abgelehnte$/)
+        # rubocop:enable Layout/LineLength
       end
     end
   end
@@ -140,7 +150,9 @@ describe Export::Tabular::Events::List do
     let(:test_camp) { events(:schekka_camp).dup }
     let(:camps) { Event::Camp.all }
     let(:list) { Export::Tabular::Events::List.new(camps) }
-    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n") }
+    let(:csv) {
+      Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")
+    }
 
     before do
       test_camp.update!(
@@ -192,7 +204,9 @@ describe Export::Tabular::Events::List do
   context "for simple events" do
     let(:courses) { Event.where(id: event) }
     let(:event) { Fabricate(:event, groups: [groups(:be)], location: "somewhere") }
-    let(:csv) { Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n") }
+    let(:csv) {
+      Export::Csv::Generator.new(list).call.delete_prefix(Export::Csv::UTF8_BOM).split("\n")
+    }
 
     context "headers" do
       subject { csv.first }
@@ -203,7 +217,7 @@ describe Export::Tabular::Events::List do
     end
   end
 
-  def required_attrs_for_camp_submit
+  def required_attrs_for_camp_submit # rubocop:todo Metrics/MethodLength
     {
       canton: "be",
       location: "foo",

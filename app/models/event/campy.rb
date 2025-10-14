@@ -28,7 +28,7 @@ module Event::Campy
     base.class_eval(&@_included_block)
   end
 
-  included do
+  included do # rubocop:todo Metrics/BlockLength
     self.used_attributes += [:leader_id, :abteilungsleitung_id, :coach_id,
       :advisor_mountain_security_id, :advisor_snow_security_id,
       :advisor_water_security_id,

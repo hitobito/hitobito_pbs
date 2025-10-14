@@ -13,7 +13,10 @@ describe Export::EventParticipationsExportJob do
   let(:params) { {filter: "all"} }
   let(:format) { :csv }
 
-  subject(:job) { Export::EventParticipationsExportJob.new(format, user.id, event.id, groups(:be).id, params.merge(filename: filename)) }
+  subject(:job) {
+    Export::EventParticipationsExportJob.new(format, user.id, event.id, groups(:be).id,
+      params.merge(filename: filename))
+  }
 
   let(:file) { AsyncDownloadFile.from_filename(filename, format) }
 

@@ -76,7 +76,8 @@ describe Event::ApplicationAbility do
 
     it "may not approve or reject in same layer outside of group" do
       create_approver(Group::Kantonalverband::VerantwortungAusbildung, groups(:be))
-      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh), "kantonalverband")
+      create_application(Group::Kantonalverband::VerantwortungAusbildung, groups(:zh),
+        "kantonalverband")
 
       is_expected.not_to be_able_to(:approve, application)
       is_expected.not_to be_able_to(:reject, application)
@@ -188,7 +189,9 @@ describe Event::ApplicationAbility do
         is_expected.to be_able_to(:index_approvals, course)
       end
 
+      # rubocop:todo Layout/LineLength
       it ":layer_full_and_below may show approvals of different layer when application is on waiting list" do
+        # rubocop:enable Layout/LineLength
         course.groups = [groups(:zuerich)]
         course.save!
 

@@ -82,7 +82,9 @@ describe Event::ParticipationDecorator, :draper_with_helpers do
       expect(decorator.event.dates).to be_present
       expect(decorator.event.dates).to have(1).item
       expect(decorator.event.dates.first.duration).to be_a Duration
+      # rubocop:todo Layout/LineLength
       expect(decorator.event.dates.first.duration.instance_variable_get(:@date_format)).to eql :default
+      # rubocop:enable Layout/LineLength
 
       # result
       expect(decorator.send(:course_confirmation_params).fetch(:dauer)).to eql("11.05.2012")

@@ -21,13 +21,15 @@ require "spec_helper"
 
 describe Event::Approval do
   [["bund", Group::Bund::Geschaeftsleitung, Group::Bund::LeitungKernaufgabeAusbildung],
-    ["kantonalverband", Group::Kantonalverband::Kantonsleitung, Group::Kantonalverband::VerantwortungAusbildung],
+    ["kantonalverband", Group::Kantonalverband::Kantonsleitung,
+      Group::Kantonalverband::VerantwortungAusbildung],
     ["region", Group::Region::Regionalleitung, Group::Region::VerantwortungAusbildung],
-    ["abteilung", Group::Abteilung::Abteilungsleitung, Group::Abteilung::AbteilungsleitungStv]].each do |layer, *roles|
-      it "#roles in #{layer} equal #{roles}" do
-        expect(Event::Approval.new(layer: layer).roles).to eq Array(roles)
-      end
+    ["abteilung", Group::Abteilung::Abteilungsleitung,
+      Group::Abteilung::AbteilungsleitungStv]].each do |layer, *roles|
+    it "#roles in #{layer} equal #{roles}" do
+      expect(Event::Approval.new(layer: layer).roles).to eq Array(roles)
     end
+  end
 
   [["bund", Group::Bund],
     ["kantonalverband", Group::Kantonalverband],
@@ -78,7 +80,8 @@ describe Event::Approval do
     rejected = create_approval("bund", Group::Bund::Geschaeftsleitung, :bund, {rejected: true})
 
     other_course = Fabricate(:pbs_course)
-    other = create_approval("bund", Group::Bund::Geschaeftsleitung, :bund, {rejected: true}, other_course)
+    other = create_approval("bund", Group::Bund::Geschaeftsleitung, :bund, {rejected: true},
+      other_course)
 
     expect(Event::Approval.completed(events(:top_course))).to match_array [approved, rejected]
     expect(Event::Approval.completed(other_course)).to eq [other]

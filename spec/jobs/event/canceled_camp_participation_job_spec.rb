@@ -14,9 +14,11 @@ describe Event::CanceledCampParticipationJob do
     let(:camp_leaders) { job.send(:camp_leaders) }
 
     it "contains all leaders" do
-      l1 = Fabricate(Event::Camp::Role::Leader.name, participation: Fabricate(:pbs_participation, event: event)).participation
+      l1 = Fabricate(Event::Camp::Role::Leader.name,
+        participation: Fabricate(:pbs_participation, event: event)).participation
       Fabricate(Event::Camp::Role::Leader.name, participation: l1)
-      Fabricate(Event::Camp::Role::AssistantLeader.name, participation: Fabricate(:pbs_participation, event: event))
+      Fabricate(Event::Camp::Role::AssistantLeader.name,
+        participation: Fabricate(:pbs_participation, event: event))
 
       expect(camp_leaders).to eq([people(:bulei), l1.person])
     end
@@ -35,7 +37,8 @@ describe Event::CanceledCampParticipationJob do
 
     it "sends mail to recipients" do
       participation.update!(state: "canceled")
-      expect(Event::CampMailer).to receive(:participant_canceled_info).with(participation, [people(:bulei)]).and_return(mailer)
+      expect(Event::CampMailer).to receive(:participant_canceled_info).with(participation,
+        [people(:bulei)]).and_return(mailer)
       job.perform
     end
   end

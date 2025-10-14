@@ -17,7 +17,7 @@ module Export::Pdf
         @right = block
       end
 
-      def render
+      def render # rubocop:todo Metrics/AbcSize
         bounding_box([0, cursor], width: bounds.width) do
           bounding_box([0, bounds.top], width: children_width) do
             @left&.yield

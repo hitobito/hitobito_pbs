@@ -54,7 +54,9 @@ describe Event::Application do
       course.update(requires_approval_abteilung: true)
     end
 
+    # rubocop:todo Layout/LineLength
     it "changing approval requirement on prio 2 course does not call Event::Approver.request_approvals" do
+      # rubocop:enable Layout/LineLength
       expect_any_instance_of(Event::Approver).not_to receive(:request_approvals)
       course2.update(requires_approval_abteilung: true)
     end

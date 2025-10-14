@@ -67,12 +67,14 @@ describe Event::QualificationsController do
     it "sends email to all qualified participants" do
       expect(Event::Course::ConfirmationMailer).to receive(:notify).twice
         .and_call_original
-      post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id}, xhr: true
+      post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id},
+        xhr: true
     end
 
     it "checks permission" do
       sign_in(people(:al_schekka))
-      post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id}, xhr: true
+      post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id},
+        xhr: true
       expect(response).to have_http_status(403)
     end
   end

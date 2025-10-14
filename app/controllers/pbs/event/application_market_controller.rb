@@ -11,7 +11,9 @@ module Pbs::Event::ApplicationMarketController
     alias_method_chain :remove_from_waiting_list, :setter
 
     def assigner_add_participant
+      # rubocop:todo Layout/LineLength
       if event.j_s_data_sharing_acceptance_required? && participation.j_s_data_sharing_accepted_at.nil?
+        # rubocop:enable Layout/LineLength
         render "j_s_data_sharing_not_accepted_error"
       else
         assigner.add_participant

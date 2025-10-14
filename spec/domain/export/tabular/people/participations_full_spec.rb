@@ -8,7 +8,9 @@ require "csv"
 
 describe Export::Tabular::People::ParticipationsFull do
   let(:person) { people(:child) }
-  let(:participation) { Fabricate(:pbs_participation, participant: person, event: events(:top_course), bsv_days: 4.5) }
+  let(:participation) {
+    Fabricate(:pbs_participation, participant: person, event: events(:top_course), bsv_days: 4.5)
+  }
   let(:list) { Event::Participation.where(id: participation.id) }
   let(:people_list) { Export::Tabular::People::ParticipationsFull.new(list) }
 
@@ -19,7 +21,10 @@ describe Export::Tabular::People::ParticipationsFull do
   end
 
   context "integration" do
-    let(:data) { Export::Tabular::People::ParticipationsFull.export(:csv, list).delete_prefix(Export::Csv::UTF8_BOM) }
+    let(:data) {
+      Export::Tabular::People::ParticipationsFull.export(:csv,
+        list).delete_prefix(Export::Csv::UTF8_BOM)
+    }
     let(:csv) { CSV.parse(data, headers: true, col_sep: Settings.csv.separator) }
 
     subject { csv }

@@ -159,7 +159,8 @@ class Group::Region < Group
   end
 
   class Regionalleitung < ::Role
-    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
+    self.permissions = [:layer_and_below_full, :contact_data, :approve_applications,
+      :manual_deletion]
     self.two_factor_authentication_enforced = true
   end
 

@@ -17,7 +17,9 @@ describe Event::ParticipationsController do
     let!(:participant) { Fabricate(:person) }
 
     before do
-      [event, camp, course].each { |e| Fabricate(:pbs_participation, person: participant, event: e) }
+      [event, camp, course].each { |e|
+        Fabricate(:pbs_participation, person: participant, event: e)
+      }
     end
 
     [:event, :camp, :course].each do |kind|
@@ -78,12 +80,16 @@ describe Event::ParticipationsController do
           }
         expect(participation).to be_valid
       end.to change { Delayed::Job.count }.by(1)
+      # rubocop:todo Layout/LineLength
       expect(flash[:notice]).not_to include "Für die definitive Anmeldung musst du diese Seite über <i>Drucken</i> ausdrucken, "
+      # rubocop:enable Layout/LineLength
     end
 
     it "creates participation for camp" do
       camp = Fabricate(:pbs_camp, paper_application_required: true)
-      post :create, params: {group_id: group.id, event_id: camp.id, event_participation: {j_s_data_sharing_accepted: true}}
+      post :create,
+        params: {group_id: group.id, event_id: camp.id,
+                 event_participation: {j_s_data_sharing_accepted: true}}
 
       participation = assigns(:participation)
       expect(participation).to be_valid

@@ -36,7 +36,9 @@ describe GroupsController, type: :controller do
 
   context "crisis" do
     let(:group) { groups(:schekka) }
-    let(:person) { Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person }
+    let(:person) {
+      Fabricate(Group::Bund::MitgliedKrisenteam.name.to_sym, group: groups(:bund)).person
+    }
 
     before {
       sign_in(person)

@@ -205,7 +205,9 @@ describe Alumni::Invitation do
             ex_members_group_ids = [instance_double(Group), instance_double(Group)]
             silverscout_group_ids = [instance_double(Group), instance_double(Group)]
             groups_finder = instance_double(Alumni::ApplicableGroups,
+              # rubocop:todo Layout/LineLength
               ex_members_group_ids: ex_members_group_ids, silverscout_group_ids: silverscout_group_ids)
+            # rubocop:enable Layout/LineLength
 
             mail = double("mail")
             expect(mail).to receive(:deliver_later)

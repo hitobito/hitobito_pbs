@@ -6,7 +6,7 @@
 module Pbs::Sheet::Group
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:todo Metrics/BlockLength
     tabs.insert(4,
       Sheet::Tab.new("activerecord.models.event/camp.other",
         :camp_group_events_path,

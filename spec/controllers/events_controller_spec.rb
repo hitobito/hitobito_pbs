@@ -22,7 +22,9 @@ describe EventsController do
     before { sign_in(people(:bulei)) }
 
     it "creates new event course with dates, advisor" do
-      post :create, params: {event: event_attrs.merge(contact_id: Person.first, advisor_id: Person.last), group_id: group.id}
+      post :create,
+        params: {event: event_attrs.merge(contact_id: Person.first, advisor_id: Person.last),
+                 group_id: group.id}
       expect(event.dates).to have(1).item
       expect(event.dates.first).to be_persisted
       expect(event.contact).to eq Person.first
@@ -30,7 +32,8 @@ describe EventsController do
     end
 
     it "creates new event course without contact, advisor" do
-      post :create, params: {event: event_attrs.merge(contact_id: "", advisor_id: ""), group_id: group.id}
+      post :create,
+        params: {event: event_attrs.merge(contact_id: "", advisor_id: ""), group_id: group.id}
 
       expect(event.contact).not_to be_present
       expect(event.advisor).not_to be_present
@@ -132,11 +135,16 @@ describe EventsController do
       let(:event) { events(:schekka_camp) }
 
       context "as camp leader" do
-        before { event.update!(coach_id: people(:al_berchtold).id, leader_id: person.id, abteilungsleitung_id: people(:al_berchtold).id) }
+        before {
+          event.update!(coach_id: people(:al_berchtold).id, leader_id: person.id,
+            abteilungsleitung_id: people(:al_berchtold).id)
+        }
 
         it "shows failing validation" do
           get :show, params: {group_id: event.groups.first.id, id: event.id}
+          # rubocop:todo Layout/LineLength
           expect(flash[:warning]).to match(/Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/)
+          # rubocop:enable Layout/LineLength
           expect(flash[:notice]).to be_blank
         end
 
@@ -145,7 +153,9 @@ describe EventsController do
 
           get :show, params: {group_id: event.groups.first.id, id: event.id}
           expect(flash[:warning]).to be_blank
+          # rubocop:todo Layout/LineLength
           expect(flash[:notice]).to eq "Es sind alle Informationen zum Einreichen des Lagers vorhanden."
+          # rubocop:enable Layout/LineLength
         end
 
         it "shows no message after the camp has been submitted" do
@@ -159,11 +169,16 @@ describe EventsController do
       end
 
       context "as coach" do
-        before { event.update!(coach_id: person.id, leader_id: people(:al_berchtold).id, abteilungsleitung_id: people(:al_berchtold).id) }
+        before {
+          event.update!(coach_id: person.id, leader_id: people(:al_berchtold).id,
+            abteilungsleitung_id: people(:al_berchtold).id)
+        }
 
         it "shows failing validation" do
           get :show, params: {group_id: event.groups.first.id, id: event.id}
+          # rubocop:todo Layout/LineLength
           expect(flash[:warning]).to match(/Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/)
+          # rubocop:enable Layout/LineLength
           expect(flash[:notice]).to be_blank
         end
 
@@ -172,7 +187,9 @@ describe EventsController do
 
           get :show, params: {group_id: event.groups.first.id, id: event.id}
           expect(flash[:warning]).to be_blank
+          # rubocop:todo Layout/LineLength
           expect(flash[:notice]).to eq "Es sind alle Informationen zum Einreichen des Lagers vorhanden."
+          # rubocop:enable Layout/LineLength
         end
 
         it "shows no message after the camp has been submitted" do
@@ -186,11 +203,16 @@ describe EventsController do
       end
 
       context "as abteilungsleitung" do
-        before { event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_berchtold).id, abteilungsleitung_id: person.id) }
+        before {
+          event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_berchtold).id,
+            abteilungsleitung_id: person.id)
+        }
 
         it "shows failing validation" do
           get :show, params: {group_id: event.groups.first.id, id: event.id}
+          # rubocop:todo Layout/LineLength
           expect(flash[:warning]).to match(/Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/)
+          # rubocop:enable Layout/LineLength
           expect(flash[:notice]).to be_blank
         end
 
@@ -199,7 +221,9 @@ describe EventsController do
 
           get :show, params: {group_id: event.groups.first.id, id: event.id}
           expect(flash[:warning]).to be_blank
+          # rubocop:todo Layout/LineLength
           expect(flash[:notice]).to eq "Es sind alle Informationen zum Einreichen des Lagers vorhanden."
+          # rubocop:enable Layout/LineLength
         end
 
         it "shows no message after the camp has been submitted" do
@@ -214,7 +238,8 @@ describe EventsController do
 
       context "as co-leader" do
         before do
-          participation = Fabricate(:event_participation, participant: Fabricate(:person), event: event)
+          participation = Fabricate(:event_participation, participant: Fabricate(:person),
+            event: event)
           Fabricate(Event::Camp::Role::AssistantLeader.name.to_sym, participation: participation)
           event.update!(coach_id: people(:al_berchtold).id, leader_id: people(:al_schekka).id)
         end
@@ -252,7 +277,9 @@ describe EventsController do
 
         it "shows failing validation" do
           get :show, params: {group_id: event.groups.first.id, id: event.id}
+          # rubocop:todo Layout/LineLength
           expect(flash[:warning]).to match(/Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/)
+          # rubocop:enable Layout/LineLength
           expect(flash[:notice]).to be_blank
         end
 
@@ -261,7 +288,9 @@ describe EventsController do
 
           get :show, params: {group_id: event.groups.first.id, id: event.id}
           expect(flash[:warning]).to be_blank
+          # rubocop:todo Layout/LineLength
           expect(flash[:notice]).to eq "Es sind alle Informationen zum Einreichen des Lagers vorhanden."
+          # rubocop:enable Layout/LineLength
         end
 
         it "shows no message after the camp has been submitted" do
@@ -279,7 +308,9 @@ describe EventsController do
 
         it "shows failing validation" do
           get :show, params: {group_id: event.groups.first.id, id: event.id}
+          # rubocop:todo Layout/LineLength
           expect(flash[:warning]).to match(/Das Lager kann noch nicht durch den\*die Coach eingereicht werden:/)
+          # rubocop:enable Layout/LineLength
           expect(flash[:notice]).to be_blank
         end
 
@@ -288,7 +319,9 @@ describe EventsController do
 
           get :show, params: {group_id: event.groups.first.id, id: event.id}
           expect(flash[:warning]).to be_blank
+          # rubocop:todo Layout/LineLength
           expect(flash[:notice]).to eq "Es sind alle Informationen zum Einreichen des Lagers vorhanden."
+          # rubocop:enable Layout/LineLength
         end
 
         it "shows no message after the camp has been submitted" do
@@ -489,7 +522,8 @@ describe EventsController do
       let(:event) { Fabricate(:course, kind: event_kinds(:fut)) }
 
       it "is not possible for non camp leader user to update checkpoint attrs" do
-        put :update, params: {group_id: event.groups.first.id, id: event.id, event: checkpoint_values}
+        put :update,
+          params: {group_id: event.groups.first.id, id: event.id, event: checkpoint_values}
 
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
           expect(event.send(attr)).to be false
@@ -500,7 +534,8 @@ describe EventsController do
         event.leader_id = people(:bulei).id
         event.save!
 
-        put :update, params: {group_id: event.groups.first.id, id: event.id, event: checkpoint_values}
+        put :update,
+          params: {group_id: event.groups.first.id, id: event.id, event: checkpoint_values}
 
         event.reload
         Event::Camp::LEADER_CHECKPOINT_ATTRS.each do |attr|
@@ -553,7 +588,9 @@ describe EventsController do
     let(:event) { events(:schekka_camp) }
     let(:group) { event.groups.first }
     let!(:q1) { Fabricate(:question, id: 1001, event: event, pass_on_to_supercamp: false) }
-    let!(:q2) { Fabricate(:question, id: 1002, event: event, admin: true, pass_on_to_supercamp: false) }
+    let!(:q2) {
+      Fabricate(:question, id: 1002, event: event, admin: true, pass_on_to_supercamp: false)
+    }
 
     before { sign_in(people(:al_schekka)) }
 
@@ -575,7 +612,9 @@ describe EventsController do
     before { sign_in(people(:al_schekka)) }
 
     it "assigns contact_attributes_passed_on_to_supercamp" do
+      # rubocop:todo Layout/LineLength
       put :update, params: {group_id: group.id, id: event.id, event: {visible_contact_attributes: {name: "1"}, contact_attrs_passed_on_to_supercamp: {
+        # rubocop:enable Layout/LineLength
         first_name: "1", nickname: "1", address: "1", social_accounts: "1"
       }}}
 
@@ -589,7 +628,11 @@ describe EventsController do
       event.update!({contact_attrs_passed_on_to_supercamp:
                         ["first_name", "social_accounts", "address", "nickname"]})
 
-      put :update, params: {group_id: group.id, id: event.id, event: {visible_contact_attributes: {name: "1"}, contact_attrs_passed_on_to_supercamp: {nickname: "1"}}}
+      put :update,
+        params: {group_id: group.id, id: event.id,
+                 # rubocop:todo Layout/LineLength
+                 event: {visible_contact_attributes: {name: "1"}, contact_attrs_passed_on_to_supercamp: {nickname: "1"}}}
+      # rubocop:enable Layout/LineLength
 
       expect(event.reload.contact_attrs_passed_on_to_supercamp).not_to include("first_name")
       expect(event.contact_attrs_passed_on_to_supercamp).to include("nickname")
@@ -611,13 +654,16 @@ describe EventsController do
           json = JSON.parse(@response.body)
 
           expect(json["events"]).to be_nil
+          # rubocop:todo Layout/LineLength
           expect(json["error"]).to eq("Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst.")
+          # rubocop:enable Layout/LineLength
         end
       end
 
       context "not allowed" do
         it "renders camps json with dates" do
-          get :index, params: {type: Event::Camp.name, group_id: group.id, token: token.token}, format: :json
+          get :index, params: {type: Event::Camp.name, group_id: group.id, token: token.token},
+            format: :json
           json = JSON.parse(@response.body)
 
           expect(json["events"]).to be_nil
@@ -631,7 +677,8 @@ describe EventsController do
         end
 
         it "renders camps json with dates" do
-          get :index, params: {type: Event::Camp.name, group_id: group.id, token: token.token}, format: :json
+          get :index, params: {type: Event::Camp.name, group_id: group.id, token: token.token},
+            format: :json
           json = JSON.parse(@response.body)
 
           event = json["events"].find { |e| e["id"] == camp.id.to_s }

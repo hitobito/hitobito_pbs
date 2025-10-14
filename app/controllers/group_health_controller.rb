@@ -5,7 +5,9 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-# rubocop:disable Metrics/ClassLength
+# rubocop:todo Lint/MissingCopEnableDirective
+# rubocop:disable Metrics/ClassLength # rubocop:todo Lint/MissingCopEnableDirective
+# rubocop:enable Lint/MissingCopEnableDirective
 class GroupHealthController < ApplicationController
   EVENT_TYPES = [Event, Event::Course, Event::Camp].freeze
   CENSUS_EVALUTATIONS_GROUP_TYPES = [Group::Abteilung, Group::Kantonalverband, Group::Region].freeze
@@ -214,7 +216,7 @@ class GroupHealthController < ApplicationController
       .merge(address: computed_address(person))
   end
 
-  def census_data(total, group)
+  def census_data(total, group) # rubocop:todo Metrics/MethodLength
     return unless total
 
     data = {

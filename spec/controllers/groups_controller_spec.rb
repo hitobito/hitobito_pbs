@@ -11,7 +11,9 @@ describe GroupsController do
   let(:entry) { assigns(:group) }
 
   context "PUT update cantons" do
-    let(:user) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person }
+    let(:user) {
+      Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
+    }
 
     describe_action :put, :update, id: true do
       let(:test_entry) { groups(:be) }
@@ -39,7 +41,9 @@ describe GroupsController do
   end
 
   context "update superior attributes as kantonsleitung" do
-    let(:user) { Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person }
+    let(:user) {
+      Fabricate(Group::Kantonalverband::Kantonsleitung.name.to_sym, group: groups(:be)).person
+    }
 
     context "for kanton" do
       describe_action :put, :update, id: true do
@@ -68,7 +72,9 @@ describe GroupsController do
 
   context "PUT change geolocations of Abteilung" do
     describe_action :put, :update, id: true do
-      let(:user) { Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:patria)).person }
+      let(:user) {
+        Fabricate(Group::Abteilung::Abteilungsleitung.name.to_sym, group: groups(:patria)).person
+      }
 
       let(:test_entry) { groups(:patria) }
 
@@ -114,9 +120,15 @@ describe GroupsController do
       end
 
       context "removing geolocations" do
-        let!(:geolocation1) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
-        let!(:geolocation2) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
-        let!(:geolocation3) { Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry) }
+        let!(:geolocation1) {
+          Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry)
+        }
+        let!(:geolocation2) {
+          Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry)
+        }
+        let!(:geolocation3) {
+          Fabricate(Geolocation.name.downcase.to_sym, geolocatable: test_entry)
+        }
         let(:params) {
           {group: {geolocations_attributes: [
             {id: geolocation1.id.to_s, lat: "47.0", long: "7.0", _destroy: 1},

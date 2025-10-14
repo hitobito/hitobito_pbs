@@ -144,7 +144,7 @@ class SupercampsController < ApplicationController
         description: appended_description)
   end
 
-  def authorize
+  def authorize # rubocop:todo Metrics/AbcSize
     authorize!(:show, supercamp)
     unless supercamp.allow_sub_camps
       raise CanCan::AccessDenied.new(I18n.t("supercamps.does_not_allow_sub_camps"),

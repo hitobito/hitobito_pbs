@@ -20,7 +20,9 @@ describe Ability do
   end
 
   describe "Leitung Kernaufgabe Kommunikation" do
-    let(:role) { Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: groups(:bund)) }
+    let(:role) {
+      Fabricate(Group::Bund::LeitungKernaufgabeKommunikation.name.to_sym, group: groups(:bund))
+    }
 
     it "may manage BlackList" do
       is_expected.to be_able_to(:manage, BlackList)

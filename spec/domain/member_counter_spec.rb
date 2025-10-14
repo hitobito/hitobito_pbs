@@ -12,20 +12,31 @@ describe MemberCounter do
     woelfe = groups(:sunnewirbu)
     pfadi1 = groups(:pegasus)
     pfadi2 = groups(:baereried)
-    Fabricate(Group::Abteilung::StufenleitungPfadi.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1985-01-01"))
-    rover = Fabricate(Group::AbteilungsRover::Rover.name, group: groups(:rovers), person: Fabricate(:person, gender: "m", birthday: "1989-01-01"))
-    Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi1, person: Fabricate(:person, gender: "w", birthday: "1988-01-01"))
+    Fabricate(Group::Abteilung::StufenleitungPfadi.name, group: abteilung,
+      person: Fabricate(:person, gender: "w", birthday: "1985-01-01"))
+    rover = Fabricate(Group::AbteilungsRover::Rover.name, group: groups(:rovers),
+      person: Fabricate(:person, gender: "m", birthday: "1989-01-01"))
+    Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi1,
+      person: Fabricate(:person, gender: "w", birthday: "1988-01-01"))
     Fabricate(Group::Pfadi::Einheitsleitung.name, group: pfadi2, person: rover.person)
-    Fabricate(Group::Pfadi::Leitpfadi.name, group: pfadi1, person: Fabricate(:person, gender: "w", birthday: "1999-01-01"))
-    Fabricate(Group::Pfadi::Pfadi.name, group: pfadi1, person: Fabricate(:person, gender: "m", birthday: "1999-01-01"))
-    puecki = Fabricate(Group::Pfadi::Pfadi.name, group: pfadi2, person: Fabricate(:person, gender: "w", birthday: "1999-02-02"))
-    Fabricate(Group::Woelfe::Wolf.name, group: woelfe, person: Fabricate(:person, gender: "w", birthday: "2002-02-02"))
+    Fabricate(Group::Pfadi::Leitpfadi.name, group: pfadi1,
+      person: Fabricate(:person, gender: "w", birthday: "1999-01-01"))
+    Fabricate(Group::Pfadi::Pfadi.name, group: pfadi1,
+      person: Fabricate(:person, gender: "m", birthday: "1999-01-01"))
+    puecki = Fabricate(Group::Pfadi::Pfadi.name, group: pfadi2,
+      person: Fabricate(:person, gender: "w", birthday: "1999-02-02"))
+    Fabricate(Group::Woelfe::Wolf.name, group: woelfe,
+      person: Fabricate(:person, gender: "w", birthday: "2002-02-02"))
     Fabricate(Group::Woelfe::Leitwolf.name, group: woelfe, person: puecki.person)
     # external roles, not counted
-    Fabricate(Group::Pfadi::Adressverwaltung.name, group: pfadi2, person: Fabricate(:person, gender: "m", birthday: "1971-01-01"))
-    Fabricate(Group::Abteilung::Webmaster.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1972-01-01"))
-    Fabricate(Group::Abteilung::Passivmitglied.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1972-01-01"))
-    old = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: abteilung, person: Fabricate(:person, gender: "w", birthday: "1977-03-01"), created_at: 2.years.ago)
+    Fabricate(Group::Pfadi::Adressverwaltung.name, group: pfadi2,
+      person: Fabricate(:person, gender: "m", birthday: "1971-01-01"))
+    Fabricate(Group::Abteilung::Webmaster.name, group: abteilung,
+      person: Fabricate(:person, gender: "w", birthday: "1972-01-01"))
+    Fabricate(Group::Abteilung::Passivmitglied.name, group: abteilung,
+      person: Fabricate(:person, gender: "w", birthday: "1972-01-01"))
+    old = Fabricate(Group::Abteilung::Abteilungsleitung.name, group: abteilung,
+      person: Fabricate(:person, gender: "w", birthday: "1977-03-01"), created_at: 2.years.ago)
     old.destroy # soft delete role
   end
 
@@ -61,7 +72,9 @@ describe MemberCounter do
   context ".create_count_for" do
     it "creates count with current census" do
       censuses(:two_o_12).destroy
-      expect { MemberCounter.create_counts_for(abteilung) }.to change { MemberCount.where(year: 2011).count }.by(1)
+      expect { MemberCounter.create_counts_for(abteilung) }.to change {
+        MemberCount.where(year: 2011).count
+      }.by(1)
     end
 
     it "does not create counts with existing ones" do
@@ -98,7 +111,8 @@ describe MemberCounter do
     count = MemberCount.where(abteilung_id: abteilung.id, year: 2011).first
     MemberCount::COUNT_COLUMNS.each do |c|
       expected = fields[c.to_sym] || 0
-      expect(count.send(c).to_i).to be(expected), "#{c} should be #{expected}, was #{count.send(c).to_i}"
+      expect(count.send(c).to_i).to be(expected),
+        "#{c} should be #{expected}, was #{count.send(c).to_i}"
     end
   end
 

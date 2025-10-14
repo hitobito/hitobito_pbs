@@ -12,6 +12,8 @@ describe Event::ApprovalCleanupJob do
 
   subject(:job) { described_class.new }
 
+  # rubocop:todo Metrics/MethodLength
+  # rubocop:todo Metrics/AbcSize
   def create_approval(event_finish: 4.months.ago, event_start: event_finish)
     start = event_start&.change(hour: 8)
     finish = event_finish&.change(hour: 18)
@@ -50,6 +52,8 @@ describe Event::ApprovalCleanupJob do
       weak_points: "ist selbst schuld"
     )
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   it "is scheduled daily" do
     expect(job.interval).to eql 1.day

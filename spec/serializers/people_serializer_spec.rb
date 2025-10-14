@@ -18,7 +18,10 @@ describe PeopleSerializer do
       serializer: PeopleSerializer,
       controller: controller)
   end
-  let(:service_token) { Fabricate(:service_token, layer_group_id: group.layer_group_id, people: true, permission: :layer_and_below_read) }
+  let(:service_token) {
+    Fabricate(:service_token, layer_group_id: group.layer_group_id, people: true,
+      permission: :layer_and_below_read)
+  }
 
   let(:hash) { serializer.to_hash }
 
@@ -29,7 +32,9 @@ describe PeopleSerializer do
 
   before do
     allow_any_instance_of(PersonDecorator).to receive(:current_user).and_return(nil)
+    # rubocop:todo Layout/LineLength
     allow_any_instance_of(PersonDecorator).to receive(:current_service_token).and_return(service_token)
+    # rubocop:enable Layout/LineLength
   end
 
   it "includes roles which are not visible from above" do

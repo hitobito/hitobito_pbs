@@ -15,7 +15,7 @@ module Export::Pdf
         end
       end
 
-      def render_group
+      def render_group # rubocop:todo Metrics/AbcSize
         title("group_title")
         labeled_value(translate("abteilung"), @context.abteilung_name)
         labeled_value(translate("einheit"), @context.einheit_name) if @context.einheit_name

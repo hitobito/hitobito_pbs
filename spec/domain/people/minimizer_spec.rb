@@ -109,7 +109,7 @@ describe People::Minimizer do
     expect(person.tags).to match_array([excluded_tag])
   end
 
-  def nullify_attrs
+  def nullify_attrs # rubocop:todo Metrics/MethodLength
     [
       :street,
       :housenumber,

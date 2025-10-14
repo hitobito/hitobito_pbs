@@ -92,7 +92,8 @@ describe Alumni::ApplicableGroups do
       bern_group = make_group(parent: groups(:bern), selfreg: true)
       be_group = make_group(parent: groups(:be), selfreg: true)
 
-      expect(subject.ex_members_group_ids).to match_array [schekka_group.id, bern_group.id, be_group.id]
+      expect(subject.ex_members_group_ids).to match_array [schekka_group.id, bern_group.id,
+        be_group.id]
     end
 
     it "excludes groups uncle and cousin layers" do

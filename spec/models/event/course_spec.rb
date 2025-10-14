@@ -32,13 +32,15 @@ describe Event::Course do
 
     Event::Course.possible_states[0..1].each do |state|
       it "is true for state #{state} when tentative_applications flag is set" do
-        expect(Event::Course.new(state: state, tentative_applications: true)).to be_tentative_application_possible
+        expect(Event::Course.new(state: state,
+          tentative_applications: true)).to be_tentative_application_possible
       end
     end
 
     Event::Course.possible_states[2..].each do |state|
       it "is false for state #{state} when tentative_applications flag is set" do
-        expect(Event::Course.new(state: state, tentative_applications: true)).not_to be_tentative_application_possible
+        expect(Event::Course.new(state: state,
+          tentative_applications: true)).not_to be_tentative_application_possible
       end
     end
   end
@@ -176,7 +178,8 @@ describe Event::Course do
       subject.advisor_id = new_advisor.id
       expect { subject.save! }.not_to change { Event::Role.count }
       expect(Event.find(subject.id).advisor_id).to eq(new_advisor.id)
-      expect(subject.participations.where(participant_id: person.id, participant_type: Person.sti_name)).not_to be_exists
+      expect(subject.participations.where(participant_id: person.id,
+        participant_type: Person.sti_name)).not_to be_exists
     end
   end
 

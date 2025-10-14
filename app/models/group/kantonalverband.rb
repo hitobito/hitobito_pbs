@@ -76,7 +76,7 @@ class Group::Kantonalverband < Group
     kantonalverband_cantons.collect(&:canton)
   end
 
-  def cantons=(list)
+  def cantons=(list) # rubocop:todo Metrics/CyclomaticComplexity
     existing = kantonalverband_cantons.pluck(:id, :canton)
     existing_cantons = existing.map(&:last)
 

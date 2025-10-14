@@ -39,7 +39,8 @@ describe Group::PendingApprovalsController do
   end
 
   it "updates application_approver_role to role with :approve_applications" do
-    Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
+    Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei),
+      group: groups(:be))
     sign_in(people(:bulei))
     patch :update_role, params: {
       id: groups(:be).id,
@@ -50,7 +51,8 @@ describe Group::PendingApprovalsController do
   end
 
   it "updates application_approver_role to all roles if blank" do
-    Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
+    Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei),
+      group: groups(:be))
     sign_in(people(:bulei))
     patch :update_role, params: {id: groups(:be).id, approver_role: "  "}
     expect(groups(:be).reload.application_approver_role).to eq(nil)
@@ -93,7 +95,8 @@ describe Group::PendingApprovalsController do
     end
 
     it "lists approved approvals for layer newest at the top" do
-      Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
+      Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei),
+        group: groups(:be))
       sign_in(people(:bulei))
       get :index, params: {id: groups(:be).id}
       expect(assigns(:approved_approvals)).to have(2).item
@@ -102,7 +105,8 @@ describe Group::PendingApprovalsController do
     end
 
     it "provides action get approved approvals filterable by course kind via xhr" do
-      Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei), group: groups(:be))
+      Fabricate(Group::Kantonalverband::Kantonsleitung.name, person: people(:bulei),
+        group: groups(:be))
       sign_in(people(:bulei))
       get :approved, params: {id: groups(:be).id, course_kind_id: event_kinds(:lpk).id}, xhr: true
       expect(assigns(:approved_approvals)).to have(1).item

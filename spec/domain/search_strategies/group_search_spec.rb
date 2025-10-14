@@ -7,7 +7,9 @@ require "spec_helper"
 
 describe SearchStrategies::GroupSearch do
   before do
+    # rubocop:todo Layout/LineLength
     groups(:bund).update!(pbs_shortname: "shortname", description: "description", website: "lemurenshop",
+      # rubocop:enable Layout/LineLength
       bank_account: "account")
   end
 

@@ -17,7 +17,7 @@ class Person::BlackListDetector
 
   private
 
-  def matching_attributes?
+  def matching_attributes? # rubocop:todo Metrics/AbcSize
     bl = BlackList.arel_table
 
     BlackList.where(
