@@ -197,8 +197,7 @@ describe Event::Approver do
       approver.approve(attrs, people(:bulei))
       expect(approval_bund.reload).to be_approved
 
-      expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation,
-                                                                               people|
+      expect(Event::ParticipationMailer).to have_received(:approval).twice do |participation, people|
         expect(participation).to eq(participation)
         expect(people.length).to eq(1)
       end
