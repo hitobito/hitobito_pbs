@@ -13,8 +13,8 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
 
   context "header" do
     it "includes name, address attributes and layer group columns" do
-      expect(exporter.attributes).to eq [:salutation, :name, :address, :zip_code, :town,
-        :country, :layer_group, :language,
+      expect(exporter.attributes).to eq [:salutation, :name, :address_care_of, :street, :housenumber, :postbox,
+        :zip_code, :town, :country, :layer_group, :language,
         :prefers_digital_correspondence, :kantonalverband_id,
         :id, :layer_group_id, :company_name, :company]
     end
@@ -28,6 +28,9 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
         expect(exporter.data_rows.to_a).to eq [[
           "Sehr geehrter Herr Dr. Leiter",
           "Bundes Leiter",
+          nil,
+          nil,
+          nil,
           nil,
           nil,
           nil,
@@ -61,6 +64,9 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
         expect(exporter.data_rows.to_a).to eq [[
           "Sehr geehrter Herr Dr. Leiter, sehr geehrte*r Schekka",
           "Bundes Leiter, AL Schekka",
+          nil,
+          nil,
+          nil,
           nil,
           nil,
           nil,
