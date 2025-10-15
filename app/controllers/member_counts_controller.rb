@@ -31,7 +31,7 @@ class MemberCountsController < ApplicationController
       redirect_to census_abteilung_group_path(abteilung, year: year),
         notice: translate("updated_data_for_year", year: year)
     else
-      render "edit", status: :unprocessable_entity
+      render "edit", status: :unprocessable_content
     end
   end
 
