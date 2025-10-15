@@ -27,7 +27,7 @@ class Event::ApprovalsController < CrudController
       redirect_to participation_path
     else
       @approval = approver.open_approval
-      render "new", status: :unprocessable_entity
+      render "new", status: :unprocessable_content
     end
   end
 
