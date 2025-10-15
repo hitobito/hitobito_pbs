@@ -147,6 +147,7 @@ module HitobitoPbs
       QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController
+      People::ManualDeletionsController.prepend Pbs::People::ManualDeletionsController
 
       DeviseController.include HostnamedGroups
 
