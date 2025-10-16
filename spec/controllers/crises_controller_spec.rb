@@ -14,9 +14,9 @@ describe CrisesController do
 
     context "POST#create" do
       it "creates crisis send mail and set crisis session" do
-        expect do
+        expect_enqueued_mail_jobs(count: 1) do
           post :create, params: {group_id: group.id}
-        end.to change { Delayed::Job.count }.by 1
+        end
 
         expect(session[:crisis]).to be true
         expect(group.active_crisis).not_to be_acknowledged
@@ -24,9 +24,9 @@ describe CrisesController do
 
       it "shows error if another crisis is active" do
         group.crises.create!(creator: user)
-        expect do
+        expect_no_enqueued_mail_jobs do
           post :create, params: {group_id: group.id}
-        end.not_to change { Delayed::Job.count }
+        end
 
         expect(session[:crisis]).to be nil
         expect(flash[:alert]).to eq("Eine andere Krise ist bereits aktiv auf dieser Gruppe")
@@ -39,18 +39,18 @@ describe CrisesController do
       end
 
       it "acknowledges crisis if not older then 3 days" do
-        expect do
+        expect_enqueued_mail_jobs(count: 1) do
           put :update, params: {group_id: group.id, id: group.active_crisis.id}
-        end.to change { Delayed::Job.count }.by 1
+        end
 
         expect(group.active_crisis.reload).to be_acknowledged
       end
 
       it "does not acknowledge if crisis older then 3 days" do
         group.active_crisis.update(created_at: 4.days.ago)
-        expect do
+        expect_no_enqueued_mail_jobs do
           put :update, params: {group_id: group.id, id: group.active_crisis.id}
-        end.not_to change { Delayed::Job.count }
+        end
 
         expect(group.active_crisis.reload).not_to be_acknowledged
         expect(flash[:alert]).to eq("Die Krise ist zu alt um zu quittieren")
