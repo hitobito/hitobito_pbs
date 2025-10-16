@@ -71,10 +71,9 @@ describe Event::DiscardedCourseParticipationJob do
           event.update!(requires_approval_region: true,
             requires_approval_kantonalverband: true,
             requires_approval_bund: true)
-          # rubocop:todo Layout/LineLength
-          participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
-            # rubocop:enable Layout/LineLength
-            application: Event::Application.new(priority_1: event))
+          person = Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person
+          participation.update!(person: person)
+          participation.create_application!(priority_1: event)
           participation.application.approvals.first.update!(approved: true,
             approver: @region,
             current_occupation: "chief",
@@ -132,10 +131,9 @@ describe Event::DiscardedCourseParticipationJob do
         event.update!(requires_approval_region: true,
           requires_approval_kantonalverband: true,
           requires_approval_bund: true)
-        # rubocop:todo Layout/LineLength
-        participation.update!(person: Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person,
-          # rubocop:enable Layout/LineLength
-          application: Event::Application.new(priority_1: event))
+        person = Fabricate(Group::Region::Redaktor.name.to_sym, group: groups(:bern)).person
+        participation.update!(person: person)
+        participation.create_application!(priority_1: event)
         participation.application.approvals.first.update!(
           approved: true,
           approver: @region,
