@@ -22,7 +22,8 @@ module Pbs::Event::Application
 
   def initialize_approval
     if participation.present?
-      approver = Event::Approver.new(participation.reload)
+      participation.reload if participation.persisted?
+      approver = Event::Approver.new(participation)
       approver.request_approvals
     end
   end
