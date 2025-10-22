@@ -53,11 +53,13 @@ module Pbs::Person
   extend ActiveSupport::Concern
 
   included do
-    Person::PUBLIC_ATTRS << :title << :salutation << :language <<
+    Person::PUBLIC_ATTRS << :pronouns << :title << :salutation << :language <<
       :prefers_digital_correspondence << :kantonalverband_id
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
     Person::SEARCHABLE_ATTRS << :title << :pbs_number
+
+    Person.used_attributes << :pronouns # Pronouns should be selectable in table display
 
     alias_method_chain :full_name, :title
 
