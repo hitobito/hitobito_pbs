@@ -236,6 +236,7 @@ class Event::Camp < Event
   end
 
   def send_created_infos
+    return unless state_changed_from_created? && state == "confirmed"
     layer_leaders.each { |person| send_created_info(person) }
   end
 
