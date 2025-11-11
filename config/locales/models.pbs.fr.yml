@@ -1282,6 +1282,9 @@ fr:
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
 
+      participant:
+        pronouns: Pronom
+
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem

@@ -1296,6 +1296,9 @@ it:
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
 
+      participant:
+        pronouns: Pronome
+
       person:
         layer_group_id: Id del livello principale
         nickname: Totem

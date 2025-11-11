@@ -1276,6 +1276,10 @@ de:
       event/question:
         pass_on_to_supercamp: An übergeordnetes Lager weitergeben
 
+      participant:
+        pronouns: Pronomen
+        gender: Amtliches Geschlecht
+
       person:
         layer_group_id: Id der Hauptebene
         nickname: Pfadiname
