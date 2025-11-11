@@ -1105,6 +1105,22 @@ de:
             w: Hallo %{greeting_name}
             other: Hallo %{greeting_name}
         available:
+          hallo_neutral_pfadiname:
+            label: Hallo [Pfadiname]
+            value:
+              other: Hallo %{nickname}
+          hallo_neutral_vorname:
+            label: Hallo [Vorname]
+            value:
+              other: Hallo %{first_name}
+          guten_tag_neutral_pfadiname:
+            label: Guten Tag [Pfadiname]
+            value:
+              other: Guten Tag %{nickname}
+          guten_tag_neutral_vorname:
+            label: Guten Tag [Vorname]
+            value:
+              other: Guten Tag %{first_name}
           lieber_pfadiname:
             label: Liebe*r [Pfadiname]
             value:
@@ -1260,13 +1276,19 @@ de:
       event/question:
         pass_on_to_supercamp: An übergeordnetes Lager weitergeben
 
+      participant:
+        pronouns: Pronomen
+        gender: Amtliches Geschlecht
+
       person:
         layer_group_id: Id der Hauptebene
         nickname: Pfadiname
         pbs_number: PBS Personennummer
         salutation: Anrede
         salutation_value: Anrede
+        pronouns: Pronomen
         title: Titel
+        gender: Amtliches Geschlecht
         grade_of_school: Schulklasse
         entry_date: Eintrittsdatum
         leaving_date: Austrittsdatum

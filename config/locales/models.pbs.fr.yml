@@ -1111,6 +1111,22 @@ fr:
             w: Bonjour %{greeting_name}
             other: Bonjour %{greeting_name}
         available:
+          hallo_neutral_pfadiname:
+            label: Salut [Pfadiname]
+            value:
+              other: Salut %{nickname}
+          hallo_neutral_vorname:
+            label: Salut [Vorname]
+            value:
+              other: Salut %{first_name}
+          guten_tag_neutral_pfadiname:
+            label: Bonjour [Pfadiname]
+            value:
+              other: Bonjour %{nickname}
+          guten_tag_neutral_vorname:
+            label: Bonjour [Vorname]
+            value:
+              other: Bonjour %{first_name}
           lieber_pfadiname:
             label: Cher·Chère [totem]
             value:
@@ -1266,12 +1282,16 @@ fr:
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
 
+      participant:
+        pronouns: Pronom
+
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse
         salutation_value: Formule de politesse
+        pronouns: Pronom
         title: Civilité
         grade_of_school: Classe scolaire
         entry_date: Membre depuis

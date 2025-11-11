@@ -1125,6 +1125,22 @@ it:
             w: Ciao %{greeting_name}
             other: Ciao %{greeting_name}
         available:
+          hallo_neutral_pfadiname:
+            label: Ciao [Pfadiname]
+            value:
+              other: Ciao %{nickname}
+          hallo_neutral_vorname:
+            label: Ciao [Vorname]
+            value:
+              other: Ciao %{first_name}
+          guten_tag_neutral_pfadiname:
+            label: Salve [Pfadiname]
+            value:
+              other: Salve %{nickname}
+          guten_tag_neutral_vorname:
+            label: Salve [Vorname]
+            value:
+              other: Salve %{first_name}
           lieber_pfadiname:
             label: Caro/a [totem]
             value:
@@ -1280,12 +1296,16 @@ it:
       event/question:
         pass_on_to_supercamp: Inoltrare al campo superiore
 
+      participant:
+        pronouns: Pronome
+
       person:
         layer_group_id: Id del livello principale
         nickname: Totem
         pbs_number: Numero personale MSS
         salutation: Appellativo
         salutation_value: Appellativo
+        pronouns: Pronome
         title: Titolo
         grade_of_school: Classe scolastica
         entry_date: Data d'entrata

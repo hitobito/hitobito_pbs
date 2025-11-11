@@ -12,7 +12,7 @@ describe Salutation do
   context ".available" do
     subject { Salutation.available }
 
-    it { expect(subject).to have(4).items }
+    it { expect(subject).to have(8).items }
   end
 
   context "#label" do

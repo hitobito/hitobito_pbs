@@ -126,9 +126,8 @@ module HitobitoPbs
       EventParticipationSerializer.include Pbs::EventParticipationSerializer
 
       ### controllers
-      PeopleController.permitted_attrs += [:salutation, :title, :grade_of_school, :entry_date,
-        :leaving_date, :j_s_number,
-        :prefers_digital_correspondence]
+      PeopleController.permitted_attrs += [:pronouns, :salutation, :title, :grade_of_school,
+        :entry_date, :leaving_date, :j_s_number, :prefers_digital_correspondence]
       GroupsController.permitted_attrs += [:hostname]
       Event::KindsController.permitted_attrs += [:documents_text, :campy, :can_have_confirmations,
         :confirmation_name]
@@ -154,6 +153,7 @@ module HitobitoPbs
       ### resources
 
       EventResource.include Pbs::EventResource
+      PersonResource.include Pbs::PersonResource
       Person::NameResource.course_leader_roles = [
         Event::Course::Role::Leader,
         Event::Course::Role::ClassLeader

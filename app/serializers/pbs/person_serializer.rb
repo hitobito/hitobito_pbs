@@ -9,7 +9,7 @@ module Pbs::PersonSerializer
   included do
     extension(:details) do |_|
       map_properties :pbs_number, :salutation_value, :language,
-        :prefers_digital_correspondence, :grade_of_school, :entry_date, :leaving_date
+        :prefers_digital_correspondence, :grade_of_school, :entry_date, :leaving_date, :pronouns
 
       # correspondence_language is deprecated and could be removed in the future
       property :correspondence_language, item.language
