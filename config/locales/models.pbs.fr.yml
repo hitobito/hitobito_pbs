@@ -1112,29 +1112,29 @@ fr:
             other: Bonjour %{greeting_name}
         available:
           hallo_neutral_pfadiname:
-            label: Salut [Pfadiname]
+            label: Hallo [Pfadiname]
             value:
-              m: Salut %{nickname}
-              w: Salut %{nickname}
-              other: Salut %{nickname}
+              m: Hallo %{nickname}
+              w: Hallo %{nickname}
+              other: Hallo %{nickname}
           hallo_neutral_vorname:
-            label: Salut [Vorname]
+            label: Hallo [Vorname]
             value:
-              m: Salut %{first_name}
-              w: Salut %{first_name}
-              other: Salut %{first_name}
+              m: Hallo %{first_name}
+              w: Hallo %{first_name}
+              other: Hallo %{first_name}
           guten_tag_neutral_pfadiname:
-            label: Bonjour [Pfadiname]
+            label: Guten Tag [Pfadiname]
             value:
-              m: Bonjour %{nickname}
-              w: Bonjour %{nickname}
-              other: Bonjour %{nickname}
+              m: Guten Tag %{nickname}
+              w: Guten Tag %{nickname}
+              other: Guten Tag %{nickname}
           guten_tag_neutral_vorname:
-            label: Bonjour [Vorname]
+            label: Guten Tag [Vorname]
             value:
-              m: Bonjour %{first_name}
-              w: Bonjour %{first_name}
-              other: Bonjour %{first_name}
+              m: Guten Tag %{first_name}
+              w: Guten Tag %{first_name}
+              other: Guten Tag %{first_name}
           lieber_pfadiname:
             label: Cher·Chère [totem]
             value:
@@ -1291,7 +1291,8 @@ fr:
         pass_on_to_supercamp: Transmettre au camp principal
 
       participant:
-        pronouns: Pronom
+        pronouns: Pronomen
+        gender: Amtliches Geschlecht
 
       person:
         layer_group_id: Id du niveau principal
@@ -1299,8 +1300,9 @@ fr:
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse
         salutation_value: Formule de politesse
-        pronouns: Pronom
+        pronouns: Pronomen
         title: Civilité
+        gender: Amtliches Geschlecht
         grade_of_school: Classe scolaire
         entry_date: Membre depuis
         leaving_date: Date de départ

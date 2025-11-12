@@ -1126,29 +1126,29 @@ it:
             other: Ciao %{greeting_name}
         available:
           hallo_neutral_pfadiname:
-            label: Ciao [Pfadiname]
+            label: Hallo [Pfadiname]
             value:
-              m: Ciao %{nickname}
-              w: Ciao %{nickname}
-              other: Ciao %{nickname}
+              m: Hallo %{nickname}
+              w: Hallo %{nickname}
+              other: Hallo %{nickname}
           hallo_neutral_vorname:
-            label: Ciao [Vorname]
+            label: Hallo [Vorname]
             value:
-              m: Ciao %{first_name}
-              w: Ciao %{first_name}
-              other: Ciao %{first_name}
+              m: Hallo %{first_name}
+              w: Hallo %{first_name}
+              other: Hallo %{first_name}
           guten_tag_neutral_pfadiname:
-            label: Salve [Pfadiname]
+            label: Guten Tag [Pfadiname]
             value:
-              m: Salve %{nickname}
-              w: Salve %{nickname}
-              other: Salve %{nickname}
+              m: Guten Tag %{nickname}
+              w: Guten Tag %{nickname}
+              other: Guten Tag %{nickname}
           guten_tag_neutral_vorname:
-            label: Salve [Vorname]
+            label: Guten Tag [Vorname]
             value:
-              m: Salve %{first_name}
-              w: Salve %{first_name}
-              other: Salve %{first_name}
+              m: Guten Tag %{first_name}
+              w: Guten Tag %{first_name}
+              other: Guten Tag %{first_name}
           lieber_pfadiname:
             label: Caro/a [totem]
             value:
@@ -1305,7 +1305,8 @@ it:
         pass_on_to_supercamp: Inoltrare al campo superiore
 
       participant:
-        pronouns: Pronome
+        pronouns: Pronomen
+        gender: Amtliches Geschlecht
 
       person:
         layer_group_id: Id del livello principale
@@ -1313,8 +1314,9 @@ it:
         pbs_number: Numero personale MSS
         salutation: Appellativo
         salutation_value: Appellativo
-        pronouns: Pronome
+        pronouns: Pronomen
         title: Titolo
+        gender: Amtliches Geschlecht
         grade_of_school: Classe scolastica
         entry_date: Data d'entrata
         leaving_date: Data d'uscita
