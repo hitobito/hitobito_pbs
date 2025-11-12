@@ -1108,18 +1108,26 @@ de:
           hallo_neutral_pfadiname:
             label: Hallo [Pfadiname]
             value:
+              m: Hallo %{nickname}
+              w: Hallo %{nickname}
               other: Hallo %{nickname}
           hallo_neutral_vorname:
             label: Hallo [Vorname]
             value:
+              m: Hallo %{first_name}
+              w: Hallo %{first_name}
               other: Hallo %{first_name}
           guten_tag_neutral_pfadiname:
             label: Guten Tag [Pfadiname]
             value:
+              m: Guten Tag %{nickname}
+              w: Guten Tag %{nickname}
               other: Guten Tag %{nickname}
           guten_tag_neutral_vorname:
             label: Guten Tag [Vorname]
             value:
+              m: Guten Tag %{first_name}
+              w: Guten Tag %{first_name}
               other: Guten Tag %{first_name}
           lieber_pfadiname:
             label: Liebe*r [Pfadiname]

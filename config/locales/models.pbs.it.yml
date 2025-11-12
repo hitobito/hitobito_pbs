@@ -1128,18 +1128,26 @@ it:
           hallo_neutral_pfadiname:
             label: Ciao [Pfadiname]
             value:
+              m: Ciao %{nickname}
+              w: Ciao %{nickname}
               other: Ciao %{nickname}
           hallo_neutral_vorname:
             label: Ciao [Vorname]
             value:
+              m: Ciao %{first_name}
+              w: Ciao %{first_name}
               other: Ciao %{first_name}
           guten_tag_neutral_pfadiname:
             label: Salve [Pfadiname]
             value:
+              m: Salve %{nickname}
+              w: Salve %{nickname}
               other: Salve %{nickname}
           guten_tag_neutral_vorname:
             label: Salve [Vorname]
             value:
+              m: Salve %{first_name}
+              w: Salve %{first_name}
               other: Salve %{first_name}
           lieber_pfadiname:
             label: Caro/a [totem]
