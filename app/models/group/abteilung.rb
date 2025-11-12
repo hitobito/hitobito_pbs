@@ -259,6 +259,10 @@ class Group::Abteilung < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungIT < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   class VizePraesidium < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -295,6 +299,7 @@ class Group::Abteilung < Group
     VerantwortungMaterialverkaufsstelle,
     VerantwortungPfadiTrotzAllem,
     VerantwortungPr,
+    VerantwortungIT,
     Spezialfunktion,
     Ehrenmitglied,
     Passivmitglied,

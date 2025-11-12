@@ -851,6 +851,9 @@ it:
         one: Responsabile PR
         many: Responsabili PR
         other: Responsabili PR
+      group/abteilung/verantwortung_pr:
+        one: Responsabile IT
+        other: Responsabili IT
       group/abteilung/spezialfunktion:
         one: Funzione speciale
         many: Funzioni speciale
