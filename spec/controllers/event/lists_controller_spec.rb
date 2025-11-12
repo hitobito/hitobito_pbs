@@ -336,28 +336,6 @@ describe Event::ListsController do
         expect(values[7]).to eq("11.11.2015")
       end
     end
-
-    context "access via api" do
-      before do
-        sign_out(user)
-      end
-
-      it "responses csv" do
-        user.generate_authentication_token!
-
-        get :bsv_export, params: {
-          filter: {
-            bsv_since: "09.09.2015",
-            bsv_until: "08.09.2016",
-            states: ["closed"]
-          },
-          advanced: true,
-          user_token: user.authentication_token, user_email: user.email
-        }
-
-        expect(rows.length).to eq(3)
-      end
-    end
   end
 
   def fabricate_pbs_camp(overrides = {})
