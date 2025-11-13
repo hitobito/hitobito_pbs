@@ -5,6 +5,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 # Pfadi Organization Hierarchy
 
 <!-- roles:start -->
+
     * Root
       * Root
         * Admin: 2FA [:layer_and_below_full, :admin]
@@ -215,6 +216,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r Materialverkaufsstelle: [:group_read, :contact_data]
         * Verantwortliche*r Pfadi Trotz Allem: [:group_read, :contact_data]
         * Verantwortliche*r PR: [:group_read, :contact_data]
+        * Verantwortliche*r IT: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
         * Ehrenmitglied: []
         * Passivmitglied: []
@@ -272,4 +274,5 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Leitung: [:group_full]
 
 (Output of rake app:hitobito:roles)
+
 <!-- roles:end -->
