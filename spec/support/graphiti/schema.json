@@ -79,33 +79,20 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "label": {
-        },
-        "public": {
-        },
-        "contactable_id": {
-        },
-        "contactable_type": {
-        },
-        "address_care_of": {
-        },
-        "street": {
-        },
-        "housenumber": {
-        },
-        "postbox": {
-        },
-        "zip_code": {
-        },
-        "town": {
-        },
-        "country": {
-        }
+        "id": {},
+        "label": {},
+        "public": {},
+        "contactable_id": {},
+        "contactable_type": {},
+        "address_care_of": {},
+        "street": {},
+        "housenumber": {},
+        "postbox": {},
+        "zip_code": {},
+        "town": {},
+        "country": {}
       },
       "filters": {
         "id": {
@@ -273,8 +260,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -324,21 +310,14 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "label": {
-        },
-        "public": {
-        },
-        "contactable_id": {
-        },
-        "contactable_type": {
-        },
-        "email": {
-        }
+        "id": {},
+        "label": {},
+        "public": {},
+        "contactable_id": {},
+        "contactable_type": {},
+        "email": {}
       },
       "filters": {
         "id": {
@@ -416,8 +395,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -581,11 +559,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -772,11 +748,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -840,11 +814,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -859,8 +831,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -922,11 +893,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -1069,11 +1038,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -1322,46 +1289,26 @@
         }
       },
       "sorts": {
-        "id": {
-        },
-        "name": {
-        },
-        "short_name": {
-        },
-        "display_name": {
-        },
-        "description": {
-        },
-        "layer": {
-        },
-        "parent_id": {
-        },
-        "layer_group_id": {
-        },
-        "type": {
-        },
-        "email": {
-        },
-        "address": {
-        },
-        "zip_code": {
-        },
-        "town": {
-        },
-        "country": {
-        },
-        "require_person_add_requests": {
-        },
-        "self_registration_url": {
-        },
-        "archived_at": {
-        },
-        "created_at": {
-        },
-        "updated_at": {
-        },
-        "deleted_at": {
-        }
+        "id": {},
+        "name": {},
+        "short_name": {},
+        "display_name": {},
+        "description": {},
+        "layer": {},
+        "parent_id": {},
+        "layer_group_id": {},
+        "type": {},
+        "email": {},
+        "address": {},
+        "zip_code": {},
+        "town": {},
+        "country": {},
+        "require_person_add_requests": {},
+        "self_registration_url": {},
+        "archived_at": {},
+        "created_at": {},
+        "updated_at": {},
+        "deleted_at": {}
       },
       "filters": {
         "id": {
@@ -1676,6 +1623,11 @@
           "type": "has_many",
           "description": null,
           "resource": "AdditionalEmailResource"
+        },
+        "mailing_lists": {
+          "type": "has_many",
+          "description": null,
+          "resource": "MailingListResource"
         }
       },
       "stats": {
@@ -1751,11 +1703,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -1873,11 +1823,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -1938,6 +1886,318 @@
       }
     },
     {
+      "name": "MailingListResource",
+      "type": "mailing_lists",
+      "graphql_entrypoint": "mailingLists",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "name": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "group_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "description": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "publisher": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "mail_name": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "additional_sender": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "subscribable_for": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "subscribable_mode": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "subscribers_may_post": {
+          "type": "boolean",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "anyone_may_post": {
+          "type": "boolean",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "preferred_labels": {
+          "type": "array",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "delivery_report": {
+          "type": "boolean",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "main_email": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "subscribable": {
+          "type": "boolean",
+          "readable": true,
+          "writable": true,
+          "description": null
+        }
+      },
+      "extra_attributes": {
+        "subscribers": {
+          "type": "array",
+          "readable": true,
+          "description": null
+        }
+      },
+      "sorts": {
+        "id": {},
+        "name": {},
+        "group_id": {},
+        "description": {},
+        "publisher": {},
+        "mail_name": {},
+        "additional_sender": {},
+        "subscribable_for": {},
+        "subscribable_mode": {},
+        "subscribers_may_post": {},
+        "anyone_may_post": {},
+        "preferred_labels": {},
+        "delivery_report": {},
+        "main_email": {},
+        "subscribable": {}
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "group_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "publisher": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "mail_name": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "additional_sender": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "subscribable_for": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "subscribable_mode": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "subscribers_may_post": {
+          "type": "boolean",
+          "operators": [
+            "eq"
+          ],
+          "single": true
+        },
+        "anyone_may_post": {
+          "type": "boolean",
+          "operators": [
+            "eq"
+          ],
+          "single": true
+        },
+        "preferred_labels": {
+          "type": "array",
+          "operators": [
+            "eq"
+          ]
+        },
+        "delivery_report": {
+          "type": "boolean",
+          "operators": [
+            "eq"
+          ],
+          "single": true
+        },
+        "main_email": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "subscribable": {
+          "type": "boolean",
+          "operators": [
+            "eq"
+          ],
+          "single": true
+        }
+      },
+      "relationships": {
+        "group": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "GroupResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      }
+    },
+    {
       "name": "Person::NameResource",
       "type": "person-name",
       "graphql_entrypoint": "names",
@@ -1962,11 +2222,9 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        }
+        "id": {}
       },
       "filters": {
         "id": {
@@ -1987,8 +2245,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -2140,53 +2397,30 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "first_name": {
-        },
-        "last_name": {
-        },
-        "nickname": {
-        },
-        "company_name": {
-        },
-        "company": {
-        },
-        "email": {
-        },
-        "address": {
-        },
-        "address_care_of": {
-        },
-        "street": {
-        },
-        "housenumber": {
-        },
-        "postbox": {
-        },
-        "zip_code": {
-        },
-        "town": {
-        },
-        "country": {
-        },
-        "primary_group_id": {
-        },
-        "gender": {
-        },
-        "birthday": {
-        },
-        "picture": {
-        },
-        "updated_at": {
-        },
-        "additional_information": {
-        },
-        "language": {
-        }
+        "id": {},
+        "first_name": {},
+        "last_name": {},
+        "nickname": {},
+        "company_name": {},
+        "company": {},
+        "email": {},
+        "address": {},
+        "address_care_of": {},
+        "street": {},
+        "housenumber": {},
+        "postbox": {},
+        "zip_code": {},
+        "town": {},
+        "country": {},
+        "primary_group_id": {},
+        "gender": {},
+        "birthday": {},
+        "picture": {},
+        "updated_at": {},
+        "additional_information": {},
+        "language": {}
       },
       "filters": {
         "id": {
@@ -2592,21 +2826,14 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "label": {
-        },
-        "public": {
-        },
-        "contactable_id": {
-        },
-        "contactable_type": {
-        },
-        "number": {
-        }
+        "id": {},
+        "label": {},
+        "public": {},
+        "contactable_id": {},
+        "contactable_type": {},
+        "number": {}
       },
       "filters": {
         "id": {
@@ -2684,8 +2911,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -2759,29 +2985,18 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "created_at": {
-        },
-        "updated_at": {
-        },
-        "start_on": {
-        },
-        "end_on": {
-        },
-        "name": {
-        },
-        "person_id": {
-        },
-        "group_id": {
-        },
-        "type": {
-        },
-        "label": {
-        }
+        "id": {},
+        "created_at": {},
+        "updated_at": {},
+        "start_on": {},
+        "end_on": {},
+        "name": {},
+        "person_id": {},
+        "group_id": {},
+        "type": {},
+        "label": {}
       },
       "filters": {
         "id": {
@@ -2973,21 +3188,14 @@
           "description": null
         }
       },
-      "extra_attributes": {
-      },
+      "extra_attributes": {},
       "sorts": {
-        "id": {
-        },
-        "label": {
-        },
-        "public": {
-        },
-        "contactable_id": {
-        },
-        "contactable_type": {
-        },
-        "name": {
-        }
+        "id": {},
+        "label": {},
+        "public": {},
+        "contactable_id": {},
+        "contactable_type": {},
+        "name": {}
       },
       "filters": {
         "id": {
@@ -3065,8 +3273,7 @@
           ]
         }
       },
-      "relationships": {
-      },
+      "relationships": {},
       "stats": {
         "total": [
           "count"
@@ -3125,6 +3332,16 @@
         },
         "update": {
           "resource": "InvoiceResource"
+        }
+      }
+    },
+    "/api/mailing_lists": {
+      "actions": {
+        "index": {
+          "resource": "MailingListResource"
+        },
+        "show": {
+          "resource": "MailingListResource"
         }
       }
     },
