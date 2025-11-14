@@ -1111,6 +1111,30 @@ fr:
             w: Bonjour %{greeting_name}
             other: Bonjour %{greeting_name}
         available:
+          hallo_neutral_pfadiname:
+            label: Hallo [Pfadiname]
+            value:
+              m: Hallo %{nickname}
+              w: Hallo %{nickname}
+              other: Hallo %{nickname}
+          hallo_neutral_vorname:
+            label: Hallo [Vorname]
+            value:
+              m: Hallo %{first_name}
+              w: Hallo %{first_name}
+              other: Hallo %{first_name}
+          guten_tag_neutral_pfadiname:
+            label: Guten Tag [Pfadiname]
+            value:
+              m: Guten Tag %{nickname}
+              w: Guten Tag %{nickname}
+              other: Guten Tag %{nickname}
+          guten_tag_neutral_vorname:
+            label: Guten Tag [Vorname]
+            value:
+              m: Guten Tag %{first_name}
+              w: Guten Tag %{first_name}
+              other: Guten Tag %{first_name}
           lieber_pfadiname:
             label: Cher·Chère [totem]
             value:
@@ -1266,13 +1290,19 @@ fr:
       event/question:
         pass_on_to_supercamp: Transmettre au camp principal
 
+      participant:
+        pronouns: Pronomen
+        gender: Amtliches Geschlecht
+
       person:
         layer_group_id: Id du niveau principal
         nickname: Totem
         pbs_number: N° personnel MSdS
         salutation: Formule de politesse
         salutation_value: Formule de politesse
+        pronouns: Pronomen
         title: Civilité
+        gender: Amtliches Geschlecht
         grade_of_school: Classe scolaire
         entry_date: Membre depuis
         leaving_date: Date de départ
