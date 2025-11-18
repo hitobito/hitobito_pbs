@@ -837,6 +837,9 @@ fr:
         one: Responsable relations publiques
         many: Responsables relations publiques
         other: Responsables relations publiques
+      group/abteilung/verantwortung_it:
+        one: Responsable IT
+        other: Responsables IT
       group/abteilung/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
