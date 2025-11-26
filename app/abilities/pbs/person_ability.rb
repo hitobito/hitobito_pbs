@@ -9,8 +9,8 @@ module Pbs::PersonAbility
   included do
     on(Person) do
       permission(:any)
-        .may(:show, :show_full, :show_details, :history,
-          :index_tags, :index_notes).if_member_of_crisis_group_or_oneself_or_manager
+        .may(:show, :show_full, :show_details, :history, :show_tags, :index_notes)
+        .if_member_of_crisis_group_or_oneself_or_manager
     end
 
     def if_member_of_crisis_group_or_oneself_or_manager
