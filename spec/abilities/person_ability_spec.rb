@@ -9,7 +9,7 @@ describe PersonAbility do
   let(:ability) { Ability.new(crisis_creator) }
   let(:crisis_creator) { Fabricate(:person) }
   let(:member) { roles(:al_schekka).person }
-  let(:actions) { [:show, :show_full, :show_details, :history, :index_tags, :index_notes] }
+  let(:actions) { [:show, :show_full, :show_details, :history, :show_tags, :index_notes] }
 
   subject { ability }
 
@@ -60,7 +60,7 @@ describe PersonAbility do
       :show_details,
       :show_full,
       :history,
-      :index_tags,
+      :show_tags,
       :index_notes
     ]
 
