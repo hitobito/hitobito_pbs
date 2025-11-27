@@ -77,7 +77,7 @@ module Alumni
 
     def set_timestamp
       timestamp_attr = "alumni_#{type}_processed_at"
-      role.update!(timestamp_attr => Time.zone.now)
+      role.update_column(timestamp_attr, Time.zone.now)
     end
 
     def send_invitation
