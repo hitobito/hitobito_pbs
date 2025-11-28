@@ -92,7 +92,7 @@ module Pbs::EventAbility
 
   def if_globally_visible_or_participating_with_pbs
     if_globally_visible_or_participating_without_pbs ||
-      participating? ||
+      participating_in_event_or_ancestors? ||
       if_part_of_krisenteam
   end
 
@@ -143,7 +143,7 @@ module Pbs::EventAbility
   end
 
   def if_participating_as_leader_role_of_supercamp
-    participating? && participating_as_leader_role?
+    participating_in_event_or_ancestors? && participating_as_leader_role?
   end
 
   def if_part_of_krisenteam
@@ -160,13 +160,12 @@ module Pbs::EventAbility
     @relevant_participating_event_ids ||= begin
       relevant_event_ids = event.self_and_ancestors.pluck(:id)
       participating_event_ids = user_context.participations.collect(&:event_id)
-
-      (participating_event_ids & relevant_event_ids)
+      participating_event_ids & relevant_event_ids
     end
   end
 
-  def participating?
-    relevant_participating_event_ids.any?
+  def participating_in_event_or_ancestors?
+    relevant_participating_event_ids.present?
   end
 
   def participating_as_leader_role?
@@ -174,7 +173,7 @@ module Pbs::EventAbility
       .joins(participations: [:roles])
       .where(event_participations: {participant_id: user.id, participant_type: Person.sti_name})
       .where.not(event_roles: {type: Event::Camp::Role::Participant.sti_name})
-      .present?
+      .exists?
   end
 
   def if_full_permission_in_course_layer_with_ausbildungskommission
