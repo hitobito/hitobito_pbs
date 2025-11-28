@@ -834,12 +834,17 @@ fr:
         many: Responsables Scout Malgré Tout
         other: Responsables Scout Malgré Tout
       group/abteilung/verantwortung_pr:
+        one: Verantwortliche*r PR
+        other: Verantwortliche PR
+        description:
+      group/abteilung/verantwortung_pr:
         one: Responsable relations publiques
         many: Responsables relations publiques
         other: Responsables relations publiques
       group/abteilung/verantwortung_it:
-        one: Responsable IT
-        other: Responsables IT
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/abteilung/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
