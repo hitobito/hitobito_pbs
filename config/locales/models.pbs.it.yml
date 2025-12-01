@@ -848,9 +848,17 @@ it:
         many: Responsabili SOC
         other: Responsabili SOC
       group/abteilung/verantwortung_pr:
+        one: Verantwortliche*r PR
+        other: Verantwortliche PR
+        description:
+      group/abteilung/verantwortung_pr:
         one: Responsabile PR
         many: Responsabili PR
         other: Responsabili PR
+      group/abteilung/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/abteilung/spezialfunktion:
         one: Funzione speciale
         many: Funzioni speciale
