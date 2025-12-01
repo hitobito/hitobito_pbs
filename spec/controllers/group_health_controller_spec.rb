@@ -15,7 +15,7 @@ describe GroupHealthController do
   describe "authentication" do
     it "redirects to login" do
       get :people
-      is_expected.to redirect_to "/users/sign_in"
+      is_expected.to redirect_to "/de/users/sign_in"
     end
   end
 
