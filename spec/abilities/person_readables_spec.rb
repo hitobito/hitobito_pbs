@@ -49,15 +49,13 @@ describe PersonReadables do
     end
 
     it "people are accessible if user is creator of crisis on another group of this Abteilung" do
-      crises(:schekka).update(creator: user)
+      user.crises.create!(group: groups(:sunnewirbu))
       expect_accessible(al_schekka)
       expect_accessible(child)
     end
   end
 
   context "scoped on group" do
-    let(:group) { groups(:sunnewirbu) }
-
     it "people are not accessible" do
       expect_not_accessible(al_schekka, on_group: :schekka)
       expect_not_accessible(child, on_group: :pegasus)
@@ -78,7 +76,7 @@ describe PersonReadables do
     end
 
     it "people are accessible if user is creator of crisis on another group of this Abteilung" do
-      crises(:schekka).update(creator: user)
+      user.crises.create!(group: groups(:sunnewirbu))
 
       expect_accessible(al_schekka, on_group: :schekka)
       expect_accessible(child, on_group: :pegasus)
