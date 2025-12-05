@@ -19,4 +19,15 @@ module Pbs::PersonReadables
   def has_group_based_conditions?
     user.crises.active.any? || super
   end
+
+  def read_permission_for_this_group?
+    super || user_has_crisis_for_group?
+  end
+
+  def user_has_crisis_for_group?
+    user.crises.active.any? do |crisis|
+      layer_group = crisis.group.layer_group
+      group.lft >= layer_group.lft && group.rgt <= layer_group.rgt
+    end
+  end
 end
