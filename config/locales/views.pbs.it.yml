@@ -351,7 +351,7 @@ it:
       no_sensitive_information: Non includere in questo campo nessun dato personale particolarmente sensibile
     fields_pbs:
       non_automatic_field: Questo non è un campo automatico e deve essere aggiornato manualmente.
-      siblings_in_context: Fratelli in %{context}
+      siblings_in_context: Fratelli e sorelle nel gruppo %{context}
     qualification_buttons_pbs:
       print_course_confirmation: Stampare la conferma del corso
     household_attrs_pbs:
@@ -367,8 +367,8 @@ it:
       year: Anno di nascita
       no_birthday_given: Sconosciuto
       no_census_data_requested: Al momento non c'è nessun censimento ancora in sospeso.
-      please_confirm_census_data: 'Per favore completare il sesso di tutti i membri e confermare i censimenti della tua sezione con "Confermare i censimenti"'
-      missing_gender_information: Per poter inviare i censimenti, a tutti i membri deve essere assegnato il sesso.
+      please_confirm_census_data: 'Per favore completare il sesso registrato di tutti i membri e confermare i censimenti della tua sezione con "Confermare i censimenti"'
+      missing_gender_information: Per poter inviare i censimenti, a tutti i membri deve essere assegnato il sesso registrato.
 
   qualification_kinds:
     fields_pbs:
