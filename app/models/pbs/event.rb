@@ -14,6 +14,12 @@ module Pbs::Event
 
     # dummy accessors for event_resource (only courses do have advisor)
     attr_accessor :advisor_id, :advisor
+
+    private
+
+    def attributes_for_duplicate
+      attributes.excluding("id", "lft", "rgt", "depth", "children_count", "parent_id")
+    end
   end
 
   def camp_submitted?
