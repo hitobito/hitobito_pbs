@@ -21,7 +21,8 @@ module Pbs::Event
     alias_method :original_attributes_for_duplicate, :attributes_for_duplicate
 
     def attributes_for_duplicate
-      original_attributes_for_duplicate.excluding("lft", "rgt", "depth", "children_count", "parent_id")
+      original_attributes_for_duplicate
+        .excluding("lft", "rgt", "depth", "children_count", "parent_id")
     end
   end
 
