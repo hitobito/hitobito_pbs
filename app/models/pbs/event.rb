@@ -17,8 +17,11 @@ module Pbs::Event
 
     private
 
+    # Super cannot be called directly since the module redefines the original method
+    alias :original_attributes_for_duplicate :attributes_for_duplicate
+
     def attributes_for_duplicate
-      attributes.excluding("id", "lft", "rgt", "depth", "children_count", "parent_id")
+      original_attributes_for_duplicate.excluding("lft", "rgt", "depth", "children_count", "parent_id")
     end
   end
 
