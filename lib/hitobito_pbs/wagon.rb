@@ -32,7 +32,7 @@ module HitobitoPbs
       Person.include Pbs::Person
       Role.include Pbs::Role
       Qualification.include Pbs::Qualification
-      Event.include Pbs::Event
+      Event.prepend Pbs::Event
       Event::Kind.include Pbs::Event::Kind
       Event::Date.prepend Pbs::Event::Date
       Event::Course.include Pbs::Event::Course
