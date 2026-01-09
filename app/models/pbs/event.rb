@@ -14,6 +14,16 @@ module Pbs::Event
 
     # dummy accessors for event_resource (only courses do have advisor)
     attr_accessor :advisor_id, :advisor
+
+    private
+
+    # Super cannot be called directly since the module redefines the original method
+    alias_method :original_attributes_for_duplicate, :attributes_for_duplicate
+
+    def attributes_for_duplicate
+      original_attributes_for_duplicate
+        .excluding("lft", "rgt", "depth", "children_count", "parent_id")
+    end
   end
 
   def camp_submitted?
