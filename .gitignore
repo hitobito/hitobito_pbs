@@ -23,3 +23,6 @@ spec/reports
 brakeman-output.tabs
 rubocop-results.xml
 .tool-versions
+
+db/schema.rb
+db/schema.rb.diff

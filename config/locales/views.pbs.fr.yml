@@ -351,7 +351,7 @@ fr:
       no_sensitive_information: Ne pas saisir de données personnelles sensibles dans ce champ.
     fields_pbs:
       non_automatic_field: Ceci n'est pas un champ automatique et doit être adapté manuellement.
-      siblings_in_context: Frères et sœurs en %{context}
+      siblings_in_context: Frères et sœurs dans le groupe %{context}
     qualification_buttons_pbs:
       print_course_confirmation: Imprimer la confirmation du cours
     household_attrs_pbs:
@@ -367,8 +367,8 @@ fr:
       year: Année
       no_birthday_given: Inconnu
       no_census_data_requested: Il n'y a pas de déclaration des effectifs ouverte en ce moment.
-      please_confirm_census_data: 'S''il-te-plaît, indique le sexe de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
-      missing_gender_information: Le sexe de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
+      please_confirm_census_data: 'S''il-te-plaît, indique le sexe officiel de tous les membres et confirme les effectifs de ton groupe en cliquant sur "confirmer les effectifs".'
+      missing_gender_information: Le sexe officiel de tous les membres doit être indiqué avant de pouvoir confirmer les effectifs.
 
   qualification_kinds:
     fields_pbs:

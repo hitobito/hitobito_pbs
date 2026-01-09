@@ -834,9 +834,17 @@ fr:
         many: Responsables Scout Malgré Tout
         other: Responsables Scout Malgré Tout
       group/abteilung/verantwortung_pr:
+        one: Verantwortliche*r PR
+        other: Verantwortliche PR
+        description:
+      group/abteilung/verantwortung_pr:
         one: Responsable relations publiques
         many: Responsables relations publiques
         other: Responsables relations publiques
+      group/abteilung/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/abteilung/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
@@ -1292,7 +1300,7 @@ fr:
 
       participant:
         pronouns: Pronomen
-        gender: Amtliches Geschlecht
+        gender: Sexe officiel
 
       person:
         layer_group_id: Id du niveau principal
@@ -1302,7 +1310,7 @@ fr:
         salutation_value: Formule de politesse
         pronouns: Pronomen
         title: Civilité
-        gender: Amtliches Geschlecht
+        gender: Sexe officiel
         grade_of_school: Classe scolaire
         entry_date: Membre depuis
         leaving_date: Date de départ
@@ -1322,7 +1330,7 @@ fr:
         hostname: Hostname
 
       group/abteilung:
-        gender: Sexe
+        gender: Sexe officiel
         genders:
           _nil: Mixte
           m: Hommes
@@ -1339,7 +1347,7 @@ fr:
 
       people_relation:
         kinds:
-          sibling: Fratrie
+          sibling: Frères et sœurs
 
       black_list:
         first_name: Prénom

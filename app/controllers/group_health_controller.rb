@@ -115,7 +115,7 @@ class GroupHealthController < ApplicationController
 
   def participations
     respond(Event::Participation
-                .select("*", "participant_id AS person_id")
+                .select("event_participations.*", "participant_id AS person_id")
                 .where(participant_type: Person.sti_name)
                 .with_person_participants
                 .merge(Person.joins([{roles: :group}]))

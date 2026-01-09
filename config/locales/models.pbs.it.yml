@@ -848,9 +848,17 @@ it:
         many: Responsabili SOC
         other: Responsabili SOC
       group/abteilung/verantwortung_pr:
+        one: Verantwortliche*r PR
+        other: Verantwortliche PR
+        description:
+      group/abteilung/verantwortung_pr:
         one: Responsabile PR
         many: Responsabili PR
         other: Responsabili PR
+      group/abteilung/verantwortung_it:
+        one: Verantwortliche*r IT
+        many: Verantwortliche IT
+        other: Verantwortliche IT
       group/abteilung/spezialfunktion:
         one: Funzione speciale
         many: Funzioni speciali
@@ -1306,7 +1314,7 @@ it:
 
       participant:
         pronouns: Pronomi
-        gender: Genere ufficiale
+        gender: Sesso registrato
 
       person:
         layer_group_id: Id del livello principale
@@ -1316,7 +1324,7 @@ it:
         salutation_value: Appellativo
         pronouns: Pronomi
         title: Titolo
-        gender: Genere ufficiale
+        gender: Sesso registrato
         grade_of_school: Classe scolastica
         entry_date: Data d'entrata
         leaving_date: Data d'uscita
@@ -1336,7 +1344,7 @@ it:
         hostname: Hostname
 
       group/abteilung:
-        gender: Sesso
+        gender: Sesso registrato
         genders:
           _nil: Misto
           m: Uomini
@@ -1353,7 +1361,7 @@ it:
 
       people_relation:
         kinds:
-          sibling: Fratelli/sorelle
+          sibling: Fratelli e sorelle
 
       black_list:
         first_name: Nome

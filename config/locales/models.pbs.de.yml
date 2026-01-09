@@ -825,6 +825,14 @@ de:
         one: Verantwortliche*r PR
         other: Verantwortliche PR
         description:
+      group/abteilung/verantwortung_pr:
+        one: Verantwortliche*r PR
+        other: Verantwortliche PR
+        description:
+      group/abteilung/verantwortung_it:
+        one: Verantwortliche*r IT
+        other: Verantwortliche IT
+        description:
       group/abteilung/spezialfunktion:
         one: Spezialfunktion
         other: Spezialfunktion

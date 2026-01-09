@@ -957,3 +957,7 @@ kantonalverband_verantwortung_it:
 region_verantwortung_it:
   name: Group::Region::VerantwortungIT
   order_weight: 240
+
+abteilung_verantwortung_pr:
+  name: Group::Abteilung::VerantwortungIT
+  order_weight: 241
