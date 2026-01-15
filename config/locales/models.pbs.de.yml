@@ -670,6 +670,10 @@ de:
         one: Verantwortliche*r Programm
         other: Verantwortliche Programm
         description:
+      group/region/verantwortung_nachhaltigkeit:
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
+        description:
       group/region/spezialfunktion:
         one: Spezialfunktion
         other: Spezialfunktion
