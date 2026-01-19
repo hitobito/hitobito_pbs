@@ -686,9 +686,9 @@ fr:
         many: Responsables du programme
         other: Responsables du programme
       group/region/verantwortung_nachhaltigkeit:
-        one: Responsable du développement durable et de l'environnement
-        many: Responsables du développement durable et de l'environnement
-        other: Responsables du développement durable et de l'environnement
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        many: Verantwortliche Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
       group/region/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
