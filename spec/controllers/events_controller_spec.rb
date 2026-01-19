@@ -598,7 +598,7 @@ describe EventsController do
       it attr do
         put :update, params: {group_id: group.id, id: event.id, event: {
           :visible_contact_attributes => {name: "1"},
-          (attr.to_s + "_attributes") => [{id: qid, pass_on_to_supercamp: true}]
+          (attr.to_s + "_attributes") => {qid => {id: qid, pass_on_to_supercamp: true}}
         }}
         expect(event.reload.send(attr)[0].pass_on_to_supercamp).to be_truthy
       end
