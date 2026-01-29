@@ -12,7 +12,7 @@ describe Export::Tabular::People::PeopleAddress do
     %w[Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail
       zusätzliche\ Adresszeile Strasse Hausnummer Postfach PLZ Ort Land
       Hauptebene Rollen Titel Anrede Sprache Digitale\ Korrespondenz\ bevorzugt
-      Kantonalverband Id] << "Id der Hauptebene"
+      Kantonalverband Personennummer] << "Id der Hauptebene"
   end
   let(:list) { Person.where(id: person) }
   let(:data) {
