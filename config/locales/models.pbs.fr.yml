@@ -22,8 +22,8 @@ fr:
         other: Commissions
         long: Comité de groupe
       group/abteilungs_rover:
-        one: Routier
-        other: Routiers
+        one: Routièr·e
+        other: Routièr·e·s
         long: Routier groupe
       group/ausbildungskommission:
         one: Commission formation
@@ -106,8 +106,8 @@ fr:
         other: Commissions
         long: Comité régional
       group/regionale_rover:
-        one: Routier
-        other: Routiers
+        one: Routièr·e
+        other: Routièr·e·s
         long: Routiers régionaux
       group/root:
         one: Root
@@ -116,7 +116,7 @@ fr:
       group/rover:
         one: Routier
         many: Routiers
-        other: Routiers
+        other: Routièr·e·s
       group/silverscouts:
         one: Silver Scouts
         many: Silver Scouts
@@ -686,9 +686,9 @@ fr:
         many: Responsables du programme
         other: Responsables du programme
       group/region/verantwortung_nachhaltigkeit:
-        one: Responsable du développement durable et de l'environnement
-        many: Responsables du développement durable et de l'environnement
-        other: Responsables du développement durable et de l'environnement
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        many: Verantwortliche Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
       group/region/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
@@ -957,9 +957,9 @@ fr:
         many: Administrateur·trice·s des adresses
         other: Administrateur·trice·s des adresses
       group/rover/rover:
-        one: Routier
-        other: Routiers
-        long: Routier
+        one: Routièr·e
+        other: Routièr·e·s
+        long: Routièr·e
 
       group/pta/einheitsleitung:
         one: Responsable d'unité
@@ -1195,7 +1195,7 @@ fr:
         expected_participants_pio: Pico
         expected_participants_pio_f: Nombre de Picos filles
         expected_participants_pio_m: Nombre de Picos garçons
-        expected_participants_rover: Routier
+        expected_participants_rover: Routièr·e
         expected_participants_rover_f: Nombre de routiers filles
         expected_participants_rover_m: Nombre de routiers garçons
         expected_participants_leitung: Responsables
@@ -1383,7 +1383,7 @@ fr:
         pios: Picos
         pios_m: Picos masc.
         pios_f: Picos fém.
-        rover: Routiers
+        rover: Routièr·e·s
         rover_m: Routiers masc.
         rover_f: Routiers fém.
         pta: SMT
