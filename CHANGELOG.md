@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 2.8
 
 *   Neu können die Pronomen auf Personen erfasst werden, das Geschlecht wurde zu amtliches Geschlecht umbenannt und zwei neue genderneutrale Anreden sind verfügbar (hitobito_pbs#416)
 
