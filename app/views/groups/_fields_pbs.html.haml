@@ -24,7 +24,7 @@
     = f.labeled_input_field :try_out_day_at
 
   - entry.modifiable?(:geolocations) do
-    = f.labeled_inline_fields_for :geolocations, 'group/abteilung/geolocations/geolocation_fields'
+    = f.labeled_inline_fields_for :geolocations, 'group/abteilung/geolocations/geolocation_fields', nil, false, Group::Abteilung::GEOLOCATION_COUNT_LIMIT
 
 = field_set_tag do
   - entry.modifiable_attributes(:pbs_shortname, :bank_account).each do |attr|
