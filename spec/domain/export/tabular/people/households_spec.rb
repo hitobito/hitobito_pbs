@@ -48,12 +48,12 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
     end
 
     context "of household" do
-      let(:list) { Person.where(id: [leader, member]) }
+      let(:list) { Person.where(id: [leader, member]).order(:id) }
 
       before do
-        leader.update(household_key: "1234-1234-1234-1234",
+        leader.update!(household_key: "1234-1234-1234-1234",
           prefers_digital_correspondence: true)
-        member.update(household_key: leader.household_key,
+        member.update!(household_key: leader.household_key,
           street: leader.address,
           zip_code: leader.zip_code,
           town: leader.town,
