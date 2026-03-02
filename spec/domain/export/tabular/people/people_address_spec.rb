@@ -9,10 +9,14 @@ require "csv"
 describe Export::Tabular::People::PeopleAddress do
   let(:person) { people(:bulei) }
   let(:simple_headers) do
-    %w[Vorname Nachname Pfadiname Firmenname Firma Haupt-E-Mail
-      zusätzliche\ Adresszeile Strasse Hausnummer Postfach PLZ Ort Land
-      Hauptebene Rollen Titel Anrede Sprache Digitale\ Korrespondenz\ bevorzugt
-      Kantonalverband Personennummer] << "Id der Hauptebene"
+    ["Vorname", "Nachname", "Pfadiname", "Firmenname", "Firma", "Haupt-E-Mail",
+      "zusätzliche Adresszeile", "Strasse", "Hausnummer", "Postfach", "PLZ", "Ort", "Land",
+      "Hauptebene", "Rollen", "Titel", "Anrede", "Sprache", "Digitale Korrespondenz bevorzugt",
+      "Kantonalverband", "Personennummer", "Id der Hauptebene", "Weitere E-Mail Privat",
+      "Weitere E-Mail Arbeit", "Weitere E-Mail Vater", "Weitere E-Mail Mutter",
+      "Weitere E-Mail Andere", "Weitere E-Mails Freitext", "Telefonnummer Privat",
+      "Telefonnummer Mobil", "Telefonnummer Arbeit", "Telefonnummer Vater",
+      "Telefonnummer Mutter", "Telefonnummer Fax", "Telefonnummer Andere"]
   end
   let(:list) { Person.where(id: person) }
   let(:data) {
