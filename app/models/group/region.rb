@@ -278,6 +278,10 @@ class Group::Region < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungNachhaltigkeit < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   roles Regionalleitung,
     Sekretariat,
     Adressverwaltung,
@@ -319,6 +323,7 @@ class Group::Region < Group
     VerantwortungPraeventionSexuellerAusbeutung,
     VerantwortungIT,
     VerantwortungProgramm,
+    VerantwortungNachhaltigkeit,
     Spezialfunktion,
     Ehrenmitglied,
     Passivmitglied,

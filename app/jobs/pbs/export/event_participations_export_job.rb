@@ -25,7 +25,8 @@ module Pbs::Export::EventParticipationsExportJob
   end
 
   def unfiltered_participants
-    ::Event::ParticipationFilter.new(event, user, filter: "participants").list_entries
+    ::Event::ParticipationFilter::List.new(event, user,
+      filters: {participant_type: "participants"}).list_entries
   end
 
   def data

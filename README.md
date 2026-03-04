@@ -168,6 +168,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r PR: [:group_read, :contact_data]
         * Verantwortliche*r Prävention: [:group_read, :contact_data]
         * Verantwortliche*r Programm: [:group_read, :contact_data]
+        * Verantwortliche*r Nachhaltigkeit und Umwelt: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
         * Ehrenmitglied: []
         * Passivmitglied: []

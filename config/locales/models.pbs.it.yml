@@ -699,6 +699,10 @@ it:
         one: Responsabile del programma
         many: Responsabili del programma
         other: Responsabili del programma
+      group/region/verantwortung_nachhaltigkeit:
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        many: Verantwortliche Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
       group/region/spezialfunktion:
         one: Funzione speciale
         many: Funzioni speciali

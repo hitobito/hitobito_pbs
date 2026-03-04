@@ -1,6 +1,13 @@
 name: 'Lint and test'
 
 on:
+  push:
+    branches:
+      - master
+      - stable
+    paths-ignore:
+      - 'doc/**'
+      - '**.md'
   pull_request:
     paths-ignore:
       - 'doc/**'

@@ -81,7 +81,7 @@ groups:
 
 alumni:
   invitation:
-    enabled: true
+    enabled: false
     role_deleted_before_ago: P3M # must be an ISO 8601 duration string
     role_deleted_after_ago: P6M # must be an ISO 8601 duration string
   reminder:
