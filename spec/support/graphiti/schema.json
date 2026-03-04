@@ -3139,6 +3139,13 @@
             "match",
             "not_match"
           ]
+        },
+        "active": {
+          "type": "date",
+          "operators": [
+            "eq"
+          ],
+          "single": true
         }
       },
       "relationships": {
