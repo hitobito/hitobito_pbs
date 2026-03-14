@@ -12,7 +12,6 @@ module Pbs::Event::Application
     has_many :approvals, dependent: :destroy
 
     after_commit :initialize_approval, on: :create
-
   end
 
   def next_open_approval
@@ -22,7 +21,6 @@ module Pbs::Event::Application
   private
 
   def initialize_approval
-    binding.pry
     if participation.present?
       participation.reload if participation.persisted?
       approver = Event::Approver.new(participation)
