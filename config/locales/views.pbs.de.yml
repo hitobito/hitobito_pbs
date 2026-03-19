@@ -15,12 +15,9 @@ de:
       index:
         no_data_for_this_year: Für dieses Jahr sind keine Angaben vorhanden.
       infos:
-        census_evaluation:
-          Die Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
-        census_evaluation_active:
-          Die aktuellen Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
-        census_evaluation_reference_date:
-          Stichtag ist der %{finish_at}
+        census_evaluation: Die Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
+        census_evaluation_active: Die aktuellen Bestandesmeldungen für %{year} können ab dem %{start_at} erfasst werden.
+        census_evaluation_reference_date: Stichtag ist der %{finish_at}
     abteilung:
       actions_index:
         create_population_data: Aktuellen Bestand erzeugen
@@ -38,7 +35,7 @@ de:
 
   crises:
     update:
-      too_old:  Die Krise ist zu alt um zu quittieren
+      too_old: Die Krise ist zu alt um zu quittieren
 
   devise:
     sessions:
@@ -95,17 +92,16 @@ de:
         camps_abroad: Lager im Ausland
       all_camps:
         title: Bevorstehende Lager in der ganzen Schweiz
-        explanation: 'Hier werden alle Lager der gesamten PBS angezeigt, welche aktuell oder in drei oder weniger Wochen durchgeführt werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und die nicht abgesagt sind.'
+        explanation: "Hier werden alle Lager der gesamten PBS angezeigt, welche aktuell oder in drei oder weniger Wochen durchgeführt werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und die nicht abgesagt sind."
       kantonalverband_camps:
         title: Alle Lager im Kantonalverband %{group}
-        explanation: 'Hier werden alle Lager, welche innerhalb des entsprechenden Kantonalverbandes organisiert werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+        explanation: "Hier werden alle Lager, welche innerhalb des entsprechenden Kantonalverbandes organisiert werden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind."
       camps_in_canton:
         title: Alle Lager im Kanton %{canton}
-        explanation: 'Hier werden alle Lager, welche aktuell oder in drei oder weniger Wochen im entsprechenden Kanton stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
+        explanation: "Hier werden alle Lager, welche aktuell oder in drei oder weniger Wochen im entsprechenden Kanton stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind."
       camps_abroad:
         title: Alle Lager im Ausland
-        explanation: 'Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind.'
-      advanced_bsv_export_button: Erweiterter BSV/LKB Export
+        explanation: "Hier werden alle Lager, welche im Ausland stattfinden angezeigt. Dabei werden nur Lager berücksichtigt, welche eingereicht wurden und deren Status bestätigt oder höher ist und die nicht abgesagt sind."
     hierarchy: Lagerhierarchie
 
     participations:
@@ -159,15 +155,15 @@ de:
 
   event/camp:
     al_present_info:
-      'true': Im Lager anwesend
-      'false': Nicht im Lager anwesend
+      "true": Im Lager anwesend
+      "false": Nicht im Lager anwesend
     visiting_info:
       at: Besucht das Lager am %{date}
-      'true': Besucht das Lager
-      'false': Besucht das Lager nicht
+      "true": Besucht das Lager
+      "false": Besucht das Lager nicht
     coach_confirmed_info:
-      'true': Bestätigt
-      'false': Nicht bestätigt
+      "true": Bestätigt
+      "false": Nicht bestätigt
     checkpoint_field_caption: Kann nur von dem*der Lagerleiter*in bestätigt werden
 
   event/course:
@@ -198,8 +194,8 @@ de:
     create_camp_application:
       flash:
         success: Das Lager wurde an die PBS eingereicht. Du erhältst eine Kopie des E-Mails.
-        error: 'Das Lager konnte nicht eingereicht werden:'
-        preview: 'Das Lager kann noch nicht durch den*die Coach eingereicht werden:'
+        error: "Das Lager konnte nicht eingereicht werden:"
+        preview: "Das Lager kann noch nicht durch den*die Coach eingereicht werden:"
         preview_success: Es sind alle Informationen zum Einreichen des Lagers vorhanden.
     expected_participants_fields:
       expected_participants_help_inline: Hier wird die Anzahl TN und die Anzahl der Leiter*innen eingetragen. Sind diese Angaben noch nicht bekannt, wird die erwartete Anzahl angegeben.
@@ -262,8 +258,11 @@ de:
       vd_title: Beachte die Sonderregelung für Lager im Kanton Waadt («Hering» -> Kantonale Sonderregelungen)
       vd_url: http://hering.scouts.ch
 
+  events/courses:
+    advanced_bsv_export_button: Erweiterter BSV/LKB Export
+
   filter_navigation/events:
-    canton: 'durchgeführt im Kanton'
+    canton: "durchgeführt im Kanton"
 
   filter_navigation/camps:
     all: Alle untergeordneten Lager
@@ -276,7 +275,7 @@ de:
     pending_approvals:
       index:
         pending_title: Offene Freigaben
-        pending_info: 'Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden:'
+        pending_info: "Folgende Personen haben sich für einen Kurs angemeldet und müssen durch dich freigegeben werden:"
         no_pending_info: Zurzeit sind keine offenen Freigaben vorhanden.
       notified_role_setting:
         title: Benachrichtigungen an

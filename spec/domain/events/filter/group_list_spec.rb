@@ -5,11 +5,20 @@
 
 require "spec_helper"
 
-describe Event::Filter do
+describe Events::Filter::GroupList do
   let(:be) { groups(:be) }
   let(:camp) { events(:schekka_camp) }
+  let(:user) { people(:rl_bern) }
+  let(:range) { "all" }
+  let(:default_params) do
+    {year: 2012, type: "Event::Camp", range: range}
+  end
 
-  subject { Event::Filter.new(be, "Event::Camp", filter, 2012, nil).scope }
+  subject { described_class.new(be, user, "Event::Camp", filter, 2012, nil).scope }
+
+  def list_entries(params = {})
+    described_class.new(group, user, default_params.merge(params)).entries
+  end
 
   before do
     KantonalverbandCanton.create!(kantonalverband: be, canton: "be")
@@ -17,37 +26,35 @@ describe Event::Filter do
   end
 
   context "filter all" do
-    let(:filter) { nil }
-
     context "be" do
       let(:group) { be }
 
       it "lists camp" do
-        expect(subject).to eq [camp]
+        expect(list_entries).to eq [camp]
       end
     end
   end
 
   context "filter canton" do
-    let(:filter) { "canton" }
+    let(:range) { "canton" }
 
     context "be" do
       let(:group) { be }
 
       it "does not list camp" do
-        expect(subject).to eq []
+        expect(list_entries).to eq []
       end
 
       context "camp is assigned to be" do
         before { camp.update(canton: "be") }
 
         it "lists camp" do
-          expect(subject).to eq [camp]
+          expect(list_entries).to eq [camp]
         end
 
         it "lists camp even if assigned to different kantonalverband" do
           camp.update(groups: [groups(:zh)])
-          expect(subject).to eq [camp]
+          expect(list_entries).to eq [camp]
         end
       end
     end
