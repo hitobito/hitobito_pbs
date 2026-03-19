@@ -54,8 +54,8 @@ module HitobitoPbs
       Bsv::Info.leader_roles += [Event::Role::Cook]
       Export::Pdf::Participation.runner = Pbs::Export::Pdf::Participation::Runner
       Event::ParticipantAssigner.include Pbs::Event::ParticipantAssigner
-      Event::Filter.include Pbs::Event::Filter
-      Events::Filter::Groups.include Pbs::Events::Filter::Groups
+      Events::Filter::GroupList.prepend Pbs::Events::Filter::GroupList
+      Events::Filter::CourseList.prepend Pbs::Events::Filter::CourseList
       Event::Qualifier::QualifyAction.include Pbs::Event::Qualifier::QualifyAction
       Export::Tabular::Events::List.include Pbs::Export::Tabular::Events::List
       Export::Tabular::Events::Row.include Pbs::Export::Tabular::Events::Row
@@ -145,6 +145,7 @@ module HitobitoPbs
       Event::ParticipationsController.include Pbs::Event::ParticipationsController
       Event::QualificationsController.include Pbs::Event::QualificationsController
       Event::RolesController.prepend Pbs::Event::RolesController
+      Events::CoursesController.prepend Pbs::Events::CoursesController
       QualificationsController.include Pbs::QualificationsController
       Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController

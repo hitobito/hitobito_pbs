@@ -20,6 +20,7 @@ Gemfile.lock
 # reports
 spec/coverage
 spec/reports
+coverage/
 brakeman-output.tabs
 rubocop-results.xml
 .tool-versions
