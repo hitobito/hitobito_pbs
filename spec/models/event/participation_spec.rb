@@ -63,6 +63,16 @@ describe Event::Participation do
       expect(participation.approvers).to have(2).items
       expect(participation.approvers).to include(people(:bulei), people(:al_schekka))
     end
+
+    it "enqueues approval request job with participation" do
+      event.update!(requires_approval_abteilung: true)
+      participation = Fabricate(:pbs_participation,
+        event: event,
+        application: Event::Application.new(priority_1: event), participant: people(:child))
+      job = Delayed::Job.last.payload_object
+      expect(job).to be_a(Event::ApprovalRequestJob)
+      expect(job.parameters[:participation_id]).to eq participation.id
+    end
   end
 
   context "#j_s_data_sharing_accepted" do
