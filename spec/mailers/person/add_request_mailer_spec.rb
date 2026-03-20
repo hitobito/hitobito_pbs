@@ -52,9 +52,9 @@ describe Person::AddRequestMailer do
     let(:mail) { Person::AddRequestMailer.ask_responsibles(request, responsibles) }
 
     before :all do
-      # rubocop:todo Layout/LineLength
-      template = CustomContent.find_or_create_by key: described_class::CONTENT_ADD_REQUEST_RESPONSIBLES
-      # rubocop:enable Layout/LineLength
+      template = CustomContent.find_or_create_by(
+        key: described_class::CONTENT_ADD_REQUEST_RESPONSIBLES
+      )
       template.update!(
         label: "Anfrage Personendaten: E-Mail Freigabe durch Verantwortliche",
         subject: "Freigabe Personendaten",
