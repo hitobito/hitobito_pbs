@@ -98,6 +98,7 @@ module HitobitoPbs
       PersonAbility.include Pbs::PersonAbility
       EventAbility.include Pbs::EventAbility
       EventAbility.include Pbs::Event::Constraints
+      EventReadables.prepend Pbs::EventReadables
       Event::ApplicationAbility.include Pbs::Event::ApplicationAbility
       Event::ApplicationAbility.include Pbs::Event::Constraints
       Event::ParticipationAbility.include Pbs::Event::ParticipationAbility

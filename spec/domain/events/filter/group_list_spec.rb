@@ -52,9 +52,19 @@ describe Events::Filter::GroupList do
           expect(list_entries).to eq [camp]
         end
 
-        it "lists camp even if assigned to different kantonalverband" do
+        it "does not list camp if assigned to different kantonalverband" do
           camp.update(groups: [groups(:zh)])
-          expect(list_entries).to eq [camp]
+          expect(list_entries).to eq []
+        end
+
+        context "as krisenteam member" do
+          let(:user) { people(:be_crisis_member) }
+
+          it "does list camp if assigned to different kantonalverband" do
+            camp.update(groups: [groups(:zh)])
+            puts list_entries.niceql
+            expect(list_entries).to eq [camp]
+          end
         end
       end
     end
