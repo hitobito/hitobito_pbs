@@ -5,7 +5,7 @@
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
 
-CustomContent.seed_once(:key,
+CustomContent.seed(:key,
   { key: AlumniMailer::CONTENT_INVITATION_WITH_REGIONAL_GROUPS,
     placeholders_required: 'person-name, SiScRegion-Links, AlumniGroup-Links' },
 
@@ -593,7 +593,7 @@ CustomContent::Translation.seed_once(:custom_content_id, :locale,
   self_key = [Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_SELF, event_type&.name].compact.join('-')
   other_key = [Pbs::Event::ParticipationsController::CONTENT_KEY_JS_DATA_SHARING_INFO_OTHER, event_type&.name].compact.join('-')
 
-  CustomContent.seed_once(:key,
+  CustomContent.seed(:key,
     { key: self_key },
     { key: other_key }
   )

@@ -28,9 +28,9 @@ describe Event::ParticipationMailer do
       subject { mail.body }
 
       it "renders placeholders" do
-        # rubocop:todo Layout/LineLength
-        is_expected.to match(/AL Schekka \/ Torben wurde per 01.07.2015 vom Kurs Top Course abgemeldet./)
-        # rubocop:enable Layout/LineLength
+        is_expected.to match(
+          /AL Schekka \/ Torben wurde per 01.07.2015 vom Kurs Top Course abgemeldet./
+        )
       end
     end
   end
@@ -69,13 +69,11 @@ describe Event::ParticipationMailer do
         template.update!(
           label: "Anlass: E-Mail Anmeldebestätigung",
           subject: "Bestätigung der Anmeldung",
-          # rubocop:todo Layout/LineLength
           body: "{recipient-name-with-salutation}<br/><br/>" \
                 "Du hast dich für folgenden Anlass angemeldet:<br/><br/>" \
                 "{event-details}<br/><br/>" \
-                "Falls du ein Login hast, kannst du deine Anmeldung unter folgender Adresse einsehen " \
-                "und eine Bestätigung ausdrucken:<br/><br/>{application-url}"
-          # rubocop:enable Layout/LineLength
+                "Falls du ein Login hast, kannst du deine Anmeldung unter folgender Adresse " \
+                " einsehen und eine Bestätigung ausdrucken:<br/><br/>{application-url}"
         )
       end
 
