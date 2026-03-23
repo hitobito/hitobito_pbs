@@ -26,6 +26,10 @@ on:
         description: An optional identifier which is simply output again, in order to identify the workflow run when triggered from another repo
         type: string
         default: ''
+      core_branch_ref:
+        description: Use the core branch for dependency wagon with fallback to master in case branch doesn't exist.
+        type: string
+        default: ''
 jobs:
   wagon_tests:
     uses: hitobito/hitobito/.github/workflows/wagon-tests.yml@master
@@ -34,6 +38,7 @@ jobs:
       wagon_dependency_repository: hitobito_youth
       core_ref: ${{ inputs.core_ref }}
       wagon_dependency_ref: ${{ inputs.wagon_dependency_ref }}
+      core_branch_ref: ${{ inputs.core_branch_ref }}
       distinct_id: ${{ inputs.distinct_id }}
     secrets:
       HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL }}
