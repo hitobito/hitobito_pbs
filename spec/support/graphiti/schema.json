@@ -716,6 +716,11 @@
           "description": null,
           "resource": "Event::DateResource"
         },
+        "participations": {
+          "type": "has_many",
+          "description": null,
+          "resource": "Event::ParticipationResource"
+        },
         "advisor": {
           "type": "belongs_to",
           "description": null,
@@ -952,6 +957,250 @@
       }
     },
     {
+      "name": "Event::ParticipationResource",
+      "type": "event_participations",
+      "graphql_entrypoint": "participations",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "event_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "participant_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "participant_type": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "application_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "active": {
+          "type": "boolean",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "qualified": {
+          "type": "boolean",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "additional_information": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "created_at": {
+          "type": "datetime",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "updated_at": {
+          "type": "datetime",
+          "readable": true,
+          "writable": false,
+          "description": null
+        }
+      },
+      "extra_attributes": {},
+      "sorts": {
+        "id": {}
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "event_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "participant_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "participant_type": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        }
+      },
+      "relationships": {
+        "event": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "EventResource"
+        },
+        "roles": {
+          "type": "has_many",
+          "description": null,
+          "resource": "Event::RoleResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      }
+    },
+    {
+      "name": "Event::RoleResource",
+      "type": "event_roles",
+      "graphql_entrypoint": "roles",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "participation_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "type": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "label": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        }
+      },
+      "extra_attributes": {},
+      "sorts": {
+        "id": {},
+        "participation_id": {},
+        "type": {},
+        "label": {}
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "participation_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        }
+      },
+      "relationships": {
+        "participation": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "Event::ParticipationResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      }
+    },
+    {
       "name": "EventResource",
       "type": "events",
       "graphql_entrypoint": "events",
@@ -1164,6 +1413,11 @@
           "type": "has_many",
           "description": null,
           "resource": "Event::DateResource"
+        },
+        "participations": {
+          "type": "has_many",
+          "description": null,
+          "resource": "Event::ParticipationResource"
         },
         "advisor": {
           "type": "belongs_to",
@@ -3465,6 +3719,16 @@
         },
         "show": {
           "resource": "Event::KindResource"
+        }
+      }
+    },
+    "/api/event_participations": {
+      "actions": {
+        "index": {
+          "resource": "Event::ParticipationResource"
+        },
+        "show": {
+          "resource": "Event::ParticipationResource"
         }
       }
     },
