@@ -41,6 +41,9 @@ Rails.application.routes.draw do
       resources :events, only: [] do # do not redefine events actions, only add new ones
         collection do
           get 'camp' => 'events#index', type: 'Event::Camp'
+          scope module: "events", only: [:new, :create] do
+            resources :filters, path: "camp/filters", as: "events_camp_filters", type: "Event::Camp"
+          end
         end
         member do
           get 'camp_application' => 'events#show_camp_application'
