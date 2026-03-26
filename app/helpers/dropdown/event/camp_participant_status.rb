@@ -37,7 +37,7 @@ module Dropdown
       end
 
       def label_for_state(state)
-        I18n.t("activerecord.attributes.event/camp.participation_states.#{state}")
+        I18n.t("activerecord.attributes.event/participation.states.#{state}")
       end
 
       def possible_states
