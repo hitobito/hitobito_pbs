@@ -15,6 +15,7 @@ describe EventResource, type: :resource do
   before do
     params[:include] = "advisor"
     course.update!(advisor_id: person.id)
+    allow(Graphiti.context[:object]).to receive(:current_scopes).and_return(["api"])
   end
 
   describe "advisor" do
