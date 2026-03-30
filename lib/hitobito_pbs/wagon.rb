@@ -106,7 +106,9 @@ module HitobitoPbs
       Household.prepend Pbs::Household
       QualificationAbility.include Pbs::QualificationAbility
       ServiceTokenAbility.prepend Pbs::ServiceToken::Constraints
-      TokenAbility.include Pbs::TokenAbility
+      TokenAbility.prepend Pbs::TokenAbility
+      TokenAbility.prepend Pbs::ApiScopeAbility
+      DoorkeeperTokenAbility.prepend Pbs::ApiScopeAbility
       VariousAbility.include Pbs::VariousAbility
 
       ### decorators
