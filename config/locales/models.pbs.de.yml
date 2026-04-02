@@ -1257,11 +1257,6 @@ de:
           assignment_closed: Teilnehmende erfasst
           canceled: Abgesagt
           closed: Abgeschlossen
-        participation_states:
-          applied_electronically: Elektronisch angemeldet
-          assigned: Angemeldet
-          canceled: Abgemeldet
-          absent: Nicht erschienen
         coach_id: Coach
         coach: Coach
         advisor_unassigned: Niemand zugeordnet
@@ -1288,6 +1283,11 @@ de:
         confirmation_name: Name der Kursart im Export-Tool
 
       event/participation:
+        states:
+          applied_electronically: Elektronisch angemeldet
+          assigned: Angemeldet
+          canceled: Abgemeldet
+          absent: Nicht erschienen
         additional_information: Wie möchtest du dich im Anlass ernähren? Was sind deine Essgewohnheiten?
         bsv_days: BSV-Tage
         j_s_data_sharing_accepted: J+S Datenweitergabe
