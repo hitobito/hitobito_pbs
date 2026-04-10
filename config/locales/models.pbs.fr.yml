@@ -1263,11 +1263,6 @@ fr:
           assignment_closed: Participant·e·s saisi·e·s
           canceled: Annulé
           closed: Clôturé
-        participation_states:
-          applied_electronically: Inscription électronique
-          assigned: Inscrit·e
-          canceled: Désinscrit·e
-          absent: Ne s'est pas présenté·e
         coach_id: Coach
         coach: Coach
         advisor_unassigned: Attribué à personne
@@ -1294,6 +1289,11 @@ fr:
         confirmation_name: Nom du type du cours dans l'outil pour l'export
 
       event/participation:
+        states:
+          applied_electronically: Elektronisch angemeldet
+          assigned: Angemeldet
+          canceled: Abgemeldet
+          absent: Nicht erschienen
         additional_information: Comment souhaites-tu t'alimenter en cette occasion ? Quelles sont tes habitudes alimentaires ?
         bsv_days: Jours OFAS
         j_s_data_sharing_accepted: Transmission des données à J+S
