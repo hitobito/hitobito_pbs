@@ -15,12 +15,9 @@ it:
       index:
         no_data_for_this_year: Per questo anno non esistono censimenti dei membri.
       infos:
-        census_evaluation:
-          I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
-        census_evaluation_active:
-          I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
-        census_evaluation_reference_date:
-          Il termine è fissato per il %{finish_at}
+        census_evaluation: I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
+        census_evaluation_active: I censimenti dei membri per l'anno %{year} possono essere inviati a partire dal %{start_at}
+        census_evaluation_reference_date: Il termine è fissato per il %{finish_at}
     abteilung:
       actions_index:
         create_population_data: Generare i censimenti
@@ -38,7 +35,7 @@ it:
 
   crises:
     update:
-      too_old:  La crisi è troppo vecchia per venir terminata
+      too_old: La crisi è troppo vecchia per venir terminata
 
   devise:
     sessions:
@@ -95,17 +92,16 @@ it:
         camps_abroad: Campo all'estero
       all_camps:
         title: Futuri campi in tutta la Svizzera
-        explanation: 'Qui vengono indicati tutti i campi di tutto il MSS che sono in corso o che si svolgeranno entro le prossime tre settimane. Entrano in considerazione solo i campi annunciati e non annullati.'
+        explanation: "Qui vengono indicati tutti i campi di tutto il MSS che sono in corso o che si svolgeranno entro le prossime tre settimane. Entrano in considerazione solo i campi annunciati e non annullati."
       kantonalverband_camps:
         title: Tutti i campi dell'associazione cantonale %{group}
-        explanation: 'Qui vengono indicati tutti i campi organizzati all''interno della rispettiva associazione cantonale. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
+        explanation: "Qui vengono indicati tutti i campi organizzati all'interno della rispettiva associazione cantonale. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati."
       camps_in_canton:
         title: Tutti i campi nel cantone %{canton}
-        explanation: 'Qui vengono indicati tutti i campi che sono in corso o che si svolgeranno entro le prossime tre settimane nel cantone corrispondente. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
+        explanation: "Qui vengono indicati tutti i campi che sono in corso o che si svolgeranno entro le prossime tre settimane nel cantone corrispondente. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati."
       camps_abroad:
         title: Tutti i campi all'estero
-        explanation: 'Qui vengono indicati tutti i campi che si svolgono all''estero. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati.'
-      advanced_bsv_export_button: Esportazione estesa a UFAS/CaF
+        explanation: "Qui vengono indicati tutti i campi che si svolgono all'estero. Entrano in considerazione solo i campi annunciati, con lo stato confermato o incrementato e che non sono stati annullati."
     hierarchy: Gerarchia del campo
 
     participations:
@@ -160,15 +156,15 @@ it:
 
   event/camp:
     al_present_info:
-      'true': Presente al campo
-      'false': Non presente al campo
+      "true": Presente al campo
+      "false": Non presente al campo
     visiting_info:
       at: Visita il campo il %{date}
-      'true': Visita il campo
-      'false': Non visita il campo
+      "true": Visita il campo
+      "false": Non visita il campo
     coach_confirmed_info:
-      'true': Confermato
-      'false': Non confermato
+      "true": Confermato
+      "false": Non confermato
     checkpoint_field_caption: Può essere confermato solo dalla direzione del campo
 
   event/course:
@@ -199,8 +195,8 @@ it:
     create_camp_application:
       flash:
         success: Il campo è stato inoltrato al MSS. Ricevi una copia dell'e-mail.
-        error: 'Il campo non può essere salvato:'
-        preview: 'Il campo non può ancora essere annunciato dalla/dal coach:'
+        error: "Il campo non può essere salvato:"
+        preview: "Il campo non può ancora essere annunciato dalla/dal coach:"
         preview_success: Sono disponibili tutte le informazioni per l'annuncio del campo.
     expected_participants_fields:
       expected_participants_help_inline: Qui vengono registrati il numero di partecipanti e il numero di animatori. Se non si conoscono ancora questi dati, va indicato il numero stimato.
@@ -263,8 +259,11 @@ it:
       vd_title: Fai attenzione alle regole particolari per i campi nel Canton Vaud ("Sardina" -> casi particolari per l'iscrizione al campo)
       vd_url: https://www.scout.ch/it/associazione/download/programma/campo/sardina-guida-allamministrazione-di-campi-scout-versione-2016-con-midata
 
+  events/courses:
+    advanced_bsv_export_button: Erweiterter BSV/LKB Export
+
   filter_navigation/events:
-    canton: 'eseguito nel cantone di'
+    canton: "eseguito nel cantone di"
 
   filter_navigation/camps:
     all: Tutti i campi inferiori
@@ -277,7 +276,7 @@ it:
     pending_approvals:
       index:
         pending_title: Autorizzazioni aperte
-        pending_info: 'Le seguenti persone si sono iscritte a un corso e devono essere approvate da te:'
+        pending_info: "Le seguenti persone si sono iscritte a un corso e devono essere approvate da te:"
         no_pending_info: Al momento non ci sono autorizzazioni aperte.
       notified_role_setting:
         title: Notifica a

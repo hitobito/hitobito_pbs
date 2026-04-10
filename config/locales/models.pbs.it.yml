@@ -1277,11 +1277,6 @@ it:
           assignment_closed: Partecipanti registrati
           canceled: Annullato
           closed: Terminato
-        participation_states:
-          applied_electronically: Iscritta/o elettronicamente
-          assigned: Iscritta/o
-          canceled: Disiscritta/o
-          absent: Non comparsa/o
         coach_id: Coach
         coach: Coach
         advisor_unassigned: Nessuna assegnazione
@@ -1308,6 +1303,11 @@ it:
         confirmation_name: Nome del tipo di corso nel tool per l'esportazione
 
       event/participation:
+        states:
+          applied_electronically: Elektronisch angemeldet
+          assigned: Angemeldet
+          canceled: Abgemeldet
+          absent: Nicht erschienen
         additional_information: Quali sono le tue abitudini alimentari?
         bsv_days: Numero di giorni UFAS
         j_s_data_sharing_accepted: Trasferimento dati G+S

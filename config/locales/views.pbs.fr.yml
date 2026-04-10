@@ -15,12 +15,9 @@ fr:
       index:
         no_data_for_this_year: Il n'y a pas de données disponibles pour cette année.
       infos:
-        census_evaluation:
-          Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
-        census_evaluation_active:
-          Les déclarations des effectifs actuels pour l'année %{year} peuvent être saisies dès le %{start_at}.
-        census_evaluation_reference_date:
-          La date limite est le %{finish_at}
+        census_evaluation: Les déclarations des effectifs pour l'année %{year} pourront être saisies dès le %{start_at}.
+        census_evaluation_active: Les déclarations des effectifs actuels pour l'année %{year} peuvent être saisies dès le %{start_at}.
+        census_evaluation_reference_date: La date limite est le %{finish_at}
     abteilung:
       actions_index:
         create_population_data: Créer la liste des effectifs actuels
@@ -38,7 +35,7 @@ fr:
 
   crises:
     update:
-      too_old:  La crise est trop ancienne pour être confirmée
+      too_old: La crise est trop ancienne pour être confirmée
 
   devise:
     sessions:
@@ -95,17 +92,16 @@ fr:
         camps_abroad: Camp à l'étranger
       all_camps:
         title: Camps à venir dans toute la Suisse
-        explanation: 'Ici s''affichent tous les camps du MSdS qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins. Seuls les camps annoncés et qui n''ont pas été annulés sont pris en compte.'
+        explanation: "Ici s'affichent tous les camps du MSdS qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins. Seuls les camps annoncés et qui n'ont pas été annulés sont pris en compte."
       kantonalverband_camps:
         title: Tous les camps au sein de l'association cantonale %{group}
-        explanation: 'Ici s''affichent tous les camps qui sont organisés au sein d''une même association cantonale. Seuls les camps annoncés et qui n''ont pas été annulés sont pris en compte.'
+        explanation: "Ici s'affichent tous les camps qui sont organisés au sein d'une même association cantonale. Seuls les camps annoncés et qui n'ont pas été annulés sont pris en compte."
       camps_in_canton:
         title: Tous les camps dans le canton %{canton}
-        explanation: 'Ici s''affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins au sein d''un même canton. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n''ont pas été annulés sont pris en compte.'
+        explanation: "Ici s'affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins au sein d'un même canton. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n'ont pas été annulés sont pris en compte."
       camps_abroad:
         title: Tous les camps à l'étranger
-        explanation: 'Ici s''affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins à l''étranger. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n''ont pas été annulés sont pris en compte.'
-      advanced_bsv_export_button: Export étendu OFAS/CàF
+        explanation: "Ici s'affichent tous les camps qui ont lieu actuellement ou qui auront lieu dans trois semaines ou moins à l'étranger. Seuls les camps annoncés et dont le statut est confirmé ou plus et qui n'ont pas été annulés sont pris en compte."
     hierarchy: Hiérarchie du camp
 
     participations:
@@ -160,15 +156,15 @@ fr:
 
   event/camp:
     al_present_info:
-      'true': Présent au camp
-      'false': Absent au camp
+      "true": Présent au camp
+      "false": Absent au camp
     visiting_info:
       at: Visitera le camp le %{date}
-      'true': Visitera le camp
-      'false': Ne visitera pas le camp
+      "true": Visitera le camp
+      "false": Ne visitera pas le camp
     coach_confirmed_info:
-      'true': Confirmé
-      'false': Pas confirmé
+      "true": Confirmé
+      "false": Pas confirmé
     checkpoint_field_caption: Ne peut être confirmé que par la·le responsable de camp
 
   event/course:
@@ -199,8 +195,8 @@ fr:
     create_camp_application:
       flash:
         success: Le camp a été remis au MSdS. Tu recevras une copie par l'e-mail.
-        error: 'Le camp n''a pas pu être remis:'
-        preview: 'Le camp ne peut pas encore être transmis par le·la coach :'
+        error: "Le camp n'a pas pu être remis:"
+        preview: "Le camp ne peut pas encore être transmis par le·la coach :"
         preview_success: Toutes les informations nécessaires pour transmettre le camp sont disponibles.
     expected_participants_fields:
       expected_participants_help_inline: Saisir le nombre de participant·e·s et le nombre de responsables. Si ces données ne sont pas encore connues, mettre le nombre de participant·e·s attendu·e·s.
@@ -263,8 +259,11 @@ fr:
       vd_title: Observe la réglementation spéciale pour les camps dans le canton de Vaud ("Sardine" -> Cas particuliers de l'annonce de camp)
       vd_url: http://sardine.scouts.ch
 
+  events/courses:
+    advanced_bsv_export_button: Erweiterter BSV/LKB Export
+
   filter_navigation/events:
-    canton: 'Réalisé dans le canton de'
+    canton: "Réalisé dans le canton de"
 
   filter_navigation/camps:
     all: Tous les sous-camps
@@ -277,7 +276,7 @@ fr:
     pending_approvals:
       index:
         pending_title: Confirmations en attente
-        pending_info: 'Les personnes suivantes se sont inscrites à un cours et doivent être confirmées:'
+        pending_info: "Les personnes suivantes se sont inscrites à un cours et doivent être confirmées:"
         no_pending_info: Il n'y pas de confirmations en attente en ce moment.
       notified_role_setting:
         title: Notification à
