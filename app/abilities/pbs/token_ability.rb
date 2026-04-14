@@ -9,7 +9,11 @@ module Pbs::TokenAbility
   def initialize(token)
     super
 
-    can :show, GroupHealthController if token.group_health?
-    can :census_evaluations, GroupHealthController if token.census_evaluations?
+    if token.group_health? && token.layer.instance_of?(Group::Bund)
+      can :show, GroupHealthController
+    end
+    if token.census_evaluations? && token.layer.instance_of?(Group::Bund)
+      can :census_evaluations, GroupHealthController
+    end
   end
 end

@@ -120,7 +120,6 @@ module HitobitoPbs
       ContactableDecorator.include Pbs::ContactableDecorator
       Event::ParticipationDecorator.include Pbs::Event::ParticipationDecorator
       GroupDecorator.include Pbs::GroupDecorator
-      ServiceTokenDecorator.kinds += [:group_health]
 
       ### serializers
       PersonSerializer.include Pbs::PersonSerializer
