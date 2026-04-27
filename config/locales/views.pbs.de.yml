@@ -230,7 +230,7 @@ de:
       location_help: Den Lagerort auch bei Auslandlager genau beschreiben, inkl. Land
       coordinates_help: CH1903+ / LV95 (Beispiel 2604'870, 1211'271)
       landlord_permission_obtained_caption: Einverständnis der Grund- bzw. Waldeigentümer*innen eingeholt
-      local_scout_contact_present_caption: Kontakt zu lokalen Pfadfis vorhanden
+      local_scout_contact_present_caption: Kontakt zu lokalen Pfadis vorhanden
       emergency_phone_field: Notfallnummer, Notfallkontakt
     show:
       inform_by_email: Informieren
