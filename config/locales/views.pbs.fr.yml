@@ -231,7 +231,7 @@ fr:
       location_help: Décrire également le lieu du camp dans le cas d'un camp à l'étranger, en incluant le pays
       coordinates_help: CH1903+ / LV95 (Exemple 2604'870, 1211'271)
       landlord_permission_obtained_caption: Renseignements pris des probpriétaires du terrain ainsi que de la forêt
-      local_scout_contact_present_caption: Contact avec les scout·e·s locaux·ales disponible
+      local_scout_contact_present_caption: Kontakt zu lokalen Pfadis vorhanden
       emergency_phone_field: Numéro en cas d'urgence, contact en cas d'urgence
     show:
       inform_by_email: Informer

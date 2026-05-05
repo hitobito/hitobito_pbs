@@ -231,7 +231,7 @@ it:
       location_help: Descrivere il luogo del campo anche per campi all'estero, incl. paese
       coordinates_help: CH1903+ / LV95 (esempio 2604'870, 1211'271)
       landlord_permission_obtained_caption: Consenso del proprietario del terreno o bosco ottenuto
-      local_scout_contact_present_caption: Contatto scout locali disponibile
+      local_scout_contact_present_caption: Kontakt zu lokalen Pfadis vorhanden
       emergency_phone_field: Numero d'emergenza, contatto d'emergenza
     show:
       inform_by_email: Informare
