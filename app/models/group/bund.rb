@@ -243,6 +243,10 @@ class Group::Bund < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class VerantwortungNachhaltigkeit < ::Role
+    self.permissions = [:group_read, :contact_data]
+  end
+
   class VerantwortungPfadiTrotzAllem < ::Role
     self.permissions = [:group_read, :contact_data]
   end

@@ -263,6 +263,10 @@ de:
         one: Verantwortliche*r Lagermeldung
         other: Verantwortliche Lagermeldung
         description:
+      group/bund/verantwortung_nachhaltigkeit:
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
+        description:
       group/bund/verantwortung_pr:
         one: Verantwortliche*r PR
         other: Verantwortliche PR

@@ -55,6 +55,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * International Commissioner IC WOSM: [:group_read, :contact_data]
         * Stv IC Programme WAGGGS: [:group_read, :contact_data]
         * Stv IC Programme WOSM: [:group_read, :contact_data]
+        * Verantwortliche*r Nachhaltigkeit und Umwelt: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
         * Ehrenmitglied: []
         * Passivmitglied: []
