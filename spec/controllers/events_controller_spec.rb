@@ -365,6 +365,29 @@ describe EventsController do
         end
       end
     end
+
+    context "flash message respects locale" do
+      let(:event) { events(:schekka_camp) }
+
+      before {
+        event.update!(coach_id: person.id, leader_id: person.id,
+          abteilungsleitung_id: people(:al_berchtold).id)
+      }
+
+      it "failing validation" do
+        get :show, params: {group_id: event.groups.first.id, id: event.id, locale: :fr}
+        expect(flash[:warning]).to match(/Le camp ne peut pas encore être transmis par le·la coach :/)
+        expect(flash[:notice]).to be_blank
+      end
+
+      it "success message" do
+        fill_in_required_columns(event)
+
+        get :show, params: {group_id: event.groups.first.id, id: event.id, locale: :fr}
+        expect(flash[:warning]).to be_blank
+        expect(flash[:notice]).to eq "Toutes les informations nécessaires pour transmettre le camp sont disponibles."
+      end
+    end
   end
 
   context "GET show_camp_application" do

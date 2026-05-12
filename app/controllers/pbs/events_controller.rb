@@ -13,7 +13,7 @@ module Pbs::EventsController
 
     prepend_before_action :entry, only: CrudController::ACTIONS +
       [:show_camp_application, :create_camp_application]
-    prepend_before_action :preview_camp_application_validation, only: :show
+    before_action :preview_camp_application_validation, only: :show
 
     before_render_show :load_participation_emails, if: :canceled?
     before_render_form :load_canton_specific_help_texts
