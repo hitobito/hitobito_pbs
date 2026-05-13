@@ -8,5 +8,5 @@ Fabricator(:question, class_name: "Event::Question") do
   question { "Ja oder nein?" }
   choices { "Ja,Nein" }
   admin { false }
-  disclosure { "optional" }
+  required { false }
 end
