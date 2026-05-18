@@ -9,16 +9,15 @@ describe Export::EventParticipationsExportJob do
   let(:participation) { event_participations(:top_participant) }
   let(:user) { participation.person }
   let(:event) { participation.event }
-  let(:filename) { AsyncDownloadFile.create_name("event_participation_export", user.id) }
   let(:params) { {filter: "all"} }
   let(:format) { :csv }
 
   subject(:job) {
     Export::EventParticipationsExportJob.new(format, user.id, event.id, groups(:be).id,
-      params.merge(filename: filename))
+      params.merge(filename: "event_participation_export"))
   }
 
-  let(:file) { AsyncDownloadFile.from_filename(filename, format) }
+  let(:file) { subject.user_job_result }
 
   before do
     SeedFu.quiet = true
@@ -26,7 +25,9 @@ describe Export::EventParticipationsExportJob do
   end
 
   it "exports 3 lines" do
+    job.enqueue!
     job.perform
+
     expect(file.read).to have(3).lines
   end
 
@@ -34,7 +35,9 @@ describe Export::EventParticipationsExportJob do
     before { params[:nds_course] = true }
 
     it "exports 3 lines" do
+      job.enqueue!
       job.perform
+
       expect(file.read).to have(3).lines
     end
 
@@ -42,7 +45,9 @@ describe Export::EventParticipationsExportJob do
       let(:user) { people(:bulei) }
 
       it "exports only 2 lines" do
+        job.enqueue!
         job.perform
+
         expect(file.read).to have(2).lines
       end
 
