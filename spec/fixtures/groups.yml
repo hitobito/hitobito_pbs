@@ -290,20 +290,20 @@ aries:
   type: Group::Woelfe
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:berchtold) %>
 
-pegasus:
+baereried:
   parent: schekka
   lft: 14
-  rgt: 19
-  name: Pegasus
+  rgt: 15
+  name: Bäreried
   short_name:
   type: Group::Pfadi
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
 
-baereried:
+pegasus:
   parent: schekka
-  lft: 20
+  lft: 16
   rgt: 21
-  name: Bäreried
+  name: Pegasus
   short_name:
   type: Group::Pfadi
   layer_group_id: <%= ActiveRecord::FixtureSet.identify(:schekka) %>
@@ -319,8 +319,8 @@ schloss:
 
 poseidon:
   parent: pegasus
-  lft: 15
-  rgt: 16
+  lft: 19
+  rgt: 20
   name: Poseidon
   short_name:
   type: Group::Pfadi
