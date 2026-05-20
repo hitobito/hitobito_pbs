@@ -11,12 +11,11 @@ module Pbs::SubscriptionsController
   end
 
   def render_tabular_in_background_with_detail(format)
-    with_async_download_cookie(format, "subscriptions_#{mailing_list.id}") do |filename|
-      Export::SubscriptionsJob.new(format,
-        current_person.id,
-        mailing_list.id,
-        params.slice(:household, :household_details, :selection)
-              .merge(filename: filename)).enqueue!
-    end
+    Export::SubscriptionsJob.new(format,
+      current_person.id,
+      mailing_list.id,
+      params.slice(:household, :household_details, :selection)
+            .merge(filename: "subscriptions_#{mailing_list.id}")).enqueue!
+    respond_to_export_job
   end
 end
