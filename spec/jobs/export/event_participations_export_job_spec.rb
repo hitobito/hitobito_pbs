@@ -17,7 +17,7 @@ describe Export::EventParticipationsExportJob do
       params.merge(filename: "event_participation_export"))
   }
 
-  let(:file) { subject.user_job_result }
+  let(:file) { subject.job_observation }
 
   before do
     SeedFu.quiet = true
