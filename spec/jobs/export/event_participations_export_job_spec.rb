@@ -6,6 +6,8 @@
 require "spec_helper"
 
 describe Export::EventParticipationsExportJob do
+  include JobObservationSpecHelper
+
   let(:participation) { event_participations(:top_participant) }
   let(:user) { participation.person }
   let(:event) { participation.event }
@@ -28,7 +30,7 @@ describe Export::EventParticipationsExportJob do
     job.enqueue!
     job.perform
 
-    expect(file.read).to have(3).lines
+    expect(read_data_from_generated_file(file)).to have(3).lines
   end
 
   describe "filtered export" do
@@ -38,7 +40,7 @@ describe Export::EventParticipationsExportJob do
       job.enqueue!
       job.perform
 
-      expect(file.read).to have(3).lines
+      expect(read_data_from_generated_file(file)).to have(3).lines
     end
 
     context "with show details permissions" do
@@ -48,7 +50,7 @@ describe Export::EventParticipationsExportJob do
         job.enqueue!
         job.perform
 
-        expect(file.read).to have(2).lines
+        expect(read_data_from_generated_file(file)).to have(2).lines
       end
 
       it "call to data succeeds for non nds course " do
