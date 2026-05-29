@@ -502,9 +502,9 @@ fr:
         many: Responsables du programme
         other: Responsables du programme
       group/kantonalverband/verantwortung_nachhaltigkeit:
-        one: Responsable du développement durable et de l'environnement
-        many: Responsables du développement durable et de l'environnement
-        other: Responsables du développement durable et de l'environnement
+        one: Responsable durabilité et environnement
+        many: Responsables durabilité et environnement
+        other: Responsables durabilité et environnement
       group/kantonalverband/spezialfunktion:
         one: fonction spéciale
         many: fonction spéciale
@@ -686,9 +686,9 @@ fr:
         many: Responsables du programme
         other: Responsables du programme
       group/region/verantwortung_nachhaltigkeit:
-        one: Verantwortliche*r Nachhaltigkeit und Umwelt
-        many: Verantwortliche Nachhaltigkeit und Umwelt
-        other: Verantwortliche Nachhaltigkeit und Umwelt
+        one: Responsable durabilité et environnement
+        many: Responsables durabilité et environnement
+        other: Responsables durabilité et environnement
       group/region/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
