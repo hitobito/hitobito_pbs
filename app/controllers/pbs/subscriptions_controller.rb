@@ -16,6 +16,7 @@ module Pbs::SubscriptionsController
       mailing_list.id,
       params.slice(:household, :household_details, :selection)
             .merge(filename: "subscriptions_#{mailing_list.id}")).enqueue!
-    respond_to_export_job
+
+    redirect_after_enqueued_export
   end
 end
