@@ -13,7 +13,15 @@ describe Alumni::Invitations do
   end
 
   context "#date_range" do
-    after { Settings.reload! }
+    before do
+      @before_ago = Settings.alumni.invitation.role_deleted_before_ago
+      @after_ago = Settings.alumni.invitation.role_deleted_after_ago
+    end
+
+    after do
+      Settings.alumni.invitation.role_deleted_before_ago = @before_ago
+      Settings.alumni.invitation.role_deleted_after_ago = @after_ago
+    end
 
     it "begins 6 months ago" do
       expect(subject.date_range.begin).to eq 6.months.ago.to_date
