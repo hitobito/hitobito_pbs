@@ -13,7 +13,13 @@ describe Alumni::Reminders do
   end
 
   context "#date_range" do
-    after { Settings.reload! }
+    before do
+      @before_ago = Settings.alumni.reminder.role_deleted_before_ago
+    end
+
+    after do
+      Settings.alumni.reminder.role_deleted_before_ago = @before_ago
+    end
 
     it "begins open ended" do
       expect(subject.date_range.begin).to eq nil
