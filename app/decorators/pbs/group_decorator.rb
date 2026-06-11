@@ -6,22 +6,11 @@
 module Pbs::GroupDecorator
   extend ActiveSupport::Concern
 
-  included do
-    alias_method_chain :allowed_roles_for_self_registration, :nopermission
-  end
-
   def upcoming_supercamps
     events.upcoming.where(allow_sub_camps: true, state: "created").distinct
   end
 
   def upcoming_supercamps_on_group_and_above
     upcoming_supercamps + (root? ? [] : parent.upcoming_supercamps_on_group_and_above)
-  end
-
-  def allowed_roles_for_self_registration_with_nopermission
-    klass.role_types.reject do |r|
-      r.restricted? ||
-        r.permissions.any?
-    end
   end
 end
