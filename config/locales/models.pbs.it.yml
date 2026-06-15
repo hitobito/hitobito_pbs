@@ -296,9 +296,9 @@ it:
         many: Responsabili annuncio campi
         other: Responsabili annuncio campi
       group/bund/verantwortung_nachhaltigkeit:
-        one: Responsabile sostenibilità e ambiente
-        many: Responsabili sostenibilità e ambiente
-        other: Responsabili sostenibilità e ambiente
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        many: Verantwortliche Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
       group/bund/verantwortung_pr:
         one: Responsabile PR
         many: Responsabili PR

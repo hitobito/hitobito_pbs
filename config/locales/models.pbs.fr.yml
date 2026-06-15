@@ -282,9 +282,9 @@ fr:
         many: Responsables annonce de camp
         other: Responsables annonce de camp
       group/bund/verantwortung_nachhaltigkeit:
-        one: Responsable du développement durable et de l'environnement
-        many: Responsables du développement durable et de l'environnement
-        other: Responsables du développement durable et de l'environnement
+        one: Verantwortliche*r Nachhaltigkeit und Umwelt
+        many: Verantwortliche Nachhaltigkeit und Umwelt
+        other: Verantwortliche Nachhaltigkeit und Umwelt
       group/bund/verantwortung_pr:
         one: Responsable relations publiques
         many: Responsables relations publiques
