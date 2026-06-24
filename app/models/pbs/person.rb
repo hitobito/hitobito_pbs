@@ -57,7 +57,7 @@ module Pbs::Person
       :prefers_digital_correspondence << :kantonalverband_id
     Person::ADDRESS_ATTRS << "prefers_digital_correspondence"
 
-    Person::SEARCHABLE_ATTRS << :title << :pbs_number
+    Person::SEARCHABLE_ATTRS << :title
 
     Person.used_attributes << :pronouns # Pronouns should be selectable in table display
 

@@ -84,6 +84,8 @@ module HitobitoPbs
 
       Salutation.prepend Pbs::Salutation
 
+      SearchStrategies::PersonSearch.prepend Pbs::SearchStrategies::PersonSearch
+
       TableDisplays::People::LayerGroupLabelColumn.prepend(
         Pbs::TableDisplays::People::LayerGroupLabelColumn
       )
@@ -147,7 +149,6 @@ module HitobitoPbs
       Event::RolesController.prepend Pbs::Event::RolesController
       Events::CoursesController.prepend Pbs::Events::CoursesController
       QualificationsController.include Pbs::QualificationsController
-      Person::QueryController.search_columns << :pbs_number
       SubscriptionsController.include Pbs::SubscriptionsController
       People::ManualDeletionsController.prepend Pbs::People::ManualDeletionsController
 
