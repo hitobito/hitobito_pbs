@@ -67,16 +67,10 @@ module Pbs::EventAbility
       class_side(:list_cantonal).if_kantonsleitung_or_krisenverantwortlich
       class_side(:list_abroad).if_international_commissioner
 
-      permission(:any).may(:index_revoked_participations).for_participations_full_events
       permission(:any).may(:show_details).if_part_of_krisenteam
       permission(:any).may(:show_crisis_contacts).if_part_of_krisenteam
 
       permission(:any).may(:index_participations).like_in_core_or_as_leader_of_supercamp
-
-      permission(:group_full).may(:index_revoked_participations).in_same_group
-      permission(:group_and_below_full).may(:index_revoked_participations).in_same_group_or_below
-      permission(:layer_full).may(:index_revoked_participations).in_same_layer
-      permission(:layer_and_below_full).may(:index_revoked_participations).in_same_layer_or_below
     end
 
     alias_method_chain :if_full_permission_in_course_layer, :ausbildungskommission
