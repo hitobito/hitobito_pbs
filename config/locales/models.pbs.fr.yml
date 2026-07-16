@@ -282,9 +282,9 @@ fr:
         many: Responsables annonce de camp
         other: Responsables annonce de camp
       group/bund/verantwortung_nachhaltigkeit:
-        one: Verantwortliche*r Nachhaltigkeit und Umwelt
-        many: Verantwortliche Nachhaltigkeit und Umwelt
-        other: Verantwortliche Nachhaltigkeit und Umwelt
+        one: Responsable durabilité et environnement
+        many: Responsables durabilité et environnement
+        other: Responsables durabilité et environnement
       group/bund/verantwortung_pr:
         one: Responsable relations publiques
         many: Responsables relations publiques
@@ -498,9 +498,9 @@ fr:
         many: Responsables prévention
         other: Responsables prévention
       group/kantonalverband/verantwortung_it:
-        one: Verantwortliche*r IT
-        many: Verantwortliche IT
-        other: Verantwortliche IT
+        one: Responsable IT
+        many: Responsables IT
+        other: Responsable IT
       group/kantonalverband/verantwortung_programm:
         one: Responsable du programme
         many: Responsables du programme
@@ -682,9 +682,9 @@ fr:
         many: Responsables prévention
         other: Responsables prévention
       group/region/verantwortung_it:
-        one: Verantwortliche*r IT
-        many: Verantwortliche IT
-        other: Verantwortliche IT
+        one: Responsable IT
+        many: Responsables IT
+        other: Responsable IT
       group/region/verantwortung_programm:
         one: Responsable du programme
         many: Responsables du programme
@@ -850,9 +850,9 @@ fr:
         many: Responsables relations publiques
         other: Responsables relations publiques
       group/abteilung/verantwortung_it:
-        one: Verantwortliche*r IT
-        many: Verantwortliche IT
-        other: Verantwortliche IT
+        one: Responsable IT
+        many: Responsables IT
+        other: Responsable IT
       group/abteilung/spezialfunktion:
         one: Fonction spéciale
         many: Fonction spéciale
