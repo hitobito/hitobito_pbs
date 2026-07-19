@@ -9,7 +9,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
   let(:leader) { people(:bulei) }
   let(:member) { people(:al_schekka) }
   let(:list) { Person.none }
-  let(:exporter) { Pbs::Export::Tabular::People::HouseholdsFull.new(list) }
+  let(:exporter) { Pbs::Export::Tabular::People::HouseholdsFull.new(list, retain_order: true) }
 
   context "header" do
     it "includes name, address attributes and layer group columns" do
