@@ -171,7 +171,7 @@ module HitobitoPbs
       EventsHelper.include Pbs::EventsHelper
       FilterNavigation::Events.include Pbs::FilterNavigation::Events
       NavigationHelper::ADMIN_GROUPS[:people][:items] <<
-        {model: BlackList, path: :black_lists_path}
+        NavigationHelper::Item.new(model: BlackList, path: :black_lists_path)
       ContactAttrs::ControlBuilder.include Pbs::ContactAttrs::ControlBuilder
       Dropdown::PeopleExport.include Pbs::Dropdown::PeopleExport
 
