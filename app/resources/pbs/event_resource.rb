@@ -10,7 +10,8 @@ module Pbs::EventResource
 
   included do
     attribute :advisor_id, :integer, writable: false, sortable: false
-    belongs_to :advisor, resource: PersonResource, writable: false, foreign_key: :advisor_id do
+    belongs_to :advisor, resource: PersonResource, writable: false, foreign_key: :advisor_id,
+      base_scope: ::Person.all do
       assign do |_event, _person|
         # nothing
       end

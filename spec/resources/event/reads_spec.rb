@@ -40,5 +40,16 @@ describe EventResource, type: :resource do
       expect(jsonapi_data[0].id).to eq course.id
       expect(advisor_data.id).to eq person.id
     end
+
+    it "works for an advisor without any role" do
+      advisor = Fabricate(:person)
+      expect(Person.accessible_by(PersonReadables.new(person))).not_to include advisor
+      course.update!(advisor_id: advisor.id)
+
+      params[:filter] = {id: {eq: course.id}}
+      render
+
+      expect(d[0].sideload(:advisor).id).to eq advisor.id
+    end
   end
 end
