@@ -170,8 +170,8 @@ module HitobitoPbs
       ### helpers
       EventsHelper.include Pbs::EventsHelper
       FilterNavigation::Events.include Pbs::FilterNavigation::Events
-      admin = NavigationHelper::MAIN.find { |opts| opts[:label] == :admin }
-      admin[:active_for] << "black_lists"
+      NavigationHelper::ADMIN_GROUPS[:people][:items] <<
+        NavigationHelper::Item.new(model: BlackList, path: :black_lists_path)
       ContactAttrs::ControlBuilder.include Pbs::ContactAttrs::ControlBuilder
       Dropdown::PeopleExport.include Pbs::Dropdown::PeopleExport
 
