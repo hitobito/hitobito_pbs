@@ -11,7 +11,7 @@ class Group::Root < ::Group
   self.event_types = [] # only managing structure, does not have events (as of 2023-05-23)
 
   class Admin < ::Role
-    self.permissions = [:layer_and_below_full, :admin]
+    self.permissions = [:layer_and_below_full, :admin, :see_invisible_from_above]
     self.two_factor_authentication_enforced = true
   end
 
