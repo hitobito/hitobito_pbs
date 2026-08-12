@@ -8,8 +8,8 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
 
     * Root
       * Root
-        * Admin: 2FA [:layer_and_below_full, :admin]
-    * Bund
+        * Admin: 2FA [:layer_and_below_full, :admin, :see_invisible_from_above]
+    * Bund < Root
       * Bund
         * Mitarbeiter*in GS: 2FA [:layer_and_below_full, :contact_data, :admin]
         * IT Support: 2FA [:layer_and_below_full, :contact_data, :admin, :impersonation]
@@ -46,16 +46,16 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r Roverstufe: [:group_read, :contact_data]
         * Verantwortliche*r Pfadi Trotz Allem: [:group_read, :contact_data]
         * Verantwortliche*r Diversität und Inklusion: [:group_read, :contact_data]
-        * Verantwortliche*r IT [:group_read, :contact_data]
         * Verantwortliche*r Lagermeldung: [:group_read, :contact_data]
         * Verantwortliche*r PR: [:group_read, :contact_data]
         * Verantwortliche*r Prävention: [:group_read, :contact_data]
+        * Verantwortliche*r IT: [:group_read, :contact_data]
         * Verantwortliche*r Krisenteam: 2FA [:group_read, :contact_data, :crisis_trigger]
+        * Verantwortliche*r Ehrenamtlichen-Management: 2FA [:layer_and_below_read, :contact_data]
         * International Commissioner IC WAGGGS: [:group_read, :contact_data]
         * International Commissioner IC WOSM: [:group_read, :contact_data]
         * Stv IC Programme WAGGGS: [:group_read, :contact_data]
         * Stv IC Programme WOSM: [:group_read, :contact_data]
-        * Verantwortliche*r Nachhaltigkeit und Umwelt: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
         * Ehrenmitglied: []
         * Passivmitglied: []
@@ -67,14 +67,14 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Leiter*in: [:group_and_below_full]
         * Mitglied: [:group_read]
       * Kommission
-        * Leiter*in: [:layer_read, :group_and_below_full]
-        * Mitglied: [:layer_read]
-    * Kantonalverband
+        * Leiter*in: 2FA [:layer_read, :group_and_below_full]
+        * Mitglied: 2FA [:layer_read]
+    * Kantonalverband < Bund
       * Kantonalverband
-        * Kantonsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
-        * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
-        * Adressverwalter*in: 2FA [:layer_and_below_full, :manual_deletion]
-        * PowerUser: 2FA [:layer_and_below_full, :manual_deletion]
+        * Kantonsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications]
+        * Sekretariat: 2FA [:layer_and_below_full, :contact_data]
+        * Adressverwalter*in: 2FA [:layer_and_below_full]
+        * PowerUser: 2FA [:layer_and_below_full]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
         * Präsident*in APV: [:group_read]
@@ -101,16 +101,17 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r Ausbildung: 2FA [:layer_full, :layer_and_below_read, :contact_data, :approve_applications]
         * Verantwortliche*r Betreuung: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Diversität und Inklusion: [:group_read, :contact_data]
-        * Verantwortliche*r IT [:group_read, :contact_data]
         * Verantwortliche*r Internationales: [:group_read, :contact_data]
         * Verantwortliche*r kantonales Suchtpräventionsprogramm: [:group_read, :contact_data]
         * Verantwortliche*r Kantonsarchiv: [:group_read, :contact_data]
         * Verantwortliche*r Krisenteam: 2FA [:layer_and_below_read, :contact_data, :crisis_trigger]
+        * Verantwortliche*r Ehrenamtlichen-Management: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Lagermeldung: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Lagerplätze: [:group_read, :contact_data]
         * Verantwortliche*r Materialverkaufsstelle: [:group_read, :contact_data]
         * Verantwortliche*r PR: [:group_read, :contact_data]
         * Verantwortliche*r Prävention: [:group_read, :contact_data]
+        * Verantwortliche*r IT: [:group_read, :contact_data]
         * Verantwortliche*r Programm: [:group_read, :contact_data]
         * Verantwortliche*r Nachhaltigkeit und Umwelt: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
@@ -127,7 +128,21 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
       * Kommission
         * Leiter*in: 2FA [:group_and_below_full, :layer_and_below_read]
         * Mitglied: 2FA [:layer_and_below_read]
-    * Region
+    * Region < Region, Silverscouts, Kantonalverband
+      * Rover
+        * Einheitsleiter*in: 2FA [:layer_and_below_read]
+        * Mitleiter*in: 2FA [:layer_and_below_read]
+        * Adressverwalter*in: [:group_and_below_full]
+        * Rover: []
+      * Gremium
+        * Leiter*in: [:group_and_below_full]
+        * Mitglied: [:group_read]
+      * Internes Gremium
+        * Leitung: [:group_and_below_full]
+        * Mitglied: [:group_read]
+      * Kommission
+        * Leiter*in: 2FA [:group_and_below_full, :layer_and_below_read]
+        * Mitglied: 2FA [:layer_and_below_read]
       * Region
         * Regionsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
         * Sekretariat: 2FA [:layer_and_below_full, :contact_data, :manual_deletion]
@@ -159,36 +174,23 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Verantwortliche*r Ausbildung: 2FA [:layer_full, :layer_and_below_read, :contact_data, :approve_applications]
         * Verantwortliche*r Betreuung: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Diversität und Inklusion: [:group_read, :contact_data]
-        * Verantwortliche*r IT [:group_read, :contact_data]
         * Verantwortliche*r Internationales: [:group_read, :contact_data]
         * Verantwortliche*r kantonales Suchtpräventionsprogramm: [:group_read, :contact_data]
         * Verantwortliche*r Krisenteam: 2FA [:layer_and_below_read, :contact_data]
+        * Verantwortliche*r Ehrenamtlichen-Management: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Lagermeldung: 2FA [:layer_and_below_read, :contact_data]
         * Verantwortliche*r Lagerplätze: [:group_read, :contact_data]
         * Verantwortliche*r Materialverkaufsstelle: [:group_read, :contact_data]
         * Verantwortliche*r PR: [:group_read, :contact_data]
         * Verantwortliche*r Prävention: [:group_read, :contact_data]
+        * Verantwortliche*r IT: [:group_read, :contact_data]
         * Verantwortliche*r Programm: [:group_read, :contact_data]
         * Verantwortliche*r Nachhaltigkeit und Umwelt: [:group_read, :contact_data]
         * Spezialfunktion: [:group_read]
         * Ehrenmitglied: []
         * Passivmitglied: []
         * Selbstregistrierte*r: []
-      * Rover
-        * Einheitsleiter*in: 2FA [:layer_and_below_read]
-        * Mitleiter*in: 2FA [:layer_and_below_read]
-        * Adressverwalter*in: [:group_and_below_full]
-        * Rover: []
-      * Gremium
-        * Leiter*in: [:group_and_below_full]
-        * Mitglied: [:group_read]
-      * Internes Gremium
-        * Leitung: [:group_and_below_full]
-        * Mitglied: [:group_read]
-      * Kommission
-        * Leiter*in: 2FA [:group_and_below_full, :layer_and_below_read]
-        * Mitglied: 2FA [:layer_and_below_read]
-    * Abteilung
+    * Abteilung < Region, Kantonalverband
       * Abteilung
         * Abteilungsleiter*in: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
         * Abteilungsleiter*in Stv: 2FA [:layer_and_below_full, :contact_data, :approve_applications, :manual_deletion]
@@ -266,10 +268,14 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
       * Internes Gremium
         * Leitung: [:group_and_below_full]
         * Mitglied: [:group_read]
-    * Silverscouts
-      * Silverscouts
-        * Leitung: [:group_read, :contact_data]
+      * Erziehungsberechtigte
         * Mitglied: []
+        * Selbstregistrierte*r: []
+    * Silverscouts < Root
+      * Silverscouts
+        * Verantwortliche*r: [:layer_and_below_full, :manual_deletion]
+        * Lesezugriff: [:layer_and_below_read]
+        * PowerUser: [:layer_full]
     * Global
       * Ehemalige
         * Mitglied: []
