@@ -11,7 +11,7 @@ module Pbs::EventParticipationSerializer
       property(:phone_numbers, item.person.phone_numbers.select(&:public).map do |number|
         {
           number: number.number,
-          translated_label: number.translated_label
+          translated_label: number.category_label
         }
       end)
 

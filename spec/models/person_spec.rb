@@ -251,7 +251,10 @@ describe Person do
 
     it "triggers blacklist when phone_number" do
       expect do
-        person.update(phone_numbers_attributes: {"0" => {number: "079 123 45 60", label: "privat"}})
+        person.update(phone_numbers_attributes: {
+          "0" => {number: "079 123 45 60", label: "privat",
+                  category_id: contact_account_categories(:phone_number_person_landline).id}
+        })
         expect(person.phone_numbers).to have(1).item
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
