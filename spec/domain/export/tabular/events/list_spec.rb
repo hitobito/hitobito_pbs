@@ -33,9 +33,8 @@ describe Export::Tabular::Events::List do
     end
 
     its(:labels) do
-      # rubocop:todo Layout/LineLength
-      is_expected.to eql ["Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
-        # rubocop:enable Layout/LineLength
+      is_expected.to eql [
+        "Name", "Organisatoren", "Kursnummer", "Kursart", "Beschreibung", "Status", "Ort / Adresse",
         "Datum 1 Bezeichnung", "Datum 1 Ort", "Datum 1 Zeitraum",
         "Datum 2 Bezeichnung", "Datum 2 Ort", "Datum 2 Zeitraum",
         "Datum 3 Bezeichnung", "Datum 3 Ort", "Datum 3 Zeitraum",
@@ -45,12 +44,13 @@ describe Export::Tabular::Events::List do
         "Hauptleitung Haupt-E-Mail", "Hauptleitung Telefonnummern",
         "LKB Name", "LKB Adresse", "LKB PLZ", "LKB Ort",
         "LKB Haupt-E-Mail", "LKB Telefonnummern",
-        "Motto", "Kosten", "Anmeldebeginn", "Anmeldeschluss", "Maximale Teilnehmerzahl",
+        "Motto", "Kosten", "Anmeldebeginn", "Anmeldeschluss", "Maximale Teilnehmendenzahl",
         "Externe Anmeldungen", "Priorisierung", "Ausbildungstage", "Expressgebühr",
         "Kurssprache Deutsch", "Kurssprache Französisch", "Kurssprache Italienisch",
         "Kurssprache Englisch", "Anzahl Leitungsteam", "Anzahl Teilnehmende",
         "Anzahl Anmeldungen", "Anzahl Teilnehmende Männer", "Anzahl Teilnehmende Frauen",
-        "Anzahl Abgemeldete", "Anzahl Nicht erschienene", "Anzahl Abgelehnte"]
+        "Anzahl Abgemeldete", "Anzahl Nicht erschienene", "Anzahl Abgelehnte"
+      ]
     end
   end
 end
