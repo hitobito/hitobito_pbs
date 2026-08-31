@@ -31,8 +31,8 @@ de:
         one: Biber
         other: Biber
       group/bund:
-        one: Bund
-        other: Bund
+        one: Verband
+        other: Verband
       group/bundes_gremium:
         one: Gremium
         other: Gremien
@@ -102,8 +102,8 @@ de:
         one: Rover
         other: Rovers
       group/silverscouts:
-        one: Silverscouts
-        other: Silverscouts
+        one: Ehemaligennetzwerk
+        other: Ehemaligennetzwerk
       group/silverscouts_region:
         one: Region
         other: Regionen
