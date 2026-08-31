@@ -46,7 +46,7 @@ describe Export::Tabular::Events::List do
         "Hauptleitung Haupt-E-Mail", "Hauptleitung Telefonnummern",
         "LKB Name", "LKB Adresse", "LKB PLZ", "LKB Ort",
         "LKB Haupt-E-Mail", "LKB Telefonnummern",
-        "Motto", "Kosten", "Anmeldebeginn", "Anmeldeschluss", "Maximale Teilnehmerzahl",
+        "Motto", "Kosten", "Anmeldebeginn", "Anmeldeschluss", "Maximale Teilnehmendenzahl",
         "Externe Anmeldungen", "Priorisierung", "Ausbildungstage", "Expressgebühr",
         "Kurssprache Deutsch", "Kurssprache Französisch", "Kurssprache Italienisch",
         "Kurssprache Englisch", "Anzahl Leitungsteam", "Anzahl Teilnehmende",
@@ -166,7 +166,7 @@ describe Export::Tabular::Events::List do
 
       it {
         is_expected.to eq <<~CSV_HEADERS.chomp
-          Name;Organisatoren;Beschreibung;Lagerstatus;Ort / Adresse;Datum 1 Bezeichnung;Datum 1 Ort;Datum 1 Zeitraum;Datum 2 Bezeichnung;Datum 2 Ort;Datum 2 Zeitraum;Datum 3 Bezeichnung;Datum 3 Ort;Datum 3 Zeitraum;Notfallnummer;Kontaktperson Name;Kontaktperson Adresse;Kontaktperson PLZ;Kontaktperson Ort;Kontaktperson Haupt-E-Mail;Kontaktperson Telefonnummern;Hauptleitung Name;Hauptleitung Adresse;Hauptleitung PLZ;Hauptleitung Ort;Hauptleitung Haupt-E-Mail;Hauptleitung Telefonnummern;Motto;Kosten;Anmeldebeginn;Anmeldeschluss;Maximale Teilnehmerzahl;Externe Anmeldungen;J+S-Rahmen;Kanton / Land;Eingereicht;Eingereicht am;Leitungsteam erwartet;Teilnehmende erwartet;Anzahl Leitungsteam;Anzahl Teilnehmende;Anzahl Anmeldungen
+          Name;Organisatoren;Beschreibung;Lagerstatus;Ort / Adresse;Datum 1 Bezeichnung;Datum 1 Ort;Datum 1 Zeitraum;Datum 2 Bezeichnung;Datum 2 Ort;Datum 2 Zeitraum;Datum 3 Bezeichnung;Datum 3 Ort;Datum 3 Zeitraum;Notfallnummer;Kontaktperson Name;Kontaktperson Adresse;Kontaktperson PLZ;Kontaktperson Ort;Kontaktperson Haupt-E-Mail;Kontaktperson Telefonnummern;Hauptleitung Name;Hauptleitung Adresse;Hauptleitung PLZ;Hauptleitung Ort;Hauptleitung Haupt-E-Mail;Hauptleitung Telefonnummern;Motto;Kosten;Anmeldebeginn;Anmeldeschluss;Maximale Teilnehmendenzahl;Externe Anmeldungen;J+S-Rahmen;Kanton / Land;Eingereicht;Eingereicht am;Leitungsteam erwartet;Teilnehmende erwartet;Anzahl Leitungsteam;Anzahl Teilnehmende;Anzahl Anmeldungen
         CSV_HEADERS
       }
     end
