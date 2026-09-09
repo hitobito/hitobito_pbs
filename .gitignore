@@ -14,8 +14,8 @@ zeus.json
 .rakeTasks
 .pry_history
 
-# ignore Gemfile.lock for wagons
 Gemfile.lock
+Gemfile.local*
 
 # reports
 spec/coverage

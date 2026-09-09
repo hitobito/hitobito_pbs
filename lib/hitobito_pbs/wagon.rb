@@ -209,10 +209,6 @@ module HitobitoPbs
         url: :help_path
       )
 
-      if Delayed::Job.table_exists?
-        Event::CampReminderJob.new.schedule
-      end
-
       if defined? Bullet
         Bullet.add_safelist type: :n_plus_one_query,
           class_name: "Group::Kantonalverband",

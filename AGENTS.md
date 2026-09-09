@@ -1,0 +1,1 @@
+../hitobito/AGENTS_WAGON.md
