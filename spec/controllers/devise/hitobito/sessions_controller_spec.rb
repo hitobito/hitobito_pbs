@@ -18,7 +18,7 @@ describe Devise::Hitobito::SessionsController do
 
       get :new
 
-      expect(logo[:src]).to match %r{media/images/logo-.*\.svg}
+      expect(logo[:src]).to eq ActionController::Base.helpers.image_path("logo.svg")
     end
 
     it "Group with matching hostname but blank logo returns default logo" do
@@ -26,7 +26,7 @@ describe Devise::Hitobito::SessionsController do
 
       get :new
 
-      expect(logo[:src]).to match %r{media/images/logo-.*\.svg}
+      expect(logo[:src]).to eq ActionController::Base.helpers.image_path("logo.svg")
     end
 
     it "Group with matching hostname and present logo returns group logo" do
