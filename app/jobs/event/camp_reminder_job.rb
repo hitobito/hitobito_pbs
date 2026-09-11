@@ -45,8 +45,8 @@ class Event::CampReminderJob < RecurringJob
     camps.includes(:dates)
       .references(:dates)
       .where("event_dates.start_at >= ? AND (" \
-                "(canton != ? AND event_dates.start_at <= ?) OR " \
-                "(canton = ? AND event_dates.start_at <= ?))",
+                "(events.canton != ? AND event_dates.start_at <= ?) OR " \
+                "(events.canton = ? AND event_dates.start_at <= ?))",
         tonight,
         Event::Camp::ABROAD_CANTON, tonight + SPAN_NATIONAL + 1.day,
         Event::Camp::ABROAD_CANTON, tonight + SPAN_ABROAD + 1.day)
