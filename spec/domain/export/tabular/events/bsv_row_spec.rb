@@ -10,7 +10,6 @@ describe Export::Tabular::Events::BsvRow do
   let(:course) { fabricate_course }
 
   let(:row) { Export::Tabular::Events::BsvRow.new(course) }
-  let(:bern) { Location.create!(name: "Bern Stadt", canton: :be, zip_code: 3000) }
 
   subject { row }
 
@@ -47,15 +46,15 @@ describe Export::Tabular::Events::BsvRow do
   it "bsv_eligible_participants_count counts only ch residents aged 17 to 30" do
     participant = course.people.joins(event_participations: :roles)
       .find_by(event_roles: {type: Event::Course::Role::Participant.sti_name})
-    participant.update(birthday: "01.01.1990", location: bern)
+    participant.update(birthday: "01.01.1990", canton: :be)
     expect(row.fetch(:bsv_eligible_participations_count)).to eq 1
   end
 
   describe "advanced_bsv_export" do
     before do
       course.bsv_days = 7
-      create_eligible_participation(course, location: bern, age: 20)
-      create_eligible_participation(course, location: bern, age: 12)
+      create_eligible_participation(course, canton: :be, age: 20)
+      create_eligible_participation(course, canton: :be, age: 12)
     end
 
     it "bsv_eligible_attendance_summary" do
@@ -78,9 +77,9 @@ describe Export::Tabular::Events::BsvRow do
     course
   end
 
-  def create_eligible_participation(course, age: 20, location: nil, bsv_days: course.bsv_days)
+  def create_eligible_participation(course, age: 20, canton: :be, bsv_days: course.bsv_days)
     birthday = (course.dates.first.start_at - age.years).to_date
-    person = Fabricate(:person, birthday: birthday, location: location)
+    person = Fabricate(:person, birthday: birthday, canton: canton)
     participation = Fabricate(:pbs_participation, event: course, participant: person,
       bsv_days: bsv_days, state: :attended)
     Fabricate(Event::Course::Role::Participant.name, participation: participation)
