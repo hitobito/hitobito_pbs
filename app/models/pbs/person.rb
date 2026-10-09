@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -79,11 +79,6 @@ module Pbs::Person
 
     after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_previously_changed?
-    after_save :send_black_list_mail, if: :blacklisted_attribute_changed?
-  end
-
-  def send_black_list_mail
-    BlackListMailer.hit(self).deliver_now
   end
 
   def salutation_label
@@ -103,10 +98,6 @@ module Pbs::Person
 
   def reset_kantonalverband!
     update_column(:kantonalverband_id, find_kantonalverband.try(:id))
-  end
-
-  def black_listed?
-    Person::BlackListDetector.new(self, attributes.slice(*changed)).occures?
   end
 
   def layer_ids_with_active_crises
@@ -136,10 +127,6 @@ module Pbs::Person
   # Missing when core person is seeded and wagon migrations have not be run
   def pbs_number_column_available?
     self.class.column_names.include?("pbs_number")
-  end
-
-  def blacklisted_attribute_changed?
-    %w[first_name last_name email].any? { |k| previous_changes.key?(k) } && black_listed?
   end
 
   def has_email_in_household

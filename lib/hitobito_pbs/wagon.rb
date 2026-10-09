@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -44,8 +44,6 @@ module HitobitoPbs
       ServiceToken.include Pbs::ServiceToken
 
       Event.acts_as_nested_set(dependent: :nullify)
-
-      PhoneNumber.include Pbs::PhoneNumber
 
       Event::Role::Speaker.qualifiable = true # According to https://github.com/hitobito/hitobito_pbs/issues/233
 
@@ -170,8 +168,6 @@ module HitobitoPbs
       ### helpers
       EventsHelper.include Pbs::EventsHelper
       FilterNavigation::Events.include Pbs::FilterNavigation::Events
-      NavigationHelper::ADMIN_GROUPS[:people][:items] <<
-        NavigationHelper::Item.new(model: BlackList, path: :black_lists_path)
       ContactAttrs::ControlBuilder.include Pbs::ContactAttrs::ControlBuilder
       Dropdown::PeopleExport.include Pbs::Dropdown::PeopleExport
 

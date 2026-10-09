@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -232,40 +232,14 @@ describe Person do
     end
   end
 
-  context "notifies if relevant attribute changes" do
-    let(:last_email) { ActionMailer::Base.deliveries.last }
+  describe "blocklist" do
+    it "prevents creating a blocklisted person" do
+      BlocklistEntry.create!(person_id: person.id)
+      blocked = Person.new(first_name: person.first_name, last_name: person.last_name,
+        birthday: person.birthday)
 
-    before do
-      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return("test@test.com")
-      Fabricate(:black_list, first_name: "dummy", last_name: "example",
-        phone_number: "079 123 45 60")
-    end
-
-    it "triggers blacklist when changing name attributes" do
-      expect do
-        person.update(first_name: "dummy", last_name: "example")
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
-
-      expect(last_email.body).to include(person.full_name)
-    end
-
-    it "triggers blacklist when phone_number" do
-      expect do
-        person.update(phone_numbers_attributes: {
-          "0" => {number: "079 123 45 60", label: "privat",
-                  category_id: contact_account_categories(:phone_number_person_landline).id}
-        })
-        expect(person.phone_numbers).to have(1).item
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
-
-      expect(last_email.body).to include(person.full_name)
-    end
-
-    it "is not triggered on subsequent attribute changes" do
-      person.update(first_name: "dummy", last_name: "example")
-      expect do
-        person.update(gender: "w")
-      end.not_to change { ActionMailer::Base.deliveries.count }
+      expect(blocked).not_to be_valid
+      expect(blocked.errors[:base]).to include(/Ausschlussliste/)
     end
   end
 end
