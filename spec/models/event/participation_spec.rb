@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -215,33 +215,6 @@ describe Event::Participation do
       participation.bsv_days = nil
       participation.state = :attended
       expect(participation).not_to be_valid
-    end
-  end
-
-  context "notification if person is on black list" do
-    let!(:person) { Fabricate(:person, first_name: "foo", last_name: "bar") }
-    let(:last_email) { ActionMailer::Base.deliveries.last }
-
-    before do
-      allow_any_instance_of(BlackListMailer).to receive(:recipients).and_return("test@test.com")
-    end
-
-    it "is sent on participation creation with black list person" do
-      Fabricate(:black_list, first_name: "foo", last_name: "bar")
-
-      expect do
-        Event::Participation.create(event: event, person: person,
-          j_s_data_sharing_accepted_at: Time.zone.now)
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
-
-      expect(last_email.body).to include(person.full_name)
-      expect(last_email.body).to include(event.name)
-    end
-
-    it "is not sent on participation creation if person is not blacklisted" do
-      expect do
-        Event::Participation.create(event: event, person: person)
-      end.not_to change { ActionMailer::Base.deliveries.count }
     end
   end
 end

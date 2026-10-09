@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -81,8 +81,6 @@ Rails.application.routes.draw do
         as: :list_kantonalverband_camps
     get 'list_camps_in_canton' => 'event/lists#camps_in_canton', as: :list_camps_in_canton
     get 'list_camps_abroad' => 'event/lists#camps_abroad', as: :list_camps_abroad
-
-    resources :black_lists
 
     get 'help' => 'help#index'
 
