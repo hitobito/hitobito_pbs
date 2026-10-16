@@ -11,7 +11,8 @@ module Pbs::Event::QualificationsController
   end
 
   def send_confirmation_notifications
-    entries.map(&:decorate).select(&:has_confirmation?).each do |participation|
+    entries
+    @participants.select(&:has_confirmation?).each do |participation|
       Event::Course::ConfirmationMailer.notify(Draper.undecorate(participation)).deliver_later
     end
     flash.now.notice = t(".sent_to_qualified_participants")
