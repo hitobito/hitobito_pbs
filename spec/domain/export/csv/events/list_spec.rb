@@ -147,7 +147,7 @@ describe Export::Tabular::Events::List do
   end
 
   context "camps" do
-    let(:test_camp) { events(:schekka_camp).dup }
+    let(:test_camp) { events(:schekka_camp).duplicate }
     let(:camps) { Event::Camp.all }
     let(:list) { Export::Tabular::Events::List.new(camps) }
     let(:csv) {
