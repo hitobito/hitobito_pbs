@@ -155,7 +155,6 @@ describe Export::Tabular::Events::List do
     }
 
     before do
-      pry
       test_camp.update!(
         **required_attrs_for_camp_submit,
         camp_submitted_at: Time.zone.now.to_date
