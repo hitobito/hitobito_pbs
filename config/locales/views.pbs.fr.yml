@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -391,18 +391,6 @@ fr:
     not_in_created_state: Le camp principal choisi n'a pas le statut "Créé"
     not_upcoming: Le camp supérieur sélectionné est déjà terminé
     already_connected: Le camp est déjà rattaché à un autre camp supérieur
-
-  black_lists:
-    form:
-      pbs_number_format: Exemple 123-123-123
-
-    global:
-      link:
-        add: Ajouter une personne
-    new:
-      title: Ajouter une personne
-    edit:
-      title: Modifier l'entrée
 
   global:
     title_event/camp: camp
