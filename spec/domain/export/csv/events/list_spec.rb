@@ -147,7 +147,7 @@ describe Export::Tabular::Events::List do
   end
 
   context "camps" do
-    let(:test_camp) { events(:schekka_camp).dup }
+    let(:test_camp) { events(:schekka_camp).duplicate }
     let(:camps) { Event::Camp.all }
     let(:list) { Export::Tabular::Events::List.new(camps) }
     let(:csv) {
@@ -155,6 +155,7 @@ describe Export::Tabular::Events::List do
     }
 
     before do
+      pry
       test_camp.update!(
         **required_attrs_for_camp_submit,
         camp_submitted_at: Time.zone.now.to_date
