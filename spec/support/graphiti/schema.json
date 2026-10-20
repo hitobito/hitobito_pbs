@@ -547,9 +547,9 @@
       }
     },
     {
-      "name": "Event::ContactResource",
-      "type": "event-contact",
-      "graphql_entrypoint": "contacts",
+      "name": "Event::ContactDetailsResource",
+      "type": "event-contact-details",
+      "graphql_entrypoint": "contactDetails",
       "description": null,
       "attributes": {
         "id": {
@@ -588,13 +588,7 @@
           "writable": false,
           "description": null
         },
-        "email": {
-          "type": "string",
-          "readable": "guarded",
-          "writable": false,
-          "description": null
-        },
-        "address": {
+        "picture": {
           "type": "string",
           "readable": "guarded",
           "writable": false,
@@ -642,8 +636,32 @@
           "writable": false,
           "description": null
         },
-        "picture": {
+        "additional_addresses": {
+          "type": "array",
+          "readable": "guarded",
+          "writable": false,
+          "description": null
+        },
+        "email": {
           "type": "string",
+          "readable": "guarded",
+          "writable": false,
+          "description": null
+        },
+        "additional_emails": {
+          "type": "array",
+          "readable": "guarded",
+          "writable": false,
+          "description": null
+        },
+        "phone_numbers": {
+          "type": "array",
+          "readable": "guarded",
+          "writable": false,
+          "description": null
+        },
+        "social_accounts": {
+          "type": "array",
           "readable": "guarded",
           "writable": false,
           "description": null
@@ -953,7 +971,12 @@
         "contact": {
           "type": "belongs_to",
           "description": null,
-          "resource": "Event::ContactResource"
+          "resource": "PersonResource"
+        },
+        "contact_details": {
+          "type": "has_one",
+          "description": null,
+          "resource": "Event::ContactDetailsResource"
         },
         "kind": {
           "type": "belongs_to",
@@ -1787,7 +1810,12 @@
         "contact": {
           "type": "belongs_to",
           "description": null,
-          "resource": "Event::ContactResource"
+          "resource": "PersonResource"
+        },
+        "contact_details": {
+          "type": "has_one",
+          "description": null,
+          "resource": "Event::ContactDetailsResource"
         },
         "kind": {
           "type": "belongs_to",
