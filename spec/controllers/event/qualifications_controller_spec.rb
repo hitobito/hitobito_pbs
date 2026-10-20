@@ -65,7 +65,7 @@ describe Event::QualificationsController do
     end
 
     it "sends email to all qualified participants" do
-      expect(Event::Course::ConfirmationMailer).to receive(:notify).twice
+      expect(Event::Course::ConfirmationMailer).to receive(:notify).once
         .and_call_original
       post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id},
         xhr: true
