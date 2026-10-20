@@ -332,6 +332,7 @@ class Group::Bund < Group
     VerantwortungIT,
     VerantwortungKrisenteam,
     VerantwortungEhrenamt,
+    VerantwortungNachhaltigkeit,
     InternationalCommissionerIcWagggs,
     InternationalCommissionerIcWosm,
     StvIcProgrammeWagggs,
