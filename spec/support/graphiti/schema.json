@@ -2373,6 +2373,62 @@
       }
     },
     {
+      "name": "GroupTypeResource",
+      "type": "group_types",
+      "graphql_entrypoint": "groupTypes",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "label": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "label_plural": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "layer": {
+          "type": "boolean",
+          "readable": true,
+          "writable": false,
+          "description": null
+        }
+      },
+      "extra_attributes": {},
+      "sorts": {
+        "id": {},
+        "label": {}
+      },
+      "filters": {},
+      "relationships": {
+        "role_types": {
+          "type": "has_many",
+          "description": null,
+          "resource": "RoleTypeResource"
+        },
+        "possible_children": {
+          "type": "has_many",
+          "description": null,
+          "resource": "GroupTypeResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      },
+      "default_page_size": 1000
+    },
+    {
       "name": "InvoiceItemResource",
       "type": "invoice_items",
       "graphql_entrypoint": "invoiceItems",
@@ -4069,6 +4125,63 @@
       }
     },
     {
+      "name": "RoleTypeResource",
+      "type": "role_types",
+      "graphql_entrypoint": "roleTypes",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "label": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "kind": {
+          "type": "string",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "permissions": {
+          "type": "array_of_strings",
+          "readable": true,
+          "writable": false,
+          "description": null
+        },
+        "visible_from_above": {
+          "type": "boolean",
+          "readable": true,
+          "writable": false,
+          "description": null
+        }
+      },
+      "extra_attributes": {},
+      "sorts": {
+        "id": {},
+        "label": {}
+      },
+      "filters": {},
+      "relationships": {
+        "group_types": {
+          "type": "has_many",
+          "description": null,
+          "resource": "GroupTypeResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      },
+      "default_page_size": 1000
+    },
+    {
       "name": "SelfRegistrationResource",
       "type": "self_registrations",
       "graphql_entrypoint": "selfRegistrations",
@@ -4358,6 +4471,13 @@
         }
       }
     },
+    "/api/group_types": {
+      "actions": {
+        "index": {
+          "resource": "GroupTypeResource"
+        }
+      }
+    },
     "/api/invoices": {
       "actions": {
         "index": {
@@ -4426,6 +4546,13 @@
         },
         "destroy": {
           "resource": "RoleResource"
+        }
+      }
+    },
+    "/api/role_types": {
+      "actions": {
+        "index": {
+          "resource": "RoleTypeResource"
         }
       }
     },
