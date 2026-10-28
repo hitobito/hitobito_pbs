@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2013, Jungwacht Blauring Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Jungwacht Blauring Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
@@ -39,6 +39,14 @@ describe "events/_attrs.html.haml" do
         is_expected.to have_content "some general informations"
         is_expected.to have_content "some application conditions"
       end
+    end
+
+    it "renders formatted description" do
+      event.update!(description: "<div>Erste Zeile</div><div><a href=\"https://example.com\">Link</a></div>")
+
+      render
+      is_expected.to have_css ".trix-content div", text: "Erste Zeile"
+      is_expected.to have_link "Link", href: "https://example.com"
     end
   end
 end
