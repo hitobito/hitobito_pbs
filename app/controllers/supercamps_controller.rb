@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2019-2021, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -122,6 +122,7 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
+      .reject { |_attr, value| value.is_a?(ActionText::RichText) }
       .merge(supercamp_attributes_to_merge)
   end
 
@@ -131,9 +132,9 @@ class SupercampsController < ApplicationController
 
   def appended_description
     [
-      params[:event][:description].to_s.strip,
-      supercamp.description.to_s.strip
-    ].join("\n\n").strip
+      params[:event][:description],
+      supercamp.description&.body&.to_trix_html
+    ].map { |html| html.to_s.strip }.compact_blank.join("<br>")
   end
 
   def event_with_merged_supercamp

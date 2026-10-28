@@ -1,4 +1,4 @@
-#  Copyright (c) 2019-2021 Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2026 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -93,6 +93,7 @@ describe SupercampsController do
         let(:event_form_data) { camp.attributes }
         let(:override_date) { nil }
         let(:parent_id) { nil }
+        let(:supercamp_description) { nil }
         let(:expected_required_contact_attrs) {
           {"email" => :required,
            "first_name" => :required,
@@ -111,7 +112,8 @@ describe SupercampsController do
             parent_id: parent_id)
           supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
             state: supercamp_state,
-            required_contact_attrs: [:town])
+            required_contact_attrs: [:town],
+            description: supercamp_description)
 
           if !override_date.nil?
             supercamp.dates.each do |date|
@@ -177,10 +179,26 @@ describe SupercampsController do
             expect(result[:name]).to eq(supercamp.name + ": " + group.display_name)
           end
 
-          it "description is calculated" do
-            # rubocop:todo Layout/LineLength
-            expect(result[:description]).to eq((supercamp.description.to_s + "\n\n" + camp.description.to_s).strip)
-            # rubocop:enable Layout/LineLength
+          context "with descriptions" do
+            let(:supercamp_description) { "<div>Hauptlager <strong>fett</strong></div>" }
+            let(:event_form_data) { camp.attributes.merge("description" => "<div>Unterlager</div>") }
+
+            it "appends the description of the supercamp" do
+              expect(result[:description])
+                .to eq("<div>Unterlager</div><br><div>Hauptlager <strong>fett</strong></div>")
+            end
+
+            it "passes on no rich text objects" do
+              expect(result.values.grep(ActionText::RichText)).to be_empty
+            end
+
+            context "without description in the form" do
+              let(:event_form_data) { camp.attributes.merge("description" => "") }
+
+              it "takes the description of the supercamp" do
+                expect(result[:description]).to eq("<div>Hauptlager <strong>fett</strong></div>")
+              end
+            end
           end
 
           it "parent_id is correct" do
