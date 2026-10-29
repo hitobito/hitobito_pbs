@@ -20,8 +20,8 @@ module Pbs
             attrs
           end
 
-          def initialize(list, group = nil)
-            super(list)
+          def initialize(list, ability = nil, group = nil)
+            super(list, ability)
             @group = group
           end
 
