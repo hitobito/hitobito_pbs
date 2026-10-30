@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-#  Copyright (c) 2020-2022 Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2020-2026 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -253,6 +253,7 @@ describe GroupHealthController do
             person = people.first
             expect(person.keys).to match_array(%w[id pbs_number town zip_code country gender
               birthday entry_date leaving_date primary_group_id name address])
+            expect(person["pbs_number"]).to eq(Person.find(person["id"]).pbs_number)
           end
 
           it "does only export camps with participants having roles in a group having opted in" do

@@ -128,6 +128,10 @@ describe Person do
       person = Fabricate(:person, id: 123_456_789)
       expect(person.pbs_number).to eq("123-456-789")
     end
+
+    it "is nil for new person" do
+      expect(Person.new.pbs_number).to be_nil
+    end
   end
 
   context "#kantonalverband" do
