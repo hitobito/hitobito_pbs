@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_youth and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -25,7 +25,7 @@ describe Event::QualificationsController, type: :controller do
 
         get :index, params: {group_id: course.groups.first.id, event_id: course.id}
 
-        expect(page).to have_selector("input[type=radio]", count: 3)
+        expect(page).to have_selector("input[type=checkbox]")
       end
     end
   end
