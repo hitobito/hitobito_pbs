@@ -1,4 +1,4 @@
-#  Copyright (c) 2017, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2017-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
@@ -17,6 +17,6 @@ module Pbs::Export::PeopleExportJob
 
   def data
     return super unless exporter == ::Export::Tabular::People::PeopleFull
-    ::Export::Tabular::People::PeopleFull.export(@format, entries, group)
+    ::Export::Tabular::People::PeopleFull.export(@format, entries, ability, group)
   end
 end
