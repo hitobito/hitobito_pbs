@@ -1,4 +1,4 @@
-#  Copyright (c) 2019, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -12,7 +12,7 @@ module Pbs::Event::QualificationsController
 
   def send_confirmation_notifications
     entries
-    @participants.select(&:has_confirmation?).each do |participation|
+    (@leaders + @participants).select(&:has_confirmation?).each do |participation|
       Event::Course::ConfirmationMailer.notify(Draper.undecorate(participation)).deliver_later
     end
     flash.now.notice = t(".sent_to_qualified_participants")
