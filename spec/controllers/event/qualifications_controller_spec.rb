@@ -1,4 +1,4 @@
-#  Copyright (c) 2019-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2019-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -65,7 +65,7 @@ describe Event::QualificationsController do
     end
 
     it "sends email to all qualified participants" do
-      expect(Event::Course::ConfirmationMailer).to receive(:notify).once
+      expect(Event::Course::ConfirmationMailer).to receive(:notify).twice
         .and_call_original
       post :send_confirmation_notifications, params: {group_id: group.id, event_id: course.id},
         xhr: true

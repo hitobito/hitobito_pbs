@@ -50,6 +50,9 @@ event:
   globally_visible_by_default: false
   participations:
     delete_additional_information_after_months: 3
+  qualifications:
+    comments:
+      enabled: false
 
 csv:
   separator: ;
