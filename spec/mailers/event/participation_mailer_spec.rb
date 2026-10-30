@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -82,6 +82,23 @@ describe Event::ParticipationMailer do
       it "contains the name with a salutation" do
         is_expected.to match(/Liebe\*r Torben/)
       end
+    end
+  end
+
+  context "confirmation_other" do
+    let(:mail) { Event::ParticipationMailer.confirmation_other(participation) }
+
+    before do
+      template = CustomContent.find_or_create_by key: described_class::CONTENT_CONFIRMATION_OTHER
+      template.update!(label: "Anlass: E-Mail Fremdanmeldebestätigung",
+        subject: "Du wurdest angemeldet",
+        body: "{event-details}<br/><br/>{application-url}")
+      question = participation.event.questions.create!(question: "Shoe size?", required: false)
+      participation.answers.find_or_initialize_by(question:).update!(answer: "42")
+    end
+
+    it "contains the application answers" do
+      expect(mail.parts.first.body).to include("Shoe size?: 42")
     end
   end
 
