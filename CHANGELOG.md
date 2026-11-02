@@ -1,5 +1,9 @@
 # Hitobito PBS Changelog
 
+## unreleased
+
+*   Die PBS Personennummer wird nicht mehr auf dem Personenprofil angezeigt, dort ist neu die Personennummer ersichtlich (hitobito_zss#8)
+
 ## Version 2.8
 
 *   Neu können die Pronomen auf Personen erfasst werden, das Geschlecht wurde zu amtliches Geschlecht umbenannt und zwei neue genderneutrale Anreden sind verfügbar (hitobito_pbs#416)

@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2023, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -34,10 +34,6 @@ describe Export::Tabular::People::PeopleAddress do
   context "export_full" do
     let(:data) { Export::Tabular::People::PeopleFull.csv(list) }
 
-    before do
-      person.update(pbs_number: "337-180-612")
-    end
-
     its(:headers) { is_expected.to include("Titel") }
 
     context "first row" do
@@ -45,7 +41,7 @@ describe Export::Tabular::People::PeopleAddress do
 
       its(["Titel"]) { is_expected.to eq "Dr." }
       its(["Anrede"]) { is_expected.to eq "Sehr geehrter Herr Dr. Leiter" }
-      its(["PBS Personennummer"]) { is_expected.to eq "337-180-612" }
+      its(["PBS Personennummer"]) { is_expected.to be_present.and eq(person.pbs_number) }
     end
   end
 end

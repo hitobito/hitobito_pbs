@@ -77,8 +77,11 @@ module Pbs::Person
 
     validate :has_email_in_household, if: :prefers_digital_correspondence
 
-    after_create :set_pbs_number!, if: :pbs_number_column_available?
     after_save :reset_kantonalverband!, if: :primary_group_id_previously_changed?
+  end
+
+  def pbs_number
+    format("%09d", id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-') if id
   end
 
   def salutation_label
@@ -118,15 +121,6 @@ module Pbs::Person
   def kantonalverband_for(group)
     group.hierarchy.select(:id).find_by(type: ::Group::Kantonalverband.sti_name) ||
       Group::Bund.select(:id).first
-  end
-
-  def set_pbs_number!
-    update_column(:pbs_number, format("%09d", id).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, '\\1-'))
-  end
-
-  # Missing when core person is seeded and wagon migrations have not be run
-  def pbs_number_column_available?
-    self.class.column_names.include?("pbs_number")
   end
 
   def has_email_in_household

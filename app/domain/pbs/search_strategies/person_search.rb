@@ -7,12 +7,12 @@
 
 module Pbs::SearchStrategies
   module PersonSearch
-    extend ActiveSupport::Concern
+    PBS_NUMBER_FORMAT = /\A\d{3}-\d{3}-\d{3}\z/
 
-    prepended do
-      self.searchable_identifiers = searchable_identifiers.merge({
-        pbs_number: /\A\d{3}-\d{3}-\d{3}\z/
-      })
+    def search_identifiers
+      return super unless term.match?(PBS_NUMBER_FORMAT)
+
+      accessible_scope.where(id: term.delete("-").to_i)
     end
   end
 end

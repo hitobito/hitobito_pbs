@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2020-2022, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2020-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -13,7 +13,7 @@ class GroupHealthController < ApplicationController
   CENSUS_EVALUTATIONS_GROUP_TYPES = [Group::Abteilung, Group::Kantonalverband, Group::Region].freeze
   J_S_KINDS = %w[j_s_kind_none j_s_kind_j_s_child j_s_kind_j_s_youth j_s_kind_j_s_mixed].freeze
   CAMP_STATES = %w[created confirmed assignment_closed canceled closed].freeze
-  PERSON_FIELDS = %i[id pbs_number first_name last_name nickname street housenumber town zip_code
+  PERSON_FIELDS = %i[id first_name last_name nickname street housenumber town zip_code
     country gender birthday entry_date leaving_date primary_group_id].freeze
   ROLES_FIELDS = %i[id person_id group_id type created_at start_on end_on].freeze
   GROUPS_FIELDS = %i[id parent_id type name created_at deleted_at canton_id canton_name].freeze
@@ -62,7 +62,7 @@ class GroupHealthController < ApplicationController
                   .where(EXCLUDE_INTERNES_GREMIUM)
                   .order(:id)
                   .page(params[:page]).per(params[:size] || DEFAULT_PAGE_SIZE)
-                  .as_json(only: PERSON_FIELDS)
+                  .as_json(only: PERSON_FIELDS, methods: :pbs_number)
                   .map { |item| set_name(item) }
                   .map { |item| set_address(item) })
     }
