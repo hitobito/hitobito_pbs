@@ -4,7 +4,13 @@
 #  https://github.com/hitobito/hitobito_pbs.
 
 class RemovePbsNumberFromPeople < ActiveRecord::Migration[8.0]
-  def change
-    remove_column :people, :pbs_number, :string
+  def up
+    remove_column :people, :search_column, if_exists: true
+    remove_column :people, :pbs_number, if_exists: true
+  end
+
+  def down
+    remove_column :people, :search_column, if_exists: true
+    add_column :people, :pbs_number, :string
   end
 end
