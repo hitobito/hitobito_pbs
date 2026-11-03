@@ -1,6 +1,6 @@
 # Hitobito PBS Changelog
 
-## unreleased
+## Version 2.11
 
 *   Die PBS Personennummer wird nicht mehr auf dem Personenprofil angezeigt, dort ist neu die Personennummer ersichtlich (hitobito_zss#8)
 
