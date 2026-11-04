@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-#  Copyright (c) 2023-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2023-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -14,6 +14,7 @@ describe People::Minimizer do
   let(:person) do
     p = Fabricate(Group::Pfadi::Pfadi.sti_name.to_sym, group: groups(:pegasus)).person
     p.update!(address_care_of: "c/o Herr Blømblgårf",
+      address_addition: "Hinterhaus",
       street: "Belpstrasse",
       housenumber: "37",
       postbox: "Postfach 42",
@@ -114,6 +115,7 @@ describe People::Minimizer do
       :street,
       :housenumber,
       :address_care_of,
+      :address_addition,
       :postbox,
       :town,
       :zip_code,
