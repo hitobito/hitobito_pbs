@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2024, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
@@ -13,7 +13,8 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
 
   context "header" do
     it "includes name, address attributes and layer group columns" do
-      expect(exporter.attributes).to eq [:salutation, :name, :address_care_of, :street, :housenumber, :postbox,
+      expect(exporter.attributes).to eq [:salutation, :name, :address_care_of, :address_addition,
+        :street, :housenumber, :postbox,
         :zip_code, :town, :country, :layer_group, :language,
         :prefers_digital_correspondence, :kantonalverband_id,
         :id, :layer_group_id, :company_name, :company]
@@ -28,6 +29,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
         expect(exporter.data_rows.to_a).to eq [[
           "Sehr geehrter Herr Dr. Leiter",
           "Bundes Leiter",
+          nil,
           nil,
           nil,
           nil,
@@ -64,6 +66,7 @@ describe Pbs::Export::Tabular::People::HouseholdsFull do
         expect(exporter.data_rows.to_a).to eq [[
           "Sehr geehrter Herr Dr. Leiter, sehr geehrte*r Schekka",
           "Bundes Leiter, AL Schekka",
+          nil,
           nil,
           nil,
           nil,
