@@ -19,6 +19,7 @@ This hitobito wagon defines the organization hierarchy with groups and roles of 
         * Assistenz Ausbildung: 2FA [:layer_full]
         * Präsident*in: [:group_read, :contact_data]
         * Vize Präsident*in: [:group_read, :contact_data]
+        * Vorstand: 2FA [:layer_and_below_read, :contact_data]
         * Präsident*in APV: [:group_read]
         * Geschäftsleiter*in: 2FA [:layer_and_below_read, :contact_data, :approve_applications]
         * Mitarbeiter*in: [:group_read, :contact_data]

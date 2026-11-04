@@ -2,6 +2,7 @@
 
 ## unreleased
 
+*   Neue Rolle "Vorstand" auf Bundesebene hinzugefügt (hitobito_pbs#479)
 *   Die PBS Personennummer wird nicht mehr auf dem Personenprofil angezeigt, dort ist neu die Personennummer ersichtlich (hitobito_zss#8)
 
 ## Version 2.8
