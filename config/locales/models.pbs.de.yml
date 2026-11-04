@@ -143,6 +143,10 @@ de:
         one: Vize Präsident*in
         other: Vize Präsident*innen
         description:
+      group/bund/vorstand:
+        one: Vorstand
+        other: Vorstand
+        description:
       group/bund/praesidium_apv:
         one: Präsident*in APV
         other: Präsident*innen APV

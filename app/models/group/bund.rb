@@ -287,6 +287,11 @@ class Group::Bund < Group
     self.permissions = [:group_read, :contact_data]
   end
 
+  class Vorstand < ::Role
+    self.permissions = [:layer_and_below_read, :contact_data]
+    self.two_factor_authentication_enforced = true
+  end
+
   class Webmaster < ::Role
     self.permissions = [:group_read, :contact_data]
   end
@@ -299,6 +304,7 @@ class Group::Bund < Group
     AssistenzAusbildung,
     Praesidium,
     VizePraesidium,
+    Vorstand,
     PraesidiumApv,
     Geschaeftsleitung,
     Mitarbeiter,
