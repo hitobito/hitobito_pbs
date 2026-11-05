@@ -16,7 +16,7 @@ describe Export::Tabular::Events::List do
     subject { list }
 
     its(:attributes) do
-      is_expected.to eql [:name, :group_names, :number, :kind, :description, :state, :location,
+      is_expected.to eql [:name, :group_names, :number, :kind, :plain_text_description, :state, :location,
         :date_0_label, :date_0_location, :date_0_duration,
         :date_1_label, :date_1_location, :date_1_duration,
         :date_2_label, :date_2_location, :date_2_duration,
@@ -147,7 +147,7 @@ describe Export::Tabular::Events::List do
   end
 
   context "camps" do
-    let(:test_camp) { events(:schekka_camp).dup }
+    let(:test_camp) { events(:schekka_camp).duplicate }
     let(:camps) { Event::Camp.all }
     let(:list) { Export::Tabular::Events::List.new(camps) }
     let(:csv) {
