@@ -243,7 +243,7 @@ describe Person do
         birthday: person.birthday)
 
       expect(blocked).not_to be_valid
-      expect(blocked.errors[:base]).to include(/Ausschlussliste/)
+      expect(blocked.errors[:base]).to include(/konnte nicht erstellt werden/)
     end
   end
 end
