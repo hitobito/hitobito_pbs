@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -209,6 +209,25 @@ describe Export::Pdf::CampApplication::ViewModel do
           advisor_water = Fabricate(:person)
           camp.update(advisor_water_security_id: advisor_water.id)
           expect(data.camp_attr_value(:advisor_water_security)).to eq advisor_water.to_s
+        end
+      end
+
+      context "phone number" do
+        let(:person) { Fabricate(:person) }
+
+        before do
+          Fabricate(:phone_number, contactable: person, number: "+41 31 111 11 11",
+            category: contact_account_categories(:phone_number_person_landline))
+          Fabricate(:phone_number, contactable: person, number: "+41 79 222 22 22",
+            category: contact_account_categories(:phone_number_person_mobile))
+        end
+
+        it "returns the number of the home category" do
+          expect(data.phone_number(person, :home)).to eq "+41 31 111 11 11"
+        end
+
+        it "returns the number of the mobile category" do
+          expect(data.phone_number(person, :mobile)).to eq "+41 79 222 22 22"
         end
       end
 

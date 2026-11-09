@@ -1,4 +1,4 @@
-#  Copyright (c) 2015 Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2015-2026 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -94,8 +94,8 @@ module Export::Pdf
           .collect(&:person) - [camp_leader]
       end
 
-      def phone_number(person, label)
-        person.phone_numbers.find_by(label: label).try(:number)
+      def phone_number(person, category)
+        person.phone_numbers.public_send(category).first&.number
       end
 
       def js_security_value
