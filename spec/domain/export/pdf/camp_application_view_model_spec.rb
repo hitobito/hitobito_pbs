@@ -215,19 +215,21 @@ describe Export::Pdf::CampApplication::ViewModel do
       context "phone number" do
         let(:person) { Fabricate(:person) }
 
-        before do
-          Fabricate(:phone_number, contactable: person, number: "+41 31 111 11 11",
+        let!(:landline) do
+          Fabricate(:phone_number, contactable: person, number: "+41 44 111 11 11",
             category: contact_account_categories(:phone_number_person_landline))
+        end
+        let!(:mobile) do
           Fabricate(:phone_number, contactable: person, number: "+41 79 222 22 22",
             category: contact_account_categories(:phone_number_person_mobile))
         end
 
-        it "returns the number of the home category" do
-          expect(data.phone_number(person, :home)).to eq "+41 31 111 11 11"
+        it "returns the landline number for home" do
+          expect(data.phone_number(person, :home)).to eq landline.number
         end
 
-        it "returns the number of the mobile category" do
-          expect(data.phone_number(person, :mobile)).to eq "+41 79 222 22 22"
+        it "returns the mobile number for mobile" do
+          expect(data.phone_number(person, :mobile)).to eq mobile.number
         end
       end
 
