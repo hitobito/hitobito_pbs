@@ -1,4 +1,4 @@
-#  Copyright (c) 2016 Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2016-2026 Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -39,12 +39,10 @@ module Export::Pdf
         labeled_value(label, value, {cell_style: {height: 12}}.merge(options))
       end
 
-      def labeled_phone_number(person, phone_label, options = {})
-        value = @context.phone_number(person, phone_label)
-        return if value.blank?
+      def labeled_phone_number(number, i18n_key, options = {})
+        return if number.blank?
 
-        label = I18n.t("events.fields_pbs.phone_#{phone_label.downcase}")
-        labeled_value(label, value, options)
+        labeled_value(I18n.t("events.fields_pbs.#{i18n_key}"), number, options)
       end
 
       def labeled_person(person, details = true) # rubocop:todo Metrics/AbcSize
@@ -53,8 +51,8 @@ module Export::Pdf
         labeled_value(Person.human_attribute_name(:town), [person.zip_code,
           person.town].compact.join(" "))
         labeled_email(person)
-        labeled_phone_number(person, "Privat")
-        labeled_phone_number(person, "Mobil")
+        labeled_phone_number(@context.home_phone_number(person), :phone_privat)
+        labeled_phone_number(@context.mobile_phone_number(person), :phone_mobil)
         return unless details
 
         birthday = person.birthday.presence && I18n.l(person.birthday)

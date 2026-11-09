@@ -1,4 +1,4 @@
-#  Copyright (c) 2012-2014, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2026, Pfadibewegung Schweiz. This file is part of
 #  hitobito_pbs and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito_pbs.
@@ -137,6 +137,48 @@ describe Export::Pdf::CampApplication::ViewModel do
 
       it "returns none if leader has no qualifications" do
         expect(data.active_qualifications(leader)).to match(/keine/)
+      end
+    end
+
+    context "phone numbers" do
+      let(:camp) { Fabricate(:pbs_camp) }
+      let(:person) { Fabricate(:person) }
+      let(:data) { described_class.new(camp) }
+
+      it "returns none if person has no phone numbers" do
+        expect(data.home_phone_number(person)).to be_nil
+        expect(data.mobile_phone_number(person)).to be_nil
+      end
+
+      context "with landline and mobile number" do
+        let!(:landline) do
+          Fabricate(:phone_number, contactable: person, number: "+41 44 111 11 11",
+            category: contact_account_categories(:phone_number_person_landline))
+        end
+        let!(:mobile) do
+          Fabricate(:phone_number, contactable: person, number: "+41 79 222 22 22",
+            category: contact_account_categories(:phone_number_person_mobile))
+        end
+
+        it "returns the landline number as home phone number" do
+          expect(data.home_phone_number(person)).to eq landline.number
+        end
+
+        it "returns the mobile number as mobile phone number" do
+          expect(data.mobile_phone_number(person)).to eq mobile.number
+        end
+      end
+
+      context "with work number labeled Privat" do
+        let!(:work) do
+          Fabricate(:phone_number, contactable: person, number: "+41 31 333 33 33", label: "Privat",
+            category: contact_account_categories(:phone_number_person_work))
+        end
+
+        it "returns none" do
+          expect(data.home_phone_number(person)).to be_nil
+          expect(data.mobile_phone_number(person)).to be_nil
+        end
       end
     end
 
