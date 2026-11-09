@@ -140,6 +140,48 @@ describe Export::Pdf::CampApplication::ViewModel do
       end
     end
 
+    context "phone numbers" do
+      let(:camp) { Fabricate(:pbs_camp) }
+      let(:person) { Fabricate(:person) }
+      let(:data) { described_class.new(camp) }
+
+      it "returns none if person has no phone numbers" do
+        expect(data.home_phone_number(person)).to be_nil
+        expect(data.mobile_phone_number(person)).to be_nil
+      end
+
+      context "with landline and mobile number" do
+        let!(:landline) do
+          Fabricate(:phone_number, contactable: person, number: "+41 44 111 11 11",
+            category: contact_account_categories(:phone_number_person_landline))
+        end
+        let!(:mobile) do
+          Fabricate(:phone_number, contactable: person, number: "+41 79 222 22 22",
+            category: contact_account_categories(:phone_number_person_mobile))
+        end
+
+        it "returns the landline number as home phone number" do
+          expect(data.home_phone_number(person)).to eq landline.number
+        end
+
+        it "returns the mobile number as mobile phone number" do
+          expect(data.mobile_phone_number(person)).to eq mobile.number
+        end
+      end
+
+      context "with work number labeled Privat" do
+        let!(:work) do
+          Fabricate(:phone_number, contactable: person, number: "+41 31 333 33 33", label: "Privat",
+            category: contact_account_categories(:phone_number_person_work))
+        end
+
+        it "returns none" do
+          expect(data.home_phone_number(person)).to be_nil
+          expect(data.mobile_phone_number(person)).to be_nil
+        end
+      end
+    end
+
     context "camp attribute value formatting" do
       let(:coach) { Fabricate(:person) }
       let(:camp) { Fabricate(:pbs_camp, coach_id: coach.id) }
@@ -209,27 +251,6 @@ describe Export::Pdf::CampApplication::ViewModel do
           advisor_water = Fabricate(:person)
           camp.update(advisor_water_security_id: advisor_water.id)
           expect(data.camp_attr_value(:advisor_water_security)).to eq advisor_water.to_s
-        end
-      end
-
-      context "phone number" do
-        let(:person) { Fabricate(:person) }
-
-        let!(:landline) do
-          Fabricate(:phone_number, contactable: person, number: "+41 44 111 11 11",
-            category: contact_account_categories(:phone_number_person_landline))
-        end
-        let!(:mobile) do
-          Fabricate(:phone_number, contactable: person, number: "+41 79 222 22 22",
-            category: contact_account_categories(:phone_number_person_mobile))
-        end
-
-        it "returns the landline number as home phone number" do
-          expect(data.home_phone_number(person)).to eq landline.number
-        end
-
-        it "returns the mobile number as mobile phone number" do
-          expect(data.mobile_phone_number(person)).to eq mobile.number
         end
       end
 
