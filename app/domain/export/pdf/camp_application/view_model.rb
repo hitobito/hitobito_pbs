@@ -94,8 +94,12 @@ module Export::Pdf
           .collect(&:person) - [camp_leader]
       end
 
-      def phone_number(person, category)
-        person.phone_numbers.public_send(category).first&.number
+      def home_phone_number(person)
+        person.phone_numbers.home.first&.number
+      end
+
+      def mobile_phone_number(person)
+        person.phone_numbers.mobile.first&.number
       end
 
       def js_security_value

@@ -224,12 +224,12 @@ describe Export::Pdf::CampApplication::ViewModel do
             category: contact_account_categories(:phone_number_person_mobile))
         end
 
-        it "returns the landline number for home" do
-          expect(data.phone_number(person, :home)).to eq landline.number
+        it "returns the landline number as home phone number" do
+          expect(data.home_phone_number(person)).to eq landline.number
         end
 
-        it "returns the mobile number for mobile" do
-          expect(data.phone_number(person, :mobile)).to eq mobile.number
+        it "returns the mobile number as mobile phone number" do
+          expect(data.mobile_phone_number(person)).to eq mobile.number
         end
       end
 

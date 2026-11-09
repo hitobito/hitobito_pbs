@@ -39,11 +39,10 @@ module Export::Pdf
         labeled_value(label, value, {cell_style: {height: 12}}.merge(options))
       end
 
-      def labeled_phone_number(person, category, i18n_key, options = {})
-        value = @context.phone_number(person, category)
-        return if value.blank?
+      def labeled_phone_number(number, i18n_key, options = {})
+        return if number.blank?
 
-        labeled_value(I18n.t("events.fields_pbs.#{i18n_key}"), value, options)
+        labeled_value(I18n.t("events.fields_pbs.#{i18n_key}"), number, options)
       end
 
       def labeled_person(person, details = true) # rubocop:todo Metrics/AbcSize
@@ -52,8 +51,8 @@ module Export::Pdf
         labeled_value(Person.human_attribute_name(:town), [person.zip_code,
           person.town].compact.join(" "))
         labeled_email(person)
-        labeled_phone_number(person, :home, :phone_privat)
-        labeled_phone_number(person, :mobile, :phone_mobil)
+        labeled_phone_number(@context.home_phone_number(person), :phone_privat)
+        labeled_phone_number(@context.mobile_phone_number(person), :phone_mobil)
         return unless details
 
         birthday = person.birthday.presence && I18n.l(person.birthday)
