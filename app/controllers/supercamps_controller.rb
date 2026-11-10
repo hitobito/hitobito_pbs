@@ -122,8 +122,12 @@ class SupercampsController < ApplicationController
 
   def supercamp_attrs
     @supercamp_attrs ||= supercamp.attributes.except(*EXCLUDED_SUPERCAMP_ATTRS)
-      .reject { |_attr, value| value.is_a?(ActionText::RichText) }
+      .transform_values { |value| rich_text_as_html(value) }
       .merge(supercamp_attributes_to_merge)
+  end
+
+  def rich_text_as_html(value)
+    value.is_a?(ActionText::RichText) ? value.body&.to_trix_html : value
   end
 
   def generated_name

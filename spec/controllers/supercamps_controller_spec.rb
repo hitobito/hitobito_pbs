@@ -94,6 +94,7 @@ describe SupercampsController do
         let(:override_date) { nil }
         let(:parent_id) { nil }
         let(:supercamp_description) { nil }
+        let(:supercamp_description_fr) { nil }
         let(:expected_required_contact_attrs) {
           {"email" => :required,
            "first_name" => :required,
@@ -113,7 +114,8 @@ describe SupercampsController do
           supercamp.update!(allow_sub_camps: supercamp_allows_sub_camps,
             state: supercamp_state,
             required_contact_attrs: [:town],
-            description: supercamp_description)
+            description: supercamp_description,
+            description_fr: supercamp_description_fr)
 
           if !override_date.nil?
             supercamp.dates.each do |date|
@@ -190,6 +192,14 @@ describe SupercampsController do
 
             it "passes on no rich text objects" do
               expect(result.values.grep(ActionText::RichText)).to be_empty
+            end
+
+            context "in other languages" do
+              let(:supercamp_description_fr) { "<div>Camp principal</div>" }
+
+              it "takes the descriptions of the supercamp" do
+                expect(result[:description_fr]).to eq("<div>Camp principal</div>")
+              end
             end
 
             context "without description in the form" do
