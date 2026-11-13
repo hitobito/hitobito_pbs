@@ -175,6 +175,10 @@ it:
         one: Vicepresidente
         many: Vicepresidenti
         other: Vicepresidenti
+      group/bund/vorstand:
+        one: Vorstand
+        many: Vorstand
+        other: Vorstand
       group/bund/praesidium_apv:
         one: Presidente scout anziani
         many: Presidenti scout anziani

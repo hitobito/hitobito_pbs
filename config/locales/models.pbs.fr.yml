@@ -161,6 +161,10 @@ fr:
         one: Vice-président·e
         many: Vice-président·e·s
         other: Vice-président·e·s
+      group/bund/vorstand:
+        one: Vorstand
+        many: Vorstand
+        other: Vorstand
       group/bund/praesidium_apv:
         one: Président·e de l'AdA
         many: Président·e·s de l'AdA
