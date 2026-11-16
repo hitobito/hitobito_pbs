@@ -3964,18 +3964,6 @@
           "writable": false,
           "description": null
         },
-        "start_on": {
-          "type": "date",
-          "readable": true,
-          "writable": false,
-          "description": null
-        },
-        "end_on": {
-          "type": "date",
-          "readable": true,
-          "writable": false,
-          "description": null
-        },
         "name": {
           "type": "string",
           "readable": true,
@@ -4005,6 +3993,18 @@
           "readable": true,
           "writable": true,
           "description": null
+        },
+        "start_on": {
+          "type": "date",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "end_on": {
+          "type": "date",
+          "readable": true,
+          "writable": true,
+          "description": null
         }
       },
       "extra_attributes": {},
@@ -4012,12 +4012,12 @@
         "id": {},
         "created_at": {},
         "updated_at": {},
-        "start_on": {},
-        "end_on": {},
         "person_id": {},
         "group_id": {},
         "type": {},
-        "label": {}
+        "label": {},
+        "start_on": {},
+        "end_on": {}
       },
       "filters": {
         "id": {
@@ -4053,28 +4053,6 @@
             "lte"
           ]
         },
-        "start_on": {
-          "type": "date",
-          "operators": [
-            "eq",
-            "not_eq",
-            "gt",
-            "gte",
-            "lt",
-            "lte"
-          ]
-        },
-        "end_on": {
-          "type": "date",
-          "operators": [
-            "eq",
-            "not_eq",
-            "gt",
-            "gte",
-            "lt",
-            "lte"
-          ]
-        },
         "person_id": {
           "type": "integer",
           "operators": [
@@ -4125,6 +4103,28 @@
             "not_suffix",
             "match",
             "not_match"
+          ]
+        },
+        "start_on": {
+          "type": "date",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "end_on": {
+          "type": "date",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
           ]
         },
         "active": {
