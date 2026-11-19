@@ -49,7 +49,7 @@ email:
 event:
   globally_visible_by_default: false
   participations:
-    delete_additional_information_after_months: 3
+    delete_additional_information_after_months: P3M
   qualifications:
     comments:
       enabled: false
